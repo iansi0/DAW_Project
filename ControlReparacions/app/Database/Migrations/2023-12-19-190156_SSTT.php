@@ -31,7 +31,6 @@ class SSTT extends Migration
         ]);
         $this->forge->addPrimaryKey('id_sstt', true);
         $this->forge->createTable('SSTT');
-
     }
 
     public function down()
