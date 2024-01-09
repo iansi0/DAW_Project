@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="<?=base_url() ?>/assets/css/styles.css">
 </head>
 
-<body>
+<body class="">
 
-    <main>
-        <h1>Login</h1>
+    <main class="">
+        <h1 class=" text-2xl">Login</h1>
         <label for="user">User</label>
         <input type="text" name="user">
 
