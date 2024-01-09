@@ -10,19 +10,21 @@ class POBLACIO extends Migration
     {
         $this->forge->addField([
                 'id_poblacio'          => [
-                        'type'           => 'INT',
-                        'constraint'     => 2,
+                        'type'           => 'BINARY',
+                        'constraint'     => 20,
                 ],
                 'nom_poblacio'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 100,
                         'null'           => false,
                 ],
                 'id_comarca'          => [
-                        'type'           => 'INT',
+                        'type'           => 'BINARY',
+                        'constraint'     => 2,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addPrimaryKey('id_poblacio', true);
+        $this->forge->addKey('id_poblacio', true);
         $this->forge->createTable('Poblacio');
         $this->forge->addForeignKey('id_comarca', 'Comarca', 'id_comarca');
 

@@ -14,18 +14,21 @@ class CURS extends Migration
                 ],
                 'cicle'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 50,
                         'null'           => false,
                 ],
                 'titol'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 20,
                         'null'           => false,
                 ],
                 'curs'          => [
                         'type'           => 'INT',
+                        'constraint'     => 1,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addPrimaryKey('id_curs', true);
+        $this->forge->addKey('id_curs', true);
         $this->forge->createTable('Curs');
         $this->forge->addForeignKey('id_curs', 'Intervencio', 'id_curs');
 

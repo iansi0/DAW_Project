@@ -10,14 +10,16 @@ class TIPUSINTERVENCIONS extends Migration
     {
         $this->forge->addField([
                 'id_tipus_intevencio'          => [
-                        'type'           => 'INT',
+                        'type'           => 'BINARY',
+                        'constraint'     => 20,
                 ],
                 'nom_tipus_intervencio'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 20,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addPrimaryKey('id_tipus_intevencio', true);
+        $this->forge->addKey('id_tipus_intevencio', true);
         $this->forge->createTable('TipusIntervencio');
     }
 

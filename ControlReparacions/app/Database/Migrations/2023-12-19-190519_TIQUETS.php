@@ -10,50 +10,61 @@ class TIQUETS extends Migration
 {
         $this->forge->addField([
                 'id_tiquet'          => [
-                        'type'           => 'INT',
+                        'type'           => 'BINARY',
+                        'constraint'     => 20,
                 ],
-                'codi_equip'          => [
+                'codi_dispositiu'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 50,
                         'null'           => false,
                 ],
                 'descripcio_avaria'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 100,
                         'null'           => false,
                 ],
                 'nom_persona_contacte_centre'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 50,
                         'null'           => false,
                 ],
                 'correu_persona_contacte_centre'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 50,
                         'null'           => false,
                 ],
                 'data_alta'          => [
                         'type'           => 'DATE',
+                        'default'        => date("Y-m-d H:i:s"),
                         'null'           => false,
                 ],
                 'data_ultima_modificacio'          => [
                         'type'           => 'DATE',
+                        'default'        => date("Y-m-d H:i:s"),
                         'null'           => false,
                 ],
                 'id_tipus_dispositiu'          => [
                         'type'           => 'INT',
+                        'constraint'     => 2,
                         'null'           => false,
                 ],
                 'id_estat'          => [
                         'type'           => 'INT',
+                        'constraint'     => 3,
                         'null'           => false,
                 ],
                 'codi_centre_emissor'          => [
-                        'type'           => 'INT',
+                        'type'           => 'BINARY',
+                        'constraint'     => 20,
                         'null'           => false,
                 ],
                 'codi_centre_reparador'          => [
-                        'type'           => 'INT',
+                        'type'           => 'BINARY',
+                        'constraint'     => 20,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addPrimaryKey('codi_centre_reparador', true);
+        $this->forge->addKey('codi_centre_reparador', true);
         $this->forge->createTable('Tiquet');
         $this->forge->addForeignKey('id_tipus_dispositiu', 'TipusDispositiu', 'id_tipus_dispositiu');
         $this->forge->addForeignKey('id_estat', 'Estat', 'id_estat');

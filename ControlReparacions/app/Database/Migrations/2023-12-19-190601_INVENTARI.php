@@ -10,10 +10,12 @@ class INVENTARI extends Migration
 {
         $this->forge->addField([
                 'id_inventari'          => [
-                        'type'           => 'VARCHAR',
+                        'type'           => 'BINARY',
+                        'constraint'     => 20,
                 ],
                 'data_compra'          => [
                         'type'           => 'DATE',
+                        'default'        => date("Y-m-d H:i:s"),
                         'null'           => false,
                 ],
                 'preu'          => [
@@ -21,7 +23,8 @@ class INVENTARI extends Migration
                         'null'           => false,
                 ],
                 'codi_centre'          => [
-                        'type'           => 'VARCHAR',
+                        'type'           => 'BINARY',
+                        'constraint'     => 20,
                         'null'           => false,
                 ],
                 'id_tipus_inventari'          => [
@@ -29,7 +32,7 @@ class INVENTARI extends Migration
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addPrimaryKey('id_inventari', true);
+        $this->forge->addKey('id_inventari', true);
         $this->forge->createTable('Inventari');
         $this->forge->addForeignKey('codi_centre', 'Centre', 'codi_centre');
         $this->forge->addForeignKey('id_tipus_inventari', 'TipusInventari', 'id_tipus_inventari');

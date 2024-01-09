@@ -14,10 +14,11 @@ class TIPUSINVENTARI extends Migration
                 ],
                 'nom_tipus_inventari'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 30,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addPrimaryKey('id_tipus_inventari', true);
+        $this->forge->addKey('id_tipus_inventari', true);
         $this->forge->createTable('TipusInventari');
     }
 
