@@ -10,15 +10,16 @@ class COMARCA extends Migration
     {
         $this->forge->addField([
                 'id_comarca'          => [
-                        'type'           => 'INT',
-                        'constraint'     => 2,
-                ],
-                'nom_comarca'          => [
+                        'type'           => 'BINARY',
+                        'constraint'     => 3,
+                    ],
+                    'nom_comarca'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 50,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addPrimaryKey('id_comarca', true);
+        $this->forge->addKey('id_comarca', true);
         $this->forge->createTable('Comarca');
     }
 

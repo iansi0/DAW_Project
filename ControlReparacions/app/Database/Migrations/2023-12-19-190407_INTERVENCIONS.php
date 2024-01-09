@@ -10,22 +10,27 @@ class INTERVENCIONS extends Migration
     {
         $this->forge->addField([
                 'id_intervencio'          => [
-                        'type'           => 'VARCHAR',
+                        'type'           => 'BINARY',
+                        'constraint'     => 20,
                 ],
                 'descripcio_intervencio'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 100,
                         'null'           => false,
                 ],
                 'data_intervencio'          => [
                         'type'           => 'DATE',
-                        'null'           => false,
-                ],
-                'id_tipus_intervencio'          => [
-                        'type'           => 'VARCHAR',
+                        'default'        => date("Y-m-d H:i:s"),
                         'null'           => false,
                 ],
                 'id_tipus_intervencio'          => [
                         'type'           => 'INT',
+                        'constraint'     => 3,
+                        'null'           => false,
+                ],
+                'id_tipus_intervencio'          => [
+                        'type'           => 'INT',
+                        'constraint'     => 3,
                         'null'           => false,
                 ],
                 'id_curs'          => [
@@ -34,14 +39,16 @@ class INTERVENCIONS extends Migration
                 ],
                 'correu_alumne'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 50,
                         'null'           => false,
                 ],
                 'id_xtec'          => [
-                        'type'           => 'VARCHAR',
+                        'type'           => 'BINARY',
+                        'constraint'     => 20,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addPrimaryKey('id_intervencio', true);
+        $this->forge->addKey('id_intervencio', true);
         $this->forge->createTable('Intervencio');
         $this->forge->addForeignKey('id_tipus_intervencio', 'TipusIntervencio', 'id_tipus_intervencio');
         $this->forge->addForeignKey('id_tipus_intervencio', 'TipusIntervencio', 'id_tipus_intervencio');

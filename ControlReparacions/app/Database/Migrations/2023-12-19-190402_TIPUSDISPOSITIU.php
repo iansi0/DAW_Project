@@ -11,13 +11,15 @@ class TIPUSDISPOSITIU extends Migration
         $this->forge->addField([
                 'id_tipus_dispositiu'          => [
                         'type'           => 'INT',
-                ],
+                        'constraint'     => 3,
+                    ],
                 'nom_tipus_dispositiu'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 20,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addPrimaryKey('id_tipus_dispositiu', true);
+        $this->forge->addKey('id_tipus_dispositiu', true);
         $this->forge->createTable('TipusDispositiu');
     
     }

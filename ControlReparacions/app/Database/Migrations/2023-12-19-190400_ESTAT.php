@@ -11,13 +11,15 @@ class ESTATS extends Migration
         $this->forge->addField([
                 'id_estat'          => [
                         'type'           => 'INT',
+                        'constraint'     => 3,
                 ],
                 'nom_estat'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 20,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addPrimaryKey('id_estat', true);
+        $this->forge->addKey('id_estat', true);
         $this->forge->createTable('Estat');
     }
 

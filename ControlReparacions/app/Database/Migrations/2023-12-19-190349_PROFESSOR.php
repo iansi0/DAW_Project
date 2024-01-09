@@ -10,26 +10,31 @@ class PROFESSOR extends Migration
     {
         $this->forge->addField([
                 'id_xtec'          => [
-                        'type'           => 'VARCHAR',
+                        'type'           => 'BINARY',
+                        'constraint'     => 20,
                 ],
                 'nom_professor'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 20,
                         'null'           => false,
                 ],
                 'cognoms_professor'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 30,
                         'null'           => false,
                 ],
                 'correu_professor'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 50,
                         'null'           => false,
                 ],
                 'codi_centre'          => [
-                        'type'           => 'VARCHAR',
+                        'type'           => 'BINARY',
+                        'constraint'     => 20,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addPrimaryKey('id_xtec', true);
+        $this->forge->addKey('id_xtec', true);
         $this->forge->createTable('Professor');
         $this->forge->addForeignKey('codi_centre', 'Centre', 'codi_centre');
 

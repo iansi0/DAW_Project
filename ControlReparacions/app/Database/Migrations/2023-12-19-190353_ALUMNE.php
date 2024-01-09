@@ -11,13 +11,15 @@ class ALUMNE extends Migration
         $this->forge->addField([
                 'correu_alumne'          => [
                         'type'           => 'VARCHAR',
+                        'constraint'     => 50,
                 ],
                 'codi_centre'          => [
-                        'type'           => 'VARCHAR',
+                        'type'           => 'BINARY',
+                        'constraint'     => 20,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addPrimaryKey('correu_alumne', true);
+        $this->forge->addKey('correu_alumne', true);
         $this->forge->createTable('Alumne');
         $this->forge->addForeignKey('codi_centre', 'Centre', 'codi_centre');
 
