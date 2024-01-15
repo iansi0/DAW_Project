@@ -11,7 +11,7 @@ class PROFESSOR extends Migration
         $this->forge->addField([
                 'id_xtec'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 16,
                 ],
                 'nom_professor'          => [
                         'type'           => 'VARCHAR',

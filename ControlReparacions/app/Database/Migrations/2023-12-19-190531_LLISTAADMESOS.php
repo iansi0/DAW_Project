@@ -21,7 +21,7 @@ class LLISTAADMESOS extends Migration
                 ],
                 'codi_centre'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 16,
                         'null'           => false,
                 ],
         ]);

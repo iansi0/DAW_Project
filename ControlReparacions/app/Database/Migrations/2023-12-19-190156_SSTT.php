@@ -9,28 +9,43 @@ class SSTT extends Migration
     public function up()
     {
         $this->forge->addField([
-                'id_sstt' => [
+                'id' => [
                         'type'           => 'BINARY',
-                        'constraint'     => '2',
+                        'constraint'     => 16,
                 ],
-                'nom_sstt' => [
+                'nom' => [
                         'type'           => 'VARCHAR',
-                        'constraint'     => '40',
+                        'constraint'     => 40,
                         'null'           => false,
                 ],
-                'adreca_fisica_sstt' => [
+                'adreca_fisica' => [
                         'type'           => 'VARCHAR',
-                        'constraint'     => '100',
+                        'constraint'     => 100,
                         'null'           => false,
                 ],
-                'telefon_sstt' => [
-                        'type'           => 'VARCHAR',
-                        'constraint'     => '9',
+                'cp' => [
+                        'type'           => 'INT',
+                        'constraint'     => 5,
                         'null'           => false,
                 ],
-                'correu_sstt' => [
+                'poblacio' => [
                         'type'           => 'VARCHAR',
-                        'constraint'     => '50',
+                        'constraint'     => 100,
+                        'null'           => false,
+                ],
+                'telefon' => [
+                        'type'           => 'INT',
+                        'constraint'     => 9,
+                        'null'           => false,
+                ],
+                'correu' => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => 50,
+                        'null'           => false,
+                ],
+                'altres' => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => 250,
                         'null'           => false,
                 ],
         ]);

@@ -7,11 +7,11 @@ use CodeIgniter\Database\Migration;
 class INVENTARI extends Migration
 {
     public function up()
-{
+    {
         $this->forge->addField([
                 'id_inventari'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 16,
                 ],
                 'data_compra'          => [
                         'type'           => 'DATE',
@@ -24,7 +24,7 @@ class INVENTARI extends Migration
                 ],
                 'codi_centre'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 16,
                         'null'           => false,
                 ],
                 'id_tipus_inventari'          => [

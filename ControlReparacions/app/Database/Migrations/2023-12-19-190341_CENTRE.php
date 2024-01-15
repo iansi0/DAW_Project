@@ -7,11 +7,11 @@ use CodeIgniter\Database\Migration;
 class CENTRE extends Migration
 {
     public function up()
-{
+    {
         $this->forge->addField([
                 'codi_centre'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 16,
                         'null'           => false,
                 ],
                 'nom_centre'          => [

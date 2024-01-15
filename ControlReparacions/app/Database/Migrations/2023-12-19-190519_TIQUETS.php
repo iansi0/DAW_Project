@@ -7,11 +7,11 @@ use CodeIgniter\Database\Migration;
 class TIQUETS extends Migration
 {
     public function up()
-{
+    {
         $this->forge->addField([
                 'id_tiquet'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 16,
                 ],
                 'codi_dispositiu'          => [
                         'type'           => 'VARCHAR',
@@ -55,12 +55,12 @@ class TIQUETS extends Migration
                 ],
                 'codi_centre_emissor'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 16,
                         'null'           => false,
                 ],
                 'codi_centre_reparador'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 16,
                         'null'           => false,
                 ],
         ]);

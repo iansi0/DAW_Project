@@ -11,7 +11,7 @@ class TIPUSINTERVENCIONS extends Migration
         $this->forge->addField([
                 'id_tipus_intevencio'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 16,
                 ],
                 'nom_tipus_intervencio'          => [
                         'type'           => 'VARCHAR',
