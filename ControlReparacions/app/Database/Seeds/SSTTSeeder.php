@@ -20,14 +20,14 @@ class SSTTSeeder extends Seeder
         // Insertar los datos en la base de datos
         foreach ($data as $row) {
             $dataToInsert = array(
-                'id'            => $row['id'],
-                'nom'           => $row['nom'],
-                'adreca_fisica' => $row['adreca_fisica'],
-                'cp'            => $row['cp'],
-                'poblacio'      => $row['poblacio'],
-                'telefon'       => $row['telefon'],
-                'correu'        => $row['correu'],
-                'altres'        => $row['altres'],
+                'id'            => trim($row['id']),
+                'nom'           => trim($row['nom']),
+                'adreca_fisica' => trim($row['adreca_fisica']),
+                'cp'            => trim($row['cp']),
+                'poblacio'      => trim($row['poblacio']),
+                'telefon'       => trim($row['telefon']),
+                'correu'        => trim($row['correu']),
+                'altres'        => trim($row['altres']),
             );
 
             $this->db->table('SSTT')->insert($dataToInsert);
