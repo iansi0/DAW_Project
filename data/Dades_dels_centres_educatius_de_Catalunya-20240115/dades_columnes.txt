@@ -1,0 +1,19 @@
+Contingut
+    Codi de centre
+    Denominació completa
+    Codi i nom de naturalesa
+    Codi i nom de titularitat
+    Adreça i codi postal
+    Telèfon i fax
+    Codi i nom de delegació o servei territorial
+    Codi i nom de comarca
+    Codi i nom de municipi
+    Codi i nom de districte municipal
+    Codi i nom de localitat
+    Zona educativa
+    Coordenades UTM X
+    Coordenades UTM Y
+    Coordenades GEO X
+    Coordenades GEO Y
+    E-mail del centre
+    Estudis: en un sol camp, o bé en camp separats
