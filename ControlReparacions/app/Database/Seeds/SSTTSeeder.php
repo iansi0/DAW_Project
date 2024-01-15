@@ -23,9 +23,9 @@ class SSTTSeeder extends Seeder
                 'id'            => trim($row['id']),
                 'nom'           => trim($row['nom']),
                 'adreca_fisica' => trim($row['adreca_fisica']),
-                'cp'            => trim($row['cp']),
+                'cp'            => str_replace(' ', '', trim($row['cp'])),
                 'poblacio'      => trim($row['poblacio']),
-                'telefon'       => trim($row['telefon']),
+                'telefon'       => str_replace(' ', '', trim($row['telefon'])),
                 'correu'        => trim($row['correu']),
                 'altres'        => trim($row['altres']),
             );
