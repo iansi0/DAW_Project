@@ -11,7 +11,7 @@ class TIQUETS extends Migration
         $this->forge->addField([
                 'id_tiquet'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 16,
+                        'constraint'     => 32,
                 ],
                 'codi_dispositiu'          => [
                         'type'           => 'VARCHAR',
@@ -55,12 +55,12 @@ class TIQUETS extends Migration
                 ],
                 'codi_centre_emissor'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 16,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
                 'codi_centre_reparador'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 16,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
         ]);

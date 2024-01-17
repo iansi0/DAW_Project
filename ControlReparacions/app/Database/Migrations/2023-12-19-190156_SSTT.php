@@ -11,7 +11,12 @@ class SSTT extends Migration
         $this->forge->addField([
                 'id' => [
                         'type'           => 'BINARY',
-                        'constraint'     => 16,
+                        'constraint'     => 32,
+                ],
+                'codi' => [
+                        'type'           => 'INT',
+                        'constraint'     => 10,
+                        'null'           => false,
                 ],
                 'nom' => [
                         'type'           => 'VARCHAR',
@@ -24,7 +29,7 @@ class SSTT extends Migration
                         'null'           => false,
                 ],
                 'cp' => [
-                        'type'           => 'INT',
+                        'type'           => 'VARCHAR',
                         'constraint'     => 5,
                         'null'           => false,
                 ],
@@ -36,17 +41,17 @@ class SSTT extends Migration
                 'telefon' => [
                         'type'           => 'INT',
                         'constraint'     => 9,
-                        'null'           => false,
+                        'null'           => true,
                 ],
                 'correu' => [
                         'type'           => 'VARCHAR',
                         'constraint'     => 50,
-                        'null'           => false,
+                        'null'           => true,
                 ],
                 'altres' => [
                         'type'           => 'VARCHAR',
                         'constraint'     => 250,
-                        'null'           => false,
+                        'null'           => true,
                 ],
         ]);
         $this->forge->addKey('id_sstt', true);

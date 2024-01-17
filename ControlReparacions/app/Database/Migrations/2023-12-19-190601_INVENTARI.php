@@ -11,7 +11,7 @@ class INVENTARI extends Migration
         $this->forge->addField([
                 'id_inventari'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 16,
+                        'constraint'     => 32,
                 ],
                 'data_compra'          => [
                         'type'           => 'DATE',
@@ -24,7 +24,7 @@ class INVENTARI extends Migration
                 ],
                 'codi_centre'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 16,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
                 'id_tipus_inventari'          => [

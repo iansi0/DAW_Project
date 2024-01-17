@@ -15,7 +15,7 @@ class ALUMNE extends Migration
                 ],
                 'codi_centre'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 16,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
         ]);

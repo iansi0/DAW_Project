@@ -11,7 +11,7 @@ class INTERVENCIONS extends Migration
         $this->forge->addField([
                 'id_intervencio'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 16,
+                        'constraint'     => 32,
                 ],
                 'descripcio_intervencio'          => [
                         'type'           => 'VARCHAR',
@@ -39,7 +39,7 @@ class INTERVENCIONS extends Migration
                 ],
                 'id_xtec'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 16,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
         ]);

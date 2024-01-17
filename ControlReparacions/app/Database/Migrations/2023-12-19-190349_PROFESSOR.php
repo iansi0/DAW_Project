@@ -11,7 +11,7 @@ class PROFESSOR extends Migration
         $this->forge->addField([
                 'id_xtec'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 16,
+                        'constraint'     => 32,
                 ],
                 'nom_professor'          => [
                         'type'           => 'VARCHAR',
@@ -30,7 +30,7 @@ class PROFESSOR extends Migration
                 ],
                 'codi_centre'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
         ]);

@@ -11,7 +11,7 @@ class COMARCA extends Migration
         $this->forge->addField([
                 'id_comarca'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 16,
+                        'constraint'     => 32,
                     ],
                     'nom_comarca'          => [
                         'type'           => 'VARCHAR',

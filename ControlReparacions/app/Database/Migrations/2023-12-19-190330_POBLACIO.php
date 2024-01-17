@@ -11,7 +11,7 @@ class POBLACIO extends Migration
         $this->forge->addField([
                 'id_poblacio'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 16,
+                        'constraint'     => 32,
                 ],
                 'nom_poblacio'          => [
                         'type'           => 'VARCHAR',

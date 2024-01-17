@@ -11,7 +11,7 @@ class CENTRE extends Migration
         $this->forge->addField([
                 'codi_centre'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 16,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
                 'nom_centre'          => [
@@ -49,12 +49,12 @@ class CENTRE extends Migration
                 ],
                 'id_sstt'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 2,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
                 'id_poblacio'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
         ]);

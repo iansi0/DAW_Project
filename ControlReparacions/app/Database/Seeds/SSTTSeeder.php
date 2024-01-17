@@ -2,6 +2,7 @@
 
 namespace App\Database\Seeds;
 
+use App\Libraries\UUID as LibrariesUUID;
 use CodeIgniter\Database\Seeder;
 
 class SSTTSeeder extends Seeder
@@ -14,25 +15,30 @@ class SSTTSeeder extends Seeder
         $firstline = true;
 
         // Insertar los datos en la base de datos
-        while (($row = fgetcsv($csvFile, 2000, ";")) !== FALSE) {
-            $dataToInsert = '';
+        while (($row = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
+
+            // Generamos un UUID
+            $uuid = LibrariesUUID::v4();
 
             if (!$firstline) {
+                                
                 $dataToInsert = array(
-                    'id'            => trim($row['id']),
-                    'nom'           => trim($row['nom']),
-                    'adreca_fisica' => trim($row['adreca_fisica']),
-                    'cp'            => str_replace(' ', '', trim($row['cp'])),
-                    'poblacio'      => trim($row['poblacio']),
-                    'telefon'       => str_replace(' ', '', trim($row['telefon'])),
-                    'correu'        => trim($row['correu']),
-                    'altres'        => trim($row['altres'])
+                    'id'            => $uuid,
+                    'codi'          => trim($row[0]),
+                    'nom'           => trim($row[1]),
+                    'adreca_fisica' => trim($row[2]),
+                    'cp'            => str_replace(' ', '', trim($row[3])),
+                    'poblacio'      => trim($row[4]),
+                    'telefon'       => str_replace(' ', '', trim($row[5])),
+                    'correu'        => trim($row[6]),
+                    'altres'        => trim($row[7])
                 );
+
+                $this->db->table('SSTT')->insert($dataToInsert);
             }
 
             $firstline = false;
 
-            $this->db->table('SSTT')->insert($dataToInsert);
         }
 
         fclose($csvFile);
