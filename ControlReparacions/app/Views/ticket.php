@@ -1,10 +1,10 @@
 <?= $this->extend('layouts/master.php') ?>
 
-
 <?= $this->section('content') ?>
 <h1 class="text-center text-7xl text-primario">TICKETS</h1>
 
 <button id="add-ticket" class=" bg-primario text-white float-right mb-5 px-5 py-2 hover:bg-terciario-4">+ Afegir</button>
+
 
 <table class="w-full ">
   <thead class=" bg-primario text-white">
