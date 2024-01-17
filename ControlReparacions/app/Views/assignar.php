@@ -16,7 +16,7 @@
 </section>
 
 
-<table class="w-full"> 
+<table class="w-full m"> 
     <thead class="bg-primario  text-white">
         <th>Ticket</th>
         <th>Emisor</th>
@@ -32,10 +32,10 @@
             <td>23-03-24</td>
         </tr>
         <tr>
-            <td>1234-5678-9012</td>
-            <td>Institut Escola del Treball</td>
-            <td>caparella</td>
-            <td>23-03-24</td>
+            <td class=" bg-gray-200">1234-5678-9012</td>
+            <td class=" bg-gray-200">Institut Escola del Treball</td>
+            <td class=" bg-gray-200">caparella</td>
+            <td class=" bg-gray-200">23-03-24</td>
         </tr>
         <tr>
             <td>1234-5678-9012</td>
@@ -44,10 +44,10 @@
             <td>23-03-24</td>
         </tr>
         <tr>
-            <td>1234-5678-9012</td>
-            <td>Institut Escola del Treball</td>
-            <td>caparella</td>
-            <td>23-03-24</td>
+            <td class=" bg-gray-200">1234-5678-9012</td>
+            <td class=" bg-gray-200">Institut Escola del Treball</td>
+            <td class=" bg-gray-200">caparella</td>
+            <td class=" bg-gray-200">23-03-24</td>
         </tr>
     </tbody>
 </table>
