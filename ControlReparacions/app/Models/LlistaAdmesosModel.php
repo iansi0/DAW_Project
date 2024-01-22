@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class LlistaAdmesosModel extends Model
 {
     protected $table            = 'llistaadmesos';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'correu_professor';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['correu_professor','data_entrega','codi_centre'];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,4 +37,16 @@ class LlistaAdmesosModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function addLlistaAdmesos($correu_professor,$data_entrega,$codi_centre) {
+           
+        $data = [
+            'correu_professor' =>  $correu_professor,
+            'data_entrega' => $data_entrega,
+            'codi_centre' => $codi_centre,
+            
+        ];
+
+        $this->insert($data);
+    }
 }

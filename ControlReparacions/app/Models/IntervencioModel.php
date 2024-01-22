@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class IntervencioModel extends Model
 {
     protected $table            = 'intervencios';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'id_intervencio';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['id_intervencio','descripcio_intervencio','data_intervencio','id_tipus_intervencio','id_curs','correu_alumne','id_xtec'];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,4 +37,19 @@ class IntervencioModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function addIntervencio($id_intervencio,$descripcio_intervencio,$data_intervencio,$id_tipus_intervencio,$id_curs,$correu_alumne,$id_xtec) {
+           
+        $data = [
+            'id_intervencio' =>  $id_intervencio,
+            'descripcio_intervencio' => $descripcio_intervencio,
+            'data_intervencio' => $data_intervencio,
+            'id_tipus_intervencio' => $id_tipus_intervencio,
+            'id_curs' => $id_curs,
+            'correu_alumne' => $correu_alumne,
+            'id_xtec' => $id_xtec,
+        ];
+
+        $this->insert($data);
+    }
 }

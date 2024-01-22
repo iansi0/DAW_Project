@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class SSTTModel extends Model
 {
     protected $table            = 'sstts';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'id_sstt';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['id_sstt','nom_sstt','adreca_fisia_sstt','telefon_sstt','correu_sstt'];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,4 +37,18 @@ class SSTTModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function addSSTT($id_sstt,$nom_sstt,$adreca_fisia_sstt,$telefon_sstt,$correu_sstt) {
+           
+        $data = [
+            'id_sstt' =>  $id_sstt,
+            'nom_sstt' => $nom_sstt,
+            'adreca_fisia_sstt' => $adreca_fisia_sstt,
+            'telefon_sstt' => $telefon_sstt,
+            'correu_sstt' => $correu_sstt,
+            
+        ];
+
+        $this->insert($data);
+    }
 }

@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class TiquetModel extends Model
 {
     protected $table            = 'tiquets';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'id_tiquet';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['id_tiquet','codi_equip','descripcio_avaria','nom_persona_contacte_centre','correu_persona_contacte_centre','data_alta','data_ultima_modificacio','id_tipus_dispositiu','id_estat','codi_centre_emissor','codi_centre_reparador'];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,4 +37,24 @@ class TiquetModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function addTiquet($id_tiquet,$codi_equip,$descripcio_avaria,$nom_persona_contacte_centre,$correu_persona_contacte_centre,$data_alta,$data_ultima_modificacio,$id_tipus_dispositiu,$id_estat,$codi_centre_emissor,$codi_centre_reparador) {
+           
+        $data = [
+            'id_tiquet' =>  $id_tiquet,
+            'codi_equip' => $codi_equip,
+            'descripcio_avaria' => $descripcio_avaria,
+            'nom_persona_contacte_centre' => $nom_persona_contacte_centre,
+            'correu_persona_contacte_centre' => $correu_persona_contacte_centre,
+            'data_alta' => $data_alta,
+            'data_ultima_modificacio' => $data_ultima_modificacio,
+            'id_tipus_dispositiu' => $id_tipus_dispositiu,
+            'id_estat' => $id_estat,
+            'codi_centre_emissor' => $codi_centre_emissor,
+            'codi_centre_reparador' => $codi_centre_reparador,
+            
+        ];
+
+        $this->insert($data);
+    }
 }

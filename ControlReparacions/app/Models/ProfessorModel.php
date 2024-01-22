@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class ProfessorModel extends Model
 {
     protected $table            = 'professors';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'id_xtec';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['id_xtec','nom_professor','cognom_professor','correu_professor','codi_professor'];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,4 +37,18 @@ class ProfessorModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function addProfessor($id_xtec,$nom_professor,$cognom_professor,$correu_professor,$codi_professor) {
+           
+        $data = [
+            'id_xtec' =>  $id_xtec,
+            'nom_professor' => $nom_professor,
+            'cognom_professor' => $cognom_professor,
+            'correu_professor' => $correu_professor,
+            'codi_professor' => $codi_professor,
+            
+        ];
+
+        $this->insert($data);
+    }
 }

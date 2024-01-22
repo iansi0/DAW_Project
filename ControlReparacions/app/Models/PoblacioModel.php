@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class PoblacioModel extends Model
 {
     protected $table            = 'poblacios';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'id_poblacio';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['id_poblacio','nom_poblacio','id_comarca'];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,4 +37,16 @@ class PoblacioModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function addPoblacio($id_poblacio,$nom_poblacio,$id_comarca) {
+           
+        $data = [
+            'id_poblacio' =>  $id_poblacio,
+            'nom_poblacio' => $nom_poblacio,
+            'id_comarca' => $id_comarca,
+            
+        ];
+
+        $this->insert($data);
+    }
 }

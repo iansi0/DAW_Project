@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class EstatModel extends Model
 {
     protected $table            = 'estats';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'id_estat';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['id_estat','nom_estat'];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,4 +37,14 @@ class EstatModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function addEstat($id_estat,$nom_estat) {
+           
+        $data = [
+            'id_estat' =>  $id_estat,
+            'nom_estat' => $nom_estat,
+        ];
+
+        $this->insert($data);
+    }
 }

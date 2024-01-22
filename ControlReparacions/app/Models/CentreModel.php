@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class CentreModel extends Model
 {
     protected $table            = 'centres';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'codi_centre';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['codi_centre','nom_centre','actiu','taller','telefon_centre','adreca_fisica_centre','nom_persona_contacte_centre','correu_persona_contacte_centre','id_sstt','id_poblacio'];
 
     // Dates
     protected $useTimestamps = false;
@@ -37,4 +37,23 @@ class CentreModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function addCentre($codi_centre,$nom_centre,$actiu,$taller,$telefon_centre,$adreca_fisica_centre,$nom_persona_contacte_centre,$correu_persona_contacte_centre,$id_sstt,$id_poblacio) {
+           
+        $data = [
+            'codi_centre' =>  $codi_centre,
+            'nom_centre' => $nom_centre,
+            'actiu' => $actiu,
+            'taller' => $taller,
+            'telefon_centre' => $telefon_centre,
+            'adreca_fisica_centre' => $adreca_fisica_centre,
+            'nom_persona_contacte_centre' => $nom_persona_contacte_centre,
+            'adreca_fisica_centre' => $adreca_fisica_centre,
+            'correu_persona_contacte_centre' => $correu_persona_contacte_centre,
+            'id_sstt' => $id_sstt,
+            'id_poblacio' => $id_poblacio,
+        ];
+
+        $this->insert($data);
+    }
 }
