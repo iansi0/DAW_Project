@@ -75,14 +75,24 @@
   </tbody>
 </table>
 
-<!--Tabla -->
+
+<!-- Search form 
+<form method='get' action="<?php // base_url('tickets'); ?>" id="searchForm">
+  <input type='text' name='q' value='<?php // $search ?>' placeholder="Search here...">
+  <input type='button' id='btnsearch' value='Cercar' onclick='document.getElementById("searchForm").submit();'>
+</form>
+-->
+
+<!--Tabla 
 <?php
-echo $table->generate($news);
+//echo $table->generate($news);
 ?>
 
-<!--Paginacion -->
+Paginacion 
 <div style='margin-top: 10px;'>
-        <?= $pager->only(['q'])->links() ?>
-    </div>
+  <?php
+   //$pager->only(['q'])->links(); ?>
+</div>
+-->
 
 <?= $this->endSection() ?>

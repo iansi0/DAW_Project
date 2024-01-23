@@ -45,9 +45,26 @@ class Home extends BaseController
 
     public function tickets(): string
     {
+        /*
+        //Comprovar si tenemos un filtro de busqueda
+        $searchData = $this->request->getGet();
+
+        if (isset($searchData) && isset($searchData['q'])) {
+            $search = $searchData["q"];
+        } else {
+            $search = "";
+        }
+
+
         //Recuperar los datos a mostrar en la tabla de la BBDD
+        $model = new TicketsModel();
 
         //Paginacion con filtro
+        if ($search == '') {
+            $paginateData = $model->getAllPaged(5);
+        } else {
+            $paginateData = $model->getByTitleOrText($search)->paginate(5);
+        }
 
         //Crear tabla con los datos
         $table = new \CodeIgniter\View\Table();
@@ -61,15 +78,13 @@ class Home extends BaseController
 
         /* Tabla
         $data = [
-            'page_title' => 'CI4 Pager & search filter',
-            'title' => 'Llistat paginat',
             'news' => $paginateData,
             'pager' => $model->pager,
             'search' => $search,
             'table' => $table,
         ];
-        */
 
+*/
         //Ir a tickets con la tabla
         return view('ticket.php');
     }
