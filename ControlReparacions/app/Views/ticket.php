@@ -74,4 +74,15 @@
     </tr>
   </tbody>
 </table>
+
+<!--Tabla -->
+<?php
+echo $table->generate($news);
+?>
+
+<!--Paginacion -->
+<div style='margin-top: 10px;'>
+        <?= $pager->only(['q'])->links() ?>
+    </div>
+
 <?= $this->endSection() ?>

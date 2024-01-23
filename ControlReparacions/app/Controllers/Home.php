@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+
 class Home extends BaseController
 {
     public function index(): string
@@ -44,6 +45,32 @@ class Home extends BaseController
 
     public function tickets(): string
     {
+        //Recuperar los datos a mostrar en la tabla de la BBDD
+
+        //Paginacion con filtro
+
+        //Crear tabla con los datos
+        $table = new \CodeIgniter\View\Table();
+        $table->setHeading('ID', 'Title', 'Text');
+
+        $template = [
+            'table_open' => "<table class='table table-hover' style='border-collapse: collapse;'>"
+        ];
+        $table->setTemplate($template);
+        /*************** TABLE GENERATOR ********************/
+
+        /* Tabla
+        $data = [
+            'page_title' => 'CI4 Pager & search filter',
+            'title' => 'Llistat paginat',
+            'news' => $paginateData,
+            'pager' => $model->pager,
+            'search' => $search,
+            'table' => $table,
+        ];
+        */
+
+        //Ir a tickets con la tabla
         return view('ticket.php');
     }
 }
