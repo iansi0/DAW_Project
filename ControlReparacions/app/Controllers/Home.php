@@ -8,4 +8,9 @@ class Home extends BaseController
     {
         return view('login.php');
     }
+
+    public function tickets(): string
+    {
+        return view('ticket.php');
+    }
 }

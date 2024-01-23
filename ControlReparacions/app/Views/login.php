@@ -1,50 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class=" h-screen">
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    <link rel="stylesheet" href="<?=base_url() ?>/assets/css/styles.css">
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="<?= base_url() ?>/assets/css/styles.css">
+</head>
 
-    <body>
-        <header>
-            <h2 class="logo">KYS</h2>
-            <!-- esta es la parte del header que va al lado isquierdo -->
-        </header>
+<body class=" h-screen flex flex-col justify-center items-center">
+    <section class=" bg-gray-300 flex flex-col gap-5 items-center border-2 rounded-md border-black px-20 py-10">
+        <h1 class=" text-7xl">KYS</h1>
+        <form class="flex flex-col text-center">
+            <label class="mb-1 text-xl" for="email">Email</label>
+            <input class="mb-5 rounded-md" type="email" id="email" />
 
-        <div class="container" id="container">
-            <!-- esto va a la parte izquierda  -->
-            <div class="form-container sign-in">
-                <form>
-                    <h1>Login</h1>
-                    <div class="social-icons">
-                        <!-- aca poner los iconos de bootstrap o de otro... una manera  rapida de iniciar session en cuadraditos pequeños -->
-                        <a href="#" class="icon">google</a>
-                        <a href="#" class="icon">facebook</a>
-                        <a href="#" class="icon">github</a>
-                        <a href="#" class="icon">linkedin-in</a>
-                    </div>
+            <label class="mb-1 text-xl" for="password">Contrasenya</label>
+            <input class="mb-5 rounded-md  w-60 h-6" type="password" id="password" />
 
-                    <span>use su correo electronico y su password</span>
-                    <input type="email" placeholder="Email" />
-                    <input type="password" placeholder="Password" />
-                    <a href="#">a olvidado su password</a>
-                    <button>iniciar session</button>
-                </form>
-            </div>
+            <input class="mb-5 text-xl bg-gray-200 rounded-md" type="submit" value="Iniciar Sessió">
 
-            <div class="container-derecho">
-                <div class="container-derecho-bienvenido">
-                    <!-- esta es la parte ira al lado derecho  junto al login  la primera vista-->
-                    <div class="panel-bienvenido">
-                        <h1>Bienvenido nuevamente</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </body>
+            <a href="#">Contrasenya olvidada</a>
+        </form>
+    </section>
+</body>
 
 </html>
