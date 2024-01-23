@@ -13,4 +13,9 @@ class Home extends BaseController
     {
         return view('ticket.php');
     }
+
+    public function assignar(): string
+    {
+        return view('assignar.php');
+    }
 }
