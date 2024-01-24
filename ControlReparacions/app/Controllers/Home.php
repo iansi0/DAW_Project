@@ -18,4 +18,9 @@ class Home extends BaseController
     {
         return view('assignar.php');
     }
+
+    public function alumnos() : string
+    {
+        return view('alumnos.php');
+    }
 }
