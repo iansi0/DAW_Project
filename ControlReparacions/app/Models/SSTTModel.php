@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class SSTTModel extends Model
 {
-    protected $table            = 'sstts';
-    protected $primaryKey       = 'id_sstt';
+    protected $table            = 'SSTT';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_sstt','nom_sstt','adreca_fisia_sstt','telefon_sstt','correu_sstt'];
+    protected $allowedFields    = ['id', 'codi', 'nom', 'adreca_fisica', 'cp', 'poblacio', 'telefon', 'correu', 'altres'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,14 +38,18 @@ class SSTTModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addSSTT($id_sstt,$nom_sstt,$adreca_fisia_sstt,$telefon_sstt,$correu_sstt) {
+    public function addSSTT($id,$codi,$nom,$adreca_fisica,$cp,$poblacio,$telefon,$correu,$altres) {
            
         $data = [
-            'id_sstt' =>  $id_sstt,
-            'nom_sstt' => $nom_sstt,
-            'adreca_fisia_sstt' => $adreca_fisia_sstt,
-            'telefon_sstt' => $telefon_sstt,
-            'correu_sstt' => $correu_sstt,
+            'id'            => $id,
+            'codi'          => trim($codi),
+            'nom'           => trim($nom),
+            'adreca_fisica' => trim($adreca_fisica),
+            'cp'            => str_replace(' ', '', trim($cp)),
+            'poblacio'      => trim($poblacio),
+            'telefon'       => str_replace(' ', '', trim($telefon)),
+            'correu'        => trim($correu),
+            'altres'        => trim($altres)
             
         ];
 

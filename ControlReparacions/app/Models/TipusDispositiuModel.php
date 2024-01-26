@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class TipusDispositiuModel extends Model
 {
-    protected $table            = 'tipusdispositius';
-    protected $primaryKey       = 'id_tipus_dispositiu';
+    protected $table            = 'TIPUS_DISPOSITIUS';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_tipus_dispositiu','nom_tipus_dispositiu'];
+    protected $allowedFields    = ['id','nom'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,11 +38,11 @@ class TipusDispositiuModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addTipusDispositiu($id_tipus_dispositiu,$nom_tipus_dispositiu) {
+    public function addTipusDispositiu($id,$nom) {
            
         $data = [
-            'id_tipus_dispositiu' =>  $id_tipus_dispositiu,
-            'nom_tipus_dispositiu' => $nom_tipus_dispositiu,
+            'id' =>  $id,
+            'nom' => $nom,
             
         ];
 

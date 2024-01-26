@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class TipusInventariModel extends Model
 {
-    protected $table            = 'tipusinventaris';
-    protected $primaryKey       = 'id_tipus_inventari';
+    protected $table            = 'TIPUS_INVENTARI';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_tipus_inventari','nom_tipus_inventari'];
+    protected $allowedFields    = ['id','nom'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,11 +38,11 @@ class TipusInventariModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addTipusInventari($id_tipus_inventari,$nom_tipus_inventari) {
+    public function addTipusInventari($id,$nom) {
            
         $data = [
-            'id_tipus_inventari' =>  $id_tipus_inventari,
-            'nom_tipus_inventari' => $nom_tipus_inventari,
+            'id' =>  $id,
+            'nom' => $nom,
             
         ];
 

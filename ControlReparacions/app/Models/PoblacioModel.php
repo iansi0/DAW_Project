@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class PoblacioModel extends Model
 {
-    protected $table            = 'poblacios';
-    protected $primaryKey       = 'id_poblacio';
+    protected $table            = 'POBLACIO';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_poblacio','nom_poblacio','id_comarca'];
+    protected $allowedFields    = ['id','nom','id_comarca'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,11 +38,11 @@ class PoblacioModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addPoblacio($id_poblacio,$nom_poblacio,$id_comarca) {
+    public function addPoblacio($id,$nom,$id_comarca) {
            
         $data = [
-            'id_poblacio' =>  $id_poblacio,
-            'nom_poblacio' => $nom_poblacio,
+            'id' =>  $id,
+            'nom' => $nom,
             'id_comarca' => $id_comarca,
             
         ];

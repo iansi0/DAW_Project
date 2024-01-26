@@ -54,7 +54,7 @@ class SSTT extends Migration
                         'null'           => true,
                 ],
         ]);
-        $this->forge->addKey('id_sstt', true);
+        $this->forge->addKey('id', true);
         $this->forge->createTable('SSTT');
 
     }

@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class ComarcaModel extends Model
 {
-    protected $table            = 'comarcas';
-    protected $primaryKey       = 'id_comarca';
+    protected $table            = 'COMARCA';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_comarca','nom_comarca'];
+    protected $allowedFields    = ['id','nom'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,11 +38,11 @@ class ComarcaModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addComarca($id_comarca,$nom_comarca) {
+    public function addComarca($id,$nom) {
            
         $data = [
-            'id_comarca' =>  $id_comarca,
-            'nom_comarca' => $nom_comarca,
+            'id' =>  $id,
+            'nom' => $nom,
         ];
 
         $this->insert($data);

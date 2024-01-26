@@ -1,0 +1,15 @@
+ID,ESTATS,DISPOSITIUS,COMPONENTS,INTERVENCIO
+0,Desguaçat,Portàtil,Placa Base,Normal
+1,Espatllat,Sobretaula,Processador,Bloquejant
+2,Espatllat Recollir,Servidor,Targeta Gràfica,
+3,Espatllat Enviat,Perifèric,RAM,
+4,Espatllat Entregat,Projector,Font alimentació,
+5,Espera Reparació,Switch,Cablejat,
+6,Reparació,Tablet,Disc Dur,
+7,Revisio,Móvil,Caixa,
+8,Reparat,Enrutador,Manteniment,
+9,Reparat Recollit,Altres,Altres,
+10,Reparat Enviat,,,
+11,Finalitzat,,,
+12,SSTT,,,
+13,Rebutjat,,,

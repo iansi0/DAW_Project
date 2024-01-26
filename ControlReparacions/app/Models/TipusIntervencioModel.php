@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class TipusIntervencioModel extends Model
 {
-    protected $table            = 'tipusintervencios';
-    protected $primaryKey       = 'id_tipus_intervencio';
+    protected $table            = 'TIPUS_INTERVENCIONS';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_tipus_intervencio','nom_tipus_intervencio'];
+    protected $allowedFields    = ['id','nom'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,11 +38,11 @@ class TipusIntervencioModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addTipusIntervencio($id_tipus_intervencio,$nom_tipus_intervencio) {
+    public function addTipusIntervencio($id,$nom) {
            
         $data = [
-            'id_tipus_intervencio' =>  $id_tipus_intervencio,
-            'nom_tipus_intervencio' => $nom_tipus_intervencio,
+            'id' =>  $id,
+            'nom' => $nom,
             
         ];
 
