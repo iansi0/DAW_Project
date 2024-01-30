@@ -37,7 +37,7 @@ class POBLACIOSeeder extends Seeder
                 */
 
                 // Si no existe en el array, generamos la comarca en BBDD y guardamos el id en el array
-                if (!in_array($arrPoblacio, $row[11])) {
+                if (!in_array($row[13], $arrPoblacio)) {
                     $poblacio -> addPoblacio( 
                         trim($row[13]),
                         trim($row[14]),

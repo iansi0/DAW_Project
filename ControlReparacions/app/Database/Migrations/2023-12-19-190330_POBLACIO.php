@@ -10,8 +10,8 @@ class POBLACIO extends Migration
     {
         $this->forge->addField([
                 'id'          => [
-                        'type'           => 'BINARY',
-                        'constraint'     => 32,
+                        'type'           => 'INT',
+                        'constraint'     => 5,
                 ],
                 'nom'          => [
                         'type'           => 'VARCHAR',

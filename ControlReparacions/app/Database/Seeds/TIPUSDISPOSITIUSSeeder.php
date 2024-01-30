@@ -10,7 +10,7 @@ class TIPUSDISPOSITIUSSeeder extends Seeder
     public function run()
     {
         // Cargamos el archivo CSV desde la siguiente ruta
-        $csvFile = fopen(WRITEPATH . 'install'.DIRECTORY_SEPARATOR.'CENTRE_seeder.csv', "r");
+        $csvFile = fopen(WRITEPATH . 'install'.DIRECTORY_SEPARATOR.'TIPUS_seeder.csv', "r");
         // Boolean para saltarnos la primera fila (es una fila con los nombres de los campos y por ende la descartamos)
         $firstLine = true;
 

@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class EstatModel extends Model
 {
-    protected $table            = 'ESTATS';
+    protected $table            = 'ESTAT';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

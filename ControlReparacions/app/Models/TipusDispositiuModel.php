@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class TipusDispositiuModel extends Model
 {
-    protected $table            = 'TIPUS_DISPOSITIUS';
+    protected $table            = 'TIPUS_DISPOSITIU';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

@@ -28,17 +28,17 @@ class COMARCASeeder extends Seeder
                 /*
 
                     PARÁMETROS DE addComarca()
-                    +---------------+
-                    | codi          |
-                    | nom           |
-                    +---------------+
+                    +------+
+                    | codi |
+                    | nom  |
+                    +------+
                     
                 */
 
                 // Si no existe en el array, generamos la comarca en BBDD y guardamos el id en el array
-                if (!in_array($arrComarca, $row[11])) {
+                if (!in_array($row[11], $arrComarca)) {
                     $comarca -> addComarca( 
-                        trim($row[11]), 
+                        (int) $row[11],
                         trim($row[12])
                     );
 

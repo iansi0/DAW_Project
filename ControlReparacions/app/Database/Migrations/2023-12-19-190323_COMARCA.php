@@ -10,8 +10,8 @@ class COMARCA extends Migration
     {
         $this->forge->addField([
                 'codi' => [
-                    'type'           => 'BINARY',
-                    'constraint'     => 32,
+                    'type'           => 'INT',
+                    'constraint'     => 3,
                 ],
                 
                 'nom' => [

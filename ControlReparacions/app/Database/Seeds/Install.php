@@ -8,6 +8,13 @@ class Install extends Seeder
 {
     public function run()
     {
-        $this->call("SSTTSeeder");  
+        $this->call("SSTTSeeder");
+        $this->call("COMARCASeeder");
+        $this->call("POBLACIOSeeder");
+        $this->call("CENTRESeeder");
+        $this->call("TIPUSDISPOSITIUSSeeder");
+        $this->call("TIPUSINTERVENCIOSeeder");
+        $this->call("TIPUSINVENTARISeeder");
+        $this->call("ESTATSeeder");
     }
 }
