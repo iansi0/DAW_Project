@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class ComarcaModel extends Model
 {
     protected $table            = 'COMARCA';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'codi';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id','nom'];
+    protected $allowedFields    = ['codi','nom'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,10 +38,10 @@ class ComarcaModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addComarca($id,$nom) {
+    public function addComarca($codi,$nom) {
            
         $data = [
-            'id' =>  $id,
+            'codi' =>  $codi,
             'nom' => $nom,
         ];
 

@@ -26,8 +26,8 @@ class TIPUSINTERVENCIOSeeder extends Seeder
 
                     PARÁMETROS DE addTipusIntervencio()
                     +----------------+
-                    | id_intervencio   |
-                    | nom_intervencio  |
+                    | id             |
+                    | nom            |
                     +----------------+
                     
                 */

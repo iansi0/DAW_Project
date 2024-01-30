@@ -9,7 +9,7 @@ class INVENTARI extends Migration
     public function up()
     {
         $this->forge->addField([
-                'id_inventari'          => [
+                'id'          => [
                         'type'           => 'BINARY',
                         'constraint'     => 32,
                 ],
@@ -32,16 +32,16 @@ class INVENTARI extends Migration
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addKey('id_inventari', true);
-        $this->forge->createTable('Inventari');
-        $this->forge->addForeignKey('codi_centre', 'Centre', 'codi_centre');
-        $this->forge->addForeignKey('id_tipus_inventari', 'TipusInventari', 'id_tipus_inventari');
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('INVENTARI');
+        $this->forge->addForeignKey('codi_centre', 'CENTRE', 'codi_centre');
+        $this->forge->addForeignKey('id_tipus_inventari', 'TIPUS_INVENTARI', 'id');
 
 
     }
 
     public function down()
     {
-        $this->forge->dropTable('Inventari');
+        $this->forge->dropTable('INVENTARI');
     }
 }

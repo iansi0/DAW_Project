@@ -5,7 +5,7 @@ namespace App\Database\Seeds;
 use App\Models\TipusInventariModel;
 use CodeIgniter\Database\Seeder;
 
-class COMPONENTSSeeder extends Seeder
+class TIPUSINVENTARISeeder extends Seeder
 {
     public function run()
     {
@@ -26,8 +26,8 @@ class COMPONENTSSeeder extends Seeder
 
                     PARÁMETROS DE addTipusInventari()
                     +----------------+
-                    | id_inventari   |
-                    | nom_inventari  |
+                    | id             |
+                    | nom            |
                     +----------------+
                     
                 */

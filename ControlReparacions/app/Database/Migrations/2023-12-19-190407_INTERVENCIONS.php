@@ -9,21 +9,21 @@ class INTERVENCIONS extends Migration
     public function up()
     {
         $this->forge->addField([
-                'id_intervencio'          => [
+                'id'          => [
                         'type'           => 'BINARY',
                         'constraint'     => 32,
                 ],
-                'descripcio_intervencio'          => [
+                'descripcio'          => [
                         'type'           => 'VARCHAR',
                         'constraint'     => 100,
                         'null'           => false,
                 ],
-                'data_intervencio'          => [
+                'data'          => [
                         'type'           => 'DATE',
                         'default'        => date("Y-m-d H:i:s"),
                         'null'           => false,
                 ],
-                'id_tipus_intervencio'          => [
+                'id_tipus'          => [
                         'type'           => 'INT',
                         'constraint'     => 3,
                         'null'           => false,
@@ -43,18 +43,18 @@ class INTERVENCIONS extends Migration
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addKey('id_intervencio', true);
-        $this->forge->createTable('Intervencio');
-        $this->forge->addForeignKey('id_tipus_intervencio', 'TipusIntervencio', 'id_tipus_intervencio');
-        $this->forge->addForeignKey('id_tipus_intervencio', 'TipusIntervencio', 'id_tipus_intervencio');
-        $this->forge->addForeignKey('correu_alumne', 'Alumne', 'correu_alumne');
-        $this->forge->addForeignKey('id_xtec', 'Professor', 'id_xtec');
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('INTERVENCIO');
+        $this->forge->addForeignKey('id_tipus', 'TIPUS_INTERVENCIO', 'id');
+        $this->forge->addForeignKey('id_curs', 'CURS', 'id');
+        $this->forge->addForeignKey('correu_alumne', 'ALUMNE', 'correu_alumne');
+        $this->forge->addForeignKey('id_xtec', 'PROFESSOR', 'id_xtec');
 
 
     }
 
     public function down()
     {
-        $this->forge->dropTable('Intervencio');
+        $this->forge->dropTable('INTERVENCIO');
     }
 }

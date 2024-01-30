@@ -9,7 +9,7 @@ class COMARCA extends Migration
     public function up()
     {
         $this->forge->addField([
-                'id' => [
+                'codi' => [
                     'type'           => 'BINARY',
                     'constraint'     => 32,
                 ],
@@ -20,7 +20,7 @@ class COMARCA extends Migration
                     'null'           => false,
                 ],
         ]);
-        $this->forge->addKey('id', true);
+        $this->forge->addKey('codi', true);
         $this->forge->createTable('COMARCA');
     }
 

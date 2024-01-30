@@ -26,8 +26,8 @@ class ESTATSeeder extends Seeder
 
                     PARÁMETROS DE addEstat()
                     +------------+
-                    | id_estat   |
-                    | nom_estat  |
+                    | id         |
+                    | nom        |
                     +------------+
                     
                 */

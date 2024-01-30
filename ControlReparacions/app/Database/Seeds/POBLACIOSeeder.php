@@ -29,8 +29,8 @@ class POBLACIOSeeder extends Seeder
 
                     PARÁMETROS DE addComarca()
                     +---------------+
-                    | id_poblacio   |
-                    | nom_poblacio  |
+                    | id            |
+                    | nom           |
                     | id_comarca    |
                     +---------------+
                     

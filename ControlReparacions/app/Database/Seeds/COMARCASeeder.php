@@ -29,7 +29,7 @@ class COMARCASeeder extends Seeder
 
                     PARÁMETROS DE addComarca()
                     +---------------+
-                    | codi_comarca  |
+                    | codi          |
                     | nom           |
                     +---------------+
                     

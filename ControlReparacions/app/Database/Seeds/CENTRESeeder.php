@@ -29,14 +29,14 @@ class CENTRESeeder extends Seeder
 
                     PARÁMETROS DE addCentre()
                     +--------------------------------+
-                    | codi_centre                    |
-                    | nom_centre                     |
+                    | codi                           |
+                    | nom                            |
                     | actiu                          |
                     | taller                         |
-                    | telefon_centre                 |
-                    | adreca_fisica_centre           |
-                    | nom_persona_contacte_centre    |
-                    | correu_persona_contacte_centre |
+                    | telefon                        |
+                    | adreca_fisica                  |
+                    | nom_persona_contacte           |
+                    | correu_persona_contacte        |
                     | id_sstt                        |
                     | id_poblacio                    |
                     +--------------------------------+

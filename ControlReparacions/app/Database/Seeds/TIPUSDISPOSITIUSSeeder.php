@@ -5,7 +5,7 @@ namespace App\Database\Seeds;
 use App\Models\TipusDispositiuModel;
 use CodeIgniter\Database\Seeder;
 
-class DISPOSITIUSSeeder extends Seeder
+class TIPUSDISPOSITIUSSeeder extends Seeder
 {
     public function run()
     {
@@ -26,8 +26,8 @@ class DISPOSITIUSSeeder extends Seeder
 
                     PARÁMETROS DE addTipusDispositiu()
                     +-----------------+
-                    | id_dispositiu   |
-                    | nom_dispositiu  |
+                    | id              |
+                    | nom             |
                     +-----------------+
                     
                 */
