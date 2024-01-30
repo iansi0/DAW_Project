@@ -26,7 +26,7 @@ class POBLACIO extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('POBLACIO');
-        $this->forge->addForeignKey('id_comarca', 'COMARCA', 'id');
+        $this->forge->addForeignKey('id_comarca', 'COMARCA', 'codi');
 
 
     }
