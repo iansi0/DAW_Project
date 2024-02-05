@@ -74,4 +74,9 @@
     </tr>
   </tbody>
 </table>
+
+
+<?php
+//Imrpimir tabla tickets
+ //$table_tickets ?>
 <?= $this->endSection() ?>
