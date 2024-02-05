@@ -12,10 +12,11 @@ class TIQUETS extends Migration
                 'id'          => [
                         'type'           => 'BINARY',
                         'constraint'     => 32,
+                        'null'           => false,
                 ],
                 'codi_dispositiu'          => [
-                        'type'           => 'VARCHAR',
-                        'constraint'     => 50,
+                        'type'           => 'BINARY',
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
                 'descripcio_avaria'          => [
@@ -54,13 +55,13 @@ class TIQUETS extends Migration
                         'null'           => false,
                 ],
                 'codi_centre_emissor'          => [
-                        'type'           => 'BINARY',
-                        'constraint'     => 32,
+                        'type'           => 'INT',
+                        'constraint'     => 7,
                         'null'           => false,
                 ],
                 'codi_centre_reparador'          => [
-                        'type'           => 'BINARY',
-                        'constraint'     => 32,
+                        'type'           => 'INT',
+                        'constraint'     => 7,
                         'null'           => false,
                 ],
         ]);

@@ -16,5 +16,8 @@ class Install extends Seeder
         $this->call("TIPUSINTERVENCIOSeeder");
         $this->call("TIPUSINVENTARISeeder");
         $this->call("ESTATSeeder");
+        $this->call("PROFESSORSeeder");
+        $this->call("ALUMNESeeder");
+        $this->call("TIQUETSeeder");
     }
 }
