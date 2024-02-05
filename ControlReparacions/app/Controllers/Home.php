@@ -23,23 +23,27 @@ class Home extends BaseController
 
         //si son correctos creamos una session y redirigimos a tickets
 
-        if ($email == "hola@gmail.com") {
+        if ($email == "admin@gmail.com") {
 
             $session = \Config\Services::session();
 
+            //Crear sesion
             $newdata = [
-                'username' => 'johndoe',
+                'username' => 'admin',
                 'email' => $email,
                 'logged_in' => true,
             ];
 
             $session->set($newdata);
 
-            return redirect("tickets");
+            //Redirect a tickets
+            return redirect()->to(base_url("tickets"));
         }
 
         //Si no existen o no son correctos devolvemos a login con un mensaje de error
-        $data["error"] = "Email o contraseña incorrectos";
+
+        //Cambiar error a sesion de 1 solo uso
+        $data["error"] = "EMAIL O CONTRASENYA INCORRECTE";
         return view("login.php", $data);
     }
 
