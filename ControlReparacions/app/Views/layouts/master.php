@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ca" class="h-full">
 
@@ -11,16 +12,16 @@
 <body class=" flex h-full">
 
     <nav id="Sidebar" class="bg-terciario-3 flex flex-col gap-10 py-20 w-20  text-5xl h-full ">
-        <a href="#" class=" w-20 overflow-hidden  transition-all ease-in duration-500   hover:w-60  hover:bg-primario hover:text-white hover:z-10">Alumnos</a>
+        <a href="#" class=" w-20 overflow-hidden  transition-all ease-in duration-500   hover:w-60  hover:bg-primario hover:text-white hover:z-10"><?=strtoupper(lang('master.students'))?></a>
 
 
         <a href="#" class=" w-20   h-20 overflow-hidden flex items-center  transition-all ease-in duration-500   hover:w-60  hover:bg-primario hover:text-white hover:z-10">
             <!-- Imagen ticket
             <img src="/assets/img/navbar/ticketRojo.png" alt="ticket" class="w-20 h-20">-->
-            Tickets</a>
+            <?=strtoupper(lang('master.tickets'))?></a>
 
 
-        <a href="#" class=" w-20 overflow-hidden  transition-all ease-in duration-500   hover:w-60  hover:bg-primario hover:text-white hover:z-10">Archivos</a>
+        <a href="#" class=" w-20 overflow-hidden  transition-all ease-in duration-500   hover:w-60  hover:bg-primario hover:text-white hover:z-10"><?=strtoupper(lang('master.assign'))?></a>
     </nav>
 
 

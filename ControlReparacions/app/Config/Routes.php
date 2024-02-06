@@ -5,6 +5,6 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
-$routes->get('tickets', 'Home::tickets');
-$routes->get('assignar', 'Home::assignar');
+$routes->get('/{locale}', 'Home::index');
+$routes->get('{locale}/tickets', 'Home::tickets');
+$routes->get('{locale}/assignar', 'Home::assignar');
