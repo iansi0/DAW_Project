@@ -2,19 +2,19 @@
 
 
 <?= $this->section('content') ?>
-<h1 class="text-center text-7xl text-primario">TICKETS</h1>
+<h1 class="text-center text-7xl text-primario">><?=strtoupper(lang('ticket.ticket'))?></h1>
 
-<button id="add-ticket" class=" bg-primario text-white float-right mb-5 px-5 py-2 hover:bg-terciario-4">+ Afegir</button>
+<button id="add-ticket" class=" bg-primario text-white float-right mb-5 px-5 py-2 hover:bg-terciario-4">+ ><?=lang('ticekt.add')?></button>
 
 <table class="w-full ">
   <thead class=" bg-primario text-white">
-    <th>Ticket</th>
-    <th>ID_Disp</th>
-    <th>Type</th>
-    <th>Institut</th>
-    <th>Inici</th>
-    <th>Última</th>
-    <th>Estat</th>
+    <th><?=lang('ticekt.ticket')?></th>
+    <th><?=lang('ticekt.id_device')?></th>
+    <th><?=lang('ticekt.type')?></th>
+    <th><?=lang('ticekt.ins')?></th>
+    <th><?=lang('ticekt.start')?></th>
+    <th><?=lang('ticekt.last')?></th>
+    <th><?=lang('ticekt.status')?></th>
     </tr>
   </thead>
   <tbody>

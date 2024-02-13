@@ -8,5 +8,6 @@ return [
     'last'      => 'Ultima',
     'status'      => 'Estat',
     'add'      => 'Afegir',
+    'ins'      => 'Institut',
     // ''      => '',
 ];

@@ -5,5 +5,6 @@ return [
     'ticket'    => 'Tiquet',
     'transmitter'    => 'Emisor',
     'receiver'      => 'Receptor',
+    'start'      => 'Inicio',
     // ''      => '',
 ];
