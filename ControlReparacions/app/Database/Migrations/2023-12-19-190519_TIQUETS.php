@@ -7,15 +7,16 @@ use CodeIgniter\Database\Migration;
 class TIQUETS extends Migration
 {
     public function up()
-{
+    {
         $this->forge->addField([
-                'id_tiquet'          => [
+                'id'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 32,
+                        'null'           => false,
                 ],
                 'codi_dispositiu'          => [
-                        'type'           => 'VARCHAR',
-                        'constraint'     => 50,
+                        'type'           => 'BINARY',
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
                 'descripcio_avaria'          => [
@@ -54,28 +55,28 @@ class TIQUETS extends Migration
                         'null'           => false,
                 ],
                 'codi_centre_emissor'          => [
-                        'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'type'           => 'INT',
+                        'constraint'     => 7,
                         'null'           => false,
                 ],
                 'codi_centre_reparador'          => [
-                        'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'type'           => 'INT',
+                        'constraint'     => 7,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addKey('codi_centre_reparador', true);
-        $this->forge->createTable('Tiquet');
-        $this->forge->addForeignKey('id_tipus_dispositiu', 'TipusDispositiu', 'id_tipus_dispositiu');
-        $this->forge->addForeignKey('id_estat', 'Estat', 'id_estat');
-        $this->forge->addForeignKey('codi_centre_emissor', 'Centre', 'codi_centre');
-        $this->forge->addForeignKey('codi_centre_reparador', 'Centre', 'codi_centre');
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('TIQUET');
+        $this->forge->addForeignKey('id_tipus_dispositiu', 'TIPUS_DISPOSITIU', 'id');
+        $this->forge->addForeignKey('id_estat', 'ESTAT', 'id');
+        $this->forge->addForeignKey('codi_centre_emissor', 'CENTRE', 'codi');
+        $this->forge->addForeignKey('codi_centre_reparador', 'CENTRE', 'codi');
 
 
     }
 
     public function down()
     {
-        $this->forge->dropTable('Tiquet');
+        $this->forge->dropTable('TIQUET');
     }
 }

@@ -11,7 +11,7 @@ class PROFESSOR extends Migration
         $this->forge->addField([
                 'id_xtec'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 32,
                 ],
                 'nom_professor'          => [
                         'type'           => 'VARCHAR',
@@ -30,19 +30,19 @@ class PROFESSOR extends Migration
                 ],
                 'codi_centre'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
         ]);
         $this->forge->addKey('id_xtec', true);
-        $this->forge->createTable('Professor');
-        $this->forge->addForeignKey('codi_centre', 'Centre', 'codi_centre');
+        $this->forge->createTable('PROFESSOR');
+        $this->forge->addForeignKey('codi_centre', 'CENTRE', 'codi');
 
 
     }
 
     public function down()
     {
-        $this->forge->dropTable('Professor');
+        $this->forge->dropTable('PROFESSOR');
     }
 }

@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class CursModel extends Model
 {
-    protected $table            = 'curs';
-    protected $primaryKey       = 'id_curs';
+    protected $table            = 'CURS';
+    protected $primaryKey       = 'idcurs';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_curs','cicle'];
+    protected $allowedFields    = ['id','cicle'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,10 +38,10 @@ class CursModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addCurs($id_curs,$cicle) {
+    public function addCurs($id,$cicle) {
            
         $data = [
-            'id_curs' =>  $id_curs,
+            'id' =>  $id,
             'cicle' => $cicle,
         ];
 

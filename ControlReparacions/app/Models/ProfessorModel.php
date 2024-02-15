@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class ProfessorModel extends Model
 {
-    protected $table            = 'professors';
+    protected $table            = 'professor';
     protected $primaryKey       = 'id_xtec';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
@@ -38,15 +38,14 @@ class ProfessorModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addProfessor($id_xtec,$nom_professor,$cognom_professor,$correu_professor,$codi_professor) {
+    public function addProfessor($id_xtec,$nom_professor,$cognom_professor,$correu_professor,$codi_centre) {
            
         $data = [
             'id_xtec' =>  $id_xtec,
             'nom_professor' => $nom_professor,
-            'cognom_professor' => $cognom_professor,
+            'cognoms_professor' => $cognom_professor,
             'correu_professor' => $correu_professor,
-            'codi_professor' => $codi_professor,
-            
+            'codi_centre' => $codi_centre
         ];
 
         $this->insert($data);

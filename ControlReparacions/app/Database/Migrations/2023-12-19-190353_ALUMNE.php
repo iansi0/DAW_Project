@@ -15,19 +15,19 @@ class ALUMNE extends Migration
                 ],
                 'codi_centre'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
         ]);
         $this->forge->addKey('correu_alumne', true);
-        $this->forge->createTable('Alumne');
-        $this->forge->addForeignKey('codi_centre', 'Centre', 'codi_centre');
+        $this->forge->createTable('ALUMNE');
+        $this->forge->addForeignKey('codi_centre', 'CENTRE', 'codi');
 
 
     }
 
     public function down()
     {
-        $this->forge->dropTable('Alumne');
+        $this->forge->dropTable('ALUMNE');
     }
 }

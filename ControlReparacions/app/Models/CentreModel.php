@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class CentreModel extends Model
 {
-    protected $table            = 'centres';
-    protected $primaryKey       = 'codi_centre';
+    protected $table            = 'CENTRES';
+    protected $primaryKey       = 'codi';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['codi_centre','nom_centre','actiu','taller','telefon_centre','adreca_fisica_centre','nom_persona_contacte_centre','correu_persona_contacte_centre','id_sstt','id_poblacio'];
+    protected $allowedFields    = ['codi','nom','actiu','taller','telefon','adreca_fisica','nom_persona_contacte','correu_persona_contacte','id_sstt','id_poblacio'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,18 +38,17 @@ class CentreModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addCentre($codi_centre,$nom_centre,$actiu,$taller,$telefon_centre,$adreca_fisica_centre,$nom_persona_contacte_centre,$correu_persona_contacte_centre,$id_sstt,$id_poblacio) {
+    public function addCentre($codi,$nom,$actiu,$taller,$telefon,$adreca_fisica,$nom_persona_contacte,$correu_persona_contacte,$id_sstt,$id_poblacio) {
            
         $data = [
-            'codi_centre' =>  $codi_centre,
-            'nom_centre' => $nom_centre,
+            'codi' =>  $codi,
+            'nom' => $nom,
             'actiu' => $actiu,
             'taller' => $taller,
-            'telefon_centre' => $telefon_centre,
-            'adreca_fisica_centre' => $adreca_fisica_centre,
-            'nom_persona_contacte_centre' => $nom_persona_contacte_centre,
-            'adreca_fisica_centre' => $adreca_fisica_centre,
-            'correu_persona_contacte_centre' => $correu_persona_contacte_centre,
+            'telefon' => $telefon,
+            'adreca_fisica' => $adreca_fisica,
+            'nom_persona_contacte' => $nom_persona_contacte,
+            'correu_persona_contacte' => $correu_persona_contacte,
             'id_sstt' => $id_sstt,
             'id_poblacio' => $id_poblacio,
         ];

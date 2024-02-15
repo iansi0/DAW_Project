@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class EstatModel extends Model
 {
-    protected $table            = 'estats';
-    protected $primaryKey       = 'id_estat';
+    protected $table            = 'ESTAT';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_estat','nom_estat'];
+    protected $allowedFields    = ['id','nom'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,11 +38,11 @@ class EstatModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addEstat($id_estat,$nom_estat) {
+    public function addEstat($id,$nom) {
            
         $data = [
-            'id_estat' =>  $id_estat,
-            'nom_estat' => $nom_estat,
+            'id' =>  $id,
+            'nom' => $nom,
         ];
 
         $this->insert($data);

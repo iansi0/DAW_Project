@@ -21,20 +21,19 @@ class LLISTAADMESOS extends Migration
                 ],
                 'codi_centre'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
         ]);
         $this->forge->addKey('correu_professor', true);
-        $this->forge->createTable('LlistaAdmesos');
-        $this->forge->addForeignKey('correu_professor', 'Intervencio', 'id_curs');
-        $this->forge->addForeignKey('codi_centre', 'Centre', 'codi_centre');
+        $this->forge->createTable('LLISTA_ADMESOS');
+        $this->forge->addForeignKey('codi_centre', 'CENTRE', 'codi');
 
 
     }
 
     public function down()
     {
-        $this->forge->dropTable('LlistaAdmesos');
+        $this->forge->dropTable('LLISTA_ADMESOS');
     }
 }
