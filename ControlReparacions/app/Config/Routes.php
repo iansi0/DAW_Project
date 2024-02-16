@@ -6,5 +6,8 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/{locale}', 'Home::index');
+
+$routes->post('login', 'Home::login');
+
 $routes->get('/tickets', 'Home::tickets');
 $routes->get('{locale}/assignar', 'Home::assignar');
