@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use SIENSIS\KpaCrud\Libraries\KpaCrud;
 
 class Home extends BaseController
 {
@@ -10,86 +11,50 @@ class Home extends BaseController
         return view('login.php');
     }
 
-    public function login()
-    {
-        //Guardamos los datos que nos han llegado por post en variables
-        $request = request();
-
-        $email = $request->getPost('email');
-
-        $password = $request->getPost('password');
-
-        //Comprobar si los datos existen en la bbdd y son correctos
-
-        //si son correctos creamos una session y redirigimos a tickets
-
-        if ($email == "admin@gmail.com") {
-
-            $session = \Config\Services::session();
-
-            //Crear sesion
-            $newdata = [
-                'username' => 'admin',
-                'email' => $email,
-                'logged_in' => true,
-            ];
-
-            $session->set($newdata);
-
-            //Redirect a tickets
-            return redirect()->to(base_url("tickets"));
-        }
-
-        //Si no existen o no son correctos devolvemos a login con un mensaje de error
-
-        //Cambiar error a sesion de 1 solo uso
-        $data["error"] = "EMAIL O CONTRASENYA INCORRECTE";
-        return view("login.php", $data);
-    }
-
     public function tickets(): string
     {
+        //CODIGO KPACRUD
         /*
-        //Comprovar si tenemos un filtro de busqueda
-        $searchData = $this->request->getGet();
+        //Crear el objeto kpaCrud
+        $crud = new KpaCrud();
 
-        if (isset($searchData) && isset($searchData['q'])) {
-            $search = $searchData["q"];
-        } else {
-            $search = "";
-        }
+        //La tabla que mostrara el kpaCrud sera solo de vista, no tendra funciones(add, modify, delete...)
+        $crud->setConfig('onlyView');
 
+        //Le decimos a que tabla hace referencia
+        $crud->setTable('Tiquet');
 
-        //Recuperar los datos a mostrar en la tabla de la BBDD
-        $model = new TicketsModel();
+        //Decimos que columnas nos interesa mostrar
+        $crud->setColumns(['id_tiquet', 'codi_dispositiu', 'id_tipus_dispositiu', 'codi_centre_emissor', 'data_alta', 'data_ultima_modificacio', 'id_estat']);
 
-        //Paginacion con filtro
-        if ($search == '') {
-            $paginateData = $model->getAllPaged(5);
-        } else {
-            $paginateData = $model->getByTitleOrText($search)->paginate(5);
-        }
+        $data['table_tickets'] = $crud;
+        */
+        return view('ticket.php', /*$data*/);
+    }
 
-        //Crear tabla con los datos
-        $table = new \CodeIgniter\View\Table();
-        $table->setHeading('ID', 'Title', 'Text');
+    public function assignar(): string
+    {
+        return view('assignar.php');
+    }
 
-        $template = [
-            'table_open' => "<table class='table table-hover' style='border-collapse: collapse;'>"
-        ];
-        $table->setTemplate($template);
-        /*************** TABLE GENERATOR ********************/
+    public function alumnes(): string
+    {
+        //CODIGO KPACRUD
+        /*
+        //Crear el objeto kpaCrud
+        $crud = new KpaCrud();
 
-        /* Tabla
-        $data = [
-            'news' => $paginateData,
-            'pager' => $model->pager,
-            'search' => $search,
-            'table' => $table,
-        ];
+        //La tabla que mostrara el kpaCrud sera solo de vista, no tendra funciones(add, modify, delete...)
+        $crud->setConfig('default');
 
-*/
-        //Ir a tickets con la tabla
-        return view('ticket.php');
+        //Le decimos a que tabla hace referencia
+        $crud->setTable('Alumne');
+
+        //Decimos que columnas nos interesa mostrar
+        $crud->setColumns(['correu_alumne', 'codi_centre']);
+
+        $data['table_alumnes'] = $crud;
+        */
+        return view('alumnes.php', /* $data*/);
     }
 }
