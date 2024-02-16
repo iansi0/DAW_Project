@@ -92,9 +92,4 @@ class Home extends BaseController
         //Ir a tickets con la tabla
         return view('ticket.php');
     }
-
-    public function assignar(): string
-    {
-        return view('assignar.php');
-    }
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title><?=lang('login.login')?></title>
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/styles.css">
 </head>
 
@@ -22,6 +22,12 @@
         <form class=" flex flex-col   w-60 " method="POST" action="<?= base_url() ?>/login">
             <label class="mb-1 text-xl" for="email">Email</label>
             <input class="mb-5 rounded-md border-2 text-terciario-1 pl-1 focus:outline-none" type="email" id="email" name="email" />
+<body class=" h-screen flex flex-col justify-center items-center">
+    <section class=" bg-gray-300 flex flex-col gap-5 items-center border-2 rounded-md border-black px-20 py-10">
+        <h1 class=" text-7xl">KYS</h1>
+        <form class="flex flex-col text-center">
+            <label class="mb-1 text-xl" for="email"><?=lang('login.email')?></label>
+            <input class="mb-5 rounded-md" type="email" id="email" />
 
             <label class="mb-1 text-xl" for="password">Contrasenya</label>
             <input class="mb-10 rounded-md border-2 text-terciario-1 pl-1 focus:outline-none" type="password" id="password" name="password" />

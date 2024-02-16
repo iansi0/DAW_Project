@@ -9,21 +9,21 @@ class TIPUSINVENTARI extends Migration
     public function up()
     {
         $this->forge->addField([
-                'id_tipus_inventari'          => [
+                'id'          => [
                         'type'           => 'INT',
                 ],
-                'nom_tipus_inventari'          => [
+                'nom'          => [
                         'type'           => 'VARCHAR',
                         'constraint'     => 30,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addKey('id_tipus_inventari', true);
-        $this->forge->createTable('TipusInventari');
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('TIPUS_INVENTARI');
     }
 
     public function down()
     {
-        $this->forge->dropTable('TipusInventari');
+        $this->forge->dropTable('TIPUS_INVENTARI');
     }
 }

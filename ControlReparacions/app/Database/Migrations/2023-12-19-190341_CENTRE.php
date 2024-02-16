@@ -7,14 +7,14 @@ use CodeIgniter\Database\Migration;
 class CENTRE extends Migration
 {
     public function up()
-{
+    {
         $this->forge->addField([
-                'codi_centre'          => [
-                        'type'           => 'BINARY',
-                        'constraint'     => 20,
+                'codi'          => [
+                        'type'           => 'INT',
+                        'constraint'     => 7,
                         'null'           => false,
                 ],
-                'nom_centre'          => [
+                'nom'          => [
                         'type'           => 'VARCHAR',
                         'constraint'     => 100,
                         'null'           => false,
@@ -27,47 +27,47 @@ class CENTRE extends Migration
                         'type'           => 'BOOLEAN',
                         'null'           => false,
                 ],
-                'telefon_centre'          => [
+                'telefon'          => [
                         'type'           => 'VARCHAR',
                         'constraint'     => 9,
                         'null'           => false,
                 ],
-                'adreca_fisica_centre'          => [
+                'adreca_fisica'          => [
                         'type'           => 'VARCHAR',
                         'constraint'     => 100,
                         'null'           => false,
                 ],
-                'nom_persona_contacte_centre'          => [
+                'nom_persona_contacte'          => [
                         'type'           => 'VARCHAR',
                         'constraint'     => 50,
                         'null'           => false,
                 ],
-                'correu_persona_contacte_centre'          => [
+                'correu_persona_contacte'          => [
                         'type'           => 'VARCHAR',
                         'constraint'     => 50,
                         'null'           => false,
                 ],
                 'id_sstt'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 2,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
                 'id_poblacio'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addKey('codi_centre', true);
-        $this->forge->createTable('Centre');
-        $this->forge->addForeignKey('id_sstt', 'SSTT', 'id_sstt');
-        $this->forge->addForeignKey('id_poblacio', 'Poblacio', 'id_poblacio');
+        $this->forge->addKey('codi', true);
+        $this->forge->createTable('CENTRE');
+        $this->forge->addForeignKey('id_sstt', 'SSTT', 'id');
+        $this->forge->addForeignKey('id_poblacio', 'POBLACIO', 'id');
 
 
 }
 
 public function down()
 {
-        $this->forge->dropTable('Centre');
+        $this->forge->dropTable('CENTRE');
 }
 }

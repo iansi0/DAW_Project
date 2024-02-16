@@ -9,22 +9,22 @@ class TIPUSINTERVENCIONS extends Migration
     public function up()
     {
         $this->forge->addField([
-                'id_tipus_intevencio'          => [
+                'id'          => [
                         'type'           => 'BINARY',
-                        'constraint'     => 20,
+                        'constraint'     => 32,
                 ],
-                'nom_tipus_intervencio'          => [
+                'nom'          => [
                         'type'           => 'VARCHAR',
                         'constraint'     => 20,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addKey('id_tipus_intevencio', true);
-        $this->forge->createTable('TipusIntervencio');
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('TIPUS_INTERVENCIO');
     }
 
     public function down()
     {
-        $this->forge->dropTable('TipusIntervencio');
+        $this->forge->dropTable('TIPUS_INTERVENCIO');
     }
 }

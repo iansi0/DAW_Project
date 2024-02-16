@@ -9,7 +9,7 @@ class CURS extends Migration
     public function up()
     {
         $this->forge->addField([
-                'id_curs'          => [
+                'id'          => [
                         'type'           => 'INT',
                 ],
                 'cicle'          => [
@@ -28,14 +28,13 @@ class CURS extends Migration
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addKey('id_curs', true);
-        $this->forge->createTable('Curs');
-        $this->forge->addForeignKey('id_curs', 'Intervencio', 'id_curs');
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('CURS');
 
     }
 
     public function down()
     {
-        $this->forge->dropTable('Curs');
+        $this->forge->dropTable('CURS');
     }
 }

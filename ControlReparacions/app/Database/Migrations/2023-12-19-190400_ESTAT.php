@@ -9,22 +9,22 @@ class ESTATS extends Migration
     public function up()
     {
         $this->forge->addField([
-                'id_estat'          => [
+                'id'          => [
                         'type'           => 'INT',
                         'constraint'     => 3,
                 ],
-                'nom_estat'          => [
+                'nom'          => [
                         'type'           => 'VARCHAR',
                         'constraint'     => 20,
                         'null'           => false,
                 ],
         ]);
-        $this->forge->addKey('id_estat', true);
-        $this->forge->createTable('Estat');
+        $this->forge->addKey('id', true);
+        $this->forge->createTable('ESTAT');
     }
 
     public function down()
     {
-        $this->forge->dropTable('Estat');
+        $this->forge->dropTable('ESTAT');
     }
 }
