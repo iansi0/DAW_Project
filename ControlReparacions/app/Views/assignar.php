@@ -1,54 +1,98 @@
 <?= $this->extend('layouts/master.php') ?>
 
-
 <?= $this->section('content') ?>
-<h1 class="text-center text-7xl text-primario">><?=strtoupper(lang('assignar.assignar'))?></h1>
+<h1 class="text-center text-7xl text-primario">TICKETS</h1>
 
-<section class="flex  gap-8 mt-8   mb-5">
-    <button class="bg-primario text-white px-5 py-2 hover:bg-terciario-4">+><?=lang('assignar.filter')?></button>
-
-    <form action="" class="flex gap-2 w-full">
-        <input type="search" id="gsearch" name="gsearch" class="text-black bg-slate-400 ml-auto pl-2  rounded-lg ">
-        <input type="submit" class="bg-primario text-white px-5 py-2 hover:bg-terciario-4">
-    </form>
-
-    <button id="add-ticket" class="bg-primario text-white px-5 py-2 hover:bg-terciario-4"><?=lang('assignar.add')?></button>
-</section>
+<button id="add-ticket" class=" bg-primario text-white float-right mb-5 px-5 py-2 hover:bg-terciario-4">+ Afegir</button>
 
 
-<table class="w-full m"> 
-    <thead class="bg-primario  text-white">
-        <th>><?=lang('assignar.ticket')?></th>
-        <th>><?=lang('assignar.transmitter')?></th>
-        <th>><?=lang('assignar.receiver')?></th>
-        <th>><?=lang('assignar.start')?></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1234-5678-9012</td>
-            <td>Institut Escola del Treball</td>
-            <td>caparella</td>
-            <td>23-03-24</td>
-        </tr>
-        <tr>
-            <td class=" bg-gray-200">1234-5678-9012</td>
-            <td class=" bg-gray-200">Institut Escola del Treball</td>
-            <td class=" bg-gray-200">caparella</td>
-            <td class=" bg-gray-200">23-03-24</td>
-        </tr>
-        <tr>
-            <td>1234-5678-9012</td>
-            <td>Institut Escola del Treball</td>
-            <td>caparella</td>
-            <td>23-03-24</td>
-        </tr>
-        <tr>
-            <td class=" bg-gray-200">1234-5678-9012</td>
-            <td class=" bg-gray-200">Institut Escola del Treball</td>
-            <td class=" bg-gray-200">caparella</td>
-            <td class=" bg-gray-200">23-03-24</td>
-        </tr>
-    </tbody>
+<table class="w-full ">
+  <thead class=" bg-primario text-white">
+    <th>Ticket</th>
+    <th>ID_Disp</th>
+    <th>Type</th>
+    <th>Institut</th>
+    <th>Inici</th>
+    <th>Última</th>
+    <th>Estat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1234-5678-9012</td>
+      <td>1234567890</td>
+      <td>Portatil</td>
+      <td>Institut Escola del Treball</td>
+      <td>22-10-2023</td>
+      <td>22-10-2023</td>
+      <td>En reparació</td>
+    </tr>
+    <tr>
+      <td>1234-5678-9032</td>
+      <td>1234577890</td>
+      <td>Projector</td>
+      <td>Institut Escola del Treball</td>
+      <td>22-10-2023</td>
+      <td>22-10-2023</td>
+      <td>Reparat</td>
+    </tr>
+    <tr>
+      <td>2134-5678-9012</td>
+      <td>987654311</td>
+      <td>Torre</td>
+      <td>Institut Escola del Treball</td>
+      <td>22-10-2023</td>
+      <td>22-10-2023</td>
+      <td>Preparat per recollir</td>
+    </tr>
+    <tr>
+      <td>1234-5678-9012</td>
+      <td>098765432</td>
+      <td>Pantalla</td>
+      <td>Institut Escola del Treball</td>
+      <td>22-10-2023</td>
+      <td>22-10-2023</td>
+      <td>Validat i reparat</td>
+    </tr>
+    <tr>
+      <td>1234-5678-9012</td>
+      <td>098765434</td>
+      <td>Portatil</td>
+      <td>Institut Escola del Treball</td>
+      <td>22-10-2023</td>
+      <td>22-10-2023</td>
+      <td>Espatllat</td>
+    </tr>
+    <tr>
+      <td>1234-5678-9999</td>
+      <td>1234567899</td>
+      <td>Portatil</td>
+      <td>Institut Escola del Treball</td>
+      <td>22-10-2023</td>
+      <td>22-10-2023</td>
+      <td>Desguaçat</td>
+    </tr>
+  </tbody>
 </table>
+
+
+<!-- Search form 
+<form method='get' action="<?php // base_url('tickets'); ?>" id="searchForm">
+  <input type='text' name='q' value='<?php // $search ?>' placeholder="Search here...">
+  <input type='button' id='btnsearch' value='Cercar' onclick='document.getElementById("searchForm").submit();'>
+</form>
+-->
+
+<!--Tabla 
+<?php
+//echo $table->generate($news);
+?>
+
+Paginacion 
+<div style='margin-top: 10px;'>
+  <?php
+   //$pager->only(['q'])->links(); ?>
+</div>
+-->
+
 <?= $this->endSection() ?>
