@@ -23,4 +23,9 @@ class Home extends BaseController
     {
         return view('alumnos.php');
     }
+
+    public function intervencion() : string
+    {
+        return view('intervencion.php');
+    }
 }
