@@ -2,7 +2,7 @@
 
 
 <?= $this->section('content') ?>
-<h1 class="text-center text-7xl text-primario">><?=strtoupper(lang('ticket.ticket'))?></h1>
+<!-- <h1 class="text-center text-7xl text-primario">><?=strtoupper(lang('ticket.ticket'))?></h1>
 
 <button id="add-ticket" class=" bg-primario text-white float-right mb-5 px-5 py-2 hover:bg-terciario-4">+ ><?=lang('ticekt.add')?></button>
 
@@ -73,7 +73,7 @@
       <td>Desguaçat</td>
     </tr>
   </tbody>
-</table>
+</table> -->
 
 
 <?php

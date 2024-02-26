@@ -57,4 +57,19 @@ class Home extends BaseController
         */
         return view('alumnes.php', /* $data*/);
     }
+
+    public function ticketinfo(): string
+    {
+        return view('ticketinfo.php');
+    }
+
+    public function intervencion(): string
+    {
+        return view('intervencion.php');
+    }
+
+    public function formestudiantes(): string
+    {
+        return view('formestudiantes.php');
+    }
 }
