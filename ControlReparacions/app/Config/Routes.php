@@ -10,3 +10,4 @@ $routes->get('tickets', 'Home::tickets');
 $routes->get('assignar', 'Home::assignar');
 $routes->get('alumnos', 'Home::alumnos');
 $routes->get('intervencion','Home::intervencion');
+$routes->get('ticketinfo','Home::ticketinfo');
