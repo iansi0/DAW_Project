@@ -8,10 +8,15 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        return view('login.php');
+        return view('login');
     }
 
-    public function tickets(): string
+    public function login(): string
+    {
+        return view('login');
+    }
+
+    public function ticket(): string
     {
         //CODIGO KPACRUD
         /*
@@ -29,12 +34,13 @@ class Home extends BaseController
 
         $data['table_tickets'] = $crud;
         */
-        return view('ticket.php', /*$data*/);
+        // return view('ticket', /*$data*/);
+        return view('ticket');
     }
 
     public function assignar(): string
     {
-        return view('assignar.php');
+        return view('assignar');
     }
 
     public function alumnes(): string
@@ -55,21 +61,21 @@ class Home extends BaseController
 
         $data['table_alumnes'] = $crud;
         */
-        return view('alumnes.php', /* $data*/);
+        return view('alumnes', /* $data*/);
     }
 
     public function ticketinfo(): string
     {
-        return view('ticketinfo.php');
+        return view('ticketinfo');
     }
 
-    public function intervencion(): string
+    public function intervention(): string
     {
-        return view('intervencion.php');
+        return view('intervention');
     }
 
-    public function formestudiantes(): string
+    public function formstudents(): string
     {
-        return view('formestudiantes.php');
+        return view('formstudents');
     }
 }

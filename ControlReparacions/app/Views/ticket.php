@@ -1,20 +1,20 @@
-<?= $this->extend('layouts/master.php') ?>
+<?= $this->extend('layouts/master') ?>
 
 
 <?= $this->section('content') ?>
-<!-- <h1 class="text-center text-7xl text-primario">><?=strtoupper(lang('ticket.ticket'))?></h1>
+<h1 class="text-center text-7xl text-primario">><?=strtoupper(lang('ticket.ticket'))?></h1>
 
-<button id="add-ticket" class=" bg-primario text-white float-right mb-5 px-5 py-2 hover:bg-terciario-4">+ ><?=lang('ticekt.add')?></button>
+<button id="add-ticket" class=" bg-primario text-white float-right mb-5 px-5 py-2 hover:bg-terciario-4">+ ><?=lang('ticket.add')?></button>
 
 <table class="w-full ">
   <thead class=" bg-primario text-white">
-    <th><?=lang('ticekt.ticket')?></th>
-    <th><?=lang('ticekt.id_device')?></th>
-    <th><?=lang('ticekt.type')?></th>
-    <th><?=lang('ticekt.ins')?></th>
-    <th><?=lang('ticekt.start')?></th>
-    <th><?=lang('ticekt.last')?></th>
-    <th><?=lang('ticekt.status')?></th>
+    <th><?=lang('ticket.ticket')?></th>
+    <th><?=lang('ticket.id_device')?></th>
+    <th><?=lang('ticket.type')?></th>
+    <th><?=lang('ticket.ins')?></th>
+    <th><?=lang('ticket.start')?></th>
+    <th><?=lang('ticket.last')?></th>
+    <th><?=lang('ticket.status')?></th>
     </tr>
   </thead>
   <tbody>
@@ -73,7 +73,7 @@
       <td>Desguaçat</td>
     </tr>
   </tbody>
-</table> -->
+</table>
 
 
 <?php

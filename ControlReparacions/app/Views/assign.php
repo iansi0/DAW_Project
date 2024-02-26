@@ -75,8 +75,8 @@
   </tbody>
 </table>
 
-
-<!-- Search form 
+<!-- 
+ Search form  
 <form method='get' action="<?php // base_url('tickets'); ?>" id="searchForm">
   <input type='text' name='q' value='<?php // $search ?>' placeholder="Search here...">
   <input type='button' id='btnsearch' value='Cercar' onclick='document.getElementById("searchForm").submit();'>
@@ -92,7 +92,7 @@ Paginacion
 <div style='margin-top: 10px;'>
   <?php
    //$pager->only(['q'])->links(); ?>
-</div>
--->
+</div> -->
+
 
 <?= $this->endSection() ?>

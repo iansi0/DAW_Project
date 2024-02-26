@@ -17,7 +17,8 @@
         </tbody>
     </table>
     <div class="flex justify-start mt-6 ml-20">
-        <button class="bg-primario text-white px-5 py-2 rounded hover:bg-terciario-4 mr-4">star *</button>
+        <!-- Esto es un select, coño -->
+        <button class="bg-primario text-white px-5 py-2 rounded hover:bg-terciario-4 mr-4">c_stat </button>
         <button class="bg-primario text-white px-5 py-2 rounded hover:bg-terciario-4">guardar</button>
     </div>
 </section>

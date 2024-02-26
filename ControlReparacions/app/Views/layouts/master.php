@@ -1,5 +1,7 @@
 <?php
-
+$session = \Config\Services::session();
+// $name = $_SESSION['username'];
+$name = 'HOLA';
 
 ?>
 

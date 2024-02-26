@@ -5,9 +5,11 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/ticketinfo', 'Home::ticketinfo');
-$routes->get('/intervencion', 'Home::intervencion');
-$routes->get('/formestudiantes', 'Home::formestudiantes');
-$routes->get('/', 'Home::index');
-$routes->get('{locale}/tickets', 'Home::tickets');
-$routes->get('{locale}/assignar', 'Home::assignar');
+$routes->get('/{locale}/ticketinfo', 'Home::ticketinfo');
+$routes->get('/{locale}/intervention', 'Home::intervention');
+$routes->get('/{locale}/formstudents', 'Home::formstudents');
+$routes->get('/{locale}/login', 'Home::login');
+$routes->get('/{locale}/ticket', 'Home::ticket');
+$routes->get('/{locale}/assign', 'Home::assign');
+$routes->get('/{locale}/student', 'Home::student');
+$routes->get('/{locale}', 'Home::index');
