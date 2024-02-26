@@ -62,4 +62,9 @@ class Home extends BaseController
     {
         return view('intervencion.php');
     }
+    
+    public function ticketinfo() : string
+    {
+        return view('ticketinfo.php');
+    }
 }
