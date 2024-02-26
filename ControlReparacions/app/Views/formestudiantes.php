@@ -51,7 +51,7 @@
     </form>
     <div class="flex items-center mt-20">
         <label for="dni" class="w-auto text-right mr-2">ALTRES</label>
-        <input type="text" id="dni" name="dni" class="bg-blue-400 rounded px-2 py-3 flex-1">
+        <input type="text" id="dni" name="dni" class="bg-blue-400 hover:bg-blue-800  rounded px-2 py-3 flex-1">
     </div>
 </section>
 
