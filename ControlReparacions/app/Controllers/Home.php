@@ -33,4 +33,8 @@ class Home extends BaseController
     {
         return view('ticketinfo.php');
     }
+    public function formestudiantes() : string
+    {
+        return view('formestudiantes.php');
+    }
 }
