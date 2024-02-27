@@ -12,3 +12,4 @@ $routes->get('alumnos', 'Home::alumnos');
 $routes->get('intervencion','Home::intervencion');
 $routes->get('ticketinfo','Home::ticketinfo');
 $routes->get('formestudiantes','Home::formestudiantes');
+$routes->get('institutoform','Home::institutoform');

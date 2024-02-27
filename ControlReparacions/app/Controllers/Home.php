@@ -76,5 +76,9 @@ class Home extends BaseController
     {
         return view('alumnos.php');
     }
+    public function institutoform() : string
+    {
+        return view('institutoform.php');
+    }
 
 }

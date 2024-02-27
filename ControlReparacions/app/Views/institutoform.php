@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/master.php') ?>
 <?= $this->section('content') ?>
 
-<h1 class="text-2xl text-primario mt-14">FORMULARIO AlUMNO</h1>
+<h1 class="text-2xl text-primario mt-14">FORMULARIO INSTITUTO</h1>
 
 
 <section class="container mx-auto px-4 py-8 mt-10">
@@ -11,15 +11,15 @@
             <input type="text" id="nombre" name="nombre" class="bg-blue-400 rounded px-2 py-3">
         </div>
         <div class="flex items-center">
-            <label for="apellido" class="w-20 text-right mr-2">APELLIDOS</label>
+            <label for="apellido" class="w-20 text-right mr-2">REPARADOR</label>
             <input type="text" id="apellido" name="apellido" class="bg-blue-400 rounded px-2 py-3 border-blue-400">
         </div>
         <div class="flex items-center">
-            <label for="dni" class="w-16 text-right mr-2">DNI</label>
+            <label for="dni" class="w-16 text-right mr-2">CARRER</label>
             <input type="text" id="dni" name="dni" class="bg-blue-400 rounded px-2 py-3">
         </div>
         <div class="flex items-center mt-12 ml-10">
-            <label for="dni" class="w-16 text-right mr-2">CURS</label>
+            <label for="dni" class="w-16 text-right mr-2">Nº*</label>
             <select id="curso" name="curso" required class="border bg-blue-400 rounded px-2 py-3">
                 <option value="">Seleccione uno</option>
                 <option value="1">DAW</option>
@@ -29,7 +29,7 @@
             </select>
         </div>
         <div class="flex items-center mt-12 ml-14">
-            <label for="apellido" class="w-20 text-right mr-2">CLASE</label>
+            <label for="apellido" class="w-20 text-right mr-2">CP</label>
             <select id="curso" name="curso" required class="border bg-blue-400 rounded px-2 py-3">
                 <option value="">Seleccione uno</option>
                 <option value="1">1</option>
@@ -39,7 +39,7 @@
             </select>
         </div>
         <div class="flex items-center mt-12 ml-24">
-            <label for="dni" class="w-16 text-right mr-2">PROFESOR</label>
+            <label for="dni" class="w-16 text-right mr-2">POBLACIO</label>
             <select id="curso" name="curso" required class="border bg-blue-400 rounded px-2 py-3 ml-5">
                 <option value="">Seleccione uno</option>
                 <option value="1">ALVER</option>
