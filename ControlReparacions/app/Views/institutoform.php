@@ -11,8 +11,8 @@
             <input type="text" id="nombre" name="nombre" class="bg-blue-400 rounded px-2 py-3">
         </div>
         <div class="flex items-center">
-            <label for="apellido" class="w-20 text-right mr-2">REPARADOR</label>
-            <input type="text" id="apellido" name="apellido" class="bg-blue-400 rounded px-2 py-3 border-blue-400">
+            <label for="apellido" class="w-20 text-right mr-2 ">REPARADOR</label>
+            <input type="text" id="apellido" name="apellido" class="bg-blue-400 rounded px-2 py-3 border-blue-400 ml-5">
         </div>
         <div class="flex items-center">
             <label for="dni" class="w-16 text-right mr-2">CARRER</label>
@@ -20,13 +20,7 @@
         </div>
         <div class="flex items-center mt-12 ml-10">
             <label for="dni" class="w-16 text-right mr-2">Nº*</label>
-            <select id="curso" name="curso" required class="border bg-blue-400 rounded px-2 py-3">
-                <option value="">Seleccione uno</option>
-                <option value="1">DAW</option>
-                <option value="2">DAM</option>
-                <option value="3">DAM</option>
-                <option value="4">DAW</option>
-            </select>
+            <input type="text" id="" name="" class="bg-blue-400 rounded px-2 py-3 border-blue-400">
         </div>
         <div class="flex items-center mt-12 ml-14">
             <label for="apellido" class="w-20 text-right mr-2">CP</label>
