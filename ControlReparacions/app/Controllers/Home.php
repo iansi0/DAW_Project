@@ -38,9 +38,9 @@ class Home extends BaseController
         return view('ticket');
     }
 
-    public function assignar(): string
+    public function assign(): string
     {
-        return view('assignar');
+        return view('assign');
     }
 
     public function alumnes(): string
