@@ -80,5 +80,9 @@ class Home extends BaseController
     {
         return view('institutoform.php');
     }
+    public function ticketform() : string
+    {
+        return view('ticketform.php');
+    }
 
 }
