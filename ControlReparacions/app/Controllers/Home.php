@@ -90,4 +90,9 @@ class Home extends BaseController
         return view('formañadirticketinfo.php');
     }
 
+    public function vistainfoinstituto(): string
+    {
+        return view('vistainfoinstituto');
+    }
+
 }

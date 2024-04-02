@@ -14,4 +14,5 @@ $routes->get('formestudiantes','Home::formestudiantes');
 $routes->get('institutoform','Home::institutoform');
 $routes->get('ticketform','Home::ticketform');
 $routes->get('formañadirticketinfo', 'Home::formañadirticketinfo');
+$routes->get('vistainfoinstituto','Home::vistainfoinstituto');
 $routes->get('/{locale}', 'Home::index');
