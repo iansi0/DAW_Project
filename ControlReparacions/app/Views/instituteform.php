@@ -3,7 +3,7 @@
 
 <h1 class="text-2xl text-primario mt-14">FORMULARIO INSTITUTO</h1>
 
-
+<!-- TODO: CAMBIAR TODAS LAS ID POR DIOS -->
 <section class="container mx-auto px-4 py-8 mt-10">
     <form action="" class="grid grid-cols-3 gap-x-2">
         <div class="flex items-center">
@@ -12,6 +12,7 @@
         </div>
         <div class="flex items-center">
             <label for="apellido" class="w-20 text-right mr-2 ">REPARADOR</label>
+            <!-- TODO: Porque es un tipo texto y no checkbox -->
             <input type="text" id="apellido" name="apellido" class="bg-blue-400 rounded px-2 py-3 border-blue-400 ml-5">
         </div>
         <div class="flex items-center">

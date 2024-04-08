@@ -25,8 +25,6 @@ class TIQUETSeeder extends Seeder
                 | descripcio_avaria               |
                 | nom_persona_contacte_centre     |
                 | correu_persona_contacte_centre  |
-                | data_alta                       |
-                | data_ultima_modificacio         |
                 | id_tipus_dispositiu             |
                 | id_estat                        |
                 | codi_centre_emissor             |
@@ -43,8 +41,6 @@ class TIQUETSeeder extends Seeder
                 $fake->text(25),
                 $fake->name()." ".$fake->lastName(),
                 $fake->email(),
-                $fake->date(),
-                $fake->date(),
                 rand(0, 9),
                 rand(0, 13),    
                 $arrCentres[rand((count($arrCentres)/2)-1, count($arrCentres)-1)],

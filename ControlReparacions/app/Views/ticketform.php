@@ -13,6 +13,7 @@
             <label  class="w-20 text-right mr-2">Descripción</label>
             <input type="text" class="bg-blue-400 hover:bg-blue-500 text-white px-2 py-3 rounded flex-1"></input>
         </div>
+        <!-- TODO: Este select sobra -->
         <div class="flex items-center mt-5">
             <label  class="w-20 text-right mr-2">Prioridad</label>
             <select  class=" border bg-blue-400 hover:bg-blue-500 text-white px-2 py-3 rounded flex-1">
@@ -22,6 +23,7 @@
                 <option value="baja">Baja</option>
             </select>
         </div>
+        <!-- TODO: Este select sobra -->
         <div class="flex items-center mt-5">
             <label  class="w-20 text-right mr-2">Categoría</label>
             <select class="bg-blue-400 hover:bg-blue-500 text-white px-2 py-3 rounded flex-1">
@@ -36,6 +38,7 @@
             <label  class="w-20 text-right mr-2">Fecha Límite</label>
             <input type="date" id="fecha_limite" name="fecha_limite" class="bg-blue-400 hover:bg-blue-500 text-white px-2 py-3 rounded flex-1">
         </div>
+        <!-- TODO: Este select sera generado con un foreach de php -->
         <div class="flex items-center mt-5">
             <label  class="w-20 text-right mr-2">Estado</label>
             <select  class=" border bg-blue-400 hover:bg-blue-500 text-white px-2 py-3 rounded flex-1">
@@ -45,6 +48,7 @@
                 <option value="pendiente">Pendiente</option>
             </select>
         </div>
+        <!-- TODO: Esto sobra y se genera automaticamente en BBDD -->
         <div class="flex items-center mt-5">
             <label class="w-20 text-right mr-2">Fecha Creación</label>
             <input type="date" id="fecha_creacion" name="fecha_creacion" class="bg-blue-400 hover:bg-blue-500 text-white px-2 py-3 rounded flex-1">
