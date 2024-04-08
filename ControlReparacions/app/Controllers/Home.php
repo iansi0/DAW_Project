@@ -6,17 +6,8 @@ use SIENSIS\KpaCrud\Libraries\KpaCrud;
 
 class Home extends BaseController
 {
-    public function index(): string
-    {
-        return view('login');
-    }
-
-    public function login(): string
-    {
-        return view('login');
-    }
-
-    public function ticket(): string
+    //Tikcets functions
+    public function tickets(): string
     {
         //CODIGO KPACRUD
         /*
@@ -35,75 +26,80 @@ class Home extends BaseController
         $data['table_tickets'] = $crud;
         */
         // return view('ticket', /*$data*/);
-        return view('ticket');
+        return view('tickets/tickets');
     }
 
-    public function assign(): string
+    public function ticketInfo(): string
     {
-        return view('assign');
+        return view('tickets/ticketInfo');
     }
 
-    public function alumnes(): string
+    public function ticketForm(): string
+    {
+        return view('tickets/ticketForm.php');
+    }
+
+
+    //Intervention Functions
+    public function intervention(): string
+    {
+        return view('intervention/intervention');
+    }
+
+    public function interventionForm(): string
+    {
+        return view('intervention/interventionForm');
+    }
+
+
+    //Students Functions
+    public function students(): string
     {
         //CODIGO KPACRUD
         /*
         //Crear el objeto kpaCrud
         $crud = new KpaCrud();
-
+ 
         //La tabla que mostrara el kpaCrud sera solo de vista, no tendra funciones(add, modify, delete...)
         $crud->setConfig('default');
-
+ 
         //Le decimos a que tabla hace referencia
         $crud->setTable('Alumne');
-
+ 
         //Decimos que columnas nos interesa mostrar
         $crud->setColumns(['correu_alumne', 'codi_centre']);
-
+ 
         $data['table_alumnes'] = $crud;
         */
-        return view('alumnes', /* $data*/);
+        return view('students/students', /* $data*/);
     }
 
-    public function ticketinfo(): string
+    public function studentsForm(): string
     {
-        return view('ticketinfo');
+        return view('students/studentsForm');
     }
 
-    public function intervention(): string
+
+    //Institute Functions
+    public function institute(): string
     {
-        return view('intervention');
+        return view('institute/institute');
     }
 
-    public function formstudents(): string
+    public function instituteForm(): string
     {
-        return view('formstudents');
+        return view('institute/instituteForm');
     }
 
-    public function intervencion() : string
+    public function assign(): string
     {
-        return view('intervencion.php');
-    }
-    
-    public function ticketinfo() : string
-    {
-        return view('ticketinfo.php');
-    }
-    public function formestudiantes() : string
-    {
-        return view('formestudiantes.php');
+        return view('institute/assign');
     }
 
-    public function alumnos() : string
-    {
-        return view('alumnos.php');
-    }
-    public function institutoform() : string
-    {
-        return view('institutoform.php');
-    }
-    public function ticketform() : string
-    {
-        return view('ticketform.php');
-    }
 
+    //Common Functions
+    public function login(): string
+    {
+        return view('login');
+    }
 }

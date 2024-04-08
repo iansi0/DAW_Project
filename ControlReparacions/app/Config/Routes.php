@@ -5,20 +5,28 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+
+//Tcikets Routes
 $routes->get('{locale}/tickets', 'Home::tickets');
-$routes->get('{locale}/assignar', 'Home::assignar');
-$routes->get('alumnos', 'Home::alumnos');
-$routes->get('intervencion','Home::intervencion');
-$routes->get('ticketinfo','Home::ticketinfo');
-$routes->get('formestudiantes','Home::formestudiantes');
-$routes->get('institutoform','Home::institutoform');
-$routes->get('ticketform','Home::ticketform');
-$routes->get('/{locale}', 'Home::index');
 $routes->get('/{locale}/ticketinfo', 'Home::ticketinfo');
-$routes->get('/{locale}/intervention', 'Home::intervention');
-$routes->get('/{locale}/formstudents', 'Home::formstudents');
-$routes->get('/{locale}/login', 'Home::login');
-$routes->get('/{locale}/ticket', 'Home::ticket');
+$routes->get('/{locale}/ticketform', 'Home::ticketForm');
+
+//Intervention Routes
+$routes->get('/{locale}/intervention', 'Home::intervencion');
+$routes->get('/{locale}/interventionForm', 'Home::intervencionForm');
+
+
+//Students Routes
+$routes->get('/{locale}/students', 'Home::students');
+$routes->get('/{locale}/studentsform', 'Home::studentsForm');
+
+
+//Institute Routes
+$routes->get('/{locale}/institutes', 'Home::institutes');
+$routes->get('/{locale}/instituteform', 'Home::instituteForm');
 $routes->get('/{locale}/assign', 'Home::assign');
-$routes->get('/{locale}/student', 'Home::student');
-$routes->get('/{locale}', 'Home::index');
+
+
+//Common Routes
+$routes->get('/{locale}/login', 'Home::login');
+$routes->get('/{locale}', 'Home::login');
