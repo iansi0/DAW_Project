@@ -6,17 +6,17 @@ use SIENSIS\KpaCrud\Libraries\KpaCrud;
 
 class Home extends BaseController
 {
-    public function index(): string
+    public function index()
     {
         return view('login');
     }
 
-    public function login(): string
+    public function login()
     {
         return view('login');
     }
 
-    public function ticket(): string
+    public function ticket()
     {
         //CODIGO KPACRUD
         /*
@@ -38,12 +38,12 @@ class Home extends BaseController
         return view('ticket');
     }
 
-    public function assign(): string
+    public function assign()
     {
         return view('assign');
     }
 
-    public function alumnes(): string
+    public function student()
     {
         //CODIGO KPACRUD
         /*
@@ -51,7 +51,7 @@ class Home extends BaseController
         $crud = new KpaCrud();
 
         //La tabla que mostrara el kpaCrud sera solo de vista, no tendra funciones(add, modify, delete...)
-        $crud->setConfig('default');
+        $crud->setConfig('onlyview');
 
         //Le decimos a que tabla hace referencia
         $crud->setTable('Alumne');
@@ -61,49 +61,33 @@ class Home extends BaseController
 
         $data['table_alumnes'] = $crud;
         */
-        return view('alumnes', /* $data*/);
+        return view('student', /* $data*/);
     }
 
-    public function ticketinfo(): string
-    {
-        return view('ticketinfo');
-    }
-
-    public function intervention(): string
+    public function intervention()
     {
         return view('intervention');
     }
 
-    public function formstudents(): string
+    public function formstudents()
     {
         return view('formstudents');
     }
 
-    public function intervencion() : string
+    
+    public function ticketinfo() 
     {
-        return view('intervencion.php');
+        return view('ticketinfo');
     }
     
-    public function ticketinfo() : string
+    public function instituteform() 
     {
-        return view('ticketinfo.php');
-    }
-    public function formestudiantes() : string
-    {
-        return view('formestudiantes.php');
+        return view('instituteform');
     }
 
-    public function alumnos() : string
+    public function ticketform() 
     {
-        return view('alumnos.php');
-    }
-    public function institutoform() : string
-    {
-        return view('institutoform.php');
-    }
-    public function ticketform() : string
-    {
-        return view('ticketform.php');
+        return view('ticketform');
     }
 
 }
