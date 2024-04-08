@@ -4,15 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CursModel extends Model
+class UsersModel extends Model
 {
-    protected $table            = 'CURS';
-    protected $primaryKey       = 'idcurs';
+    protected $table            = 'USERS';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id','cicle'];
+    protected $allowedFields    = ['id', 'passwd'];
+
+    protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
+
+    protected array $casts = [];
+    protected array $castHandlers = [];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,11 +44,11 @@ class CursModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addCurs($id,$cicle) {
+    public function addUser($id, $passwd) {
            
         $data = [
-            'id' =>  $id,
-            'cicle' => $cicle,
+            'id'            => $id,
+            'passwd'          => trim($passwd)
         ];
 
         $this->insert($data);

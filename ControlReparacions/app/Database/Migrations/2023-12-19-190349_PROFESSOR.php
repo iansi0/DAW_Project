@@ -33,10 +33,16 @@ class PROFESSOR extends Migration
                         'constraint'     => 32,
                         'null'           => false,
                 ],
+                'language'          => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => 10,
+                        'null'           => true,
+                ],
         ]);
         $this->forge->addKey('id_xtec', true);
         $this->forge->createTable('PROFESSOR');
         $this->forge->addForeignKey('codi_centre', 'CENTRE', 'codi');
+        $this->forge->addForeignKey('id_user', 'USERS', 'id');
 
 
     }

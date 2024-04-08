@@ -13,6 +13,10 @@ class SSTT extends Migration
                         'type'           => 'BINARY',
                         'constraint'     => 32,
                 ],
+                'id_user' => [
+                        'type'           => 'BINARY',
+                        'constraint'     => 32,
+                ],
                 'codi' => [
                         'type'           => 'INT',
                         'constraint'     => 10,
@@ -53,9 +57,15 @@ class SSTT extends Migration
                         'constraint'     => 250,
                         'null'           => true,
                 ],
+                'language'          => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => 10,
+                        'null'           => true,
+                ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('SSTT');
+        $this->forge->addForeignKey('id_user', 'USERS', 'id');
 
     }
 

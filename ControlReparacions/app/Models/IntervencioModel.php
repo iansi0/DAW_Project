@@ -10,7 +10,7 @@ class IntervencioModel extends Model
     protected $primaryKey       = 'id_intervencio';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = ['id_intervencio','descripcio_intervencio','data_intervencio','id_tipus_intervencio','id_curs','correu_alumne','id_xtec'];
 

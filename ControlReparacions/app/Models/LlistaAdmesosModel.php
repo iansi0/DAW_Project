@@ -10,7 +10,7 @@ class LlistaAdmesosModel extends Model
     protected $primaryKey       = 'correu_professor';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = ['correu_professor','data_entrega','codi_centre'];
 

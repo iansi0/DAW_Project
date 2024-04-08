@@ -18,12 +18,17 @@ class ALUMNE extends Migration
                         'constraint'     => 32,
                         'null'           => false,
                 ],
+                'language'          => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => 10,
+                        'null'           => true,
+                ],
         ]);
         $this->forge->addKey('correu_alumne', true);
         $this->forge->createTable('ALUMNE');
         $this->forge->addForeignKey('codi_centre', 'CENTRE', 'codi');
-
-
+        $this->forge->addForeignKey('id_user', 'USERS', 'id');
+        
     }
 
     public function down()

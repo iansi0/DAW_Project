@@ -10,7 +10,7 @@ class ProfessorModel extends Model
     protected $primaryKey       = 'id_xtec';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = ['id_xtec','nom_professor','cognom_professor','correu_professor','codi_professor'];
 

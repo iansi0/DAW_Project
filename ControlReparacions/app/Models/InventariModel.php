@@ -10,7 +10,7 @@ class InventariModel extends Model
     protected $primaryKey       = 'id_inventari';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = ['id_inventari','data_compra','preu','codi_centre','id_tipus_inventari'];
 

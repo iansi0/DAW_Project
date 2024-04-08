@@ -4,15 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CursModel extends Model
+class RolesModel extends Model
 {
-    protected $table            = 'CURS';
-    protected $primaryKey       = 'idcurs';
+    protected $table            = 'ROLES';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $useSoftDeletes   = true;
+    protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id','cicle'];
+    protected $allowedFields    = ['id', 'role'];
+
+    protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
+
+    protected array $casts = [];
+    protected array $castHandlers = [];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,11 +44,11 @@ class CursModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addCurs($id,$cicle) {
+    public function addRole($id, $role) {
            
         $data = [
-            'id' =>  $id,
-            'cicle' => $cicle,
+            'id'            => $id,
+            'role'          => trim($role)
         ];
 
         $this->insert($data);
