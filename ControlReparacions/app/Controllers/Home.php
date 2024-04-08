@@ -81,19 +81,19 @@ class Home extends BaseController
 
 
     //Institute Functions
-    public function institute(): string
+    public function institutes(): string
     {
-        return view('institute/institute');
+        return view('institutes/institute');
     }
 
     public function instituteForm(): string
     {
-        return view('institute/instituteForm');
+        return view('institutes/instituteForm');
     }
 
     public function assign(): string
     {
-        return view('institute/assign');
+        return view('institutes/assign');
     }
 
 
