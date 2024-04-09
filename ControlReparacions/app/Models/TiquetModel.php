@@ -54,4 +54,16 @@ class TiquetModel extends Model
 
         $this->insert($data);
     }
+
+    public function getByTitleOrText($search)
+    {
+
+        return $this->select(['id', 'id_tipus_dispositiu', 'codi_centre_emissor', 'codi_dispositiu', 'data_alta', 'data_ultima_modificacio', 'id_estat' ])->orLike('codi_dispositiu', $search, 'both', true)->orLike('descripcio_avaria', $search, 'both', true);
+    }
+
+    public function getAllPaged($nElements)
+    {
+
+        return $this->select(['id', 'id_tipus_dispositiu', 'codi_centre_emissor', 'codi_dispositiu', 'data_alta', 'data_ultima_modificacio', 'id_estat' ])->paginate($nElements);
+    }
 }

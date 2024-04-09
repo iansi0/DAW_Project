@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\TiquetModel;
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
 
 class Home extends BaseController
@@ -9,28 +10,51 @@ class Home extends BaseController
     //Tikcets functions
     public function tickets(): string
     {
-        //CODIGO KPACRUD
+        //Crear una tabla con todos los tickets
 
-        //Crear el objeto kpaCrud
-        $crud = new KpaCrud();
+        $searchData = $this->request->getGet();
 
-        //La tabla que mostrara el kpaCrud sera solo de vista, no tendra funciones(add, modify, delete...)
-        $crud->setConfig('default');
+        if (isset($searchData) && isset($searchData['q'])) {
+            $search = $searchData["q"];
+        } else
+            $search = "";
 
-        //Le decimos a que tabla hace referencia
-        $crud->setTable('tiquet');
+        // Get News Data
 
-        $crud->setPrimaryKey('id');
+        $model= new TiquetModel();
 
-        //Decimos que columnas nos interesa mostrar
-        $crud->setColumns([
-            'id',
-            'codi_dispositiu', 'id_tipus_dispositiu', 'codi_centre_emissor', 'data_alta', 'data_ultima_modificacio', 'id_estat'
-        ]);
+        if ($search==''){
+            $paginateData=$model->getAllPaged(8);
+        } else {
+            $paginateData=$model->getByTitleOrText($search)->paginate(8);
+        }
 
-        $data['table_tickets'] = $crud->render();
+        /** TABLE GENERATOR **/
+        $table = new \CodeIgniter\View\Table();
+        $table->setHeading('ID', 'id_tipus_dispositiu','codi_centre_emissor', 'codi_dispositiu', 'data_alta', 'data_ultima_modificacio', 'id_estat' );
 
-        return view('tickets/tickets', $data);
+        $template = [
+            'table_open'         => "<table class='w-full'>",
+            'thead_open'  => "<thead class='bg-terciario-1 text-primario'>",
+            'heading_cell_start' => "<th class='p-5'>",
+
+
+            'cell_start' => "<td class='p-5'>",
+
+        ];
+        $table->setTemplate($template);
+        /** TABLE GENERATOR **/
+
+        $data = [
+            'page_title' => 'CI4 Pager & search filter',
+            'tickets' => $paginateData,
+            'pager' => $model->pager,
+            'search' => $search,
+            'table' => $table,
+        ];
+
+
+        return view('ticket', $data);
     }
 
     public function ticketInfo(): string
