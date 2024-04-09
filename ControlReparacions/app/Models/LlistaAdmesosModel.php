@@ -15,7 +15,7 @@ class LlistaAdmesosModel extends Model
     protected $allowedFields    = ['correu_professor','data_entrega','codi_centre'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

@@ -15,7 +15,7 @@ class TiquetModel extends Model
     protected $allowedFields    = ['id','codi_dispositiu','descripcio_avaria','nom_persona_contacte_centre','correu_persona_contacte_centre','id_tipus_dispositiu','id_estat','codi_centre_emissor','codi_centre_reparador'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

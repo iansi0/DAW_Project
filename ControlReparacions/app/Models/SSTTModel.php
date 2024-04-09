@@ -15,7 +15,7 @@ class SSTTModel extends Model
     protected $allowedFields    = ['id', 'codi', 'nom', 'adreca_fisica', 'cp', 'poblacio', 'telefon', 'correu', 'altres'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

@@ -15,7 +15,7 @@ class CursModel extends Model
     protected $allowedFields    = ['id','cicle'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
