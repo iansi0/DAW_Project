@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\TiquetModel;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use Faker\Factory;
 
 class TicketsController extends BaseController
 {
@@ -65,6 +66,40 @@ class TicketsController extends BaseController
     public function ticketForm()
     {
         return view('tickets/ticketForm.php');
+    }
+
+    public function addTicket()
+    {
+
+        $model = new TiquetModel();
+
+        $fake = Factory::create("es_ES");
+        $arrCentres = ['25002799', '17010700', '17010499', '17008249', '8000013', '8001509', '8002198', '8015399', '8017104', '8019401'];
+
+
+        $id_tiquet =  $fake->uuid();
+        $codi_equip = $fake->uuid();
+        $descripcio_avaria =  $fake->text(25);
+        $nom_persona_contacte_centre = $fake->name() . " " . $fake->lastName();
+        $correu_persona_contacte_centre =  $fake->email();
+        $id_tipus_dispositiu = rand(0, 9);
+        $id_estat = rand(0, 13);
+        $codi_centre_emissor = $arrCentres[rand((count($arrCentres) / 2) - 1, count($arrCentres) - 1)];
+
+
+        $model->addTiquet(
+            $id_tiquet,
+            $codi_equip,
+            $descripcio_avaria,
+            $nom_persona_contacte_centre,
+            $correu_persona_contacte_centre,
+            $id_tipus_dispositiu,
+            $id_estat,
+            $codi_centre_emissor
+        );
+
+        return redirect()->to(base_url('/tickets'));
+
     }
 
 }
