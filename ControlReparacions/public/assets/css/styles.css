@@ -1603,3 +1603,32 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(178 48 0 / var(--tw-border-opacity));
 }
+
+#data-list-backticket,
+#data-list-tiquet>thead>tr>th {
+    background-color: #333333;
+    color: white;
+    
+}
+
+#data-list-tiquet {
+
+}
+#data-list-tiquet>thead>tr>th {
+    
+}
+#data-list-backticket {
+
+}
+
+.col-sm-12 {
+ 
+}
+
+.dataTables_info {
+
+}
+
+#title {
+
+}

@@ -10,23 +10,27 @@ class Home extends BaseController
     public function tickets(): string
     {
         //CODIGO KPACRUD
-        /*
+
         //Crear el objeto kpaCrud
         $crud = new KpaCrud();
 
         //La tabla que mostrara el kpaCrud sera solo de vista, no tendra funciones(add, modify, delete...)
-        $crud->setConfig('onlyView');
+        $crud->setConfig('default');
 
         //Le decimos a que tabla hace referencia
-        $crud->setTable('Tiquet');
+        $crud->setTable('tiquet');
+
+        $crud->setPrimaryKey('id');
 
         //Decimos que columnas nos interesa mostrar
-        $crud->setColumns(['id_tiquet', 'codi_dispositiu', 'id_tipus_dispositiu', 'codi_centre_emissor', 'data_alta', 'data_ultima_modificacio', 'id_estat']);
+        $crud->setColumns([
+            'id',
+            'codi_dispositiu', 'id_tipus_dispositiu', 'codi_centre_emissor', 'data_alta', 'data_ultima_modificacio', 'id_estat'
+        ]);
 
-        $data['table_tickets'] = $crud;
-        */
-        // return view('ticket', /*$data*/);
-        return view('tickets/tickets');
+        $data['table_tickets'] = $crud->render();
+
+        return view('tickets/tickets', $data);
     }
 
     public function ticketInfo(): string

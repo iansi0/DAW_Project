@@ -8,8 +8,11 @@ use CodeIgniter\Router\RouteCollection;
 
 //Tcikets Routes
 $routes->get('/tickets', 'Home::tickets');
+$routes->post('/tickets', 'Home::tickets');
 $routes->get('/ticketinfo', 'Home::ticketinfo');
 $routes->get('/ticketform', 'Home::ticketForm');
+
+
 
 //Intervention Routes
 $routes->get('/intervention', 'Home::intervention');
