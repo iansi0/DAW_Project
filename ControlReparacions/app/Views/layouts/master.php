@@ -59,7 +59,7 @@ $name = 'HOLA';
     </nav>
 
 
-    <main id="tickets" class="w-full  text-center  justify-items-center items-center">
+    <main id="tickets" class=" w-full  text-center  justify-items-center items-center">
 
         <header class=" bg-terciario-1 text-segundario h-16 flex items-center relative justify-center   ">
             <img src="/assets/img/logo.png" alt="Logo">

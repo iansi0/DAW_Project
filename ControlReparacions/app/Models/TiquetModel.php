@@ -12,7 +12,7 @@ class TiquetModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id','codi_dispositiu','descripcio_avaria','nom_persona_contacte_centre','correu_persona_contacte_centre','data_alta','data_ultima_modificacio','id_tipus_dispositiu','id_estat','codi_centre_emissor','codi_centre_reparador'];
+    protected $allowedFields    = ['id', 'codi_dispositiu', 'descripcio_avaria', 'nom_persona_contacte_centre', 'correu_persona_contacte_centre', 'data_alta', 'data_ultima_modificacio', 'id_tipus_dispositiu', 'id_estat', 'codi_centre_emissor', 'codi_centre_reparador'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,8 +38,9 @@ class TiquetModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addTiquet($id_tiquet,$codi_equip,$descripcio_avaria,$nom_persona_contacte_centre,$correu_persona_contacte_centre,$data_alta,$data_ultima_modificacio,$id_tipus_dispositiu,$id_estat,$codi_centre_emissor,$codi_centre_reparador) {
-           
+    public function addTiquet($id_tiquet, $codi_equip, $descripcio_avaria, $nom_persona_contacte_centre, $correu_persona_contacte_centre, $data_alta, $data_ultima_modificacio, $id_tipus_dispositiu, $id_estat, $codi_centre_emissor, $codi_centre_reparador)
+    {
+
         $data = [
             'id' =>  $id_tiquet,
             'codi_dispositiu' => $codi_equip,
@@ -55,5 +56,17 @@ class TiquetModel extends Model
         ];
 
         $this->insert($data);
+    }
+
+    public function getByTitleOrText($search)
+    {
+
+        return $this->select(['id', 'id_tipus_dispositiu', 'codi_centre_emissor', 'codi_dispositiu', 'data_alta', 'data_ultima_modificacio', 'id_estat' ])->orLike('codi_dispositiu', $search, 'both', true)->orLike('descripcio_avaria', $search, 'both', true);
+    }
+
+    public function getAllPaged($nElements)
+    {
+
+        return $this->select(['id', 'id_tipus_dispositiu', 'codi_centre_emissor', 'codi_dispositiu', 'data_alta', 'data_ultima_modificacio', 'id_estat' ])->paginate($nElements);
     }
 }
