@@ -7,27 +7,27 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 //Tcikets Routes
-$routes->GET('/tickets', 'Home::tickets');
-$routes->POST('/tickets', 'Home::tickets');
-$routes->GET('/ticketinfo', 'Home::ticketinfo');
-$routes->GET('/ticketform', 'Home::ticketForm');
+$routes->GET('/tickets', 'TicketsController::tickets');
+$routes->POST('/tickets', 'TicketsController::tickets');
+$routes->GET('/ticketinfo', 'TicketsController::ticketinfo');
+$routes->GET('/ticketform', 'TicketsController::ticketForm');
 
 
 
 //Intervention Routes
-$routes->GET('/intervention', 'Home::intervention');
-$routes->GET('/interventionform', 'Home::interventionForm');
+$routes->GET('/intervention', 'InterventionController::intervention');
+$routes->GET('/interventionform', 'InterventionController::interventionForm');
 
 
 //Students Routes
-$routes->GET('/students', 'Home::students');
-$routes->GET('/studentsform', 'Home::studentsForm');
+$routes->GET('/students', 'StudentsController::students');
+$routes->GET('/studentsform', 'StudentsController::studentsForm');
 
 
 //Institute Routes
-$routes->GET('/institutes', 'Home::institutes');
-$routes->GET('/assign', 'Home::assign');
-$routes->GET('/instituteform', 'Home::instituteForm');
+$routes->GET('/institutes', 'InstitutesController::institutes');
+$routes->GET('/assign', 'InstitutesController::assign');
+$routes->GET('/instituteform', 'InstitutesController::instituteForm');
 
 
 //Common Routes
