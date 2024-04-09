@@ -24,7 +24,7 @@ $name = 'HOLA';
 
 <body class=" flex h-full bg-segundario">
 
-    <nav id="Sidebar" class=" bg-terciario-1 flex flex-col gap-10 py-20 w-20  text-primario text-5xl h-full ">
+    <nav id="Sidebar" class=" bg-terciario-1 flex flex-col gap-10 py-20 w-20 text-primario text-5xl h-full ">
 
 
         <a href="<?= base_url('alumnes') ?>" class=" w-20  h-16 overflow-hidden flex items-center text-2xl  transition-all ease-in duration-300  hover:w-56  hover:bg-primario hover:text-white">
