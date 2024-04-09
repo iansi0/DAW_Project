@@ -34,16 +34,6 @@ class TIQUETS extends Migration
                         'constraint'     => 50,
                         'null'           => false,
                 ],
-                'data_alta'          => [
-                        'type'           => 'DATE',
-                        'default'        => date("Y-m-d H:i:s"),
-                        'null'           => false,
-                ],
-                'data_ultima_modificacio'          => [
-                        'type'           => 'DATE',
-                        'default'        => date("Y-m-d H:i:s"),
-                        'null'           => false,
-                ],
                 'id_tipus_dispositiu'          => [
                         'type'           => 'INT',
                         'constraint'     => 2,

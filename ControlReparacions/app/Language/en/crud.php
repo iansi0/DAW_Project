@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Language file from EN language. English 
  * 
@@ -13,6 +14,7 @@
  * This code is provided for educational purposes
  * 
  */
+
 return [
     'datatablesLangURL' => '', // default language: English
 

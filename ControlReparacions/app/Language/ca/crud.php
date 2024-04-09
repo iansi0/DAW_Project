@@ -12,7 +12,9 @@
  * with this source code in the file LICENSE.
  * 
  * This code is provided for educational purposes
+ * 
  */
+
 return [
     'datatablesLangURL' => '//cdn.datatables.net/plug-ins/1.11.5/i18n/ca.json',
 
