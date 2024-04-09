@@ -54,7 +54,7 @@ class Home extends BaseController
         ];
 
 
-        return view('ticket', $data);
+        return view('tickets/tickets', $data);
     }
 
     public function ticketInfo(): string
