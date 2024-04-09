@@ -31,7 +31,7 @@ class Home extends BaseController
 
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading('ID', 'id_tipus_dispositiu','codi_centre_emissor', 'codi_dispositiu', 'data_alta', 'data_ultima_modificacio', 'id_estat' );
+        $table->setHeading('ID', 'id_tipus_dispositiu','codi_centre_emissor', 'codi_dispositiu', 'created_at', 'updated_at', 'id_estat' );
 
         $template = [
             'table_open'         => "<table class='w-full'>",

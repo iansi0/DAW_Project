@@ -10,13 +10,23 @@ class ESTATS extends Migration
     {
         $this->forge->addField([
                 'id'          => [
-                        'type'           => 'INT',
-                        'constraint'     => 3,
+                    'type'           => 'INT',
+                    'constraint'     => 3,
                 ],
                 'nom'          => [
-                        'type'           => 'VARCHAR',
-                        'constraint'     => 20,
-                        'null'           => false,
+                    'type'           => 'VARCHAR',
+                    'constraint'     => 20,
+                    'null'           => false,
+                ],
+                'created_at' => [
+                    'type'       => 'DATETIME',
+                ],
+                'updated_at' => [
+                    'type'       => 'DATETIME',
+                ],
+                'deleted_at' => [
+                    'type'       => 'DATETIME',
+                    'null'       => true,
                 ],
         ]);
         $this->forge->addKey('id', true);

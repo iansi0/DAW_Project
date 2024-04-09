@@ -38,6 +38,16 @@ class PROFESSOR extends Migration
                         'constraint'     => 10,
                         'null'           => true,
                 ],
+                'created_at' => [
+                    'type'       => 'DATETIME',
+                ],
+                'updated_at' => [
+                    'type'       => 'DATETIME',
+                ],
+                'deleted_at' => [
+                    'type'       => 'DATETIME',
+                    'null'       => true,
+                ],
         ]);
         $this->forge->addKey('id_xtec', true);
         $this->forge->createTable('PROFESSOR');
