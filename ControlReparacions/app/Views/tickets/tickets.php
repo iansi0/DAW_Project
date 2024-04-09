@@ -6,7 +6,7 @@
 
 <button id="add-ticket" class=" bg-primario text-white float-right mb-5 px-5 py-2 hover:bg-terciario-4">+ ><?=lang('ticket.add')?></button>
 
-<table class="w-full ">
+<!-- <table class="w-full ">
   <thead class=" bg-primario text-white">
     <th><?=lang('ticket.ticket')?></th>
     <th><?=lang('ticket.id_device')?></th>
@@ -73,10 +73,13 @@
       <td>Desguaçat</td>
     </tr>
   </tbody>
-</table>
+</table> -->
 
-
+<div>
+  <?=$table_tickets ?>
+</div>
 <?php
 //Imrpimir tabla tickets
- //$table_tickets ?>
+
+ $table_tickets ?>
 <?= $this->endSection() ?>
