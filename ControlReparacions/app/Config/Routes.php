@@ -12,6 +12,8 @@ $routes->POST('/tickets', 'TicketsController::tickets');
 $routes->GET('/ticketinfo', 'TicketsController::ticketinfo');
 $routes->GET('/ticketform', 'TicketsController::ticketForm');
 
+$routes->POST('/addticket', 'Home::addTicket');
+
 
 
 //Intervention Routes
