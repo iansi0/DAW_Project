@@ -5,6 +5,7 @@ return [
 
     'assign'        => 'Assignar',
     'type'          => 'Tipus',
+    'home'          => 'Inici',
 
     '2fa'           => 'Segon Factor d\'Autenticació',
 

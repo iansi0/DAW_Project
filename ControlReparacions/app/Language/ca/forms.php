@@ -20,7 +20,7 @@ return [
     'phone'         => 'Telèfon',
 
     'contact_name'  => 'Nom del responsable',
-    'contact_email' => 'Email de responsable',
+    'contact_email' => 'Email del responsable',
 
     'adress'        => 'Adreça',
     'cp'            => 'Codi Postal',
@@ -56,6 +56,6 @@ return [
     'other'         => 'Altres',
     'price'         => 'Preu',
 
-    'must_slot'     => 'Els camps marcats amb ( * ) són obligatoris',
+    'required_slot' => 'Els camps marcats amb ( * ) són obligatoris',
 
 ];

@@ -3,6 +3,9 @@ return [
     'login'     => 'Iniciar Sessió',
     'logout'    => 'Tancar Sessió',
 
+    'back'      => 'Tornar Enrere',
+    'back_2'    => 'Enrere',
+
     'yes'       => 'Sí',
     'no'        => 'No',
     'accept'    => 'Acceptar',
