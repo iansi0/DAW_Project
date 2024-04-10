@@ -36,7 +36,7 @@ class Home extends BaseController
 
             // Si el user o mail no existe, devolvemos error
             if (!$user) {
-                session()->setFlashdata('error', lang("error.login"));
+                session()->setFlashdata('error', lang("error.wrong_login"));
                 return redirect()->to(base_url('login'));
             }
 
@@ -45,42 +45,32 @@ class Home extends BaseController
 
             // Si la contraseña es incorrecta, devolvemos error
             if (!$verify) {
-                session()->setFlashdata('error', lang("error.login"));
+                session()->setFlashdata('error', lang("error.wrong_login"));
                 return redirect()->to(base_url('login'));
             }
 
-            if ($user["2fa_activated"]) { // Si tiene segundo factor, se lo pedimos
+            $model = new UsersModel();
+            $isAdmin = $model->isAdmin($model->getUserRoles($user["id"]));
 
-                session()->setFlashdata("userid", $user['id']);
-                $data['user'] = $user['id'];
+            $sessionData = [
+                "username"      => $user["username"],
+                "uid"           => $user["id"],
+                "email"         => $user["email"],
+                "phone"         => $user["phone"],
+                "name"          => $user["name"],
+                "surname1"      => $user["surname1"],
+                "surname2"      => $user["surname2"],
+                "complete_name" => $user["name"]." ".$user["surname1"]." ".$user["surname2"],
+                "2fa_activated" => $user["2fa_activated"],
+                "language"      => ($user["language"])?$user["language"]:'esp',
+                "logged_data"   => date("Y-m-d H:i:s"),
+                "isAdmin"       => $isAdmin
+            ];
 
-                return view('login_register/2fa_authenticator', $data);
+            session()->set("user", $sessionData);
 
-            } else {  // Si no tiene segundo factor, lo iniciamos
+            return redirect()->to(base_url('home'));
 
-                $model = new UsersModel();
-                $isAdmin = $model->isAdmin($model->getUserRoles($user["id"]));
-
-                $sessionData = [
-                    "username"      => $user["username"],
-                    "uid"           => $user["id"],
-                    "email"         => $user["email"],
-                    "phone"         => $user["phone"],
-                    "name"          => $user["name"],
-                    "surname1"      => $user["surname1"],
-                    "surname2"      => $user["surname2"],
-                    "complete_name" => $user["name"]." ".$user["surname1"]." ".$user["surname2"],
-                    "2fa_activated" => $user["2fa_activated"],
-                    "language"      => ($user["language"])?$user["language"]:'esp',
-                    "logged_data"   => date("Y-m-d H:i:s"),
-                    "isAdmin"       => $isAdmin
-                ];
-
-                session()->set("user", $sessionData);
-
-                return redirect()->to(base_url('home'));
-
-            }
         } else {
             return redirect()->to(base_url('/'));
         }

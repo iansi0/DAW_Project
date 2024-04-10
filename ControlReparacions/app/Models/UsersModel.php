@@ -59,14 +59,14 @@ class UsersModel extends Model
     {
 
         // Consulta SSTT
-        $this->select('*');
+        $this->select();
         $this->from('sstt');
         $this->where('correu', $email);
         $this->limit(1);
         $query1 = $this->get();
 
         if ($query1->num_rows() > 0) {
-            # code...
+            return $query1->row_array(); 
         }
 
         // Consulta Professor
@@ -76,6 +76,10 @@ class UsersModel extends Model
         $this->limit(1); // Limitamos a 1 resultado
         $query2 = $this->get();
 
+        if ($query2->num_rows() > 0) {
+            return $query2->row_array(); 
+        }
+
         // Consulta Alumne
         $this->select('*');
         $this->from('alumnes');
@@ -83,16 +87,12 @@ class UsersModel extends Model
         $this->limit(1);
         $query3 = $this->get();
 
-        $result = NULL;
-        if ($query1->num_rows() > 0) {
-            $result = $query1->row_array();
-        } elseif ($query2->num_rows() > 0) {
-            $result = $query2->row_array();
-        } elseif ($query3->num_rows() > 0) {
-            $result = $query3->row_array();
+        if ($query3->num_rows() > 0) {
+            return $query3->row_array(); 
         }
 
-        return $result;
+        return null;
+
         // dd($this->db->getLastQuery());
     }
 }
