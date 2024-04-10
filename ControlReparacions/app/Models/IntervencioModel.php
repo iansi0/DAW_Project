@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class IntervencioModel extends Model
 {
-    protected $table            = 'intervencios';
+    protected $table            = 'intervencio';
     protected $primaryKey       = 'id_intervencio';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
@@ -51,5 +51,10 @@ class IntervencioModel extends Model
         ];
 
         $this->insert($data);
+    }
+
+    public function getInterventions($id)
+    {
+        return $this->select(['id', 'data', 'correu_alumne', 'id_tipus', 'descripcio', 'id_tipus'])->where('id', $id)->findAll();
     }
 }

@@ -12,7 +12,7 @@ class TiquetModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id','codi_dispositiu','descripcio_avaria','nom_persona_contacte_centre','correu_persona_contacte_centre','id_tipus_dispositiu','id_estat','codi_centre_emissor','codi_centre_reparador'];
+    protected $allowedFields    = ['id', 'codi_dispositiu', 'descripcio_avaria', 'nom_persona_contacte_centre', 'correu_persona_contacte_centre', 'id_tipus_dispositiu', 'id_estat', 'codi_centre_emissor', 'codi_centre_reparador'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,8 +38,9 @@ class TiquetModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addTiquet($id_tiquet,$codi_equip,$descripcio_avaria,$nom_persona_contacte_centre,$correu_persona_contacte_centre,$id_tipus_dispositiu,$id_estat,$codi_centre_emissor) {
-           
+    public function addTiquet($id_tiquet, $codi_equip, $descripcio_avaria, $nom_persona_contacte_centre, $correu_persona_contacte_centre, $id_tipus_dispositiu, $id_estat, $codi_centre_emissor)
+    {
+
         $data = [
             'id' =>  $id_tiquet,
             'codi_dispositiu' => $codi_equip,
@@ -57,18 +58,24 @@ class TiquetModel extends Model
     public function getByTitleOrText($search)
     {
 
-        return $this->select(['id', 'id_tipus_dispositiu', 'codi_centre_emissor', 'codi_dispositiu', 'created_at', 'updated_at', 'id_estat' ])->orLike('codi_dispositiu', $search, 'both', true)->orLike('descripcio_avaria', $search, 'both', true);
+        return $this->select(['id', 'id_tipus_dispositiu', 'codi_centre_emissor', 'codi_dispositiu', 'created_at', 'updated_at', 'id_estat'])->orLike('codi_dispositiu', $search, 'both', true)->orLike('descripcio_avaria', $search, 'both', true);
     }
 
     public function getAllPaged($nElements)
     {
 
-        return $this->select(['id', 'id_tipus_dispositiu', 'codi_centre_emissor', 'codi_dispositiu', 'created_at', 'updated_at', 'id_estat' ])->paginate($nElements);
+        return $this->select(['id', 'id_tipus_dispositiu', 'codi_centre_emissor', 'codi_dispositiu', 'created_at', 'updated_at', 'id_estat'])->paginate($nElements);
+    }
+
+    public function viewTicket($id)
+    {
+
+        return  $this->where('id', $id)->first();
     }
 
     public function deleteTicket($id)
     {
 
-        return $this->where('id', $id)->delete(); 
+        return $this->where('id', $id)->delete();
     }
 }
