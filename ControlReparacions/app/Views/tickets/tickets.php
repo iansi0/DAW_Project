@@ -33,7 +33,7 @@
 
 
   <?php   // TABLE GENERATED WITH TABLE-GEN-HELPER
-  echo $table->generate($tickets);
+  echo $table->generate();
   ?>
 
 
