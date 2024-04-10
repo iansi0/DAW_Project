@@ -15,7 +15,7 @@ class AlumneModel extends Model
     protected $allowedFields    = ['correu_alumne','codi_centre'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

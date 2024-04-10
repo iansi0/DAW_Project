@@ -15,7 +15,7 @@ class ProfessorModel extends Model
     protected $allowedFields    = ['id_xtec','nom_professor','cognom_professor','correu_professor','codi_professor'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

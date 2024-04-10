@@ -24,6 +24,16 @@ class LLISTAADMESOS extends Migration
                         'constraint'     => 32,
                         'null'           => false,
                 ],
+                'created_at' => [
+                    'type'       => 'DATETIME',
+                ],
+                'updated_at' => [
+                    'type'       => 'DATETIME',
+                ],
+                'deleted_at' => [
+                    'type'       => 'DATETIME',
+                    'null'       => true,
+                ],
         ]);
         $this->forge->addKey('correu_professor', true);
         $this->forge->createTable('LLISTA_ADMESOS');

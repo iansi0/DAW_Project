@@ -57,6 +57,16 @@ class CENTRE extends Migration
                         'constraint'     => 32,
                         'null'           => false,
                 ],
+                'created_at' => [
+                    'type'       => 'DATETIME',
+                ],
+                'updated_at' => [
+                    'type'       => 'DATETIME',
+                ],
+                'deleted_at' => [
+                    'type'       => 'DATETIME',
+                    'null'       => true,
+                ],
         ]);
         $this->forge->addKey('codi', true);
         $this->forge->createTable('CENTRE');

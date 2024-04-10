@@ -15,7 +15,7 @@ class InventariModel extends Model
     protected $allowedFields    = ['id_inventari','data_compra','preu','codi_centre','id_tipus_inventari'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

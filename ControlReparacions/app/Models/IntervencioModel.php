@@ -15,7 +15,7 @@ class IntervencioModel extends Model
     protected $allowedFields    = ['id_intervencio','descripcio_intervencio','data_intervencio','id_tipus_intervencio','id_curs','correu_alumne','id_xtec'];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
