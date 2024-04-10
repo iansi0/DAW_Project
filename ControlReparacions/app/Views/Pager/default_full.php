@@ -1,4 +1,6 @@
 
+<?php #TODO: HACER QUE EL ANTERIOR Y SIGUIENTE FUNCIONEN ?>
+
 <div class="flex items-center justify-end border-t border-segundario-200 bg-segundario px-4 py-3 sm:px-6">
 
     <a href="<?=$pager->getFirst()?>" class="relative mr-1 inline-flex items-center rounded-md border border-segundario-300 bg-segundario px-4 py-2 text-sm font-medium text-segundario-700 hover:bg-segundario-50">&lt;&lt;</a>
