@@ -15,9 +15,9 @@
     }
 </style>
 
-<body class="h-screen flex flex-col justify-center items-center bg-segundario">
+<body class="h-screen flex flex-col justify-center items-center bg-secundario">
 
-    <section class="bg-terciario-1 text-segundario flex flex-col gap-5 items-center border-2 rounded-md px-20 py-10">
+    <section class="bg-terciario-1 text-secundario flex flex-col gap-5 items-center border-2 rounded-md px-20 py-10">
         <img src="/assets/img/logo.png" alt="Logo">
         <form class=" flex flex-col   w-60 " method="POST" action="<?= lang_url('login') ?>">
             <label class="mb-1 text-xl" for="email">Email</label>

@@ -32,11 +32,11 @@ class TicketsController extends BaseController
 
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading('ID', 'tipus dispositiu', 'centre emissor', 'codi dispositiu', 'fecha creacio', 'ultima modificacio', 'estat', '', '',);
+        $table->setHeading('ID', lang('titles.type'), lang('titles.description'), lang('titles.sender'), lang('titles.receiver'), lang('titles.date'), lang('titles.status'), '', '',);
 
         $template = [
-            'table_open'         => "<table class='w-full'>",
-            'thead_open'  => "<thead class='bg-terciario-1 text-primario'>",
+            'table_open'  => "<table class='w-full'>",
+            'thead_open'  => "<thead class='bg-primario text-secundario'>",
             'heading_cell_start' => "<th class='p-5'>",
             'cell_start' => "<td class='p-5'>",
 
@@ -60,12 +60,12 @@ class TicketsController extends BaseController
             $buttonUpdate = base_url("tu/controlador/accion/" . $ticket['id']); // Reemplazar con tu ruta real
             $table->addRow(
                 $ticket['id'],
-                $ticket['id_tipus_dispositiu'],
-                $ticket['codi_centre_emissor'],
-                $ticket['codi_dispositiu'],
-                $ticket['created_at'],
-                $ticket['updated_at'],
-                $ticket['id_estat'],
+                $ticket['tipus'],
+                $ticket['descripcio'],
+                $ticket['centre_emisor'],
+                $ticket['centre_receptor'],
+                $ticket['data'],
+                $ticket['estat'],
                 "<a href='$buttonDelete' class='btn btn-primary'>Delete</a>",
                 "<a href='$buttonUpdate' class='btn btn-primary'>Modify</a>"
             );

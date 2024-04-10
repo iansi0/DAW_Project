@@ -19,7 +19,7 @@ class CENTRESeeder extends Seeder
         // Insertar los datos en la base de datos
         while (($row = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 
-            if ($firstLine) {
+            if (!$firstLine) {
 
                 if (trim($row[2] == 1)) {
 

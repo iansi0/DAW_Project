@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class IntervencioModel extends Model
 {
-    protected $table            = 'intervencios';
-    protected $primaryKey       = 'id_intervencio';
+    protected $table            = 'INTERVENCIO';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_intervencio','descripcio_intervencio','data_intervencio','id_tipus_intervencio','id_curs','correu_alumne','id_xtec'];
+    protected $allowedFields    = ['id','descripcio','id_ticket','id_tipus','id_curs','correu_alumne','id_xtec'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,13 +38,13 @@ class IntervencioModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addIntervencio($id_intervencio,$descripcio_intervencio,$data_intervencio,$id_tipus_intervencio,$id_curs,$correu_alumne,$id_xtec) {
+    public function addIntervencio($id,$descripcio,$id_ticket,$id_tipus,$id_curs,$correu_alumne,$id_xtec) {
            
         $data = [
-            'id_intervencio' =>  $id_intervencio,
-            'descripcio_intervencio' => $descripcio_intervencio,
-            'data_intervencio' => $data_intervencio,
-            'id_tipus_intervencio' => $id_tipus_intervencio,
+            'id' =>  $id,
+            'descripcio' => $descripcio,
+            'id_ticket' => $id_ticket,
+            'id_tipus' => $id_tipus,
             'id_curs' => $id_curs,
             'correu_alumne' => $correu_alumne,
             'id_xtec' => $id_xtec,

@@ -22,7 +22,7 @@ $name = 'HOLA';
     }
 </style>
 
-<body class=" flex h-full bg-segundario">
+<body class=" flex h-full bg-secundario">
 
     <nav id="Sidebar" class=" bg-terciario-1 flex flex-col gap-10 py-20 w-20 text-primario text-5xl h-full ">
 
@@ -61,7 +61,7 @@ $name = 'HOLA';
 
     <main id="tickets" class="w-full  text-center  justify-items-center items-center">
 
-        <header class=" bg-terciario-1 text-segundario h-16 flex items-center relative justify-center   ">
+        <header class=" bg-terciario-1 text-secundario h-16 flex items-center relative justify-center   ">
             <img src="/assets/img/logo.png" alt="Logo">
             <h1 class=" absolute right-0 mr-5"><?= $name ?></h1>
 

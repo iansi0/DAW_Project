@@ -5,7 +5,11 @@ return [
 
     'assign'        => 'Assignar',
     'type'          => 'Tipus',
-    'home'          => 'Inici',
+    'description'   => 'Descripció',
+    'sender'        => 'Emissor',
+    'receiver'      => 'Receptor',
+    'date'          => 'Data',
+    'status'        => 'Estat',
 
     '2fa'           => 'Segon Factor d\'Autenticació',
 

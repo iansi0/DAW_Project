@@ -57,13 +57,29 @@ class TiquetModel extends Model
     public function getByTitleOrText($search)
     {
 
-        return $this->select(['id', 'id_tipus_dispositiu', 'codi_centre_emissor', 'codi_dispositiu', 'created_at', 'updated_at', 'id_estat' ])->orLike('codi_dispositiu', $search, 'both', true)->orLike('descripcio_avaria', $search, 'both', true);
+        return $this->select(['tiquet.id as id', 'tipus_dispositiu.nom as tipus', 'tiquet.descripcio_avaria as descripcio', 'emissor.nom as centre_emisor', 'receptor.nom as centre_receptor', 'tiquet.created_at as data', 'estat.nom as estat' ])
+            ->join('tipus_dispositiu','tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
+            ->join('centre as emissor','tiquet.codi_centre_emissor = emissor.codi')
+            ->join('centre as receptor','tiquet.codi_centre_reparador = receptor.codi')
+            ->join('estat','tiquet.id_estat = estat.id')
+            ->orLike('id', $search, 'both', true)
+            ->orLike('tipus', $search, 'both', true)
+            ->orLike('descripcio', $search, 'both', true)
+            ->orLike('centre_emisor', $search, 'both', true)
+            ->orLike('centre_receptor', $search, 'both', true)
+            ->orLike('data', $search, 'both', true)
+            ->orLike('estat', $search, 'both', true);
     }
 
     public function getAllPaged($nElements)
     {
 
-        return $this->select(['id', 'id_tipus_dispositiu', 'codi_centre_emissor', 'codi_dispositiu', 'created_at', 'updated_at', 'id_estat' ])->paginate($nElements);
+        return $this->select(['tiquet.id as id', 'tipus_dispositiu.nom as tipus', 'tiquet.descripcio_avaria as descripcio', 'emissor.nom as centre_emisor', 'receptor.nom as centre_receptor', 'tiquet.created_at as data', 'estat.nom as estat' ])
+            ->join('tipus_dispositiu','tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
+            ->join('centre as emissor','tiquet.codi_centre_emissor = emissor.codi')
+            ->join('centre as receptor','tiquet.codi_centre_reparador = receptor.codi')
+            ->join('estat','tiquet.id_estat = estat.id')
+            ->paginate($nElements);
     }
 
     public function deleteTicket($id)

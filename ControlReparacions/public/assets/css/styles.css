@@ -966,7 +966,7 @@ video {
   background-color: rgb(244 63 94 / var(--tw-bg-opacity));
 }
 
-.bg-segundario {
+.bg-secundario {
   --tw-bg-opacity: 1;
   background-color: rgb(242 242 242 / var(--tw-bg-opacity));
 }
@@ -1123,7 +1123,7 @@ video {
   color: rgb(178 48 0 / var(--tw-text-opacity));
 }
 
-.text-segundario {
+.text-secundario {
   --tw-text-opacity: 1;
   color: rgb(242 242 242 / var(--tw-text-opacity));
 }

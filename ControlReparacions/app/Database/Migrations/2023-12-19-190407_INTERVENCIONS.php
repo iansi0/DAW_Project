@@ -18,10 +18,9 @@ class INTERVENCIONS extends Migration
                         'constraint'     => 100,
                         'null'           => false,
                 ],
-                'data'          => [
-                        'type'           => 'DATE',
-                        'default'        => date("Y-m-d H:i:s"),
-                        'null'           => false,
+                'id_ticket'          => [
+                        'type'           => 'BINARY',
+                        'constraint'     => 32,
                 ],
                 'id_tipus'          => [
                         'type'           => 'INT',
@@ -55,6 +54,7 @@ class INTERVENCIONS extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('INTERVENCIO');
+        $this->forge->addForeignKey('id_ticket', 'TICKET', 'id');
         $this->forge->addForeignKey('id_tipus', 'TIPUS_INTERVENCIO', 'id');
         $this->forge->addForeignKey('id_curs', 'CURS', 'id');
         $this->forge->addForeignKey('correu_alumne', 'ALUMNE', 'correu_alumne');
