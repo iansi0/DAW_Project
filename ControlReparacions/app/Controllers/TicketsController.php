@@ -22,29 +22,30 @@ class TicketsController extends BaseController
 
         // Get News Data
 
-        $model= new TiquetModel();
+        $model = new TiquetModel();
 
-        if ($search==''){
-            $paginateData=$model->getAllPaged(8);
+        if ($search == '') {
+            $paginateData = $model->getAllPaged(8);
         } else {
-            $paginateData=$model->getByTitleOrText($search)->paginate(8);
+            $paginateData = $model->getByTitleOrText($search)->paginate(8);
         }
 
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading('ID', 'id_tipus_dispositiu','codi_centre_emissor', 'codi_dispositiu', 'created_at', 'updated_at', 'id_estat' );
+        $table->setHeading('ID', 'tipus dispositiu', 'centre emissor', 'codi dispositiu', 'fecha creacio', 'ultima modificacio', 'estat', '', '',);
 
         $template = [
             'table_open'         => "<table class='w-full'>",
             'thead_open'  => "<thead class='bg-terciario-1 text-primario'>",
             'heading_cell_start' => "<th class='p-5'>",
-
-
             'cell_start' => "<td class='p-5'>",
 
         ];
         $table->setTemplate($template);
+
         /** TABLE GENERATOR **/
+  
+
 
         $data = [
             'page_title' => 'CI4 Pager & search filter',
@@ -54,6 +55,21 @@ class TicketsController extends BaseController
             'table' => $table,
         ];
 
+        foreach ($data['tickets'] as $ticket) {
+            $buttonDelete = base_url("deleteticket/" . $ticket['id']); // Reemplazar con tu ruta real
+            $buttonUpdate = base_url("tu/controlador/accion/" . $ticket['id']); // Reemplazar con tu ruta real
+            $table->addRow(
+                $ticket['id'],
+                $ticket['id_tipus_dispositiu'],
+                $ticket['codi_centre_emissor'],
+                $ticket['codi_dispositiu'],
+                $ticket['created_at'],
+                $ticket['updated_at'],
+                $ticket['id_estat'],
+                "<a href='$buttonDelete' class='btn btn-primary'>Delete</a>",
+                "<a href='$buttonUpdate' class='btn btn-primary'>Modify</a>"
+            );
+        }
 
         return view('tickets/tickets', $data);
     }
@@ -99,7 +115,17 @@ class TicketsController extends BaseController
         );
 
         return redirect()->to(base_url('/tickets'));
+    }
 
+    public function deleteTicket($id)
+    {
+
+        $model = new TiquetModel();
+
+
+        $model->where('id', $id)->delete();
+
+        return redirect()->to(base_url('/tickets'));
     }
 
     public function exportCSV($search = '')
@@ -127,8 +153,7 @@ class TicketsController extends BaseController
 
         header('Content-Disposition: attachment; filename="archivo.csv"');
 
-      
+
         echo $csv_string;
     }
-
 }
