@@ -122,10 +122,10 @@ class TicketsController extends BaseController
 
         $model = new TiquetModel();
 
-
-        $model->where('id', $id)->delete();
+        $model->deleteTicket($id);
 
         return redirect()->to(base_url('/tickets'));
+
     }
 
     public function exportCSV($search = '')

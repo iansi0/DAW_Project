@@ -65,4 +65,10 @@ class TiquetModel extends Model
 
         return $this->select(['id', 'id_tipus_dispositiu', 'codi_centre_emissor', 'codi_dispositiu', 'created_at', 'updated_at', 'id_estat' ])->paginate($nElements);
     }
+
+    public function deleteTicket($id)
+    {
+
+        return $this->where('id', $id)->delete(); 
+    }
 }
