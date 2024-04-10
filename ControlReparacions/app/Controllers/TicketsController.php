@@ -102,4 +102,33 @@ class TicketsController extends BaseController
 
     }
 
+    public function exportCSV($search = '')
+    {
+        $searchData = $this->request->getGet();
+
+
+
+        // Get News Data
+
+        $model = new TiquetModel();
+
+        if ($search == '') {
+            $paginateData = $model->findAll();
+        } else {
+            $paginateData = $model->orLike('codi_dispositiu', $search, 'both', true)->orLike('descripcio_avaria', $search, 'both', true)->findAll($search);
+        }
+
+        $csv_string = "";
+
+        foreach ($paginateData as $ticket) {
+            $csv_string .= implode(",", $ticket) . "\n";
+        }
+        // dd($csv_string);
+
+        header('Content-Disposition: attachment; filename="archivo.csv"');
+
+      
+        echo $csv_string;
+    }
+
 }

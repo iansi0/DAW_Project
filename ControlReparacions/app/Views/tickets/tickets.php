@@ -15,8 +15,14 @@
       <button id="add-ticket" class=" bg-primario text-white  mb-5 px-5 py-2 float-right hover:bg-terciario-4">+ Add Ticket</button>
     </a>
 
+    <a href="<?= base_url('export/' . $search . '') ?>">
+      <button id="add-ticket" class=" bg-primario text-white  mb-5 px-5 py-2 float-right hover:bg-terciario-4">Export</button>
+
+    </a>
+
+
     <!-- Search form -->
-    <form method='get' action="<?= base_url('/es/ticket'); ?>" id="searchForm" class="float-right mr-10 p-0">
+    <form method='get' action="<?= base_url('/tickets'); ?>" id="searchForm" class="float-right mr-10 p-0">
       <input type='text' name='q' value='<?= $search ?>' placeholder="Search here..." class="mb-5 px-5 py-1.5  border-2 border-terciario-3">
       <input type='button' id='btnsearch' value='Cercar' onclick='document.getElementById("searchForm").submit();' class="bg-primario text-white  mb-5 px-5 py-2 float-right">
     </form>

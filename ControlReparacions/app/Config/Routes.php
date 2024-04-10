@@ -14,7 +14,8 @@ $routes->GET('/ticketform', 'TicketsController::ticketForm');
 
 $routes->POST('/addticket', 'TicketsController::addTicket');
 
-
+$routes->get('/export/(:segment)', 'TicketsController::exportCSV/$1');
+$routes->get('/export', 'TicketsController::exportCSV');
 
 //Intervention Routes
 $routes->GET('/intervention', 'InterventionController::intervention');
