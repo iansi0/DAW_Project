@@ -14,5 +14,11 @@ class Home extends BaseController
     {
         return view('login');
     }
-    
+
+    public function logout()
+    {
+        $session = \Config\Services::session();
+        $session->destroy();
+        return redirect()->to(base_url('/login'));
+    }
 }
