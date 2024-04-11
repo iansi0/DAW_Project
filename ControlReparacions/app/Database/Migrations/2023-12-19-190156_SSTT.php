@@ -9,10 +9,6 @@ class SSTT extends Migration
     public function up()
     {
         $this->forge->addField([
-                'id' => [
-                        'type'           => 'BINARY',
-                        'constraint'     => 32,
-                ],
                 'id_user' => [
                         'type'           => 'BINARY',
                         'constraint'     => 32,
