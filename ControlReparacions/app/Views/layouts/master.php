@@ -83,7 +83,7 @@ $name = 'HOLA';
             <b>Inventari</b>
         </a>
 
-        <a href="<?= base_url('LogOut') ?>" class=" w-20  h-16 flex items-center   transition-all ease-in duration-300  hover:w-56  hover:bg-primario hover:text-white">
+        <a href="<?= base_url('logout') ?>" class=" w-20  h-16 flex items-center   transition-all ease-in duration-300  hover:w-56  hover:bg-primario hover:text-white">
             <!-- Imagen ticket-->
             <p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="75" height="100" fill="currentColor" viewBox="-160 0 798 512">
