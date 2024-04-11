@@ -12,7 +12,7 @@ class SSTTModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'codi', 'nom', 'adreca_fisica', 'cp', 'poblacio', 'telefon', 'correu', 'altres'];
+    protected $allowedFields    = ['id_user', 'codi', 'nom', 'adreca_fisica', 'cp', 'poblacio', 'telefon', 'altres'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,17 +38,16 @@ class SSTTModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addSSTT($id,$codi,$nom,$adreca_fisica,$cp,$poblacio,$telefon,$correu,$altres) {
+    public function addSSTT($id, $codi, $nom, $adreca_fisica, $cp, $poblacio, $telefon, $altres) {
            
         $data = [
-            'id'            => $id,
+            'id_user'       => $id,
             'codi'          => trim($codi),
             'nom'           => trim($nom),
             'adreca_fisica' => trim($adreca_fisica),
             'cp'            => str_replace(' ', '', trim($cp)),
             'poblacio'      => trim($poblacio),
             'telefon'       => str_replace(' ', '', trim($telefon)),
-            'correu'        => trim($correu),
             'altres'        => trim($altres)
             
         ];

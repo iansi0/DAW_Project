@@ -8,17 +8,15 @@ class Install extends Seeder
 {
     public function run()
     {
+        // Seeder de User+Roles+SSTT+CENTRE+PROFESSOR+ALUMNE+USERINROLE
         $this->call("USERSSeeder");
-        $this->call("SSTTSeeder");
+
         $this->call("COMARCASeeder");
         $this->call("POBLACIOSeeder");
-        $this->call("CENTRESeeder");
         $this->call("TIPUSDISPOSITIUSSeeder");
         $this->call("TIPUSINTERVENCIOSeeder");
         $this->call("TIPUSINVENTARISeeder");
         $this->call("ESTATSeeder");
-        $this->call("PROFESSORSeeder");
-        $this->call("ALUMNESeeder");
         $this->call("TIQUETSeeder");
     }
 }

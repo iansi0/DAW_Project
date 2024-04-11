@@ -13,9 +13,18 @@ class USERS extends Migration
                 'type'           => 'BINARY',
                 'constraint'     => 32,
             ],
+            'user' => [
+                'type'           => 'VARCHAR',
+                'constraint'     => 200,
+            ],
             'passwd' => [
                 'type'           => 'VARCHAR',
                 'constraint'     => 100,
+            ],
+            'lang'          => [
+                'type'           => 'VARCHAR',
+                'constraint'     => 10,
+                'null'           => true,
             ],
             'created_at' => [
                 'type'       => 'DATETIME',

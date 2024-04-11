@@ -12,7 +12,7 @@ class UsersModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'passwd'];
+    protected $allowedFields    = ['id', 'user', 'passwd', 'language'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -44,11 +44,13 @@ class UsersModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addUser($id, $passwd) {
+    public function addUser($id, $user, $passwd, $lang) {
            
         $data = [
             'id'            => $id,
-            'passwd'          => trim($passwd)
+            'user'            => $user,
+            'passwd'         => trim($passwd),
+            'lang'            => $lang
         ];
 
         $this->insert($data);

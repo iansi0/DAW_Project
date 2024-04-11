@@ -43,13 +43,8 @@ class SSTT extends Migration
                         'null'           => false,
                 ],
                 'telefon' => [
-                        'type'           => 'INT',
-                        'constraint'     => 9,
-                        'null'           => true,
-                ],
-                'correu' => [
                         'type'           => 'VARCHAR',
-                        'constraint'     => 50,
+                        'constraint'     => 9,
                         'null'           => true,
                 ],
                 'altres' => [
@@ -57,11 +52,7 @@ class SSTT extends Migration
                         'constraint'     => 250,
                         'null'           => true,
                 ],
-                'language'          => [
-                        'type'           => 'VARCHAR',
-                        'constraint'     => 10,
-                        'null'           => true,
-                ],
+
                 'created_at' => [
                         'type'       => 'DATETIME',
                 ],
@@ -73,7 +64,7 @@ class SSTT extends Migration
                         'null'       => true,
                 ],
         ]);
-        $this->forge->addKey('id', true);
+        $this->forge->addKey('id_user', true);
         $this->forge->createTable('SSTT');
         $this->forge->addForeignKey('id_user', 'USERS', 'id');
 

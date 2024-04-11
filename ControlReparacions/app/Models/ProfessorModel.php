@@ -12,7 +12,7 @@ class ProfessorModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_xtec','nom','cognom','correu','codi_centre'];
+    protected $allowedFields    = ['id_user', 'id_xtec', 'nom', 'cognom', 'codi_centre'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,14 +38,14 @@ class ProfessorModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addProfessor($id_xtec,$nom,$cognom,$correu,$codi_centre) {
+    public function addProfessor($id, $id_xtec, $nom, $cognom, $codi_centre) {
            
         $data = [
-            'id_xtec' =>  $id_xtec,
-            'nom' => $nom,
-            'cognoms' => $cognom,
-            'correu' => $correu,
-            'codi_centre' => $codi_centre
+            'id_user'       => $id,
+            'id_xtec'       => trim($id_xtec),
+            'nom'           => trim($nom),
+            'cognoms'       => trim($cognom),
+            'codi_centre'   => trim($codi_centre)
         ];
 
         $this->insert($data);
