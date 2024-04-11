@@ -52,4 +52,9 @@ class IntervencioModel extends Model
 
         $this->insert($data);
     }
+
+    public function getInterventions($id)
+    {
+        return $this->select(['id', 'data', 'correu_alumne', 'id_tipus', 'descripcio', 'id_tipus'])->where('id', $id)->findAll();
+    }
 }
