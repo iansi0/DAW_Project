@@ -92,8 +92,8 @@ class TicketsController extends BaseController
         $template = [
             'table_open'         => "<table class='w-full'>",
             'thead_open'  => "<thead class='bg-primario text-segundario'>",
-            'heading_cell_start' => "<th class='p-5'>",
-            'cell_start' => "<td class='p-5'>",
+            'heading_cell_start' => "<th class='p-5 text-lg'>",
+            'cell_start' => "<td>",
 
         ];
         $table->setTemplate($template);
@@ -114,8 +114,7 @@ class TicketsController extends BaseController
                 $intervencio['correu_alumne'],
                 $intervencio['id_tipus'],
                
-                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 2 ? 'bg-red-500' : 'bg-segundario']
-                // "<span class=' " . ($intervencio['id_tipus'] == 2 ? 'bg-primario' : 'bg-segundario') . "'> " . $intervencio['descripcio'] . "</span>"
+                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 2 ? 'bg-red-500 text-segundario' : 'bg-segundario']
             );
         }
         return view('tickets/ticketInfo', $data);
