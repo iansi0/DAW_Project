@@ -88,4 +88,9 @@ class TiquetModel extends Model
 
         return $this->where('id', $id)->delete();
     }
+
+    public function viewTicket($id)
+    {
+        return  $this->where('id', $id)->first();
+    }
 }

@@ -33,7 +33,7 @@ class TicketsController extends BaseController
 
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading('ID', lang('titles.type'), lang('titles.description'), lang('titles.sender'), lang('titles.receiver'), lang('titles.date'), lang('titles.status'), '', '',);
+        $table->setHeading('ID', lang('titles.type'), lang('titles.description'), lang('titles.sender'), lang('titles.receiver'), lang('titles.date'), lang('titles.status'), '', '', '');
 
         $template = [
             'table_open'  => "<table class='w-full'>",
@@ -66,6 +66,7 @@ class TicketsController extends BaseController
                 $ticket['centre_receptor'],
                 $ticket['data'],
                 $ticket['estat'],
+                "<a href='$buttonView' class='btn btn-primary'>View</a>",
                 "<a href='$buttonDelete' class='btn btn-primary'>Delete</a>",
                 "<a href='$buttonUpdate' class='btn btn-primary'>Modify</a>"
             );
@@ -109,7 +110,7 @@ class TicketsController extends BaseController
             $buttonView = base_url("ticketinfo/" . $intervencio['id']); // Reemplazar con tu ruta real
 
             $table->addRow(
-                $intervencio['data'],
+                $intervencio['created_at'],
                 $intervencio['correu_alumne'],
                 $intervencio['id_tipus'],
                
@@ -195,4 +196,6 @@ class TicketsController extends BaseController
 
         echo $csv_string;
     }
+
+   
 }

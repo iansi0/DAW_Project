@@ -55,6 +55,6 @@ class IntervencioModel extends Model
 
     public function getInterventions($id)
     {
-        return $this->select(['id', 'data', 'correu_alumne', 'id_tipus', 'descripcio', 'id_tipus'])->where('id', $id)->findAll();
+        return $this->select(['id', 'correu_alumne', 'id_tipus', 'descripcio', 'id_tipus', 'created_at'])->where('id_ticket', $id)->findAll();
     }
 }

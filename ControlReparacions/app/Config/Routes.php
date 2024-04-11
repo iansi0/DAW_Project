@@ -9,7 +9,7 @@ use CodeIgniter\Router\RouteCollection;
 //Tcikets Routes
 $routes->GET('/tickets', 'TicketsController::tickets');
 $routes->POST('/tickets', 'TicketsController::tickets');
-$routes->GET('/ticketinfo/(:segment)', 'TicketsController::ticketinfo/$1');
+$routes->GET('/ticketinfo/(:segment)', 'TicketsController::ticketInfo/$1');
 $routes->GET('/ticketform', 'TicketsController::ticketForm');
 
 $routes->POST('/addticket', 'TicketsController::addTicket');
