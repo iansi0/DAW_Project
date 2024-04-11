@@ -35,5 +35,6 @@ $routes->GET('/instituteform', 'InstitutesController::instituteForm');
 
 
 //Common Routes
+$routes->GET('/logout', 'Home::logout');
 $routes->GET('/login', 'Home::login');
 $routes->GET('', 'Home::login');
