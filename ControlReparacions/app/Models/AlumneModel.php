@@ -12,7 +12,7 @@ class AlumneModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['correu_alumne','codi_centre'];
+    protected $allowedFields    = ['correu_alumne', 'id_user', 'nom', 'cognoms', 'codi_centre'];
 
     // Dates
     protected $useTimestamps = true;

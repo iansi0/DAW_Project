@@ -13,6 +13,20 @@ class ALUMNE extends Migration
                         'type'           => 'VARCHAR',
                         'constraint'     => 50,
                 ],
+                'id_user'          => [
+                        'type'           => 'BINARY',
+                        'constraint'     => 32,
+                ],
+                'nom'          => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => 20,
+                        'null'           => false,
+                ],
+                'cognoms'          => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => 80,
+                        'null'           => false,
+                ],
                 'codi_centre'          => [
                         'type'           => 'BINARY',
                         'constraint'     => 32,
