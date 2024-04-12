@@ -76,7 +76,7 @@ class UsersModel extends Model
                 , COALESCE(sstt.codi, centre.codi, professor.codi_centre, alumne.codi_centre, '') AS code
                 , COALESCE(sstt.nom, centre.nom, CONCAT(professor.nom, ' ', COALESCE(professor.cognoms, '')), CONCAT(alumne.nom, ' ', COALESCE(alumne.cognoms, '')), '') AS name
                 , COALESCE(sstt.adreca_fisica, centre.adreca_fisica, (SELECT centre.adreca_fisica FROM centre JOIN professor ON professor.codi_centre = centre.codi WHERE professor.id_user = 'USER_ID'), (SELECT centre.adreca_fisica FROM centre JOIN alumne ON alumne.codi_centre = centre.codi WHERE alumne.id_user = 'USER_ID'), '') AS adress
-                , COALESCE(sstt.telefon, centre.telefon, (SELECT centre.telefon FROM centre JOIN professor ON professor.codi_centre = centre.codi WHERE professor.id_user = 'USER_ID'), (SELECT centre.telefon FROM centre JOIN alumne ON alumne.codi_centre = centre.codi WHERE alumne.id_user = 'USER_ID'), '') AS phone
+                , COALESCE(sstt.telefon, centre.telefon, '') AS phone
                 , COALESCE(sstt.altres, CONCAT(centre.taller, ',', centre.actiu), professor.id_xtec, '') AS other
                 , COALESCE(CONCAT(centre.nom_persona_contacte, ',', centre.correu_persona_contacte), '') AS contact
                 , CASE
@@ -101,7 +101,7 @@ class UsersModel extends Model
                         ,COALESCE(sstt.codi, centre.codi, professor.codi_centre, alumne.codi_centre, '') AS code
                         ,COALESCE(sstt.nom, centre.nom, CONCAT(professor.nom, ' ', COALESCE(professor.cognoms, '')), CONCAT(alumne.nom, ' ', COALESCE(alumne.cognoms, '')), '') AS name
                         ,COALESCE(sstt.adreca_fisica, centre.adreca_fisica, (SELECT centre.adreca_fisica FROM centre JOIN professor ON professor.codi_centre = centre.codi WHERE professor.id_user = $id_str), (SELECT centre.adreca_fisica FROM centre JOIN alumne ON alumne.codi_centre = centre.codi WHERE alumne.id_user = $id_str), '') AS adress
-                        ,COALESCE(sstt.telefon, centre.telefon, (SELECT centre.telefon FROM centre JOIN professor ON professor.codi_centre = centre.codi WHERE professor.id_user = $id_str), (SELECT centre.telefon FROM centre JOIN alumne ON alumne.codi_centre = centre.codi WHERE alumne.id_user = $id_str), '') AS phone
+                        ,COALESCE(sstt.telefon, centre.telefon, '') AS phone
                         ,COALESCE(sstt.altres, CONCAT(centre.taller, ',', centre.actiu), professor.id_xtec, '') AS other
                         ,COALESCE(CONCAT(centre.nom_persona_contacte, ',', centre.correu_persona_contacte), '') AS contact
                         ,CASE

@@ -200,7 +200,7 @@ class USERSSeeder extends Seeder
          * AÑADIR INSTITUTOS
          */
 
-         // Cargamos el archivo CSV desde la siguiente ruta
+        // Cargamos el archivo CSV desde la siguiente ruta
         $csvFile = fopen(WRITEPATH . 'install'.DIRECTORY_SEPARATOR.'CENTRE_seeder.csv', "r");
         // Boolean para saltarnos la primera fila (es una fila con los nombres de los campos y por ende la descartamos)
         $firstLine = true;
@@ -220,7 +220,7 @@ class USERSSeeder extends Seeder
 
                     $user -> addUser( 
                         $uuid, 
-                        trim($row[6]),
+                        trim($row[23]),
                         password_hash('1234', PASSWORD_DEFAULT),
                         'cat'
                     );
