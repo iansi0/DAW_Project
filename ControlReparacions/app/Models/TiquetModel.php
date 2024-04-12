@@ -75,6 +75,23 @@ class TiquetModel extends Model
     public function getAllPaged($nElements)
     {
 
+        /**
+            SELECT tiquet.id as id
+                , tipus_dispositiu.nom as tipus
+                , tiquet.descripcio_avaria as descripcio
+                , tiquet.created_at as data
+                , CASE WHEN tiquet.codi_centre_emissor = centre.codi THEN centre.nom END AS emissor
+                , CASE WHEN tiquet.codi_centre_reparador = centre.codi THEN centre.nom END AS receptor
+                , estat.nom as estat
+                
+            FROM tiquet
+                JOIN tipus_dispositiu ON tiquet.id_tipus_dispositiu = tipus_dispositiu.id
+                JOIN centre ON tiquet.codi_centre_emissor = centre.codi OR tiquet.codi_centre_reparador = centre.codi
+                JOIN estat ON tiquet.id_estat = estat.id
+            WHERE tiquet.deleted_at IS NULL
+
+            LIMIT 8
+         */
         $page = $this->select("tiquet.id as id
                                 , tipus_dispositiu.nom as tipus
                                 , tiquet.descripcio_avaria as descripcio
