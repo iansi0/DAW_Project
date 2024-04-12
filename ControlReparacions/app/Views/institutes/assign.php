@@ -1,20 +1,20 @@
 <?= $this->extend('layouts/master.php') ?>
 
 <?= $this->section('content') ?>
-<h1 class="text-center text-7xl text-primario">TICKETS</h1>
+<h1 class="text-center text-7xl text-primario">><?=strtoupper(lang('titles.ticket'))?></h1>
 
-<button id="add-ticket" class=" bg-primario text-white float-right mb-5 px-5 py-2 hover:bg-terciario-4">+ Afegir</button>
+<button id="add-ticket" class=" bg-primario text-white float-right mb-5 px-5 py-2 hover:bg-terciario-4">+><?=lang('buttons.add')?></button>
 
 
-<table class="w-full ">
+<!-- <table class="w-full ">
   <thead class=" bg-primario text-white">
-    <th>Ticket</th>
-    <th>ID_Disp</th>
-    <th>Type</th>
-    <th>Institut</th>
-    <th>Inici</th>
-    <th>Última</th>
-    <th>Estat</th>
+    <th><?=lang('titles.ticket_2')?>Ticket</th>
+    <th><?=lang('titles.disp')?>ID_Disp</th>
+    <th><?=lang('titles.type')?>Type</th>
+    <th><?=lang('titles.ins')?>Institut</th>
+    <th><?=lang('titles.start')?>Inici</th>
+    <th>Última</th> // falta por que no hay botton creo yo 
+    <th><?=lang('forms.state')?>Estat</th>
     </tr>
   </thead>
   <tbody>
@@ -73,7 +73,7 @@
       <td>Desguaçat</td>
     </tr>
   </tbody>
-</table>
+</table> -->
 
 <!-- 
  Search form  

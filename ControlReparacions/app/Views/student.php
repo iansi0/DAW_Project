@@ -2,28 +2,28 @@
 
 
 <?= $this->section('content') ?>
-<h1 class="text-center text-7xl text-primario">Alumnos</h1>
+<h1 class="text-center text-7xl text-primario">><?=strtoupper(lang('titles.students'))?></h1>
 
 
 <section class="flex  gap-8 mt-8   mb-5">
-    <button class="bg-primario text-white px-5 py-2 hover:bg-terciario-4">+Filter</button>
+    <button class="bg-primario text-white px-5 py-2 hover:bg-terciario-4">+><?=lang('buttons.filter')?></button>
 
     <form action="" class="flex gap-2 w-full">
         <input type="search" id="gsearch" name="gsearch" class="text-black bg-slate-400 ml-auto pl-2  rounded-lg ">
         <input type="submit" class="bg-primario text-white px-5 py-2 hover:bg-terciario-4">
     </form>
 
-    <button id="add-ticket" class="bg-primario text-white px-5 py-2 hover:bg-terciario-4">Afegir</button>
+    <button id="add-ticket" class="bg-primario text-white px-5 py-2 hover:bg-terciario-4">><?=lang('buttons.add')?></button>
 </section>
 
 
 <table class="w-full m"> 
     <thead class="bg-primario  text-white">
-        <th>DNI</th>
-        <th>Categoria</th>
-        <th>Asignar Dispositivo</th>
-        <th>Inici</th>
-        <th>Ultima</th>
+        <th>><?=lang('forms.dni')?></th>
+        <th>Categoria</th> <!-- esto falta ponerlo-->
+        <th>Asignar ><?=lang('titles.disp_2')?></th>
+        <th>><?=lang('titles.home')?></th>
+        <th>><?=lang('titles.end')?></th>
         </tr>
     </thead>
     <tbody>

@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/master.php') ?>
 <?= $this->section('content') ?>
 
-<h1 class=" text-center mt-9 bg-primario ml-80 text-5xl" style="margin-top: 9%;">Intervencion</h1>
+<h1 class=" text-center mt-9 bg-primario ml-80 text-5xl" style="margin-top: 9%;">><?=strtoupper(lang('titles.int_2'))?></h1>
 
 <div id="imagen" style="margin-bottom: 20px;"> <!-- Añade un margen inferior de 20px -->
     <img src="imagen/aponer" style="width: 10%; height: 20%; " alt="">
@@ -36,8 +36,8 @@
     </table>
 
     <div class="flex justify-start mt-6 ml-20">
-        <button class="bg-primario text-white px-5 py-2 rounded hover:bg-terciario-4 mr-4">star *</button>
-        <button class="bg-primario text-white px-5 py-2 rounded hover:bg-terciario-4">guardar</button>
+        <button class="bg-primario text-white px-5 py-2 rounded hover:bg-terciario-4 mr-4">><?=lang('titles.start')?>star*</button>
+        <button class="bg-primario text-white px-5 py-2 rounded hover:bg-terciario-4">><?=lang('buttons.save')?>guardar</button>
     </div>
 </section>
 

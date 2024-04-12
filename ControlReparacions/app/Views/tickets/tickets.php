@@ -2,19 +2,19 @@
 
 
 <?= $this->section('content') ?>
-<h1 class="text-center text-7xl text-primario">><?=strtoupper(lang('.titles.ticket.ticket.ticket'))?></h1>
+<h1 class="text-center text-7xl text-primario">><?=strtoupper(lang('titles.ticket'))?></h1>
 
-<button id="add-ticket" class=" bg-primario text-white float-right mb-5 px-5 py-2 hover:bg-terciario-4">+ ><?=lang('.buttons.add.ticket.add')?></button>
+<button id="add-ticket" class=" bg-primario text-white float-right mb-5 px-5 py-2 hover:bg-terciario-4">+ ><?=lang('buttons.add')?></button>
 
 <!-- <table class="w-full ">
   <thead class=" bg-primario text-white">
-    <th><?=lang('.titles.ticket_2.ticket.ticket')?></th>
-    <th><?=lang('.tittles.disp.ticket.id_device')?></th>
-    <th><?=lang('.titles.type.ticket.type')?></th>
-    <th><?=lang('.titles.ins.ticket.ins')?></th>
-    <th><?=lang('.titles.start.ticket.start')?></th>
-    <th><?=lang('ticket.last')?></th>
-    <th><?=lang('.forms.state.ticket.status')?></th>
+    <th><?=lang('titles.ticket_2')?></th>
+    <th><?=lang('titles.disp')?></th>
+    <th><?=lang('titles.type')?></th>
+    <th><?=lang('titles.ins')?></th>
+    <th><?=lang('titles.start')?></th>
+    <th><?=lang('ticket.last')?></th> // esto falta xxxx
+    <th><?=lang('forms.state')?></th>
     </tr>
   </thead>
   <tbody>
