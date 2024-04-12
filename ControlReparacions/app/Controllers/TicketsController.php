@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\TiquetModel;
 use App\Controllers\BaseController;
+use App\Models\IntervencioModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use Faker\Factory;
 
@@ -32,7 +33,7 @@ class TicketsController extends BaseController
 
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading('ID', lang('titles.type'), lang('titles.description'), lang('titles.sender'), lang('titles.receiver'), lang('titles.date'), lang('titles.status'), '', '',);
+        $table->setHeading('ID', lang('titles.type'), lang('titles.description'), lang('titles.sender'), lang('titles.receiver'), lang('titles.date'), lang('titles.status'), '', '', '');
 
         $template = [
             'table_open'  => "<table class='w-full'>",
@@ -44,8 +45,6 @@ class TicketsController extends BaseController
         $table->setTemplate($template);
 
         /** TABLE GENERATOR **/
-  
-
 
         $data = [
             'page_title' => 'CI4 Pager & search filter',
@@ -58,6 +57,7 @@ class TicketsController extends BaseController
         foreach ($data['tickets'] as $ticket) {
             $buttonDelete = base_url("deleteticket/" . $ticket['id']); // Reemplazar con tu ruta real
             $buttonUpdate = base_url("tu/controlador/accion/" . $ticket['id']); // Reemplazar con tu ruta real
+            $buttonView = base_url("ticketinfo/" . $ticket['id']); // Reemplazar con tu ruta real
             $table->addRow(
                 $ticket['id'],
                 $ticket['tipus'],
@@ -66,6 +66,7 @@ class TicketsController extends BaseController
                 $ticket['centre_receptor'],
                 $ticket['data'],
                 $ticket['estat'],
+                "<a href='$buttonView' class='btn btn-primary'>View</a>",
                 "<a href='$buttonDelete' class='btn btn-primary'>Delete</a>",
                 "<a href='$buttonUpdate' class='btn btn-primary'>Modify</a>"
             );
@@ -74,9 +75,49 @@ class TicketsController extends BaseController
         return view('tickets/tickets', $data);
     }
 
-    public function ticketInfo()
+    public function ticketInfo($id = null)
     {
-        return view('tickets/ticketInfo');
+
+        if ($id == null) {
+            return redirect()->to(base_url('/tickets'));
+        }
+
+        $modelTickets = new TiquetModel();
+        $modelInterventions = new IntervencioModel();
+
+        /** TABLE GENERATOR **/
+        $table = new \CodeIgniter\View\Table();
+        $table->setHeading('fecha', 'alumne', 'material', 'descripcio');
+
+        $template = [
+            'table_open'         => "<table class='w-full'>",
+            'thead_open'  => "<thead class='bg-primario text-segundario'>",
+            'heading_cell_start' => "<th class='p-5 text-lg'>",
+            'cell_start' => "<td>",
+
+        ];
+        $table->setTemplate($template);
+
+        $data = [
+            'ticket' => $modelTickets->viewTicket($id),
+            'interventions' => $modelInterventions->getInterventions($id),
+            'pager' => $modelInterventions->pager,
+            // 'search' => $search,
+            'table' => $table,
+        ];
+
+        foreach ($data['interventions'] as $intervencio) {
+            $buttonView = base_url("ticketinfo/" . $intervencio['id']); // Reemplazar con tu ruta real
+
+            $table->addRow(
+                $intervencio['created_at'],
+                $intervencio['correu_alumne'],
+                $intervencio['id_tipus'],
+               
+                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 2 ? 'bg-red-500 text-segundario' : 'bg-segundario']
+            );
+        }
+        return view('tickets/ticketInfo', $data);
     }
 
     public function ticketForm()
@@ -125,7 +166,6 @@ class TicketsController extends BaseController
         $model->deleteTicket($id);
 
         return redirect()->to(base_url('/tickets'));
-
     }
 
     public function exportCSV($search = '')
@@ -156,4 +196,6 @@ class TicketsController extends BaseController
 
         echo $csv_string;
     }
+
+   
 }
