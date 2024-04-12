@@ -18,19 +18,21 @@ class TicketsController extends BaseController
 
         if (isset($searchData) && isset($searchData['q'])) {
             $search = $searchData["q"];
-        } else
+        } else {
             $search = "";
+        }
 
         // Get News Data
 
+        
         $model = new TiquetModel();
-
+        
         if ($search == '') {
             $paginateData = $model->getAllPaged(8);
         } else {
             $paginateData = $model->getByTitleOrText($search)->paginate(8);
         }
-
+        
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
         $table->setHeading('ID', lang('titles.type'), lang('titles.description'), lang('titles.sender'), lang('titles.receiver'), lang('titles.date'), lang('titles.status'), '', '', '');
