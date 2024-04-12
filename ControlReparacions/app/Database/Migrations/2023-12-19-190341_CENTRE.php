@@ -14,6 +14,10 @@ class CENTRE extends Migration
                         'constraint'     => 7,
                         'null'           => false,
                 ],
+                'id_user'          => [
+                        'type'           => 'BINARY',
+                        'constraint'     => 32,
+                ],
                 'nom'          => [
                         'type'           => 'VARCHAR',
                         'constraint'     => 100,
@@ -57,6 +61,7 @@ class CENTRE extends Migration
                         'constraint'     => 32,
                         'null'           => false,
                 ],
+
                 'created_at' => [
                     'type'       => 'DATETIME',
                 ],
@@ -68,8 +73,9 @@ class CENTRE extends Migration
                     'null'       => true,
                 ],
         ]);
-        $this->forge->addKey('codi', true);
+        $this->forge->addKey('id_user', true);
         $this->forge->createTable('CENTRE');
+        $this->forge->addForeignKey('id_user', 'USERS', 'id');
         $this->forge->addForeignKey('id_sstt', 'SSTT', 'id');
         $this->forge->addForeignKey('id_poblacio', 'POBLACIO', 'id');
 

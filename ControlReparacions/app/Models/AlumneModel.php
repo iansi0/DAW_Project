@@ -12,7 +12,7 @@ class AlumneModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['correu_alumne','codi_centre'];
+    protected $allowedFields    = ['id_user', 'nom', 'cognoms', 'codi_centre'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,11 +38,13 @@ class AlumneModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addAlumne($correu_alumne,$codi_centre) {
+    public function addAlumne($id, $nom, $cognoms, $codi_centre) {
            
         $data = [
-            'correu_alumne' => $correu_alumne,
-            'codi_centre' =>  $codi_centre,
+            'id_user'       => $id,
+            'nom'           => trim($nom),
+            'cognoms'       => trim($cognoms),
+            'codi_centre'   => trim($codi_centre),
         ];
 
         $this->insert($data);

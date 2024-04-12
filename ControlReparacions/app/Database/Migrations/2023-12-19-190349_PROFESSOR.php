@@ -13,19 +13,18 @@ class PROFESSOR extends Migration
                         'type'           => 'BINARY',
                         'constraint'     => 32,
                 ],
-                'nom_professor'          => [
+                'id_user'          => [
+                        'type'           => 'BINARY',
+                        'constraint'     => 32,
+                ],
+                'nom'          => [
                         'type'           => 'VARCHAR',
                         'constraint'     => 20,
                         'null'           => false,
                 ],
-                'cognoms_professor'          => [
+                'cognoms'          => [
                         'type'           => 'VARCHAR',
-                        'constraint'     => 30,
-                        'null'           => false,
-                ],
-                'correu_professor'          => [
-                        'type'           => 'VARCHAR',
-                        'constraint'     => 50,
+                        'constraint'     => 80,
                         'null'           => false,
                 ],
                 'codi_centre'          => [
@@ -33,11 +32,7 @@ class PROFESSOR extends Migration
                         'constraint'     => 32,
                         'null'           => false,
                 ],
-                'language'          => [
-                        'type'           => 'VARCHAR',
-                        'constraint'     => 10,
-                        'null'           => true,
-                ],
+
                 'created_at' => [
                     'type'       => 'DATETIME',
                 ],
@@ -49,8 +44,9 @@ class PROFESSOR extends Migration
                     'null'       => true,
                 ],
         ]);
-        $this->forge->addKey('id_xtec', true);
+        $this->forge->addKey('id_user', true);
         $this->forge->createTable('PROFESSOR');
+        $this->forge->addForeignKey('id_user', 'USERS', 'id');
         $this->forge->addForeignKey('codi_centre', 'CENTRE', 'codi');
         $this->forge->addForeignKey('id_user', 'USERS', 'id');
 
