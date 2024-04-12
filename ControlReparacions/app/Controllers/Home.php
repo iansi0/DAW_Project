@@ -70,11 +70,9 @@ class Home extends BaseController
                 "ip_user"       => $_SERVER['REMOTE_ADDR'],
             ];
 
-            dd($sessionData);
-
             session()->set("user", $sessionData);
 
-            return redirect()->to(base_url('home'));
+            return redirect()->to(base_url('tickets'));
 
         } else {
             return redirect()->to(base_url('/'));
