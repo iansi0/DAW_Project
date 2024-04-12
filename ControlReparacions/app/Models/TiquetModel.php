@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use PhpParser\Node\Stmt\Return_;
+use CodeIgniter\Database\RawSql;
 
 class TiquetModel extends Model
 {
@@ -58,11 +60,11 @@ class TiquetModel extends Model
     public function getByTitleOrText($search)
     {
 
-        return $this->select(['tiquet.id as id', 'tipus_dispositiu.nom as tipus', 'tiquet.descripcio_avaria as descripcio', 'emissor.nom as centre_emisor', 'receptor.nom as centre_receptor', 'tiquet.created_at as data', 'estat.nom as estat' ])
-            ->join('tipus_dispositiu','tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
-            ->join('centre as emissor','tiquet.codi_centre_emissor = emissor.codi')
-            ->join('centre as receptor','tiquet.codi_centre_reparador = receptor.codi')
-            ->join('estat','tiquet.id_estat = estat.id')
+        return $this->select(['tiquet.id as id', 'tipus_dispositiu.nom as tipus', 'tiquet.descripcio_avaria as descripcio', 'emissor.nom as centre_emisor', 'receptor.nom as centre_receptor', 'tiquet.created_at as data', 'estat.nom as estat'])
+            ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
+            ->join('centre as emissor', 'tiquet.codi_centre_emissor = emissor.codi')
+            ->join('centre as receptor', 'tiquet.codi_centre_reparador = receptor.codi')
+            ->join('estat', 'tiquet.id_estat = estat.id')
             ->orLike('id', $search, 'both', true)
             ->orLike('tipus', $search, 'both', true)
             ->orLike('descripcio', $search, 'both', true)
@@ -75,7 +77,7 @@ class TiquetModel extends Model
     public function getAllPaged($nElements)
     {
 
-        /**
+        /*
             SELECT tiquet.id as id
                 , tipus_dispositiu.nom as tipus
                 , tiquet.descripcio_avaria as descripcio
@@ -92,21 +94,26 @@ class TiquetModel extends Model
 
             LIMIT 8
          */
-        $page = $this->select("tiquet.id as id
-                                , tipus_dispositiu.nom as tipus
-                                , tiquet.descripcio_avaria as descripcio
-                                , tiquet.created_at as data
-                                , CASE WHEN tiquet.codi_centre_emissor = centre.codi THEN centre.nom END AS emissor
-                                , CASE WHEN tiquet.codi_centre_reparador = centre.codi THEN centre.nom END AS receptor
-                                , estat.nom as estat"
-                            );
-                $this->join('tipus_dispositiu','tiquet.id_tipus_dispositiu = tipus_dispositiu.id');
-                $this->join('centre', 'tiquet.codi_centre_emissor = centre.codi OR tiquet.codi_centre_reparador = centre.codi');
-                $this->join('estat', 'tiquet.id_estat = estat.id');
-                $this->paginate($nElements);
 
-        return $page;
-        
+
+        $this->select(
+            new RawSql("
+            tiquet.id AS id, 
+            tiquet.descripcio_avaria AS descripcio,
+            tiquet.created_at AS created,
+            tipus_dispositiu.nom AS tipus,
+            estat.nom as estat,
+            CASE  WHEN tiquet.codi_centre_emissor = centre.codi THEN CONCAT(centre.nom)  ELSE NULL  END AS emissor,
+            CASE  WHEN tiquet.codi_centre_reparador = centre.codi THEN CONCAT(centre.nom)  ELSE CONCAT('per assignar')  END AS receptor
+            ")
+        );
+
+        $this->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id');
+        $this->join('estat', 'tiquet.id_estat = estat.id');
+        $this->join('centre', ' tiquet.codi_centre_emissor = centre.codi OR tiquet.codi_centre_reparador = centre.codi');
+
+
+        return $this->paginate($nElements);
     }
 
     public function deleteTicket($id)

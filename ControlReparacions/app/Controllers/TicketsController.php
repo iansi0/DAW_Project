@@ -56,6 +56,7 @@ class TicketsController extends BaseController
             'table' => $table,
         ];
 
+    
         foreach ($data['tickets'] as $ticket) {
             $buttonDelete = base_url("deleteticket/" . $ticket['id']); // Reemplazar con tu ruta real
             $buttonUpdate = base_url("tu/controlador/accion/" . $ticket['id']); // Reemplazar con tu ruta real
@@ -64,9 +65,9 @@ class TicketsController extends BaseController
                 $ticket['id'],
                 $ticket['tipus'],
                 $ticket['descripcio'],
-                $ticket['centre_emisor'],
-                $ticket['centre_receptor'],
-                $ticket['data'],
+                $ticket['emissor'],
+                $ticket['receptor'],
+                $ticket['created'],
                 $ticket['estat'],
                 "<a href='$buttonView' class='btn btn-primary'>View</a>",
                 "<a href='$buttonDelete' class='btn btn-primary'>Delete</a>",
