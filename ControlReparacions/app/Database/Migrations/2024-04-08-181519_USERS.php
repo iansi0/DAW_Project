@@ -20,6 +20,7 @@ class USERS extends Migration
             'passwd' => [
                 'type'           => 'VARCHAR',
                 'constraint'     => 100,
+                'null'           => true,
             ],
             'lang'          => [
                 'type'           => 'VARCHAR',
