@@ -111,13 +111,11 @@ class TiquetModel extends Model
         $this->join('estat', 'tiquet.id_estat = estat.id');
         $this->join('centre', ' tiquet.codi_centre_emissor = centre.codi OR tiquet.codi_centre_reparador = centre.codi');
 
-
         return $this->paginate($nElements);
     }
 
     public function deleteTicket($id)
     {
-
         return $this->where('id', $id)->delete();
     }
 
