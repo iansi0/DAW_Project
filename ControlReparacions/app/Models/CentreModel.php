@@ -56,4 +56,16 @@ class CentreModel extends Model
 
         $this->insert($data);
     }
+
+    public function getByTitleOrText($search)
+    {
+
+        return $this->select(['codi','id_user','nom','actiu','taller','telefon','adreca_fisica','correu_persona_contacte','id_sstt','id_poblacio' ])->orLike('id_user', $search, 'both', true)->orLike('nom', $search, 'both', true);
+    }
+
+    public function getAllPaged($nElements)
+    {
+
+        return $this->select(['codi','id_user','nom','actiu','taller','telefon','adreca_fisica','correu_persona_contacte','id_sstt','id_poblacio' ])->paginate($nElements);
+    }
 }

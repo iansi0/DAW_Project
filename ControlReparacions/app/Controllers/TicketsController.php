@@ -27,6 +27,7 @@ class TicketsController extends BaseController
         
         $model = new TiquetModel();
         
+        // para buscar filtrado
         if ($search == '') {
             $paginateData = $model->getAllPaged(8);
         } else {
