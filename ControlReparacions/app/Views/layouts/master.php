@@ -23,8 +23,7 @@ $name = 'HOLA';
 </style>
 
 <body class=" flex bg-secundario">
-    <div class="bg-terciario-1 text-primario relative text-lg w-20  overflow-hidden transition-all ease-in duration-300 hover:w-60 ">
-
+    <div class="bg-terciario-1 text-primario relative text-lg min-w-20 h-auto  overflow-hidden transition-all ease-in duration-300 hover:min-w-60 ">
         <nav id="Sidebar" class="flex flex-col gap-9 py-16  w-[70px]  fixed overflow-hidden transition-all ease-in duration-300 hover:w-60 ">
             <div class=" w-20 h-16  flex items-center text-sm text-secundario ">
                 <!-- Imagen ticket-->
@@ -142,18 +141,16 @@ $name = 'HOLA';
                 <b>LogOut</b>
             </a>
         </nav>
-
     </div>
 
     <main id="tickets" class="w-full  text-center  justify-items-center items-center">
 
-        <header class=" bg-terciario-1 text-secundario h-16 flex items-center relative justify-center   ">
-            <img src="/assets/img/logo.png" alt="Logo">
-            <h1 class=" absolute right-0 mr-5"><?= $name ?></h1>
-
+        <header class=" fixed w-[-webkit-fill-available]  bg-terciario-1 bg-green-300 text-secundario  h-16 flex items-center  justify-center  ">
+                <img src="/assets/img/logo.png" alt="Logo">
+                <h1 class=" absolute right-0 mr-5  "><?= $name ?></h1>
         </header>
 
-        <article class="p-5">
+        <article class="p-5 pt-16">
             <?= $this->renderSection('content') ?>
         </article>
     </main>
