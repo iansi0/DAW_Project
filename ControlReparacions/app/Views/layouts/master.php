@@ -145,7 +145,7 @@ $name = 'HOLA';
 
     <main id="tickets" class="w-full  text-center  justify-items-center items-center">
 
-        <header class=" fixed w-[-webkit-fill-available]  bg-terciario-1 bg-green-300 text-secundario  h-16 flex items-center  justify-center  ">
+        <header class=" fixed w-[-webkit-fill-available]  bg-terciario-1 text-secundario  h-16 flex items-center  justify-center  ">
                 <img src="/assets/img/logo.png" alt="Logo">
                 <h1 class=" absolute right-0 mr-5  "><?= $name ?></h1>
         </header>
