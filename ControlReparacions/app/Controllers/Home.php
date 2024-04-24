@@ -13,9 +13,7 @@ class Home extends BaseController
     {
         $client = new \Google\Client();
         //$client->setAuthConfig('/path/to/client_credentials.json');
-        $client->setClientId('825266504668-5e4qgd9bko7jqtu7ubqobtc0mfs1c2mk .
-        apps.googleusercontent.com'); //Define your ClientID
-        $client->setClientSecret('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'); //Define your Client Secret Key
+       
 
         $client->setRedirectUri('http://localhost:8080'); //Define your Redirect Uri
         // $client->addScope(\Google\Service\Drive::DRIVE_METADATA_READONLY);
