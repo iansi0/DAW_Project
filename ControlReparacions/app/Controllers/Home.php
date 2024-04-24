@@ -15,7 +15,6 @@ class Home extends BaseController
         //$client->setAuthConfig('/path/to/client_credentials.json');
        
 
-        $client->setRedirectUri('http://localhost:8080'); //Define your Redirect Uri
         // $client->addScope(\Google\Service\Drive::DRIVE_METADATA_READONLY);
         $client->addScope(\Google\Service\Oauth2::USERINFO_EMAIL);
         $client->addScope(\Google\Service\Oauth2::USERINFO_PROFILE);
