@@ -3,6 +3,7 @@ return [
     'login'         => 'Iniciar Sessió',
     'register'      => 'Registre',
 
+    'id'            => 'Identificador',
     'assign'        => 'Assignar',
     'type'          => 'Tipus',
     'description'   => 'Descripció',
@@ -10,6 +11,7 @@ return [
     'receiver'      => 'Receptor',
     'date'          => 'Data',
     'status'        => 'Estat',
+    'home'          => 'Inici',
 
     '2fa'           => 'Segon Factor d\'Autenticació',
 
@@ -48,6 +50,6 @@ return [
     'n_disp'        => 'Afegir Dispositiu',
     'e_disp'        => 'Modificar Dispositiu',
 
-    'start'         => 'Inici',
+    'start'         => 'Començat',
     'end'           => 'Acabat',
 ];

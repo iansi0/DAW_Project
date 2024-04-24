@@ -3,8 +3,14 @@ return [
     'login'         => 'Log In',
     'register'      => 'Register',
 
+    'id'            => 'Identifyer',
     'assign'        => 'Assign',
     'type'          => 'Type',
+    'description'   => 'Description',
+    'sender'        => 'Sender',
+    'receiver'      => 'Reciever',
+    'date'          => 'Date',
+    'status'        => 'Status',
     'home'          => 'Home',
 
     '2fa'           => 'Second Factor Authentication',
