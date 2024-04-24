@@ -121,6 +121,21 @@ class TiquetModel extends Model
 
     public function viewTicket($id)
     {
-        return  $this->where('id', $id)->first();
+        $this->select(["
+            tiquet.id AS id, 
+            tiquet.descripcio_avaria AS descripcio,
+            tiquet.created_at AS created,
+            tipus_dispositiu.nom AS tipus,
+            estat.nom as estat,
+            CASE  WHEN tiquet.codi_centre_emissor = centre.codi THEN CONCAT(centre.nom)  ELSE NULL  END AS emissor,
+            CASE  WHEN tiquet.codi_centre_reparador = centre.codi THEN CONCAT(centre.nom)  ELSE CONCAT('per assignar')  END AS receptor
+            "]);
+    
+
+        $this->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id');
+        $this->join('estat', 'tiquet.id_estat = estat.id');
+        $this->join('centre', ' tiquet.codi_centre_emissor = centre.codi OR tiquet.codi_centre_reparador = centre.codi');
+
+        return  $this->where('tiquet.id', $id)->first();
     }
 }
