@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class CentreModel extends Model
 {
-    protected $table            = 'CENTRE';
+    protected $table            = 'centre';
     protected $primaryKey       = 'codi';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
