@@ -13,18 +13,18 @@
 
      <!-- Search form -->
      <form method='get' action="<?= base_url('/tickets'); ?>" id="searchForm">
-      <input type='text' name='q' value='<?= $search ?>' placeholder="Search here..." class="mb-5 px-5 py-1.5  border-2 border-terciario-3">
-      <input type='button' id='btnsearch' value='Cercar' onclick='document.getElementById("searchForm").submit();' class="bg-primario text-white  mb-5 px-5 py-2 float-right">
+      <input type='text' name='q' value='<?= $search ?>' placeholder="<?=lang('buttons.search')?>..." class="mb-5 px-5 py-1.5  border-2 border-terciario-3">
+      <input type='button' id='btnsearch' value='<?=lang('buttons.search')?>' onclick='document.getElementById("searchForm").submit();' class="bg-primario text-white  mb-5 px-5 py-2 float-right">
     </form>
 
 
     <a href="<?= base_url('export/' . $search . '') ?>">
-      <button id="add-ticket" class=" bg-primario text-white px-5 py-2  hover:bg-terciario-4">Export</button>
+      <button id="add-ticket" class=" bg-primario text-white px-5 py-2  hover:bg-terciario-4"><?=lang('buttons.export')?></button>
 
     </a>
 
     <a href="<?= base_url('ticketform') ?>">
-      <button id="add-ticket" class=" bg-primario text-white px-5 py-2  hover:bg-terciario-4">Add Ticket</button>
+      <button id="add-ticket" class=" bg-primario text-white px-5 py-2  hover:bg-terciario-4"><?=lang('titles.n_ticket')?></button>
     </a>
  
 

@@ -1,29 +1,29 @@
 <?= $this->extend('layouts/master.php') ?>
 <?= $this->section('content') ?>
 
-<h1 class="text-2xl text-primario mt-14">FORMULARIO DE AÑADIR TICKET</h1>
+<h1 class="text-2xl text-primario mt-14"><?=lang('titles.n_ticket')?></h1>
 
 <section class="container mx-auto px-4 py-8 mt-10">
     <form action="addticket" method="POST" class="grid grid-cols-3 gap-x-2">
 
         <div class="flex flex-col mt-5">
-            <label class=""><?=lang('forms.')?></label>
+            <label><?=lang('forms.description')?></label>
             <input type="text" name="description"  class="bg-blue-400 hover:bg-blue-500 text-white px-2 py-3 rounded flex-1">
         </div>
 
         <div class="flex flex-col mt-5">
-            <label  class="">Nom Persona Contacte</label>
+            <label><?=lang('forms.contact_name')?></label>
             <input type="text" name="nameContact" class="bg-blue-400 hover:bg-blue-500 text-white px-2 py-3 rounded flex-1"></input>
         </div>
 
         <div class="flex flex-col mt-5">
-            <label  class="">Correu Persona Contacte</label>
+            <label><?=lang('forms.contact_email')?></label>
             <input type="text" name="emailContact" class="bg-blue-400 hover:bg-blue-500 text-white px-2 py-3 rounded flex-1"></input>
         </div>
 
 
         <div class="flex flex-col mt-5">
-            <label  class="">Tipus</label>
+            <label><?=lang('title.type')?></label>
             <select name="id_type" id="" class="bg-blue-400 hover:bg-blue-500 text-white px-2 py-3 rounded flex-1">
                 <option value="1">option 1</option>
                 <option value="2">option 2</option>
@@ -38,10 +38,10 @@
 </section>
 
 <div class="flex items-center mt-20 justify-between">
-    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Cancelar</button>
+    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"><?=lang('buttons.cancel')?></button>
     <div>
-        <button class="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded">Añadir</button>
-        <button class="bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded ml-4">Guardar</button>
+        <button class="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded"><?=lang('buttons.add')?></button>
+        <button class="bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded ml-4"><?=lang('buttons.save')?></button>
     </div>
 </div>
 

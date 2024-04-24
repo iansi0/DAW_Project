@@ -22,6 +22,10 @@ return [
 
     'assign'    => 'Assign',
     'filter'    => 'Filter',
+
     'search'    => 'Search',
+    'search2'   => 'Search here...',
+
     'change'    => 'Change',
+    'export'    => 'Export',
 ];

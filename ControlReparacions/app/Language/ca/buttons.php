@@ -22,6 +22,7 @@ return [
 
     'assign'    => 'Assignar',
     'filter'    => 'Filtrar',
-    'search'    => 'Buscar',
+    'search'    => 'Cercar',
     'change'    => 'Canviar',
+    'export'    => 'Exportar',
 ];

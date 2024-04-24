@@ -37,6 +37,7 @@ return [
 
     'ticket'        => 'Tickets',
     'ticket_2'      => 'Ticket',
+    'id_ticket'     => 'Ticket Identifyer:',
     'n_ticket'      => 'Añadir Ticket',
     'e_ticket'      => 'Modificar Ticket',
     
@@ -54,6 +55,11 @@ return [
     'inventory_2'   => 'Inventario',
     'n_inventory'   => 'Añadir Inventario',
     'e_inventory'   => 'Modificar Inventario',
+
+    'material'     => 'Materiales',
+    'material_2'   => 'Material',
+    'n_material'   => 'Añadir Material',
+    'e_material'   => 'Modificar Material',
 
     'start'         => 'Empezado',
     'end'           => 'Acabado',

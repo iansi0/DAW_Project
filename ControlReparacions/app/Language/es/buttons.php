@@ -24,4 +24,5 @@ return [
     'filter'    => 'Filtrar',
     'search'    => 'Buscar',
     'change'    => 'Cambiar',
+    'export'    => 'Exportar',
 ];

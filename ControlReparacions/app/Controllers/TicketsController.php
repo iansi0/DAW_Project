@@ -34,7 +34,7 @@ class TicketsController extends BaseController
         
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading('ID', lang('titles.ticket'), lang('titles.description'), lang('titles.sender'), lang('titles.receiver'), lang('titles.date'), lang('titles.status'), '', '', '');
+        $table->setHeading(lang('titles.id'), lang('titles.device'), lang('titles.description'), lang('titles.sender'), lang('titles.receiver'), lang('titles.date'), lang('titles.status'), '', '', '');
 
         $template = [
             'table_open'  => "<table class='w-full'>",
