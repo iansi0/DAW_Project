@@ -3,8 +3,14 @@ return [
     'login'         => 'Iniciar Sessión',
     'register'      => 'Registro',
 
+    'id'            => 'Identificador',
     'assign'        => 'Asignar',
     'type'          => 'Tipo',
+    'description'   => 'Descripción',
+    'sender'        => 'Emisor',
+    'receiver'      => 'Receptor',
+    'date'          => 'Fecha',
+    'status'        => 'Estado',
     'home'          => 'Inicio',
 
     '2fa'           => 'Segundo Factor de Autenticación',

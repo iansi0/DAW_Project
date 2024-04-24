@@ -2,7 +2,7 @@
 
 
 <?= $this->section('content') ?>
-<h1 class="text-center text-7xl text-primario"><?= strtoupper(lang('ticket.ticket')) ?></h1>
+<h1 class="text-center text-7xl text-primario"><?= strtoupper(lang('titles.ticket')) ?></h1>
 
 
 

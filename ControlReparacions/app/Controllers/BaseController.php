@@ -60,5 +60,7 @@ abstract class BaseController extends Controller
         } else {
             $this->request->setlocale('es');
         }
+
+        // session_destroy();
     }
 }
