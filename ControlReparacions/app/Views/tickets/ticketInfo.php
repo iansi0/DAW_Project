@@ -15,7 +15,7 @@
 
         <div class="flex justify-around">
             <!-- Esto es un select, coño -->
-            <button class="bg-primario text-white px-5 py-2 rounded hover:bg-terciario-4 mr-4">c_stat </button>
+            <button class="bg-primario text-white px-5 py-2 rounded hover:bg-terciario-4 mr-4"><?= $ticket['estat'] ?> </button>
             <button class="bg-primario text-white px-5 py-2 rounded hover:bg-terciario-4">guardar</button>
         </div>
 
