@@ -49,4 +49,16 @@ class AlumneModel extends Model
 
         $this->insert($data);
     }
+
+    public function getByTitleOrText($search)
+    {
+
+        return $this->select(['id_user','nom','cognoms','codi_centre'])->orLike('id_user', $search, 'both', true)->orLike('nom', $search, 'both', true);
+    }
+
+    public function getAllPaged($nElements)
+    {
+
+        return $this->select(['id_user','nom','cognoms','codi_centre'])->paginate($nElements);
+    }
 }
