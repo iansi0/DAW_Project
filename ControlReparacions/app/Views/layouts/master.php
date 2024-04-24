@@ -39,7 +39,7 @@ $name = 'HOLA';
                         <path d="M473.6,215.5508a17.1034,17.1034,0,0,0,8.498-14.7788V127.75A17.0965,17.0965,0,0,0,465,110.6519H349.0981v28.5a17.0981,17.0981,0,1,1-34.1962,0v-28.5H47A17.0965,17.0965,0,0,0,29.9019,127.75v73.022A17.1034,17.1034,0,0,0,38.4,215.5508a46.5019,46.5019,0,0,1-.0093,80.9077,17.095,17.095,0,0,0-8.4887,14.7788V384.25A17.0965,17.0965,0,0,0,47,401.3481H314.9019v-28.5a17.0981,17.0981,0,1,1,34.1962,0v28.5H465A17.0965,17.0965,0,0,0,482.0981,384.25V311.2373a17.1034,17.1034,0,0,0-8.498-14.7788,46.5064,46.5064,0,0,1,0-80.9077Zm-124.502,98.4a17.0981,17.0981,0,1,1-34.1962,0v-28.5a17.0981,17.0981,0,1,1,34.1962,0Zm0-87.4018a17.0981,17.0981,0,1,1-34.1962,0v-28.5a17.0981,17.0981,0,1,1,34.1962,0Z"></path>
                     </svg>
                 </p>
-                <b>TICKETS</b>
+                <b><?=lang('titles.ticket')?></b>
             </a>
 
             <a href="<?= base_url('students') ?>" class=" w-20  h-16 flex items-center   transition-all ease-in duration-300  hover:w-56  hover:bg-primario hover:text-white">
@@ -57,7 +57,7 @@ $name = 'HOLA';
                         <path d="M17.4,22.6C17,22.9,16.5,23,16,23s-1-0.1-1.4-0.4L6,18.1V22c0,3.1,4.9,6,10,6s10-2.9,10-6v-3.9L17.4,22.6z"></path>
                     </svg>
                 </p>
-                <b>STUDENTS</b>
+                <b><?=lang('titles.students')?></b>
             </a>
 
             <a href="<?= base_url('institutes') ?>" class=" w-20 h-16 flex items-center   transition-all ease-in duration-300   hover:w-56  hover:bg-primario hover:text-white hover:z-10">
@@ -73,7 +73,7 @@ $name = 'HOLA';
                         </g>
                     </svg>
                 </p>
-                <b>INSTITUTES</b>
+                <b><?=lang('titles.ins')?></b>
             </a>
 
             <a href="<?= base_url('assign') ?>" class=" w-20  h-16 flex items-center   transition-all ease-in duration-300  hover:w-56  hover:bg-primario hover:text-white">
@@ -108,7 +108,7 @@ $name = 'HOLA';
                     </svg>
 
                 </p>
-                <b>ASSIGN</b>
+                <b><?=lang('titles.assign')?></b>
             </a>
 
             <a href="<?= base_url('Inventari') ?>" class=" w-20  h-16 flex items-center  transition-all ease-in duration-300  hover:w-56  hover:bg-primario hover:text-white">
@@ -127,7 +127,7 @@ $name = 'HOLA';
                         </g>
                     </svg>
                 </p>
-                <b>Inventari</b>
+                <b><?=lang("titles.inventory")?></b>
             </a>
 
             <a href="<?= base_url('logout') ?>" class=" w-20  h-16 flex items-center   transition-all ease-in duration-300  hover:w-56  hover:bg-primario hover:text-white">
@@ -138,7 +138,7 @@ $name = 'HOLA';
                         <path d="M4 18h2v2h12V4H6v2H4V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3zm2-7h7v2H6v3l-5-4 5-4v3z"></path>
                     </svg>
                 </p>
-                <b>LogOut</b>
+                <b><?=lang('buttons.logout')?></b>
             </a>
         </nav>
     </div>

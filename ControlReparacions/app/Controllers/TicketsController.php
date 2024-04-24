@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Models\TiquetModel;
 use App\Controllers\BaseController;
 use App\Models\IntervencioModel;
-use CodeIgniter\HTTP\ResponseInterface;
 use Faker\Factory;
 
 class TicketsController extends BaseController

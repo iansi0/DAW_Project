@@ -50,6 +50,11 @@ return [
     'n_disp'        => 'Add Device',
     'e_disp'        => 'Modify Device',
 
+    'inventory'     => 'Inventories',
+    'inventory_2'   => 'Inventory',
+    'n_inventory'   => 'Add Inventory',
+    'e_inventory'   => 'Modify Inventory',
+
     'start'         => 'Start',
     'end'           => 'End',
 ];

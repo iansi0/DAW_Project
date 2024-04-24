@@ -14,6 +14,7 @@ return [
     'surnames'      => 'Cognoms',
     'surname_1'     => 'Primer Cognom',
     'surname_2'     => 'Segon Cognom',
+    'description'   => 'Descripció',
 
     'dni'           => 'DNI / NIE',
     'email'         => 'E-mail',

@@ -7,7 +7,7 @@
     <form action="addticket" method="POST" class="grid grid-cols-3 gap-x-2">
 
         <div class="flex flex-col mt-5">
-            <label class="">Descripción</label>
+            <label class=""><?=lang('forms.')?></label>
             <input type="text" name="description"  class="bg-blue-400 hover:bg-blue-500 text-white px-2 py-3 rounded flex-1">
         </div>
 

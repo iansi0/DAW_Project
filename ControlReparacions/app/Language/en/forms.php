@@ -14,6 +14,7 @@ return [
     'surnames'      => 'Surnames',
     'surname_1'     => 'First Surname',
     'surname_2'     => 'Second Surname',
+    'description'   => 'Description',
 
     'dni'           => 'DNI / NIE',
     'email'         => 'E-mail',

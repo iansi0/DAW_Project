@@ -50,6 +50,11 @@ return [
     'n_disp'        => 'Añadir Dispositivo',
     'e_disp'        => 'Modificar Dispositivo',
 
+    'inventory'     => 'Inventarios',
+    'inventory_2'   => 'Inventario',
+    'n_inventory'   => 'Añadir Inventario',
+    'e_inventory'   => 'Modificar Inventario',
+
     'start'         => 'Empezado',
     'end'           => 'Acabado',
 ];

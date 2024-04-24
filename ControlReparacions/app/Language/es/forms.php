@@ -14,6 +14,7 @@ return [
     'surnames'      => 'Apellidos',
     'surname_1'     => 'Primer Apellido',
     'surname_2'     => 'Segundo Apellido',
+    'description'   => 'Descripción',
 
     'dni'           => 'DNI / NIE',
     'email'         => 'E-mail',
