@@ -22,9 +22,9 @@ $name = 'HOLA';
     }
 </style>
 
-<body class=" flex bg-secundario">
-    <div class="bg-terciario-1 text-primario relative text-lg min-w-20 h-auto  overflow-hidden transition-all ease-in duration-300 hover:min-w-60 ">
-        <nav id="Sidebar" class="flex flex-col gap-9 py-16  w-[70px]  fixed overflow-hidden transition-all ease-in duration-300 hover:w-60 ">
+<body class=" flex h-full bg-secundario">
+    <div class=" relative text-lg min-w-20 h-full  overflow-hidden transition-all ease-in duration-300 hover:min-w-60 ">
+        <nav id="Sidebar" class="bg-terciario-1 text-primario flex flex-col gap-9 py-16 pl-1  w-20  fixed overflow-hidden transition-all ease-in duration-300 hover:w-60 ">
             <div class=" w-20 h-16  flex items-center text-sm text-secundario ">
                 <!-- Imagen ticket-->
                 <img src="/assets/img/logo.png" alt="Logo">
@@ -143,7 +143,7 @@ $name = 'HOLA';
         </nav>
     </div>
 
-    <main id="tickets" class="w-full  text-center  justify-items-center items-center">
+    <main id="tickets" class="w-full h-full   text-center  justify-items-center items-center">
 
         <header class=" fixed w-[-webkit-fill-available]  bg-terciario-1 text-secundario  h-16 flex items-center  justify-center  ">
                 <img src="/assets/img/logo.png" alt="Logo">
