@@ -6,6 +6,8 @@ return [
     'back'      => 'Tornar Enrere',
     'back_2'    => 'Enrere',
 
+    'config'    => 'Configuració',
+
     'yes'       => 'Sí',
     'no'        => 'No',
     'accept'    => 'Acceptar',
@@ -22,6 +24,9 @@ return [
 
     'assign'    => 'Assignar',
     'filter'    => 'Filtrar',
-    'search'    => 'Buscar',
+    'search'    => 'Cercar',
     'change'    => 'Canviar',
+    'export'    => 'Exportar',
+
+    'user'      => 'Usuari',
 ];

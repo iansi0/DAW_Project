@@ -41,5 +41,6 @@ $routes->POST('/login', 'Home::login_post');
 $routes->GET('', 'Home::login');
 $routes->GET('/', 'Home::login');
 
-
-
+// User Routes
+$routes->GET('/config', 'UserController::config');
+$routes->POST('/config', 'UserController::config_post');

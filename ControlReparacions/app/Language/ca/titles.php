@@ -12,6 +12,7 @@ return [
     'date'          => 'Data',
     'status'        => 'Estat',
     'home'          => 'Inici',
+    'config'        => 'Configuració',
 
     '2fa'           => 'Segon Factor d\'Autenticació',
 
@@ -37,6 +38,7 @@ return [
 
     'ticket'        => 'Tickets',
     'ticket_2'      => 'Ticket',
+    'id_ticket'     => 'Identificador del Ticket:',
     'n_ticket'      => 'Afegir Ticket',
     'e_ticket'      => 'Modificar Ticket',
     
@@ -45,10 +47,20 @@ return [
     'n_int'         => 'Afegir Intervenció',
     'e_int'         => 'Modificar Intervenció',
 
-    'disp'          => 'Dispositius',
-    'disp_2'        => 'Dispositiu',
-    'n_disp'        => 'Afegir Dispositiu',
-    'e_disp'        => 'Modificar Dispositiu',
+    'device'        => 'Dispositius',
+    'device_2'      => 'Dispositiu',
+    'n_device'      => 'Afegir Dispositiu',
+    'e_device'      => 'Modificar Dispositiu',
+
+    'inventory'     => 'Inventaris',
+    'inventory_2'   => 'Inventari',
+    'n_inventory'   => 'Afegir Inventari',
+    'e_inventory'   => 'Modificar Inventari',
+
+    'material'     => 'Materials',
+    'material_2'   => 'Material',
+    'n_material'   => 'Afegir Material',
+    'e_material'   => 'Modificar Material',
 
     'start'         => 'Començat',
     'end'           => 'Acabat',

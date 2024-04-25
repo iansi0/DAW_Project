@@ -1,4 +1,4 @@
 <?php
 return [
-    'forgetPassword' => '¿Has olvidado la contraseña?',
+    'forget' => '¿Has olvidado la contraseña?',
 ];

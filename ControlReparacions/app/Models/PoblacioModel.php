@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class PoblacioModel extends Model
 {
-    protected $table            = 'POBLACIO';
+    protected $table            = 'poblacio';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

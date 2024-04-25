@@ -12,6 +12,7 @@ return [
     'date'          => 'Fecha',
     'status'        => 'Estado',
     'home'          => 'Inicio',
+    'config'        => 'Configuración',
 
     '2fa'           => 'Segundo Factor de Autenticación',
 
@@ -37,6 +38,7 @@ return [
 
     'ticket'        => 'Tickets',
     'ticket_2'      => 'Ticket',
+    'id_ticket'     => 'Ticket Identifyer:',
     'n_ticket'      => 'Añadir Ticket',
     'e_ticket'      => 'Modificar Ticket',
     
@@ -45,10 +47,20 @@ return [
     'n_int'         => 'Añadir Intervención',
     'e_int'         => 'Modificar Intervención',
 
-    'disp'          => 'Dispositivos',
-    'disp_2'        => 'Dispositivo',
-    'n_disp'        => 'Añadir Dispositivo',
-    'e_disp'        => 'Modificar Dispositivo',
+    'device'        => 'Dispositivos',
+    'device_2'      => 'Dispositivo',
+    'n_device'      => 'Añadir Dispositivo',
+    'e_device'      => 'Modificar Dispositivo',
+
+    'inventory'     => 'Inventarios',
+    'inventory_2'   => 'Inventario',
+    'n_inventory'   => 'Añadir Inventario',
+    'e_inventory'   => 'Modificar Inventario',
+
+    'material'     => 'Materiales',
+    'material_2'   => 'Material',
+    'n_material'   => 'Añadir Material',
+    'e_material'   => 'Modificar Material',
 
     'start'         => 'Empezado',
     'end'           => 'Acabado',
