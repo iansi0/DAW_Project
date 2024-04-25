@@ -10,6 +10,10 @@ module.exports = {
         'terciario-2': '#B3B3B3',
         'terciario-3': '#888888',
         'terciario-4': '#575555',
+        'light-blue': '#add8e6',
+        'succes': '#4caf50',
+       
+
       },
 
       fontFamily:{
