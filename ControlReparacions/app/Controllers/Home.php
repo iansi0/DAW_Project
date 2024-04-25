@@ -152,4 +152,11 @@ class Home extends BaseController
         $session->destroy();
         return redirect()->to(base_url('/login'));
     }
+
+    public function empty()
+    {
+
+        // retornamos  una vista vacía para evitar errores de rutas no definidas.
+        return  view('/paginareparacion');
+    }
 }
