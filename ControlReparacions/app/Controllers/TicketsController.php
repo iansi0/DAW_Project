@@ -76,7 +76,7 @@ class TicketsController extends BaseController
                 $ticket['emissor'],
                 ($ticket['receptor'] != null)?$ticket['receptor']:lang('titles.ticket'),
                 $ticket['created'],
-                $ticket['estat'],
+                ["data" => $ticket['estat'], "class" => "estat_".$ticket['id_estat']],
                 "<a href='$buttonView' class='btn btn-primary'><i class='fa-solid fa-eye'></i></a>",
                 "<a href='$buttonUpdate' class='btn btn-primary'><i class='fa-solid fa-pencil'></i></a>",
                 "<a href='$buttonDelete' class='btn btn-primary'><i class='fa-solid fa-trash'></i></a>",
