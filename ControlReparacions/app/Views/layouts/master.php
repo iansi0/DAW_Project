@@ -162,7 +162,7 @@ $name = $_SESSION['user']['user'];
             </div>
 
             <!-- DROPDOWN USER -->  
-            <!-- <div class="hidden absolute right-0 mt-4 top-16 w-60 px-5 py-3 dark:bg-gray-800 bg-white rounded-lg shadow border dark:border-transparent">
+            <div class="absolute right-0 top-16 w-60 px-5 py-3 dark:bg-gray-800 bg-white rounded-lg shadow border dark:border-transparent">
                 <ul class="space-y-3 dark:text-white">
                     <li class="font-medium">
                     <a href="#" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-indigo-700">
@@ -190,7 +190,7 @@ $name = $_SESSION['user']['user'];
                     </a>
                     </li>
                 </ul>
-            </div> -->
+            </div>
         </header>
 
         <article class="p-5 pt-16">
@@ -198,5 +198,9 @@ $name = $_SESSION['user']['user'];
         </article>
     </main>
 </body>
+
+<script>
+    
+</script>
 
 </html>
