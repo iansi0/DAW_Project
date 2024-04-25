@@ -17,7 +17,7 @@ module.exports = {
       },
 
       fontFamily:{
-        'sans': ['Glacial Indifference'],
+        // 'sans': ['Glacial Indifference'],
       },
     },
   },

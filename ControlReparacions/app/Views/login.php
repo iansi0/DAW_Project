@@ -10,7 +10,7 @@
 
 <style>
     body {
-        font-family: monospace;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         /* font-family: system-ui; */
     }
 </style>
