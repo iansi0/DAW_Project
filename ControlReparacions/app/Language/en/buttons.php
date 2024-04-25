@@ -6,6 +6,8 @@ return [
     'back_2'    => 'Go Back',
     'back_3'    => 'Back',
 
+    'config'    => 'Settings',
+
     'yes'       => 'Yes',
     'no'        => 'No',
     'accept'    => 'Accept',
@@ -28,4 +30,6 @@ return [
 
     'change'    => 'Change',
     'export'    => 'Export',
+
+    'user'      => 'User',
 ];

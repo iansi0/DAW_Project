@@ -12,6 +12,7 @@ return [
     'date'          => 'Date',
     'status'        => 'Status',
     'home'          => 'Home',
+    'config'        => 'Settings',
 
     '2fa'           => 'Second Factor Authentication',
 

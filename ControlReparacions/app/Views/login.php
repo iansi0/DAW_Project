@@ -37,7 +37,7 @@
             <a class=" text-center" href="#"><?=lang('login.forget')?></a>
         </form>
 
-        <a href="<?= $client ?>">
+        <!-- <a href="">
             <button class="flex gap-2 text-lg px-4 py-2 rounded-sm bg-primario   hover:bg-terciario-2 hover:text-terciario-1">
                 <svg width="30px" height="30px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff" stroke="#ffffff">
 
@@ -61,7 +61,7 @@
                 </svg>
                 <span>Login with Google</span>
             </button>
-        </a>
+        </a> -->
     </section>
 </body>
 
