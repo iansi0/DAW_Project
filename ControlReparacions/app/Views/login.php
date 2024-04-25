@@ -23,7 +23,7 @@
             <label class="mb-1 text-xl" for="user"><?=lang('forms.user')?></label>
             <input class="mb-5 rounded-md border-2 text-terciario-1 pl-1 focus:outline-none" type="text" id="user" name="user" />
 
-            <label class="mb-1 text-xl" for="password"><?=lang('forms.password')?></label>
+            <label class="mb-1 text-xl" for="password"><?=lang('forms.passwd')?></label>
             <input class="mb-10 rounded-md border-2 text-terciario-1 pl-1 focus:outline-none" type="password" id="password" name="password" />
 
             <input class="mb-5 text-lg py-2 rounded-sm bg-primario   hover:bg-terciario-2 hover:text-terciario-1" type="submit" value="<?=lang('buttons.login')?>">

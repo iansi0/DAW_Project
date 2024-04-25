@@ -47,10 +47,10 @@ return [
     'n_int'         => 'Add Interventions',
     'e_int'         => 'Modify Interventions',
 
-    'disp'          => 'Devices',
-    'disp_2'        => 'Device',
-    'n_disp'        => 'Add Device',
-    'e_disp'        => 'Modify Device',
+    'device'        => 'Devices',
+    'device_2'      => 'Device',
+    'n_device'      => 'Add Device',
+    'e_device'      => 'Modify Device',
 
     'inventory'     => 'Inventories',
     'inventory_2'   => 'Inventory',

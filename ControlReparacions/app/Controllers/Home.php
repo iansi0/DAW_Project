@@ -134,7 +134,7 @@ class Home extends BaseController
             "other"         => (count(explode(',', $user["other"]))>0)?explode(',', $user["other"]):(($user["other"])?$user["other"]:''),
             "contact"       => (count(explode(',', $user["contact"]))>0)?explode(',', $user["contact"]):'',
             "type"          => $user["type"],
-            "lang"          => ($user["lang"])?$user["lang"]:'esp',
+            "lang"          => ($user["lang"])?$user["lang"]:'ca',
             "logged_data"   => date("Y-m-d H:i:s"),
             "ip_user"       => $_SERVER['REMOTE_ADDR'],
         ];

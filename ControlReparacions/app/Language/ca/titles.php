@@ -47,10 +47,10 @@ return [
     'n_int'         => 'Afegir Intervenció',
     'e_int'         => 'Modificar Intervenció',
 
-    'disp'          => 'Dispositius',
-    'disp_2'        => 'Dispositiu',
-    'n_disp'        => 'Afegir Dispositiu',
-    'e_disp'        => 'Modificar Dispositiu',
+    'device'        => 'Dispositius',
+    'device_2'      => 'Dispositiu',
+    'n_device'      => 'Afegir Dispositiu',
+    'e_device'      => 'Modificar Dispositiu',
 
     'inventory'     => 'Inventaris',
     'inventory_2'   => 'Inventari',

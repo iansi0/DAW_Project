@@ -43,7 +43,6 @@ class TicketsController extends BaseController
             'table_open'  => "<table class='w-full'>",
             'thead_open'  => "<thead class='bg-primario text-secundario'>",
             'heading_cell_start' => "<th class='p-5'>",
-            
             'cell_start' => "<td class='p-5')>",
             'cell_alt_start' => "<td class='p-5 bg-terciario-3')>",
 
