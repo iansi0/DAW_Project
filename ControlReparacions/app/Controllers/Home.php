@@ -23,63 +23,63 @@ class Home extends BaseController
         // $client->addScope('profile');
         $client->setAccessType('offline');
 
-        // $data['titol'] = "GSuite login";
-        // // $client->addScope('email');
+        $data['titol'] = "GSuite login";
+        // $client->addScope('email');
 
-        // if (isset($_GET["code"])) {
+        if (isset($_GET["code"])) {
 
-        //     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+            $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
 
-        //     if (!isset($token["error"])) {
-        //         $client->setAccessToken($token['access_token']);
+            if (!isset($token["error"])) {
+                $client->setAccessToken($token['access_token']);
 
               
 
-        //         $oauth2 = new \Google\Service\Oauth2($client);
+                $oauth2 = new \Google\Service\Oauth2($client);
 
-        //         $userInfo = $oauth2->userinfo->get();
+                $userInfo = $oauth2->userinfo->get();
 
-        //         // Creamos un Modelo Usuario
-        //         $model = new UsersModel();
-        //         // Obtenemos el usuario por user o por mail
-        //         $user = $model->getLoginByMail($userInfo->getEmail());
+                // Creamos un Modelo Usuario
+                $model = new UsersModel();
+                // Obtenemos el usuario por user o por mail
+                $user = $model->getLoginByMail($userInfo->getEmail());
 
-        //         // Si el user o mail no existe, devolvemos error
-        //         if (!$user) {
-        //             session()->setFlashdata('error', lang("error.login"));
-        //             return redirect()->to(base_url('login'));
-        //         }
+                // Si el user o mail no existe, devolvemos error
+                if (!$user) {
+                    session()->setFlashdata('error', lang("error.login"));
+                    return redirect()->to(base_url('login'));
+                }
 
-        //         // Obtenemos la información del usuario
-        //         $user = $model->getUserById($user["id"]);
+                // Obtenemos la información del usuario
+                $user = $model->getUserById($user["id"]);
 
-        //         $sessionData = [
-        //             "uid"           => $user["id"],
-        //             "user"          => $user["user"],
-        //             "code"          => $user["code"],
-        //             "name"          => $user["name"],
-        //             "adress"        => $user["adress"],
-        //             "phone"         => $user["phone"],
-        //             "other"         => (count(explode(',', $user["other"])) > 0) ? explode(',', $user["other"]) : (($user["other"]) ? $user["other"] : ''),
-        //             "contact"       => (count(explode(',', $user["contact"])) > 0) ? explode(',', $user["contact"]) : '',
-        //             "type"          => $user["type"],
-        //             "lang"          => ($user["lang"]) ? $user["lang"] : 'esp',
-        //             "logged_data"   => date("Y-m-d H:i:s"),
-        //             "ip_user"       => $_SERVER['REMOTE_ADDR'],
-        //         ];
+                $sessionData = [
+                    "uid"           => $user["id"],
+                    "user"          => $user["user"],
+                    "code"          => $user["code"],
+                    "name"          => $user["name"],
+                    "adress"        => $user["adress"],
+                    "phone"         => $user["phone"],
+                    "other"         => (count(explode(',', $user["other"])) > 0) ? explode(',', $user["other"]) : (($user["other"]) ? $user["other"] : ''),
+                    "contact"       => (count(explode(',', $user["contact"])) > 0) ? explode(',', $user["contact"]) : '',
+                    "type"          => $user["type"],
+                    "lang"          => ($user["lang"]) ? $user["lang"] : 'esp',
+                    "logged_data"   => date("Y-m-d H:i:s"),
+                    "ip_user"       => $_SERVER['REMOTE_ADDR'],
+                ];
 
-        //         session()->set('access_token', $token['access_token']);
-        //         session()->set("user", $sessionData);
-        //     }
-        // }
+                session()->set('access_token', $token['access_token']);
+                session()->set("user", $sessionData);
+            }
+        }
 
-        // if (!session()->get('access_token')) {
+        if (!session()->get('access_token')) {
 
-        //     $data['client'] = $client->createAuthUrl();
-        //     return view('login', $data);
-        // } else {
-        //     return redirect()->to(base_url('tickets'));
-        // }
+            $data['client'] = $client->createAuthUrl();
+            return view('login', $data);
+        } else {
+            return redirect()->to(base_url('tickets'));
+        }
 
         return view('login');
     }
@@ -156,6 +156,6 @@ class Home extends BaseController
     {
 
         // retornamos  una vista vacía para evitar errores de rutas no definidas.
-        return  view('/paginareparacion');
+        return  view('/workingpage');
     }
 }

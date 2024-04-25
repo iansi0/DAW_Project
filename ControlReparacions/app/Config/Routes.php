@@ -32,10 +32,11 @@ $routes->GET('/studentsform', 'Home::empty');
 $routes->GET('/institutes', 'Home::empty');
 $routes->GET('/assign', 'Home::empty');
 $routes->GET('/instituteform', 'Home::empty');
+$routes->GET('/inventary', 'Home::empty');
 
 
 //Common Routes
-$routes->GET('/logout', 'Home::empty'); // como no funcionaba el logout lo puse el de estamos trabjando en ellox
+$routes->GET('/logout', 'Home::logout'); // como no funcionaba el logout lo puse el de estamos trabjando en ellox
 $routes->GET('/login', 'Home::login');
 $routes->POST('/login', 'Home::login_post');
 $routes->GET('', 'Home::login');
