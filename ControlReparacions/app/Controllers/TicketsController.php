@@ -43,8 +43,11 @@ class TicketsController extends BaseController
             'table_open'  => "<table class='w-full'>",
             'thead_open'  => "<thead class='bg-primario text-secundario'>",
             'heading_cell_start' => "<th class='p-5'>",
-            'cell_start' => "<td class='p-5')>",
-            'cell_alt_start' => "<td class='p-5 bg-terciario-3')>",
+            'row_start' => "<tr>",
+            'row_alt_start' => "<tr class=''>",
+            
+            'cell_start' => "<td class='p-5'>",
+            'cell_alt_start' => "<td class='p-5 bg-terciario-3'>",
 
 
         ];
@@ -74,7 +77,7 @@ class TicketsController extends BaseController
                 $ticket['emissor'],
                 ($ticket['receptor'] != null)?$ticket['receptor']:lang('titles.ticket'),
                 $ticket['created'],
-                ["data" => $ticket['estat'], "class" => "estat_".$ticket['id_estat']],
+                ["data" => $ticket['estat'], "class" => "p-5 estat_".$ticket['id_estat']],
                 "<a href='$buttonView' class='btn btn-primary'><i class='fa-solid fa-eye'></i></a>",
                 "<a href='$buttonUpdate' class='btn btn-primary'><i class='fa-solid fa-pencil'></i></a>",
                 "<a href='$buttonDelete' class='btn btn-primary'><i class='fa-solid fa-trash'></i></a>",
