@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class CursModel extends Model
 {
-    protected $table            = 'CURS';
+    protected $table            = 'curs';
     protected $primaryKey       = 'idcurs';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

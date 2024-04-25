@@ -32,6 +32,9 @@ class TicketsController extends BaseController
         } else {
             $paginateData = $model->getByTitleOrText($search)->paginate(8);
         }
+
+        $count = 0; 
+
         
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
@@ -41,7 +44,12 @@ class TicketsController extends BaseController
             'table_open'  => "<table class='w-full'>",
             'thead_open'  => "<thead class='bg-primario text-secundario'>",
             'heading_cell_start' => "<th class='p-5'>",
+            'row_start' => "<tr>",
+            'row_alt_start' => "<tr class=''>",
+            
             'cell_start' => "<td class='p-5'>",
+            'cell_alt_start' => "<td class='p-5 bg-terciario-3'>",
+
 
         ];
         $table->setTemplate($template);
@@ -58,21 +66,28 @@ class TicketsController extends BaseController
 
     
         foreach ($data['tickets'] as $ticket) {
+
             $buttonDelete = base_url("deleteticket/" . $ticket['id']);
             $buttonUpdate = base_url("tu/controlador/accion/" . $ticket['id']);
             $buttonView = base_url("ticketinfo/" . $ticket['id']);
             $table->addRow(
+                // ["data" => $ticket['id'],"class"=>'p-5'],
                 $ticket['id'],
                 $ticket['tipus'],
                 $ticket['descripcio'],
                 $ticket['emissor'],
                 ($ticket['receptor'] != null)?$ticket['receptor']:lang('titles.ticket'),
                 $ticket['created'],
-                $ticket['estat'],
-                "<a href='$buttonView' class='btn btn-primary'>View</a>",
-                "<a href='$buttonDelete' class='btn btn-primary'>Delete</a>",
-                "<a href='$buttonUpdate' class='btn btn-primary'>Modify</a>"
+                ["data" => $ticket['estat'], "class" => "p-5 estat_".$ticket['id_estat']],
+                "<a href='$buttonView' class='btn btn-primary'><i class='fa-solid fa-eye'></i></a>",
+                "<a href='$buttonUpdate' class='btn btn-primary'><i class='fa-solid fa-pencil'></i></a>",
+                "<a href='$buttonDelete' class='btn btn-primary'><i class='fa-solid fa-trash'></i></a>",
+                
+
             );
+
+
+            $count++;
         }
 
         return view('tickets/tickets', $data);
@@ -90,11 +105,11 @@ class TicketsController extends BaseController
 
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading('fecha', 'alumne', 'material', 'descripcio');
+        $table->setHeading(lang('forms.date'), lang('titles.students'), lang('titles.material_2'), lang('forms.description'));
 
         $template = [
             'table_open'         => "<table class='w-full'>",
-            'thead_open'  => "<thead class='bg-primario text-segundario'>",
+            'thead_open'  => "<thead class='bg-primario text-white'>",
             'heading_cell_start' => "<th class='p-5 text-lg'>",
             'cell_start' => "<td>",
 
@@ -105,7 +120,6 @@ class TicketsController extends BaseController
             'ticket' => $modelTickets->viewTicket($id),
             'interventions' => $modelInterventions->getInterventions($id),
             'pager' => $modelInterventions->pager,
-            // 'search' => $search,
             'table' => $table,
         ];
 

@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class ComarcaModel extends Model
 {
-    protected $table            = 'COMARCA';
+    protected $table            = 'comarca';
     protected $primaryKey       = 'codi';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
