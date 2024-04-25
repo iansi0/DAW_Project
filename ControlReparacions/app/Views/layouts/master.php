@@ -1,8 +1,6 @@
 <?php
 $session = \Config\Services::session();
-// $name = $_SESSION['username'];
-$name = 'HOLA';
-
+$name = $_SESSION['user']['user'];
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +10,8 @@ $name = 'HOLA';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+
     <title>KeepYourSoftware</title>
 </head>
 
@@ -24,28 +24,29 @@ $name = 'HOLA';
 
 <body class=" flex h-full bg-secundario">
     <div class=" relative text-lg min-w-20 h-full  overflow-hidden transition-all ease-in duration-300 hover:min-w-60 ">
-        <nav id="Sidebar" class="bg-terciario-1 text-primario flex flex-col gap-9 py-16 pl-1  w-20  fixed overflow-hidden transition-all ease-in duration-300 hover:w-60 ">
-            <div class=" w-20 h-16  flex items-center text-sm text-secundario ">
-                <!-- Imagen ticket-->
-                <img src="/assets/img/logo.png" alt="Logo">
+        <nav id="Sidebar" class="bg-terciario-1 text-primario flex flex-col gap-9 py-16 pl-1 w-20 h-full fixed overflow-hidden transition-all ease-in duration-300 hover:w-60 ">
+            
+            <!-- LOGO -->
+            <div class="w-full h-16 flex items-center text-sm text-secundario ">
+                <img width="65" height="100" class="mr-3 ml-1" src="/assets/img/logo.png" alt="Logo">
                 <b>KeepYourSoftware</b>
             </div>
 
-            <a href="<?= base_url('tickets') ?>" class=" w-20 h-16  flex items-center   transition-all ease-in duration-300   hover:w-full  hover:bg-primario hover:text-white hover:z-10">
-                <!-- Imagen ticket-->
-                <p>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="75" height="100" fill="currentColor" viewBox="-50 0 600 512">
+            <!-- TICKET -->
+            <a href="<?= base_url('tickets') ?>" class="w-full h-16  flex items-center transition-all ease-in duration-300   hover:w-full  hover:bg-primario hover:text-white hover:z-10">
+                <p class="mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="65" height="100" fill="currentColor" viewBox="-50 0 600 512">
                         <path d="M473.6,215.5508a17.1034,17.1034,0,0,0,8.498-14.7788V127.75A17.0965,17.0965,0,0,0,465,110.6519H349.0981v28.5a17.0981,17.0981,0,1,1-34.1962,0v-28.5H47A17.0965,17.0965,0,0,0,29.9019,127.75v73.022A17.1034,17.1034,0,0,0,38.4,215.5508a46.5019,46.5019,0,0,1-.0093,80.9077,17.095,17.095,0,0,0-8.4887,14.7788V384.25A17.0965,17.0965,0,0,0,47,401.3481H314.9019v-28.5a17.0981,17.0981,0,1,1,34.1962,0v28.5H465A17.0965,17.0965,0,0,0,482.0981,384.25V311.2373a17.1034,17.1034,0,0,0-8.498-14.7788,46.5064,46.5064,0,0,1,0-80.9077Zm-124.502,98.4a17.0981,17.0981,0,1,1-34.1962,0v-28.5a17.0981,17.0981,0,1,1,34.1962,0Zm0-87.4018a17.0981,17.0981,0,1,1-34.1962,0v-28.5a17.0981,17.0981,0,1,1,34.1962,0Z"></path>
                     </svg>
-                </p>
-                <b>TICKETS</b>
+                </p> 
+                
+                <b><?=lang('titles.ticket')?></b>
             </a>
 
-            <a href="<?= base_url('students') ?>" class=" w-20  h-16 flex items-center   transition-all ease-in duration-300  hover:w-56  hover:bg-primario hover:text-white">
-                <!-- Imagen ticket-->
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="75" height="100" fill="currentColor" viewBox="-3 0 40 32">
+            <!-- ESTUDIANTES -->
+            <a href="<?= base_url('students') ?>" class="w-full h-16  flex items-center   transition-all ease-in duration-300   hover:w-full  hover:bg-primario hover:text-white hover:z-10">
+                <p class="mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="65" height="100" fill="currentColor" viewBox="-3 0 40 32">
                         <g>
                             <path d="M31,26c-0.6,0-1-0.4-1-1V12c0-0.6,0.4-1,1-1s1,0.4,1,1v13C32,25.6,31.6,26,31,26z"></path>
                         </g>
@@ -57,13 +58,13 @@ $name = 'HOLA';
                         <path d="M17.4,22.6C17,22.9,16.5,23,16,23s-1-0.1-1.4-0.4L6,18.1V22c0,3.1,4.9,6,10,6s10-2.9,10-6v-3.9L17.4,22.6z"></path>
                     </svg>
                 </p>
-                <b>STUDENTS</b>
+                <b><?=lang('titles.students')?></b>
             </a>
 
-            <a href="<?= base_url('institutes') ?>" class=" w-20 h-16 flex items-center   transition-all ease-in duration-300   hover:w-56  hover:bg-primario hover:text-white hover:z-10">
-                <!-- Imagen ticket-->
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="75" height="100" fill="currentColor" viewBox="-2 2 35 26">
+            <!-- INSTITUTOS -->
+            <a href="<?= base_url('institutes') ?>" class="w-full h-16  flex items-center   transition-all ease-in duration-300   hover:w-full  hover:bg-primario hover:text-white hover:z-10">
+                <p class="mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="65" height="100" fill="currentColor" viewBox="-2 2 35 26">
                         <g id="school-7_1_">
                             <polygon points="15,10 14,10 14,12 14,13 15,13 17,13 17,12 15,12 	"></polygon>
                             <path d="M27,25v-9h1l-1-2h-6v11h-1V9.067l1.529,0.815l0.941-1.766L15,4.133V3h3V0h-3h-1v4.133L6.529,8.117l0.941,1.766L9,9.067V25
@@ -73,13 +74,13 @@ $name = 'HOLA';
                         </g>
                     </svg>
                 </p>
-                <b>INSTITUTES</b>
+                <b><?=lang('titles.ins')?></b>
             </a>
 
-            <a href="<?= base_url('assign') ?>" class=" w-20  h-16 flex items-center   transition-all ease-in duration-300  hover:w-56  hover:bg-primario hover:text-white">
-                <!-- Imagen ticket-->
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="75" height="100" fill="currentColor" viewBox="-30 0 520 455">
+            <!-- ASIGNAR -->
+            <a href="<?= base_url('assign') ?>" class="w-full h-16  flex items-center   transition-all ease-in duration-300   hover:w-full  hover:bg-primario hover:text-white hover:z-10">
+                <p class="mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="65" height="100" fill="currentColor" viewBox="-30 0 520 455">
                         <g transform="translate(0.000000,455.000000) scale(0.050000,-0.050000)" stroke="none">
                             <path d="M4038 9036 c-801 -397 -673 -1607 196 -1846 95 -26 93 -26 -138 -28
                             -489 -4 -782 -156 -937 -488 -92 -196 -102 -296 -95 -979 8 -797 16 -815 393
@@ -108,13 +109,13 @@ $name = 'HOLA';
                     </svg>
 
                 </p>
-                <b>ASSIGN</b>
+                <b><?=lang('titles.assign')?></b>
             </a>
 
-            <a href="<?= base_url('Inventari') ?>" class=" w-20  h-16 flex items-center  transition-all ease-in duration-300  hover:w-56  hover:bg-primario hover:text-white">
-                <!-- Imagen ticket-->
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="75" height="100" fill="currentColor" viewBox="-3 0 38 32">
+            <!-- INVENTARIO -->
+            <a href="<?= base_url('Inventari') ?>" class="w-ful h-16  flex items-center   transition-all ease-in duration-300   hover:w-full  hover:bg-primario hover:text-white hover:z-10">
+                <p class="mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="65" height="100" fill="currentColor" viewBox="-3 0 38 32">
                         <g>
                             <path d="M27.3,12.1l2.4-2.4C29.9,9.5,30,9.1,30,8.8c-0.1-0.3-0.3-0.6-0.6-0.7l-10-4C19,3.9,18.6,4,18.3,4.3L16,6.6l-2.3-2.3
 		                    C13.4,4,13,3.9,12.6,4.1l-10,4C2.3,8.2,2.1,8.5,2,8.8C2,9.1,2.1,9.5,2.3,9.7l2.4,2.4l-2.5,3.3C2,15.6,2,16,2,16.3
@@ -127,27 +128,66 @@ $name = 'HOLA';
                         </g>
                     </svg>
                 </p>
-                <b>Inventari</b>
+                <b><?=lang("titles.inventory_2")?></b>
             </a>
 
-            <a href="<?= base_url('logout') ?>" class=" w-20  h-16 flex items-center   transition-all ease-in duration-300  hover:w-56  hover:bg-primario hover:text-white">
-                <!-- Imagen ticket-->
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="75" height="100" fill="currentColor" viewBox="-2 0 30 24">
+            <!-- CERRAR SESIÓN -->
+            <!-- <a href="<?= base_url('logout') ?>" class=" w-20  h-16 flex items-center   transition-all ease-in duration-300  hover:w-56  hover:bg-primario hover:text-white">
+                <p class="mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="65" height="100" fill="currentColor" viewBox="-2 0 30 24">
                         <path fill="none" d="M0 0h24v24H0z"></path>
                         <path d="M4 18h2v2h12V4H6v2H4V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3zm2-7h7v2H6v3l-5-4 5-4v3z"></path>
                     </svg>
                 </p>
-                <b>LogOut</b>
-            </a>
+                <b><?=lang('buttons.logout')?></b>
+            </a> -->
         </nav>
     </div>
 
     <main id="tickets" class="w-full h-full   text-center  justify-items-center items-center">
 
-        <header class=" fixed w-[-webkit-fill-available]  bg-terciario-1 text-secundario  h-16 flex items-center  justify-center  ">
-                <img src="/assets/img/logo.png" alt="Logo">
-                <h1 class=" absolute right-0 mr-5  "><?= $name ?></h1>
+        <!-- USER -->
+        <header class=" fixed w-[-webkit-fill-available]  bg-terciario-1 text-secundario  h-16 flex items-center justify-center">
+            <img src="/assets/img/logo.png" alt="Logo">
+            <div id="div_user" style="cursor:pointer" class="flex items-center absolute right-0 h-full  transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                <h1 class="flex align-middle mr-5 ml-5">
+                    <?=$name?>&nbsp;
+                    <i class="fa-solid fa-caret-down"></i>
+                </h1>
+            </div>
+
+            <!-- DROPDOWN USER -->  
+            <div id="dropdown_user" class="absolute right-0 top-16 w-60 px-5 py-3 bg-terciario-1 shadow border dark:border-transparent">
+                <ul class="space-y-3 dark:text-white">
+                    <li class="font-medium h-8">
+                        <a href="#" class="pl-2 h-full py-2 flex items-center transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                            <div class="mr-3">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                            </div>
+                            <?=lang('buttons.user')?>
+                        </a>
+                    </li>
+                    <li class="font-medium h-8">
+                        <a href="<?= base_url('config') ?>" class="pl-2 h-full py-2 flex items-center transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                            <div class="mr-3">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <?=lang('buttons.config')?>
+                        </a>
+                    </li>
+
+                    <hr class="dark:border-gray-700">
+
+                    <li class="font-medium h-8">
+                        <a href="<?= base_url('logout') ?>" class="pl-2 h-full py-2 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                            <div class="ml-2 mr-3 text-red-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                            </div>
+                            <?=lang('buttons.logout')?>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </header>
 
         <article class="p-5 pt-16">
@@ -155,5 +195,23 @@ $name = 'HOLA';
         </article>
     </main>
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+
+        var dropdown = document.querySelector("#dropdown_user");
+        dropdown.style.display = "none";
+
+        document.querySelector("#div_user").addEventListener('click', function(){
+            if (dropdown.style.display == "none") {
+                dropdown.style.display = "block";
+            } else {
+                dropdown.style.display = "none";
+            }
+        })
+
+    });
+
+</script>
 
 </html>

@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class UsersModel extends Model
 {
-    protected $table            = 'USERS';
+    protected $table            = 'users';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'user', 'passwd', 'language'];
+    protected $allowedFields    = ['id', 'user', 'passwd', 'lang'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -123,5 +123,14 @@ class UsersModel extends Model
         
         return $result;
         // dd($this->db->getLastQuery());
+    }
+
+    // Cambiar lenguaje del user
+    public function changeLang($lang)
+    {
+        if (session()->has("user") && !empty(session()->get("user"))) {
+            return $this->update(session()->get('user')["uid"], ['lang'=>$lang]);
+            // dd($this->db->getLastQuery());
+        }
     }
 }

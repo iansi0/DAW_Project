@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class UsersInRolesModel extends Model
 {
-    protected $table            = 'USERS_IN_ROLES';
+    protected $table            = 'users_in_roles';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

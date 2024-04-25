@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class TipusIntervencioModel extends Model
 {
-    protected $table            = 'TIPUS_INTERVENCIO';
+    protected $table            = 'tipus_intervencio';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

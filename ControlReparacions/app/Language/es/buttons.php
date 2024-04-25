@@ -3,6 +3,8 @@ return [
     'login'     => 'Iniciar Sessión',
     'logout'    => 'Cerrar Sessión',
 
+    'config'    => 'Configuración',
+
     'back'      => 'Ir atrás',
     'back_2'    => 'Atrás',
 
@@ -24,4 +26,7 @@ return [
     'filter'    => 'Filtrar',
     'search'    => 'Buscar',
     'change'    => 'Cambiar',
+    'export'    => 'Exportar',
+
+    'user'      => 'Usuario',
 ];

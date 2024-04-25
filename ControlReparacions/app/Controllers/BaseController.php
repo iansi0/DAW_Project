@@ -55,10 +55,10 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
 
-        if (isset(session()->language)) {
-            $this->request->setlocale(session()->language);
+        if (isset(session('user')['lang'])) {
+            $this->request->setlocale(session('user')['lang']);
         } else {
-            $this->request->setlocale('es');
+            $this->request->setlocale('ca');
         }
 
         // session_destroy();

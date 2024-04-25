@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class SSTTModel extends Model
 {
-    protected $table            = 'SSTT';
+    protected $table            = 'sstt';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

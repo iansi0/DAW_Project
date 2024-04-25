@@ -4,6 +4,8 @@ return [
     'passwd'        => 'Password',
     'passwd2'       => 'Repeat Password',
 
+    'id'            => 'Identifyer',
+
     'role'          => 'Role',
 
     'title'         => 'Title',
