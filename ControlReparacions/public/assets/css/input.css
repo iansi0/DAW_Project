@@ -4,57 +4,99 @@
 
 /* Desguaçat */
 .estat_0{
-    @apply bg-terciario-1 text-secundario
-  }
-  /* Espatllat */
-  .estat_1{
-    @apply bg-red-500 text-terciario-1
-  }
-  /* Espatllat Recollit */
-  .estat_2{
-    @apply bg-orange-500 text-terciario-1
-  }
-  /* Espatllat Enviat */
-  .estat_3{
-    @apply bg-yellow-500 text-terciario-1
-  }
-  /* Espatllat Entregat */
-  .estat_4{
-    @apply bg-lime-500 text-terciario-1
-  }
-  /* Espera Reparació */
-  .estat_5{
-    @apply bg-blue-500 text-terciario-1
-  }
-  /* Reparació */
-  .estat_6{
-    @apply bg-teal-500 text-terciario-1
-  }
-  /* Revisio */
-  .estat_7{
-    @apply bg-purple-500 text-terciario-1
-  }
-  /* Reparat */
-  .estat_8{
-    @apply bg-green-500 text-terciario-1
-  }
-  /* Reparat Recollit */
-  .estat_9{
-    @apply bg-light-blue text-terciario-1
-  }
-  /* Reparat Enviat */
-  .estat_10{
-    @apply bg-indigo-500 text-secundario
-  }
-  /* Finalitzat */
-  .estat_11{
-    @apply bg-succes text-terciario-1
-  }
-  /* SSTT */
-  .estat_12{
-    @apply bg-gray-500 text-terciario-1
-  }
-  /* Rebutjat */
-  .estat_13{
-    @apply bg-red-800 text-secundario
-  }
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-terciario-1 m-1  text-secundario 
+    
+}
+/* Espatllat */
+.estat_1{
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-red-500 m-1  text-terciario-1 
+  
+}
+/* Espatllat Recollit */
+.estat_2{
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-orange-500 m-1  text-terciario-1 
+  
+}
+/* Espatllat Enviat */
+.estat_3{
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-yellow-500 m-1  text-terciario-1 
+  
+}
+/* Espatllat Entregat */
+.estat_4{
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-lime-500 m-1  text-terciario-1 
+  
+}
+/* Espera Reparació */
+.estat_5{
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-blue-500 m-1  text-terciario-1 
+  
+}
+/* Reparació */
+.estat_6{
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-teal-500 m-1  text-terciario-1 
+  
+}
+/* Revisio */
+.estat_7{
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-purple-500 m-1  text-terciario-1 
+  
+}
+/* Reparat */
+.estat_8{
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-green-500 m-1  text-terciario-1 
+  
+}
+/* Reparat Recollit */
+.estat_9{
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-light-blue m-1  text-terciario-1 
+  
+}
+/* Reparat Enviat */
+.estat_10{
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-indigo-500 m-1 text-secundario 
+  
+}
+/* Finalitzat */
+.estat_11{
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-succes m-1  text-terciario-1 
+  
+}
+/* SSTT */
+.estat_12{
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-gray-500 m-1  text-terciario-1 
+  
+}
+/* Rebutjat */
+.estat_13{
+  border-radius: 10px;
+  font-weight: bold;
+  @apply bg-red-800 m-1 text-secundario 
+  
+}

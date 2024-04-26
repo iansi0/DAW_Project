@@ -60,8 +60,8 @@ class TicketsController extends BaseController
 
             'tbody_open'  => "<tbody class=''>",
 
-            'row_start' => "<tr class=''>",
-            'row_alt_start' => "<tr class='bg-[#f7f7f9]'>",
+            'row_start' => "<tr class='border-b-[0.01px] '>",
+            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-terciario-2'>",
         ];
         $table->setTemplate($template);
         
@@ -92,11 +92,16 @@ class TicketsController extends BaseController
                 ["data" => $ticket['estat'], "class" => "py-3 px-1 m-1 estat_" . $ticket['id_estat']],
 
                 ["data" => 
-                    "<a href='$buttonView' class='btn btn-primary'><i class='fa-solid fa-eye'></i></a>
-                     <a href='$buttonUpdate' class='btn btn-primary'><i class='fa-solid fa-pencil'></i></a>
-                     <a href='$buttonDelete' class='btn btn-primary'><i class='fa-solid fa-trash'></i></a>", 
+                    "<a href='$buttonView' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl transition-all ease-in duration-300 fa-eye'></i></a>
+                     <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl fa-pencil'></i></a>
+                     <a href='$buttonDelete' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl fa-trash'></i></a>", 
 
-                "class" => "px-2 flex h-12 justify-evenly  items-center"],
+                "class" => " p-5 flex h-16 justify-between items-center"],
+
+
+             
+
+
 
             );
 

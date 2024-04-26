@@ -193,7 +193,7 @@ $name = $_SESSION['user']['user'];
                     </a>
                 </li>
 
-                <hr class="dark:border-gray-700">
+                <hr class="border-gray-700">
 
                 <li class="font-medium h-8">
                     <a href="<?= base_url('logout') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transition-all ease-in duration-300 hover:bg-primario hover:text-white">
@@ -302,7 +302,7 @@ $name = $_SESSION['user']['user'];
                 </a>
 
                 <!-- INVENTARIO -->
-                <a href="<?= base_url('Inventari') ?>" class="w-ful h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                <a href="<?= base_url('inventary') ?>" class="w-ful h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 38 32">
                             <g>
