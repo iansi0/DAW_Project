@@ -303,7 +303,7 @@ $name = $_SESSION['user']['user'];
                 </a>
 
                 <!-- INVENTARIO -->
-                <a href="<?= base_url('Inventari') ?>" class="w-ful h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                <a href="<?= base_url('inventary') ?>" class="w-ful h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 38 32">
                             <g>

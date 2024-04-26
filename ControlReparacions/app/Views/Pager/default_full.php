@@ -1,5 +1,5 @@
 
-<div class="flex items-center justify-center border-t border-black  px-4 py-3 sm:px-6">
+<div class="flex items-center justify-center border-t border-primario  px-4 py-3 sm:px-6">
 
     <a href="<?=$pager->getFirst()?>" class="relative mr-1 inline-flex items-center rounded-md border border-secundario-300 bg-secundario px-4 py-2 text-sm font-medium text-secundario-700 hover:bg-secundario-50">&lt;&lt;</a>
     <!-- <a href="<?=$pager->getPrevious()?>" class="relative mr-1 inline-flex items-center rounded-md border border-secundario-300 bg-secundario px-4 py-2 text-sm font-medium text-secundario-700 hover:bg-secundario-50">&lt;</a> -->
