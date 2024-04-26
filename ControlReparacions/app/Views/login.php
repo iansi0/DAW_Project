@@ -10,59 +10,94 @@
 
 <style>
     body {
-        font-family: monospace;
-        /* font-family: system-ui; */
+        /* font-family: system-ui;
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzx2uGKrj5EwuCNCC_LKqS-bIhw_GKRrRnRg&usqp=CAU');
+        background-repeat: no-repeat;
+        background-size: cover; */
     }
 </style>
 
-<body class="h-screen flex flex-col justify-center items-center bg-secundario">
+<body class="h-screen flex flex-col justify-center items-center bg-[#f7f7f9]">
 
-    <section class="bg-terciario-1 text-secundario flex flex-col gap-5 items-center border-2 rounded-md px-20 py-10">
-        <img src="/assets/img/logo.png" alt="Logo">
-        <form class=" flex flex-col   w-60 " method="POST" action="login">
-            <label class="mb-1 text-xl" for="user"><?=lang('forms.user')?></label>
-            <input class="mb-5 rounded-md border-2 text-terciario-1 pl-1 focus:outline-none" type="text" id="user" name="user" />
+    <section class="bg-[#ffffff] text-terciario-4 flex flex-col gap-5 items-center border-2 border-secundario rounded-md px-20 py-10">
+        <div class="flex items-center">
+            <img src="/assets/img/logo.png" alt="Logo">
+            <b>KeepYourSoftware</b>
+        </div>
 
-            <label class="mb-1 text-xl" for="password"><?=lang('forms.passwd')?></label>
-            <input class="mb-10 rounded-md border-2 text-terciario-1 pl-1 focus:outline-none" type="password" id="password" name="password" />
+        <form class=" flex flex-col gap-5   w-full " method="POST" action="login">
 
-            <input class="mb-5 text-lg py-2 rounded-sm bg-primario   hover:bg-terciario-2 hover:text-terciario-1" type="submit" value="<?=lang('buttons.login')?>">
+            <!-- user -->
+            <div>
+                <div class="relative flex items-center">
+                    <input name="user" id="user" type="text" required class="w-full  text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="<?= lang('forms.user') ?>" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2" viewBox="0 0 682.667 682.667">
+                        <defs>
+                            <clipPath id="a" clipPathUnits="userSpaceOnUse">
+                                <path d="M0 512h512V0H0Z" data-original="#000000"></path>
+                            </clipPath>
+                        </defs>
+                        <g clip-path="url(#a)" transform="matrix(1.33 0 0 -1.33 0 682.667)">
+                            <path fill="none" stroke-miterlimit="10" stroke-width="40" d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z" data-original="#000000"></path>
+                            <path d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z" data-original="#000000"></path>
+                        </g>
+                    </svg>
+                </div>
+            </div>
 
-            <?php if (isset($error) && !empty($error)) : ?>
-                <p class="  text-primario text-center  text-lg r py-2"> <strong><?= $error ?></strong></p>
+            <!-- password -->
+            <div class="mt-8">
+                <div class="relative flex items-center">
+                    <input name="password" id="password" type="password" required class="w-full  text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none" placeholder="<?= lang('forms.passwd') ?>" />
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" class="w-[18px] h-[18px] absolute right-2 cursor-pointer" viewBox="0 0 128 128">
+                        <path d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z" data-original="#000000"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- remember me + forgot password -->
+            <div class="flex gap-10 text-sm">
+
+                <div class="flex items-center">
+                    <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 shrink-0  border-gray-300 rounded" />
+                    <label for="remember-me" class="ml-3 block">
+                        Remember me
+                    </label>
+                </div>
+
+                <a class=" text-center" href="#"><?= lang('login.forget') ?></a>
+            </div>
+
+            <!-- submit -->
+            <input class="mb-5 text-lg py-2 rounded-2xl bg-primario text-secundario   hover:bg-terciario-2 hover:text-terciario-1" type="submit" value="<?= lang('buttons.login') ?>">
+
+            <!-- error -->
+            <?php if (session()->getFlashdata('error')) : ?>
+                <div id="alert-border-2" class="flex items-center p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800" role="alert">
+                    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                    </svg>
+                    <div class="ms-3 text-sm font-medium">
+                        <?= session()->getFlashdata('error') ?>
+                    </div>
+                </div>
+                <!-- <p class="bg-red-300 text-terciario-1 text-center text-lg "> <?= session()->getFlashdata('error'); ?></p> -->
+
             <?php endif ?>
-
-            <?= session()->getFlashdata('error'); ?>
-
-            <a class=" text-center" href="#"><?=lang('login.forget')?></a>
         </form>
 
-        <a href="">
-            <button class="flex gap-2 text-lg px-4 py-2 rounded-sm bg-primario   hover:bg-terciario-2 hover:text-terciario-1">
-                <svg width="30px" height="30px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff" stroke="#ffffff">
 
-                    <g id="SVGRepo_bgCarrier" stroke-width="0" />
+        <p class="text-terciario-2"> or continue with</p>
 
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-
-                    <g id="SVGRepo_iconCarrier">
-                        <title>google [#ffffff]</title>
-                        <desc>Created with Sketch.</desc>
-                        <defs> </defs>
-                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g id="Dribbble-Light-Preview" transform="translate(-300.000000, -7399.000000)" fill="currentColor">
-                                <g id="icons" transform="translate(56.000000, 160.000000)">
-                                    <path d="M263.821537,7247.00386 L254.211298,7247.00386 C254.211298,7248.0033 254.211298,7250.00218 254.205172,7251.00161 L259.774046,7251.00161 C259.560644,7252.00105 258.804036,7253.40026 257.734984,7254.10487 C257.733963,7254.10387 257.732942,7254.11086 257.7309,7254.10986 C256.309581,7255.04834 254.43389,7255.26122 253.041161,7254.98137 C250.85813,7254.54762 249.130492,7252.96451 248.429023,7250.95364 C248.433107,7250.95064 248.43617,7250.92266 248.439233,7250.92066 C248.000176,7249.67336 248.000176,7248.0033 248.439233,7247.00386 L248.438212,7247.00386 C249.003881,7245.1669 250.783592,7243.49084 252.969687,7243.0321 C254.727956,7242.65931 256.71188,7243.06308 258.170978,7244.42831 C258.36498,7244.23842 260.856372,7241.80579 261.043226,7241.6079 C256.0584,7237.09344 248.076756,7238.68155 245.090149,7244.51127 L245.089128,7244.51127 C245.089128,7244.51127 245.090149,7244.51127 245.084023,7244.52226 L245.084023,7244.52226 C243.606545,7247.38565 243.667809,7250.75975 245.094233,7253.48622 C245.090149,7253.48921 245.087086,7253.49121 245.084023,7253.49421 C246.376687,7256.0028 248.729215,7257.92672 251.563684,7258.6593 C254.574796,7259.44886 258.406843,7258.90916 260.973794,7256.58747 C260.974815,7256.58847 260.975836,7256.58947 260.976857,7256.59047 C263.15172,7254.63157 264.505648,7251.29445 263.821537,7247.00386" id="google-[#ffffff]"> </path>
-                                </g>
-                            </g>
-                        </g>
-                    </g>
-
-                </svg>
-                <span>Login with Google</span>
-            </button>
+        <a href="<?= $client ?>" class="px-4 py-2 border flex gap-2 border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow transition duration-150">
+            <img class="w-6 h-6" src="https://www.svgrepo.com/show/475656/google-color.svg" loading="lazy" alt="google logo">
+            <span>Login with Google</span>
         </a>
+
+
     </section>
+
+
 </body>
 
 </html>
