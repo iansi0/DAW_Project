@@ -29,7 +29,7 @@ return [
     'search2'   => 'Search here...',
 
     'change'    => 'Change',
-    'export'    => 'Export',
+    'export'    => 'Export CSV',
 
     'user'      => 'User',
 ];
