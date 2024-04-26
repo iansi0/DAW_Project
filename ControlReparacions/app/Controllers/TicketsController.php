@@ -37,8 +37,20 @@ class TicketsController extends BaseController
 
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading(lang('titles.id'), lang('titles.device'), lang('titles.description'), lang('titles.sender'), lang('titles.receiver'), lang('titles.date'), lang('titles.status'), 'Actions');
 
+        // HEADER
+        $table->setHeading(lang('titles.id'), 
+                            lang('titles.device'), 
+                            lang('titles.description'), 
+                            lang('titles.sender'), 
+                            lang('titles.receiver'), 
+                            lang('titles.date'), 
+                            lang('titles.hour'), 
+                            lang('titles.status'),
+                            lang('titles.actions')
+                        );
+
+        // TEMPLATE
         $template = [
             'table_open'  => "<table class='w-full rounded-t-2xl overflow-hidden '>",
 
@@ -52,9 +64,7 @@ class TicketsController extends BaseController
             'row_alt_start' => "<tr class='bg-[#f7f7f9]'>",
         ];
         $table->setTemplate($template);
-
-        /** TABLE GENERATOR **/
-
+        
         $data = [
             'page_title' => 'CI4 Pager & search filter',
             'tickets' => $paginateData,
@@ -63,7 +73,7 @@ class TicketsController extends BaseController
             'table' => $table,
         ];
 
-
+        // ROWS
         foreach ($data['tickets'] as $ticket) {
 
             $buttonDelete = base_url("deleteticket/" . $ticket['id']);
@@ -76,7 +86,9 @@ class TicketsController extends BaseController
                 $ticket['descripcio'],
                 $ticket['emissor'],
                 ($ticket['receptor'] != null) ? $ticket['receptor'] : lang('titles.ticket'),
-                $ticket['created'],
+                date("d/m/Y", strtotime($ticket['created'])),
+                date("H:i:s", strtotime($ticket['created'])),
+
                 ["data" => $ticket['estat'], "class" => "py-3 px-1 m-1 estat_" . $ticket['id_estat']],
 
                 ["data" => 
@@ -84,15 +96,9 @@ class TicketsController extends BaseController
                      <a href='$buttonUpdate' class='btn btn-primary'><i class='fa-solid fa-pencil'></i></a>
                      <a href='$buttonDelete' class='btn btn-primary'><i class='fa-solid fa-trash'></i></a>", 
 
-                "class" => " px-10 flex h-12 justify-between  items-center"],
-
-
-             
-
-
+                "class" => "px-2 flex h-12 justify-evenly  items-center"],
 
             );
-
 
             $count++;
         }

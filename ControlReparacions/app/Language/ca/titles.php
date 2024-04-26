@@ -5,11 +5,16 @@ return [
 
     'id'            => 'Identificador',
     'assign'        => 'Assignar',
+    'actions'       => 'Accions',
     'type'          => 'Tipus',
     'description'   => 'Descripció',
+
     'sender'        => 'Emissor',
     'receiver'      => 'Receptor',
+
     'date'          => 'Data',
+    'hour'          => 'Hora',
+
     'status'        => 'Estat',
     'home'          => 'Inici',
     'config'        => 'Configuració',
