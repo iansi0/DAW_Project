@@ -60,18 +60,25 @@ class TiquetModel extends Model
     public function getByTitleOrText($search)
     {
 
-        return $this->select(['tiquet.id as id', 'tipus_dispositiu.nom as tipus', 'tiquet.descripcio_avaria as descripcio', 'emissor.nom as centre_emisor', 'receptor.nom as centre_receptor', 'tiquet.created_at as data', 'estat.nom as estat'])
-            ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
-            ->join('centre as emissor', 'tiquet.codi_centre_emissor = emissor.codi')
-            ->join('centre as receptor', 'tiquet.codi_centre_reparador = receptor.codi')
-            ->join('estat', 'tiquet.id_estat = estat.id')
-            ->orLike('id', $search, 'both', true)
-            ->orLike('tipus', $search, 'both', true)
-            ->orLike('descripcio', $search, 'both', true)
-            ->orLike('centre_emisor', $search, 'both', true)
-            ->orLike('centre_receptor', $search, 'both', true)
-            ->orLike('data', $search, 'both', true)
-            ->orLike('estat', $search, 'both', true);
+        return $this->select(["
+                                tiquet.id AS id, 
+                                tiquet.descripcio_avaria AS descripcio,
+                                tiquet.created_at AS created,
+                                tipus_dispositiu.nom AS tipus,
+                                estat.nom as estat,
+                                tiquet.id_estat as id_estat,
+                                CASE  WHEN tiquet.codi_centre_emissor = centre.codi THEN CONCAT(centre.nom)  ELSE NULL  END AS emissor,
+                                CASE  WHEN tiquet.codi_centre_reparador = centre.codi THEN CONCAT(centre.nom)  ELSE CONCAT('per assignar')  END AS receptor
+                            "])
+                    ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
+                    ->join('estat', 'tiquet.id_estat = estat.id')
+                    ->join('centre', ' tiquet.codi_centre_emissor = centre.codi OR tiquet.codi_centre_reparador = centre.codi')
+                    ->orLike('tiquet.id', $search, 'both', true)
+                    ->orLike('tipus_dispositiu.nom', $search, 'both', true)
+                    ->orLike('tiquet.descripcio_avaria', $search, 'both', true)
+                    ->orLike('centre.nom', $search, 'both', true)
+                    ->orLike('tiquet.created_at', $search, 'both', true)
+                    ->orLike('estat.nom', $search, 'both', true);
     }
 
     public function getAllPaged($nElements)
