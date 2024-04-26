@@ -26,7 +26,7 @@ return [
     'filter'    => 'Filtrar',
     'search'    => 'Buscar',
     'change'    => 'Cambiar',
-    'export'    => 'Exportar',
+    'export'    => 'Exportar CSV',
 
     'user'      => 'Usuario',
 ];
