@@ -169,8 +169,7 @@ $name = $_SESSION['user']['user'];
         </div>
 
         <!-- DROPDOWN USER -->
-        <br><br>
-        <div id="dropdown_user" class="absolute  right-1 top-10 w-60 px-5 py-3 bg-[#f7f7f9] shadow border border-transparent rounded-b-lg">
+        <div id="dropdown_user" class="absolute right-1 top-12 w-60 px-5 py-3 bg-[#f7f7f9] shadow border dark:border-transparent rounded-b-lg">
             <ul class="space-y-3 text-terciario-4">
                 <li class="font-medium h-8">
                     <a href="#" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
@@ -303,7 +302,7 @@ $name = $_SESSION['user']['user'];
                 </a>
 
                 <!-- INVENTARIO -->
-                <a href="<?= base_url('Inventari') ?>" class="w-ful h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                <a href="<?= base_url('inventary') ?>" class="w-ful h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 38 32">
                             <g>
@@ -346,17 +345,27 @@ $name = $_SESSION['user']['user'];
 <script>
     document.addEventListener("DOMContentLoaded", function(event) {
 
+        // FUNCIONES DE SHOW / HIDE DE DROPDOWN USUARIO
         var dropdown = document.querySelector("#dropdown_user");
         dropdown.style.display = "none";
+        
+        window.addEventListener('click', function(event) {
 
-        document.querySelector("#div_user").addEventListener('click', function() {
-            if (dropdown.style.display == "none") {
-                dropdown.style.display = "block";
-            } else {
-                dropdown.style.display = "none";
+            if(event.target.id != 'dropdown_user' || event.target.closest('div').id != 'dropdown_user'){
+                if (event.target.id == 'div_user' || event.target.closest('div').id == 'div_user') {
+                    if (dropdown.style.display == "none") {
+                        dropdown.style.display = "block";
+                    } else {
+                        dropdown.style.display = "none";
+                    }
+                } else {
+                    dropdown.style.display = "none";
+                }
             }
+
         })
 
+        // FUNCIONES DE LA BARRA LATERAL DEL MENÚ (version movil)
         var modal = document.getElementById('modal');
         modal.style.display = 'none';
 
@@ -370,7 +379,6 @@ $name = $_SESSION['user']['user'];
                     modal.style.display = "none";
                 }
             })
-
         }
 
 

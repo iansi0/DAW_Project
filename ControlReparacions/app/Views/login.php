@@ -10,6 +10,8 @@
 
 <style>
     body {
+        /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+        font-family: system-ui;
         /* font-family: system-ui;
         background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzx2uGKrj5EwuCNCC_LKqS-bIhw_GKRrRnRg&usqp=CAU');
         background-repeat: no-repeat;
