@@ -1,10 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./app/Views/**/*.php"],
+  content: [
+    "./app/Views/**/*.php",
+    "./app/Controllers/**/*.php"
+  ],
   theme: {
     extend: {
       colors:{
-        'primario': '#B23000',
+        // 'primario': '#B23000',
+        'primario': '#b92640',
         'secundario': '#F2F2F2',
         'terciario-1': '#333333',
         'terciario-2': '#B3B3B3',

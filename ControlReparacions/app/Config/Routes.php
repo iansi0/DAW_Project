@@ -14,28 +14,31 @@ $routes->GET('/ticketform', 'TicketsController::ticketForm');
 
 $routes->POST('/addticket', 'TicketsController::addTicket');
 $routes->GET('/deleteticket/(:segment)', 'TicketsController::deleteTicket/$1');
+// $routes->GET('/modifyticket/(:segment)', 'TicketsController::deleteTicket/$1');
+$routes->GET('/modifyticket/(:segment)', 'Home::empty');
 
 $routes->GET('/export/(:segment)', 'TicketsController::exportCSV/$1');
 $routes->GET('/export', 'TicketsController::exportCSV');
 
 //Intervention Routes
-$routes->GET('/intervention', 'InterventionController::intervention');
-$routes->GET('/interventionform', 'InterventionController::interventionForm');
+$routes->GET('/intervention', 'Home::empty');
+$routes->GET('/interventionform', 'Home::empty');
 
 
 //Students Routes
-$routes->GET('/students', 'StudentsController::students');
-$routes->GET('/studentsform', 'StudentsController::studentsForm');
+$routes->GET('/students', 'Home::empty');
+$routes->GET('/studentsform', 'Home::empty');
 
 
 //Institute Routes
-$routes->GET('/institutes', 'InstitutesController::institutes');
-$routes->GET('/assign', 'InstitutesController::assign');
-$routes->GET('/instituteform', 'InstitutesController::instituteForm');
+$routes->GET('/institutes', 'Home::empty');
+$routes->GET('/assign', 'Home::empty');
+$routes->GET('/instituteform', 'Home::empty');
+$routes->GET('/inventary', 'Home::empty');
 
 
 //Common Routes
-$routes->GET('/logout', 'Home::logout');
+$routes->GET('/logout', 'Home::logout'); // como no funcionaba el logout lo puse el de estamos trabjando en ellox
 $routes->GET('/login', 'Home::login');
 $routes->POST('/login', 'Home::login_post');
 $routes->GET('', 'Home::login');

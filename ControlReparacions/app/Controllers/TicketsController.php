@@ -23,33 +23,33 @@ class TicketsController extends BaseController
 
         // Get News Data
 
-        
+
         $model = new TiquetModel();
-        
+
         if ($search == '') {
             $paginateData = $model->getAllPaged(8);
         } else {
             $paginateData = $model->getByTitleOrText($search)->paginate(8);
         }
 
-        $count = 0; 
+        $count = 0;
 
-        
+
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading(lang('titles.id'), lang('titles.device'), lang('titles.description'), lang('titles.sender'), lang('titles.receiver'), lang('titles.date'), lang('titles.status'), '', '', '');
+        $table->setHeading(lang('titles.id'), lang('titles.device'), lang('titles.description'), lang('titles.sender'), lang('titles.receiver'), lang('titles.date'), lang('titles.status'), 'Actions');
 
         $template = [
-            'table_open'  => "<table class='w-full'>",
-            'thead_open'  => "<thead class='bg-primario text-secundario'>",
-            'heading_cell_start' => "<th class='p-5'>",
-            'row_start' => "<tr>",
-            'row_alt_start' => "<tr class=''>",
-            
-            'cell_start' => "<td class='p-5'>",
-            'cell_alt_start' => "<td class='p-5 bg-terciario-3'>",
+            'table_open'  => "<table class='w-full rounded-t-2xl overflow-hidden '>",
 
+            'thead_open'  => "<thead class='bg-primario text-secundario '>",
 
+            'heading_cell_start' => "<th class='py-3 text-base'>",
+
+            'tbody_open'  => "<tbody class=''>",
+
+            'row_start' => "<tr class=''>",
+            'row_alt_start' => "<tr class='bg-[#f7f7f9]'>",
         ];
         $table->setTemplate($template);
 
@@ -63,25 +63,33 @@ class TicketsController extends BaseController
             'table' => $table,
         ];
 
-    
+
         foreach ($data['tickets'] as $ticket) {
 
             $buttonDelete = base_url("deleteticket/" . $ticket['id']);
-            $buttonUpdate = base_url("tu/controlador/accion/" . $ticket['id']);
+            $buttonUpdate = base_url("modifyticket/" . $ticket['id']);
             $buttonView = base_url("ticketinfo/" . $ticket['id']);
             $table->addRow(
                 // ["data" => $ticket['id'],"class"=>'p-5'],
-                $ticket['id'],
+                explode("-",$ticket['id'])[4],
                 $ticket['tipus'],
                 $ticket['descripcio'],
                 $ticket['emissor'],
-                ($ticket['receptor'] != null)?$ticket['receptor']:lang('titles.ticket'),
+                ($ticket['receptor'] != null) ? $ticket['receptor'] : lang('titles.ticket'),
                 $ticket['created'],
-                ["data" => $ticket['estat'], "class" => "p-5 estat_".$ticket['id_estat']],
-                "<a href='$buttonView' class='btn btn-primary'><i class='fa-solid fa-eye'></i></a>",
-                "<a href='$buttonUpdate' class='btn btn-primary'><i class='fa-solid fa-pencil'></i></a>",
-                "<a href='$buttonDelete' class='btn btn-primary'><i class='fa-solid fa-trash'></i></a>",
-                
+                ["data" => $ticket['estat'], "class" => "py-3 px-1 m-1 estat_" . $ticket['id_estat']],
+
+                ["data" => 
+                    "<a href='$buttonView' class='btn btn-primary'><i class='fa-solid fa-eye'></i></a>
+                     <a href='$buttonUpdate' class='btn btn-primary'><i class='fa-solid fa-pencil'></i></a>
+                     <a href='$buttonDelete' class='btn btn-primary'><i class='fa-solid fa-trash'></i></a>", 
+
+                "class" => " px-10 flex h-12 justify-between  items-center"],
+
+
+             
+
+
 
             );
 
@@ -129,7 +137,7 @@ class TicketsController extends BaseController
                 $intervencio['created_at'],
                 $intervencio['correu_alumne'],
                 $intervencio['id_tipus'],
-               
+
                 ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 2 ? 'bg-red-500 text-segundario' : 'bg-segundario']
             );
         }
@@ -212,6 +220,4 @@ class TicketsController extends BaseController
 
         echo $csv_string;
     }
-
-   
 }
