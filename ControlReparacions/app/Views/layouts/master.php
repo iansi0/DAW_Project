@@ -20,6 +20,27 @@ $name = $_SESSION['user']['user'];
         /* font-family: monospace; */
         font-family: system-ui;
     }
+
+    /* article {
+        view-transition-name: article;
+    }
+
+
+    @keyframes slide-up {
+        from {
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    ::view-transition-new(article) {
+        animation: 0.45s 0.45s linear both slide-up;
+    } */
 </style>
 
 <body class=" flex flex-col  h-full bg-[#ffffff]">
@@ -169,7 +190,7 @@ $name = $_SESSION['user']['user'];
         </div>
 
         <!-- DROPDOWN USER -->
-        <div id="dropdown_user" class="absolute  right-1 top-10 w-60 px-5 py-3 bg-[#f7f7f9] shadow border dark:border-transparent rounded-b-lg">
+        <div id="dropdown_user" class="absolute hidden   right-1 top-10 w-60 px-5 py-3 bg-[#f7f7f9] shadow border dark:border-transparent rounded-b-lg">
             <ul class="space-y-3 dark:text-white">
                 <li class="font-medium h-8">
                     <a href="#" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
@@ -380,6 +401,33 @@ $name = $_SESSION['user']['user'];
         var modal = document.getElementById('modal');
         modal.style.display = 'none';
     }
-</script>
 
+    // if (document.startViewTransition) {
+    //     window.navigation.addEventListener('navigate', (event) => {
+    //         const toUrl = new URL(event.destination.url)
+
+    //         if (location.origin !== toUrl.origin) return
+
+    //         console.log(toUrl.pathname);
+
+    //         if (toUrl.pathname !== '/ticketform') return
+
+    //         event.intercept({
+    //             async handler() {
+    //                 const response = await fetch(toUrl.pathname)
+    //                 const text = await response.text()
+
+    //                 const data = text.match(/<body[^>]*>([\s\S]*)<\/body>/i)[1]
+
+
+    //                 document.startViewTransition(() => {
+
+    //                     document.body.innerHTML = data
+    //                     document.documentElement.scrollTop = 0
+    //                 })
+    //             }
+    //         })
+    //     })
+    // }
+</script>
 </html>

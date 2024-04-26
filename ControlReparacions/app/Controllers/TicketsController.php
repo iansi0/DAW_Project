@@ -85,15 +85,7 @@ class TicketsController extends BaseController
                      <a href='$buttonDelete' class='btn btn-primary'><i class='fa-solid fa-trash'></i></a>", 
 
                 "class" => " px-10 flex h-12 justify-between  items-center"],
-
-
-             
-
-
-
             );
-
-
             $count++;
         }
 

@@ -2,10 +2,9 @@
 
 
 <?= $this->section('content') ?>
-
 <div>
 
-  <div class="flex justify-between items-center mb-1">
+  <div class="flex justify-between items-center mb-3">
 
     <h1 class=" text-left text-5xl text-primario"><?= strtoupper(lang('titles.ticket')) ?></h1>
 
@@ -38,9 +37,6 @@
   <divs>
     <?= $pager->only(['q'])->links() ?>
 </div>
-
 </div>
-
-
 
 <?= $this->endSection() ?>
