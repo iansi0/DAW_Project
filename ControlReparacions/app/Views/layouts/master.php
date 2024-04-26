@@ -170,7 +170,7 @@ $name = $_SESSION['user']['user'];
 
         <!-- DROPDOWN USER -->
         <div id="dropdown_user" class="absolute  right-1 top-10 w-60 px-5 py-3 bg-[#f7f7f9] shadow border dark:border-transparent rounded-b-lg">
-            <ul class="space-y-3 dark:text-white">
+            <ul class="space-y-3 text-terciario-4">
                 <li class="font-medium h-8">
                     <a href="#" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                         <div class="mr-3">

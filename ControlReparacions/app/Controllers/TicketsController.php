@@ -67,7 +67,7 @@ class TicketsController extends BaseController
         foreach ($data['tickets'] as $ticket) {
 
             $buttonDelete = base_url("deleteticket/" . $ticket['id']);
-            $buttonUpdate = base_url("tu/controlador/accion/" . $ticket['id']);
+            $buttonUpdate = base_url("modifyticket/" . $ticket['id']);
             $buttonView = base_url("ticketinfo/" . $ticket['id']);
             $table->addRow(
                 // ["data" => $ticket['id'],"class"=>'p-5'],
