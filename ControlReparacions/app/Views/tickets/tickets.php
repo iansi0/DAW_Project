@@ -3,6 +3,13 @@
 
 <?= $this->section('content') ?>
 
+<style>
+  #add-ticket{
+    view-transition-name: addTicket;
+ 
+  }
+</style>
+
 <div>
 
   <div class="flex justify-between items-center mb-1">
@@ -10,7 +17,7 @@
     <h1 class=" text-left text-5xl text-primario"><?= strtoupper(lang('titles.ticket')) ?></h1>
 
     <a href="<?= base_url('ticketform') ?>">
-      <button id="add-ticket" class=" px-8 py-1 border border-terciario-4  rounded-lg hover:bg-terciario-4"><?= lang('titles.n_ticket') ?></button>
+      <button id="add-ticket"  class="px-8 py-1 border border-terciario-4  rounded-lg hover:bg-terciario-4"><?= lang('titles.n_ticket') ?></button>
     </a>
 
   </div>
@@ -25,7 +32,7 @@
 
 
     <a href="<?= base_url('export/' . $search . '') ?>">
-      <button id="add-ticket" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4"><?= lang('buttons.export') ?></button>
+      <button id="export" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4"><?= lang('buttons.export') ?></button>
 
     </a>
   </div>

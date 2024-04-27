@@ -9,6 +9,7 @@ $name = $_SESSION['user']['user'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="view-transition" content="same-origin">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
 
@@ -349,17 +350,22 @@ $name = $_SESSION['user']['user'];
         var dropdown = document.querySelector("#dropdown_user");
         dropdown.style.display = "none";
 
+        var ticketForm = document.getElementById('add-ticket');
+
         window.addEventListener('click', function(event) {
 
             if (event.target.id != 'dropdown_user' || event.target.closest('div').id != 'dropdown_user') {
                 if (event.target.id == 'div_user' || event.target.closest('div').id == 'div_user') {
                     if (dropdown.style.display == "none") {
                         dropdown.style.display = "block";
+                        ticketForm.style.display = 'none';
                     } else {
                         dropdown.style.display = "none";
+                        ticketForm.style.display = 'block';
                     }
                 } else {
                     dropdown.style.display = "none";
+                    ticketForm.style.display = 'block';
                 }
             }
 

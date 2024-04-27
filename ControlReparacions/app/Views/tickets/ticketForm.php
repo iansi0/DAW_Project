@@ -3,7 +3,7 @@
 
 <h1 class="text-2xl text-primario mt-14">FORMULARIO DE AÑADIR TICKET</h1>
 
-<section class="container mx-auto px-4 py-8 mt-10 text-base">
+<section style="view-transition-name: addTicket;" class="container mx-auto px-4 py-8 mt-10 text-base">
     <form action="addticket" method="POST" class="flex flex-col gap-20">
 
         <div class="grid grid-cols-3 gap-x-2">
