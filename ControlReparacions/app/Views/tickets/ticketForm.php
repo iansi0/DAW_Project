@@ -27,7 +27,7 @@
             <div class="flex flex-col mt-5">
                 <label class="">Tipus de dispositiu</label>
                 <select name="id_type" id="" class="border-2 border-terciario-1 px-2 py-3 rounded ">
-                <option value="" disabled selected hidden>Seleccioni un tipus de dispositiu</option>
+                    <option value="" disabled selected hidden>Seleccioni un tipus de dispositiu</option>
                     <option value="1">Ordinador sobretaula</option>
                     <option value="2">Proyector</option>
                     <option value="3">Portatil</option>
@@ -37,7 +37,7 @@
             <div class="flex flex-col justify-end  mt-5">
 
                 <button type="button" id="assignButton" class="bg-primario text-white px-2 py-3  hover:bg-terciario-4">Assignar centro reparador</button>
-                
+
                 <label class="hidden" for="institute" id="labelInstitute">Institut reparador</label>
                 <select name="institute" id="institute" class="border-2 border-terciario-1 px-2 py-3 rounded  hidden">
                     <option value="" disabled selected hidden>Seleccioni un institut reparador</option>
@@ -48,7 +48,10 @@
 
         <div class="flex gap-5">
 
-            <a href="<?= base_url('/tickets') ?>" class="bg-primario hover:bg-red-600 text-white px-4 py-2 rounded">Cancelar</a>
+            <a href="<?= strpos(previous_url(), 'tickets?') !== false
+                            ? str_replace('index.php/', '', previous_url())
+                            : base_url('/tickets');
+                        ?>" class="bg-primario hover:bg-red-600 text-white px-4 py-2 rounded">Cancelar</a>
 
             <input type="submit" value="Añadir" class="bg-green-700 hover:bg-green-500 text-white px-4 py-2 rounded">
 
