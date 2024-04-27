@@ -5,6 +5,7 @@ return [
 
     'id'            => 'Identificador',
     'assign'        => 'Assignar',
+    'toassign'      => 'Per Assignar',
     'actions'       => 'Accions',
     'type'          => 'Tipus',
     'description'   => 'Descripció',
