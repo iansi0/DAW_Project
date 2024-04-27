@@ -38,13 +38,13 @@ $name = $_SESSION['user']['user'];
             </button>
         </div>
 
-        <nav id="modal" class="md:hidden h-full overflow-x-auto overflow-y-auto fixed inset-0 z-10  flex-col text-3xl  bg-white">
+        <nav id="modal" class="md:hidden h-full overflow-x-hidden overflow-y-hidden fixed inset-0 z-10  flex-col text-3xl  bg-white">
 
             <button class="modalButton w-full text-right pr-8 pt-5 text-4xl">X</button>
 
             <ul class=" flex flex-col gap-5 text-center justify-center justify-items-center content-center">
                 <li>
-                    <a href="<?= base_url('tickets') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white ">
+                    <a href="<?= base_url('tickets') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'tickets') ? 'bg-red-300' : '' ?>">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-50 0 600 512">
                                 <path d="M473.6,215.5508a17.1034,17.1034,0,0,0,8.498-14.7788V127.75A17.0965,17.0965,0,0,0,465,110.6519H349.0981v28.5a17.0981,17.0981,0,1,1-34.1962,0v-28.5H47A17.0965,17.0965,0,0,0,29.9019,127.75v73.022A17.1034,17.1034,0,0,0,38.4,215.5508a46.5019,46.5019,0,0,1-.0093,80.9077,17.095,17.095,0,0,0-8.4887,14.7788V384.25A17.0965,17.0965,0,0,0,47,401.3481H314.9019v-28.5a17.0981,17.0981,0,1,1,34.1962,0v28.5H465A17.0965,17.0965,0,0,0,482.0981,384.25V311.2373a17.1034,17.1034,0,0,0-8.498-14.7788,46.5064,46.5064,0,0,1,0-80.9077Zm-124.502,98.4a17.0981,17.0981,0,1,1-34.1962,0v-28.5a17.0981,17.0981,0,1,1,34.1962,0Zm0-87.4018a17.0981,17.0981,0,1,1-34.1962,0v-28.5a17.0981,17.0981,0,1,1,34.1962,0Z"></path>
@@ -55,7 +55,7 @@ $name = $_SESSION['user']['user'];
                 </li>
 
                 <li>
-                    <a href="<?= base_url('students') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('students') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'students') ? 'bg-red-300' : '' ?>">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 40 32">
                                 <g>
@@ -74,7 +74,7 @@ $name = $_SESSION['user']['user'];
                 </li>
 
                 <li>
-                    <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'institutes') ? 'bg-red-300' : '' ?>">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 2 35 26">
                                 <g id="school-7_1_">
@@ -91,7 +91,7 @@ $name = $_SESSION['user']['user'];
                 </li>
 
                 <li>
-                    <a href="<?= base_url('assign') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('assign') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'assign') ? 'bg-red-300' : '' ?>">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-30 0 520 455">
                                 <g transform="translate(0.000000,455.000000) scale(0.050000,-0.050000)" stroke="none">
@@ -127,7 +127,7 @@ $name = $_SESSION['user']['user'];
                 </li>
 
                 <li>
-                    <a href="<?= base_url('inventary') ?>"  class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('inventary') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'inventary') ? 'bg-red-300' : '' ?>">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="65" height="100" fill="currentColor" viewBox="-3 0 38 32">
                                 <g>
@@ -226,7 +226,7 @@ $name = $_SESSION['user']['user'];
                 </div>
 
                 <!-- TICKET -->
-                <a href="<?= base_url('tickets') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white ">
+                <a href="<?= base_url('tickets') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'tickets') ? 'bg-red-300' : '' ?>">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-50 0 600 512">
                             <path d="M473.6,215.5508a17.1034,17.1034,0,0,0,8.498-14.7788V127.75A17.0965,17.0965,0,0,0,465,110.6519H349.0981v28.5a17.0981,17.0981,0,1,1-34.1962,0v-28.5H47A17.0965,17.0965,0,0,0,29.9019,127.75v73.022A17.1034,17.1034,0,0,0,38.4,215.5508a46.5019,46.5019,0,0,1-.0093,80.9077,17.095,17.095,0,0,0-8.4887,14.7788V384.25A17.0965,17.0965,0,0,0,47,401.3481H314.9019v-28.5a17.0981,17.0981,0,1,1,34.1962,0v28.5H465A17.0965,17.0965,0,0,0,482.0981,384.25V311.2373a17.1034,17.1034,0,0,0-8.498-14.7788,46.5064,46.5064,0,0,1,0-80.9077Zm-124.502,98.4a17.0981,17.0981,0,1,1-34.1962,0v-28.5a17.0981,17.0981,0,1,1,34.1962,0Zm0-87.4018a17.0981,17.0981,0,1,1-34.1962,0v-28.5a17.0981,17.0981,0,1,1,34.1962,0Z"></path>
@@ -236,7 +236,7 @@ $name = $_SESSION['user']['user'];
                 </a>
 
                 <!-- ESTUDIANTES -->
-                <a href="<?= base_url('students') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                <a href="<?= base_url('students') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white  <?= (uri_string() === 'students') ? 'bg-red-300' : '' ?>">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 40 32">
                             <g>
@@ -254,7 +254,7 @@ $name = $_SESSION['user']['user'];
                 </a>
 
                 <!-- INSTITUTOS -->
-                <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white  <?= (uri_string() === 'institutes') ? 'bg-red-300' : '' ?>">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 2 35 26">
                             <g id="school-7_1_">
@@ -270,7 +270,7 @@ $name = $_SESSION['user']['user'];
                 </a>
 
                 <!-- ASIGNAR -->
-                <a href="<?= base_url('assign') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                <a href="<?= base_url('assign') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white  <?= (uri_string() === 'assign') ? 'bg-red-300' : '' ?>">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-30 0 520 455">
                             <g transform="translate(0.000000,455.000000) scale(0.050000,-0.050000)" stroke="none">
@@ -305,7 +305,7 @@ $name = $_SESSION['user']['user'];
                 </a>
 
                 <!-- INVENTARIO -->
-                <a href="<?= base_url('inventary') ?>" class="w-ful h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                <a href="<?= base_url('inventary') ?>" class="w-ful h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white  <?= (uri_string() === 'inventary') ? 'bg-red-300' : '' ?>">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 38 32">
                             <g>
@@ -324,7 +324,7 @@ $name = $_SESSION['user']['user'];
                 </a>
 
                 <!-- CERRAR SESIÓN -->
-                <a href="<?= base_url('logout') ?>" class=" w-full  h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                <a href="<?= base_url('logout') ?>" class=" w-full  h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white ">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 0 30 24">
                             <path fill="none" d="M0 0h24v24H0z"></path>
@@ -378,8 +378,10 @@ $name = $_SESSION['user']['user'];
             botones[index].addEventListener('click', function() {
                 if (modal.style.display == "none") {
                     modal.style.display = "block";
+                    document.documentElement.style.overflow = 'hidden';
                 } else {
                     modal.style.display = "none";
+                    document.documentElement.style.overflow = 'auto';
                 }
             })
         }
@@ -391,6 +393,7 @@ $name = $_SESSION['user']['user'];
     function show() {
         var modal = document.getElementById('modal');
         modal.style.display = 'none';
+        
     }
 </script>
 
