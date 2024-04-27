@@ -1,4 +1,7 @@
 <?php
 return [
-    'forget' => 'Has olvidat la contrasenya?',
+    'forget'    => 'Has oblidat la contrasenya?',
+    'remember'  => 'Recorda\'m',
+    'google'    => 'Google',
+    'next'      => 'O inicia amb',
 ];

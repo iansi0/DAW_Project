@@ -46,7 +46,7 @@ class Home extends BaseController
 
                 // Si el user o mail no existe, devolvemos error
                 if (!$user) {
-                    session()->setFlashdata('error', lang("error.login"));
+                    session()->setFlashdata('error', lang("error.wrong_login"));
                     return redirect()->to(base_url('login'));
                 }
 
@@ -81,13 +81,12 @@ class Home extends BaseController
             return redirect()->to(base_url('tickets'));
         }
 
-        return view('login');
     }
 
     public function login_post()
     {
 
-        helper("form"); // Helper nativo de CI4
+        helper("form");
 
         // Comprobamos las reglas de los input
         $rules = [
@@ -97,7 +96,7 @@ class Home extends BaseController
 
         // Si no cumple, devolvemos error
         // if (!$this->validate($rules)) {
-        //     session()->setFlashdata('error', lang("error.login"));
+        //     session()->setFlashdata('error', lang("error.wrong_login"));
         //     return redirect()->to(base_url('login'));
         // }
 
@@ -108,7 +107,7 @@ class Home extends BaseController
 
         // Si el user o mail no existe, devolvemos error
         if (!$user) {
-            session()->setFlashdata('error', lang("error.login"));
+            session()->setFlashdata('error', lang("error.wrong_login"));
             return redirect()->to(base_url('login'));
         }
 
@@ -117,13 +116,14 @@ class Home extends BaseController
 
         // Si la contraseña es incorrecta, devolvemos error
         if (!$verify) {
-            session()->setFlashdata('error', lang("error.login"));
+            session()->setFlashdata('error', lang("error.wrong_login"));
             return redirect()->to(base_url('login'));
         }
 
         // Obtenemos la información del usuario
         $user = $model->getUserById($user["id"]);            
 
+        // Generamos la sesión
         $sessionData = [
             "uid"           => $user["id"],
             "user"          => $user["user"],
@@ -136,10 +136,19 @@ class Home extends BaseController
             "type"          => $user["type"],
             "lang"          => ($user["lang"])?$user["lang"]:'ca',
             "logged_data"   => date("Y-m-d H:i:s"),
-            "ip_user"       => $_SERVER['REMOTE_ADDR'],
+            "ip_user"       => $_SERVER['REMOTE_ADDR']
         ];
 
         session()->set("user", $sessionData);
+
+        // Creamos la cookie para recordar el nombre de usuario
+        if(!empty($this->request->getVar('remember'))){
+            // Si esta marcado, creamos la cookie
+            setcookie("user", $_POST['user'], time()+606024*30);
+        } else {
+            // Si no esta marcado, eliminamos la cookie
+            setcookie("user", "", time() - 60);
+        }
 
         return redirect()->to(base_url('tickets'));
 

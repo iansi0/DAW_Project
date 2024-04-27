@@ -1,8 +1,3 @@
-<?php
-$session = \Config\Services::session();
-$name = $_SESSION['user']['user'];
-?>
-
 <!DOCTYPE html>
 <html lang="ca" class="h-full">
 
@@ -163,7 +158,7 @@ $name = $_SESSION['user']['user'];
             <img class="w-10 h-10 rounded-full" src="https://cdn-icons-png.freepik.com/512/1077/1077114.png" alt="Rounded avatar">
 
             <h1 class="align-center h mr-5">
-                <?= $name ?>&nbsp;
+                <?= session('user')['user'] ?>&nbsp;
                 <i class="fa-solid fa-caret-down"></i>
             </h1>
         </div>
