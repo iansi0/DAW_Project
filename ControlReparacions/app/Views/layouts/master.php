@@ -20,12 +20,14 @@ $name = $_SESSION['user']['user'];
     body {
         /* font-family: monospace; */
         font-family: system-ui;
+        /*montserrat para titulos con bold
+        lato y popins para textos medium */
     }
 </style>
 
 <body class=" flex flex-col  h-full bg-[#ffffff]">
 
-    <header class=" fixed w-full  bg-[#f7f7f9] text-terciario-4  h-12 flex text-xl ">
+    <header class=" fixed w-full  bg-[#f7f7f9] text-terciario-4  h-12 flex text-xl z-20 ">
 
         <!-- Navbar Movil -->
         <div class="modalButton md:hidden flex items-center ml-5">
@@ -215,7 +217,7 @@ $name = $_SESSION['user']['user'];
 
         <!-- Navbar Web -->
         <div class=" hidden md:block text-lg min-w-10 h-full  overflow-hidden transition-all ease-in duration-300 hover:min-w-60 ">
-            <nav id="Sidebar" class="fixed bg-[#f7f7f9] text-terciario-4 flex flex-col gap-5  w-14 h-full  overflow-hidden transition-all ease-in duration-300 hover:w-60 ">
+            <nav id="Sidebar" class="fixed bg-[#f7f7f9] text-terciario-4 flex flex-col gap-5  w-14 h-full  overflow-hidden transition-all ease-in duration-300 hover:w-60 z-30 ">
 
                 <!-- LOGO -->
                 <div class="w-full h-16 flex items-center text-sm text-terciario-1 ">
@@ -350,22 +352,17 @@ $name = $_SESSION['user']['user'];
         var dropdown = document.querySelector("#dropdown_user");
         dropdown.style.display = "none";
 
-        var ticketForm = document.getElementById('add-ticket');
-
         window.addEventListener('click', function(event) {
 
             if (event.target.id != 'dropdown_user' || event.target.closest('div').id != 'dropdown_user') {
                 if (event.target.id == 'div_user' || event.target.closest('div').id == 'div_user') {
                     if (dropdown.style.display == "none") {
                         dropdown.style.display = "block";
-                        ticketForm.style.display = 'none';
                     } else {
                         dropdown.style.display = "none";
-                        ticketForm.style.display = 'block';
                     }
                 } else {
                     dropdown.style.display = "none";
-                    ticketForm.style.display = 'block';
                 }
             }
 
