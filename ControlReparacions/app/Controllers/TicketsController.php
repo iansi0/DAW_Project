@@ -76,9 +76,9 @@ class TicketsController extends BaseController
         // ROWS
         foreach ($data['tickets'] as $ticket) {
 
-            $buttonDelete = base_url("deleteticket/" . $ticket['id']);
-            $buttonUpdate = base_url("modifyticket/" . $ticket['id']);
-            $buttonView = base_url("ticketinfo/" . $ticket['id']);
+            $buttonDelete = base_url("tickets/delete/" . $ticket['id']);
+            $buttonUpdate = base_url("tickets/modify/" . $ticket['id']);
+            $buttonView = base_url("tickets/" . $ticket['id']);
             $table->addRow(
                 // ["data" => $ticket['id'],"class"=>'p-5'],
                 explode("-",$ticket['id'])[4],
@@ -97,11 +97,6 @@ class TicketsController extends BaseController
                      <a href='$buttonDelete' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl fa-trash'></i></a>", 
 
                 "class" => " p-5 flex h-16 justify-between items-center"],
-
-
-             
-
-
 
             );
 
@@ -142,7 +137,7 @@ class TicketsController extends BaseController
         ];
 
         foreach ($data['interventions'] as $intervencio) {
-            $buttonView = base_url("ticketinfo/" . $intervencio['id']); // Reemplazar con tu ruta real
+            $buttonView = base_url("tickets/" . $intervencio['id']); // Reemplazar con tu ruta real
 
             $table->addRow(
                 $intervencio['created_at'],

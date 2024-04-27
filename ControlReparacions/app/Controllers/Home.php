@@ -158,7 +158,7 @@ class Home extends BaseController
     {
         $session = \Config\Services::session();
         $session->destroy();
-        return redirect()->to(base_url('/login'));
+        return redirect()->to(base_url('login'));
     }
 
     public function empty()
