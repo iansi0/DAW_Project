@@ -39,16 +39,17 @@ class TicketsController extends BaseController
         $table = new \CodeIgniter\View\Table();
 
         // HEADER
-        $table->setHeading(lang('titles.id'), 
-                            lang('titles.device'), 
-                            lang('titles.description'), 
-                            lang('titles.sender'), 
-                            lang('titles.receiver'), 
-                            lang('titles.date'), 
-                            lang('titles.hour'), 
-                            lang('titles.status'),
-                            lang('titles.actions')
-                        );
+        $table->setHeading(
+            lang('titles.id'),
+            lang('titles.device'),
+            lang('titles.description'),
+            lang('titles.sender'),
+            lang('titles.receiver'),
+            lang('titles.date'),
+            lang('titles.hour'),
+            lang('titles.status'),
+            lang('titles.actions')
+        );
 
         // TEMPLATE
         $template = [
@@ -64,7 +65,7 @@ class TicketsController extends BaseController
             'row_alt_start' => "<tr class='border-b-[0.01px]  bg-terciario-2'>",
         ];
         $table->setTemplate($template);
-        
+
         $data = [
             'page_title' => 'CI4 Pager & search filter',
             'tickets' => $paginateData,
@@ -81,7 +82,7 @@ class TicketsController extends BaseController
             $buttonView = base_url("ticketinfo/" . $ticket['id']);
             $table->addRow(
                 // ["data" => $ticket['id'],"class"=>'p-5'],
-                explode("-",$ticket['id'])[4],
+                explode("-", $ticket['id'])[4],
                 $ticket['tipus'],
                 $ticket['descripcio'],
                 $ticket['emissor'],
@@ -91,15 +92,17 @@ class TicketsController extends BaseController
 
                 ["data" => $ticket['estat'], "class" => "py-3 px-1 m-1 estat_" . $ticket['id_estat']],
 
-                ["data" => 
-                    "<a href='$buttonView' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl transition-all ease-in duration-300 fa-eye'></i></a>
+                [
+                    "data" =>
+                    "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl transition-all ease-in duration-300 fa-eye'></i></a>
                      <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl fa-pencil'></i></a>
-                     <a href='$buttonDelete' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl fa-trash'></i></a>", 
+                     <a href='$buttonDelete' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl fa-trash'></i></a>",
 
-                "class" => " p-5 flex h-16 justify-between items-center"],
+                    "class" => " p-5 flex h-16 justify-between items-center"
+                ],
 
 
-             
+
 
 
 
