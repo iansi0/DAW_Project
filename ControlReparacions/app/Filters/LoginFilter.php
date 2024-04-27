@@ -9,7 +9,9 @@ class LoginFilter implements FilterInterface {
     public function before(RequestInterface $request, $arguments = null)
     {
         if (!session('user')) {
-            return redirect()->to(base_url('/'));
+            return redirect()->to(base_url('login'));
+        } else if(url_is('login')){
+            return redirect()->to(base_url('tickets'));
         }
     }
 

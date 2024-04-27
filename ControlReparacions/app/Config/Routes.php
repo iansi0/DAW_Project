@@ -7,14 +7,15 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 
-// LOGIN
+// LOGIN / LOGOUT
 $routes->GET('logout', 'Home::logout');
-$routes->GET('login', 'Home::login');
-$routes->POST('login', 'Home::login_post');
-$routes->GET('', 'Home::login');
-$routes->GET('/', 'Home::login');
 
 $routes->group('', ['filter' => 'isLogged'], function($routes){
+
+    $routes->GET('login', 'Home::login');
+    $routes->addRedirect('', 'login');
+    $routes->addRedirect('/', 'login');
+    $routes->POST('login', 'Home::login_post');
 
     // TICKETS
     $routes->group('tickets', [], function($routes){

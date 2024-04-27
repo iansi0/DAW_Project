@@ -87,7 +87,7 @@ class TicketsController extends BaseController
                 $ticket['emissor'],
                 ($ticket['receptor'] != null) ? $ticket['receptor'] : lang('titles.ticket'),
                 date("d/m/Y", strtotime($ticket['created'])),
-                date("H:i:s", strtotime($ticket['created'])),
+                date("H:i", strtotime($ticket['created'])),
 
                 ["data" => $ticket['estat'], "class" => "py-3 px-1 m-1 estat_" . $ticket['id_estat']],
 
