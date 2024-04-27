@@ -123,12 +123,12 @@ $name = $_SESSION['user']['user'];
                     </a>
                 </li>
 
-            <!-- INVENTARIO -->
-            <a href="<?= base_url('inventary') ?>" class="w-ful h-16  flex items-center   transition-all ease-in duration-300   hover:w-full  hover:bg-primario hover:text-white hover:z-10">
-                <p class="mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="65" height="100" fill="currentColor" viewBox="-3 0 38 32">
-                        <g>
-                            <path d="M27.3,12.1l2.4-2.4C29.9,9.5,30,9.1,30,8.8c-0.1-0.3-0.3-0.6-0.6-0.7l-10-4C19,3.9,18.6,4,18.3,4.3L16,6.6l-2.3-2.3
+                <li>
+                    <a href="<?= base_url('inventary') ?>"  class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                        <p class="mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="65" height="100" fill="currentColor" viewBox="-3 0 38 32">
+                                <g>
+                                    <path d="M27.3,12.1l2.4-2.4C29.9,9.5,30,9.1,30,8.8c-0.1-0.3-0.3-0.6-0.6-0.7l-10-4C19,3.9,18.6,4,18.3,4.3L16,6.6l-2.3-2.3
 		                    C13.4,4,13,3.9,12.6,4.1l-10,4C2.3,8.2,2.1,8.5,2,8.8C2,9.1,2.1,9.5,2.3,9.7l2.4,2.4l-2.5,3.3C2,15.6,2,16,2,16.3
 		                    c0.1,0.3,0.3,0.5,0.6,0.7l10,4c0.1,0,0.2,0.1,0.4,0.1c0.3,0,0.6-0.1,0.8-0.4l2.2-2.9l2.2,2.9c0.2,0.3,0.5,0.4,0.8,0.4
 		                    c0.1,0,0.3,0,0.4-0.1l10-4c0.3-0.1,0.5-0.4,0.6-0.7c0.1-0.3,0-0.6-0.2-0.9L27.3,12.1z M16,14.9L8.7,12L16,9.1l7.3,2.9L16,14.9z">
@@ -348,10 +348,10 @@ $name = $_SESSION['user']['user'];
         // FUNCIONES DE SHOW / HIDE DE DROPDOWN USUARIO
         var dropdown = document.querySelector("#dropdown_user");
         dropdown.style.display = "none";
-        
+
         window.addEventListener('click', function(event) {
 
-            if(event.target.id != 'dropdown_user' || event.target.closest('div').id != 'dropdown_user'){
+            if (event.target.id != 'dropdown_user' || event.target.closest('div').id != 'dropdown_user') {
                 if (event.target.id == 'div_user' || event.target.closest('div').id == 'div_user') {
                     if (dropdown.style.display == "none") {
                         dropdown.style.display = "block";
