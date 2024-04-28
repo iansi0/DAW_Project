@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\TiquetModel;
+use App\Models\TipusDispositiuModel;
 use App\Controllers\BaseController;
+use App\Models\CentreModel;
 use App\Models\IntervencioModel;
 use Faker\Factory;
 
@@ -90,13 +92,13 @@ class TicketsController extends BaseController
                 date("d/m/Y", strtotime($ticket['created'])),
                 date("H:i", strtotime($ticket['created'])),
 
-                ["data" => $ticket['estat'], "class" => "py-3 px-1 m-1 estat_" . $ticket['id_estat']],
+                ["data" => "<a class='w-full p-3 estat_" . $ticket['id_estat']."'>".$ticket['estat']."</a>" , "class" => " p-1 "],
 
                 [
                     "data" =>
-                    "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl transition-all ease-in duration-300 fa-eye'></i></a>
-                     <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl fa-pencil'></i></a>
-                     <a href='$buttonDelete' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl fa-trash'></i></a>",
+                    "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
+                     <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
+                     <a href='$buttonDelete' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
 
                     "class" => " p-5 flex h-16 justify-between items-center"
                 ],
@@ -155,7 +157,14 @@ class TicketsController extends BaseController
 
     public function ticketForm()
     {
-        return view('tickets/ticketForm.php');
+        $type=new TipusDispositiuModel();
+        $center=new CentreModel();
+        $data=[
+            "types" => $type->getAllTypes(),
+            "centers" => $center->getAllCenter(),
+            "repairs" => $center->getAllRepairCenters(),
+        ];
+        return view('tickets/ticketForm.php', $data);
     }
 
     public function addTicket()
@@ -164,17 +173,23 @@ class TicketsController extends BaseController
         $model = new TiquetModel();
 
         $fake = Factory::create("es_ES");
-        $arrCentres = ['25002799', '17010700', '17010499', '17008249', '8000013', '8001509', '8002198', '8015399', '8017104', '8019401'];
+        // $arrCentres = ['25002799', '17010700', '17010499', '17008249', '8000013', '8001509', '8002198', '8015399', '8017104', '8019401'];
 
 
         $id_tiquet =  $fake->uuid();
         $codi_equip = $fake->uuid();
-        $descripcio_avaria =  $fake->text(25);
-        $nom_persona_contacte_centre = $fake->name() . " " . $fake->lastName();
-        $correu_persona_contacte_centre =  $fake->email();
-        $id_tipus_dispositiu = rand(0, 9);
-        $id_estat = rand(0, 13);
-        $codi_centre_emissor = $arrCentres[rand((count($arrCentres) / 2) - 1, count($arrCentres) - 1)];
+        $descripcio_avaria =  $this->request->getPost("description");
+        $nom_persona_contacte_centre = $this->request->getPost("nameContact");
+        $correu_persona_contacte_centre =  $this->request->getPost("emailContact");
+        $id_tipus_dispositiu = $this->request->getPost("id_type");
+        if ($this->request->getPost("repair")) {
+            $id_estat = 2;
+            $codi_centre_reparador = $this->request->getPost("repair");
+        }else{
+            $id_estat = 1;
+            $codi_centre_reparador = 0;
+        }
+        $codi_centre_emissor = $this->request->getPost("sender");
 
 
         $model->addTiquet(
@@ -185,7 +200,8 @@ class TicketsController extends BaseController
             $correu_persona_contacte_centre,
             $id_tipus_dispositiu,
             $id_estat,
-            $codi_centre_emissor
+            $codi_centre_emissor,
+            $codi_centre_reparador
         );
 
         return redirect()->to(base_url('/tickets'));

@@ -22,10 +22,10 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
         $routes->GET('', 'TicketsController::tickets');
         $routes->POST('', 'TicketsController::tickets');
 
-        $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
-
         $routes->GET('add', 'TicketsController::ticketForm');
         $routes->POST('add', 'TicketsController::addTicket');
+        
+        $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
 
         $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1');
         $routes->GET('modify/(:segment)', 'Home::empty');

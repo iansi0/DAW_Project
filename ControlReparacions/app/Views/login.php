@@ -72,7 +72,7 @@
             </div>
 
             <!-- BOTON LOGIN -->
-            <input class="mb-5 text-lg py-2 rounded-2xl bg-primario text-secundario hover:cursor-pointer hover:bg-terciario-2 hover:text-terciario-1" type="submit" value="<?= lang('buttons.login') ?>">
+            <input class="mb-5 text-lg py-2 rounded-2xl bg-primario text-secundario hover:cursor-pointer hover:bg-terciario-2 hover:text-terciario-1 transition hover:ease-in ease-out duration-250" type="submit" value="<?= lang('buttons.login') ?>">
 
             <!-- MSG ERROR -->
             <?php if (session()->getFlashdata('error')) : ?>

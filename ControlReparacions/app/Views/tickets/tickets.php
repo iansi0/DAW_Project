@@ -17,7 +17,7 @@
     <h1 class=" text-left text-5xl text-primario"><?= strtoupper(lang('titles.ticket')) ?></h1>
 
     <a href="<?= base_url('tickets/add') ?>">
-      <button id="add-ticket" class=" px-8 py-1 border border-terciario-4  rounded-lg hover:bg-terciario-4"><?= lang('titles.n_ticket') ?></button>
+      <button id="add-ticket" class=" px-28 py-1 border border-terciario-4  rounded-lg hover:bg-terciario-4 hover:text-white transition hover:ease-in ease-out duration-250"><?= lang('titles.n_ticket') ?></button>
     </a>
 
   </div>
@@ -26,17 +26,19 @@
 
     <!-- Search form -->
     <form method='get' action="<?= base_url('tickets'); ?>" id="searchForm" class="flex gap-2 items-center center">
-      <input type='text' name='q' value='<?= $search ?>' placeholder="<?= lang('buttons.search') ?>..." class=" px-5 py-1  border-2 rounded-lg border-terciario-3 ">
-      <input type='button' id='btnsearch' value='<?= lang('buttons.search') ?>' onclick='document.getElementById("searchForm").submit();' class="bg-primario text-white px-8 py-1 border border-terciario-4 hover:bg-terciario-4 hover:text-secundario rounded-lg">
+      <input type='text' name='q' value='<?= $search ?>' placeholder="<?= lang('buttons.search') ?>..." class=" px-5 py-1  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+      <input type='button' id='btnsearch' value='<?= lang('buttons.search') ?>' onclick='document.getElementById("searchForm").submit();' class="bg-primario text-white px-8 py-1 border border-terciario-4 hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250">
     </form>
 
+    <div>
 
-    <a href="<?= base_url('export/xls' . $search . '') ?>">
-      <button id="xls" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4"><?= lang('buttons.export')." XLS" ?></button>
-    </a>
-    <a href="<?= base_url('export/csv/' . $search . '') ?>">
-      <button id="csv" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4"><?= lang('buttons.export')." CSV" ?></button>
-    </a>
+      <a href="<?= base_url('export/xls' . $search . '') ?>">
+        <button id="xls" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export')." XLS" ?></button>
+      </a>
+      <a href="<?= base_url('export/csv/' . $search . '') ?>">
+        <button id="csv" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export')." CSV" ?></button>
+      </a>
+    </div>
   </div>
 
   <?php   // TABLE GENERATED WITH TABLE-GEN-HELPER

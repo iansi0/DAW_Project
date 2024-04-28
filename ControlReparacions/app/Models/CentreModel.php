@@ -56,4 +56,12 @@ class CentreModel extends Model
 
         $this->insert($data);
     }
+
+    public function getAllCenter(){
+        return $this->select('codi, nom')->findAll();
+    }
+    
+    public function getAllRepairCenters(){
+        return $this->select('codi, nom')->where('actiu', true)->where('taller', true)->findAll();
+    }
 }
