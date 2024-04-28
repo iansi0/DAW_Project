@@ -33,8 +33,6 @@ class Home extends BaseController
             if (!isset($token["error"])) {
                 $client->setAccessToken($token['access_token']);
 
-              
-
                 $oauth2 = new \Google\Service\Oauth2($client);
 
                 $userInfo = $oauth2->userinfo->get();
@@ -163,8 +161,13 @@ class Home extends BaseController
 
     public function empty()
     {
-
         // retornamos  una vista vacía para evitar errores de rutas no definidas.
         return  view('/workingpage');
+    }
+
+    public function error404()
+    {
+        // retornamos  una vista vacía para evitar errores de rutas no definidas.
+        return  view('/errors/cli/error_404');
     }
 }

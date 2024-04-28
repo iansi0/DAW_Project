@@ -6,19 +6,19 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-
-// LOGIN / LOGOUT
-$routes->GET('logout', 'Home::logout');
-
 $routes->group('', ['filter' => 'isLogged'], function($routes){
 
+    // LOGOUT
+    $routes->GET('logout', 'Home::logout');
+    
+    // LOGIN
     $routes->GET('login', 'Home::login');
-    $routes->addRedirect('', 'login');
-    $routes->addRedirect('/', 'login');
+        $routes->addRedirect('', 'login');
+        $routes->addRedirect('/', 'login');
     $routes->POST('login', 'Home::login_post');
 
     // TICKETS
-    $routes->group('tickets', [], function($routes){
+    $routes->group('tickets', function($routes){
         $routes->GET('', 'TicketsController::tickets');
         $routes->POST('', 'TicketsController::tickets');
 
@@ -32,48 +32,56 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
     });
 
     // EXPORT
-    $routes->group('export', [], function($routes){
+    $routes->group('export', function($routes){
         $routes->GET('', 'TicketsController::exportCSV');
         $routes->GET('(:segment)', 'TicketsController::exportCSV/$1');
     });
 
     // INTERVENTIONS
-    $routes->group('intervention', [], function($routes){
+    $routes->group('intervention', function($routes){
         $routes->GET('', 'Home::empty');
         $routes->GET('form', 'Home::empty');
     });
 
     // STUDENTS
-    $routes->group('students', [], function($routes){
+    $routes->group('students', function($routes){
         $routes->GET('', 'Home::empty');
         $routes->GET('form', 'Home::empty');
     });
 
     // INSTITUTES
-    $routes->group('institutes', [], function($routes){
+    $routes->group('institutes', function($routes){
         $routes->GET('', 'Home::empty');
         $routes->GET('form', 'Home::empty');
     });
 
     // ASSIGN
-    $routes->group('assign', [], function($routes){
+    $routes->group('assign', function($routes){
         $routes->GET('', 'Home::empty');
     });
 
     // INVENTARY
-    $routes->group('inventary', [], function($routes){
+    $routes->group('inventary', function($routes){
         $routes->GET('', 'Home::empty');
     });
 
     // CONFIG
-    $routes->group('config', [], function($routes){
+    $routes->group('config', function($routes){
         $routes->GET('', 'UserController::config');
         $routes->POST('', 'UserController::config_post');
     });
 
     // PROFILE
-    $routes->group('profile', [], function($routes){
+    $routes->group('profile', function($routes){
         $routes->GET('', 'Home::empty');
+    });
+
+    // WORKING
+    $routes->GET('work', 'Home::empty');
+
+    // ERRORS
+    $routes->group('error', function($routes){
+        $routes->GET('404', 'Home::error404');
     });
 
 });
