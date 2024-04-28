@@ -206,7 +206,8 @@ class USERSSeeder extends Seeder
         $firstLine = true;
         $count = 0;
 
-        // Insertar los datos en la base de datos
+        // Insertar los datos en la base de datos 
+        // PARA EL 100% DEL ARCHIVO COMENTAR LA PARTE DE - && $count < 20 -
         while (($row = fgetcsv($csvFile, 2000, ",")) !== FALSE && $count < 20) {
 
             if (!$firstLine) {

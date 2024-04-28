@@ -77,9 +77,9 @@ class TicketsController extends BaseController
         // ROWS
         foreach ($data['tickets'] as $ticket) {
 
-            $buttonDelete = base_url("deleteticket/" . $ticket['id']);
-            $buttonUpdate = base_url("modifyticket/" . $ticket['id']);
-            $buttonView = base_url("ticketinfo/" . $ticket['id']);
+            $buttonDelete = base_url("tickets/delete/" . $ticket['id']);
+            $buttonUpdate = base_url("tickets/modify/" . $ticket['id']);
+            $buttonView = base_url("tickets/" . $ticket['id']);
             $table->addRow(
                 // ["data" => $ticket['id'],"class"=>'p-5'],
                 explode("-", $ticket['id'])[4],
@@ -88,7 +88,7 @@ class TicketsController extends BaseController
                 $ticket['emissor'],
                 ($ticket['receptor'] != null) ? $ticket['receptor'] : lang('titles.ticket'),
                 date("d/m/Y", strtotime($ticket['created'])),
-                date("H:i:s", strtotime($ticket['created'])),
+                date("H:i", strtotime($ticket['created'])),
 
                 ["data" => $ticket['estat'], "class" => "py-3 px-1 m-1 estat_" . $ticket['id_estat']],
 
@@ -100,11 +100,6 @@ class TicketsController extends BaseController
 
                     "class" => " p-5 flex h-16 justify-between items-center"
                 ],
-
-
-
-
-
 
             );
 
@@ -145,7 +140,7 @@ class TicketsController extends BaseController
         ];
 
         foreach ($data['interventions'] as $intervencio) {
-            $buttonView = base_url("ticketinfo/" . $intervencio['id']); // Reemplazar con tu ruta real
+            $buttonView = base_url("tickets/" . $intervencio['id']); // Reemplazar con tu ruta real
 
             $table->addRow(
                 $intervencio['created_at'],

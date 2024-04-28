@@ -1,8 +1,3 @@
-<?php
-$session = \Config\Services::session();
-$name = $_SESSION['user']['user'];
-?>
-
 <!DOCTYPE html>
 <html lang="ca" class="h-full">
 
@@ -166,7 +161,7 @@ $name = $_SESSION['user']['user'];
             <img class="w-10 h-10 rounded-full" src="https://cdn-icons-png.freepik.com/512/1077/1077114.png" alt="Rounded avatar">
 
             <h1 class="align-center h mr-5">
-                <?= $name ?>&nbsp;
+                <?= session('user')['user'] ?>&nbsp;
                 <i class="fa-solid fa-caret-down"></i>
             </h1>
         </div>
@@ -175,7 +170,7 @@ $name = $_SESSION['user']['user'];
         <div id="dropdown_user" class="absolute right-1 top-12 w-60 px-5 py-3 bg-[#f7f7f9] shadow border border-transparent rounded-b-lg">
             <ul class="space-y-3 text-terciario-4">
                 <li class="font-medium h-8">
-                    <a href="#" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('profile') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                         <div class="mr-3">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>

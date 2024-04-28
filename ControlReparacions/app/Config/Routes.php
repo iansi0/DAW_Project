@@ -6,47 +6,82 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-//Tcikets Routes
-$routes->GET('/tickets', 'TicketsController::tickets');
-$routes->POST('/tickets', 'TicketsController::tickets');
-$routes->GET('/ticketinfo/(:segment)', 'TicketsController::ticketInfo/$1');
-$routes->GET('/ticketform', 'TicketsController::ticketForm');
+$routes->group('', ['filter' => 'isLogged'], function($routes){
 
-$routes->POST('/addticket', 'TicketsController::addTicket');
-$routes->GET('/deleteticket/(:segment)', 'TicketsController::deleteTicket/$1');
-// $routes->GET('/modifyticket/(:segment)', 'TicketsController::deleteTicket/$1');
-$routes->GET('/modifyticket/(:segment)', 'Home::empty');
+    // LOGOUT
+    $routes->GET('logout', 'Home::logout');
+    
+    // LOGIN
+    $routes->GET('login', 'Home::login');
+        $routes->addRedirect('', 'login');
+        $routes->addRedirect('/', 'login');
+    $routes->POST('login', 'Home::login_post');
 
-$routes->GET('/export/xls/(:segment)', 'TicketsController::exportXLS/$1');
-$routes->GET('/export/xls', 'TicketsController::exportXLS');
+    // TICKETS
+    $routes->group('tickets', function($routes){
+        $routes->GET('', 'TicketsController::tickets');
+        $routes->POST('', 'TicketsController::tickets');
 
-$routes->GET('/export/csv/(:segment)', 'TicketsController::exportCSV/$1');
-$routes->GET('/export/csv', 'TicketsController::exportCSV');
+        $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
 
-//Intervention Routes
-$routes->GET('/intervention', 'Home::empty');
-$routes->GET('/interventionform', 'Home::empty');
+        $routes->GET('add', 'TicketsController::ticketForm');
+        $routes->POST('add', 'TicketsController::addTicket');
 
+        $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1');
+        $routes->GET('modify/(:segment)', 'Home::empty');
+    });
 
-//Students Routes
-$routes->GET('/students', 'Home::empty');
-$routes->GET('/studentsform', 'Home::empty');
+    // EXPORT
+    $routes->group('export', function($routes){
+        $routes->GET('', 'TicketsController::exportCSV');
+        $routes->GET('(:segment)', 'TicketsController::exportCSV/$1');
+    });
 
+    // INTERVENTIONS
+    $routes->group('intervention', function($routes){
+        $routes->GET('', 'Home::empty');
+        $routes->GET('form', 'Home::empty');
+    });
 
-//Institute Routes
-$routes->GET('/institutes', 'Home::empty');
-$routes->GET('/assign', 'Home::empty');
-$routes->GET('/instituteform', 'Home::empty');
-$routes->GET('/inventary', 'Home::empty');
+    // STUDENTS
+    $routes->group('students', function($routes){
+        $routes->GET('', 'Home::empty');
+        $routes->GET('form', 'Home::empty');
+    });
 
+    // INSTITUTES
+    $routes->group('institutes', function($routes){
+        $routes->GET('', 'Home::empty');
+        $routes->GET('form', 'Home::empty');
+    });
 
-//Common Routes
-$routes->GET('/logout', 'Home::logout'); // como no funcionaba el logout lo puse el de estamos trabjando en ellox
-$routes->GET('/login', 'Home::login');
-$routes->POST('/login', 'Home::login_post');
-$routes->GET('', 'Home::login');
-$routes->GET('/', 'Home::login');
+    // ASSIGN
+    $routes->group('assign', function($routes){
+        $routes->GET('', 'Home::empty');
+    });
 
-// User Routes
-$routes->GET('/config', 'UserController::config');
-$routes->POST('/config', 'UserController::config_post');
+    // INVENTARY
+    $routes->group('inventary', function($routes){
+        $routes->GET('', 'Home::empty');
+    });
+
+    // CONFIG
+    $routes->group('config', function($routes){
+        $routes->GET('', 'UserController::config');
+        $routes->POST('', 'UserController::config_post');
+    });
+
+    // PROFILE
+    $routes->group('profile', function($routes){
+        $routes->GET('', 'Home::empty');
+    });
+
+    // WORKING
+    $routes->GET('work', 'Home::empty');
+
+    // ERRORS
+    $routes->group('error', function($routes){
+        $routes->GET('404', 'Home::error404');
+    });
+
+});
