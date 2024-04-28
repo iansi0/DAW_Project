@@ -228,10 +228,42 @@ class TicketsController extends BaseController
             $csv_string .= implode(",", $ticket) . "\n";
         }
         // dd($csv_string);
-
-        header('Content-Disposition: attachment; filename="archivo.csv"');
+        if ($search!='') {
+            header('Content-Disposition: attachment; filename="'.date("d-m-Y").'_filter-'.$search.'.csv"');
+        }else{
+            header('Content-Disposition: attachment; filename="'.date("d-m-Y").'.csv"');
+        }
 
 
         echo $csv_string;
+    }
+    public function exportXLS($search = '')
+    {
+        $searchData = $this->request->getGet();
+
+
+
+        // Get News Data
+
+        $model = new TiquetModel();
+
+        if ($search == '') {
+            $paginateData = $model->findAll();
+        } else {
+            $paginateData = $model->orLike('codi_dispositiu', $search, 'both', true)->orLike('descripcio_avaria', $search, 'both', true)->findAll($search);
+        }
+
+        $xls_string = "";
+
+        foreach ($paginateData as $ticket) {
+            $xls_string .= implode(",", $ticket) . "\n";
+        }
+        if ($search!='') {
+            header('Content-Disposition: attachment; filename="'.date("d-m-Y").'_filter-'.$search.'.xls"');
+        }else{
+            header('Content-Disposition: attachment; filename="'.date("d-m-Y").'.xls"');
+        }
+
+        echo $xls_string;
     }
 }

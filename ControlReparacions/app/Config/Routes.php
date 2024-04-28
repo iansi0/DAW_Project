@@ -17,8 +17,11 @@ $routes->GET('/deleteticket/(:segment)', 'TicketsController::deleteTicket/$1');
 // $routes->GET('/modifyticket/(:segment)', 'TicketsController::deleteTicket/$1');
 $routes->GET('/modifyticket/(:segment)', 'Home::empty');
 
-$routes->GET('/export/(:segment)', 'TicketsController::exportCSV/$1');
-$routes->GET('/export', 'TicketsController::exportCSV');
+$routes->GET('/export/xls/(:segment)', 'TicketsController::exportXLS/$1');
+$routes->GET('/export/xls', 'TicketsController::exportXLS');
+
+$routes->GET('/export/csv/(:segment)', 'TicketsController::exportCSV/$1');
+$routes->GET('/export/csv', 'TicketsController::exportCSV');
 
 //Intervention Routes
 $routes->GET('/intervention', 'Home::empty');
