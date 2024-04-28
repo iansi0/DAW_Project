@@ -92,7 +92,7 @@ class TicketsController extends BaseController
                 date("d/m/Y", strtotime($ticket['created'])),
                 date("H:i", strtotime($ticket['created'])),
 
-                ["data" => "<a class='w-full p-3 estat_" . $ticket['id_estat']."'>".$ticket['estat']."</a>" , "class" => " p-1 "],
+                ["data" => "<a class='p-3 w-full	 estat_" . $ticket['id_estat']."'>".$ticket['estat']."</a>" , "class" => "p-2"],
 
                 [
                     "data" =>

@@ -156,11 +156,12 @@
 
 
         <!-- User img and name -->
-        <div id="div_user" style="cursor:pointer" class="flex items-center absolute right-5 h-full gap-2">
-
-            <img class="w-10 h-10 rounded-full" src="https://cdn-icons-png.freepik.com/512/1077/1077114.png" alt="Rounded avatar">
-
-            <h1 class="align-center h mr-5 font-bold">
+        <div id="div_user" style="cursor:pointer" class="flex items-center absolute right-5 h-full gap-2 transform transition-all ease-in duration-200 hover:text-primario">
+            <div class="">
+            </div>
+            <!-- <img class="w-10 h-10 rounded-full" src="https://cdn-icons-png.freepik.com/512/1077/1077114.png" alt="Rounded avatar"> -->
+            <i class="py-3 rounded-full fa-solid fa-user text-2xl"></i>
+            <h1 class="align-center h mr-5 font-bold ">
                 <?= session('user')['user'] ?>&nbsp;
                 <i class="fa-solid fa-caret-down"></i>
             </h1>
