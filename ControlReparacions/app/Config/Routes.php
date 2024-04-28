@@ -33,8 +33,12 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
 
     // EXPORT
     $routes->group('export', function($routes){
-        $routes->GET('', 'TicketsController::exportCSV');
-        $routes->GET('(:segment)', 'TicketsController::exportCSV/$1');
+        //CSV
+        $routes->GET('csv', 'TicketsController::exportCSV');
+        $routes->GET('csv/(:segment)', 'TicketsController::exportCSV/$1');
+        // XLS
+        $routes->GET('xls', 'TicketsController::exportXLS');
+        $routes->GET('xls/(:segment)', 'TicketsController::exportXLS/$1');
     });
 
     // INTERVENTIONS
