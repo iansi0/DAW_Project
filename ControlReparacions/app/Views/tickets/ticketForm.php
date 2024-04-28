@@ -10,23 +10,23 @@
 
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.description")?></label>
-                <input type="text" name="description" class="border-2 border-terciario-1 px-2 py-3 rounded ">
+                <input type="text" name="description" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
             </div>
 
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.contact_name")?></label>
-                <input type="text" name="nameContact" class="border-2 border-terciario-1 px-2 py-3 rounded "></input>
+                <input type="text" name="nameContact" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
             </div>
 
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.contact_email")?></label>
-                <input type="text" name="emailContact" class="border-2 border-terciario-1 px-2 py-3 rounded"></input>
+                <input type="text" name="emailContact" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
             </div>
 
 
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.s_disp")?></label>
-                <select name="id_type" id="" class="border-2 border-terciario-1 px-2 py-3 rounded ">
+                <select name="id_type" id="" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                 <option value="" disabled selected hidden><?= lang("forms.s_disp")?></option>
                 <?php
                         foreach ($types as $type) {
@@ -39,7 +39,7 @@
             <div class="flex flex-col justify-end  mt-5">
                 
                 <label class="block" for="sender" id="labelsSender"><?= lang("forms.s_ins")?></label>
-                <select name="sender" id="sender" class="border-2 border-terciario-1 px-2 py-3 rounded">
+                <select name="sender" id="sender" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                     
                     <option value="" disabled selected hidden><?= lang("forms.s_ins")?></option>
                     <?php
@@ -56,7 +56,7 @@
                 <button type="button" id="assignButton" class="bg-primario text-white px-2 py-3  hover:bg-terciario-4 bg-primario text-white px-8 py-1 border border-terciario-4 hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang("forms.s_ins")." ".lang("forms.work")?></button>
                 
                 <label class="hidden" for="repair" id="labelRepair"><?= lang("forms.s_ins")." ".lang("forms.work")?></label>
-                <select name="repair" id="repair" class="border-2 border-terciario-1 px-2 py-3 rounded  hidden">
+                <select name="repair" id="repair" class="border-2 border-terciario-1 px-2 py-3 rounded  hidden hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                     <option value="" disabled selected hidden><?= lang("forms.s_ins")?></option>
                     <?php
                         foreach ($repairs as $repair) {

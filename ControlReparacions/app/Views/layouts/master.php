@@ -39,7 +39,7 @@
 
             <ul class=" flex flex-col gap-5 text-center justify-center justify-items-center content-center">
                 <li>
-                    <a href="<?= base_url('tickets') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-250 hover:bg-primario hover:text-white ">
+                    <a href="<?= base_url('tickets') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white ">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-50 0 600 512">
                                 <path d="M473.6,215.5508a17.1034,17.1034,0,0,0,8.498-14.7788V127.75A17.0965,17.0965,0,0,0,465,110.6519H349.0981v28.5a17.0981,17.0981,0,1,1-34.1962,0v-28.5H47A17.0965,17.0965,0,0,0,29.9019,127.75v73.022A17.1034,17.1034,0,0,0,38.4,215.5508a46.5019,46.5019,0,0,1-.0093,80.9077,17.095,17.095,0,0,0-8.4887,14.7788V384.25A17.0965,17.0965,0,0,0,47,401.3481H314.9019v-28.5a17.0981,17.0981,0,1,1,34.1962,0v28.5H465A17.0965,17.0965,0,0,0,482.0981,384.25V311.2373a17.1034,17.1034,0,0,0-8.498-14.7788,46.5064,46.5064,0,0,1,0-80.9077Zm-124.502,98.4a17.0981,17.0981,0,1,1-34.1962,0v-28.5a17.0981,17.0981,0,1,1,34.1962,0Zm0-87.4018a17.0981,17.0981,0,1,1-34.1962,0v-28.5a17.0981,17.0981,0,1,1,34.1962,0Z"></path>
@@ -50,7 +50,7 @@
                 </li>
 
                 <li>
-                    <a href="<?= base_url('students') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-250 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('students') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 40 32">
                                 <g>
@@ -69,7 +69,7 @@
                 </li>
 
                 <li>
-                    <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-250 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 2 35 26">
                                 <g id="school-7_1_">
@@ -86,7 +86,7 @@
                 </li>
 
                 <li>
-                    <a href="<?= base_url('assign') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-250 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('assign') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-30 0 520 455">
                                 <g transform="translate(0.000000,455.000000) scale(0.050000,-0.050000)" stroke="none">
@@ -122,7 +122,7 @@
                 </li>
 
                 <li>
-                    <a href="<?= base_url('inventary') ?>"  class="w-full h-16 flex items-center justify-center transition-all ease-in duration-250 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('inventary') ?>"  class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="65" height="100" fill="currentColor" viewBox="-3 0 38 32">
                                 <g>
@@ -141,7 +141,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?= base_url('logout') ?>" class=" w-full  h-16 flex items-center justify-center transition-all ease-in duration-250 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('logout') ?>" class=" w-full  h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 0 30 24">
                                 <path fill="none" d="M0 0h24v24H0z"></path>
@@ -160,7 +160,7 @@
 
             <img class="w-10 h-10 rounded-full" src="https://cdn-icons-png.freepik.com/512/1077/1077114.png" alt="Rounded avatar">
 
-            <h1 class="align-center h mr-5">
+            <h1 class="align-center h mr-5 font-bold">
                 <?= session('user')['user'] ?>&nbsp;
                 <i class="fa-solid fa-caret-down"></i>
             </h1>
@@ -170,7 +170,7 @@
         <div id="dropdown_user" class="absolute right-1 top-12 w-60 px-5 py-3 bg-[#f7f7f9] shadow border border-transparent rounded-b-lg">
             <ul class="space-y-3 text-terciario-4">
                 <li class="font-medium h-8">
-                    <a href="<?= base_url('profile') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-250 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('profile') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                         <div class="mr-3">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -180,7 +180,7 @@
                     </a>
                 </li>
                 <li class="font-medium h-8">
-                    <a href="<?= base_url('config') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-250 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('config') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                         <div class="mr-3">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
@@ -194,7 +194,7 @@
                 <hr class="border-gray-700">
 
                 <li class="font-medium h-8">
-                    <a href="<?= base_url('logout') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transition-all ease-in duration-250 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('logout') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                         <div class="ml-1 mr-3 text-red-600">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
@@ -211,8 +211,8 @@
     <main id="tickets" class="w-full h-full flex  text-center  justify-items-center items-center">
 
         <!-- Navbar Web -->
-        <div class=" hidden md:block text-lg min-w-10 h-full  overflow-hidden transition-all ease-in duration-250 hover:min-w-60 ">
-            <nav id="Sidebar" class="fixed bg-[#f7f7f9] text-terciario-4 flex flex-col gap-5  w-14 h-full  overflow-hidden transition-all ease-in duration-250 hover:w-60 z-30 ">
+        <div class=" hidden md:block text-lg min-w-10 h-full  overflow-hidden transition-all ease-in duration-300 hover:min-w-60 ">
+            <nav id="Sidebar" class="fixed bg-[#f7f7f9] text-terciario-4 flex flex-col gap-5  w-14 h-full  overflow-hidden transition-all ease-in duration-300 hover:w-60 z-30 ">
 
                 <!-- LOGO -->
                 <div class="w-full h-16 flex items-center text-sm text-terciario-1 ">
@@ -221,7 +221,7 @@
                 </div>
 
                 <!-- TICKET -->
-                <a href="<?= base_url('tickets') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-250 hover:bg-primario hover:text-white ">
+                <a href="<?= base_url('tickets') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white ">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-50 0 600 512">
                             <path d="M473.6,215.5508a17.1034,17.1034,0,0,0,8.498-14.7788V127.75A17.0965,17.0965,0,0,0,465,110.6519H349.0981v28.5a17.0981,17.0981,0,1,1-34.1962,0v-28.5H47A17.0965,17.0965,0,0,0,29.9019,127.75v73.022A17.1034,17.1034,0,0,0,38.4,215.5508a46.5019,46.5019,0,0,1-.0093,80.9077,17.095,17.095,0,0,0-8.4887,14.7788V384.25A17.0965,17.0965,0,0,0,47,401.3481H314.9019v-28.5a17.0981,17.0981,0,1,1,34.1962,0v28.5H465A17.0965,17.0965,0,0,0,482.0981,384.25V311.2373a17.1034,17.1034,0,0,0-8.498-14.7788,46.5064,46.5064,0,0,1,0-80.9077Zm-124.502,98.4a17.0981,17.0981,0,1,1-34.1962,0v-28.5a17.0981,17.0981,0,1,1,34.1962,0Zm0-87.4018a17.0981,17.0981,0,1,1-34.1962,0v-28.5a17.0981,17.0981,0,1,1,34.1962,0Z"></path>
@@ -231,7 +231,7 @@
                 </a>
 
                 <!-- ESTUDIANTES -->
-                <a href="<?= base_url('students') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-250 hover:bg-primario hover:text-white">
+                <a href="<?= base_url('students') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 40 32">
                             <g>
@@ -249,7 +249,7 @@
                 </a>
 
                 <!-- INSTITUTOS -->
-                <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-250 hover:bg-primario hover:text-white">
+                <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 2 35 26">
                             <g id="school-7_1_">
@@ -265,7 +265,7 @@
                 </a>
 
                 <!-- ASIGNAR -->
-                <a href="<?= base_url('assign') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-250 hover:bg-primario hover:text-white">
+                <a href="<?= base_url('assign') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-30 0 520 455">
                             <g transform="translate(0.000000,455.000000) scale(0.050000,-0.050000)" stroke="none">
@@ -300,7 +300,7 @@
                 </a>
 
                 <!-- INVENTARIO -->
-                <a href="<?= base_url('inventary') ?>" class="w-ful h-16 flex items-center transition-all ease-in duration-250 hover:bg-primario hover:text-white">
+                <a href="<?= base_url('inventary') ?>" class="w-ful h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 38 32">
                             <g>
@@ -319,7 +319,7 @@
                 </a>
 
                 <!-- CERRAR SESIÓN -->
-                <a href="<?= base_url('logout') ?>" class=" w-full  h-16 flex items-center transition-all ease-in duration-250 hover:bg-primario hover:text-white">
+                <a href="<?= base_url('logout') ?>" class=" w-full  h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                     <p class="mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 0 30 24">
                             <path fill="none" d="M0 0h24v24H0z"></path>
