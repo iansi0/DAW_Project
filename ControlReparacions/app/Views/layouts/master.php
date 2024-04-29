@@ -156,9 +156,10 @@
 
 
 
-        <div class="absolute right-44 flex mt-2 gap-3">
-            <a href="<?= base_url('change_lang/es') ?>">ES</a>
-            <a href="<?= base_url('change_lang/ca') ?>">CAT</a>
+        <div class="absolute right-44 flex align-middle mt-2 gap-3">
+            <a class="hover:text-primario" href="<?= base_url('change_lang/es') ?>">ES</a>
+            <span>&nbsp;|&nbsp;</span>
+            <a class="hover:text-primario" href="<?= base_url('change_lang/ca') ?>">CAT</a>
         </div>
 
         <!-- User img and name -->
