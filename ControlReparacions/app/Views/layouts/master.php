@@ -157,9 +157,9 @@
 
 
         <div class="absolute right-44 flex align-middle mt-2 gap-3">
-            <a class="hover:text-primario" href="<?= base_url('change_lang/es') ?>">ES</a>
+            <a class="hover:text-primario <?= session('user')['lang']=='es' ? "text-primario font-bold" : "" ?>" href="<?= base_url('change_lang/es') ?>">ES</a>
             <span>&nbsp;|&nbsp;</span>
-            <a class="hover:text-primario" href="<?= base_url('change_lang/ca') ?>">CAT</a>
+            <a class="hover:text-primario <?= session('user')['lang']=='ca' ? "text-primario font-bold" : "" ?>" href="<?= base_url('change_lang/ca') ?>">CA</a>
         </div>
 
         <!-- User img and name -->
@@ -188,7 +188,7 @@
                     </a>
                 </li>
                 <li class="font-medium h-8">
-                    <a href="<?= base_url('config') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                    <a href="<?= base_url('work') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                         <div class="mr-3">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
