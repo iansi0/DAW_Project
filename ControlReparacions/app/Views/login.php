@@ -11,16 +11,11 @@
 
 <style>
     body {
-        /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
-        font-family: system-ui;
-        /* font-family: system-ui;
-        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzx2uGKrj5EwuCNCC_LKqS-bIhw_GKRrRnRg&usqp=CAU');
-        background-repeat: no-repeat;
-        background-size: cover; */
+        font-family: system-ui;   
     }
 </style>
 
-<body class="h-screen flex flex-col justify-center items-center" style="background-image: url(https://top-fon.com/uploads/posts/2021-07/1626848748_46-p-geometriya-krasnii-fon-46.jpg); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
+<body class="h-screen flex flex-col justify-center items-center" style="background-image: url('<?=base_url()?>/assets/img/login.jpg') ; background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
 
     <section class="bg-[#ffffff] text-terciario-4 flex flex-col gap-5 items-center border-2 border-secundario rounded-md px-20 py-10">
         <div class="flex items-center" style="user-select: none">
