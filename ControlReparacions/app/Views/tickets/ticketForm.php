@@ -69,12 +69,12 @@
             </div>
         </div>
 
-        <div class="flex gap-5">
+        <div class="flex gap-5 justify-end w-full">
 
             <a href="<?= strpos(previous_url(), 'tickets?') !== false
                             ? str_replace('index.php/', '', previous_url())
                             : base_url('/tickets');
-                        ?>" class="bg-primario hover:bg-red-600 text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel")?></a>
+                        ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel")?></a>
 
             <input type="submit" value="<?= lang("buttons.add")?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
 

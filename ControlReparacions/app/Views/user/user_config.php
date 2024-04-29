@@ -60,8 +60,8 @@
 
         <div class="flex items-center mt-20 justify-end">
             <div>
-                <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"><?=lang('buttons.cancel')?></button>
-                <input type="submit" class="bg-green-400 hover:bg-green-500 text-white px-4 py-2 rounded ml-4" style="cursor: pointer;" value="<?=lang('buttons.save')?>">
+                <a href="<?=base_url('/')?>"><button class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250"><?=lang('buttons.cancel')?></button></a>
+                <input type="submit" class="bg-green-700 hover:bg-green-500 text-white px-4 py-2 rounded ml-4 transition hover:ease-in ease-out duration-250" style="cursor: pointer;" value="<?=lang('buttons.save')?>">
             </div>
         </div>
     </form>

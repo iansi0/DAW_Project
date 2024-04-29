@@ -358,7 +358,7 @@
         window.addEventListener('click', function(event) {
 
             if (event.target.id != 'dropdown_user' || event.target.closest('div').id != 'dropdown_user') {
-                if (event.target.id == 'div_user' || event.target.closest('div').id == 'div_user') {
+                if (event.target && (event.target.id === 'div_user' || (event.target.closest('div') && event.target.closest('div').id === 'div_user'))) {
                     if (dropdown.style.display == "none") {
                         dropdown.style.display = "block";
                     } else {

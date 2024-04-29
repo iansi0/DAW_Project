@@ -56,23 +56,25 @@
                 </select>
 
                 <a href="<?= base_url('work') ?>">
-                    <button id="pdf" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.save'); ?></button>
+                    <button id="pdf" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-green-700 transition hover:ease-in ease-out duration-250"><?= lang('buttons.save'); ?></button>
                 </a>
             </form>
 
             <div>
 
                 <a href="<?= base_url('work') ?>">
-                    <button id="pdf" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250">Imprimir PDF</button>
+                    <button id="pdf" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-red-800 transition hover:ease-in ease-out duration-250">Imprimir PDF</button>
                 </a>
             </div>
         </div>
 
 
         <div>
-            <div class="flex justify-between bg-primario text-secundario text-left p-3 pr-10 text-3xl rounded-t-2xl">
+            <div class="flex justify-between bg-primario text-secundario text-left p-3 pr-8 text-3xl rounded-t-2xl">
                 <h1><?= lang('titles.int'); ?></h1>
-                <a href="<?= base_url('work') ?>"><i class="fa-icon fa-solid fa-plus "></i></a>
+                <div class="hover:bg-green-700 p-2 px-3 rounded-xl transition hover:ease-in ease-out duration-250">
+                    <a href="<?= base_url('work') ?>"><i class="fa-icon fa-solid fa-plus "></i></a>
+                </div>
             </div>
 
             <?php

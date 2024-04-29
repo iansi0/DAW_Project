@@ -21,17 +21,17 @@ class TIQUETS extends Migration
                 ],
                 'descripcio_avaria'          => [
                         'type'           => 'VARCHAR',
-                        'constraint'     => 100,
+                        'constraint'     => 500,
                         'null'           => false,
                 ],
                 'nom_persona_contacte_centre'          => [
                         'type'           => 'VARCHAR',
-                        'constraint'     => 50,
+                        'constraint'     => 100,
                         'null'           => false,
                 ],
                 'correu_persona_contacte_centre'          => [
                         'type'           => 'VARCHAR',
-                        'constraint'     => 50,
+                        'constraint'     => 100,
                         'null'           => false,
                 ],
                 'id_tipus_dispositiu'          => [
