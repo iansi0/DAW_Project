@@ -78,7 +78,6 @@ class Home extends BaseController
         } else {
             return redirect()->to(base_url('tickets'));
         }
-
     }
 
     public function login_post()
@@ -119,7 +118,7 @@ class Home extends BaseController
         }
 
         // Obtenemos la información del usuario
-        $user = $model->getUserById($user["id"]);            
+        $user = $model->getUserById($user["id"]);
 
         // Generamos la sesión
         $sessionData = [
@@ -129,10 +128,10 @@ class Home extends BaseController
             "name"          => $user["name"],
             "adress"        => $user["adress"],
             "phone"         => $user["phone"],
-            "other"         => (count(explode(',', $user["other"]))>0)?explode(',', $user["other"]):(($user["other"])?$user["other"]:''),
-            "contact"       => (count(explode(',', $user["contact"]))>0)?explode(',', $user["contact"]):'',
+            "other"         => (count(explode(',', $user["other"])) > 0) ? explode(',', $user["other"]) : (($user["other"]) ? $user["other"] : ''),
+            "contact"       => (count(explode(',', $user["contact"])) > 0) ? explode(',', $user["contact"]) : '',
             "type"          => $user["type"],
-            "lang"          => ($user["lang"])?$user["lang"]:'ca',
+            "lang"          => ($user["lang"]) ? $user["lang"] : 'ca',
             "logged_data"   => date("Y-m-d H:i:s"),
             "ip_user"       => $_SERVER['REMOTE_ADDR']
         ];
@@ -140,16 +139,15 @@ class Home extends BaseController
         session()->set("user", $sessionData);
 
         // Creamos la cookie para recordar el nombre de usuario
-        if(!empty($this->request->getVar('remember'))){
+        if (!empty($this->request->getVar('remember'))) {
             // Si esta marcado, creamos la cookie
-            setcookie("user", $_POST['user'], time()+606024*30);
+            setcookie("user", $_POST['user'], time() + 606024 * 30);
         } else {
             // Si no esta marcado, eliminamos la cookie
             setcookie("user", "", time() - 60);
         }
 
         return redirect()->to(base_url('tickets'));
-
     }
 
     public function logout()
@@ -169,5 +167,53 @@ class Home extends BaseController
     {
         // retornamos  una vista vacía para evitar errores de rutas no definidas.
         return  view('/errors/cli/error_404');
+    }
+
+
+    // function para el lenguaje 
+    public function change_lang($language)
+    {
+        // $userModel = new UsersModel();
+
+        // // Obtén el ID del usuario de la sesión o de otro mecanismo de autenticación
+        // $userId = session()->get('user_id');
+
+        // if ($userId) {
+        //     $userModel->updateLanguage($userId, $idioma);
+
+        //     // Opcionalmente, actualiza la información de la sesión si es necesario
+        //     session()->set('language', $idioma);
+        // }
+        
+
+        $model = new UsersModel();
+
+
+        if ($language != 'ca' && $language != 'es' && $language != 'en') {
+            // session()->setFlashdata('error', lang("error.wrong_slot"));
+            return redirect()->to(base_url('tickets'));
+        }
+        
+        $model->changeLang($language);
+
+        $sessionData = [
+            "uid"           => session('user')["uid"],
+            "user"          => session('user')["user"],
+            "code"          => session('user')["code"],
+            "name"          => session('user')["name"],
+            "adress"        => session('user')["adress"],
+            "phone"         => session('user')["phone"],
+            "other"         => session('user')["other"],
+            "contact"       => session('user')["contact"],
+            "type"          => session('user')["type"],
+            "lang"          => $language,
+            "logged_data"   => date("Y-m-d H:i:s"),
+            "ip_user"       => $_SERVER['REMOTE_ADDR'],
+        ];
+
+        session()->set("user", $sessionData);
+
+        return redirect()->to(str_replace('index.php/', '', previous_url()));
+
     }
 }

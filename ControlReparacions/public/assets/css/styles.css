@@ -622,6 +622,26 @@ video {
   top: 3rem;
 }
 
+.right-20 {
+  right: 5rem;
+}
+
+.right-40 {
+  right: 10rem;
+}
+
+.right-0 {
+  right: 0px;
+}
+
+.right-4 {
+  right: 1rem;
+}
+
+.right-44 {
+  right: 11rem;
+}
+
 .isolate {
   isolation: isolate;
 }
@@ -1451,6 +1471,10 @@ video {
 
 .text-right {
   text-align: right;
+}
+
+.align-middle {
+  vertical-align: middle;
 }
 
 .text-2xl {

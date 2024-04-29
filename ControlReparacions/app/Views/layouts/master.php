@@ -155,6 +155,12 @@
         </nav>
 
 
+
+        <div class="absolute right-44 flex mt-2 gap-3">
+            <a href="<?= base_url('change_lang/es') ?>">ES</a>
+            <a href="<?= base_url('change_lang/ca') ?>">CAT</a>
+        </div>
+
         <!-- User img and name -->
         <div id="div_user" style="cursor:pointer" class="flex items-center absolute right-5 h-full gap-2 transform transition-all ease-in duration-200 hover:text-primario">
             <div class="">
@@ -389,7 +395,7 @@
     function show() {
         var modal = document.getElementById('modal');
         modal.style.display = 'none';
-        
+
     }
 </script>
 
