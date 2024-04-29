@@ -4,9 +4,9 @@
 <?= $this->section('content') ?>
 
 <style>
-  #add-ticket{
+  #add-ticket {
     view-transition-name: addTicket;
- 
+
   }
 </style>
 
@@ -33,10 +33,10 @@
     <div>
 
       <a href="<?= base_url('export/xls' . $search . '') ?>">
-        <button id="xls" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export')." XLS" ?></button>
+        <button id="xls" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " XLS" ?></button>
       </a>
       <a href="<?= base_url('export/csv/' . $search . '') ?>">
-        <button id="csv" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export')." CSV" ?></button>
+        <button id="csv" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " CSV" ?></button>
       </a>
     </div>
   </div>
