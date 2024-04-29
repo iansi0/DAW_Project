@@ -5,7 +5,9 @@ namespace App\Controllers;
 use App\Models\TiquetModel;
 use App\Models\TipusDispositiuModel;
 use App\Controllers\BaseController;
+use App\Database\Migrations\ESTATS;
 use App\Models\CentreModel;
+use App\Models\EstatModel;
 use App\Models\EstatModel;
 use App\Models\IntervencioModel;
 use Faker\Factory;
@@ -62,8 +64,6 @@ class TicketsController extends BaseController
 
             'heading_cell_start' => "<th class='py-3 text-base'>",
 
-            'tbody_open'  => "<tbody class=''>",
-
             'row_start' => "<tr class='border-b-[0.01px] '>",
             'row_alt_start' => "<tr class='border-b-[0.01px]  bg-[#F7F4EF]'>",
         ];
@@ -93,7 +93,7 @@ class TicketsController extends BaseController
                 date("d/m/Y", strtotime($ticket['created'])),
                 date("H:i", strtotime($ticket['created'])),
 
-                ["data" => "<a class='p-3 w-full	 estat_" . $ticket['id_estat']."'>".$ticket['estat']."</a>" , "class" => "p-2"],
+                ["data" => "<a class='p-3 w-full	 estat_" . $ticket['id_estat'] . "'>" . $ticket['estat'] . "</a>", "class" => "p-2"],
 
                 [
                     "data" =>
@@ -121,16 +121,22 @@ class TicketsController extends BaseController
 
         $modelTickets = new TiquetModel();
         $modelInterventions = new IntervencioModel();
+        $estat = new EstatModel();
 
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
         $table->setHeading(lang('forms.date'), lang('titles.students'), lang('titles.material_2'), lang('forms.description'));
 
         $template = [
-            'table_open'         => "<table class='w-full'>",
-            'thead_open'  => "<thead class='bg-primario text-white'>",
-            'heading_cell_start' => "<th class='p-5 text-lg'>",
-            'cell_start' => "<td>",
+            'table_open'  => "<table class='w-full'>",
+
+            'thead_open'  => "<thead class='bg-primario text-secundario'>",
+
+            'heading_cell_start' => "<th class='py-3 text-base'>",
+
+            'row_start' => "<tr class='border-b-[0.01px] '>",
+            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-terciario-2'>",
+
 
         ];
         $table->setTemplate($template);
@@ -140,6 +146,7 @@ class TicketsController extends BaseController
             'interventions' => $modelInterventions->getInterventions($id),
             'pager' => $modelInterventions->pager,
             'table' => $table,
+            'estats' => $estat->getAllEstats(),
         ];
 
         foreach ($data['interventions'] as $intervencio) {
@@ -158,9 +165,9 @@ class TicketsController extends BaseController
 
     public function ticketForm()
     {
-        $type=new TipusDispositiuModel();
-        $center=new CentreModel();
-        $data=[
+        $type = new TipusDispositiuModel();
+        $center = new CentreModel();
+        $data = [
             "types" => $type->getAllTypes(),
             "centers" => $center->getAllCenter(),
             "repairs" => $center->getAllRepairCenters(),
@@ -290,10 +297,10 @@ class TicketsController extends BaseController
             $csv_string .= implode(",", $ticket) . "\n";
         }
         // dd($csv_string);
-        if ($search!='') {
-            header('Content-Disposition: attachment; filename="'.date("d-m-Y").'_filter-'.$search.'.csv"');
-        }else{
-            header('Content-Disposition: attachment; filename="'.date("d-m-Y").'.csv"');
+        if ($search != '') {
+            header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '_filter-' . $search . '.csv"');
+        } else {
+            header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '.csv"');
         }
 
 
@@ -320,10 +327,10 @@ class TicketsController extends BaseController
         foreach ($paginateData as $ticket) {
             $xls_string .= implode(",", $ticket) . "\n";
         }
-        if ($search!='') {
-            header('Content-Disposition: attachment; filename="'.date("d-m-Y").'_filter-'.$search.'.xls"');
-        }else{
-            header('Content-Disposition: attachment; filename="'.date("d-m-Y").'.xls"');
+        if ($search != '') {
+            header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '_filter-' . $search . '.xls"');
+        } else {
+            header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '.xls"');
         }
 
         echo $xls_string;
