@@ -45,15 +45,15 @@ class TicketsController extends BaseController
 
         // HEADER
         $table->setHeading(
-            mb_strtoupper(lang('titles.id'),'utf-8'),
-            mb_strtoupper(lang('titles.device'),'utf-8'),
-            mb_strtoupper(lang('titles.description'),'utf-8'),
-            mb_strtoupper(lang('titles.sender'),'utf-8'),
-            mb_strtoupper(lang('titles.receiver'),'utf-8'),
-            mb_strtoupper(lang('titles.date'),'utf-8'),
-            mb_strtoupper(lang('titles.hour'),'utf-8'),
-            mb_strtoupper(lang('titles.status'),'utf-8'),
-            mb_strtoupper(lang('titles.actions'),'utf-8'),
+            mb_strtoupper(lang('titles.id'), 'utf-8'),
+            mb_strtoupper(lang('titles.device'), 'utf-8'),
+            mb_strtoupper(lang('titles.description'), 'utf-8'),
+            mb_strtoupper(lang('titles.sender'), 'utf-8'),
+            mb_strtoupper(lang('titles.receiver'), 'utf-8'),
+            mb_strtoupper(lang('titles.date'), 'utf-8'),
+            mb_strtoupper(lang('titles.hour'), 'utf-8'),
+            mb_strtoupper(lang('titles.status'), 'utf-8'),
+            mb_strtoupper(lang('titles.actions'), 'utf-8'),
         );
 
         // TEMPLATE
@@ -87,10 +87,10 @@ class TicketsController extends BaseController
                 // ["data" => $ticket['id'],"class"=>'p-5'],
                 explode("-", $ticket['id'])[4],
                 $ticket['tipus'],
-                ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis" ],
+                ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis"],
                 $ticket['emissor'],
-                ["data" =>  ($ticket['receptor'] != null) ? $ticket['receptor'] : lang('titles.ticket'), "class" => ($ticket['receptor'] != null) ? "bg-red-400" : "" ],
-                
+                ["data" => ($ticket['receptor'] != null) ? $ticket['receptor'] : lang('titles.ticket'), "class" => ($ticket['receptor'] != null) ? "bg-red-400" : ""],
+
                 date("d/m/Y", strtotime($ticket['created'])),
                 date("H:i", strtotime($ticket['created'])),
 
@@ -127,10 +127,10 @@ class TicketsController extends BaseController
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
         $table->setHeading(
-            mb_strtoupper(lang('forms.date'),'utf-8'), 
-            mb_strtoupper(lang('titles.students'),'utf-8'), 
-            mb_strtoupper(lang('titles.material_2'),'utf-8'), 
-            mb_strtoupper(lang('forms.description'),'utf-8')
+            mb_strtoupper(lang('forms.date'), 'utf-8'),
+            mb_strtoupper(lang('titles.students'), 'utf-8'),
+            mb_strtoupper(lang('titles.material_2'), 'utf-8'),
+            mb_strtoupper(lang('forms.description'), 'utf-8')
         );
 
         $template = [
@@ -201,15 +201,15 @@ class TicketsController extends BaseController
             if ($this->request->getPost("repair") && $this->request->getPost("sender")) {
                 $codi_centre_reparador = $this->request->getPost("repair");
                 $codi_centre_emissor = $this->request->getPost("sender");
-            }else if($this->request->getPost("repair")){
+            } else if ($this->request->getPost("repair")) {
                 $codi_centre_reparador = $this->request->getPost("repair");
                 $codi_centre_emissor = 0;
-            }else{
+            } else {
                 // TODO: Poner aqui el error porque n hay centro reparador en esta opcion
                 $codi_centre_emissor = $this->request->getPost("sender");
                 $codi_centre_reparador = 0;
             }
-        }else{
+        } else {
             $id_estat = 1;
             $codi_centre_emissor = 0;
             $codi_centre_reparador = 0;
@@ -233,11 +233,11 @@ class TicketsController extends BaseController
 
     public function modifyTicket($id)
     {
-        $type=new TipusDispositiuModel();
-        $center=new CentreModel();
-        $ticket=new TiquetModel();
-        $state=new EstatModel();
-        $data=[
+        $type = new TipusDispositiuModel();
+        $center = new CentreModel();
+        $ticket = new TiquetModel();
+        $state = new EstatModel();
+        $data = [
             "types" => $type->getAllTypes(),
             "centers" => $center->getAllCenter(),
             "repairs" => $center->getAllRepairCenters(),
@@ -252,7 +252,7 @@ class TicketsController extends BaseController
 
         $model = new TiquetModel();
 
-        $data=[
+        $data = [
             "id_tiquet" =>  $id,
             "descripcio_avaria" =>  $this->request->getPost("description"),
             "nom_persona_contacte_centre" => $this->request->getPost("nameContact"),
@@ -264,12 +264,12 @@ class TicketsController extends BaseController
 
         ];
 
-        $model->modifyTicket($id,$data);
+        $model->modifyTicket($id, $data);
 
         return redirect()->to(base_url('/tickets'));
     }
 
-    
+
 
     public function deleteTicket($id)
     {
@@ -296,7 +296,7 @@ class TicketsController extends BaseController
         $model = new TiquetModel();
 
         if ($search == '') {
-            $paginateData = $model->findAll();
+            $paginateData = $model->getAllPaged()->findAll();
         } else {
             $paginateData = $model->getByTitleOrText($search)->findAll();
         }
@@ -330,19 +330,20 @@ class TicketsController extends BaseController
             $paginateData = $model->getAllPaged()->findAll();
             // dd($paginateData);
 
-            
+
         } else {
             $paginateData = $model->getByTitleOrText($search)->findAll();
         }
-        
 
+        header("Content-Type: application/vnd.ms-excel; charset=utf-8");
         $xls_string = "";
 
         foreach ($paginateData as $ticket) {
             $xls_string .= implode("\t", $ticket) . "\n";
-            d($xls_string);
+            // d($xls_string);
         }
-        dd('fin');
+        // dd('fin');
+
         if ($search != '') {
             header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '_filter-' . $search . '.xls"');
         } else {
