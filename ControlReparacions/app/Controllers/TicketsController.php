@@ -8,7 +8,6 @@ use App\Controllers\BaseController;
 use App\Database\Migrations\ESTATS;
 use App\Models\CentreModel;
 use App\Models\EstatModel;
-use App\Models\EstatModel;
 use App\Models\IntervencioModel;
 use Faker\Factory;
 
@@ -125,7 +124,12 @@ class TicketsController extends BaseController
 
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading(lang('forms.date'), lang('titles.students'), lang('titles.material_2'), lang('forms.description'));
+        $table->setHeading(
+            mb_strtoupper(lang('forms.date'),'utf-8'), 
+            mb_strtoupper(lang('titles.students'),'utf-8'), 
+            mb_strtoupper(lang('titles.material_2'),'utf-8'), 
+            mb_strtoupper(lang('forms.description'),'utf-8')
+        );
 
         $template = [
             'table_open'  => "<table class='w-full'>",
@@ -146,7 +150,7 @@ class TicketsController extends BaseController
             'interventions' => $modelInterventions->getInterventions($id),
             'pager' => $modelInterventions->pager,
             'table' => $table,
-            'estats' => $estat->getAllEstats(),
+            'estats' => $estat->getAllStates(),
         ];
 
         foreach ($data['interventions'] as $intervencio) {

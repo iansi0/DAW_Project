@@ -29,13 +29,18 @@
         <div class="flex justify-between gap-4">
 
             <form action="<?= base_url('work') ?>" method="get">
-                <select name="" id="" class="py-1 bg-primario text-secundario">
+                <select name="" id="selectType" class="py-1 bg-primario rounded-lg text-secundario">
 
-                    <option value="" disabled selected hidden><?= $ticket['estat'] ?></option>
 
                     <?php
                     foreach ($estats as $estat) {
-                        echo "<option class=' estat_" . $estat['id'] . "' value='" . $estat["id"] . "'>" . $estat["nom"] . "</option>";
+                        if ($estat['id']==$ticket['id_estat']) {
+                            echo "<option selected class=' estat_" . $estat['id'] . "' value='" . $estat["id"] . "'>" . $estat["nom"] . "</option>";
+                            
+                        }else{
+                            echo "<option class=' estat_" . $estat['id'] . "' value='" . $estat["id"] . "'>" . $estat["nom"] . "</option>";
+
+                        }
                     }
                     ?>
                 </select>
@@ -57,7 +62,7 @@
         <div>
             <div class="flex justify-between bg-primario text-secundario text-left p-3 pr-10 text-3xl rounded-t-2xl">
                 <h1><?= lang('titles.int'); ?></h1>
-                <a href="<?= base_url('work') ?>">+</a>
+                <a href="<?= base_url('work') ?>"><i class="fa-icon fa-solid fa-plus "></i></a>
             </div>
 
             <?php
