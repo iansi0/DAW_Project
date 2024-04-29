@@ -1025,6 +1025,14 @@ video {
   overflow: hidden;
 }
 
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
 .overflow-x-hidden {
   overflow-x: hidden;
 }
@@ -1230,6 +1238,29 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-blue-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+}
+
+.bg-\[terciario-2\] {
+  background-color: terciario-2;
+}
+
+.bg-\[E9DDDD\] {
+  background-color: E9DDDD;
+}
+
+.bg-\[\#E9DDDD\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(233 221 221 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#F7F4EF\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 244 239 / var(--tw-bg-opacity));
+}
+
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
@@ -1252,6 +1283,10 @@ video {
 
 .p-5 {
   padding: 1.25rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
 }
 
 .px-10 {

@@ -128,6 +128,12 @@ class TiquetModel extends Model
         return $this->where('id', $id)->delete();
     }
 
+    public function modifyTicket($id,$data)
+    {
+        return $this->where('id', $id)->set($data)->update();
+    }
+
+
     public function viewTicket($id)
     {
         $this->select(["
@@ -147,5 +153,10 @@ class TiquetModel extends Model
         $this->join('centre', ' tiquet.codi_centre_emissor = centre.codi OR tiquet.codi_centre_reparador = centre.codi');
 
         return  $this->where('tiquet.id', $id)->first();
+    }
+
+    public function getTicketById($id)
+    {
+        return $this->where('tiquet.id', $id)->first();
     }
 }

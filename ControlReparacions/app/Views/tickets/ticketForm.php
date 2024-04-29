@@ -38,8 +38,10 @@
 
             <div class="flex flex-col justify-end  mt-5">
                 
-                <label class="block" for="sender" id="labelsSender"><?= lang("forms.s_ins")?></label>
-                <select name="sender" id="sender" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                <button type="button" id="assignButton" class="bg-primario text-white px-2 py-3  hover:bg-terciario-4 bg-primario text-white px-8 py-1 border border-terciario-4 hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang("forms.s_ins")?></button>
+                
+                <label class="hidden" for="sender" id="labelSender"><?= lang("forms.s_ins")?></label>
+                <select name="sender" id="sender" class="border-2 hidden border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                     
                     <option value="" disabled selected hidden><?= lang("forms.s_ins")?></option>
                     <?php
@@ -53,10 +55,10 @@
 
             <div class="flex flex-col justify-end  mt-5">
 
-                <button type="button" id="assignButton" class="bg-primario text-white px-2 py-3  hover:bg-terciario-4 bg-primario text-white px-8 py-1 border border-terciario-4 hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang("forms.s_ins")." ".lang("forms.work")?></button>
+                <!-- <button type="button" id="assignButton" class="bg-primario text-white px-2 py-3  hover:bg-terciario-4 bg-primario text-white px-8 py-1 border border-terciario-4 hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang("forms.s_ins")." ".lang("forms.work")?></button> -->
                 
-                <label class="hidden" for="repair" id="labelRepair"><?= lang("forms.s_ins")." ".lang("forms.work")?></label>
-                <select name="repair" id="repair" class="border-2 border-terciario-1 px-2 py-3 rounded  hidden hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                <label class="block" for="repair" id="labelRepair"><?= lang("forms.s_ins")." ".lang("forms.work")?></label>
+                <select name="repair" id="repair" class="border-2 border-terciario-1 px-2 py-3 rounded   hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                     <option value="" disabled selected hidden><?= lang("forms.s_ins")?></option>
                     <?php
                         foreach ($repairs as $repair) {
@@ -74,7 +76,7 @@
                             : base_url('/tickets');
                         ?>" class="bg-primario hover:bg-red-600 text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel")?></a>
 
-            <input type="submit" value="<?= lang("buttons.add")?>" class="bg-green-700 hover:bg-green-500 text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
+            <input type="submit" value="<?= lang("buttons.add")?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
 
         </div>
 
@@ -82,14 +84,14 @@
 </section>
 
 <script>
-    const botonMostrar = document.getElementById('assignButton');
-    const labelSelect = document.getElementById('labelRepair');
-    const contenedorSelect = document.getElementById('repair');
+    const botonAssignar = document.getElementById('assignButton');
+    const labelSelect = document.getElementById('labelSender');
+    const contenedorSelect = document.getElementById('sender');
 
-    botonMostrar.addEventListener('click', () => {
+    botonAssignar.addEventListener('click', () => {
         labelSelect.style.display = 'block';
         contenedorSelect.style.display = 'block';
-        botonMostrar.style.display = 'none';
+        botonAssignar.style.display = 'none';
     });
 </script>
 

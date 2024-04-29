@@ -21,6 +21,9 @@ return [
     'add'       => 'Añadir',
 
     'save'      => 'Guardar',
+    
+    'edit'      => 'Editar',
+
 
     'assign'    => 'Asignar',
     'filter'    => 'Filtrar',

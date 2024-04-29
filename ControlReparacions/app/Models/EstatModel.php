@@ -47,4 +47,8 @@ class EstatModel extends Model
 
         $this->insert($data);
     }
+
+    public function getAllStates(){
+        return $this->select('id,nom')->findAll();
+    }
 }

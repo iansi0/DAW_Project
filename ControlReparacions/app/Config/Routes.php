@@ -28,7 +28,8 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
         $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
 
         $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1');
-        $routes->GET('modify/(:segment)', 'Home::empty');
+        $routes->GET('modify/(:segment)', 'TicketsController::modifyTicket/$1');
+        $routes->POST('modify/(:segment)', 'TicketsController::modifyTicket_post/$1');
     });
 
     // EXPORT

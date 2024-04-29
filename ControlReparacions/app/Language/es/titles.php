@@ -44,7 +44,7 @@ return [
 
     'ticket'        => 'Tickets',
     'ticket_2'      => 'Ticket',
-    'id_ticket'     => 'Ticket Identifyer:',
+    'id_ticket'     => 'Identificador del Ticket',
     'n_ticket'      => 'Añadir Ticket',
     'e_ticket'      => 'Modificar Ticket',
     

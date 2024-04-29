@@ -6,6 +6,7 @@ use App\Models\TiquetModel;
 use App\Models\TipusDispositiuModel;
 use App\Controllers\BaseController;
 use App\Models\CentreModel;
+use App\Models\EstatModel;
 use App\Models\IntervencioModel;
 use Faker\Factory;
 
@@ -42,15 +43,15 @@ class TicketsController extends BaseController
 
         // HEADER
         $table->setHeading(
-            lang('titles.id'),
-            lang('titles.device'),
-            lang('titles.description'),
-            lang('titles.sender'),
-            lang('titles.receiver'),
-            lang('titles.date'),
-            lang('titles.hour'),
-            lang('titles.status'),
-            lang('titles.actions')
+            mb_strtoupper(lang('titles.id'),'utf-8'),
+            mb_strtoupper(lang('titles.device'),'utf-8'),
+            mb_strtoupper(lang('titles.description'),'utf-8'),
+            mb_strtoupper(lang('titles.sender'),'utf-8'),
+            mb_strtoupper(lang('titles.receiver'),'utf-8'),
+            mb_strtoupper(lang('titles.date'),'utf-8'),
+            mb_strtoupper(lang('titles.hour'),'utf-8'),
+            mb_strtoupper(lang('titles.status'),'utf-8'),
+            mb_strtoupper(lang('titles.actions'),'utf-8'),
         );
 
         // TEMPLATE
@@ -64,7 +65,7 @@ class TicketsController extends BaseController
             'tbody_open'  => "<tbody class=''>",
 
             'row_start' => "<tr class='border-b-[0.01px] '>",
-            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-terciario-2'>",
+            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-[#F7F4EF]'>",
         ];
         $table->setTemplate($template);
 
@@ -164,7 +165,7 @@ class TicketsController extends BaseController
             "centers" => $center->getAllCenter(),
             "repairs" => $center->getAllRepairCenters(),
         ];
-        return view('tickets/ticketForm.php', $data);
+        return view('tickets/ticketForm', $data);
     }
 
     public function addTicket()
@@ -182,14 +183,24 @@ class TicketsController extends BaseController
         $nom_persona_contacte_centre = $this->request->getPost("nameContact");
         $correu_persona_contacte_centre =  $this->request->getPost("emailContact");
         $id_tipus_dispositiu = $this->request->getPost("id_type");
-        if ($this->request->getPost("repair")) {
+        if ($this->request->getPost("repair") || $this->request->getPost("sender")) {
             $id_estat = 2;
-            $codi_centre_reparador = $this->request->getPost("repair");
+            if ($this->request->getPost("repair") && $this->request->getPost("sender")) {
+                $codi_centre_reparador = $this->request->getPost("repair");
+                $codi_centre_emissor = $this->request->getPost("sender");
+            }else if($this->request->getPost("repair")){
+                $codi_centre_reparador = $this->request->getPost("repair");
+                $codi_centre_emissor = 0;
+            }else{
+                // TODO: Poner aqui el error porque n hay centro reparador en esta opcion
+                $codi_centre_emissor = $this->request->getPost("sender");
+                $codi_centre_reparador = 0;
+            }
         }else{
             $id_estat = 1;
+            $codi_centre_emissor = 0;
             $codi_centre_reparador = 0;
         }
-        $codi_centre_emissor = $this->request->getPost("sender");
 
 
         $model->addTiquet(
@@ -206,6 +217,46 @@ class TicketsController extends BaseController
 
         return redirect()->to(base_url('/tickets'));
     }
+
+    public function modifyTicket($id)
+    {
+        $type=new TipusDispositiuModel();
+        $center=new CentreModel();
+        $ticket=new TiquetModel();
+        $state=new EstatModel();
+        $data=[
+            "types" => $type->getAllTypes(),
+            "centers" => $center->getAllCenter(),
+            "repairs" => $center->getAllRepairCenters(),
+            "states" => $state->getAllStates(),
+            "ticket" => $ticket->getTicketById($id),
+        ];
+        return view('tickets/modifyTicket', $data);
+    }
+
+    public function modifyTicket_post($id)
+    {
+
+        $model = new TiquetModel();
+
+        $data=[
+            "id_tiquet" =>  $id,
+            "descripcio_avaria" =>  $this->request->getPost("description"),
+            "nom_persona_contacte_centre" => $this->request->getPost("nameContact"),
+            "correu_persona_contacte_centre" =>  $this->request->getPost("emailContact"),
+            "id_tipus_dispositiu" => $this->request->getPost("id_type"),
+            "id_estat" => $this->request->getPost("id_state"),
+            "codi_centre_emissor" => $this->request->getPost("sender"),
+            "codi_centre_reparador" => $this->request->getPost("repair"),
+
+        ];
+
+        $model->modifyTicket($id,$data);
+
+        return redirect()->to(base_url('/tickets'));
+    }
+
+    
 
     public function deleteTicket($id)
     {
