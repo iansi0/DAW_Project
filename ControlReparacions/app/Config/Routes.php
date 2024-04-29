@@ -88,4 +88,8 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
         $routes->GET('404', 'Home::error404');
     });
 
+
+    // change de lang 
+    $routes->get('change_lang/(:segment)', 'Home::change_lang/$1');
+
 });
