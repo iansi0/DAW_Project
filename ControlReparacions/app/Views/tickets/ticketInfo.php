@@ -2,29 +2,41 @@
 <?= $this->section('content') ?>
 
 
+<div class="flex gap-16 items-center bg-primario text-secundario p-1  pl-5 w-full mb-3">
 
-<main style="view-transition-name: info<?= $ticket['id'] ?>;" class="flex gap-7 py-10">
+    <a href="<?= strpos(previous_url(), 'tickets?') !== false
+                    ? str_replace('index.php/', '', previous_url())
+                    : base_url('/tickets'); ?>">
+        <button id="pdf" class=" p-3 hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-arrow-left text-3xl"></i></button>
+    </a>
+
+    <h1 class=" text-left text-5xl"><?= lang('titles.id_ticket'); ?>: <?= explode("-", $ticket['id'])[4] ?></h1>
+</div>
+
+<main style="view-transition-name: info<?= $ticket['id'] ?>;" class="flex gap-7 py-1 ">
+
     <section class="flex flex-col gap-2">
+
+
         <div class="p-5">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTscU3jYwiMibdPrr7f7S2htGvZGqUWHKr6gSuuUYKQkA&s" alt="imagen dispositivo" class="w-full">
         </div>
 
-        <div class=" text-secundario min-w-64 max-w-72">
-            <h3 class="bg-primario text-lg p-3"><?= lang('titles.id'); ?> </h3>
-            <p class="bg-terciario-2 p-3 text-terciario-1 overflow-auto"><?= $ticket['id'] ?></p>
+        <div class=" text-secundario min-w-72 max-w-80">
+            <h3 class="bg-primario text-lg p-3"> Datos </h3>
+            <p class="bg-terciario-2 p-2 text-terciario-1 overflow-auto"><i class="fa-solid fa-hashtag"></i> : <span class="text-sm"><?= $ticket['id'] ?></span></p>
+            <p class="bg-terciario-2 p-2 text-terciario-1 overflow-auto"><i class="fa-solid fa-envelope"></i> : <span class="text-sm"><?= $ticket['correu_contacte'] ?></span></p>
         </div>
 
 
-        <div class=" text-secundario min-w-64 max-w-72">
+        <div class=" text-secundario min-w-64 max-w-72 ">
             <h3 class="bg-primario text-lg p-3"><?= lang('forms.description'); ?></h3>
-            <p class="bg-terciario-2 p-3 text-terciario-1  min-h-36 max-h-36 overflow-auto"><?= $ticket['descripcio'] ?></p>
+            <p class="bg-terciario-2 p-3 text-terciario-1  min-h-auto max-h-32 overflow-y-auto break-words"><?= $ticket['descripcio'] ?></p>
         </div>
 
     </section>
 
-    <article class="flex flex-col gap-5 w-full">
-        <h1 class="bg-primario text-secundario text-left  p-3 text-5xl"><?= lang('titles.id_ticket'); ?>: <?= explode("-", $ticket['id'])[4] ?></h1>
-
+    <article class="flex flex-col gap-2 w-full">
 
         <div class="flex justify-between gap-4">
 
@@ -34,12 +46,10 @@
 
                     <?php
                     foreach ($estats as $estat) {
-                        if ($estat['id']==$ticket['id_estat']) {
+                        if ($estat['id'] == $ticket['id_estat']) {
                             echo "<option selected class=' estat_" . $estat['id'] . "' value='" . $estat["id"] . "'>" . $estat["nom"] . "</option>";
-                            
-                        }else{
+                        } else {
                             echo "<option class=' estat_" . $estat['id'] . "' value='" . $estat["id"] . "'>" . $estat["nom"] . "</option>";
-
                         }
                     }
                     ?>

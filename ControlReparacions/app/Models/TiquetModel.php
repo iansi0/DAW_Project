@@ -137,6 +137,7 @@ class TiquetModel extends Model
     {
         $this->select(["
             tiquet.id AS id, 
+            tiquet.correu_persona_contacte_centre AS correu_contacte, 
             tiquet.descripcio_avaria AS descripcio,
             tiquet.created_at AS created,
             tipus_dispositiu.nom AS tipus,
