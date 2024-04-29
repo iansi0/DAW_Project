@@ -10,6 +10,7 @@ use App\Models\CentreModel;
 use App\Models\EstatModel;
 use App\Models\IntervencioModel;
 use Faker\Factory;
+use Google\Service\Walletobjects\Pagination;
 
 class TicketsController extends BaseController
 {
@@ -31,7 +32,7 @@ class TicketsController extends BaseController
         $model = new TiquetModel();
 
         if ($search == '') {
-            $paginateData = $model->getAllPaged(8);
+            $paginateData = $model->getAllPaged()->paginate(8);
         } else {
             $paginateData = $model->getByTitleOrText($search)->paginate(8);
         }
@@ -86,13 +87,14 @@ class TicketsController extends BaseController
                 // ["data" => $ticket['id'],"class"=>'p-5'],
                 explode("-", $ticket['id'])[4],
                 $ticket['tipus'],
-                $ticket['descripcio'],
+                ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis" ],
                 $ticket['emissor'],
-                ($ticket['receptor'] != null) ? $ticket['receptor'] : lang('titles.ticket'),
+                ["data" =>  ($ticket['receptor'] != null) ? $ticket['receptor'] : lang('titles.ticket'), "class" => ($ticket['receptor'] != null) ? "bg-red-400" : "" ],
+                
                 date("d/m/Y", strtotime($ticket['created'])),
                 date("H:i", strtotime($ticket['created'])),
 
-                ["data" => "<a class='p-3 w-full	 estat_" . $ticket['id_estat'] . "'>" . $ticket['estat'] . "</a>", "class" => "p-2"],
+                ["data" => "<a class='flex p-3 justify-center  whitespace-nowrap w-full estat_" . $ticket['id_estat'] . "'>" . $ticket['estat'] . "</a>", "class" => "p-2 "],
 
                 [
                     "data" =>
@@ -283,7 +285,11 @@ class TicketsController extends BaseController
     {
         $searchData = $this->request->getGet();
 
-
+        // if ($search == '') {
+        //     $paginateData = $model->getAllPaged(8);
+        // } else {
+        //     $paginateData = $model->getByTitleOrText($search)->paginate(8);
+        // }
 
         // Get News Data
 
@@ -292,7 +298,7 @@ class TicketsController extends BaseController
         if ($search == '') {
             $paginateData = $model->findAll();
         } else {
-            $paginateData = $model->orLike('codi_dispositiu', $search, 'both', true)->orLike('descripcio_avaria', $search, 'both', true)->findAll($search);
+            $paginateData = $model->getByTitleOrText($search)->findAll();
         }
 
         $csv_string = "";
@@ -321,16 +327,22 @@ class TicketsController extends BaseController
         $model = new TiquetModel();
 
         if ($search == '') {
-            $paginateData = $model->findAll();
+            $paginateData = $model->getAllPaged()->findAll();
+            // dd($paginateData);
+
+            
         } else {
-            $paginateData = $model->orLike('codi_dispositiu', $search, 'both', true)->orLike('descripcio_avaria', $search, 'both', true)->findAll($search);
+            $paginateData = $model->getByTitleOrText($search)->findAll();
         }
+        
 
         $xls_string = "";
 
         foreach ($paginateData as $ticket) {
-            $xls_string .= implode(",", $ticket) . "\n";
+            $xls_string .= implode("\t", $ticket) . "\n";
+            d($xls_string);
         }
+        dd('fin');
         if ($search != '') {
             header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '_filter-' . $search . '.xls"');
         } else {
