@@ -70,7 +70,6 @@ class TicketsController extends BaseController
         $table->setTemplate($template);
 
         $data = [
-            'page_title' => 'CI4 Pager & search filter',
             'tickets' => $paginateData,
             'pager' => $model->pager,
             'search' => $search,
