@@ -175,7 +175,7 @@
         </div>
 
         <!-- DROPDOWN USER -->
-        <div id="dropdown_user" class="absolute right-1 top-12 w-60 px-5 py-3 bg-[#f7f7f9] shadow border border-transparent rounded-b-lg">
+        <div id="dropdown_user" class="absolute hidden right-1 top-12 w-60 px-5 py-3 bg-[#f7f7f9] shadow border border-transparent rounded-b-lg">
             <ul class="space-y-3 text-terciario-4">
                 <li class="font-medium h-8">
                     <a href="<?= base_url('profile') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
@@ -353,7 +353,7 @@
 
         // FUNCIONES DE SHOW / HIDE DE DROPDOWN USUARIO
         var dropdown = document.querySelector("#dropdown_user");
-        dropdown.style.display = "none";
+     
 
         window.addEventListener('click', function(event) {
 
