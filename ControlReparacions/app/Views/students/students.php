@@ -1,60 +1,36 @@
-<?= $this->extend('layouts/master.php') ?>
-
+<?= $this->extend('layouts/master') ?>
 
 <?= $this->section('content') ?>
-<h1 class="text-center text-7xl text-primario">Alumnos</h1>
 
+<div class=" ">
 
-<section class="flex  gap-8 mt-8   mb-5">
-    <button class="bg-primario text-white px-5 py-2 hover:bg-terciario-4">+Filter</button>
+    <div class="flex justify-between items-center mb-1">
 
-    <form action="" class="flex gap-2 w-full">
-        <input type="search" id="gsearch" name="gsearch" class="text-black bg-slate-400 ml-auto pl-2  rounded-lg ">
-        <input type="submit" class="bg-primario text-white px-5 py-2 hover:bg-terciario-4">
-    </form>
+        <h1 class=" text-left text-5xl text-primario"><?= strtoupper(lang('titles.students')) ?></h1>
 
-    <button id="add-ticket" class="bg-primario text-white px-5 py-2 hover:bg-terciario-4">Afegir</button>
-</section>
+        <a href="<?= base_url('tickets/add') ?>">
+            <button id="add-ticket" class=" px-28 py-1 border border-terciario-4  rounded-lg hover:bg-terciario-4 hover:text-white transition hover:ease-in ease-out duration-250"><?= lang('titles.n_students') ?></button>
+        </a>
 
+    </div>
 
-<table class="w-full m"> 
-    <thead class="bg-primario  text-white">
-        <th>DNI</th>
-        <th>Categoria</th>
-        <th>Asignar Dispositivo</th>
-        <th>Inici</th>
-        <th>Ultima</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>y9698374f</td>
-            <td>CFGM SMX 1BA</td>
-            <td>1234567890</td>
-            <td>23-03-24</td>
-            <td>24-09-24</td>
-        </tr>
-        <tr>
-            <td class=" bg-gray-200">y9698374f</td>
-            <td class=" bg-gray-200">CFGM SMX 1BA</td>
-            <td class=" bg-gray-200">1234567890</td>
-            <td class=" bg-gray-200">23-03-23</td>
-            <td class=" bg-gray-200">23-03-24</td>
-        </tr>
-        <tr>
-            <td>y9698374f</td>
-            <td>CFGM SMX 1BA</td>
-            <td>1234567890</td>
-            <td>23-03-23</td>
-            <td>23-03-24</td>
-        </tr>
-        <tr>
-            <td class=" bg-gray-200">y9698374f</td>
-            <td class=" bg-gray-200">CFGM SMX 1BA</td>
-            <td class=" bg-gray-200">1234567890</td>
-            <td class=" bg-gray-200">23-03-23</td>
-            <td class=" bg-gray-200">23-03-24</td>
-        </tr>
-    </tbody>
-</table>
+    <div class="flex justify-between items-center mb-1">
+
+        <!-- Search form -->
+        <form method='get' action="<?= base_url('students'); ?>" id="searchForm" class="flex gap-2 items-center center">
+            <input type='text' name='q' value='<?= $search ?>' placeholder="<?= lang('buttons.search') ?>..." class=" px-5 py-1  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+            <input type='button' id='btnsearch' value='<?= lang('buttons.search') ?>' onclick='document.getElementById("searchForm").submit();' class="bg-primario text-white px-8 py-1 border border-terciario-4 hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250">
+        </form>
+    </div>
+
+    <?php // TABLA GENERADA CON TABLE-GEN-HELPER
+    echo $table->generate();
+    ?>
+
+    <!-- Paginación -->
+    <div>
+        <?= $pager->only(['q'])->links() ?>
+    </div>
+</div>
+
 <?= $this->endSection() ?>
