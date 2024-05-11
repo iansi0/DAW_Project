@@ -48,4 +48,8 @@ class TipusInventariModel extends Model
 
         $this->insert($data);
     }
+
+    public function getAllTypes(){
+        return $this->select('id, nom')->findAll();
+    }
 }

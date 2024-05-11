@@ -268,8 +268,6 @@ class TicketsController extends BaseController
         return redirect()->to(base_url('/tickets'));
     }
 
-
-
     public function deleteTicket($id)
     {
 

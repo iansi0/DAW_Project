@@ -40,6 +40,7 @@ return [
     's_cycle'       => 'Escoge Ciclo Formativo',
     's_course'      => 'Escoge Curso',
     's_role'        => 'Escoge Rol',
+    's_inventary'   => 'Escoge Inventario',
 
     'lang'          => 'Idioma',
 
@@ -57,6 +58,8 @@ return [
     'description'   => 'Descripción',
     'other'         => 'Otros',
     'price'         => 'Precio',
+    'type_inventary' => 'Tipo inventario',
+   
 
     'required_slot' => 'Los campos marcados con ( * ) són obligatorios',
 
