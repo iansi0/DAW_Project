@@ -104,22 +104,21 @@ class TiquetModel extends Model
          */
 
 
-        return $this->select(["
-            tiquet.id AS id, 
+         return $this->select([
+            "tiquet.id AS id, 
             tiquet.descripcio_avaria AS descripcio,
             tiquet.created_at AS created,
             tipus_dispositiu.nom AS tipus,
             estat.nom as estat,
             tiquet.id_estat as id_estat,
-            CASE  WHEN tiquet.codi_centre_emissor = centre.codi THEN CONCAT(centre.nom)  ELSE NULL  END AS emissor,
-            CASE  WHEN tiquet.codi_centre_reparador = centre.codi THEN CONCAT(centre.nom)  ELSE CONCAT('".lang('titles.toassign')."')  END AS receptor
-            "])
-    
-
+            COALESCE(centre_emissor.nom, '".lang('titles.toassign')."') AS emissor,
+            COALESCE(centre_reparador.nom, '".lang('titles.toassign')."') AS receptor"
+        ])
         ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
         ->join('estat', 'tiquet.id_estat = estat.id')
-        ->join('centre', ' tiquet.codi_centre_emissor = centre.codi OR tiquet.codi_centre_reparador = centre.codi');
-
+        ->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left')
+        ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+        
     }
 
     public function deleteTicket($id)

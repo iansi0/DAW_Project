@@ -4,6 +4,9 @@
 <h1 class="text-5xl text-primario mt-14"><?= lang("titles.n_ticket")?></h1>
 
 <section style="view-transition-name: addTicket;" class="container mx-auto px-4 py-8 mt-10 text-base">
+    <span class="text-danger">
+        <?= validation_list_errors(); ?>
+    </span>
     <form action="add" method="POST" class="flex flex-col gap-20">
 
         <div class="grid grid-cols-3 gap-x-2">
