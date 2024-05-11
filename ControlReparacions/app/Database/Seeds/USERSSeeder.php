@@ -208,8 +208,8 @@ class USERSSeeder extends Seeder
 
         // Insertar los datos en la base de datos 
         // PARA EL 100% DEL ARCHIVO COMENTAR LA PARTE DE - && $count < 20 -
-        // while (($row = fgetcsv($csvFile, 2000, ",")) !== FALSE && $count < 20) {
-        while (($row = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
+        while (($row = fgetcsv($csvFile, 2000, ",")) !== FALSE && $count < 20) {
+        // while (($row = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 
             if (!$firstLine) {
 
@@ -353,6 +353,20 @@ class USERSSeeder extends Seeder
 
             echo("PROF DONE\n");
 
+            echo("START CURSOS\n");
+
+            /**
+             * AÑADIR CURSOS
+             */
+
+            $arrCurs = [];
+            for ($i=0; $i < 5; $i++) { 
+                $uuid = LibrariesUUID::v4();
+                $arrCurs[] = $uuid;
+            }
+
+            echo("CURSOS DONE\n");
+
             echo("START ALUMN\n");
 
             /**
@@ -384,13 +398,15 @@ class USERSSeeder extends Seeder
                 */
     
                 $arrCentres = ['25002799', '17010700', '17010499', '17008249', '8000013', '8001509', '8002198', '8015399', '8017104', '8019401'];
-                $rnd = rand(0, count($arrCentres) - 1);
-    
+                $rndCentre = rand(0, count($arrCentres) - 1);
+                $rndCurs = rand(0, count($arrCurs) - 1);
+
                 $alumne->addAlumne(
                     $uuid,
                     $fake->name(),
                     $fake->lastName(),
-                    $arrCentres[$rnd]
+                    $arrCurs[$rndCurs],
+                    $arrCentres[$rndCentre]
                 );
 
                 // Le añadimos el rol de ALUMN

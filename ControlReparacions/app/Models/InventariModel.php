@@ -12,7 +12,7 @@ class InventariModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'data_compra', 'preu', 'codi_centre', 'id_tipus_inventari'];
+    protected $allowedFields    = ['id_inventari','data_compra','preu','nom','codi_centre','id_tipus_inventari'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,13 +38,13 @@ class InventariModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addInventari($id_inventari, $data_compra, $preu, $codi_centre, $id_tipus_inventari)
-    {
-
+    public function addInventari($id_inventari,$data_compra,$preu,$nom,$codi_centre,$id_tipus_inventari) {
+           
         $data = [
             'id' =>  $id_inventari,
             'data_compra' => $data_compra,
             'preu' => $preu,
+            'nom' => $nom,
             'codi_centre' => $codi_centre,
             'id_tipus_inventari' => $id_tipus_inventari,
         ];

@@ -123,6 +123,7 @@ class Home extends BaseController
         // Generamos la sesión
         $sessionData = [
             "uid"           => $user["id"],
+            "role"          => $user["role"],
             "user"          => $user["user"],
             "code"          => $user["code"],
             "name"          => $user["name"],
@@ -198,6 +199,7 @@ class Home extends BaseController
 
         $sessionData = [
             "uid"           => session('user')["uid"],
+            "role"          => session('user')["role"],
             "user"          => session('user')["user"],
             "code"          => session('user')["code"],
             "name"          => session('user')["name"],

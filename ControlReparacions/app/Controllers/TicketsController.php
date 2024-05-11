@@ -170,6 +170,8 @@ class TicketsController extends BaseController
 
     public function ticketForm()
     {
+        helper('form');
+
         $type = new TipusDispositiuModel();
         $center = new CentreModel();
         $data = [
@@ -182,7 +184,37 @@ class TicketsController extends BaseController
 
     public function addTicket()
     {
+        helper('form');
 
+        $validationRules =
+        [
+            'description' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Error Descripcio',
+                ],
+            ],
+            'nameContact' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Error nameContact',
+                ],
+            ],
+            'emailContact' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Error emailContact',
+                ],
+            ],
+            'id_type' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Error id_type',
+                ],
+            ],
+            
+
+        ];
         $model = new TiquetModel();
 
         $fake = Factory::create("es_ES");
@@ -195,6 +227,8 @@ class TicketsController extends BaseController
         $nom_persona_contacte_centre = $this->request->getPost("nameContact");
         $correu_persona_contacte_centre =  $this->request->getPost("emailContact");
         $id_tipus_dispositiu = $this->request->getPost("id_type");
+
+        if ($this->validate($validationRules)) {
         if ($this->request->getPost("repair") || $this->request->getPost("sender")) {
             $id_estat = 2;
             if ($this->request->getPost("repair") && $this->request->getPost("sender")) {
@@ -226,12 +260,17 @@ class TicketsController extends BaseController
             $codi_centre_emissor,
             $codi_centre_reparador
         );
+    }else{
+        return redirect()->back()->withInput();
 
+    }
         return redirect()->to(base_url('/tickets'));
     }
 
     public function modifyTicket($id)
     {
+        helper('form');
+
         $type = new TipusDispositiuModel();
         $center = new CentreModel();
         $ticket = new TiquetModel();
@@ -250,19 +289,54 @@ class TicketsController extends BaseController
     {
 
         $model = new TiquetModel();
+        helper('form');
 
-        $data = [
-            "id_tiquet" =>  $id,
-            "descripcio_avaria" =>  $this->request->getPost("description"),
-            "nom_persona_contacte_centre" => $this->request->getPost("nameContact"),
-            "correu_persona_contacte_centre" =>  $this->request->getPost("emailContact"),
-            "id_tipus_dispositiu" => $this->request->getPost("id_type"),
-            "id_estat" => $this->request->getPost("id_state"),
-            "codi_centre_emissor" => $this->request->getPost("sender"),
-            "codi_centre_reparador" => $this->request->getPost("repair"),
+        $validationRules =
+        [
+            'description' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Error Descripcio',
+                ],
+            ],
+            'nameContact' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Error nameContact',
+                ],
+            ],
+            'emailContact' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Error emailContact',
+                ],
+            ],
+            'id_type' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Error id_type',
+                ],
+            ],
+            
 
         ];
+        if ($this->validate($validationRules)) {
 
+            $data = [
+                "id_tiquet" =>  $id,
+                "descripcio_avaria" =>  $this->request->getPost("description"),
+                "nom_persona_contacte_centre" => $this->request->getPost("nameContact"),
+                "correu_persona_contacte_centre" =>  $this->request->getPost("emailContact"),
+                "id_tipus_dispositiu" => $this->request->getPost("id_type"),
+                "id_estat" => $this->request->getPost("id_state"),
+                "codi_centre_emissor" => $this->request->getPost("sender"),
+                "codi_centre_reparador" => $this->request->getPost("repair"),
+
+            ];
+        }else{
+            return redirect()->back()->withInput();
+        }
+       
         $model->modifyTicket($id, $data);
 
         return redirect()->to(base_url('/tickets'));
