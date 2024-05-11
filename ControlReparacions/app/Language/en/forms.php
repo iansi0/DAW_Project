@@ -40,6 +40,7 @@ return [
     's_cycle'       => 'Choose Formative Cycle',
     's_course'      => 'Choose Course',
     's_role'        => 'Choose Role',
+    's_inventary'   => 'Choose Inventary',
 
     'lang'          => 'Language',
 
@@ -57,6 +58,7 @@ return [
     'description'   => 'Description',
     'other'         => 'Others',
     'price'         => 'Price',
+    'type_inventary' => 'Type inventary',
 
     'required_slot' => 'The inputs with ( * ) are required',
 

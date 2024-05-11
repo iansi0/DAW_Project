@@ -54,6 +54,8 @@ return [
 
     'inventory'     => 'Inventories',
     'inventory_2'   => 'Inventory',
+    'price'         => 'Price',
+    'type'         => 'Type',
     'n_inventory'   => 'Add Inventory',
     'e_inventory'   => 'Modify Inventory',
 

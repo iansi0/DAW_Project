@@ -38,10 +38,11 @@
     
     <!-- Export Buttons -->
     <div>
-      <a href="<?= base_url('export/xls/' . $search . '') ?>">
+
+      <a href="<?= base_url('tickets/xls/' . $search . '') ?>">
         <button id="xls" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " XLS" ?></button>
       </a>
-      <a href="<?= base_url('export/csv/' . $search . '') ?>">
+      <a href="<?= base_url('tickets/csv/' . $search . '') ?>">
         <button id="csv" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " CSV" ?></button>
       </a>
     </div>
@@ -122,7 +123,8 @@
   ?>
 
   <!-- Paginate -->
-  <?= $pager->only(['q'])->links() ?>
+  <divs>
+    <?= $pager->only(['q'])->links() ?>
 </div>
 
 </div>

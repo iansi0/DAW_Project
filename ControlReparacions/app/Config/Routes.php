@@ -67,7 +67,13 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
 
     // INVENTARY
     $routes->group('inventary', function($routes){
-        $routes->GET('', 'Home::empty');
+        $routes->GET('', 'InventaryController::index');
+        $routes->GET('add', 'InventaryController::inventaryForm');
+        $routes->POST('add', 'InventaryController::addInventary');
+
+        $routes->GET('delete/(:segment)', 'InventaryController::deleteInventary/$1');
+        $routes->GET('modify/(:segment)', 'InventaryController::modifyInventary/$1');
+        $routes->POST('modify/(:segment)', 'InventaryController::modifyInventary_post/$1');
     });
 
     // CONFIG
