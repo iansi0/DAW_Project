@@ -6,8 +6,8 @@ use CodeIgniter\Model;
 
 class InventariModel extends Model
 {
-    protected $table            = 'inventaris';
-    protected $primaryKey       = 'id_inventari';
+    protected $table            = 'inventari';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
@@ -41,7 +41,7 @@ class InventariModel extends Model
     public function addInventari($id_inventari,$data_compra,$preu,$nom,$codi_centre,$id_tipus_inventari) {
            
         $data = [
-            'id_inventari' =>  $id_inventari,
+            'id' =>  $id_inventari,
             'data_compra' => $data_compra,
             'preu' => $preu,
             'nom' => $nom,
@@ -50,5 +50,50 @@ class InventariModel extends Model
         ];
 
         $this->insert($data);
+    }
+
+    public function getByTitleOrText($search)
+    {
+        return $this->select("
+        inventari.id AS id, 
+        inventari.preu AS preu, 
+        inventari.data_compra AS data_compra,
+        inventari.id_tipus_inventari AS tipus,
+        tipus_inventari.nom as nomInventary
+        ")
+            ->join('tipus_inventari', 'inventari.id_tipus_inventari = tipus_inventari.id');
+        // ->where('codi_centre', session('user')['code']);
+
+
+    }
+
+    public function getAllPaged()
+    {
+
+        return $this->select("
+        inventari.id AS id, 
+        inventari.preu AS preu, 
+        inventari.data_compra AS data_compra,
+        inventari.id_tipus_inventari AS tipus,
+        tipus_inventari.nom as nomInventary
+        ")
+            ->join('tipus_inventari', 'inventari.id_tipus_inventari = tipus_inventari.id');
+        // ->where('codi_centre', session('user')['code']);
+
+    }
+
+    public function deleteTicket($id)
+    {
+        return $this->where('id', $id)->delete();
+    }
+
+    public function modifyTicket($id,$data)
+    {
+        return $this->where('id', $id)->set($data)->update();
+    }
+
+    public function getInventarytById($id)
+    {
+        return $this->where('inventari.id', $id)->first();
     }
 }

@@ -48,8 +48,8 @@ class UsersInRolesModel extends Model
            
         $data = [
             'id'            => $id,
-            'user'          => trim($user),
-            'role'          => trim($role)
+            'id_user'          => trim($user),
+            'id_role'          => trim($role)
         ];
 
         $this->insert($data);

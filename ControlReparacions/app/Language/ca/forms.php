@@ -40,6 +40,7 @@ return [
     's_cycle'       => 'Escull Cicle Formatiu',
     's_course'      => 'Escull Curs',
     's_role'        => 'Escull Rol',
+    's_inventary'   => 'Escull Inventari',
 
     'lang'          => 'Idioma',
 
@@ -57,6 +58,7 @@ return [
     'description'   => 'Descripció',
     'other'         => 'Altres',
     'price'         => 'Preu',
+    'type_inventary' => 'Tipus inventari',
 
     'required_slot' => 'Els camps marcats amb ( * ) són obligatoris',
 
