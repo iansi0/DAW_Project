@@ -96,4 +96,8 @@ class InventariModel extends Model
     {
         return $this->where('inventari.id', $id)->first();
     }
+
+    public function getInventaryNoAssigned(){
+        return $this->select('id, nom')->where('id_ticket', null)->findAll();
+    }
 }

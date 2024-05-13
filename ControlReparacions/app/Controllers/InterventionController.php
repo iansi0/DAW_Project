@@ -6,6 +6,9 @@ use App\Models\IntervencioModel;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 
+
+use App\Models\InventariModel;
+
 class InterventionController extends BaseController
 {
     public function intervention()
@@ -15,6 +18,16 @@ class InterventionController extends BaseController
 
     public function interventionForm()
     {
-        return view('intervention/interventionForm');
+
+        $inventary = new InventariModel();
+
+        $data = [
+
+            "inventary" => $inventary->getInventaryNoAssigned(),
+
+        ];
+
+
+        return view('intervention/interventionForm', $data);
     }
 }

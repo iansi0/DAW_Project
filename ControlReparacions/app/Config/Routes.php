@@ -44,8 +44,8 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
 
     // INTERVENTIONS
     $routes->group('intervention', function($routes){
-        $routes->GET('', 'Home::empty');
-        $routes->GET('form', 'Home::empty');
+        $routes->GET('', 'InterventionController::intervention');
+        $routes->GET('form', 'InterventionController::interventionForm');
     });
 
     // STUDENTS
