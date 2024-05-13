@@ -13,6 +13,11 @@ class INVENTARI extends Migration
                         'type'           => 'BINARY',
                         'constraint'     => 32,
                 ],
+                'nom' => [
+                        'type'           => 'VARCHAR',
+                        'constraint'     => 200,
+                        'null'           => false,
+                ],
                 'data_compra'          => [
                         'type'           => 'DATE',
                         'default'        => date("Y-m-d H:i:s"),
@@ -31,7 +36,7 @@ class INVENTARI extends Migration
                         'type'           => 'INT',
                         'null'           => false,
                 ],
-                'id_tipus_inventari'          => [
+                'id_intervencio'          => [
                     'type'           => 'BINARY',
                     'constraint'     => 32,
                     'null'           => true,

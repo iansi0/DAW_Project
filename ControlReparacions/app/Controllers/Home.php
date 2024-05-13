@@ -121,7 +121,6 @@ class Home extends BaseController
         $user = $model->getUserById($user["id"]);
 
         $userInRole = new UsersInRolesModel();
-        dd($userInRole->getRoleByUser($user["id"]));
         // Generamos la sesión
         $sessionData = [
             "uid"           => $user["id"],
@@ -138,7 +137,6 @@ class Home extends BaseController
             "logged_data"   => date("Y-m-d H:i:s"),
             "ip_user"       => $_SERVER['REMOTE_ADDR']
         ];
-        dd($sessionData);
         session()->set("user", $sessionData);
 
         // Creamos la cookie para recordar el nombre de usuario
