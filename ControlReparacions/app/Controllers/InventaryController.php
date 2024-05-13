@@ -156,11 +156,11 @@ class InventaryController extends BaseController
             "id" =>  $id,
             "nom" =>  $this->request->getPost("name"),
             "preu" =>  $this->request->getPost("price"),
-            "id_tipus_inventari" => $this->request->getPost("type_inventary"),
+            "id_tipus_inventari" => intval($this->request->getPost("type_inventary")),
         ];
 
        
-        $model->modifyTicket($id, $data);
+        $model->modifyInventari($id, $data);
 
         return redirect()->to(base_url('/inventary'));
     }
@@ -170,7 +170,7 @@ class InventaryController extends BaseController
 
         $model = new InventariModel();
 
-        $model->deleteTicket($id);
+        $model->deleteInventari($id);
 
         return redirect()->to(base_url('/inventary'));
     }

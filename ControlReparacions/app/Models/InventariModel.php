@@ -13,7 +13,7 @@ class InventariModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'nom', 'data_compra', 'preu',  'codi_centre', 'id_tipus_inventari, id_intervencio'];
+    protected $allowedFields    = ['id', 'nom', 'data_compra', 'preu',  'codi_centre', 'id_tipus_inventari', 'id_intervencio'];
 
     // Dates
     protected $useTimestamps = true;
@@ -87,14 +87,15 @@ class InventariModel extends Model
 
     }
 
-    public function deleteTicket($id)
+    public function deleteInventari($id)
     {
         return $this->where('id', $id)->delete();
     }
 
-    public function modifyTicket($id, $data)
+    public function modifyInventari($id, $data)
     {
         return $this->where('id', $id)->set($data)->update();
+    
     }
 
     public function getInventarytById($id)

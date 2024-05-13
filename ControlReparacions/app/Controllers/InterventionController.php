@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\IntervencioModel;
+
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -42,17 +43,15 @@ class InterventionController extends BaseController
 
         $id_inventary = $this->request->getPost("id_inventary");
 
+      
 
+        //Añadir intervencion
         $id =  $fake->uuid();
         $descripcio =  $this->request->getPost("description");
-
-
         $id_ticket = $this->request->getPost("ticket_id");
-
-       
-         $id_tipus = $id_inventary == 6 ? 1 : 0 ;
-         $id_curs = session('user')['code'];
-         $persona_reparadora = session('user')['user'];
+        $id_tipus = $id_inventary == 6 ? 1 : 0;
+        $id_curs = session('user')['code'];
+        $persona_reparadora = session('user')['user'];
 
         $model->addIntervencio(
             $id,
@@ -63,8 +62,18 @@ class InterventionController extends BaseController
             $persona_reparadora
         );
 
+        //Modificar inventario relacionandolo con la intervencion
+
+        $modelInventary = new InventariModel();
+
+        $data = [
+            "id" =>  $id_inventary,
+            'id_intervencio' => $id,
+        ];
+
+        $modelInventary->modifyInventari($id_inventary, $data);
+
 
         return redirect()->to(base_url("tickets/" . $id_ticket));
-        
     }
 }
