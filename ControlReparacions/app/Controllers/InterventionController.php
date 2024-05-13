@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\IntervencioModel;
+use App\Models\InventariModel;
+
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -10,7 +12,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Faker\Factory;
 
 
-use App\Models\InventariModel;
+
 
 class InterventionController extends BaseController
 {
@@ -49,7 +51,15 @@ class InterventionController extends BaseController
         $id =  $fake->uuid();
         $descripcio =  $this->request->getPost("description");
         $id_ticket = $this->request->getPost("ticket_id");
-        $id_tipus = $id_inventary == 6 ? 1 : 0;
+   
+
+        //mirar si id_tipus_inventary de id_inventary
+        $modelInventary = new InventariModel();
+        $product = $modelInventary->getInventarytById($id_inventary);
+
+        $id_tipus = $product['id_tipus_inventari'] == 6 ? 1 : 0;
+
+
         $id_curs = session('user')['code'];
         $persona_reparadora = session('user')['user'];
 
@@ -64,7 +74,7 @@ class InterventionController extends BaseController
 
         //Modificar inventario relacionandolo con la intervencion
 
-        $modelInventary = new InventariModel();
+        
 
         $data = [
             "id" =>  $id_inventary,

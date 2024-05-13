@@ -164,7 +164,7 @@ class TicketsController extends BaseController
                 $intervencio['correu_alumne'],
                 $intervencio['id_tipus'],
 
-                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 2 ? 'bg-red-500 text-segundario' : 'bg-segundario']
+                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-segundario' : 'bg-segundario']
             );
         }
 
