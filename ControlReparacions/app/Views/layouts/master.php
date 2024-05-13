@@ -17,16 +17,15 @@
             lato y popins para textos medium */
         }
     </style>
-    <!-- <?php 
-        if (session('user')['user']=="admin") {
-            $theme ='dark';
-        }else{
-            $theme ='light';
-            
-        }
-    ?>
+    <!-- <?php
+            if (session('user')['user'] == "admin") {
+                $theme = 'dark';
+            } else {
+                $theme = 'light';
+            }
+            ?>
     <script>
-        ='<?= $theme?>';
+        ='<?= $theme ?>';
         console.log( );
     </script> -->
 </head>
@@ -166,54 +165,55 @@
             </ul>
         </nav>
 
-
-
-        <div class="absolute right-44 flex align-middle mt-2 gap-3">
-            <a class="hover:text-primario <?= session('user')['lang']=='es' ? "text-primario font-bold" : "" ?>" href="<?= base_url('change_lang/es') ?>">ES</a>
-            <span>&nbsp;|&nbsp;</span>
-            <a class="hover:text-primario <?= session('user')['lang']=='ca' ? "text-primario font-bold" : "" ?>" href="<?= base_url('change_lang/ca') ?>">CA</a>
-        </div>
-
-        <!-- User img and name -->
-        <div id="div_user" style="cursor:pointer" class="flex items-center absolute right-5 h-full gap-2 transform transition-all ease-in duration-200 hover:text-primario">
-            <div class="">
+        <div class="flex gap-5 w-full justify-end">
+            <div class="  flex align-middle mt-2 gap-3">
+                <a class="hover:text-primario <?= session('user')['lang'] == 'es' ? "text-primario font-bold" : "" ?>" href="<?= base_url('change_lang/es') ?>">ES</a>
+                <span>&nbsp;|&nbsp;</span>
+                <a class="hover:text-primario <?= session('user')['lang'] == 'ca' ? "text-primario font-bold" : "" ?>" href="<?= base_url('change_lang/ca') ?>">CA</a>
             </div>
-            <!-- <img class="w-10 h-10 rounded-full" src="https://cdn-icons-png.freepik.com/512/1077/1077114.png" alt="Rounded avatar"> -->
-            <i class="py-3 rounded-full fa-solid fa-user text-2xl"></i>
-            <h1 class="align-center h mr-5 font-bold ">
-                <?= session('user')['user'] ?>&nbsp;
-                <i class="fa-solid fa-caret-down"></i>
-            </h1>
-        </div>
 
-        <!-- DROPDOWN USER -->
-        <div id="dropdown_user" class="absolute hidden right-1 top-12 w-60 px-5 py-3 bg-[#f7f7f9] shadow border border-transparent rounded-b-lg">
-            <ul class="space-y-3 text-terciario-4">
-                <li class="font-medium h-8">
-                    <a href="<?= base_url('work') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
-                        <div class="mr-3">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                        </div>
-                        <?= lang('buttons.config') ?>
-                    </a>
-                </li>
+            <!-- User img and name -->
+            <div id="div_user" style="cursor:pointer" class="flex items-center  h-full gap-2 transform transition-all ease-in duration-200 hover:text-primario">
+                <div class="">
+                </div>
+                <!-- <img class="w-10 h-10 rounded-full" src="https://cdn-icons-png.freepik.com/512/1077/1077114.png" alt="Rounded avatar"> -->
+                <i class="py-3 rounded-full fa-solid fa-user text-2xl"></i>
+                <h1 class="align-center h mr-5 font-bold ">
+                    <?= session('user')['user'] ?>&nbsp;
+                    <i class="fa-solid fa-caret-down"></i>
+                </h1>
+            </div>
 
-                <hr class="border-gray-700">
+            <!-- DROPDOWN USER -->
+            <div id="dropdown_user" class="absolute hidden right-1 top-12 w-60 px-5 py-3 bg-[#f7f7f9] shadow border border-transparent rounded-b-lg">
+                <ul class="space-y-3 text-terciario-4">
+                    <li class="font-medium h-8">
+                        <a href="<?= base_url('work') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                            <div class="mr-3">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <?= lang('buttons.config') ?>
+                        </a>
+                    </li>
 
-                <li class="font-medium h-8">
-                    <a href="<?= base_url('logout') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transition-all ease-in duration-300 hover:bg-primario hover:text-white">
-                        <div class="ml-1 mr-3 text-red-600">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                            </svg>
-                        </div>
-                        <?= lang('buttons.logout') ?>
-                    </a>
-                </li>
-            </ul>
+                    <hr class="border-gray-700">
+
+                    <li class="font-medium h-8">
+                        <a href="<?= base_url('logout') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                            <div class="ml-1 mr-3 text-red-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                                </svg>
+                            </div>
+                            <?= lang('buttons.logout') ?>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
         </div>
     </header>
 
@@ -355,7 +355,7 @@
 
         // FUNCIONES DE SHOW / HIDE DE DROPDOWN USUARIO
         var dropdown = document.querySelector("#dropdown_user");
-     
+
 
         window.addEventListener('click', function(event) {
 
