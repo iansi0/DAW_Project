@@ -145,27 +145,22 @@ class InventaryController extends BaseController
         return view('inventary/modifyInventary', $data);
     }
 
-    // public function modifyInventary_post($id)
-    // {
+    public function modifyInventary_post($id)
+    {
 
-    //     $model = new TiquetModel();
+        $model = new InventariModel();
 
-    //     $data = [
-    //         "id_tiquet" =>  $id,
-    //         "descripcio_avaria" =>  $this->request->getPost("description"),
-    //         "nom_persona_contacte_centre" => $this->request->getPost("nameContact"),
-    //         "correu_persona_contacte_centre" =>  $this->request->getPost("emailContact"),
-    //         "id_tipus_dispositiu" => $this->request->getPost("id_type"),
-    //         "id_estat" => $this->request->getPost("id_state"),
-    //         "codi_centre_emissor" => $this->request->getPost("sender"),
-    //         "codi_centre_reparador" => $this->request->getPost("repair"),
+        $data = [
+            "id" =>  $id,
+            // "nom" =>  $this->request->getPost("name"),
+            "preu" =>  $this->request->getPost("price"),
+            "id_tipus_inventary" => $this->request->getPost("type_inventary"),
+        ];
 
-    //     ];
+        $model->modifyTicket($id, $data);
 
-    //     $model->modifyTicket($id, $data);
-
-    //     return redirect()->to(base_url('/tickets'));
-    // }
+        return redirect()->to(base_url('/inventary'));
+    }
 
     public function deleteInventary($id)
     {
