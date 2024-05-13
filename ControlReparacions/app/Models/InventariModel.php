@@ -82,8 +82,9 @@ class InventariModel extends Model
         inventari.id_tipus_inventari AS tipus,
         tipus_inventari.nom as nomInventary
         ")
-            ->join('tipus_inventari', 'inventari.id_tipus_inventari = tipus_inventari.id');
+            ->join('tipus_inventari', 'inventari.id_tipus_inventari = tipus_inventari.id')
         // ->where('codi_centre', session('user')['code']);
+        ->where('id_intervencio', null);
 
     }
 
