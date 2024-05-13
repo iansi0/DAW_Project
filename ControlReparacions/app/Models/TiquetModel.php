@@ -61,24 +61,25 @@ class TiquetModel extends Model
     public function getByTitleOrText($search)
     {
 
-        return $this->select([
-            "tiquet.id AS id, 
-            tiquet.descripcio_avaria AS descripcio,
-            tiquet.created_at AS created,
-            tipus_dispositiu.nom AS tipus,
-            estat.nom as estat,
-            tiquet.id_estat as id_estat,
-            COALESCE(centre_emissor.nom, '".lang('titles.toassign')."') AS emissor,
-            COALESCE(centre_reparador.nom, '".lang('titles.toassign')."') AS receptor"
-        ])
-        ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
-        ->join('estat', 'tiquet.id_estat = estat.id')
-        ->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left')
-        ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left')
+        return $this->select(["
+                                tiquet.id AS id, 
+                                tiquet.descripcio_avaria AS descripcio,
+                                tiquet.created_at AS created,
+                                tipus_dispositiu.nom AS tipus,
+                                estat.nom as estat,
+                                tiquet.id_estat as id_estat,
+                                COALESCE(centre_emissor.nom, '".lang('titles.toassign')."') AS emissor,
+                                COALESCE(centre_reparador.nom, '".lang('titles.toassign')."') AS receptor
+                            "])
+                    ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
+                    ->join('estat', 'tiquet.id_estat = estat.id')
+                    ->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left')
+                    ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left')
                     ->orLike('tiquet.id', $search, 'both', true)
                     ->orLike('tipus_dispositiu.nom', $search, 'both', true)
                     ->orLike('tiquet.descripcio_avaria', $search, 'both', true)
-                    ->orLike('centre.nom', $search, 'both', true)
+                    ->orLike('centre_emissor.nom', $search, 'both', true)
+                    ->orLike('centre_reparador.nom', $search, 'both', true)
                     ->orLike('tiquet.created_at', $search, 'both', true)
                     ->orLike('estat.nom', $search, 'both', true);
     }
@@ -135,21 +136,23 @@ class TiquetModel extends Model
 
     public function viewTicket($id)
     {
-        return $this->select([
-            "tiquet.id AS id, 
+        $this->select(["
+            tiquet.id AS id, 
+            tiquet.correu_persona_contacte_centre AS correu_contacte, 
             tiquet.descripcio_avaria AS descripcio,
             tiquet.created_at AS created,
             tipus_dispositiu.nom AS tipus,
             estat.nom as estat,
             tiquet.id_estat as id_estat,
             COALESCE(centre_emissor.nom, '".lang('titles.toassign')."') AS emissor,
-            COALESCE(centre_reparador.nom, '".lang('titles.toassign')."') AS receptor"
-        ])
-        ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
-        ->join('estat', 'tiquet.id_estat = estat.id')
-        ->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left')
-        ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
-        
+            COALESCE(centre_reparador.nom, '".lang('titles.toassign')."') AS receptor
+            "]);
+    
+
+        $this->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id');
+        $this->join('estat', 'tiquet.id_estat = estat.id');
+        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
+        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
 
         return  $this->where('tiquet.id', $id)->first();
     }
