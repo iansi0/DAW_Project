@@ -28,6 +28,11 @@ class ALUMNE extends Migration
                         'constraint'     => 32,
                         'null'           => false,
                 ],
+                'id_curs'          => [
+                        'type'           => 'BINARY',
+                        'constraint'     => 32,
+                        'null'           => false,
+                ],
 
                 'created_at' => [
                         'type'       => 'DATETIME',

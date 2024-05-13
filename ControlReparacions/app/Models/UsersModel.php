@@ -120,7 +120,7 @@ class UsersModel extends Model
         $this->where('users.id', $id);
 
         $result = $this->first();
-        
+        // dd($this->first());
         return $result;
         // dd($this->db->getLastQuery());
     }

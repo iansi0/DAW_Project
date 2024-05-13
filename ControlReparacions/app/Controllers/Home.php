@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\TiquetModel;
+use App\Models\UsersInRolesModel;
 use App\Models\UsersModel;
 use SIENSIS\KpaCrud\Libraries\KpaCrud;
 
@@ -101,7 +102,6 @@ class Home extends BaseController
         $model = new UsersModel();
         // Obtenemos el usuario por user o por mail
         $user = $model->getLoginByMail($this->request->getVar('user'));
-
         // Si el user o mail no existe, devolvemos error
         if (!$user) {
             session()->setFlashdata('error', lang("error.wrong_login"));
@@ -120,9 +120,11 @@ class Home extends BaseController
         // Obtenemos la información del usuario
         $user = $model->getUserById($user["id"]);
 
+        $userInRole = new UsersInRolesModel();
         // Generamos la sesión
         $sessionData = [
             "uid"           => $user["id"],
+            "role"          => $userInRole->getRoleByUser($user["id"]),
             "user"          => $user["user"],
             "code"          => $user["code"],
             "name"          => $user["name"],
@@ -135,7 +137,6 @@ class Home extends BaseController
             "logged_data"   => date("Y-m-d H:i:s"),
             "ip_user"       => $_SERVER['REMOTE_ADDR']
         ];
-
         session()->set("user", $sessionData);
 
         // Creamos la cookie para recordar el nombre de usuario
@@ -198,6 +199,7 @@ class Home extends BaseController
 
         $sessionData = [
             "uid"           => session('user')["uid"],
+            "role"          => session('user')["role"],
             "user"          => session('user')["user"],
             "code"          => session('user')["code"],
             "name"          => session('user')["name"],
@@ -210,7 +212,7 @@ class Home extends BaseController
             "logged_data"   => date("Y-m-d H:i:s"),
             "ip_user"       => $_SERVER['REMOTE_ADDR'],
         ];
-
+        dd($sessionData);
         session()->set("user", $sessionData);
 
         return redirect()->to(str_replace('index.php/', '', previous_url()));

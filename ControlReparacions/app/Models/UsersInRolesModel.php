@@ -48,10 +48,22 @@ class UsersInRolesModel extends Model
            
         $data = [
             'id'            => $id,
-            'user'          => trim($user),
-            'role'          => trim($role)
+            'id_user'          => trim($user),
+            'id_role'          => trim($role)
         ];
 
         $this->insert($data);
+    }
+
+    public function getRoleByUser($id_user){
+        d($id_user);
+        $result = $this->select('roles.role as role')
+        ->join('roles', 'users_in_roles.id_role = roles.id')
+        ->where('users_in_roles.id_user' , $id_user)
+        ->findAll();
+        
+        d($result);
+        return $result;
+        ;
     }
 }

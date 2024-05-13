@@ -53,4 +53,6 @@ class RolesModel extends Model
 
         $this->insert($data);
     }
+
+    
 }
