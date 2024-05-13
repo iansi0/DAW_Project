@@ -31,12 +31,18 @@ class INVENTARI extends Migration
                         'type'           => 'INT',
                         'null'           => false,
                 ],
+                'id_tipus_inventari'          => [
+                    'type'           => 'BINARY',
+                    'constraint'     => 32,
+                    'null'           => true,
+                ],
                 'created_at' => [
                     'type'       => 'DATETIME',
                 ],
                 'updated_at' => [
                     'type'       => 'DATETIME',
                 ],
+                
                 'deleted_at' => [
                     'type'       => 'DATETIME',
                     'null'       => true,

@@ -98,7 +98,6 @@ class UsersModel extends Model
         $id_str = $this->db->escape($id);
 
         $this->select(  "users.id, users.user, users.lang
-                        ,users_in_roles.id_role AS role
                         ,COALESCE(sstt.codi, centre.codi, professor.codi_centre, alumne.codi_centre, '') AS code
                         ,COALESCE(sstt.nom, centre.nom, CONCAT(professor.nom, ' ', COALESCE(professor.cognoms, '')), CONCAT(alumne.nom, ' ', COALESCE(alumne.cognoms, '')), '') AS name
                         ,COALESCE(sstt.adreca_fisica, centre.adreca_fisica, (SELECT centre.adreca_fisica FROM centre JOIN professor ON professor.codi_centre = centre.codi WHERE professor.id_user = $id_str), (SELECT centre.adreca_fisica FROM centre JOIN alumne ON alumne.codi_centre = centre.codi WHERE alumne.id_user = $id_str), '') AS adress
@@ -117,12 +116,11 @@ class UsersModel extends Model
         $this->join('centre', 'centre.id_user = users.id', 'left');
         $this->join('professor', 'professor.id_user = users.id', 'left');
         $this->join('alumne', 'alumne.id_user = users.id', 'left');
-        $this->join('users_in_roles', 'users_in_roles.id_user = users.id');
 
         $this->where('users.id', $id);
 
         $result = $this->first();
-        
+        // dd($this->first());
         return $result;
         // dd($this->db->getLastQuery());
     }

@@ -19,8 +19,8 @@ class USERSINROLES extends Migration
                 'constraint'     => 32,
             ],
             'id_role' => [
-                'type'           => 'VARCHAR',
-                'constraint'     => 100,
+                'type'           => 'BINARY',
+                'constraint'     => 32,
             ],
             'created_at' => [
                 'type'       => 'DATETIME',
