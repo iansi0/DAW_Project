@@ -88,11 +88,11 @@ class TicketsController extends BaseController
                 $ticket['tipus'],
                 ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis"],
                 $ticket['emissor'],
-                ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign').' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
+                ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign') . ' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
 
                 date("d/m/Y", strtotime($ticket['created'])),
                 date("H:i", strtotime($ticket['created'])),
-                
+
                 ["data" => "<a class='flex p-3 justify-center  whitespace-nowrap w-full estat_" . $ticket['id_estat'] . "'>" . $ticket['estat'] . "</a>", "class" => "p-2 "],
 
                 [
@@ -154,6 +154,8 @@ class TicketsController extends BaseController
             'estats' => $estat->getAllStates(),
         ];
 
+   
+
         foreach ($data['interventions'] as $intervencio) {
             $buttonView = base_url("tickets/" . $intervencio['id']); // Reemplazar con tu ruta real
 
@@ -165,6 +167,9 @@ class TicketsController extends BaseController
                 ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 2 ? 'bg-red-500 text-segundario' : 'bg-segundario']
             );
         }
+
+        session()->setFlashdata('ticket_id', $id);
+
         return view('tickets/ticketInfo', $data);
     }
 
@@ -187,34 +192,34 @@ class TicketsController extends BaseController
         helper('form');
 
         $validationRules =
-        [
-            'description' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Error Descripcio',
+            [
+                'description' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error Descripcio',
+                    ],
                 ],
-            ],
-            'nameContact' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Error nameContact',
+                'nameContact' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error nameContact',
+                    ],
                 ],
-            ],
-            'emailContact' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Error emailContact',
+                'emailContact' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error emailContact',
+                    ],
                 ],
-            ],
-            'id_type' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Error id_type',
+                'id_type' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error id_type',
+                    ],
                 ],
-            ],
-            
 
-        ];
+
+            ];
         $model = new TiquetModel();
 
         $fake = Factory::create("es_ES");
@@ -229,41 +234,40 @@ class TicketsController extends BaseController
         $id_tipus_dispositiu = $this->request->getPost("id_type");
 
         if ($this->validate($validationRules)) {
-        if ($this->request->getPost("repair") || $this->request->getPost("sender")) {
-            $id_estat = 2;
-            if ($this->request->getPost("repair") && $this->request->getPost("sender")) {
-                $codi_centre_reparador = $this->request->getPost("repair");
-                $codi_centre_emissor = $this->request->getPost("sender");
-            } else if ($this->request->getPost("repair")) {
-                $codi_centre_reparador = $this->request->getPost("repair");
-                $codi_centre_emissor = 0;
+            if ($this->request->getPost("repair") || $this->request->getPost("sender")) {
+                $id_estat = 2;
+                if ($this->request->getPost("repair") && $this->request->getPost("sender")) {
+                    $codi_centre_reparador = $this->request->getPost("repair");
+                    $codi_centre_emissor = $this->request->getPost("sender");
+                } else if ($this->request->getPost("repair")) {
+                    $codi_centre_reparador = $this->request->getPost("repair");
+                    $codi_centre_emissor = 0;
+                } else {
+                    // TODO: Poner aqui el error porque n hay centro reparador en esta opcion
+                    $codi_centre_emissor = $this->request->getPost("sender");
+                    $codi_centre_reparador = 0;
+                }
             } else {
-                // TODO: Poner aqui el error porque n hay centro reparador en esta opcion
-                $codi_centre_emissor = $this->request->getPost("sender");
+                $id_estat = 1;
+                $codi_centre_emissor = 0;
                 $codi_centre_reparador = 0;
             }
+
+
+            $model->addTiquet(
+                $id_tiquet,
+                $codi_equip,
+                $descripcio_avaria,
+                $nom_persona_contacte_centre,
+                $correu_persona_contacte_centre,
+                $id_tipus_dispositiu,
+                $id_estat,
+                $codi_centre_emissor,
+                $codi_centre_reparador
+            );
         } else {
-            $id_estat = 1;
-            $codi_centre_emissor = 0;
-            $codi_centre_reparador = 0;
+            return redirect()->back()->withInput();
         }
-
-
-        $model->addTiquet(
-            $id_tiquet,
-            $codi_equip,
-            $descripcio_avaria,
-            $nom_persona_contacte_centre,
-            $correu_persona_contacte_centre,
-            $id_tipus_dispositiu,
-            $id_estat,
-            $codi_centre_emissor,
-            $codi_centre_reparador
-        );
-    }else{
-        return redirect()->back()->withInput();
-
-    }
         return redirect()->to(base_url('/tickets'));
     }
 
@@ -292,34 +296,34 @@ class TicketsController extends BaseController
         helper('form');
 
         $validationRules =
-        [
-            'description' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Error Descripcio',
+            [
+                'description' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error Descripcio',
+                    ],
                 ],
-            ],
-            'nameContact' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Error nameContact',
+                'nameContact' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error nameContact',
+                    ],
                 ],
-            ],
-            'emailContact' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Error emailContact',
+                'emailContact' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error emailContact',
+                    ],
                 ],
-            ],
-            'id_type' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Error id_type',
+                'id_type' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error id_type',
+                    ],
                 ],
-            ],
-            
 
-        ];
+
+            ];
         if ($this->validate($validationRules)) {
 
             $data = [
@@ -333,10 +337,10 @@ class TicketsController extends BaseController
                 "codi_centre_reparador" => $this->request->getPost("repair"),
 
             ];
-        }else{
+        } else {
             return redirect()->back()->withInput();
         }
-       
+
         $model->modifyTicket($id, $data);
 
         return redirect()->to(base_url('/tickets'));

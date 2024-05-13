@@ -46,6 +46,7 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
     $routes->group('intervention', function($routes){
         $routes->GET('', 'InterventionController::intervention');
         $routes->GET('form', 'InterventionController::interventionForm');
+        $routes->POST('add', 'InterventionController::addIntervention');
     });
 
     // STUDENTS

@@ -17,7 +17,6 @@
 
     <section class="flex flex-col gap-2">
 
-
         <div class="p-5">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTscU3jYwiMibdPrr7f7S2htGvZGqUWHKr6gSuuUYKQkA&s" alt="imagen dispositivo" class="w-full">
         </div>

@@ -13,10 +13,13 @@
                 <input type="text" name="description" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
             </div>
 
+            <input type="text" name="ticket_id" hidden value="<?=session()->getFlashdata('ticket_id')?>">
+
+
 
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.s_disp") ?></label>
-                <select name="id_type" id="" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                <select name="id_inventary" id="" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                     <option value="" disabled selected hidden><?= lang("forms.s_disp") ?></option>
                     <?php
                     foreach ($inventary as $product) {
