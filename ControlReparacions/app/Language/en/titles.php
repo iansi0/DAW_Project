@@ -7,6 +7,7 @@ return [
     'assign'        => 'Assign',
     'type'          => 'Type',
     'description'   => 'Description',
+    'name'          => 'Name',
     'sender'        => 'Sender',
     'receiver'      => 'Reciever',
     'date'          => 'Date',

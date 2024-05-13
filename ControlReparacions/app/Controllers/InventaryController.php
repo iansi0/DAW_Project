@@ -45,6 +45,7 @@ class InventaryController extends BaseController
         // HEADER
         $table->setHeading(
             mb_strtoupper(lang('titles.id'), 'utf-8'),
+            mb_strtoupper(lang('titles.name'), 'utf-8'),
             mb_strtoupper(lang('titles.date'), 'utf-8'),
             mb_strtoupper(lang('titles.price'), 'utf-8'),
             mb_strtoupper(lang('titles.type'), 'utf-8'),
@@ -80,6 +81,7 @@ class InventaryController extends BaseController
 
             $table->addRow(
                 $product['id'],
+                $product['nom'],
                 $product['data_compra'],
                 $product['preu'],
                 $product['nomInventary'],
@@ -115,15 +117,15 @@ class InventaryController extends BaseController
         $fake = Factory::create("es_ES");
 
         $id = $fake->uuid();
-        $data_compra = date('Y-m-d');
         $nom = $this->request->getPost("name");
+        $data_compra = date('Y-m-d');
         $preu = $this->request->getPost("price");
         $codi_centre = session('user')['code'];
         $id_tipus_inventari = $this->request->getPost("type_inventary");
 
         $model->addInventari(
             $id,
-            // $nom,
+            $nom,
             $data_compra,
             $preu,
             $codi_centre,
@@ -152,11 +154,12 @@ class InventaryController extends BaseController
 
         $data = [
             "id" =>  $id,
-            // "nom" =>  $this->request->getPost("name"),
+            "nom" =>  $this->request->getPost("name"),
             "preu" =>  $this->request->getPost("price"),
-            "id_tipus_inventary" => $this->request->getPost("type_inventary"),
+            "id_tipus_inventari" => $this->request->getPost("type_inventary"),
         ];
 
+       
         $model->modifyTicket($id, $data);
 
         return redirect()->to(base_url('/inventary'));

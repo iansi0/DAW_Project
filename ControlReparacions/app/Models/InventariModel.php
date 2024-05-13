@@ -4,6 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
+
 class InventariModel extends Model
 {
     protected $table            = 'inventari';
@@ -12,7 +13,7 @@ class InventariModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_inventari','data_compra','preu','nom','codi_centre','id_tipus_inventari'];
+    protected $allowedFields    = ['id', 'nom', 'data_compra', 'preu',  'codi_centre', 'id_tipus_inventari, id_intervencio'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,15 +39,17 @@ class InventariModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addInventari($id_inventari,$data_compra,$preu,$nom,$codi_centre,$id_tipus_inventari) {
-           
+    public function addInventari($id_inventari, $nom, $data_compra, $preu, $codi_centre, $id_tipus_inventari)
+    {
+
         $data = [
             'id' =>  $id_inventari,
+            'nom' => $nom,
             'data_compra' => $data_compra,
             'preu' => $preu,
-            'nom' => $nom,
             'codi_centre' => $codi_centre,
             'id_tipus_inventari' => $id_tipus_inventari,
+            'id_intervencio' => null,
         ];
 
         $this->insert($data);
@@ -56,6 +59,7 @@ class InventariModel extends Model
     {
         return $this->select("
         inventari.id AS id, 
+        inventari.nom as nom,
         inventari.preu AS preu, 
         inventari.data_compra AS data_compra,
         inventari.id_tipus_inventari AS tipus,
@@ -72,6 +76,7 @@ class InventariModel extends Model
 
         return $this->select("
         inventari.id AS id, 
+        inventari.nom as nom,
         inventari.preu AS preu, 
         inventari.data_compra AS data_compra,
         inventari.id_tipus_inventari AS tipus,
@@ -87,7 +92,7 @@ class InventariModel extends Model
         return $this->where('id', $id)->delete();
     }
 
-    public function modifyTicket($id,$data)
+    public function modifyTicket($id, $data)
     {
         return $this->where('id', $id)->set($data)->update();
     }
@@ -97,7 +102,8 @@ class InventariModel extends Model
         return $this->where('inventari.id', $id)->first();
     }
 
-    public function getInventaryNoAssigned(){
-        return $this->select('id, nom')->where('id_ticket', null)->findAll();
+    public function getInventaryNoAssigned()
+    {
+        return $this->select('id, nom')->where('id_intervencio', null)->findAll();
     }
 }

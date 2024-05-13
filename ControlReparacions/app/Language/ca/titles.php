@@ -9,6 +9,7 @@ return [
     'actions'       => 'Accions',
     'type'          => 'Tipus',
     'description'   => 'Descripció',
+    'name'          => 'Nom',
 
     'sender'        => 'Emissor',
     'receiver'      => 'Receptor',

@@ -7,10 +7,10 @@
 
         <div class="grid grid-cols-3 gap-x-2">
 
-            <!-- <div class="flex flex-col mt-5">
+             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.name")?></label>
-                <input type="text" name="name" value="<?= 'hola' //$product['name']; ?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
-            </div> -->
+                <input type="text" name="name" value="<?=$product['nom']; ?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+            </div> 
 
 
             <div class="flex flex-col mt-5">
