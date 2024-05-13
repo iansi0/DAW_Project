@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/master.php') ?>
 <?= $this->section('content') ?>
 
-<h1 class="text-5xl text-primario mt-14"><?= lang("titles.n_ticket") ?></h1>
+<h1 class="text-5xl text-primario mt-14"><?= lang("titles.n_int") ?></h1>
 
 <section style="view-transition-name: addTicket;" class="container mx-auto px-4 py-8 mt-10 text-base">
     <form action="add" method="POST" class="flex flex-col gap-20">
@@ -33,7 +33,7 @@
 
         <div class="flex gap-5 justify-end w-full">
 
-            <a href="<?= strpos(previous_url(), 'tickets?') !== false
+            <a href="<?= strpos(previous_url(), 'tickets') !== false
                             ? str_replace('index.php/', '', previous_url())
                             : base_url('/tickets');
                         ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel") ?></a>
