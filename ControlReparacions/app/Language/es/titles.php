@@ -32,6 +32,12 @@ return [
     'ins_2'         => 'Instituto',
     'n_ins'         => 'Añadir Instituto',
     'e_ins'         => 'Modificar Instituto',
+    'email_contact' => 'Email Contacto',
+    'name_contact'  => 'Nombre Contacto',
+    'active'        => 'Activo',
+    'workshop'      => 'Taller',
+    'population'    => 'Poblacion',
+    'number'        => 'Telefono',
 
     'prof'          => 'Profesores',
     'prof_2'        => 'Profesor',

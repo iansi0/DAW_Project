@@ -2,19 +2,11 @@
 
 
 <?= $this->section('content') ?>
-
-<style>
-  #add-ticket {
-    view-transition-name: addTicket;
-
-  }
-</style>
-
 <div>
 
   <div class="flex justify-between items-center mb-1">
 
-    <h1 class="text-left text-5xl text-primario"><?= strtoupper(lang('titles.ticket')) ?></h1>
+    <h1 class="text-left text-5xl text-primario"><?= strtoupper(lang('titles.ins')) ?></h1>
 
   </div>
 
@@ -22,7 +14,7 @@
 
     <div class="flex gap-3 items-center center">
       <!-- Search form -->
-      <form method='get' action="<?= base_url('tickets'); ?>" id="searchForm">
+      <form method='get' action="<?= base_url('institutes'); ?>" id="searchForm">
         <!-- INPUT SEARCH -->
         <input type='text' name='q' value='<?= $search ?>' onkeypress="inputFilter(this)" placeholder="<?= lang('buttons.search') ?>..." class=" px-5 py-1 w-48  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
         <!-- BUTTON SEARCH -->
@@ -50,7 +42,7 @@
   </div>
 
   <!-- Filters -->
-  <form id="filters_form" action="<?= base_url('tickets') ?>" method="get" class="hidden gap-8 items-center mb-2 mt-2 border-y-2 p-3">
+  <form id="filters_form" action="<?= base_url('institutes') ?>" method="get" class="hidden gap-8 items-center mb-2 mt-2 border-y-2 p-3">
 
     <input type="hidden" id="search_hidden" name="q">
     <!-- DISPOSITIUS -->
@@ -128,32 +120,5 @@
   </div>
 
 </div>
-
-<script>
-  function toggleFilters() {
-
-    var filters = document.getElementById("filters_form");
-
-    if (filters.classList.contains('hidden')) {
-      filters.classList.remove('hidden');
-      filters.classList.add('flex');
-      document.getElementById('btn_filters').classList.add('bg-red-300')
-      document.getElementById('btn_filters').classList.remove('text-white')
-      document.getElementById('btn_filters').classList.add('text-terciario-4')
-    } else {
-      filters.classList.add('hidden');
-      document.getElementById('btn_filters').classList.remove('bg-red-300')
-      document.getElementById('btn_filters').classList.add('text-white')
-      document.getElementById('btn_filters').classList.remove('text-terciario-4')
-    }
-
-  }
-
-  function inputFilter(input) {
-    document.getElementById('search_hidden').value = input.value;
-  }
-</script>
-
-
 
 <?= $this->endSection() ?>
