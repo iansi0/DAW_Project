@@ -6,25 +6,22 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-$routes->group('', ['filter' => 'isLogged'], function($routes){
+// LOGIN
+$routes->GET('login', 'Home::login');
+$routes->GET('', 'Home::login');
+$routes->GET('/', 'Home::login');
+$routes->POST('login', 'Home::login_post');
 
-    // LOGOUT
-    $routes->GET('logout', 'Home::logout');
-    
-    // LOGIN
-    $routes->GET('login', 'Home::login');
-        $routes->addRedirect('', 'login');
-        $routes->addRedirect('/', 'login');
-    $routes->POST('login', 'Home::login_post');
+$routes->group('', ['filter' => 'isLogged'], function ($routes) {
 
     // TICKETS
-    $routes->group('tickets', function($routes){
+    $routes->group('tickets', function ($routes) {
         $routes->GET('', 'TicketsController::tickets');
         $routes->POST('', 'TicketsController::tickets');
 
         $routes->GET('add', 'TicketsController::ticketForm');
         $routes->POST('add', 'TicketsController::addTicket');
-        
+
         $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
 
         $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1');
@@ -33,7 +30,7 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
     });
 
     // EXPORT
-    $routes->group('export', function($routes){
+    $routes->group('export', function ($routes) {
         //CSV
         $routes->GET('csv', 'TicketsController::exportCSV');
         $routes->GET('csv/(:segment)', 'TicketsController::exportCSV/$1');
@@ -43,31 +40,31 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
     });
 
     // INTERVENTIONS
-    $routes->group('intervention', function($routes){
+    $routes->group('intervention', function ($routes) {
         $routes->GET('', 'InterventionController::intervention');
         $routes->GET('form', 'InterventionController::interventionForm');
         $routes->POST('add', 'InterventionController::addIntervention');
     });
 
     // STUDENTS
-    $routes->group('students', function($routes){
+    $routes->group('students', function ($routes) {
         $routes->GET('', 'StudentsController::students');
         $routes->GET('form', 'Home::empty');
     });
 
     // INSTITUTES
-    $routes->group('institutes', function($routes){
+    $routes->group('institutes', function ($routes) {
         $routes->GET('', 'InstitutesController::institutes');
         $routes->GET('form', 'Home::empty');
     });
 
     // ASSIGN
-    $routes->group('assign', function($routes){
+    $routes->group('assign', function ($routes) {
         $routes->GET('', 'Home::empty');
     });
 
     // INVENTARY
-    $routes->group('inventary', function($routes){
+    $routes->group('inventary', function ($routes) {
         $routes->GET('', 'InventaryController::index');
         $routes->GET('add', 'InventaryController::inventaryForm');
         $routes->POST('add', 'InventaryController::addInventary');
@@ -78,13 +75,13 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
     });
 
     // CONFIG
-    $routes->group('config', function($routes){
+    $routes->group('config', function ($routes) {
         $routes->GET('', 'UserController::config');
         $routes->POST('', 'UserController::config_post');
     });
 
     // PROFILE
-    $routes->group('profile', function($routes){
+    $routes->group('profile', function ($routes) {
         $routes->GET('', 'Home::empty');
     });
 
@@ -92,7 +89,7 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
     $routes->GET('work', 'Home::empty');
 
     // ERRORS
-    $routes->group('error', function($routes){
+    $routes->group('error', function ($routes) {
         $routes->GET('404', 'Home::error404');
     });
 
@@ -100,4 +97,6 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
     // change de lang 
     $routes->get('change_lang/(:segment)', 'Home::change_lang/$1');
 
+    // LOGOUT
+    $routes->GET('logout', 'Home::logout');
 });
