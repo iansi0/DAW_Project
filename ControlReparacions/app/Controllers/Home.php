@@ -38,6 +38,16 @@ class Home extends BaseController
 
                 $userInfo = $oauth2->userinfo->get();
 
+                // $dominio = explode( "@", $userInfo->getEmail());
+                
+                // var_dump($dominio);
+
+                // //si el domino no es xtex devolvemos error
+                // if ($dominio != 'xtec.cat') {
+                //     session()->setFlashdata('error', lang("error.wrong_login"));
+                //     return redirect()->to(base_url('login'));
+                // }
+
                 // Creamos un Modelo Usuario
                 $model = new UsersModel();
                 // Obtenemos el usuario por user o por mail
