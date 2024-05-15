@@ -207,7 +207,8 @@ class TiquetModel extends Model
             estat.nom as estat,
             tiquet.id_estat as id_estat,
             COALESCE(centre_emissor.nom, '".lang('titles.toassign')."') AS emissor,
-            COALESCE(centre_reparador.nom, '".lang('titles.toassign')."') AS receptor
+            COALESCE(centre_reparador.nom, '".lang('titles.toassign')."') AS receptor,
+            COALESCE(centre_reparador.codi, '0') AS codi_reparador
             "]);
     
 

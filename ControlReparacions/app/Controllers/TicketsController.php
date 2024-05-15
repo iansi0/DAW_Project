@@ -86,13 +86,13 @@ class TicketsController extends BaseController
             $buttonUpdate = base_url("tickets/modify/" . $ticket['id']);
             $buttonView = base_url("tickets/" . $ticket['id']);
 
-            if (($role == "admin" ) || ($role== "sstt") || (($role=="ins") && ($ticket['id_estat']==1)) ) {
+            if (($role == "admin" ) || ($role== "sstt") || (($role=="prof") && ($ticket['id_estat']==1)) || (($role=="ins") && ($ticket['id_estat']==1)) ) {
                 $table->addRow(
                     // ["data" => $ticket['id'],"class"=>'p-5'],
                     explode("-", $ticket['id'])[4],
                     $ticket['tipus'],
                     ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis"],
-                    $ticket['emissor'],
+                    ($ticket['emissor'] != lang('titles.toassign')) ? $ticket['emissor'] : lang('titles.toassign').' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
                     ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign').' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
     
                     date("d/m/Y", strtotime($ticket['created'])),
@@ -116,7 +116,7 @@ class TicketsController extends BaseController
                     explode("-", $ticket['id'])[4],
                     $ticket['tipus'],
                     ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis"],
-                    $ticket['emissor'],
+                    ($ticket['emissor'] != lang('titles.toassign')) ? $ticket['emissor'] : lang('titles.toassign').' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
                     ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign').' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
     
                     date("d/m/Y", strtotime($ticket['created'])),
@@ -139,7 +139,7 @@ class TicketsController extends BaseController
                     explode("-", $ticket['id'])[4],
                     $ticket['tipus'],
                     ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis"],
-                    $ticket['emissor'],
+                    ($ticket['emissor'] != lang('titles.toassign')) ? $ticket['emissor'] : lang('titles.toassign').' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
                     ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign').' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
     
                     date("d/m/Y", strtotime($ticket['created'])),
@@ -321,9 +321,6 @@ class TicketsController extends BaseController
     public function modifyTicket($id)
     {
         helper('form');
-        if (session()->get('user')['role']=="alumn" || session()->get('user')['role']=="prof") {
-            return redirect()->back();
-        }
 
         $type = new TipusDispositiuModel();
         $center = new CentreModel();
@@ -344,9 +341,6 @@ class TicketsController extends BaseController
 
         $model = new TiquetModel();
         helper('form');
-        if (session()->get('user')['role']=="alumn" || session()->get('user')['role']=="prof") {
-            return redirect()->back();
-        }
         $validationRules =
         [
             'description' => [

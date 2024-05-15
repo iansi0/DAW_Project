@@ -9,7 +9,6 @@
                     : base_url('/tickets'); ?>">
         <button id="pdf" class="hover:bg-[#FFB053] hover:text-terciario-1 p-2 px-3 rounded-xl transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-arrow-left text-3xl"></i></button>
     </a>
-    
     <h1 class=" text-left text-5xl ml-48"><?= mb_strtoupper(lang('titles.id_ticket'), 'utf-8'); ?>: <?= explode("-", $ticket['id'])[4] ?></h1>
 </div>
 
@@ -80,14 +79,18 @@
 
         </div>
 
-        <!-- Hola mano, soc el David Aguilera, de 2n de DAM, estic fen tot el projecte jo, em tenen esclavitzat, si us plau, doneume el IPad a mi  -->
-
         <div>
             <div class="flex justify-between bg-primario text-secundario text-left p-3 pr-8 text-3xl rounded-t-2xl">
                 <h1><?= lang('titles.int'); ?></h1>
+                
+                <?php if (((session()->get('user')['role']=="prof") && (session()->get('user')['code']==$ticket['codi_reparador'])) || (session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin") ) : ?>
+                
                 <div class="hover:bg-green-700 hover:text-secundario p-2 px-3 rounded-xl transition hover:ease-in ease-out duration-250">
                     <a href="<?= base_url('work') ?>"><i class="fa-icon fa-solid fa-plus "></i></a>
                 </div>
+
+                <?php endif ?>
+
             </div>
 
             <?php

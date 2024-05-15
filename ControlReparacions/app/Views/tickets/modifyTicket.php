@@ -58,7 +58,7 @@
                 </select>
             </div>
             
-            <?php if ((session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin") ) : ?>
+            <?php if (((session()->get('user')['role']=="sstt") && $ticket['id_estat']!=6) || (session()->get('user')['role']=="admin") ) : ?>
             <div class="flex flex-col justify-end  mt-5">
                 
                 
@@ -84,7 +84,7 @@
 
             <?php endif ?>
             
-            <?php if ((session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin") ) : ?>
+            <?php if (((session()->get('user')['role']=="sstt") && $ticket['id_estat']!=6) || (session()->get('user')['role']=="admin") ) : ?>
             <div class="flex flex-col justify-end  mt-5">
                 
                 <label class="block" for="repair" id="labelRepair"><?= lang("forms.s_ins")." ".lang("forms.work")?></label>
