@@ -9,7 +9,7 @@
 
             <?php foreach($pager->links() as $key => $link): ?>
 
-                <?php if (($key <= ($pager->getCurrentPageNumber()-5)) || ($key <= ($pager->getCurrentPageNumber()+5))): ?>
+                <?php if (($key >= ($pager->getCurrentPageNumber()-3)) && ($key <= ($pager->getCurrentPageNumber()+1))): ?>
                     <?php if($link["active"]): ?>
                         <a href="<?=str_replace('index.php/', '', $link['uri'])?>" aria-current="page" class="relative z-10 inline-flex items-center border-secundario-300 bg-primario px-4 py-2 text-sm font-semibold text-secundario focus:z-20 hover:bg-terciario-4 hover:text-primario transition hover:ease-in ease-out duration-250 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primario-600"><?=$link["title"]?></a>
                     <?php else:?>

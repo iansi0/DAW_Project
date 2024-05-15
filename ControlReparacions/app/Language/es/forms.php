@@ -41,6 +41,7 @@ return [
     's_course'      => 'Escoge Curso',
     's_role'        => 'Escoge Rol',
     's_inventary'   => 'Escoge Inventario',
+    's_state'       => 'Escoge Estado',
 
     'lang'          => 'Idioma',
 

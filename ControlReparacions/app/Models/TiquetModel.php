@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Google\Service\AnalyticsData\OrderBy;
 use PhpParser\Node\Stmt\Return_;
 use CodeIgniter\Database\RawSql;
 
@@ -58,28 +59,56 @@ class TiquetModel extends Model
         $this->insert($data);
     }
 
-    public function getByTitleOrText($search)
+    public function getByTitleOrText($search, $filters)
     {
-
-        return $this->select(["
+        $sql = $this->select(["
                                 tiquet.id AS id, 
                                 tiquet.descripcio_avaria AS descripcio,
                                 tiquet.created_at AS created,
                                 tipus_dispositiu.nom AS tipus,
                                 estat.nom as estat,
                                 tiquet.id_estat as id_estat,
-                                CASE  WHEN tiquet.codi_centre_emissor = centre.codi THEN CONCAT(centre.nom)  ELSE NULL  END AS emissor,
-                                CASE  WHEN tiquet.codi_centre_reparador = centre.codi THEN CONCAT(centre.nom)  ELSE CONCAT('".lang('titles.toassign')."')  END AS receptor
+                                COALESCE(centre_emissor.nom, '".lang('titles.toassign')."') AS emissor,
+                                COALESCE(centre_reparador.nom, '".lang('titles.toassign')."') AS receptor
                             "])
                     ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
                     ->join('estat', 'tiquet.id_estat = estat.id')
-                    ->join('centre', ' tiquet.codi_centre_emissor = centre.codi OR tiquet.codi_centre_reparador = centre.codi')
-                    ->orLike('tiquet.id', $search, 'both', true)
-                    ->orLike('tipus_dispositiu.nom', $search, 'both', true)
-                    ->orLike('tiquet.descripcio_avaria', $search, 'both', true)
-                    ->orLike('centre.nom', $search, 'both', true)
-                    ->orLike('tiquet.created_at', $search, 'both', true)
-                    ->orLike('estat.nom', $search, 'both', true);
+                    ->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left')
+                    ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left')
+                    
+                    // WHERE USING SEARCH 
+                    ->groupStart()
+                        ->orLike('tiquet.id', $search, 'both', true)
+                        ->orLike('tipus_dispositiu.nom', $search, 'both', true)
+                        ->orLike('tiquet.descripcio_avaria', $search, 'both', true)
+                        ->orLike('centre_emissor.nom', $search, 'both', true)
+                        ->orLike('centre_reparador.nom', $search, 'both', true)
+                        ->orLike('tiquet.created_at', $search, 'both', true)
+                        ->orLike('estat.nom', $search, 'both', true)
+                    ->groupEnd();
+                    // WHERE USING FILTERS
+                    if(!empty($filters)){
+                        $this->groupStart();
+                            if(!empty($filters['device'])) $this->like('tipus_dispositiu.nom', $filters['device'], 'both', true);
+                            if(!empty($filters['center'])) $this->like('centre_emissor.nom', $filters['center'], 'both', true);
+                            if(!empty($filters['center'])) $this->like('centre_reparador.nom', $filters['center'], 'both', true);
+                            $this->groupStart();
+                                $this->where('DATE(tiquet.created_at) >= ', $filters['date_ini']);
+                                $this->where('DATE(tiquet.created_at) <= ', $filters['date_end']);
+                            $this->groupEnd();
+                            $this->groupStart();
+                                $this->where('TIME(tiquet.created_at) >= ', $filters['time_ini']);
+                                $this->where('TIME(tiquet.created_at) <= ', $filters['time_end']);
+                            $this->groupEnd();
+                            if(!empty($filters['state'])) $this->like('estat.nom', $filters['state']);
+                        $this->groupEnd();
+                    };
+                    $this->orderBy('tiquet.created_at', 'desc');
+
+        return $sql;
+        // $this->findAll();
+
+        dd($this->db->getLastQuery());
     }
 
     public function getAllPaged()
@@ -99,6 +128,7 @@ class TiquetModel extends Model
                 JOIN centre ON tiquet.codi_centre_emissor = centre.codi OR tiquet.codi_centre_reparador = centre.codi
                 JOIN estat ON tiquet.id_estat = estat.id
             WHERE tiquet.deleted_at IS NULL
+            ORDER BY tiquet.created_at DESC
 
             LIMIT 8
          */
@@ -117,7 +147,8 @@ class TiquetModel extends Model
         ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
         ->join('estat', 'tiquet.id_estat = estat.id')
         ->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left')
-        ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+        ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left')
+        ->orderBy('tiquet.created_at', 'desc');
         
     }
 

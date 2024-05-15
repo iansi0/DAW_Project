@@ -16,7 +16,7 @@ class TicketsController extends BaseController
 {
     public function tickets()
     {
-        //Crear una tabla con todos los tickets
+        // Crear una tabla con todos los tickets
 
         $searchData = $this->request->getGet();
 
@@ -26,19 +26,88 @@ class TicketsController extends BaseController
             $search = "";
         }
 
-        // Get News Data
+        $filters = array();
+        // OBTENCIÓN Y ASIGNACIÓN DE FILTROS
+        if (isset($searchData)) {
 
+            //  Obtener filtro de dispositivo (?d=)
+            if (isset($searchData['d']) && !empty($searchData['d'])) {
+                $filters['device'] = $searchData['d'];
+            } else {
+                $filters['device'] = '';
+            }
 
-        $model = new TiquetModel();
+            // Obtener filtro de centro (?c=)
+            if (isset($searchData['c']) && !empty($searchData['c'])) {
+                $filters['center'] = $searchData['c'];
+            } else {
+                $filters['center'] = '';
+            }
 
-        if ($search == '') {
-            $paginateData = $model->getAllPaged()->paginate(8);
-        } else {
-            $paginateData = $model->getByTitleOrText($search)->paginate(8);
+            // Obtener filtro de fecha-inicio (?dt_1=)
+            if (isset($searchData['dt_1']) && !empty($searchData['dt_1'])) {
+                $filters['date_ini'] = $searchData['dt_1'];
+            } else {
+                $filters['date_ini'] = '1970-01-01';
+            }
+
+            // Obtener filtro de fecha-fin (?dt_2=)
+            if (isset($searchData['dt_2']) && !empty($searchData['dt_2'])) {
+                $filters['date_end'] = $searchData['dt_2'];
+            } else {
+                $filters['date_end'] = date('Y-m-d');
+            }
+
+            // Obtener filtro de tiempo-inicio (?tm_1=)
+            if (isset($searchData['tm_1']) && !empty($searchData['tm_1'])) {
+                $filters['time_ini'] = $searchData['tm_1'];
+            } else {
+                $filters['time_ini'] = '00:00';
+            }
+
+            // Obtener filtro de tiempo-inicio (?tm_2=)
+            if (isset($searchData['tm_2']) && !empty($searchData['tm_2'])) {
+                $filters['time_end'] = $searchData['tm_2'];
+            } else {
+                $filters['time_end'] = '23:59';
+            }
+
+            // Obtener filtro de estado (?e=)
+            if (isset($searchData['e']) && !empty($searchData['e'])) {
+                $filters['state'] = $searchData['e'];
+            } else {
+                $filters['state'] = '';
+            }
+
         }
 
-        $count = 0;
+        // Get Tiquet Data
+        $model = new TiquetModel();
 
+        if (!empty($filters)) {
+            $paginateData = $model->getByTitleOrText($search, $filters)->paginate(8);
+            // dd($model->getByTitleOrText($search, $filters)->find());
+        } else if($search != ''){
+            $paginateData = $model->getByTitleOrText($search, $filters)->paginate(8);
+            // dd($model->getByTitleOrText($search, $filters)->find());
+        } else {
+            $paginateData = $model->getAllPaged()->paginate(8);
+        }
+
+        ($filters['date_ini'] == '1970-01-01') ? '' : $filters['date_ini'];
+        ($filters['time_ini'] == '00:00') ? '' : $filters['time_ini'];
+        ($filters['time_end'] == '23:59') ? '' : $filters['time_end'];
+
+        // Get Filter Data
+        $centresModel = new CentreModel();
+        $arrCentres = $centresModel->getAllCenter();
+        $estatModel = new EstatModel();
+        $arrEstat = $estatModel->getAllStates();
+        $dispModel = new TipusDispositiuModel();
+        $arrDisp = $dispModel->getAllTypes();
+        $arrFilters['centers'] = $arrCentres;
+        $arrFilters['states'] = $arrEstat;
+        $arrFilters['devices'] = $arrDisp;
 
         /** TABLE GENERATOR **/
         $table = new \CodeIgniter\View\Table();
@@ -73,10 +142,13 @@ class TicketsController extends BaseController
             'tickets' => $paginateData,
             'pager' => $model->pager,
             'search' => $search,
+            'filters' => $filters,
+            'arrFilters' => $arrFilters,
             'table' => $table,
         ];
 
         // ROWS
+        $count = 0;
         foreach ($data['tickets'] as $ticket) {
 
             $buttonDelete = base_url("tickets/delete/" . $ticket['id']);
@@ -356,20 +428,73 @@ class TicketsController extends BaseController
     {
         $searchData = $this->request->getGet();
 
-        // if ($search == '') {
-        //     $paginateData = $model->getAllPaged(8);
-        // } else {
-        //     $paginateData = $model->getByTitleOrText($search)->paginate(8);
-        // }
+        if (isset($searchData) && isset($searchData['q'])) {
+            $search = $searchData["q"];
+        } else {
+            $search = "";
+        }
 
-        // Get News Data
+        $filters = array();
+        // OBTENCIÓN Y ASIGNACIÓN DE FILTROS
+        if (isset($searchData)) {
+
+            //  Obtener filtro de dispositivo (?d=)
+            if (isset($searchData['d']) && !empty($searchData['d'])) {
+                $filters['device'] = $searchData['d'];
+            } else {
+                $filters['device'] = '';
+            }
+
+            // Obtener filtro de centro (?c=)
+            if (isset($searchData['c']) && !empty($searchData['c'])) {
+                $filters['center'] = $searchData['c'];
+            } else {
+                $filters['center'] = '';
+            }
+
+            // Obtener filtro de fecha-inicio (?dt_1=)
+            if (isset($searchData['dt_1']) && !empty($searchData['dt_1'])) {
+                $filters['date_ini'] = $searchData['dt_1'];
+            } else {
+                $filters['date_ini'] = '1970-01-01';
+            }
+
+            // Obtener filtro de fecha-fin (?dt_2=)
+            if (isset($searchData['dt_2']) && !empty($searchData['dt_2'])) {
+                $filters['date_end'] = $searchData['dt_2'];
+            } else {
+                $filters['date_end'] = date('d-m-Y');
+            }
+
+            // Obtener filtro de tiempo-inicio (?tm_1=)
+            if (isset($searchData['tm_1']) && !empty($searchData['tm_1'])) {
+                $filters['time_ini'] = $searchData['tm_1'];
+            } else {
+                $filters['time_ini'] = '00:00:00';
+            }
+
+            // Obtener filtro de tiempo-inicio (?tm_2=)
+            if (isset($searchData['tm_2']) && !empty($searchData['tm_2'])) {
+                $filters['time_end'] = $searchData['tm_2'];
+            } else {
+                $filters['time_end'] = date('H:i:s');
+            }
+
+            // Obtener filtro de estado (?e=)
+            if (isset($searchData['e']) && !empty($searchData['e'])) {
+                $filters['state'] = $searchData['e'];
+            } else {
+                $filters['state'] = '';
+            }
+
+        }
 
         $model = new TiquetModel();
 
-        if ($search == '') {
+        if ($search == '' && empty($filters)) {
             $paginateData = $model->getAllPaged()->findAll();
         } else {
-            $paginateData = $model->getByTitleOrText($search)->findAll();
+            $paginateData = $model->getByTitleOrText($search, $filters)->findAll();
         }
 
         $csv_string = "";
@@ -377,33 +502,84 @@ class TicketsController extends BaseController
         foreach ($paginateData as $ticket) {
             $csv_string .= implode(",", $ticket) . "\n";
         }
-        // dd($csv_string);
-        if ($search != '') {
-            header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '_filter-' . $search . '.csv"');
-        } else {
-            header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '.csv"');
-        }
 
-
+        header('Content-Disposition: attachment; filename="ticket_export_' . date("d-m-Y") . '.csv"');
+        
         echo $csv_string;
     }
+
     public function exportXLS($search = '')
     {
         $searchData = $this->request->getGet();
 
+        if (isset($searchData) && isset($searchData['q'])) {
+            $search = $searchData["q"];
+        } else {
+            $search = "";
+        }
 
+        $filters = array();
+        // OBTENCIÓN Y ASIGNACIÓN DE FILTROS
+        if (isset($searchData)) {
 
-        // Get News Data
+            //  Obtener filtro de dispositivo (?d=)
+            if (isset($searchData['d']) && !empty($searchData['d'])) {
+                $filters['device'] = $searchData['d'];
+            } else {
+                $filters['device'] = '';
+            }
+
+            // Obtener filtro de centro (?c=)
+            if (isset($searchData['c']) && !empty($searchData['c'])) {
+                $filters['center'] = $searchData['c'];
+            } else {
+                $filters['center'] = '';
+            }
+
+            // Obtener filtro de fecha-inicio (?dt_1=)
+            if (isset($searchData['dt_1']) && !empty($searchData['dt_1'])) {
+                $filters['date_ini'] = $searchData['dt_1'];
+            } else {
+                $filters['date_ini'] = '1970-01-01';
+            }
+
+            // Obtener filtro de fecha-fin (?dt_2=)
+            if (isset($searchData['dt_2']) && !empty($searchData['dt_2'])) {
+                $filters['date_end'] = $searchData['dt_2'];
+            } else {
+                $filters['date_end'] = date('d-m-Y');
+            }
+
+            // Obtener filtro de tiempo-inicio (?tm_1=)
+            if (isset($searchData['tm_1']) && !empty($searchData['tm_1'])) {
+                $filters['time_ini'] = $searchData['tm_1'];
+            } else {
+                $filters['time_ini'] = '00:00:00';
+            }
+
+            // Obtener filtro de tiempo-inicio (?tm_2=)
+            if (isset($searchData['tm_2']) && !empty($searchData['tm_2'])) {
+                $filters['time_end'] = $searchData['tm_2'];
+            } else {
+                $filters['time_end'] = date('H:i:s');
+            }
+
+            // Obtener filtro de estado (?e=)
+            if (isset($searchData['e']) && !empty($searchData['e'])) {
+                $filters['state'] = $searchData['e'];
+            } else {
+                $filters['state'] = '';
+            }
+
+        }
 
         $model = new TiquetModel();
 
         if ($search == '') {
             $paginateData = $model->getAllPaged()->findAll();
             // dd($paginateData);
-
-
         } else {
-            $paginateData = $model->getByTitleOrText($search)->findAll();
+            $paginateData = $model->getByTitleOrText($search, $filters)->findAll();
         }
 
         header("Content-Type: application/vnd.ms-excel; charset=utf-8");
@@ -415,11 +591,7 @@ class TicketsController extends BaseController
         }
         // dd('fin');
 
-        if ($search != '') {
-            header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '_filter-' . $search . '.xls"');
-        } else {
-            header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '.xls"');
-        }
+        header('Content-Disposition: attachment; filename="ticket_export_' . date("d-m-Y") . '.xls"');
 
         echo $xls_string;
     }
