@@ -115,7 +115,7 @@
   ?>
 
   <!-- Paginate -->
-  <divs>
+  <div>
     <?= $pager->only(['q'])->links() ?>
   </div>
 

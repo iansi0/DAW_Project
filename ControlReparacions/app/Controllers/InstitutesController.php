@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\CentreModel;
+use App\Models\TiquetModel;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -21,8 +22,6 @@ class InstitutesController extends BaseController
         }
 
         // Get News Data
-
-
         $model = new CentreModel();
 
         if ($search == '') {
@@ -46,6 +45,9 @@ class InstitutesController extends BaseController
             mb_strtoupper(lang('titles.workshop'), 'utf-8'),
             mb_strtoupper(lang('titles.population'), 'utf-8'),
             mb_strtoupper(lang('titles.number'), 'utf-8'),
+            mb_strtoupper(lang('titles.number'), 'utf-8'),
+            mb_strtoupper(lang('titles.actions'), 'utf-8'),
+
         );
 
         // TEMPLATE
@@ -71,30 +73,115 @@ class InstitutesController extends BaseController
         // ROWS
         foreach ($data['institutes'] as $institute) {
 
-            // $buttonDelete = base_url("tickets/delete/" . $institute['id']);
-            // $buttonUpdate = base_url("tickets/modify/" . $institute['id']);
-            // $buttonView = base_url("tickets/" . $institute['id']);
+            $buttonDelete = base_url("institutes/delete/" . $institute['codi']);
+            $buttonUpdate = base_url("institutes/modify/" . $institute['codi']);
+            $buttonView = base_url("institutes/" . $institute['codi']);
             $table->addRow(
                 $institute['nom'],
                 $institute['persona'],
                 $institute['correu'],
-                $institute['actiu'],
-                $institute['taller'],
+
+                $institute['actiu'] == 0
+                    ? '<i class="fa-solid fa-check text-xl text-green-600" ></i>'
+                    : '<i class="fa-solid fa-xmark text-xl text-red-600" ></i>',
+                $institute['taller'] == 0
+                    ? '<i class="fa-solid fa-xmark text-xl text-red-600" ></i>'
+                    : '<i class="fa-solid fa-check text-xl text-green-600" ></i>',
                 $institute['poblacio'],
                 $institute['telefon'],
                 $institute['adreca'],
-               
-
-               
-
-              
+                "
+                <a href='$buttonView' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
+                <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
+                <a href='$buttonDelete' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>
+                ",
 
             );
 
             $count++;
         }
 
-        return view('tickets/tickets', $data);
+        return view('institutes/institutes', $data);
+    }
+
+    public function instituteInfo($id = null){
+
+        if ($id == null) {
+            return redirect()->to(base_url('/tickets'));
+        }
+
+        $modelInstitute = new CentreModel();
+        $modelTickets = new TiquetModel();
+
+        $table = new \CodeIgniter\View\Table();
+        $table->setHeading(
+            mb_strtoupper(lang('titles.id'), 'utf-8'),
+            mb_strtoupper(lang('titles.device'), 'utf-8'),
+            mb_strtoupper(lang('titles.description'), 'utf-8'),
+            mb_strtoupper(lang('titles.sender'), 'utf-8'),
+            mb_strtoupper(lang('titles.receiver'), 'utf-8'),
+            mb_strtoupper(lang('titles.date'), 'utf-8'),
+            mb_strtoupper(lang('titles.hour'), 'utf-8'),
+            mb_strtoupper(lang('titles.status'), 'utf-8'),
+            mb_strtoupper(lang('titles.actions'), 'utf-8'),
+        );
+
+         // TEMPLATE
+         $template = [
+            'table_open'  => "<table class='w-full rounded-t-2xl overflow-hidden '>",
+
+            'thead_open'  => "<thead class='bg-primario text-secundario '>",
+
+            'heading_cell_start' => "<th class='py-3 text-base'>",
+
+            'row_start' => "<tr class='border-b-[0.01px] '>",
+            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-[#F7F4EF]'>",
+        ];
+        $table->setTemplate($template);
+
+        $data = [
+            'institute' => $modelInstitute->viewInstitute($id),
+            'tickets' => $modelTickets->getAllPaged()->paginate(8),
+            'pager' => $modelTickets->pager,
+            'table' => $table,
+        ];
+
+
+        
+
+        foreach ($data['tickets'] as $ticket) {
+
+            $buttonDelete = base_url("tickets/delete/" . $ticket['id']);
+            $buttonUpdate = base_url("tickets/modify/" . $ticket['id']);
+            $buttonView = base_url("tickets/" . $ticket['id']);
+            $table->addRow(
+                // ["data" => $ticket['id'],"class"=>'p-5'],
+                explode("-", $ticket['id'])[4],
+                $ticket['tipus'],
+                ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis"],
+                $ticket['emissor'],
+                ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign') . ' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
+
+                date("d/m/Y", strtotime($ticket['created'])),
+                date("H:i", strtotime($ticket['created'])),
+
+                ["data" => "<a class='flex p-3 justify-center  whitespace-nowrap w-full estat_" . $ticket['id_estat'] . "'>" . $ticket['estat'] . "</a>", "class" => "p-2 "],
+
+                [
+                    "data" =>
+                    "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
+                     <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
+                     <a href='$buttonDelete' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
+
+                    "class" => " p-5 flex h-16 justify-between items-center"
+                ],
+
+            );
+
+        
+        }
+
+        return view('institutes/instituteInfo', $data);
     }
 
     public function instituteForm()

@@ -99,6 +99,7 @@ class CentreModel extends Model
 
         return $this->select(
             "
+            centre.codi AS codi,
             centre.nom AS nom, 
             centre.actiu AS actiu,
             centre.taller AS taller,
@@ -111,5 +112,26 @@ class CentreModel extends Model
             COALESCE(poblacio.nom, '" . lang('titles.toassign') . "') AS poblacio,"
         )
             ->join('poblacio', 'centre.id_poblacio = poblacio.id');
+    }
+
+    public function viewInstitute($id)
+    {
+
+        return $this->select(
+            "
+            centre.codi AS codi,
+            centre.nom AS nom, 
+            centre.actiu AS actiu,
+            centre.taller AS taller,
+            centre.nom_persona_contacte AS persona,
+            centre.correu_persona_contacte AS correu,
+            centre.id_poblacio AS id_poblacio,
+            centre.telefon AS telefon,
+            centre.adreca_fisica AS adreca,
+    
+            COALESCE(poblacio.nom, '" . lang('titles.toassign') . "') AS poblacio,"
+        )
+            ->join('poblacio', 'centre.id_poblacio = poblacio.id')
+            ->where('centre.codi', $id)->first();
     }
 }

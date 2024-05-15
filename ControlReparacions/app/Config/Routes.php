@@ -56,6 +56,8 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
     $routes->group('institutes', function ($routes) {
         $routes->GET('', 'InstitutesController::institutes');
         $routes->GET('form', 'Home::empty');
+
+        $routes->GET('(:segment)', 'InstitutesController::instituteInfo/$1');
     });
 
     // ASSIGN
