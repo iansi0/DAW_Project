@@ -38,6 +38,7 @@
                     ?>
                 </select>
             </div>
+            <?php if ((session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin") ) : ?>
 
             <div class="flex flex-col justify-end  mt-5">
                 
@@ -55,7 +56,12 @@
                     
                 </select>
             </div>
+            <?php else : ?>
+                <input type="text" name="sender" id="sender" hidden value="<?= session()->get('user')['code']; ?>">
 
+            <?php endif ?>
+            
+            <?php if ((session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin") ) : ?>
             <div class="flex flex-col justify-end  mt-5">
 
                 <!-- <button type="button" id="assignButton" class="bg-primario text-white px-2 py-3  hover:bg-terciario-4 bg-primario text-white px-8 py-1 border border-terciario-4 hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang("forms.s_ins")." ".lang("forms.work")?></button> -->
@@ -70,6 +76,7 @@
                     ?>
                 </select>
             </div>
+            <?php endif ?>
         </div>
 
         <div class="flex gap-5 justify-end w-full">

@@ -14,15 +14,12 @@ class LoginFilter implements FilterInterface {
         
         } else if (session('user') && url_is('login')) {
 
-            // ESTE SWITCH SERA MODIFICADO PARA REDIRECCIONAR SEGÚN EL ROL
-            switch (session('user')['user']) {
-                case 'admin':
-                    return redirect()->to(base_url('tickets'));
-                
-                default:
-                    return redirect()->to(base_url('error/404'));
+            if (session()->get('user')['role']=="sstt") {
+                return redirect()->to(base_url('statistics'));
+            }else{
+                return redirect()->to(base_url('tickets'));
             }
-
+               
         }
 
     }

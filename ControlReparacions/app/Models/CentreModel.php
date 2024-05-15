@@ -58,10 +58,41 @@ class CentreModel extends Model
     }
 
     public function getAllCenter(){
-        return $this->select('codi, nom')->findAll();
+        $role=session()->get('user')['role'];
+        $code=session()->get('user')['code'];
+
+        $this->select('codi, nom');
+        
+        if ($role=="admin") {
+            $this;
+        }else if($role=="prof" || $role=="alumn"){
+            $this->where("centre_reparador.id",$code);
+        }else if($role=="sstt"){
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+        }else if($role=="ins"){
+            $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
+        }
+
+        return $this->findAll();
     }
     
     public function getAllRepairCenters(){
-        return $this->select('codi, nom')->where('actiu', true)->where('taller', true)->findAll();
+         
+        $role=session()->get('user')['role'];
+        $code=session()->get('user')['code'];
+        
+        $this->select('codi, nom')->where('actiu', true)->where('taller', true);
+        
+        if ($role=="admin") {
+            $this;
+        }else if($role=="prof" || $role=="alumn"){
+            $this->where("centre_reparador.id",$code);
+        }else if($role=="sstt"){
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+        }else if($role=="ins"){
+            $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
+        }
+
+        return $this->findAll();
     }
 }

@@ -60,6 +60,8 @@
                         <b><?= lang('titles.ticket') ?></b>
                     </a>
                 </li>
+                
+                <?php if((session()->get('user')['role']=="ins") || (session()->get('user')['role']=="prof")  || (session()->get('user')['role']=="admin")) : ?>
 
                 <li>
                     <a href="<?= base_url('students') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'students') ? 'bg-red-300' : '' ?>">
@@ -80,6 +82,9 @@
                     </a>
                 </li>
 
+                <?php endif ?>
+                <?php if((session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin")) : ?>
+
                 <li>
                     <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'institutes') ? 'bg-red-300' : '' ?>">
                         <p class="mr-3">
@@ -96,6 +101,9 @@
                         <b><?= lang('titles.ins') ?></b>
                     </a>
                 </li>
+
+                <?php endif ?>
+                <?php if((session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin")) : ?>
 
                 <li>
                     <a href="<?= base_url('assign') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'assign') ? 'bg-red-300' : '' ?>">
@@ -132,6 +140,9 @@
                         <b><?= lang('titles.assign') ?></b>
                     </a>
                 </li>
+                
+                <?php endif ?>
+                <?php if((session()->get('user')['role']=="ins") || (session()->get('user')['role']=="prof") || (session()->get('user')['role']=="admin")) : ?>
 
                 <li>
                     <a href="<?= base_url('inventary') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'inventary') ? 'bg-red-300' : '' ?>">
@@ -152,6 +163,9 @@
                         <b><?= lang("titles.inventory_2") ?></b>
                     </a>
                 </li>
+
+                <?php endif ?>
+
                 <li>
                     <a href="<?= base_url('logout') ?>" class=" w-full  h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                         <p class="mr-3">
@@ -163,6 +177,8 @@
                         <b><?= lang('buttons.logout') ?></b>
                     </a>
                 </li>
+
+
             </ul>
         </nav>
 

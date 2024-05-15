@@ -144,7 +144,7 @@ class USERSSeeder extends Seeder
                     $uuid, 
                     trim($row[6]),
                     password_hash('1234', PASSWORD_DEFAULT),
-                    'cat'
+                    'ca'
                 );
 
                 // Creamos un Modelo SSTT y lo añadimos
@@ -224,7 +224,7 @@ class USERSSeeder extends Seeder
                         $uuid, 
                         trim($row[23]),
                         password_hash('1234', PASSWORD_DEFAULT),
-                        'cat'
+                        'ca'
                     );
 
                     $centre = new CentreModel();
@@ -296,7 +296,7 @@ class USERSSeeder extends Seeder
                 $uuid, 
                 $fake->userName(),
                 password_hash('1234', PASSWORD_DEFAULT),
-                'cat'
+                'ca'
             );
 
             $professor = new ProfessorModel();
@@ -382,7 +382,7 @@ class USERSSeeder extends Seeder
                     $uuid, 
                     $fake->userName(),
                     password_hash('1234', PASSWORD_DEFAULT),
-                    'cat'
+                    'ca'
                 );
 
                 $alumne = new AlumneModel();

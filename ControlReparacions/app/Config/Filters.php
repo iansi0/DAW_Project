@@ -27,6 +27,13 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
 
         'isLogged'      => \App\Filters\LoginFilter::class,
+        'addTicket'     => \App\Filters\AddTicketFilter::class,
+        'modifyTicket'  => \App\Filters\ModifyTicketFilter::class,
+        'deleteTicket'  => \App\Filters\DeleteTicketFilter::class,
+        'addIntervention'        => \App\Filters\AddInterventionFilter::class,
+        'modifyIntervention'      => \App\Filters\ModifyInterventionFilter::class,
+        'exportTicket'      => \App\Filters\ExportXLSFilter::class,
+        
     ];
 
     /**

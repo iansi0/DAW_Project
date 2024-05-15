@@ -60,29 +60,41 @@ class TiquetModel extends Model
 
     public function getByTitleOrText($search)
     {
+        $role=session()->get('user')['role'];
+        $code=session()->get('user')['code'];
 
-        return $this->select(["
-                                tiquet.id AS id, 
-                                tiquet.descripcio_avaria AS descripcio,
-                                tiquet.created_at AS created,
-                                tipus_dispositiu.nom AS tipus,
-                                estat.nom as estat,
-                                tiquet.id_estat as id_estat,
-                                COALESCE(centre_emissor.nom, '".lang('titles.toassign')."') AS emissor,
-                                COALESCE(centre_reparador.nom, '".lang('titles.toassign')."') AS receptor
-                            "])
-                    ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
-                    ->join('estat', 'tiquet.id_estat = estat.id')
-                    ->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left')
-                    ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left')
-                    ->orLike('tiquet.id', $search, 'both', true)
-                    ->orLike('tipus_dispositiu.nom', $search, 'both', true)
-                    ->orLike('tiquet.descripcio_avaria', $search, 'both', true)
-                    ->orLike('centre_emissor.nom', $search, 'both', true)
-                    ->orLike('centre_reparador.nom', $search, 'both', true)
-                    ->orLike('tiquet.created_at', $search, 'both', true)
-                    ->orLike('estat.nom', $search, 'both', true);
-    }
+        $this->select(["
+                        tiquet.id AS id, 
+                        tiquet.descripcio_avaria AS descripcio,
+                        tiquet.created_at AS created,
+                        tipus_dispositiu.nom AS tipus,
+                        estat.nom as estat,
+                        tiquet.id_estat as id_estat,
+                        COALESCE(centre_emissor.nom, '".lang('titles.toassign')."') AS emissor,
+                        COALESCE(centre_reparador.nom, '".lang('titles.toassign')."') AS receptor
+                    "]);
+        $this->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id');
+        $this->join('estat', 'tiquet.id_estat = estat.id');
+        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
+        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+        $this->orLike('tiquet.id', $search, 'both', true);
+        $this->orLike('tipus_dispositiu.nom', $search, 'both', true);
+        $this->orLike('tiquet.descripcio_avaria', $search, 'both', true);
+        $this->orLike('centre_emissor.nom', $search, 'both', true);
+        $this->orLike('centre_reparador.nom', $search, 'both', true);
+        $this->orLike('tiquet.created_at', $search, 'both', true);
+        $this->orLike('estat.nom', $search, 'both', true);
+
+        if ($role=="admin") {
+            return $this;
+        }else if($role=="prof" || $role=="alumn"){
+            return $this->where("centre_reparador.id",$code);
+        }else if($role=="sstt"){
+            return $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+        }else if($role=="ins"){
+            return $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
+        }
+    }   
 
     public function getAllPaged()
     {
@@ -104,38 +116,88 @@ class TiquetModel extends Model
 
             LIMIT 8
          */
-
-
-         return $this->select([
+        $role=session()->get('user')['role'];
+        $code=session()->get('user')['code'];
+        
+        $this->select([
             "tiquet.id AS id, 
             tiquet.descripcio_avaria AS descripcio,
             tiquet.created_at AS created,
             tipus_dispositiu.nom AS tipus,
+            tipus_dispositiu.id AS id_tipus,
             estat.nom as estat,
             tiquet.id_estat as id_estat,
             COALESCE(centre_emissor.nom, '".lang('titles.toassign')."') AS emissor,
             COALESCE(centre_reparador.nom, '".lang('titles.toassign')."') AS receptor"
-        ])
-        ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
-        ->join('estat', 'tiquet.id_estat = estat.id')
-        ->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left')
-        ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+        ]);
+        $this->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id');
+        $this->join('estat', 'tiquet.id_estat = estat.id');
+        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
+        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
         
+
+        if ($role=="admin") {
+            return $this;
+        }else if($role=="prof" || $role=="alumn"){
+            return $this->where("centre_reparador.id",$code);
+        }else if($role=="sstt"){
+            return $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+        }else if($role=="ins"){
+            return $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
+        }
     }
 
     public function deleteTicket($id)
     {
-        return $this->where('id', $id)->delete();
+        $role=session()->get('user')['role'];
+        $code=session()->get('user')['code'];
+
+        $this->where('id', $id);
+        
+        if ($role=="admin") {
+            return $this->delete();
+        }else if($role=="prof"){
+            $this->where("centre_emissor.id",$code);
+        }else if($role=="sstt"){
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+        }else if($role=="ins"){
+            $this->where("centre_emissor.codi",$code);
+        }else{
+            return;
+        }
+        return $this->delete();
     }
 
     public function modifyTicket($id,$data)
     {
-        return $this->where('id', $id)->set($data)->update();
+
+        $role=session()->get('user')['role'];
+        $code=session()->get('user')['code'];
+
+        $this->where('id', $id);
+        if ($role=="admin") {
+            return $this->delete();
+        }else if($role=="prof"){
+            $this->where("centre_emissor.id",$code);
+        }else if($role=="sstt"){
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+        }else if($role=="ins"){
+            $this->where("centre_emissor.codi",$code);
+        }else{
+            return;
+        }
+        return $this->set($data)->update();
+
     }
 
 
     public function viewTicket($id)
     {
+        
+        $role=session()->get('user')['role'];
+        $code=session()->get('user')['code'];
+
+
         $this->select(["
             tiquet.id AS id, 
             tiquet.correu_persona_contacte_centre AS correu_contacte, 
@@ -154,11 +216,37 @@ class TiquetModel extends Model
         $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
 
-        return  $this->where('tiquet.id', $id)->first();
+        $this->where('tiquet.id', $id);
+        
+        if ($role=="admin") {
+            $this;
+        }else if($role=="prof" || $role=="alumn"){
+            $this->where("centre_reparador.id",$code);
+        }else if($role=="sstt"){
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+        }else if($role=="ins"){
+            $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
+        }
+        
+        return $this->first();
     }
 
     public function getTicketById($id)
     {
-        return $this->where('tiquet.id', $id)->first();
+        $code=session()->get('user')['code'];
+        $role=session()->get('user')['role'];
+
+        $this->where('tiquet.id', $id)->first();
+
+        if ($role=="admin") {
+            $this;
+        }else if($role=="prof" || $role=="alumn"){
+            $this->where("centre_reparador.id",$code);
+        }else if($role=="sstt"){
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+        }else if($role=="ins"){
+            $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
+        }
+        return $this->first();
     }
 }
