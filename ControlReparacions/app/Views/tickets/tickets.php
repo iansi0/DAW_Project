@@ -24,7 +24,7 @@
       <!-- Search form -->
       <form method='get' action="<?= base_url('tickets'); ?>" id="searchForm">
         <!-- INPUT SEARCH -->
-        <input type='text' name='q' value='<?= $search ?>' onkeypress="inputFilter(this)" placeholder="<?= lang('buttons.search') ?>..." class=" px-5 py-1 w-48  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+        <input type='text' id="inputSearch" name='q' value='<?= $search ?>' placeholder="<?= lang('buttons.search') ?>..." class=" px-5 py-1 w-48  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
         <!-- BUTTON SEARCH -->
         <button id='btnsearch' onclick='document.getElementById("filters_form").submit();' class="bg-primario text-white px-2 py-1 border border-terciario-4 hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
@@ -43,10 +43,10 @@
 
     <div>
 
-      <a href="<?= base_url('tickets/xls/' . $search . '') ?>">
+      <a href="<?= base_url('tickets/xls/' . $search) ?>">
         <button id="xls" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " XLS" ?></button>
       </a>
-      <a href="<?= base_url('tickets/csv/' . $search . '') ?>">
+      <a href="<?= base_url('tickets/csv/' . $search) ?>">
         <button id="csv" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " CSV" ?></button>
       </a>
     </div>
@@ -55,86 +55,109 @@
   </div>
 
   <!-- Filters -->
-  <form id="filters_form" action="<?=base_url('tickets')?>" method="get" class="hidden gap-8 items-center mb-2 mt-2 border-y-2 p-3">
-    
-    <input type="hidden" id="search_hidden" name="q">
-    <!-- DISPOSITIUS -->
-    <div>
-      <input list="dispositius" name="d" id="dispositiu" placeholder="Dispositius..." class="px-2 py-1 w-32 border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
-      <datalist id="dispositius">
-        <option>a</option>
-        <option>b</option>
-        <option>c</option>
-        <option>d</option>
-      </datalist>
+  <form id="filters_form" action="<?=base_url('tickets')?>" method="get" class="hidden relative gap-4 items-center mb-2 mt-2 border-y-2 p-3">
+    <input type="hidden" id="search_hidden" name="q" value="<?=$search?>">
+
+    <!-- DATALIST DISPOSITIVOS -->
+    <div class='relative searchable-device-list'>
+      <input name="d" type='text' class='data-device-list peer w-28 h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
+              caret-gray-800 pl-2 pr-7 focus:bg-gray-200 font-bold transition-all duration-300 text-sm text-overflow-ellipsis ' spellcheck="false"  placeholder="<?=lang('forms.s_disp')?>">
+      <svg class="outline-none cursor-pointer fill-gray-400 absolute transition-all duration-200 h-full w-4 -rotate-90 right-2 top-[50%] -translate-y-[50%]"
+        viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <path d="M0 256l512 512L1024 256z"></path>
+      </svg>
+      <ul class='absolute option-device-list overflow-y-scroll max-h-64 min-h-[0px] flex flex-col top-12 
+              left-0 max-w-[120%] min-w-[120%] bg-white rounded-sm scale-0 opacity-0 
+              transition-all 
+              duration-200 origin-top-left'>
+      </ul>
+    </div>
+  
+    <!-- DATALIST CENTROS -->
+    <div class='relative searchable-center-list'>
+      <input name="c" type='text' class='data-center-list peer w-30 h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
+              caret-gray-800 pl-2 pr-7 focus:bg-gray-200 font-bold transition-all duration-300 text-sm text-overflow-ellipsis ' spellcheck="false"  placeholder="<?=lang('forms.s_ins')?>">
+      <svg class="outline-none cursor-pointer fill-gray-400 absolute transition-all duration-200 h-full w-4 -rotate-90 right-2 top-[50%] -translate-y-[50%]"
+        viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <path d="M0 256l512 512L1024 256z"></path>
+      </svg>
+      <ul class='absolute option-center-list overflow-y-scroll max-h-64 min-h-[0px] flex flex-col top-12 
+              left-0 max-w-[120%] min-w-[120%] bg-white rounded-sm   scale-0 opacity-0 
+              transition-all 
+              duration-200 origin-top-left'>
+      </ul>
     </div>
 
-    <!-- CENTRES -->
-    <div>
-      <input list="centres" name="c" id="centre" placeholder="Centres..." class="px-2 py-1 w-32  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
-      <datalist id="centres">
-        <option>a</option>
-        <option>b</option>
-        <option>c</option>
-        <option>d</option>
-      </datalist>
+    <!-- DATALIST ESTADOS -->
+    <div class='relative searchable-state-list'>
+      <input name="e" type='text' class='data-state-list peer w-28 h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
+              caret-gray-800 pl-2 pr-7 focus:bg-gray-200 font-bold transition-all duration-300 text-sm text-overflow-ellipsis ' spellcheck="false"  placeholder="<?=lang('forms.s_state')?>">
+      <svg class="outline-none cursor-pointer fill-gray-400 absolute transition-all duration-200 h-full w-4 -rotate-90 right-2 top-[50%] -translate-y-[50%]"
+        viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <path d="M0 256l512 512L1024 256z"></path>
+      </svg>
+      <ul class='absolute option-state-list overflow-y-scroll max-h-64 min-h-[0px] flex flex-col top-12 
+              left-0 max-w-[120%] min-w-[120%] bg-white rounded-sm   scale-0 opacity-0 
+              transition-all 
+              duration-200 origin-top-left'>
+      </ul>
     </div>
 
     <!-- DATA -->
     <div class="flex justify-between gap-3">
       <div class="flex">
-        <input id="desde" name="dt_1" type="date" class=" px-5 py-1  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+        <input id="dt_1" name="dt_1" type="date" value="<?=$filters['date_ini']?>" class=" px-2 py-1 w-32  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
       </div>
 
-      <label for="hasta">Hasta</label>
-
+      <span class="flex items-center"><i class="fa-solid fa-arrow-right"></i></span>
+      
       <div class="flex ">
-        <input id="hasta" name="dt_2" type="date" class=" px-5 py-1  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+        <input id="dt_2" name="dt_2" type="date" value="<?=$filters['date_end']?>" class=" px-2 py-1 w-32  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
       </div>
     </div>
 
     <!-- HORA -->
     <div class="flex justify-between gap-3">
       <div class="flex ">
-        <input id="desde" name="tm_1" type="time" class=" px-5 py-1   border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+        <input id="tm_1" name="tm_1" type="time" value="<?=$filters['time_ini']?>" class=" px-2 py-1   border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
       </div>
 
-      <label for="hasta">Hasta</label>
+      <span class="flex items-center"><i class="fa-solid fa-arrow-right"></i></span>
 
       <div class="flex ">
-        <input id="hasta" name="tm_2" type="time" class=" px-5 py-1  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+        <input id="tm_2" name="tm_2" type="time" value="<?=$filters['time_end']?>" class=" px-2 py-1  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
       </div>
 
     </div>
 
-    <!-- ESTAT -->
-    <div>
-      <input list="estats" name="e" id="estat" placeholder="Estats..." class=" px-5 py-1 w-32 border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
-      <datalist id="estats">
-        <option>a</option>
-        <option>b</option>
-        <option>c</option>
-        <option>d</option>
-      </datalist>
+    <div class="absolute right-2">
+      <button onclick='document.getElementById("filters_form").submit();' class="bg-primario text-white px-8 py-1 border border-terciario-4 rounded-lg hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?=lang('buttons.filter')?></button>
+      <button onclick='resetForm()' class="bg-primario text-white px-8 py-1 border border-terciario-4 rounded-lg hover:bg-red-500 transition hover:ease-in ease-out duration-250"><?=lang('buttons.clear')?></button>
     </div>
 
-    <div>
-      <button onclick='document.getElementById("filters_form").submit();' class="bg-primario text-white px-8 py-1 border border-terciario-4 rounded-lg hover:bg-terciario-4 transition hover:ease-in ease-out duration-250">Filtrar</button>
-    </div>
   </form>
 
-  <?php   // TABLE GENERATED WITH TABLE-GEN-HELPER
-  echo $table->generate();
+  <?php // TABLE GENERATED WITH TABLE-GEN-HELPER
+    echo $table->generate();
   ?>
 
   <!-- Paginate -->
-  <divs>
-    <?= $pager->only(['q'])->links() ?>
-</div>
+  <div>
+    <?php // LA FUNCION DE ->only() ES LA QUE MANTIENE LA BUSQUEDA Y FILTROS EN LA URL SIN RESETEARLOS ?>
+    <?= $pager->only(['q','d','c','dt_1','dt_2','tm_1','tm_2','e'])->links() ?>
+  </div>
 
 </div>
+
+<!-- CLASS DATALIST CUSTOM -->
+<script src="/assets/js/dataList.js"></script>
 
 <script>
+
+  // Funcion para mostrar/esconder los filtros
   function toggleFilters(){
 
     var filters = document.getElementById("filters_form");
@@ -154,11 +177,61 @@
 
   }
 
-  function inputFilter(input){
-    document.getElementById('search_hidden').value = input.value;
+  // Funcion para resetear los filtros
+  function resetForm(){
+    event.preventDefault();
+    document.getElementById("filters_form").reset();
+    document.getElementById("dispositiu").value = '';
+    document.getElementById("centre").value = '';
+    document.getElementById("estat").value = '';
   }
+
+  // CREADOR DE DATALIST DISPOSITIVOS
+  const dataList_device = new DataList('searchable-device-list', 'data-device-list', 'option-device-list', 'option-device');
+  // Inicializamos
+  dataList_device.init();
+  // Generamos el array de opciones 
+  var devicesJSON = `<?php echo json_encode($arrFilters['devices'])?>`;
+  var devices = JSON.parse(devicesJSON);
+  var arrDevices = [];
+  devices.forEach(element => {
+    arrDevices.push(element['nom'])
+  });
+  // Añadimos cada elemento al dataList_device
+  arrDevices.forEach(v=>(dataList_device.append(v)));
+
+  // CREADOR DE DATALIST CENTROS
+  const dataList_center = new DataList('searchable-center-list', 'data-center-list', 'option-center-list', 'option-center');
+  // Inicializamos
+  dataList_center.init();
+  // Generamos el array de opciones 
+  var centersJSON = `<?php echo json_encode($arrFilters['centers'])?>`;
+  var centers = JSON.parse(centersJSON);
+  var arrCenters = [];
+  centers.forEach(element => {
+    arrCenters.push(element['nom'])
+  });
+  // Añadimos cada elemento al dataList_center
+  arrCenters.forEach(v=>(dataList_center.append(v)));
+
+  // CREADOR DE DATALIST ESTADOS
+  const dataList_state = new DataList('searchable-state-list', 'data-state-list', 'option-state-list', 'option-state');
+  // Inicializamos
+  dataList_state.init();
+  // Generamos el array de opciones 
+  var statesJSON = `<?php echo json_encode($arrFilters['states'])?>`;
+  var states = JSON.parse(statesJSON);
+  var arrStates = [];
+  states.forEach(element => {
+    arrStates.push(element['nom'])
+  });
+  // Añadimos cada elemento al dataList_state
+  arrStates.forEach(v=>(dataList_state.append(v)));
+
+  document.getElementById("inputSearch").addEventListener('keypress', function(){
+    document.getElementById('search_hidden').value = this.value;
+  })
+
 </script>
-
-
 
 <?= $this->endSection() ?>

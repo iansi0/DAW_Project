@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Google\Service\AnalyticsData\OrderBy;
 use PhpParser\Node\Stmt\Return_;
 use CodeIgniter\Database\RawSql;
 
@@ -58,7 +59,7 @@ class TiquetModel extends Model
         $this->insert($data);
     }
 
-    public function getByTitleOrText($search)
+    public function getByTitleOrText($search, $filters)
     {
         $role=session()->get('user')['role'];
         $code=intval(session()->get('user')['code']);
@@ -84,7 +85,34 @@ class TiquetModel extends Model
         $this->orLike('centre_reparador.nom', $search, 'both', true);
         $this->orLike('tiquet.created_at', $search, 'both', true);
         $this->orLike('estat.nom', $search, 'both', true);
-
+        // WHERE USING SEARCH 
+        $this->groupStart()
+            ->orLike('tiquet.id', $search, 'both', true)
+            ->orLike('tipus_dispositiu.nom', $search, 'both', true)
+            ->orLike('tiquet.descripcio_avaria', $search, 'both', true)
+            ->orLike('centre_emissor.nom', $search, 'both', true)
+            ->orLike('centre_reparador.nom', $search, 'both', true)
+            ->orLike('tiquet.created_at', $search, 'both', true)
+            ->orLike('estat.nom', $search, 'both', true)
+        ->groupEnd();
+        // WHERE USING FILTERS
+        if(!empty($filters)){
+        $this->groupStart();
+            if(!empty($filters['device'])) $this->like('tipus_dispositiu.nom', $filters['device'], 'both', true);
+            if(!empty($filters['center'])) $this->like('centre_emissor.nom', $filters['center'], 'both', true);
+            if(!empty($filters['center'])) $this->like('centre_reparador.nom', $filters['center'], 'both', true);
+            $this->groupStart();
+                $this->where('DATE(tiquet.created_at) >= ', $filters['date_ini']);
+                $this->where('DATE(tiquet.created_at) <= ', $filters['date_end']);
+            $this->groupEnd();
+            $this->groupStart();
+                $this->where('TIME(tiquet.created_at) >= ', $filters['time_ini']);
+                $this->where('TIME(tiquet.created_at) <= ', $filters['time_end']);
+            $this->groupEnd();
+            if(!empty($filters['state'])) $this->like('estat.nom', $filters['state']);
+        $this->groupEnd();
+        };
+        $this->orderBy('tiquet.created_at', 'desc');
         if ($role=="admin") {
             return $this;
         }else if($role=="prof" || $role=="alumn"){
@@ -113,6 +141,7 @@ class TiquetModel extends Model
                 JOIN centre ON tiquet.codi_centre_emissor = centre.codi OR tiquet.codi_centre_reparador = centre.codi
                 JOIN estat ON tiquet.id_estat = estat.id
             WHERE tiquet.deleted_at IS NULL
+            ORDER BY tiquet.created_at DESC
 
             LIMIT 8
          */
@@ -133,7 +162,8 @@ class TiquetModel extends Model
         $this->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id');
         $this->join('estat', 'tiquet.id_estat = estat.id');
         $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
-        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left')
+        ->orderBy('tiquet.created_at', 'desc');
         
 
         if ($role=="admin") {

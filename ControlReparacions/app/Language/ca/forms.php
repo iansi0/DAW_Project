@@ -41,6 +41,7 @@ return [
     's_course'      => 'Escull Curs',
     's_role'        => 'Escull Rol',
     's_inventary'   => 'Escull Inventari',
+    's_state'       => 'Escull Estat',
 
     'lang'          => 'Idioma',
 
