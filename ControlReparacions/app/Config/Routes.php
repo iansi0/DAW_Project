@@ -93,7 +93,9 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
     $routes->group('error', function($routes){
         $routes->GET('404', 'Home::error404');
     });
-
+    
+    //STATISTICS
+    $routes->GET('statistics', 'StatisticsController::index');
 
     // LANGUAGE CHANGE
     $routes->get('change_lang/(:segment)', 'Home::change_lang/$1');
