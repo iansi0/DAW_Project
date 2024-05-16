@@ -146,8 +146,13 @@ class Home extends BaseController
             setcookie("user", "", time() - 60);
         }
 
-        return redirect()->to(base_url('tickets'));
-    }
+        if (session()->get('user')['role']=="sstt") {
+            return redirect()->to(base_url('statistics'));
+        }else{
+            return redirect()->to(base_url('tickets'));
+        }
+           
+    }    
 
     public function logout()
     {

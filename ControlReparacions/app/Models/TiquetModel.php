@@ -224,7 +224,7 @@ class TiquetModel extends Model
         }else if($role=="prof" || $role=="alumn"){
             $this->where("centre_reparador.id",$code);
         }else if($role=="sstt"){
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
         }else if($role=="ins"){
             $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
         }

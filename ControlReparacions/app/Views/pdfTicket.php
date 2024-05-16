@@ -32,13 +32,7 @@
 <body>
     
 <div class="flex gap-16 items-center  text-primario p-3 rounded-lg pl-5 w-full mb-3">
-
-<a href="<?= strpos(previous_url(), 'tickets?') !== false
-                ? str_replace('index.php/', '', previous_url())
-                : base_url('/tickets'); ?>">
-    <button id="pdf" class="hover:bg-[#FFB053] hover:text-terciario-1 p-2 px-3 rounded-xl transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-arrow-left text-3xl"></i></button>
-</a>
-<h1 class=" text-left text-5xl ml-48"><?= mb_strtoupper(lang('titles.id_ticket'), 'utf-8'); ?>: <?= explode("-", $ticket['id'])[4] ?></h1>
+    <h1 class=" text-left text-5xl ml-48"><?= mb_strtoupper(lang('titles.id_ticket'), 'utf-8'); ?>: <?= explode("-", $ticket['id'])[4] ?></h1>
 </div>
 
 <main style="view-transition-name: info<?= $ticket['id'] ?>;" class="flex gap-7 py-1 ">

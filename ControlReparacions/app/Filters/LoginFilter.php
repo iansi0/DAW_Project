@@ -13,7 +13,6 @@ class LoginFilter implements FilterInterface {
             return redirect()->to(base_url('login'));
         
         } else if (session('user') && url_is('login')) {
-
             if (session()->get('user')['role']=="sstt") {
                 return redirect()->to(base_url('statistics'));
             }else{
