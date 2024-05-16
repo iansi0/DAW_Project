@@ -74,7 +74,7 @@ class InventariModel extends Model
     public function getAllPaged()
     {
         $role=session()->get('user')['role'];
-        $code=session()->get('user')['code'];
+        $code=intval(session()->get('user')['code']);
 
         $this->select("
         inventari.id AS id, 

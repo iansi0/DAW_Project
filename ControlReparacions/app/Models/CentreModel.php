@@ -59,7 +59,7 @@ class CentreModel extends Model
 
     public function getAllCenter(){
         $role=session()->get('user')['role'];
-        $code=session()->get('user')['code'];
+        $code=intval(session()->get('user')['code']);
 
         $this->select('codi, nom');
         
@@ -79,7 +79,7 @@ class CentreModel extends Model
     public function getAllRepairCenters(){
          
         $role=session()->get('user')['role'];
-        $code=session()->get('user')['code'];
+        $code=intval(session()->get('user')['code']);
         
         $this->select('codi, nom')->where('actiu', true)->where('taller', true);
         
@@ -93,6 +93,21 @@ class CentreModel extends Model
             $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
         }
 
+        return $this->findAll();
+    }
+
+    public function getRegionWithMostTickets($ssttCode){
+
+        $this->select('
+        comarca.nom as name,
+        COUNT(tiquet.id) as count,
+        ');
+        $this->join('tiquet', 'centre.codi = tiquet.codi_centre_emissor');
+        $this->join('poblacio', 'centre.id_poblacio = poblacio.id');
+        $this->join('comarca', 'poblacio.id_comarca = comarca.codi');
+        $this->where('centre.id_sstt',intval($ssttCode)); 
+        $this->orderBy('count','DESC');
+        
         return $this->findAll();
     }
 }

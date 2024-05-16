@@ -61,7 +61,7 @@ class TiquetModel extends Model
     public function getByTitleOrText($search)
     {
         $role=session()->get('user')['role'];
-        $code=session()->get('user')['code'];
+        $code=intval(session()->get('user')['code']);
 
         $this->select(["
                         tiquet.id AS id, 
@@ -117,7 +117,7 @@ class TiquetModel extends Model
             LIMIT 8
          */
         $role=session()->get('user')['role'];
-        $code=session()->get('user')['code'];
+        $code=intval(session()->get('user')['code']);
         
         $this->select([
             "tiquet.id AS id, 
@@ -141,7 +141,7 @@ class TiquetModel extends Model
         }else if($role=="prof" || $role=="alumn"){
             return $this->where("centre_reparador.id",$code);
         }else if($role=="sstt"){
-            return $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+            return $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
         }else if($role=="ins"){
             return $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
         }
@@ -150,7 +150,7 @@ class TiquetModel extends Model
     public function deleteTicket($id)
     {
         $role=session()->get('user')['role'];
-        $code=session()->get('user')['code'];
+        $code=intval(session()->get('user')['code']);
 
         $this->where('id', $id);
         
@@ -172,7 +172,7 @@ class TiquetModel extends Model
     {
 
         $role=session()->get('user')['role'];
-        $code=session()->get('user')['code'];
+        $code=intval(session()->get('user')['code']);
 
         $this->where('id', $id);
         if ($role=="admin") {
@@ -195,7 +195,7 @@ class TiquetModel extends Model
     {
         
         $role=session()->get('user')['role'];
-        $code=session()->get('user')['code'];
+        $code=intval(session()->get('user')['code']);
 
 
         $this->select(["
@@ -234,7 +234,7 @@ class TiquetModel extends Model
 
     public function getTicketById($id)
     {
-        $code=session()->get('user')['code'];
+        $code=intval(session()->get('user')['code']);
         $role=session()->get('user')['role'];
 
         $this->where('tiquet.id', $id)->first();
@@ -249,5 +249,50 @@ class TiquetModel extends Model
             $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
         }
         return $this->first();
+    }
+
+    public function getTicketsByMonths()
+    {
+        $role=session()->get('user')['role'];
+        $code=intval(session()->get('user')['code']);
+
+        $this->select('
+        MONTH(tiquet.created_at) as month
+        , COUNT(tiquet.id) as count
+        ');
+        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
+        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+        $this->groupBy('month');
+
+        if ($role=="admin") {
+            $this;
+        }else if($role=="sstt"){
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+        }
+        return $this->findAll();
+
+        
+    }
+    public function getTicketsByType()
+    {
+
+        $role=session()->get('user')['role'];
+        $code=intval(session()->get('user')['code']);
+
+        $this->select('
+        tipus_dispositiu.nom AS tipus,
+        , COUNT(tiquet.id) as count
+        ');
+        $this->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id');
+        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
+        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+        $this->groupBy('tipus');
+
+        if ($role=="admin") {
+            $this;
+        }else if($role=="sstt"){
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+        }
+        return $this->findAll();
     }
 }
