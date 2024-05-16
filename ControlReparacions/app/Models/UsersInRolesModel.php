@@ -60,7 +60,7 @@ class UsersInRolesModel extends Model
         $result = $this->select('roles.role as role')
         ->join('roles', 'users_in_roles.id_role = roles.id')
         ->where('users_in_roles.id_user' , $id_user)
-        ->findAll();
+        ->first();
         
         d($result);
         return $result;

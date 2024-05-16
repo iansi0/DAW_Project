@@ -104,13 +104,7 @@ class UsersModel extends Model
                         ,COALESCE(sstt.telefon, centre.telefon, '') AS phone
                         ,COALESCE(sstt.altres, CONCAT(centre.taller, ',', centre.actiu), professor.id_xtec, '') AS other
                         ,COALESCE(CONCAT(centre.nom_persona_contacte, ',', centre.correu_persona_contacte), '') AS contact
-                        ,CASE
-                            WHEN sstt.id_user IS NOT NULL THEN 'sstt'
-                            WHEN centre.id_user IS NOT NULL THEN 'ins'
-                            WHEN professor.id_user IS NOT NULL THEN 'prof'
-                            WHEN alumne.id_user IS NOT NULL THEN 'alumn'
-                            ELSE ''
-                        END AS type"
+                        "
                     );
         $this->join('sstt', 'sstt.id_user = users.id', 'left');
         $this->join('centre', 'centre.id_user = users.id', 'left');

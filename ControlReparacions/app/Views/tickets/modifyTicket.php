@@ -57,7 +57,8 @@
                     ?>
                 </select>
             </div>
-
+            
+            <?php if (((session()->get('user')['role']=="sstt") && $ticket['id_estat']!=6) || (session()->get('user')['role']=="admin") ) : ?>
             <div class="flex flex-col justify-end  mt-5">
                 
                 
@@ -78,7 +79,12 @@
                     
                 </select>
             </div>
+            <?php else : ?>
+                <input type="text" name="sender" id="sender" hidden value="<?= session()->get('user')['code']; ?>">
 
+            <?php endif ?>
+            
+            <?php if (((session()->get('user')['role']=="sstt") && $ticket['id_estat']!=6) || (session()->get('user')['role']=="admin") ) : ?>
             <div class="flex flex-col justify-end  mt-5">
                 
                 <label class="block" for="repair" id="labelRepair"><?= lang("forms.s_ins")." ".lang("forms.work")?></label>
@@ -95,6 +101,7 @@
                     ?>
                 </select>
             </div>
+            <?php endif ?>
         </div>
 
         <div class="flex gap-5 justify-end w-full">

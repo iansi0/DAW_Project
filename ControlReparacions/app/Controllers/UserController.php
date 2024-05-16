@@ -37,7 +37,6 @@ class UserController extends BaseController
             "phone"         => session('user')["phone"],
             "other"         => session('user')["other"],
             "contact"       => session('user')["contact"],
-            "type"          => session('user')["type"],
             "lang"          => $language,
             "logged_data"   => date("Y-m-d H:i:s"),
             "ip_user"       => $_SERVER['REMOTE_ADDR'],

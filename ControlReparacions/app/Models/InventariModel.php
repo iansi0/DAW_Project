@@ -73,19 +73,32 @@ class InventariModel extends Model
 
     public function getAllPaged()
     {
+        $role=session()->get('user')['role'];
+        $code=session()->get('user')['code'];
 
-        return $this->select("
+        $this->select("
         inventari.id AS id, 
         inventari.nom as nom,
         inventari.preu AS preu, 
         inventari.data_compra AS data_compra,
         inventari.id_tipus_inventari AS tipus,
         tipus_inventari.nom as nomInventary
-        ")
-            ->join('tipus_inventari', 'inventari.id_tipus_inventari = tipus_inventari.id')
-        // ->where('codi_centre', session('user')['code']);
-        ->where('id_intervencio', null);
+        ");
 
+        $this->join('tipus_inventari', 'inventari.id_tipus_inventari = tipus_inventari.id');
+
+        // ->where('codi_centre', session('user')['code']);
+        if ($role=="admin") {
+            $this;
+        }else if($role=="prof" || $role=="alumn"){
+            $this->where("centre_reparador.id",$code);
+        }else if($role=="sstt"){
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+        }else if($role=="ins"){
+            $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
+        }
+        
+        return $this;
     }
 
     public function deleteInventari($id)

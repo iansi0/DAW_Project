@@ -22,25 +22,28 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
         $routes->GET('', 'TicketsController::tickets');
         $routes->POST('', 'TicketsController::tickets');
 
-        $routes->GET('add', 'TicketsController::ticketForm');
-        $routes->POST('add', 'TicketsController::addTicket');
+        $routes->GET('add', 'TicketsController::ticketForm', ['filter' => 'addTicket']);
+        $routes->POST('add', 'TicketsController::addTicket', ['filter' => 'addTicket']);
         
         $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
 
-        $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1');
-        $routes->GET('modify/(:segment)', 'TicketsController::modifyTicket/$1');
-        $routes->POST('modify/(:segment)', 'TicketsController::modifyTicket_post/$1');
+        $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1', ['filter' => 'deleteTicket']);
+        $routes->GET('modify/(:segment)', 'TicketsController::modifyTicket/$1', ['filter' => 'modifyTicket']);
+        $routes->POST('modify/(:segment)', 'TicketsController::modifyTicket_post/$1', ['filter' => 'modifyTicket']);
     });
 
     // EXPORT
-    $routes->group('export', function($routes){
+    $routes->group('export', ['filter' => 'exportTicket'], function($routes){
         //CSV
         $routes->GET('csv', 'TicketsController::exportCSV');
         $routes->GET('csv/(:segment)', 'TicketsController::exportCSV/$1');
         // XLS
         $routes->GET('xls', 'TicketsController::exportXLS');
         $routes->GET('xls/(:segment)', 'TicketsController::exportXLS/$1');
+        //PDF
+        
     });
+    $routes->GET('pdf/(:segment)', 'PdfController::index/$1');
 
     // INTERVENTIONS
     $routes->group('intervention', function($routes){
@@ -83,11 +86,6 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
         $routes->POST('', 'UserController::config_post');
     });
 
-    // PROFILE
-    $routes->group('profile', function($routes){
-        $routes->GET('', 'Home::empty');
-    });
-
     // WORKING
     $routes->GET('work', 'Home::empty');
 
@@ -97,7 +95,7 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
     });
 
 
-    // change de lang 
+    // LANGUAGE CHANGE
     $routes->get('change_lang/(:segment)', 'Home::change_lang/$1');
 
 });

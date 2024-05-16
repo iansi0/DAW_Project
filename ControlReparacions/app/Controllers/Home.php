@@ -61,7 +61,6 @@ class Home extends BaseController
                     "phone"         => $user["phone"],
                     "other"         => (count(explode(',', $user["other"])) > 0) ? explode(',', $user["other"]) : (($user["other"]) ? $user["other"] : ''),
                     "contact"       => (count(explode(',', $user["contact"])) > 0) ? explode(',', $user["contact"]) : '',
-                    "type"          => $user["type"],
                     "lang"          => ($user["lang"]) ? $user["lang"] : 'esp',
                     "logged_data"   => date("Y-m-d H:i:s"),
                     "ip_user"       => $_SERVER['REMOTE_ADDR'],
@@ -124,7 +123,7 @@ class Home extends BaseController
         // Generamos la sesión
         $sessionData = [
             "uid"           => $user["id"],
-            "role"          => $userInRole->getRoleByUser($user["id"]),
+            "role"          => $userInRole->getRoleByUser($user["id"])['role'],
             "user"          => $user["user"],
             "code"          => $user["code"],
             "name"          => $user["name"],
@@ -132,7 +131,6 @@ class Home extends BaseController
             "phone"         => $user["phone"],
             "other"         => (count(explode(',', $user["other"])) > 0) ? explode(',', $user["other"]) : (($user["other"]) ? $user["other"] : ''),
             "contact"       => (count(explode(',', $user["contact"])) > 0) ? explode(',', $user["contact"]) : '',
-            "type"          => $user["type"],
             "lang"          => ($user["lang"]) ? $user["lang"] : 'ca',
             "logged_data"   => date("Y-m-d H:i:s"),
             "ip_user"       => $_SERVER['REMOTE_ADDR']
@@ -207,12 +205,10 @@ class Home extends BaseController
             "phone"         => session('user')["phone"],
             "other"         => session('user')["other"],
             "contact"       => session('user')["contact"],
-            "type"          => session('user')["type"],
             "lang"          => $language,
             "logged_data"   => date("Y-m-d H:i:s"),
             "ip_user"       => $_SERVER['REMOTE_ADDR'],
         ];
-        dd($sessionData);
         session()->set("user", $sessionData);
 
         return redirect()->to(str_replace('index.php/', '', previous_url()));
