@@ -26,6 +26,12 @@ return [
     'ins_2'         => 'Highschool',
     'n_ins'         => 'Add Highschool',
     'e_ins'         => 'Modify Highschool',
+    'email_contact' => 'Email Contact',
+    'name_contact'  => 'Nom Contact',
+    'active'        => 'Active',
+    'workshop'      => 'Workshop',
+    'population'    => 'Population',
+    'number'        => 'Number',
 
     'prof'          => 'Professors',
     'prof_2'        => 'Professor',

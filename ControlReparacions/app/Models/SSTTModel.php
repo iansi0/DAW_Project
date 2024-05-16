@@ -54,4 +54,8 @@ class SSTTModel extends Model
 
         $this->insert($data);
     }
+
+    public function getAllSSTT(){
+        return $this->select('codi, nom')->findAll();
+    }
 }

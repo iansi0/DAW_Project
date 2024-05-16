@@ -37,7 +37,7 @@
       </a>
       <?php endif ?>
     </div>
-    
+
     <!-- Export Buttons -->
     <?php if ((session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="ins")  || (session()->get('user')['role']=="prof") || (session()->get('user')['role']=="admin") ) : ?>
 

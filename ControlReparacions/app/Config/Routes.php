@@ -6,19 +6,16 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-$routes->group('', ['filter' => 'isLogged'], function($routes){
+// LOGIN
+$routes->GET('login', 'Home::login');
+$routes->GET('', 'Home::login');
+$routes->GET('/', 'Home::login');
+$routes->POST('login', 'Home::login_post');
 
-    // LOGOUT
-    $routes->GET('logout', 'Home::logout');
-    
-    // LOGIN
-    $routes->GET('login', 'Home::login');
-        $routes->addRedirect('', 'login');
-        $routes->addRedirect('/', 'login');
-    $routes->POST('login', 'Home::login_post');
+$routes->group('', ['filter' => 'isLogged'], function ($routes) {
 
     // TICKETS
-    $routes->group('tickets', function($routes){
+    $routes->group('tickets', function ($routes) {
         $routes->GET('', 'TicketsController::tickets');
         $routes->POST('', 'TicketsController::tickets');
 
@@ -46,31 +43,42 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
     $routes->GET('pdf/(:segment)', 'PdfController::index/$1');
 
     // INTERVENTIONS
-    $routes->group('intervention', function($routes){
+    $routes->group('intervention', function ($routes) {
         $routes->GET('', 'InterventionController::intervention');
         $routes->GET('form', 'InterventionController::interventionForm');
         $routes->POST('add', 'InterventionController::addIntervention');
     });
 
     // STUDENTS
-    $routes->group('students', function($routes){
+    $routes->group('students', function ($routes) {
         $routes->GET('', 'StudentsController::students');
         $routes->GET('form', 'Home::empty');
     });
 
     // INSTITUTES
-    $routes->group('institutes', function($routes){
-        $routes->GET('', 'Home::empty');
-        $routes->GET('form', 'Home::empty');
+    $routes->group('institutes', function ($routes) {
+        $routes->GET('', 'InstitutesController::institutes');
+
+        $routes->GET('add', 'InstitutesController::InstituteForm');
+        $routes->POST('add', 'InstitutesController::addInstitutes');
+
+
+        $routes->GET('modify/(:segment)', 'InstitutesController::modifyInstitute/$1');
+        $routes->POST('modify/(:segment)', 'InstitutesController::modifyInstitute_post/$1');
+
+        $routes->GET('(:segment)', 'InstitutesController::instituteInfo/$1');
+        $routes->GET('(:segment)/filterSender', 'InstitutesController::instituteInfo/$1/sender');
+        $routes->GET('(:segment)/filterReceiver', 'InstitutesController::instituteInfo/$1/receiver');
+
     });
 
     // ASSIGN
-    $routes->group('assign', function($routes){
+    $routes->group('assign', function ($routes) {
         $routes->GET('', 'Home::empty');
     });
 
     // INVENTARY
-    $routes->group('inventary', function($routes){
+    $routes->group('inventary', function ($routes) {
         $routes->GET('', 'InventaryController::index');
         $routes->GET('add', 'InventaryController::inventaryForm');
         $routes->POST('add', 'InventaryController::addInventary');
@@ -81,16 +89,17 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
     });
 
     // CONFIG
-    $routes->group('config', function($routes){
+    $routes->group('config', function ($routes) {
         $routes->GET('', 'UserController::config');
         $routes->POST('', 'UserController::config_post');
     });
+
 
     // WORKING
     $routes->GET('work', 'Home::empty');
 
     // ERRORS
-    $routes->group('error', function($routes){
+    $routes->group('error', function ($routes) {
         $routes->GET('404', 'Home::error404');
     });
     
@@ -101,4 +110,6 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
     // LANGUAGE CHANGE
     $routes->GET('change_lang/(:segment)', 'Home::change_lang/$1');
 
+    // LOGOUT
+    $routes->GET('logout', 'Home::logout');
 });
