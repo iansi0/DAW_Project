@@ -12,7 +12,7 @@ function createDonut(seriesArray,labelsArray,id){
                 },
             },
             width: 380,
-            type: 'donut',
+            type: 'pie',
         },
         labels: labelsArray,
         responsive: [{

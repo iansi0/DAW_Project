@@ -37,32 +37,33 @@
     <article class="flex flex-col gap-2 w-full">
 
         <div class="flex justify-between gap-4">
-        <?php if ((session()->get('user')['role']=="prof") || (session()->get('user')['role']=="ins") || (session()->get('user')['role']=="admin") ) : ?>
+        <?php if ((session()->get('user')['role']=="prof") || (session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="ins") || (session()->get('user')['role']=="admin") ) : ?>
 
-            <form action="<?= base_url('work') ?>" method="get">
+            <form action="<?= base_url('savestate/'.$ticket['id']) ?>" id="stateform" method="post">
                 <?php
                 foreach ($estats as $estat) {
                     if ($estat['id'] == $ticket['id_estat']) {
                         $selected="estat_".$estat["id"];
+                    }else{
+                        
                     }
                 }
                 ?>
-                <select name="" id="selectType" class="py-1.5 border border-terciario-1 cursor-pointer <?=$selected?> rounded-lg ">
+                <select name="selectType" id="selectType"  class="py-1.5 border border-terciario-1 cursor-pointer <?=$selected?> rounded-lg ">
 
 
                     <?php
-                    foreach ($estats as $estat) {
-                        if ($estat['id'] == $ticket['id_estat']) {
-                            echo "<option selected class='bg-secundario cursor-pointer'  value='" . $estat["id"] . "'>" . $estat["nom"] . "</option>";
+                    foreach ($estatsFiltrats as $filtrat) {
+                        if ($filtrat['id'] == $ticket['id_estat']) {
+                            echo "<option selected class='bg-secundario cursor-pointer'  value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
                         } else {
-                            echo "<option class='bg-secundario cursor-pointer' value='" . $estat["id"] . "'>" . $estat["nom"] . "</option>";
+                            echo "<option class='bg-secundario cursor-pointer' value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
                         }
                     }
                     ?>
                 </select>
-                <a href="<?= base_url('work') ?>">
-                    <button id="pdf" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-green-700 transition hover:ease-in ease-out duration-250"><?= lang('buttons.save'); ?></button>
-                </a>
+                
+                <button id="save" onclick="document.getElementById('stateform').submit()" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-green-700 transition hover:ease-in ease-out duration-250"><?= lang('buttons.save'); ?></button>
 
             </form>
             <?php endif ?>

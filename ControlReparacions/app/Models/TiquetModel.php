@@ -211,7 +211,7 @@ class TiquetModel extends Model
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
 
         if ($role=="admin") {
-            return $this->delete();
+            $this;
         }else if($role=="prof"){
             $this->where("centre_emissor.id",$code);
         }else if($role=="sstt"){
@@ -222,6 +222,27 @@ class TiquetModel extends Model
             return;
         }
         return $this->set($data)->update();
+
+    }
+    public function saveState($id,$state)
+    {
+
+        $role=session()->get('user')['role'];
+        $code=intval(session()->get('user')['code']);
+
+        $this->where('id', $id);
+        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
+        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+
+        if($role=="prof"){
+            $this->where("centre_emissor.id",$code);
+        }else if($role=="prof"){
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+        }else if($role=="ins"){
+            $this->where("centre_emissor.codi",$code);
+        }else{
+        }
+        return $this->set(['id_estat' => $state])->update();
 
     }
 

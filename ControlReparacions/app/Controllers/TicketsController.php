@@ -275,6 +275,7 @@ class TicketsController extends BaseController
             'pager' => $modelInterventions->pager,
             'table' => $table,
             'estats' => $estat->getAllStates(),
+            'estatsFiltrats' => $estat->getFilteredStates(),
         ];
 
    
@@ -476,6 +477,17 @@ class TicketsController extends BaseController
         $model->deleteTicket($id);
 
         return redirect()->to(base_url('/tickets'));
+    }
+
+
+    public function saveState($id)
+    {
+        $model = new TiquetModel();
+
+        $estat = $this->request->getPost("selectType");
+        $model->saveState($id,$estat);
+
+        return redirect()->to(base_url('/tickets/'.$id));
     }
 
     public function exportCSV($search = '')

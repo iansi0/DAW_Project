@@ -51,4 +51,15 @@ class EstatModel extends Model
     public function getAllStates(){
         return $this->select('id,nom')->findAll();
     }
+    public function getFilteredStates(){
+
+        $role=session()->get('user')['role'];
+
+        $this->select('id,nom');
+        if($role=="prof" || $role=="ins"){
+            $this->where("id",0)->orWhere("id",6)->orWhere("id",7)->orWhere("id",8)->orWhere("id",13);
+        }
+        return $this->findAll();
+         
+    }
 }

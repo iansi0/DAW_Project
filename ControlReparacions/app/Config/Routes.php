@@ -96,8 +96,9 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
     
     //STATISTICS
     $routes->GET('statistics', 'StatisticsController::index');
-
+    
+    $routes->POST('savestate/(:segment)', 'TicketsController::saveState/$1');
     // LANGUAGE CHANGE
-    $routes->get('change_lang/(:segment)', 'Home::change_lang/$1');
+    $routes->GET('change_lang/(:segment)', 'Home::change_lang/$1');
 
 });
