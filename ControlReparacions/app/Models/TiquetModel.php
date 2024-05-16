@@ -118,7 +118,7 @@ class TiquetModel extends Model
         }else if($role=="prof" || $role=="alumn"){
             return $this->where("centre_reparador.id",$code);
         }else if($role=="sstt"){
-            return $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+            return $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
         }else if($role=="ins"){
             return $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
         }
@@ -183,13 +183,15 @@ class TiquetModel extends Model
         $code=intval(session()->get('user')['code']);
 
         $this->where('id', $id);
-        
+        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
+        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+
         if ($role=="admin") {
             return $this->delete();
         }else if($role=="prof"){
             $this->where("centre_emissor.id",$code);
         }else if($role=="sstt"){
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
         }else if($role=="ins"){
             $this->where("centre_emissor.codi",$code);
         }else{
@@ -205,12 +207,15 @@ class TiquetModel extends Model
         $code=intval(session()->get('user')['code']);
 
         $this->where('id', $id);
+        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
+        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+
         if ($role=="admin") {
             return $this->delete();
         }else if($role=="prof"){
             $this->where("centre_emissor.id",$code);
         }else if($role=="sstt"){
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
         }else if($role=="ins"){
             $this->where("centre_emissor.codi",$code);
         }else{
@@ -268,13 +273,15 @@ class TiquetModel extends Model
         $role=session()->get('user')['role'];
 
         $this->where('tiquet.id', $id)->first();
-
+        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
+        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+        
         if ($role=="admin") {
             $this;
         }else if($role=="prof" || $role=="alumn"){
             $this->where("centre_reparador.id",$code);
         }else if($role=="sstt"){
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
         }else if($role=="ins"){
             $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
         }
