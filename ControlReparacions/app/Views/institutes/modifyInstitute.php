@@ -10,12 +10,24 @@
 
         <div class="grid grid-cols-3 gap-x-2">
 
+            <!-- codi  -->
+            <div class="flex flex-col mt-5">
+                <label class=""><?= lang("forms.code") ?></label>
+                <input type="text" name="code" value="<?=$institute['codi']?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+            </div>
+
+            <!-- nom  -->
+            <div class="flex flex-col mt-5">
+                <label class=""><?= lang("forms.name") ?></label>
+                <input type="text" name="name" value="<?=$institute['nom']?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+            </div>
+
             <!-- actiu -->
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.active") ?></label>
 
                 <select name="active" id="active" class="border-2  border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
-                    <option value="<?=$institute['actiu']?>" selected hidden><?= $institute['actiu'] == 0 ? 'si' : 'no' ?></option>
+                    <option value="<?= $institute['actiu'] ?>" selected hidden><?= $institute['actiu'] == 0 ? 'si' : 'no' ?></option>
 
                     <option value='0'>si</option>
                     <option value='1'>no</option>
@@ -28,10 +40,35 @@
                 <label class=""><?= lang("forms.work") ?></label>
 
                 <select name="work" id="work" class="border-2  border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
-                    <option value="<?=$institute['taller']?>" selected hidden><?= $institute['taller'] == 0 ? 'no' : 'si' ?></option>
+                    <option value="<?= $institute['taller'] ?>" selected hidden><?= $institute['taller'] == 0 ? 'no' : 'si' ?></option>
 
                     <option value='0'>no</option>
                     <option value='1'>si</option>
+                </select>
+            </div>
+
+            <!-- telefon  -->
+            <div class="flex flex-col mt-5">
+                <label class=""><?= lang("forms.phone") ?></label>
+                <input type="text" name="phone" value="<?=$institute['telefon']?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
+            </div>
+
+            <!-- adreca  -->
+            <div class="flex flex-col mt-5">
+                <label class=""><?= lang("forms.adress") ?></label>
+                <input type="text" name="adress" value="<?=$institute['adreca_fisica']?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+            </div>
+
+            <!-- poblacio  -->
+            <div class="flex flex-col mt-5">
+                <label class=""><?= lang("forms.pobl") ?></label>
+                <select name="population" id="" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                    <option value="" disabled selected hidden><?= lang("forms.s_pobl") ?></option>
+                    <?php
+                    foreach ($populations as $population) {
+                        echo "<option value='" . $population["id"] . "'>" . $population["nom"] . "</option>";
+                    }
+                    ?>
                 </select>
             </div>
 
@@ -60,9 +97,9 @@
 
         <div class="flex gap-5 justify-end w-full">
 
-            <a href="<?= strpos(previous_url(), 'tickets?') !== false
+            <a href="<?= strpos(previous_url(), 'institutes?') !== false
                             ? str_replace('index.php/', '', previous_url())
-                            : base_url('/tickets');
+                            : base_url('/institutes');
                         ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel") ?></a>
 
             <input type="submit" value="<?= lang("buttons.save") ?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">

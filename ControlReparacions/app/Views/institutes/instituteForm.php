@@ -11,6 +11,12 @@
 
         <div class="grid grid-cols-3 gap-x-2">
 
+            <!-- codi  -->
+            <div class="flex flex-col mt-5">
+                <label class=""><?= lang("forms.code") ?></label>
+                <input type="text" name="code" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+            </div>
+
             <!-- nom  -->
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.name") ?></label>
@@ -45,8 +51,8 @@
                 <input type="text" name="phone" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
             </div>
 
-              <!-- nom  -->
-              <div class="flex flex-col mt-5">
+            <!-- adreca  -->
+            <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.adress") ?></label>
                 <input type="text" name="adress" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
             </div>

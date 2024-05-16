@@ -206,6 +206,12 @@ class InstitutesController extends BaseController
 
         $validationRules =
             [
+                'code' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error Code',
+                    ],
+                ],
                 'name' => [
                     'rules'  => 'required',
                     'errors' => [
@@ -230,6 +236,12 @@ class InstitutesController extends BaseController
                         'required' => 'Error phone',
                     ],
                 ],
+                'adress' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error Adress',
+                    ],
+                ],
                 'population' => [
                     'rules'  => 'required',
                     'errors' => [
@@ -243,7 +255,7 @@ class InstitutesController extends BaseController
 
         $fake = Factory::create("es_ES");
 
-        $codi =  $fake->uuid();
+        $codi =  $this->request->getPost("code");
         $id_user = $fake->uuid();
         $nom =  $this->request->getPost("name");
         $actiu = $this->request->getPost("active");
@@ -251,7 +263,7 @@ class InstitutesController extends BaseController
         $telefon = $this->request->getPost("phone");
         $adreca_fisica = $this->request->getPost("adress");
         $nom_persona_contacte = "";
-        $correu_persona_contacte = "";
+        $correu_persona_contacte = "a".$this->request->getPost("code")."@xtec.cat";
         $id_sstt = session('user')['code'];
         $id_poblacio = $this->request->getPost("population");
 
@@ -281,11 +293,14 @@ class InstitutesController extends BaseController
         helper('form');
 
         $modelInstitute = new CentreModel();
+        $populations = new PoblacioModel();
+
         $sstt = new SSTTModel();
 
 
         $data = [
             "institute" => $modelInstitute->getInstituteById($id),
+            "populations" => $populations->getAllPopulations(),
             "SSTTs" => $sstt->getAllSSTT(),
 
         ];
