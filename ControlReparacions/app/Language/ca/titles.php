@@ -32,6 +32,12 @@ return [
     'ins_2'         => 'Institut',
     'n_ins'         => 'Afegir Institut',
     'e_ins'         => 'Modificar Institut',
+    'email_contact' => 'Email Contacte',
+    'name_contact'  => 'Nom Contacte',
+    'active'        => 'Actiu',
+    'workshop'      => 'Taller',
+    'population'    => 'Poblacio',
+    'number'        => 'Telefon',
 
     'prof'          => 'Professors',
     'prof_2'        => 'Professor',
@@ -48,7 +54,7 @@ return [
     'id_ticket'     => 'Identificador del Ticket:',
     'n_ticket'      => 'Afegir Ticket',
     'e_ticket'      => 'Modificar Ticket',
-    
+
     'int'           => 'Intervencions',
     'int_2'         => 'Intervenció',
     'n_int'         => 'Afegir Intervenció',

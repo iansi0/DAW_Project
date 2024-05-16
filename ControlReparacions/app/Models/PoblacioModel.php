@@ -49,4 +49,8 @@ class PoblacioModel extends Model
 
         $this->insert($data);
     }
+
+    public function getAllPopulations(){
+        return $this->select('id, nom')->findAll();
+    }
 }

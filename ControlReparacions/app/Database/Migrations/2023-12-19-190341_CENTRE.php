@@ -52,8 +52,8 @@ class CENTRE extends Migration
                         'null'           => false,
                 ],
                 'id_sstt'          => [
-                        'type'           => 'BINARY',
-                        'constraint'     => 32,
+                        'type'           => 'INT',
+                        'constraint'     => 10,
                         'null'           => false,
                 ],
                 'id_poblacio'          => [

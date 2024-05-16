@@ -211,7 +211,7 @@ class TiquetModel extends Model
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
 
         if ($role=="admin") {
-            return $this->delete();
+            $this;
         }else if($role=="prof"){
             $this->where("centre_emissor.id",$code);
         }else if($role=="sstt"){
@@ -222,6 +222,27 @@ class TiquetModel extends Model
             return;
         }
         return $this->set($data)->update();
+
+    }
+    public function saveState($id,$state)
+    {
+
+        $role=session()->get('user')['role'];
+        $code=intval(session()->get('user')['code']);
+
+        $this->where('id', $id);
+        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
+        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+
+        if($role=="prof"){
+            $this->where("centre_emissor.id",$code);
+        }else if($role=="prof"){
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+        }else if($role=="ins"){
+            $this->where("centre_emissor.codi",$code);
+        }else{
+        }
+        return $this->set(['id_estat' => $state])->update();
 
     }
 
@@ -245,7 +266,7 @@ class TiquetModel extends Model
             COALESCE(centre_reparador.nom, '".lang('titles.toassign')."') AS receptor,
             COALESCE(centre_reparador.codi, '0') AS codi_reparador
             "]);
-    
+
 
         $this->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id');
         $this->join('estat', 'tiquet.id_estat = estat.id');
@@ -331,5 +352,48 @@ class TiquetModel extends Model
             $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
         }
         return $this->findAll();
+    }
+
+    
+
+    public function getInstituteTickets($id, $filter)
+    {
+      
+        if ($filter == "sender") {
+
+             return $this->select([
+                "tiquet.id AS id, 
+                tiquet.descripcio_avaria AS descripcio,
+                tiquet.created_at AS created,
+                tipus_dispositiu.nom AS tipus,
+                estat.nom as estat,
+                tiquet.id_estat as id_estat,
+                COALESCE(centre_emissor.nom, '" . lang('titles.toassign') . "') AS emissor,
+                COALESCE(centre_reparador.nom, '" . lang('titles.toassign') . "') AS receptor"
+            ])
+                ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
+                ->join('estat', 'tiquet.id_estat = estat.id')
+                ->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left')
+                ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left')
+                ->where("tiquet.codi_centre_emissor", 8000013);
+                
+        } else {
+
+            return $this->select([
+                "tiquet.id AS id, 
+                tiquet.descripcio_avaria AS descripcio,
+                tiquet.created_at AS created,
+                tipus_dispositiu.nom AS tipus,
+                estat.nom as estat,
+                tiquet.id_estat as id_estat,
+                COALESCE(centre_emissor.nom, '" . lang('titles.toassign') . "') AS emissor,
+                COALESCE(centre_reparador.nom, '" . lang('titles.toassign') . "') AS receptor"
+            ])
+                ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
+                ->join('estat', 'tiquet.id_estat = estat.id')
+                ->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left')
+                ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left')
+                ->where("tiquet.codi_centre_reparador", 8000013);
+        }
     }
 }
