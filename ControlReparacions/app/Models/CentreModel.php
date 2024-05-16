@@ -66,11 +66,11 @@ class CentreModel extends Model
         if ($role=="admin") {
             $this;
         }else if($role=="prof" || $role=="alumn"){
-            $this->where("centre_reparador.id",$code);
+            $this->where("centre.id",$code);
         }else if($role=="sstt"){
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+            $this->where("centre.id_sstt",$code);
         }else if($role=="ins"){
-            $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
+            $this->where("centre.codi",$code);
         }
 
         return $this->findAll();
@@ -86,11 +86,11 @@ class CentreModel extends Model
         if ($role=="admin") {
             $this;
         }else if($role=="prof" || $role=="alumn"){
-            $this->where("centre_reparador.id",$code);
+            $this->where("centre.id",$code);
         }else if($role=="sstt"){
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emisor.id_sstt",$code);
+            $this->where("centre.id_sstt",$code);
         }else if($role=="ins"){
-            $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
+            $this->where("centre.codi",$code);
         }
 
         return $this->findAll();
