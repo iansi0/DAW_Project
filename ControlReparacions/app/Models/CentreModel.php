@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class CentreModel extends Model
 {
     protected $table            = 'centre';
-    protected $primaryKey       = 'codi';
+    protected $primaryKey       = 'id_user';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
@@ -133,5 +133,15 @@ class CentreModel extends Model
         )
             ->join('poblacio', 'centre.id_poblacio = poblacio.id')
             ->where('centre.codi', $id)->first();
+    }
+
+    public function getInstituteById($id)
+    {
+        return $this->where('centre.codi', $id)->first();
+    }
+
+    public function modifyInstitute($id, $data)
+    {
+        return $this->where('codi', $id)->set($data)->update();
     }
 }

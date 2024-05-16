@@ -1821,6 +1821,10 @@ video {
   background-color: rgb(87 85 85 / var(--tw-bg-opacity));
 }
 
+.hover\:font-bold:hover {
+  font-weight: 700;
+}
+
 .hover\:text-blue-900:hover {
   --tw-text-opacity: 1;
   color: rgb(30 58 138 / var(--tw-text-opacity));

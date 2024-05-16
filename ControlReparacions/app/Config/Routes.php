@@ -55,9 +55,18 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
     // INSTITUTES
     $routes->group('institutes', function ($routes) {
         $routes->GET('', 'InstitutesController::institutes');
-        $routes->GET('form', 'Home::empty');
+
+        $routes->GET('add', 'InstitutesController::InstituteForm');
+        $routes->POST('add', 'InstitutesController::addInstitutes');
+
+
+        $routes->GET('modify/(:segment)', 'InstitutesController::modifyInstitute/$1');
+        $routes->POST('modify/(:segment)', 'InstitutesController::modifyInstitute_post/$1');
 
         $routes->GET('(:segment)', 'InstitutesController::instituteInfo/$1');
+        $routes->GET('(:segment)/filterSender', 'InstitutesController::instituteInfo/$1/sender');
+        $routes->GET('(:segment)/filterReceiver', 'InstitutesController::instituteInfo/$1/receiver');
+
     });
 
     // ASSIGN

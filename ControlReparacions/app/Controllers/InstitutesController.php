@@ -3,9 +3,13 @@
 namespace App\Controllers;
 
 use App\Models\CentreModel;
+use App\Models\SSTTModel;
 use App\Models\TiquetModel;
+use App\Models\PoblacioModel;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+
+use Faker\Factory;
 
 class InstitutesController extends BaseController
 {
@@ -45,7 +49,6 @@ class InstitutesController extends BaseController
             mb_strtoupper(lang('titles.workshop'), 'utf-8'),
             mb_strtoupper(lang('titles.population'), 'utf-8'),
             mb_strtoupper(lang('titles.number'), 'utf-8'),
-            mb_strtoupper(lang('titles.number'), 'utf-8'),
             mb_strtoupper(lang('titles.actions'), 'utf-8'),
 
         );
@@ -73,7 +76,6 @@ class InstitutesController extends BaseController
         // ROWS
         foreach ($data['institutes'] as $institute) {
 
-            $buttonDelete = base_url("institutes/delete/" . $institute['codi']);
             $buttonUpdate = base_url("institutes/modify/" . $institute['codi']);
             $buttonView = base_url("institutes/" . $institute['codi']);
             $table->addRow(
@@ -89,11 +91,9 @@ class InstitutesController extends BaseController
                     : '<i class="fa-solid fa-check text-xl text-green-600" ></i>',
                 $institute['poblacio'],
                 $institute['telefon'],
-                $institute['adreca'],
                 "
                 <a href='$buttonView' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
                 <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
-                <a href='$buttonDelete' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>
                 ",
 
             );
@@ -104,7 +104,10 @@ class InstitutesController extends BaseController
         return view('institutes/institutes', $data);
     }
 
-    public function instituteInfo($id = null){
+    public function instituteInfo($id = null, $filter = "sender")
+    {
+
+
 
         if ($id == null) {
             return redirect()->to(base_url('/tickets'));
@@ -126,28 +129,29 @@ class InstitutesController extends BaseController
             mb_strtoupper(lang('titles.actions'), 'utf-8'),
         );
 
-         // TEMPLATE
-         $template = [
-            'table_open'  => "<table class='w-full rounded-t-2xl overflow-hidden '>",
+        // TEMPLATE
+        $template = [
+            'table_open'  => "<table class='w-full'>",
 
-            'thead_open'  => "<thead class='bg-primario text-secundario '>",
+            'thead_open'  => "<thead class='bg-primario text-secundario'>",
 
             'heading_cell_start' => "<th class='py-3 text-base'>",
 
             'row_start' => "<tr class='border-b-[0.01px] '>",
-            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-[#F7F4EF]'>",
+            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-terciario-2'>",
+
+
         ];
         $table->setTemplate($template);
 
         $data = [
             'institute' => $modelInstitute->viewInstitute($id),
-            'tickets' => $modelTickets->getAllPaged()->paginate(8),
+            'tickets' => $modelTickets->getInstituteTickets($id, $filter)->paginate(8),
             'pager' => $modelTickets->pager,
             'table' => $table,
+            'filter' => $filter,
         ];
 
-
-        
 
         foreach ($data['tickets'] as $ticket) {
 
@@ -177,16 +181,136 @@ class InstitutesController extends BaseController
                 ],
 
             );
-
-        
         }
 
         return view('institutes/instituteInfo', $data);
     }
 
-    public function instituteForm()
+    public function InstituteForm()
     {
-        return view('institutes/instituteForm');
+
+        helper('form');
+
+        $populations = new PoblacioModel();
+
+        $data = [
+            "populations" => $populations->getAllPopulations(),
+        ];
+
+        return view('institutes/instituteForm', $data);
+    }
+
+    public function addInstitutes()
+    {
+        helper('form');
+
+        $validationRules =
+            [
+                'name' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error Name',
+                    ],
+                ],
+                'active' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error active',
+                    ],
+                ],
+                'work' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error work',
+                    ],
+                ],
+                'phone' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error phone',
+                    ],
+                ],
+                'population' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error population',
+                    ],
+                ],
+
+
+            ];
+        $model = new CentreModel();
+
+        $fake = Factory::create("es_ES");
+
+        $codi =  $fake->uuid();
+        $id_user = $fake->uuid();
+        $nom =  $this->request->getPost("name");
+        $actiu = $this->request->getPost("active");
+        $taller =  $this->request->getPost("work");
+        $telefon = $this->request->getPost("phone");
+        $adreca_fisica = $this->request->getPost("adress");
+        $nom_persona_contacte = "";
+        $correu_persona_contacte = "";
+        $id_sstt = session('user')['code'];
+        $id_poblacio = $this->request->getPost("population");
+
+        if ($this->validate($validationRules)) {
+         
+            $model->addCentre(
+                $id_user,
+                $codi,
+                $nom,
+                $actiu,
+                $taller,
+                $telefon,
+                $adreca_fisica,
+                $nom_persona_contacte,
+                $correu_persona_contacte,
+                $id_sstt,
+                $id_poblacio
+            );
+        } else {
+            return redirect()->back()->withInput();
+        }
+        return redirect()->to(base_url('/tickets'));
+    }
+
+    public function modifyInstitute($id)
+    {
+        helper('form');
+
+        $modelInstitute = new CentreModel();
+        $sstt = new SSTTModel();
+
+
+        $data = [
+            "institute" => $modelInstitute->getInstituteById($id),
+            "SSTTs" => $sstt->getAllSSTT(),
+
+        ];
+
+        return view('institutes/modifyInstitute', $data);
+    }
+
+    public function modifyInstitute_post($id)
+    {
+
+        $model = new CentreModel();
+        helper('form');
+
+        $data = [
+            "codi" =>  intval($id),
+            "actiu" =>  intval($this->request->getPost("active")),
+            "taller" => intval($this->request->getPost("work")),
+            "id_sstt" =>  intval($this->request->getPost("sstt")),
+        ];
+
+
+
+        $model->modifyInstitute($id, $data);
+
+        return redirect()->to(base_url('/institutes'));
     }
 
     public function assign()

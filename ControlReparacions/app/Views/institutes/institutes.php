@@ -23,7 +23,7 @@
       <!-- BUTTON SHOW FILTERS -->
       <button id='btn_filters' onclick='toggleFilters()' class="bg-primario text-white px-2 py-1 border border-terciario-4 hover:bg-red-300 cursor-pointer hover:text-terciario-4 rounded-lg transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-filter"></i></button>
       <!-- BUTTON ADD TICKET -->
-      <a href="<?= base_url('tickets/add') ?>">
+      <a href="<?= base_url('institutes/add') ?>">
         <button id='add-ticket' class="bg-primario text-white px-2 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-plus"></i></button>
       </a>
     </div>
