@@ -71,7 +71,7 @@
             <?php if ((session()->get('user')['role']=="prof") || (session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin") ) : ?>
             <div>
 
-                <a href="<?= base_url('work') ?>">
+                <a href="<?= base_url('pdf/' . $ticket['id'] . '') ?>">
                     <button id="pdf" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-red-800 transition hover:ease-in ease-out duration-250">Imprimir PDF</button>
                 </a>
             </div>

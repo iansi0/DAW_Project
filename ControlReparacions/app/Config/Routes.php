@@ -40,7 +40,10 @@ $routes->group('', ['filter' => 'isLogged'], function($routes){
         // XLS
         $routes->GET('xls', 'TicketsController::exportXLS');
         $routes->GET('xls/(:segment)', 'TicketsController::exportXLS/$1');
+        //PDF
+        
     });
+    $routes->GET('pdf/(:segment)', 'PdfController::index/$1');
 
     // INTERVENTIONS
     $routes->group('intervention', function($routes){

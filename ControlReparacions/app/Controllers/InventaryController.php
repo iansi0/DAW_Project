@@ -123,7 +123,7 @@ class InventaryController extends BaseController
 
         $model->addInventari(
             $id,
-            // $nom,
+            $nom,
             $data_compra,
             $preu,
             $codi_centre,
