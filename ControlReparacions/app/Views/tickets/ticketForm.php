@@ -14,7 +14,7 @@
 
                 <?php
                 if (validation_errors()) : ?>
-                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 text-red-800 border-t-4 border-red-300 "><?= validation_errors()['description'] ?></p>
+                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['description'] ?></p>
                 <?php endif ?>
             </div>
 
@@ -24,7 +24,7 @@
                 <input type="text" name="nameContact" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
                 <?php
                 if (validation_errors()) : ?>
-                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 text-red-800 border-t-4 border-red-300 "><?= validation_errors()['nameContact'] ?></p>
+                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['nameContact'] ?></p>
                 <?php endif ?>
             </div>
 
@@ -34,7 +34,7 @@
                 <input type="text" name="emailContact" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
                 <?php
                 if (validation_errors()) : ?>
-                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 text-red-800 border-t-4 border-red-300 "><?= validation_errors()['emailContact'] ?></p>
+                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['emailContact'] ?></p>
                 <?php endif ?>
             </div>
 
@@ -51,7 +51,7 @@
                 </select>
                 <?php
                 if (validation_errors()) : ?>
-                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 text-red-800 border-t-4 border-red-300 "><?= validation_errors()['id_type'] ?></p>
+                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['id_type'] ?></p>
                 <?php endif ?>
             </div>
             <?php if ((session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin") ) : ?>
