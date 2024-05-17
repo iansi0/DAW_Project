@@ -21,6 +21,7 @@ return [
     'email'         => 'E-mail',
     'phone'         => 'Telèfon',
 
+    'contact'       => 'Contacte',
     'contact_name'  => 'Nom del responsable',
     'contact_email' => 'Email del responsable',
 
@@ -46,6 +47,7 @@ return [
     'lang'          => 'Idioma',
 
     'date'          => 'Data',
+    'create_date'   => 'Data de Creació',
     'start_date'    => 'Data Inici',
     'end_date'      => 'Data Fi',
     'limit_date'    => 'Data Límit',
@@ -59,7 +61,8 @@ return [
     'description'   => 'Descripció',
     'other'         => 'Altres',
     'price'         => 'Preu',
-    'type_inventary' => 'Tipus inventari',
+    'type_inventary'=> 'Tipus inventari',
+    'info'          => 'Informació',
 
     'required_slot' => 'Els camps marcats amb ( * ) són obligatoris',
 

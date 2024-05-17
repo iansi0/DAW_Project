@@ -90,33 +90,37 @@ class TiquetModel extends Model
             ->orLike('tiquet.created_at', $search, 'both', true)
             ->orLike('estat.nom', $search, 'both', true)
         ->groupEnd();
+
         // WHERE USING FILTERS
         if(!empty($filters)){
-        $this->groupStart();
-            if(!empty($filters['device'])) $this->like('tipus_dispositiu.nom', $filters['device'], 'both', true);
-            if(!empty($filters['center'])) $this->like('centre_emissor.nom', $filters['center'], 'both', true);
-            if(!empty($filters['center'])) $this->like('centre_reparador.nom', $filters['center'], 'both', true);
             $this->groupStart();
-                $this->where('DATE(tiquet.created_at) >= ', $filters['date_ini']);
-                $this->where('DATE(tiquet.created_at) <= ', $filters['date_end']);
+                if(!empty($filters['device'])) $this->like('tipus_dispositiu.nom', $filters['device'], 'both', true);
+                if(!empty($filters['center'])) $this->like('centre_emissor.nom', $filters['center'], 'both', true);
+                if(!empty($filters['center'])) $this->like('centre_reparador.nom', $filters['center'], 'both', true);
+                $this->groupStart();
+                    $this->where('DATE(tiquet.created_at) >= ', $filters['date_ini']);
+                    $this->where('DATE(tiquet.created_at) <= ', $filters['date_end']);
+                $this->groupEnd();
+                $this->groupStart();
+                    $this->where('TIME(tiquet.created_at) >= ', $filters['time_ini']);
+                    $this->where('TIME(tiquet.created_at) <= ', $filters['time_end']);
+                $this->groupEnd();
+                if(!empty($filters['state'])) $this->like('estat.nom', $filters['state']);
             $this->groupEnd();
-            $this->groupStart();
-                $this->where('TIME(tiquet.created_at) >= ', $filters['time_ini']);
-                $this->where('TIME(tiquet.created_at) <= ', $filters['time_end']);
-            $this->groupEnd();
-            if(!empty($filters['state'])) $this->like('estat.nom', $filters['state']);
-        $this->groupEnd();
         };
-        $this->orderBy('tiquet.created_at', 'desc');
+
         if ($role=="admin") {
             return $this;
         }else if($role=="prof" || $role=="alumn"){
-            return $this->where("centre_reparador.id",$code);
+            return $this->where("centre_reparador.codi",$code);
         }else if($role=="sstt"){
             return $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
         }else if($role=="ins"){
             return $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
         }
+
+        $this->orderBy('tiquet.created_at', 'desc');
+
     }   
 
     public function getAllPaged()

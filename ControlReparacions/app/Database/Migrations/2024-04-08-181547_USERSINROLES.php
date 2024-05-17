@@ -22,6 +22,7 @@ class USERSINROLES extends Migration
                 'type'           => 'BINARY',
                 'constraint'     => 32,
             ],
+            
             'created_at' => [
                 'type'       => 'DATETIME',
             ],
