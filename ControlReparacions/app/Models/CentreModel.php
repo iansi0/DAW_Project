@@ -67,7 +67,7 @@ class CentreModel extends Model
         if ($role=="admin") {
             $this;
         }else if($role=="prof" || $role=="alumn"){
-            $this->where("centre.id",$code);
+            $this->where("centre.codi",$code);
         }else if($role=="sstt"){
             $this->where("centre.id_sstt",$code);
         }else if($role=="ins"){
@@ -87,7 +87,7 @@ class CentreModel extends Model
         if ($role=="admin") {
             $this;
         }else if($role=="prof" || $role=="alumn"){
-            $this->where("centre.id",$code);
+            $this->where("centre.codi",$code);
         }else if($role=="sstt"){
             $this->where("centre.id_sstt",$code);
         }else if($role=="ins"){

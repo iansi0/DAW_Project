@@ -15,6 +15,7 @@ class POBLACIO extends Migration
                 ],
                 'nom'          => [
                         'type'           => 'VARCHAR',
+                        'trim'           => true,
                         'constraint'     => 100,
                         'null'           => false,
                 ],

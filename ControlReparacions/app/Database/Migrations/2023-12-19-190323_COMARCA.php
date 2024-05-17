@@ -10,15 +10,17 @@ class COMARCA extends Migration
     {
         $this->forge->addField([
                 'codi' => [
-                    'type'           => 'INT',
-                    'constraint'     => 3,
+                    'type'           => 'VARCHAR',
+                    'trim'           => true,
+                    'constraint'     => 5,
                 ],
-                
                 'nom' => [
                     'type'           => 'VARCHAR',
+                    'trim'           => true,
                     'constraint'     => 50,
                     'null'           => false,
                 ],
+
                 'created_at' => [
                     'type'       => 'DATETIME',
                 ],

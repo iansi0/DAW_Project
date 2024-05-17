@@ -351,72 +351,73 @@ class USERSSeeder extends Seeder
                 $arrCentres[$rnd]
             );
 
-            echo("PROF DONE\n");
+            
+        }
+        
+        echo("PROF DONE\n");
+        
+        echo("START CURSOS\n");
 
-            echo("START CURSOS\n");
+        /**
+         * AÑADIR CURSOS
+         */
 
-            /**
-             * AÑADIR CURSOS
-             */
+        $arrCurs = [];
+        for ($i=0; $i < 5; $i++) { 
+            $uuid = LibrariesUUID::v4();
+            $arrCurs[] = $uuid;
+        }
 
-            $arrCurs = [];
-            for ($i=0; $i < 5; $i++) { 
-                $uuid = LibrariesUUID::v4();
-                $arrCurs[] = $uuid;
-            }
+        echo("CURSOS DONE\n");
 
-            echo("CURSOS DONE\n");
+        echo("START ALUMN\n");
 
-            echo("START ALUMN\n");
+        /**
+        * AÑADIR ALUMNOS
+        */
 
-            /**
-            * AÑADIR ALUMNOS
+        for ($i = 0; $i < 20; $i++) {
+
+            // Generamos un UUID
+            $uuid = LibrariesUUID::v4();
+
+            $user -> addUser( 
+                $uuid, 
+                $fake->userName(),
+                password_hash('1234', PASSWORD_DEFAULT),
+                'ca'
+            );
+
+            $alumne = new AlumneModel();
+
+            /*
+
+                PARÁMETROS DE addAlumne()
+                +--------------+
+                | correu       |
+                | codi_centre  |
+                +--------------+
+                    
             */
 
-            for ($i = 0; $i < 20; $i++) {
+            $arrCentres = ['25002799', '17010700', '17010499', '17008249', '8000013', '8001509', '8002198', '8015399', '8017104', '8019401'];
+            $rndCentre = rand(0, count($arrCentres) - 1);
+            $rndCurs = rand(0, count($arrCurs) - 1);
 
-                // Generamos un UUID
-                $uuid = LibrariesUUID::v4();
+            $alumne->addAlumne(
+                $uuid,
+                $fake->name(),
+                $fake->lastName(),
+                $arrCurs[$rndCurs],
+                $arrCentres[$rndCentre]
+            );
 
-                $user -> addUser( 
-                    $uuid, 
-                    $fake->userName(),
-                    password_hash('1234', PASSWORD_DEFAULT),
-                    'ca'
-                );
-
-                $alumne = new AlumneModel();
-    
-                /*
-    
-                    PARÁMETROS DE addAlumne()
-                    +--------------+
-                    | correu       |
-                    | codi_centre  |
-                    +--------------+
-                        
-                */
-    
-                $arrCentres = ['25002799', '17010700', '17010499', '17008249', '8000013', '8001509', '8002198', '8015399', '8017104', '8019401'];
-                $rndCentre = rand(0, count($arrCentres) - 1);
-                $rndCurs = rand(0, count($arrCurs) - 1);
-
-                $alumne->addAlumne(
-                    $uuid,
-                    $fake->name(),
-                    $fake->lastName(),
-                    $arrCurs[$rndCurs],
-                    $arrCentres[$rndCentre]
-                );
-
-                // Le añadimos el rol de ALUMN
-                $user_role -> addUserRole( 
-                    LibrariesUUID::v4(),
-                    $uuid,
-                    $role_id[4]
-                );
-    
-            }
+            // Le añadimos el rol de ALUMN
+            $user_role -> addUserRole( 
+                LibrariesUUID::v4(),
+                $uuid,
+                $role_id[4]
+            );
 
         }
 

@@ -12,14 +12,17 @@ class ALUMNE extends Migration
                 'id_user'          => [
                         'type'           => 'BINARY',
                         'constraint'     => 32,
+                        'null'           => false,
                 ],
                 'nom'          => [
                         'type'           => 'VARCHAR',
+                        'trim'           => true,
                         'constraint'     => 20,
                         'null'           => false,
                 ],
                 'cognoms'          => [
                         'type'           => 'VARCHAR',
+                        'trim'           => true,
                         'constraint'     => 80,
                         'null'           => false,
                 ],
@@ -49,6 +52,7 @@ class ALUMNE extends Migration
         $this->forge->createTable('ALUMNE');
         $this->forge->addForeignKey('codi_centre', 'CENTRE', 'codi');
         $this->forge->addForeignKey('id_user', 'USERS', 'id');
+        $this->forge->addForeignKey('id_curs', 'CURS', 'id');
         
     }
 
