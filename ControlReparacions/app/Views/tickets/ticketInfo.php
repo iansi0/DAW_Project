@@ -37,44 +37,43 @@
     <article class="flex flex-col gap-2 w-full">
 
         <div class="flex justify-between gap-4">
-        <?php if ((session()->get('user')['role']=="prof") || (session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="ins") || (session()->get('user')['role']=="admin") ) : ?>
+            <?php if ((session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "ins") || (session()->get('user')['role'] == "admin")) : ?>
 
-            <form action="<?= base_url('savestate/'.$ticket['id']) ?>" id="stateform" method="post">
-                <?php
-                foreach ($estats as $estat) {
-                    if ($estat['id'] == $ticket['id_estat']) {
-                        $selected="estat_".$estat["id"];
-                    }else{
-                        
-                    }
-                }
-                ?>
-                <select name="selectType" id="selectType"  class="py-1.5 border border-terciario-1 cursor-pointer <?=$selected?> rounded-lg ">
-
-
+                <form action="<?= base_url('savestate/' . $ticket['id']) ?>" id="stateform" method="post">
                     <?php
-                    foreach ($estatsFiltrats as $filtrat) {
-                        if ($filtrat['id'] == $ticket['id_estat']) {
-                            echo "<option selected class='bg-secundario cursor-pointer'  value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
+                    foreach ($estats as $estat) {
+                        if ($estat['id'] == $ticket['id_estat']) {
+                            $selected = "estat_" . $estat["id"];
                         } else {
-                            echo "<option class='bg-secundario cursor-pointer' value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
                         }
                     }
                     ?>
-                </select>
-                
-                <button id="save" onclick="document.getElementById('stateform').submit()" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-green-700 transition hover:ease-in ease-out duration-250"><?= lang('buttons.save'); ?></button>
+                    <select name="selectType" id="selectType" class="py-1.5 border border-terciario-1 cursor-pointer <?= $selected ?> rounded-lg ">
 
-            </form>
+
+                        <?php
+                        foreach ($estatsFiltrats as $filtrat) {
+                            if ($filtrat['id'] == $ticket['id_estat']) {
+                                echo "<option selected class='bg-secundario cursor-pointer'  value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
+                            } else {
+                                echo "<option class='bg-secundario cursor-pointer' value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+
+                    <button id="save" onclick="document.getElementById('stateform').submit()" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-green-700 transition hover:ease-in ease-out duration-250"><?= lang('buttons.save'); ?></button>
+
+                </form>
             <?php endif ?>
 
-            <?php if ((session()->get('user')['role']=="prof") || (session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin") ) : ?>
-            <div>
+            <?php if ((session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
+                <div>
 
-                <a href="<?= base_url('pdf/' . $ticket['id'] . '') ?>">
-                    <button id="pdf" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-red-800 transition hover:ease-in ease-out duration-250">Imprimir PDF</button>
-                </a>
-            </div>
+                    <a href="<?= base_url('pdf/' . $ticket['id'] . '') ?>">
+                        <button id="pdf" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-red-800 transition hover:ease-in ease-out duration-250">Imprimir PDF</button>
+                    </a>
+                </div>
             <?php endif ?>
 
         </div>
@@ -82,19 +81,16 @@
         <div>
             <div class="flex justify-between bg-primario text-secundario text-left p-3 pr-8 text-3xl rounded-t-2xl">
                 <h1><?= lang('titles.int'); ?></h1>
-                <div class="hover:bg-light-blue hover:text-terciario-1 p-2 px-3 rounded-xl transition hover:ease-in ease-out duration-250">
-                    <a href="<?= base_url('intervention/form/' . $ticket['id']) ?>"><i class="fa-icon fa-solid fa-plus "></i></a>
-                
-                <?php if (((session()->get('user')['role']=="prof") && (session()->get('user')['code']==$ticket['codi_reparador'])) || (session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin") ) : ?>
-                
-                <div class="hover:bg-green-700 hover:text-secundario p-2 px-3 rounded-xl transition hover:ease-in ease-out duration-250">
-                    <a href="<?= base_url('work') ?>"><i class="fa-icon fa-solid fa-plus "></i></a>
-                </div>
 
-                <?php endif ?>
+                    <?php if (((session()->get('user')['role'] == "prof") && (session()->get('user')['code'] == $ticket['codi_reparador'])) || (session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
+
+                        <div class="hover:bg-green-700 hover:text-secundario p-2 px-3 rounded-xl transition hover:ease-in ease-out duration-250">
+                            <a href="<?= base_url('intervention/form/' . $ticket['id']) ?>"><i class="fa-icon fa-solid fa-plus "></i></a>
+                        </div>
+
+                    <?php endif ?>
 
             </div>
-
             <?php
             echo $table->generate();
             ?>
