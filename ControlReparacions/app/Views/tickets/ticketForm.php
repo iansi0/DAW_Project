@@ -77,10 +77,10 @@
             <!-- institut reparador  -->
             <div class="flex flex-col  mt-5">
 
-                <button type="button" id="assignRepair" class="bg-primario text-white px-2 py-3  hover:bg-terciario-4 border border-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang("forms.s_ins") . " " . lang("forms.work") ?></button>
+                <button type="button" id="assignRepair" class="bg-primario text-white mt-[22px] px-2 py-3  hover:bg-terciario-4 border border-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang("forms.s_ins") . " " . lang("forms.work") ?></button>
 
-                <label class="block" for="repair" id="labelRepair"><?= lang("forms.s_ins") . " " . lang("forms.work") ?></label>
-                <select name="repair" id="repair" class="border-2 border-terciario-1 px-2 py-3 rounded   hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                <label class="hidden" for="repair" id="labelRepair"><?= lang("forms.s_ins") . " " . lang("forms.work") ?></label>
+                <select name="repair" id="repair" class="border-2 hidden border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                     <option value="" disabled selected hidden><?= lang("forms.s_ins") ?></option>
                     <?php
                     foreach ($repairs as $repair) {
@@ -112,18 +112,19 @@
     const labelSelect = document.getElementById('labelSender');
     const labelRepair = document.getElementById('labelRepair');
 
-    const contenedorSelect = document.getElementById('sender');
+    const contenedorSender = document.getElementById('sender');
+    const contenedorRepair = document.getElementById('repair');
 
     assignSender.addEventListener('click', () => {
         labelSelect.style.display = 'block';
-        contenedorSelect.style.display = 'block';
-        botonAssignar.style.display = 'none';
+        contenedorSender.style.display = 'block';
+        assignSender.style.display = 'none';
     });
 
     assignRepair.addEventListener('click', () => {
-        labelSelect.style.display = 'block';
-        contenedorSelect.style.display = 'block';
-        botonAssignar.style.display = 'none';
+        labelRepair.style.display = 'block';
+        contenedorRepair.style.display = 'block';
+        assignRepair.style.display = 'none';
     });
 </script>
 
