@@ -4,15 +4,15 @@
 
 
 
-<div class="flex gap-16 items-center bg-primario text-secundario p-3 rounded-lg pl-5 w-full mb-3">
+<div class="flex gap-16 items-center  text-primario p-3 rounded-lg pl-5 w-full mb-3">
 
     <a href="<?= strpos(previous_url(), 'institutes?') !== false
                     ? str_replace('index.php/', '', previous_url())
                     : base_url('/institutes'); ?>">
-        <button id="pdf" class="hover:bg-light-blue hover:text-terciario-1 p-2 px-3 rounded-xl transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-arrow-left text-3xl"></i></button>
+        <button id="" class="hover:bg-[#FFB053] hover:text-terciario-1 p-2 px-3 rounded-xl transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-arrow-left text-3xl"></i></button>
     </a>
 
-    <h1 class=" text-left text-5xl"> <?= $institute['nom'] ?></h1>
+    <h1 class=" text-left text-5xl ml-72"> <?= $institute['nom'] ?></h1>
 </div>
 
 <main class="flex gap-7 py-1 ">
