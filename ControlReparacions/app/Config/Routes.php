@@ -114,4 +114,6 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
 
     // LOGOUT
     $routes->GET('logout', 'Home::logout');
+
+    $routes->GET('(:segment)', 'Home::empty');
 });
