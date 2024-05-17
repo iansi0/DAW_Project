@@ -12,23 +12,23 @@
         <div class="grid grid-cols-3 gap-x-2">
 
             <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.description")?></label>
+                <label class=""><?= lang("forms.description")?>*</label>
                 <input type="text" name="description" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
             </div>
 
             <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.contact_name")?></label>
+                <label class=""><?= lang("forms.contact_name")?>*</label>
                 <input type="text" name="nameContact" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
             </div>
 
             <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.contact_email")?></label>
+                <label class=""><?= lang("forms.contact_email")?>*</label>
                 <input type="text" name="emailContact" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
             </div>
 
 
             <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.s_disp")?></label>
+                <label class=""><?= lang("forms.s_disp")?>*</label>
                 <select name="id_type" id="" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                 <option value="" disabled selected hidden><?= lang("forms.s_disp")?></option>
                 <?php

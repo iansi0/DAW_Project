@@ -72,7 +72,7 @@
             <div class="flex justify-between bg-primario text-secundario text-left p-3 pr-8 text-3xl rounded-t-2xl">
                 <h1><?= lang('titles.int'); ?></h1>
                 <div class="hover:bg-light-blue hover:text-terciario-1 p-2 px-3 rounded-xl transition hover:ease-in ease-out duration-250">
-                    <a href="<?= base_url('intervention/form') ?>"><i class="fa-icon fa-solid fa-plus "></i></a>
+                    <a href="<?= base_url('intervention/form/' . $ticket['id']) ?>"><i class="fa-icon fa-solid fa-plus "></i></a>
                 </div>
             </div>
 

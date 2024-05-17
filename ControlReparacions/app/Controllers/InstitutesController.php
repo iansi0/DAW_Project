@@ -304,7 +304,7 @@ class InstitutesController extends BaseController
             "SSTTs" => $sstt->getAllSSTT(),
 
         ];
-
+ 
         return view('institutes/modifyInstitute', $data);
     }
 
@@ -315,10 +315,14 @@ class InstitutesController extends BaseController
         helper('form');
 
         $data = [
-            "codi" =>  intval($id),
+            "codi" =>  $this->request->getPost("code"),
+            "nom" => $this->request->getPost("name"),
             "actiu" =>  intval($this->request->getPost("active")),
             "taller" => intval($this->request->getPost("work")),
+            "telefon" => $this->request->getPost("phone"),
+            "adreca_fisica" => $this->request->getPost("adress"),
             "id_sstt" =>  intval($this->request->getPost("sstt")),
+            "id_poblacio" => $this->request->getPost("population"),
         ];
 
 

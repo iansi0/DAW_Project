@@ -21,13 +21,13 @@ class InterventionController extends BaseController
         return view('intervention/intervention');
     }
 
-    public function interventionForm()
+    public function interventionForm($id)
     {
 
         $inventary = new InventariModel();
 
         $data = [
-
+            "id_ticket" => $id,
             "inventary" => $inventary->getInventaryNoAssigned(),
 
         ];

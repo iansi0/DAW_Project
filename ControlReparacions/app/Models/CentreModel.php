@@ -137,7 +137,7 @@ class CentreModel extends Model
 
     public function getInstituteById($id)
     {
-        return $this->where('centre.codi', $id)->first();
+        return $this->where('codi', $id)->first();
     }
 
     public function modifyInstitute($id, $data)

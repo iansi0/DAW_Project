@@ -13,13 +13,13 @@
             <!-- codi  -->
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.code") ?></label>
-                <input type="text" name="code" value="<?=$institute['codi']?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                <input type="text" name="code" value="<?= $institute['codi'] ?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
             </div>
 
             <!-- nom  -->
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.name") ?></label>
-                <input type="text" name="name" value="<?=$institute['nom']?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                <input type="text" name="name" value="<?= $institute['nom'] ?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
             </div>
 
             <!-- actiu -->
@@ -50,23 +50,26 @@
             <!-- telefon  -->
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.phone") ?></label>
-                <input type="text" name="phone" value="<?=$institute['telefon']?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
+                <input type="text" name="phone" value="<?= $institute['telefon'] ?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
             </div>
 
             <!-- adreca  -->
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.adress") ?></label>
-                <input type="text" name="adress" value="<?=$institute['adreca_fisica']?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                <input type="text" name="adress" value="<?= $institute['adreca_fisica'] ?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
             </div>
 
             <!-- poblacio  -->
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.pobl") ?></label>
                 <select name="population" id="" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
-                    <option value="" disabled selected hidden><?= lang("forms.s_pobl") ?></option>
                     <?php
                     foreach ($populations as $population) {
-                        echo "<option value='" . $population["id"] . "'>" . $population["nom"] . "</option>";
+                        if ($population["id"] == $institute["id_poblacio"]) {
+                            echo "<option selected value='" . $population["id"] . "'>" . $population["nom"] . "</option>";
+                        } else {
+                            echo "<option value='" . $population["id"] . "'>" . $population["nom"] . "</option>";
+                        }
                     }
                     ?>
                 </select>

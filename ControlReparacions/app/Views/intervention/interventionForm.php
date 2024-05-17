@@ -8,12 +8,13 @@
 
         <div class="grid grid-cols-3 gap-x-2">
 
+            <!-- descripcion  -->
             <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.description") ?></label>
+                <label class=""><?= lang("forms.description") ?>*</label>
                 <input type="text" name="description" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
             </div>
 
-            <input type="text" name="ticket_id" hidden value="<?=session()->getFlashdata('ticket_id')?>">
+            <input type="text" name="ticket_id" hidden value="<?=$id_ticket?>">
 
 
 
@@ -33,9 +34,9 @@
 
         <div class="flex gap-5 justify-end w-full">
 
-            <a href="<?= strpos(previous_url(), 'tickets') !== false
+            <a href="<?= strpos(previous_url(), 'tickets/') !== false
                             ? str_replace('index.php/', '', previous_url())
-                            : base_url('/tickets');
+                            : base_url('/tickets/' . $id_ticket);
                         ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel") ?></a>
 
             <input type="submit" value="<?= lang("buttons.add") ?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
