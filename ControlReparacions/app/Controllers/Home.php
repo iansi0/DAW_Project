@@ -9,6 +9,7 @@ use App\Models\UsersInRolesModel;
 use App\Models\UsersModel;
 
 use App\Libraries\UUID as LibrariesUUID;
+use App\Models\RolesModel;
 
 class Home extends BaseController
 {
@@ -222,11 +223,12 @@ class Home extends BaseController
         // Si el user o mail no existe, creamos el profe
         if (!$user) {
             $id=LibrariesUUID::v4();
-            $userModel->addUser($id,$mail,"1234",'ca');
+            $userModel->addUser($id,$mail,password_hash("1234",PASSWORD_DEFAULT),'ca');
             $profModel->addProfessor($id,$id_xtec[0],$fullname,"",$code);
-    
+            $roleModel = new RolesModel();
+            $role=$roleModel->getIdByRole("prof");
             $newId=LibrariesUUID::v4();
-            $userInRole->addUserRole($newId,$id,"70ad75d5-8a10-4cc5-af85-9c8ed34b");
+            $userInRole->addUserRole($newId,$id,$role["id"]);
         }else{
             $id=$user['id'];
             $profModel->updateCode($id,$code);

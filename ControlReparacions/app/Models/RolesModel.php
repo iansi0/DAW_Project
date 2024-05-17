@@ -53,6 +53,8 @@ class RolesModel extends Model
 
         $this->insert($data);
     }
-
+    public function getIdByRole($role){
+        return $this->select('id')->where('role',$role)->first();
+    }
     
 }

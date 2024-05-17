@@ -80,17 +80,14 @@ class TicketsController extends BaseController
             }
 
         }
-
         // Get Tiquet Data
         $model = new TiquetModel();
-
-        if (!empty($filters)) {
+        
+        if (!empty($filters) || $search != '') {
             $paginateData = $model->getByTitleOrText($search, $filters)->paginate(8);
             // dd($model->getByTitleOrText($search, $filters)->find());
-        } else if($search != ''){
-            $paginateData = $model->getByTitleOrText($search, $filters)->paginate(8);
-            // dd($model->getByTitleOrText($search, $filters)->find());
-        } else {
+        }else {
+            dd(session('user')['role']);
             $paginateData = $model->getAllPaged()->paginate(8);
         }
 
@@ -147,13 +144,10 @@ class TicketsController extends BaseController
             'table' => $table,
         ];
         $role = session()->get('user')['role'];
-        $institute = session()->get('user')['code'];
-        
-        // dd(session()->get('user'));
         // ROWS
         $count = 0;
         foreach ($data['tickets'] as $ticket) {
-            
+
             $buttonDelete = base_url("tickets/delete/" . $ticket['id']);
             $buttonUpdate = base_url("tickets/modify/" . $ticket['id']);
             $buttonView = base_url("tickets/" . $ticket['id']);
@@ -359,22 +353,29 @@ class TicketsController extends BaseController
 
         if ($this->validate($validationRules)) {
             if ($this->request->getPost("repair") || $this->request->getPost("sender")) {
-                $id_estat = 2;
-                if ($this->request->getPost("repair") && $this->request->getPost("sender")) {
-                    $codi_centre_reparador = $this->request->getPost("repair");
-                    $codi_centre_emissor = $this->request->getPost("sender");
-                } else if ($this->request->getPost("repair")) {
-                    $codi_centre_reparador = $this->request->getPost("repair");
-                    $codi_centre_emissor = 0;
-                } else {
-                    // TODO: Poner aqui el error porque n hay centro reparador en esta opcion
-                    $codi_centre_emissor = $this->request->getPost("sender");
+                if (session()->get('user')['role']="prof" || session()->get('user')['role']="prof") {
+
+                    $codi_centre_emissor = session()->get('user')['code'];
+                    $id_estat = 1;
                     $codi_centre_reparador = 0;
+                }else{
+
+                    $id_estat = 2;
+                    
+                    if ($this->request->getPost("repair") && $this->request->getPost("sender")) {
+                        $codi_centre_reparador = $this->request->getPost("repair");
+                        $codi_centre_emissor = $this->request->getPost("sender");
+                    } else if ($this->request->getPost("repair")) {
+                        $codi_centre_reparador = $this->request->getPost("repair");
+                        $codi_centre_emissor = 0;
+                    } else {
+                        // TODO: Poner aqui el error porque n hay centro reparador en esta opcion
+                        $codi_centre_emissor = $this->request->getPost("sender");
+                        $codi_centre_reparador = 0;
+                    }
                 }
             } else {
-                $id_estat = 1;
-                $codi_centre_emissor = 0;
-                $codi_centre_reparador = 0;
+                
             }
 
 

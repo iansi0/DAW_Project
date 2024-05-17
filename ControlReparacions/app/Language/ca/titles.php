@@ -10,6 +10,7 @@ return [
     'type'          => 'Tipus',
     'description'   => 'Descripció',
     'name'          => 'Nom',
+    'statistics'    => 'Estadistiques',
 
     'sender'        => 'Emissor',
     'receiver'      => 'Receptor',

@@ -91,13 +91,12 @@ class InventariModel extends Model
         if ($role=="admin") {
             $this;
         }else if($role=="prof" || $role=="alumn"){
-            $this->where("centre_reparador.id",$code);
+            $this->where("centre_reparador.codi",$code);
         }else if($role=="sstt"){
             $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
         }else if($role=="ins"){
             $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
         }
-        
         return $this;
     }
 
