@@ -68,6 +68,7 @@ return [
     'inventory'     => 'Inventarios',
     'inventory_2'   => 'Inventario',
     'price'         => 'Precio',
+    'tipy'         => 'Tipo',
     'n_inventory'   => 'Añadir Inventario',
     'e_inventory'   => 'Modificar Inventario',
 

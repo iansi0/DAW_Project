@@ -15,22 +15,18 @@ class USERS extends Migration
             ],
             'user' => [
                 'type'           => 'VARCHAR',
-                'trim'           => true,
                 'constraint'     => 200,
             ],
             'passwd' => [
                 'type'           => 'VARCHAR',
-                'trim'           => true,
                 'constraint'     => 100,
                 'null'           => true,
             ],
             'lang'          => [
                 'type'           => 'VARCHAR',
-                'trim'           => true,
                 'constraint'     => 10,
                 'null'           => true,
             ],
-
             'created_at' => [
                 'type'       => 'DATETIME',
             ],
@@ -44,7 +40,6 @@ class USERS extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addKey('user');
         $this->forge->createTable('USERS');
     }
 

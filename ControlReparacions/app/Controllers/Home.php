@@ -162,7 +162,6 @@ class Home extends BaseController
         $user = $model->getUserById($user["id"]);
 
         $userInRole = new UsersInRolesModel();
-
         // Generamos la sesión
         $sessionData = [
             "uid"           => $user["id"],

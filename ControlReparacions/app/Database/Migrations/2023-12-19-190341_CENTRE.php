@@ -10,19 +10,16 @@ class CENTRE extends Migration
     {
         $this->forge->addField([
                 'codi'          => [
-                        'type'           => 'VARCHAR',
-                        'trim'           => true,
-                        'constraint'     => 10,
+                        'type'           => 'INT',
+                        'constraint'     => 7,
                         'null'           => false,
                 ],
                 'id_user'          => [
                         'type'           => 'BINARY',
                         'constraint'     => 32,
-                        'null'           => false,
                 ],
                 'nom'          => [
                         'type'           => 'VARCHAR',
-                        'trim'           => true,
                         'constraint'     => 100,
                         'null'           => false,
                 ],
@@ -36,25 +33,21 @@ class CENTRE extends Migration
                 ],
                 'telefon'          => [
                         'type'           => 'VARCHAR',
-                        'trim'           => true,
                         'constraint'     => 9,
                         'null'           => false,
                 ],
                 'adreca_fisica'          => [
                         'type'           => 'VARCHAR',
-                        'trim'           => true,
                         'constraint'     => 100,
                         'null'           => false,
                 ],
                 'nom_persona_contacte'          => [
                         'type'           => 'VARCHAR',
-                        'trim'           => true,
                         'constraint'     => 50,
                         'null'           => false,
                 ],
                 'correu_persona_contacte'          => [
                         'type'           => 'VARCHAR',
-                        'trim'           => true,
                         'constraint'     => 50,
                         'null'           => false,
                 ],
@@ -81,7 +74,6 @@ class CENTRE extends Migration
                 ],
         ]);
         $this->forge->addKey('id_user', true);
-        $this->forge->addKey('codi');
         $this->forge->createTable('CENTRE');
         $this->forge->addForeignKey('id_user', 'USERS', 'id');
         $this->forge->addForeignKey('id_sstt', 'SSTT', 'id');

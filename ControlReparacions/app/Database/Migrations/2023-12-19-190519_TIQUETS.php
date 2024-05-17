@@ -17,22 +17,20 @@ class TIQUETS extends Migration
                 'codi_dispositiu'          => [
                         'type'           => 'BINARY',
                         'constraint'     => 32,
+                        'null'           => false,
                 ],
                 'descripcio_avaria'          => [
                         'type'           => 'VARCHAR',
-                        'trim'           => true,
                         'constraint'     => 500,
                         'null'           => false,
                 ],
                 'nom_persona_contacte_centre'          => [
                         'type'           => 'VARCHAR',
-                        'trim'           => true,
                         'constraint'     => 100,
                         'null'           => false,
                 ],
                 'correu_persona_contacte_centre'          => [
                         'type'           => 'VARCHAR',
-                        'trim'           => true,
                         'constraint'     => 100,
                         'null'           => false,
                 ],
@@ -47,16 +45,15 @@ class TIQUETS extends Migration
                         'null'           => false,
                 ],
                 'codi_centre_emissor'          => [
-                        'type'           => 'VARCHAR',
-                        'trim'           => true,
-                        'constraint'     => 10,
+                        'type'           => 'INT',
+                        'constraint'     => 7,
+                        'null'           => false,
                 ],
                 'codi_centre_reparador'          => [
-                        'type'           => 'VARCHAR',
-                        'trim'           => true,
-                        'constraint'     => 10,
+                        'type'           => 'INT',
+                        'constraint'     => 7,
+                        'null'           => false,
                 ],
-
                 'created_at' => [
                     'type'       => 'DATETIME',
                 ],

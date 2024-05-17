@@ -208,8 +208,8 @@ class USERSSeeder extends Seeder
 
         // Insertar los datos en la base de datos 
         // PARA EL 100% DEL ARCHIVO COMENTAR LA PARTE DE - && $count < 20 -
-        while (($row = fgetcsv($csvFile, 2000, ",")) !== FALSE && $count < 20) {
-        // while (($row = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
+        // while (($row = fgetcsv($csvFile, 2000, ",")) !== FALSE && $count < 20) {
+        while (($row = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 
             if (!$firstLine) {
 
@@ -351,73 +351,72 @@ class USERSSeeder extends Seeder
                 $arrCentres[$rnd]
             );
 
-            
-        }
-        
-        echo("PROF DONE\n");
-        
-        echo("START CURSOS\n");
+            echo("PROF DONE\n");
 
-        /**
-         * AÑADIR CURSOS
-         */
+            echo("START CURSOS\n");
 
-        $arrCurs = [];
-        for ($i=0; $i < 5; $i++) { 
-            $uuid = LibrariesUUID::v4();
-            $arrCurs[] = $uuid;
-        }
+            /**
+             * AÑADIR CURSOS
+             */
 
-        echo("CURSOS DONE\n");
+            $arrCurs = [];
+            for ($i=0; $i < 5; $i++) { 
+                $uuid = LibrariesUUID::v4();
+                $arrCurs[] = $uuid;
+            }
 
-        echo("START ALUMN\n");
+            echo("CURSOS DONE\n");
 
-        /**
-        * AÑADIR ALUMNOS
-        */
+            echo("START ALUMN\n");
 
-        for ($i = 0; $i < 20; $i++) {
-
-            // Generamos un UUID
-            $uuid = LibrariesUUID::v4();
-
-            $user -> addUser( 
-                $uuid, 
-                $fake->userName(),
-                password_hash('1234', PASSWORD_DEFAULT),
-                'ca'
-            );
-
-            $alumne = new AlumneModel();
-
-            /*
-
-                PARÁMETROS DE addAlumne()
-                +--------------+
-                | correu       |
-                | codi_centre  |
-                +--------------+
-                    
+            /**
+            * AÑADIR ALUMNOS
             */
 
-            $arrCentres = ['25002799', '17010700', '17010499', '17008249', '8000013', '8001509', '8002198', '8015399', '8017104', '8019401'];
-            $rndCentre = rand(0, count($arrCentres) - 1);
-            $rndCurs = rand(0, count($arrCurs) - 1);
+            for ($i = 0; $i < 20; $i++) {
 
-            $alumne->addAlumne(
-                $uuid,
-                $fake->name(),
-                $fake->lastName(),
-                $arrCurs[$rndCurs],
-                $arrCentres[$rndCentre]
-            );
+                // Generamos un UUID
+                $uuid = LibrariesUUID::v4();
 
-            // Le añadimos el rol de ALUMN
-            $user_role -> addUserRole( 
-                LibrariesUUID::v4(),
-                $uuid,
-                $role_id[4]
-            );
+                $user -> addUser( 
+                    $uuid, 
+                    $fake->userName(),
+                    password_hash('1234', PASSWORD_DEFAULT),
+                    'ca'
+                );
+
+                $alumne = new AlumneModel();
+    
+                /*
+    
+                    PARÁMETROS DE addAlumne()
+                    +--------------+
+                    | correu       |
+                    | codi_centre  |
+                    +--------------+
+                        
+                */
+    
+                $arrCentres = ['25002799', '17010700', '17010499', '17008249', '8000013', '8001509', '8002198', '8015399', '8017104', '8019401'];
+                $rndCentre = rand(0, count($arrCentres) - 1);
+                $rndCurs = rand(0, count($arrCurs) - 1);
+
+                $alumne->addAlumne(
+                    $uuid,
+                    $fake->name(),
+                    $fake->lastName(),
+                    $arrCurs[$rndCurs],
+                    $arrCentres[$rndCentre]
+                );
+
+                // Le añadimos el rol de ALUMN
+                $user_role -> addUserRole( 
+                    LibrariesUUID::v4(),
+                    $uuid,
+                    $role_id[4]
+                );
+    
+            }
 
         }
 

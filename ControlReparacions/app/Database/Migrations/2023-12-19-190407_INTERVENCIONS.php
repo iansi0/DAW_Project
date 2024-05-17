@@ -15,7 +15,6 @@ class INTERVENCIONS extends Migration
                 ],
                 'descripcio'          => [
                         'type'           => 'VARCHAR',
-                        'trim'           => true,
                         'constraint'     => 100,
                         'null'           => false,
                 ],
@@ -28,9 +27,12 @@ class INTERVENCIONS extends Migration
                         'constraint'     => 3,
                         'null'           => false,
                 ],
+                'id_curs'          => [
+                        'type'           => 'INT',
+                        'null'           => false,
+                ],
                 'correu_alumne'          => [
                         'type'           => 'VARCHAR',
-                        'trim'           => true,
                         'constraint'     => 50,
                         'null'           => false,
                 ],
@@ -39,7 +41,6 @@ class INTERVENCIONS extends Migration
                         'constraint'     => 32,
                         'null'           => false,
                 ],
-                
                 'created_at' => [
                     'type'       => 'DATETIME',
                 ],

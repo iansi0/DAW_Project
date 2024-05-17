@@ -60,7 +60,7 @@
 
     <!-- DATALIST DISPOSITIVOS -->
     <div class='relative searchable-device-list'>
-      <input name="d" type='text' style="width: 165px; overflow: hidden;text-overflow: ellipsis;" class='data-device-list peer h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
+      <input name="d" type='text' class='data-device-list peer w-28 h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
               caret-gray-800 pl-2 pr-7 focus:bg-gray-200 font-bold transition-all duration-300 text-sm text-overflow-ellipsis ' spellcheck="false"  placeholder="<?=lang('forms.s_disp')?>">
       <svg class="outline-none cursor-pointer fill-gray-400 absolute transition-all duration-200 h-full w-4 -rotate-90 right-2 top-[50%] -translate-y-[50%]"
         viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@
   
     <!-- DATALIST CENTROS -->
     <div class='relative searchable-center-list'>
-      <input name="c" type='text' style="width: 165px; overflow: hidden;text-overflow: ellipsis;" class='data-center-list peer h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
+      <input name="c" type='text' class='data-center-list peer w-30 h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
               caret-gray-800 pl-2 pr-7 focus:bg-gray-200 font-bold transition-all duration-300 text-sm text-overflow-ellipsis ' spellcheck="false"  placeholder="<?=lang('forms.s_ins')?>">
       <svg class="outline-none cursor-pointer fill-gray-400 absolute transition-all duration-200 h-full w-4 -rotate-90 right-2 top-[50%] -translate-y-[50%]"
         viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@
 
     <!-- DATALIST ESTADOS -->
     <div class='relative searchable-state-list'>
-      <input name="e" type='text' style="width: 165px; overflow: hidden;text-overflow: ellipsis;" class='data-state-list peer h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
+      <input name="e" type='text' class='data-state-list peer w-28 h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
               caret-gray-800 pl-2 pr-7 focus:bg-gray-200 font-bold transition-all duration-300 text-sm text-overflow-ellipsis ' spellcheck="false"  placeholder="<?=lang('forms.s_state')?>">
       <svg class="outline-none cursor-pointer fill-gray-400 absolute transition-all duration-200 h-full w-4 -rotate-90 right-2 top-[50%] -translate-y-[50%]"
         viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"

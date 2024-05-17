@@ -46,7 +46,6 @@ return [
     'lang'          => 'Idioma',
 
     'date'          => 'Fecha',
-    'create_date'   => 'Fecha de Creación',
     'start_date'    => 'Fecha Inicio',
     'end_date'      => 'Fecha Fin',
     'limit_date'    => 'Fecha Límite',
@@ -60,8 +59,8 @@ return [
     'description'   => 'Descripción',
     'other'         => 'Otros',
     'price'         => 'Precio',
-    'type_inventary'=> 'Tipo inventario',
-    'info'          => 'Información',
+    'type_inventary' => 'Tipo inventario',
+   
 
     'required_slot' => 'Los campos marcados con ( * ) són obligatorios',
 

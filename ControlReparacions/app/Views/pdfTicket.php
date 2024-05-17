@@ -11,57 +11,71 @@
     <style>
         body {
             /* font-family: monospace; */
-            font-family: system-ui, Arial, Helvetica;
+            font-family: system-ui;
             /*montserrat para titulos con bold
             lato y popins para textos medium */
         }
-
-        .bold{
-            font-weight: 700;
-        }
     </style>
+    <!-- <?php 
+        if (session('user')['user']=="admin") {
+            $theme ='dark';
+        }else{
+            $theme ='light';
+            
+        }
+    ?>
+    <script>
+        ='<?= $theme?>';
+        console.log( );
+    </script> -->
 </head>
 <body>
-
-<div>
-
-    <!-- HEADER  -->
-    <div style="background-color: #003049; color: #F2F2F2;padding: 5px 12px;">
-        <h1 class=""><?= mb_strtoupper(lang('titles.id_ticket'), 'utf-8'); ?>: <?= explode("-", $ticket['id'])[4] ?></h1>
-    </div>
-
-    <!-- CONTENT -->
-    <div style="margin-top: 28px;">
-        <!-- INFO -->
-        <div style="position: relative; border: 1px solid black;">
-            <h2 style="position: absolute; top: -40px; left: 20px; background-color: #FFFFFF; padding: 2px 8px;width: 140px;"><?= lang('forms.info'); ?></h2>
-            <div style="line-height: 8px; margin-top: 25px;">
-                <p style="margin-left: 20px"><span class="bold"><?=lang('titles.id')?>: </span><?=$ticket['id']?></p>
-                <p style="margin-left: 20px"><span class="bold"><?=lang('forms.contact')?>: </span><?=$ticket['correu_contacte']?></p>
-                <p style="margin-left: 20px"><span class="bold"><?=lang('forms.create_date')?>: </span><?=date( 'd/m/Y H:i', strtotime($ticket['created']))?></p>
-                <p style="margin-left: 20px"><span class="bold"><?=lang('titles.ins_2')?> <?=lang('titles.sender')?>: </span><?=$ticket['emissor']?></p>
-                <p style="margin-left: 20px"><span class="bold"><?=lang('titles.ins_2')?> <?=lang('titles.receiver')?>: </span><?=$ticket['receptor']?> (<?=$ticket['codi_reparador']?>)</p>
-            </div>
-        </div>
-
-        <!-- DESCRIPTION -->
-        <div style="position: relative; border: 1px solid black;margin-top: 50px;">
-            <h2 style="position: absolute; top: -40px; left: 20px; background-color: #FFFFFF; padding: 2px 8px;width: 140px;"><?= lang('forms.description'); ?></h2>
-            <div style="line-height: 8px; margin-top: 25px;">
-                <p style="margin-left: 20px"><?=$ticket['descripcio']?></p>
-            </div>
-        </div>
-
-        <!-- INTERVENTIONS -->
-        <div style="position: relative; border: 1px solid black;margin-top: 50px;">
-            <h2 style="position: absolute; top: -40px; left: 20px; background-color: #FFFFFF; padding: 2px 8px;width: 170px;"><?= lang('titles.int'); ?></h2>
-            <div style="line-height: 8px; margin-top: -8px;">
-                <p style="margin-left: 20px"><?=$table->generate();?></p>
-            </div>
-        </div>
-
-
-    </div>
+    
+<div class="flex gap-16 items-center  text-primario p-3 rounded-lg pl-5 w-full mb-3">
+    <h1 class=" text-left text-5xl ml-48"><?= mb_strtoupper(lang('titles.id_ticket'), 'utf-8'); ?>: <?= explode("-", $ticket['id'])[4] ?></h1>
 </div>
+
+<main style="view-transition-name: info<?= $ticket['id'] ?>;" class="flex gap-7 py-1 ">
+
+<section class="flex flex-col gap-2">
+
+
+    
+
+    <div class=" text-secundario min-w-72 max-w-80 rounded-t-lg overflow-hidden">
+        <h3 class="bg-primario text-lg p-3"> <?= lang('forms.info'); ?> </h3>
+        <p class="bg-terciario-2 p-2 text-terciario-1 overflow-auto"><i class="fa-solid fa-hashtag"></i> : <span class="text-sm"><?= $ticket['id'] ?></span></p>
+        <p class="bg-terciario-2 p-2 text-terciario-1 overflow-auto"><i class="fa-solid fa-envelope"></i> : <span class="text-sm"><?= $ticket['correu_contacte'] ?></span></p>
+    </div>
+
+
+    <div class=" text-secundario min-w-64 max-w-72  rounded-t-lg overflow-hidden">
+        <h3 class="bg-primario text-lg p-3"><?= lang('forms.description'); ?></h3>
+        <p class="bg-terciario-2 p-3 text-terciario-1  min-h-auto max-h-32 overflow-y-auto break-words"><?= $ticket['descripcio'] ?></p>
+    </div>
+
+</section>
+
+<article class="flex flex-col gap-2 w-full">
+
+    <div class="flex justify-between gap-4">
+   
+
+    </div>
+
+    <div>
+        <div class="flex justify-between bg-primario text-secundario text-left p-3 pr-8 text-3xl rounded-t-2xl">
+            <h1><?= lang('titles.int'); ?></h1>
+            
+
+        </div>
+
+        <?php
+        echo $table->generate();
+        ?>
+    </div>
+
+</article>
+</main>
 </body>
 </html>

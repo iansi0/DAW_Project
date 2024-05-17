@@ -11,7 +11,6 @@ class LLISTAADMESOS extends Migration
         $this->forge->addField([
                 'correu_professor'          => [
                         'type'           => 'VARCHAR',
-                        'trim'           => true,
                         'constraint'     => 50,
                         
                 ],
@@ -21,11 +20,10 @@ class LLISTAADMESOS extends Migration
                         'null'           => false,
                 ],
                 'codi_centre'          => [
-                        'type'           => 'VARCHAR',
-                        'constraint'     => 10,
+                        'type'           => 'BINARY',
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
-                
                 'created_at' => [
                     'type'       => 'DATETIME',
                 ],

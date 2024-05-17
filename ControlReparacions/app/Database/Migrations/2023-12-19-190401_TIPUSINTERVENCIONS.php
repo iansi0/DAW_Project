@@ -15,11 +15,9 @@ class TIPUSINTERVENCIONS extends Migration
                 ],
                 'nom'          => [
                     'type'           => 'VARCHAR',
-                    'trim'           => true,
                     'constraint'     => 20,
                     'null'           => false,
                 ],
-                
                 'created_at' => [
                     'type'       => 'DATETIME',
                 ],

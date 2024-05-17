@@ -31,16 +31,16 @@ class PDFController extends BaseController
         );
 
         $template = [
+            'table_open'  => "<table class='w-full'>",
 
-            'table_open'  => "<table style='width: 100%;border-collapse: collapse; padding: 2px;'>",
+            'thead_open'  => "<thead class='bg-primario text-secundario'>",
 
-            'thead_open'  => "<thead style='background-color: #003049; color: #F2F2F2'>",
+            'heading_cell_start' => "<th class='py-3 text-base'>",
 
-            'heading_cell_start' => "<th style='padding: 8px;padding-top: 14px;'>",
+            'row_start' => "<tr class='border-b-[0.01px] '>",
+            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-terciario-2'>",
 
-            'row_start' => "<tr style='border-bottom: 1px solid #DDDDDD'>",
-            'row_alt_start' => "<tr style='border-bottom: 1px solid #DDDDDD; background-color: #B3B3B3'>"
-            
+
         ];
         $table->setTemplate($template);
 
@@ -53,24 +53,21 @@ class PDFController extends BaseController
         ];
 
         foreach ($data['interventions'] as $intervencio) {
-            // $buttonView = base_url("tickets/" . $intervencio['id']); // Reemplazar con tu ruta real
+            $buttonView = base_url("tickets/" . $intervencio['id']); // Reemplazar con tu ruta real
 
             $table->addRow(
                 $intervencio['created_at'],
                 $intervencio['correu_alumne'],
                 $intervencio['id_tipus'],
-                $intervencio['descripcio']
-            );
 
-        }
-        
-        $dompdf = new Dompdf();
+                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 2 ? 'bg-red-500 text-segundario' : 'bg-segundario']
+            );
+        }        $dompdf = new Dompdf();
         
         $html = view('pdfTicket',$data); 
         $dompdf->loadHtml($html);
         $dompdf->render();
-        // Attachment == true -> descargar PDF || Attachment == false -> visualizar en navegador
-        $dompdf->stream("ticket_".$id.".pdf", array("Attachment" => false));
+        $dompdf->stream("ticket_".$id.".pdf", array("Attachment" => true));
         
     }
 }
