@@ -33,7 +33,7 @@
             </div>
             <div>
             <div class='relative searchable-device-list'>
-                <input name="d" type='text' class='data-device-list peer w-full h-10 rounded-sm bg-secundario cursor-pointer outline-none text-primario
+                <input name="d" type='text' value="(17000068)" class='data-device-list peer w-full h-10 rounded-sm bg-secundario cursor-pointer outline-none text-primario
                         caret-gray-800 pl-2 pr-7 focus:bg-gray-200 font-bold transition-all duration-300 text-sm text-overflow-ellipsis ' spellcheck="false"  placeholder="<?=lang('forms.s_ins')?>">
                 <svg class="outline-none cursor-pointer fill-gray-400 absolute transition-all duration-200 h-full w-4 -rotate-90 right-2 top-[50%] -translate-y-[50%]"
                     viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
