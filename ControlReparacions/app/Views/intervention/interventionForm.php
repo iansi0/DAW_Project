@@ -4,6 +4,9 @@
 <h1 class="text-5xl text-primario mt-14"><?= lang("titles.n_int") ?></h1>
 
 <section style="view-transition-name: addTicket;" class="container mx-auto px-4 py-8 mt-10 text-base">
+    <span class="text-danger">
+        <?= validation_list_errors(); ?>
+    </span>
     <form action="add" method="POST" class="flex flex-col gap-20">
 
         <div class="grid grid-cols-3 gap-x-2">
@@ -14,10 +17,11 @@
                 <input type="text" name="description" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
             </div>
 
-            <input type="text" name="ticket_id" hidden value="<?=$id_ticket?>">
+            <!-- id ticket  -->
+            <input type="text" name="ticket_id" hidden value="<?= $id_ticket ?>">
 
 
-
+            <!-- tipo inventario  -->
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.s_disp") ?></label>
                 <select name="id_inventary" id="" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">

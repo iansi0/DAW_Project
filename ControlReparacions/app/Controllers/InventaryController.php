@@ -100,6 +100,8 @@ class InventaryController extends BaseController
     public function inventaryForm()
     {
 
+        helper('form');
+
         $type = new TipusInventariModel();
 
         $data = [
@@ -112,27 +114,56 @@ class InventaryController extends BaseController
 
     public function addInventary()
     {
+        helper('form');
 
-        $model = new InventariModel();
-        $fake = Factory::create("es_ES");
+        $validationRules =
+            [
+                'name' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error Name',
+                    ],
+                ],
+                'price' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error Price',
+                    ],
+                ],
+                'type_inventary' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error Type',
+                    ],
+                ],
+            ];
 
-        $id = $fake->uuid();
-        $nom = $this->request->getPost("name");
-        $data_compra = date('Y-m-d');
-        $preu = $this->request->getPost("price");
-        $codi_centre = session('user')['code'];
-        $id_tipus_inventari = $this->request->getPost("type_inventary");
+        if ($this->validate($validationRules)) {
 
-        $model->addInventari(
-            $id,
-            $nom,
-            $data_compra,
-            $preu,
-            $codi_centre,
-            $id_tipus_inventari
-        );
 
-        return redirect()->to(base_url('inventary'));
+            $model = new InventariModel();
+            $fake = Factory::create("es_ES");
+
+            $id = $fake->uuid();
+            $nom = $this->request->getPost("name");
+            $data_compra = date('Y-m-d');
+            $preu = $this->request->getPost("price");
+            $codi_centre = session('user')['code'];
+            $id_tipus_inventari = $this->request->getPost("type_inventary");
+
+            $model->addInventari(
+                $id,
+                $nom,
+                $data_compra,
+                $preu,
+                $codi_centre,
+                $id_tipus_inventari
+            );
+
+            return redirect()->to(base_url('inventary'));
+        }else {
+            return redirect()->back()->withInput();
+        }
     }
 
     public function modifyInventary($id)
@@ -159,7 +190,7 @@ class InventaryController extends BaseController
             "id_tipus_inventari" => intval($this->request->getPost("type_inventary")),
         ];
 
-       
+
         $model->modifyInventari($id, $data);
 
         return redirect()->to(base_url('/inventary'));
