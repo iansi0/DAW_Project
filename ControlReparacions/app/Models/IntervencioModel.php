@@ -64,6 +64,7 @@ class IntervencioModel extends Model
                 'intervencio.id_tipus',
                 'intervencio.created_at',
                 'inventari.preu as preu',
+                'inventari.nom as material',
             ])
             ->join('inventari', 'intervencio.id = inventari.id_intervencio', 'left')
             ->where('intervencio.id_ticket', $id)
