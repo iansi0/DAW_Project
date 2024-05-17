@@ -46,8 +46,8 @@ class Home extends BaseController
             
 
                 //si el domino no es xtex devolvemos error
-                if ($dominio[1] == 'gmail.com') {
-                // if ($dominio[1] !== 'xtec.cat') {
+                // if ($dominio[1] == 'gmail.com') {
+                if ($dominio[1] !== 'xtec.cat') {
                     $user = new UsersModel();
                     $mail=$userInfo->getEmail();
                     $fullname=$userInfo->getName();

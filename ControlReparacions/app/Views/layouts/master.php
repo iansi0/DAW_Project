@@ -423,6 +423,7 @@
 
 
 <script>
+
     document.addEventListener("DOMContentLoaded", function(event) {
 
         // FUNCIONES DE SHOW / HIDE DE DROPDOWN USUARIO

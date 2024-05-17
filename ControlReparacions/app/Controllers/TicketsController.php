@@ -276,8 +276,6 @@ class TicketsController extends BaseController
 
         $totalPrice = 0;
 
-        // dd($data['interventions']);
-
         foreach ($data['interventions'] as $intervencio) {
 
             $totalPrice += $intervencio['preu'];
@@ -360,8 +358,7 @@ class TicketsController extends BaseController
         $id_tipus_dispositiu = $this->request->getPost("id_type");
 
         if ($this->validate($validationRules)) {
-            if ($this->request->getPost("repair") || $this->request->getPost("sender")) {
-                if (session()->get('user')['role']="prof" || session()->get('user')['role']="prof") {
+                if (session()->get('user')['role']="prof" || session()->get('user')['role']="ins") {
 
                     $codi_centre_emissor = session()->get('user')['code'];
                     $id_estat = 1;
@@ -382,9 +379,6 @@ class TicketsController extends BaseController
                         $codi_centre_reparador = 0;
                     }
                 }
-            } else {
-                
-            }
 
 
             $model->addTiquet(
