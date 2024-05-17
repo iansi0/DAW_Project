@@ -335,9 +335,8 @@ class TicketsController extends BaseController
                         'required' => 'Error id_type',
                     ],
                 ],
-
-
             ];
+
         $model = new TiquetModel();
 
         $fake = Factory::create("es_ES");
