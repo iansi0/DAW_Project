@@ -14,9 +14,11 @@ class TIPUSINVENTARI extends Migration
                 ],
                 'nom'          => [
                         'type'           => 'VARCHAR',
+                        'trim'           => true,
                         'constraint'     => 30,
                         'null'           => false,
                 ],
+                
                 'created_at' => [
                     'type'       => 'DATETIME',
                 ],

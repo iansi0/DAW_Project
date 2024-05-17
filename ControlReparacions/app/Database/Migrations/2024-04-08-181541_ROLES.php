@@ -15,8 +15,10 @@ class ROLES extends Migration
             ],
             'role' => [
                 'type'           => 'VARCHAR',
+                'trim'           => true,
                 'constraint'     => 100,
             ],
+            
             'created_at' => [
                 'type'       => 'DATETIME',
             ],

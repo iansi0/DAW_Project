@@ -10,27 +10,32 @@ class PROFESSOR extends Migration
     {
         $this->forge->addField([
                 'id_xtec'          => [
-                        'type'           => 'BINARY',
-                        'constraint'     => 32,
+                    'type'           => 'VARCHAR',
+                    'trim'           => true,
+                    'constraint'     => 50,
                 ],
                 'id_user'          => [
-                        'type'           => 'BINARY',
-                        'constraint'     => 32,
+                    'type'           => 'BINARY',
+                    'constraint'     => 32,
+                    'null'           => false,
                 ],
                 'nom'          => [
-                        'type'           => 'VARCHAR',
-                        'constraint'     => 20,
-                        'null'           => false,
+                    'type'           => 'VARCHAR',
+                    'trim'           => true,
+                    'constraint'     => 20,
+                    'null'           => false,
                 ],
                 'cognoms'          => [
-                        'type'           => 'VARCHAR',
-                        'constraint'     => 80,
-                        'null'           => false,
+                    'type'           => 'VARCHAR',
+                    'trim'           => true,
+                    'constraint'     => 80,
+                    'null'           => false,
                 ],
                 'codi_centre'          => [
-                        'type'           => 'BINARY',
-                        'constraint'     => 32,
-                        'null'           => false,
+                    'type'           => 'VARCHAR',
+                    'trim'           => true,
+                    'constraint'     => 10,
+                    'null'           => false,
                 ],
 
                 'created_at' => [
@@ -45,11 +50,10 @@ class PROFESSOR extends Migration
                 ],
         ]);
         $this->forge->addKey('id_user', true);
+        $this->forge->addKey('id_xtec');
         $this->forge->createTable('PROFESSOR');
         $this->forge->addForeignKey('id_user', 'USERS', 'id');
         $this->forge->addForeignKey('codi_centre', 'CENTRE', 'codi');
-        $this->forge->addForeignKey('id_user', 'USERS', 'id');
-
 
     }
 

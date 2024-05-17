@@ -10,23 +10,28 @@ class CURS extends Migration
     {
         $this->forge->addField([
                 'id'          => [
-                        'type'           => 'INT',
-                ],
-                'cicle'          => [
-                        'type'           => 'VARCHAR',
-                        'constraint'     => 50,
-                        'null'           => false,
-                ],
-                'titol'          => [
-                        'type'           => 'VARCHAR',
-                        'constraint'     => 20,
-                        'null'           => false,
+                    'type'           => 'BINARY',
+                    'constraint'     => 32,
+                    'null'           => false,
                 ],
                 'curs'          => [
-                        'type'           => 'INT',
-                        'constraint'     => 1,
-                        'null'           => false,
+                    'type'           => 'INT',
+                    'constraint'     => 4,
+                    'null'           => false,
                 ],
+                'any'          => [
+                    'type'           => 'INT',
+                    'constraint'     => 1,
+                    'null'           => false,
+                ],
+                'titol'          => [
+                    'type'           => 'VARCHAR',
+                    'trim'           => true,
+                    'constraint'     => 20,
+                    'null'           => false,
+                ],
+                
+
                 'created_at' => [
                     'type'       => 'DATETIME',
                 ],
