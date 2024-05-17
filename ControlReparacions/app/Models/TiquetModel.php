@@ -61,6 +61,7 @@ class TiquetModel extends Model
 
     public function getByTitleOrText($search, $filters)
     {
+        // session()->destroy();
         $role=session()->get('user')['role'];
         $code=intval(session()->get('user')['code']);
 
@@ -78,13 +79,7 @@ class TiquetModel extends Model
         $this->join('estat', 'tiquet.id_estat = estat.id');
         $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
-        $this->orLike('tiquet.id', $search, 'both', true);
-        $this->orLike('tipus_dispositiu.nom', $search, 'both', true);
-        $this->orLike('tiquet.descripcio_avaria', $search, 'both', true);
-        $this->orLike('centre_emissor.nom', $search, 'both', true);
-        $this->orLike('centre_reparador.nom', $search, 'both', true);
-        $this->orLike('tiquet.created_at', $search, 'both', true);
-        $this->orLike('estat.nom', $search, 'both', true);
+        
         // WHERE USING SEARCH 
         $this->groupStart()
             ->orLike('tiquet.id', $search, 'both', true)

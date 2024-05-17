@@ -76,6 +76,15 @@ class CentreModel extends Model
 
         return $this->findAll();
     }
+    public function getAllCenter2(){
+       
+
+        $this->select('codi, nom');
+        
+      
+
+        return $this->findAll();
+    }
     
     public function getAllRepairCenters(){
          

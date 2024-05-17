@@ -273,7 +273,7 @@ class InstitutesController extends BaseController
         } else {
             return redirect()->back()->withInput();
         }
-        return redirect()->to(base_url('/tickets'));
+        return redirect()->to(base_url('/institutes'));
     }
 
     public function modifyInstitute($id)

@@ -11,6 +11,8 @@ $routes->GET('login', 'Home::login');
 $routes->GET('', 'Home::login');
 $routes->GET('/', 'Home::login');
 $routes->POST('login', 'Home::login_post');
+$routes->POST('login/asigninstitute', 'Home::assign_institute');
+$routes->POST('addprof', 'Home::add_prof_or_code');
 
 $routes->group('', ['filter' => 'isLogged'], function ($routes) {
 

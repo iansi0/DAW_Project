@@ -2,10 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Models\CentreModel;
+use App\Models\ProfessorModel;
 use App\Models\TiquetModel;
 use App\Models\UsersInRolesModel;
 use App\Models\UsersModel;
-use SIENSIS\KpaCrud\Libraries\KpaCrud;
+
+use App\Libraries\UUID as LibrariesUUID;
 
 class Home extends BaseController
 {
@@ -42,9 +45,23 @@ class Home extends BaseController
             
 
                 //si el domino no es xtex devolvemos error
-                if ($dominio[1] !== 'xtec.cat') {
-                    session()->setFlashdata('error', lang("error.wrong_login"));
-                    return redirect()->to(base_url('login'));
+                if ($dominio[1] == 'gmail.com') {
+                // if ($dominio[1] !== 'xtec.cat') {
+                    $user = new UsersModel();
+                    $mail=$userInfo->getEmail();
+                    $fullname=$userInfo->getName();
+                    $checkusername = $user->getLoginByMail($mail);
+                    if ($checkusername==null) {
+                        $institutes= new CentreModel();
+                        $ins =$institutes->getAllCenter2();
+                        session()->setFlashdata('mail', $mail);
+                        session()->setFlashdata('fullname', $fullname);
+                        $data =[
+                            "institutes" => $ins,
+                        ];
+                        return view('assigninstitute', $data);
+
+                    }
                 }
 
                 // Creamos un Modelo Usuario
@@ -61,10 +78,23 @@ class Home extends BaseController
                 // Obtenemos la información del usuario
                 $user = $model->getUserById($user["id"]);
 
+                if ($user['code']==null && $user['role']=="prof") {
+                    $institutes= new CentreModel();
+                        $ins =$institutes->getAllCenter2();
+                        session()->setFlashdata('mail', $user['user']);
+                        $data =[
+                            "institutes" => $ins,
+                        ];
+                        return view('assigninstitute', $data);
+                }
+                $userInRole = new UsersInRolesModel();
+                // Generamos la sesión
+             
                 $sessionData = [
                     "uid"           => $user["id"],
                     "user"          => $user["user"],
                     "code"          => $user["code"],
+                    "role"          => $userInRole->getRoleByUser($user["id"])['role'],
                     "name"          => $user["name"],
                     "adress"        => $user["adress"],
                     "phone"         => $user["phone"],
@@ -88,7 +118,7 @@ class Home extends BaseController
             return redirect()->to(base_url('tickets'));
         }
     }
-
+    
     public function login_post()
     {
 
@@ -105,7 +135,10 @@ class Home extends BaseController
         //     session()->setFlashdata('error', lang("error.wrong_login"));
         //     return redirect()->to(base_url('login'));
         // }
-
+        if (str_contains($this->request->getVar('user'),"xtec.cat")) {
+            session()->setFlashdata('error', lang("error.wrong_login"));
+            return redirect()->to(base_url('login'));
+        }
         // Creamos un Modelo Usuario
         $model = new UsersModel();
         // Obtenemos el usuario por user o por mail
@@ -163,6 +196,65 @@ class Home extends BaseController
            
     }    
 
+    public function add_prof_or_code(){
+        
+        
+        $institute = request()->getPost('d');
+        $mail = session()->getFlashdata('mail');
+        $fullname = session()->getFlashdata('fullname');
+
+        // Dona error pero esta be, epnsa que es un array i es un string
+        // $fullname =  explode(" ",$fullname);
+      
+        $institute = explode("(",$institute);
+        $institute = explode(")",$institute[1]);
+        $code = $institute[0];
+        // $name=$fullname[0];
+        // $lastname=$fullname[1];
+        $userModel = new UsersModel();
+        $profModel = new ProfessorModel();
+        $userInRole = new UsersInRolesModel();
+        $id_xtec = explode("@",$mail);
+        // Obtenemos el usuario por user o por mail
+        $user = $userModel->getLoginByMail($mail);
+
+        // Si el user o mail no existe, creamos el profe
+        if (!$user) {
+            $id=LibrariesUUID::v4();
+            $userModel->addUser($id,$mail,"1234",'ca');
+            $profModel->addProfessor($id,$id_xtec[0],$fullname,"",$code);
+    
+            $newId=LibrariesUUID::v4();
+            $userInRole->addUserRole($newId,$id,"70ad75d5-8a10-4cc5-af85-9c8ed34b");
+        }else{
+            $id=$user['id'];
+            $profModel->updateCode($id,$code);
+
+        }
+
+        $user = $userModel->getUserById(substr($id, 0, -4));
+     
+        // Generamos la sesión
+        $sessionData = [
+            "uid"           => $user["id"],
+            "role"          => $userInRole->getRoleByUser($user["id"])['role'],
+            "user"          => $user["user"],
+            "code"          => $user["code"],
+            "name"          => $user["name"],
+            "adress"        => $user["adress"],
+            "phone"         => $user["phone"],
+            "other"         => (count(explode(',', $user["other"])) > 0) ? explode(',', $user["other"]) : (($user["other"]) ? $user["other"] : ''),
+            "contact"       => (count(explode(',', $user["contact"])) > 0) ? explode(',', $user["contact"]) : '',
+            "lang"          => ($user["lang"]) ? $user["lang"] : 'ca',
+            "logged_data"   => date("Y-m-d H:i:s"),
+            "ip_user"       => $_SERVER['REMOTE_ADDR']
+        ];
+        session()->set("user", $sessionData);
+       
+        return redirect()->to(base_url('tickets'));
+          
+    }
+
     public function logout()
     {
         $session = \Config\Services::session();
@@ -172,6 +264,7 @@ class Home extends BaseController
 
     public function empty()
     {
+        // mano mano
         // retornamos  una vista vacía para evitar errores de rutas no definidas.
         return  view('/workingpage');
     }
