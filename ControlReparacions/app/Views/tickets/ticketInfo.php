@@ -91,9 +91,12 @@
                     <?php endif ?>
 
             </div>
+
             <?php
             echo $table->generate();
             ?>
+
+            <p class="bg-primario text-secundario text-right  text-3xl"> Total: <?=$totalPrice?>€</p>
         </div>
 
     </article>

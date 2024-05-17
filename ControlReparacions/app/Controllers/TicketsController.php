@@ -9,6 +9,7 @@ use App\Database\Migrations\ESTATS;
 use App\Models\CentreModel;
 use App\Models\EstatModel;
 use App\Models\IntervencioModel;
+use App\Models\InventariModel;
 use Faker\Factory;
 use Google\Service\Walletobjects\Pagination;
 
@@ -238,6 +239,7 @@ class TicketsController extends BaseController
 
         $modelTickets = new TiquetModel();
         $modelInterventions = new IntervencioModel();
+        $modelInventari = new InventariModel();
         $estat = new EstatModel();
 
         /** TABLE GENERATOR **/
@@ -272,9 +274,12 @@ class TicketsController extends BaseController
             'estatsFiltrats' => $estat->getFilteredStates(),
         ];
 
-   
+        $totalPrice = 0;
 
         foreach ($data['interventions'] as $intervencio) {
+
+            $totalPrice += $intervencio['preu'];
+
             $buttonView = base_url("tickets/" . $intervencio['id']); // Reemplazar con tu ruta real
 
             $table->addRow(
@@ -285,6 +290,8 @@ class TicketsController extends BaseController
                 ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-segundario' : 'bg-segundario']
             );
         }
+
+        $data += ['totalPrice' => $totalPrice,];
 
         session()->setFlashdata('ticket_id', $id);
 
