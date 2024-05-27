@@ -46,6 +46,7 @@ class USERS extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addKey('user');
         $this->forge->createTable('USERS');
+        
     }
 
     public function down()

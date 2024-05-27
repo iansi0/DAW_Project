@@ -11,6 +11,14 @@ class ALUMNESeeder extends Seeder
 {
     public function run()
     {
+
+        /**
+         * 
+         * ESTE SEEDER TAN SOLO ES RELLENO DE DATOS PERO NO VAN A TENER LOGIN
+         * SI LO QUE QUIERE ES TENER ALUMNOS CON LOGIN VE A USERSSeeder.php
+         * 
+         */
+
         $fake = Factory::create("es_ES");
 
         for ($i = 0; $i < 20; $i++) {
@@ -20,7 +28,10 @@ class ALUMNESeeder extends Seeder
 
                 PARÁMETROS DE addAlumne()
                 +--------------+
-                | correu       |
+                | id_user      |
+                | nom          |
+                | cognoms      |
+                | id_curs      |
                 | codi_centre  |
                 +--------------+
                     
@@ -28,16 +39,12 @@ class ALUMNESeeder extends Seeder
 
             $arrCentres = ['25002799', '17010700', '17010499', '17008249', '8000013', '8001509', '8002198', '8015399', '8017104', '8019401'];
             $rndCentre = rand(0, count($arrCentres) - 1);
-            $arrCurs = [0,1,2,3,4,5,6,7,8];
-            $rndCurs = rand(0, count($arrCurs) - 1);
 
             $alumne->addAlumne(
-
                 $fake->uuid(),
                 $fake->name(),
                 $fake->lastName(),
-                $fake->email(),
-                $arrCurs[$rndCurs],
+                $fake->uuid(),
                 $arrCentres[$rndCentre]
             );
 

@@ -30,8 +30,10 @@ class TIPUSINVENTARI extends Migration
                     'null'       => true,
                 ],
         ]);
+
         $this->forge->addKey('id', true);
         $this->forge->createTable('TIPUS_INVENTARI');
+        
     }
 
     public function down()

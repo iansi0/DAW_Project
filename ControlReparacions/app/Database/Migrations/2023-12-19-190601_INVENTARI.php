@@ -56,12 +56,12 @@ class INVENTARI extends Migration
                     'null'       => true,
                 ],
         ]);
+
         $this->forge->addKey('id', true);
         $this->forge->createTable('INVENTARI');
         $this->forge->addForeignKey('codi_centre', 'CENTRE', 'codi_centre');
         $this->forge->addForeignKey('id_tipus_inventari', 'TIPUS_INVENTARI', 'id');
         $this->forge->addForeignKey('id_intervencio', 'INTERVENCIONS', 'id');
-
 
     }
 

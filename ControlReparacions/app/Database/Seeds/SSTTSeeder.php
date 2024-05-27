@@ -30,14 +30,13 @@ class SSTTSeeder extends Seeder
 
                     PARÁMETROS DE addSSTT()
                     +---------------+
-                    | id            |
+                    | id_user       |
                     | codi          |
                     | nom           |
                     | adreca_fisica |
                     | cp            |
                     | poblacio      |
                     | telefon       |
-                    | correu        |
                     | altres        |
                     +---------------+
                     
@@ -51,7 +50,6 @@ class SSTTSeeder extends Seeder
                     str_replace(' ', '', trim($row[3])), 
                     trim($row[4]), 
                     str_replace(' ', '', trim($row[5])), 
-                    trim($row[6]), 
                     trim($row[7])
                 );
 

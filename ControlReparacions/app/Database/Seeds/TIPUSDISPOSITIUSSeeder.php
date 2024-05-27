@@ -25,10 +25,10 @@ class TIPUSDISPOSITIUSSeeder extends Seeder
                 /*
 
                     PARÁMETROS DE addTipusDispositiu()
-                    +-----------------+
-                    | id              |
-                    | nom             |
-                    +-----------------+
+                    +------+
+                    | id   |
+                    | nom  |
+                    +------+
                     
                 */
 

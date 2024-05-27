@@ -48,6 +48,7 @@ class ALUMNE extends Migration
                         'null'       => true,
                 ],
         ]);
+        
         $this->forge->addKey('id_user', true);
         $this->forge->createTable('ALUMNE');
         $this->forge->addForeignKey('codi_centre', 'CENTRE', 'codi');

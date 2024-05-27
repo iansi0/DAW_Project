@@ -31,8 +31,10 @@ class TIPUSINTERVENCIONS extends Migration
                     'null'       => true,
                 ],
         ]);
+
         $this->forge->addKey('id', true);
         $this->forge->createTable('TIPUS_INTERVENCIO');
+        
     }
 
     public function down()
