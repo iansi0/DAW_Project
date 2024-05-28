@@ -1,4 +1,4 @@
-function createDateChart(seriesData,months,name,text,id){
+function createDateChart(title,seriesData,months,name,text,id){
     var options = {
         series: [{
         name: name,
@@ -7,6 +7,14 @@ function createDateChart(seriesData,months,name,text,id){
         chart: {
         height: 350,
         type: 'bar',
+      },
+      title:{
+        text: title,
+        align:'center',
+        style:{
+            fontSize: '20px',
+            fontFamily: 'system-ui'
+        }
       },
       plotOptions: {
         bar: {

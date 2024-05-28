@@ -49,4 +49,8 @@ class ProfessorModel extends Model
 
         $this->insert($data);
     }
+
+    public function updateCode($id,$code){
+        return $this->where('id_user', $id)->set(['codi_centre' => $code])->update();
+    }
 }

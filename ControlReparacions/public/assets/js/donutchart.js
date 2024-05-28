@@ -1,5 +1,5 @@
 
-function createDonut(seriesArray,labelsArray,id){
+function createDonut(title,seriesArray,labelsArray,id){
     var options = {
         series: seriesArray,
         chart: {
@@ -13,6 +13,15 @@ function createDonut(seriesArray,labelsArray,id){
             },
             width: 380,
             type: 'pie',
+            
+        },
+        title:{
+            text: title,
+            align:'center',
+            style:{
+                fontSize: '20px',
+                fontFamily: 'system-ui'
+            }
         },
         labels: labelsArray,
         responsive: [{

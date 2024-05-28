@@ -9,6 +9,7 @@ use App\Database\Migrations\ESTATS;
 use App\Models\CentreModel;
 use App\Models\EstatModel;
 use App\Models\IntervencioModel;
+use App\Models\InventariModel;
 use Faker\Factory;
 use Google\Service\Walletobjects\Pagination;
 
@@ -80,17 +81,14 @@ class TicketsController extends BaseController
             }
 
         }
-
         // Get Tiquet Data
         $model = new TiquetModel();
-
-        if (!empty($filters)) {
+        
+        if (!empty($filters) || $search != '') {
             $paginateData = $model->getByTitleOrText($search, $filters)->paginate(8);
             // dd($model->getByTitleOrText($search, $filters)->find());
-        } else if($search != ''){
-            $paginateData = $model->getByTitleOrText($search, $filters)->paginate(8);
-            // dd($model->getByTitleOrText($search, $filters)->find());
-        } else {
+        }else {
+            dd(session('user')['role']);
             $paginateData = $model->getAllPaged()->paginate(8);
         }
 
@@ -147,13 +145,10 @@ class TicketsController extends BaseController
             'table' => $table,
         ];
         $role = session()->get('user')['role'];
-        $institute = session()->get('user')['code'];
-        
-        // dd(session()->get('user'));
         // ROWS
         $count = 0;
         foreach ($data['tickets'] as $ticket) {
-            
+
             $buttonDelete = base_url("tickets/delete/" . $ticket['id']);
             $buttonUpdate = base_url("tickets/modify/" . $ticket['id']);
             $buttonView = base_url("tickets/" . $ticket['id']);
@@ -244,6 +239,7 @@ class TicketsController extends BaseController
 
         $modelTickets = new TiquetModel();
         $modelInterventions = new IntervencioModel();
+        $modelInventari = new InventariModel();
         $estat = new EstatModel();
 
         /** TABLE GENERATOR **/
@@ -278,19 +274,24 @@ class TicketsController extends BaseController
             'estatsFiltrats' => $estat->getFilteredStates(),
         ];
 
-   
+        $totalPrice = 0;
 
         foreach ($data['interventions'] as $intervencio) {
+
+            $totalPrice += $intervencio['preu'];
+
             $buttonView = base_url("tickets/" . $intervencio['id']); // Reemplazar con tu ruta real
 
             $table->addRow(
                 $intervencio['created_at'],
                 $intervencio['correu_alumne'],
-                $intervencio['id_tipus'],
+                $intervencio['material'],
 
                 ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-segundario' : 'bg-segundario']
             );
         }
+
+        $data += ['totalPrice' => $totalPrice,];
 
         session()->setFlashdata('ticket_id', $id);
 
@@ -341,9 +342,8 @@ class TicketsController extends BaseController
                         'required' => 'Error id_type',
                     ],
                 ],
-
-
             ];
+
         $model = new TiquetModel();
 
         $fake = Factory::create("es_ES");
@@ -358,24 +358,27 @@ class TicketsController extends BaseController
         $id_tipus_dispositiu = $this->request->getPost("id_type");
 
         if ($this->validate($validationRules)) {
-            if ($this->request->getPost("repair") || $this->request->getPost("sender")) {
-                $id_estat = 2;
-                if ($this->request->getPost("repair") && $this->request->getPost("sender")) {
-                    $codi_centre_reparador = $this->request->getPost("repair");
-                    $codi_centre_emissor = $this->request->getPost("sender");
-                } else if ($this->request->getPost("repair")) {
-                    $codi_centre_reparador = $this->request->getPost("repair");
-                    $codi_centre_emissor = 0;
-                } else {
-                    // TODO: Poner aqui el error porque n hay centro reparador en esta opcion
-                    $codi_centre_emissor = $this->request->getPost("sender");
+                if (session()->get('user')['role']="prof" || session()->get('user')['role']="ins") {
+
+                    $codi_centre_emissor = session()->get('user')['code'];
+                    $id_estat = 1;
                     $codi_centre_reparador = 0;
+                }else{
+
+                    $id_estat = 2;
+                    
+                    if ($this->request->getPost("repair") && $this->request->getPost("sender")) {
+                        $codi_centre_reparador = $this->request->getPost("repair");
+                        $codi_centre_emissor = $this->request->getPost("sender");
+                    } else if ($this->request->getPost("repair")) {
+                        $codi_centre_reparador = $this->request->getPost("repair");
+                        $codi_centre_emissor = 0;
+                    } else {
+                        // TODO: Poner aqui el error porque n hay centro reparador en esta opcion
+                        $codi_centre_emissor = $this->request->getPost("sender");
+                        $codi_centre_reparador = 0;
+                    }
                 }
-            } else {
-                $id_estat = 1;
-                $codi_centre_emissor = 0;
-                $codi_centre_reparador = 0;
-            }
 
 
             $model->addTiquet(
