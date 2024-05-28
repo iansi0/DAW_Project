@@ -77,7 +77,7 @@ class UsersModel extends Model
                 , COALESCE(sstt.nom, centre.nom, CONCAT(professor.nom, ' ', COALESCE(professor.cognoms, '')), CONCAT(alumne.nom, ' ', COALESCE(alumne.cognoms, '')), '') AS name
                 , COALESCE(sstt.adreca_fisica, centre.adreca_fisica, (SELECT centre.adreca_fisica FROM centre JOIN professor ON professor.codi_centre = centre.codi WHERE professor.id_user = 'USER_ID'), (SELECT centre.adreca_fisica FROM centre JOIN alumne ON alumne.codi_centre = centre.codi WHERE alumne.id_user = 'USER_ID'), '') AS adress
                 , COALESCE(sstt.telefon, centre.telefon, '') AS phone
-                , COALESCE(sstt.altres, CONCAT(centre.taller, ',', centre.actiu), professor.id_xtec, '') AS other
+                , COALESCE(sstt.altres, CONCAT(centre.taller, ',', centre.actiu), '') AS other
                 , COALESCE(CONCAT(centre.nom_persona_contacte, ',', centre.correu_persona_contacte), '') AS contact
                 , CASE
                     WHEN sstt.id_user IS NOT NULL THEN 'sstt'
@@ -102,7 +102,7 @@ class UsersModel extends Model
                         ,COALESCE(sstt.nom, centre.nom, CONCAT(professor.nom, ' ', COALESCE(professor.cognoms, '')), CONCAT(alumne.nom, ' ', COALESCE(alumne.cognoms, '')), '') AS name
                         ,COALESCE(sstt.adreca_fisica, centre.adreca_fisica, (SELECT centre.adreca_fisica FROM centre JOIN professor ON professor.codi_centre = centre.codi WHERE professor.id_user = $id_str), (SELECT centre.adreca_fisica FROM centre JOIN alumne ON alumne.codi_centre = centre.codi WHERE alumne.id_user = $id_str), '') AS adress
                         ,COALESCE(sstt.telefon, centre.telefon, '') AS phone
-                        ,COALESCE(sstt.altres, CONCAT(centre.taller, ',', centre.actiu), professor.id_xtec, '') AS other
+                        ,COALESCE(sstt.altres, CONCAT(centre.taller, ',', centre.actiu), '') AS other
                         ,COALESCE(CONCAT(centre.nom_persona_contacte, ',', centre.correu_persona_contacte), '') AS contact
                         "
                     );

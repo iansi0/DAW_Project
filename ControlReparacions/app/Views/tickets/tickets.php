@@ -152,9 +152,6 @@
 
 </div>
 
-<!-- CLASS DATALIST CUSTOM -->
-<script src="/assets/js/dataList.js"></script>
-
 <script>
 
   // Funcion para mostrar/esconder los filtros

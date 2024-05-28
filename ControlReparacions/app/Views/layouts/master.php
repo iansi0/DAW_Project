@@ -6,8 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="view-transition" content="same-origin">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/styles.css">
+    <!-- ICONS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+    <!-- APEX CHARTS -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- SWEET ALERTS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- CLASS DATALIST CUSTOM -->
+    <script src="/assets/js/dataList.js"></script>
 
     <title>KeepYourSoftware</title>
     <style>
