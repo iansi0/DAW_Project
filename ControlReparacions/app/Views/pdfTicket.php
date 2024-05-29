@@ -47,9 +47,15 @@
         <!-- DESCRIPTION -->
         <div style="position: relative; border: 1px solid black;margin-top: 50px;">
             <h2 style="position: absolute; top: -40px; left: 20px; background-color: #FFFFFF; padding: 2px 8px;width: 140px;"><?= lang('forms.description'); ?></h2>
-            <div style="line-height: 8px; margin-top: 25px;">
-                <p style="margin-left: 20px"><?=$ticket['descripcio']?></p>
+            <div style="line-height: 8px; margin-top: 25px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <p style="margin-left: 20px;"><?=$ticket['descripcio']?></p>
+                </div>
+                <div>
+                    <img src="data:image/png;base64, <?= $qr; ?> "/>
+                </div>
             </div>
+
         </div>
 
         <!-- INTERVENTIONS -->

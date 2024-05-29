@@ -8,6 +8,10 @@ use App\Models\IntervencioModel;
 use App\Models\TiquetModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use Dompdf\Dompdf;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 
 class PDFController extends BaseController
 {
@@ -44,12 +48,20 @@ class PDFController extends BaseController
         ];
         $table->setTemplate($template);
 
+        $writer = new Writer(
+            new ImageRenderer(
+                new RendererStyle(400),
+                new SvgImageBackEnd()
+            )
+        );
+
         $data = [
             'ticket' => $modelTickets->viewTicket($id),
             'interventions' => $modelInterventions->getInterventions($id),
             'pager' => $modelInterventions->pager,
             'table' => $table,
             'estats' => $estat->getAllStates(),
+            'qr' => base64_encode($writer->writeString(base_url()."tickets/".$id)),
         ];
 
         foreach ($data['interventions'] as $intervencio) {
