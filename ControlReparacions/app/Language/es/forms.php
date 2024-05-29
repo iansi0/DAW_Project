@@ -21,6 +21,7 @@ return [
     'email'         => 'E-mail',
     'phone'         => 'Teléfono',
 
+    'contact'       => 'Contacto',
     'contact_name'  => 'Nombre del responsable',
     'contact_email' => 'Email del responsable',
 
