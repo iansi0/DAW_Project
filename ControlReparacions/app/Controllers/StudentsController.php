@@ -82,65 +82,101 @@ class StudentsController extends BaseController
     {
         helper('form');
 
-   
-    
+        if ($this->request->getPost("csv")) {
+            // guardar el csv 
+            $file = $this->request->getPost("csv");
 
-        $validationRules =
-            [
-                'email' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Error Email',
-                    ],
-                ],
-                'name' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Error Name',
-                    ],
-                ],
-                'surnames' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Error Surnames',
-                    ],
-                ],
-                'course' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Error Course',
-                    ],
-                ],
-            ];
+            // leer el csv 
+            $fileCsv = fopen($file, 'r');
 
+            // Boolean para saltarnos la primera fila (es una fila con los nombres de los campos y por ende la descartamos)
+            $firstLine = true;
 
-        if ($this->validate($validationRules)) {
+            // hacer un while para introducir los datos 
+            while (($row = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
 
-            $modelAlumne = new AlumneModel();
-            $modelUser = new UsersModel();
+                if (!$firstLine) {
 
-            $fake = Factory::create("es_ES");
+                    if (trim($row[2] == 1)) {
 
-            $id_user = $fake->uuid();
-            $nom = $this->request->getPost("name");
-            $cognoms = $this->request->getPost("surnames");
-            $codi_centre = session()->get('user')['code'];
-            $id_curs = $this->request->getPost("course");
+                        $modelAlumne = new AlumneModel();
 
-            $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre);
+                        $centre->addCentre(
+                            trim($row[0]),
+                            trim($row[1]),
+                            false,
+                            false,
+                            str_replace(' ', '', trim($row[8])),
+                            trim($row[6]),
+                            '',
+                            trim($row[24]),
+                            trim($row[9]),
+                            trim($row[13])
+                        );
+                    }
+                }
 
+                $firstLine = false;
+            }
 
-            $user = $this->request->getPost("email");
-            $passwd = password_hash($fake->password(), PASSWORD_DEFAULT);
-            $lang = "ca";
-
-            $modelUser->addUser($id_user, $user, $passwd, $lang);
-            dd('añadido');
-
+            fclose($csvFile);
         } else {
-            return redirect()->back()->withInput();
-        }
+            $validationRules =
+                [
+                    'email' => [
+                        'rules'  => 'required',
+                        'errors' => [
+                            'required' => 'Error Email',
+                        ],
+                    ],
+                    'name' => [
+                        'rules'  => 'required',
+                        'errors' => [
+                            'required' => 'Error Name',
+                        ],
+                    ],
+                    'surnames' => [
+                        'rules'  => 'required',
+                        'errors' => [
+                            'required' => 'Error Surnames',
+                        ],
+                    ],
+                    'course' => [
+                        'rules'  => 'required',
+                        'errors' => [
+                            'required' => 'Error Course',
+                        ],
+                    ],
+                ];
 
-        return redirect()->to(base_url('/students'));
+
+            if ($this->validate($validationRules)) {
+
+                $modelAlumne = new AlumneModel();
+                $modelUser = new UsersModel();
+
+                $fake = Factory::create("es_ES");
+
+                $id_user = $fake->uuid();
+                $nom = $this->request->getPost("name");
+                $cognoms = $this->request->getPost("surnames");
+                $codi_centre = session()->get('user')['code'];
+                $id_curs = $this->request->getPost("course");
+
+                $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre);
+
+
+                $user = $this->request->getPost("email");
+                $passwd = password_hash($fake->password(), PASSWORD_DEFAULT);
+                $lang = "ca";
+
+                $modelUser->addUser($id_user, $user, $passwd, $lang);
+                dd('añadido');
+            } else {
+                return redirect()->back()->withInput();
+            }
+
+            return redirect()->to(base_url('/students'));
+        }
     }
 }
