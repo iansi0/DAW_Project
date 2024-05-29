@@ -5,6 +5,7 @@ Table "alumne" {
   "cognoms" varchar(80) [not null]
   "codi_centre" binary(32) [not null]
   "id_curs" binary(32) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -22,6 +23,7 @@ Table "centre" {
   "correu_persona_contacte" varchar(50) [not null]
   "id_sstt" int(10) [not null]
   "id_poblacio" binary(32) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -34,6 +36,7 @@ Table "centre" {
 Table "comarca" {
   "codi" varchar(5) [pk, not null]
   "nom" varchar(50) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -44,6 +47,8 @@ Table "curs" {
   "curs" int(4) [not null]
   "any" int(1) [not null]
   "titol" varchar(20) [not null]
+  "codi_centre" varchar(10) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -52,6 +57,7 @@ Table "curs" {
 Table "estat" {
   "id" int(3) [pk, not null]
   "nom" varchar(20) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -63,6 +69,7 @@ Table "intervencio" {
   "id_ticket" binary(32) [not null]
   "id_tipus" int(3) [not null]
   "id_user" binary(32) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -76,6 +83,7 @@ Table "inventari" {
   "codi_centre" varchar(10) [not null]
   "id_tipus_inventari" int(11) [not null]
   "id_intervencio" binary(32) [default: NULL]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -95,6 +103,7 @@ Table "poblacio" {
   "id" varchar(8) [pk, not null]
   "nom" varchar(100) [not null]
   "id_comarca" binary(2) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -105,6 +114,7 @@ Table "professor" {
   "nom" varchar(20) [not null]
   "cognoms" varchar(80) [not null]
   "codi_centre" varchar(10) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -113,6 +123,7 @@ Table "professor" {
 Table "roles" {
   "id" binary(32) [pk, not null]
   "role" varchar(100) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -127,6 +138,7 @@ Table "sstt" {
   "poblacio" varchar(100) [not null]
   "telefon" varchar(9) [default: NULL]
   "altres" varchar(250) [default: NULL]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -139,6 +151,7 @@ Table "sstt" {
 Table "tipus_dispositiu" {
   "id" int(3) [pk, not null]
   "nom" varchar(20) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -147,6 +160,7 @@ Table "tipus_dispositiu" {
 Table "tipus_intervencio" {
   "id" binary(32) [pk, not null]
   "nom" varchar(20) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -155,6 +169,7 @@ Table "tipus_intervencio" {
 Table "tipus_inventari" {
   "id" int(11) [pk, not null]
   "nom" varchar(30) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -170,6 +185,7 @@ Table "tiquet" {
   "id_estat" int(3) [not null]
   "codi_centre_emissor" varchar(10) [not null]
   "codi_centre_reparador" varchar(10) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -180,6 +196,7 @@ Table "users" {
   "user" varchar(200) [not null]
   "passwd" varchar(100) [default: NULL]
   "lang" varchar(10) [default: NULL]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -193,6 +210,7 @@ Table "users_in_roles" {
   "id" binary(32) [pk, not null]
   "id_user" binary(32) [not null]
   "id_role" binary(32) [not null]
+  
   "created_at" datetime [not null]
   "updated_at" datetime [not null]
   "deleted_at" datetime [default: NULL]
@@ -218,6 +236,9 @@ Ref: centre.codi > professor.codi_centre
 Ref: users.id - alumne.id_user
 Ref: centre.codi > alumne.codi_centre
 Ref: curs.id > alumne.id_curs
+
+// FOREIGN KEY CURS
+Ref: centre.codi > curs.codi_centre
 
 // FOREIGN KEY INTERVENCIO
 Ref: tiquet.id > intervencio.id_ticket

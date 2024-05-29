@@ -30,6 +30,12 @@ class CURS extends Migration
                     'constraint'     => 20,
                     'null'           => false,
                 ],
+                'codi_centre'          => [
+                    'type'           => 'VARCHAR',
+                    'trim'           => true,
+                    'constraint'     => 10,
+                    'null'           => false,
+                ],
                 
 
                 'created_at' => [
@@ -46,6 +52,7 @@ class CURS extends Migration
         
         $this->forge->addKey('id', true);
         $this->forge->createTable('CURS');
+        $this->forge->addForeignKey('codi_centre', 'CENTRE', 'codi');
 
     }
 

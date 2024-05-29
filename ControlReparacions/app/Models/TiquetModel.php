@@ -61,8 +61,8 @@ class TiquetModel extends Model
 
     public function getByTitleOrText($search, $filters)
     {
-        $role=session()->get('user')['role'];
-        $code=session()->get('user')['code'];
+        $role = session()->get('user')['role'];
+        $code = session()->get('user')['code'];
 
         $this->select(["
                         tiquet.id AS id, 

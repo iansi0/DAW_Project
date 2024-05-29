@@ -205,8 +205,8 @@ class Home extends BaseController
         $mail = session()->getFlashdata('mail');
         $fullname = session()->getFlashdata('fullname');
 
-        // Dona error pero esta be, epnsa que es un array i es un string
-        // $fullname =  explode(" ",$fullname);
+        // Dona error pero esta be, pensa que es un array i es un string
+        // $fullname =  explode(" ", $fullname);
       
         $institute = explode("(",$institute);
         $institute = explode(")",$institute[1]);

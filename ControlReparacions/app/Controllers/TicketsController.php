@@ -503,7 +503,6 @@ class TicketsController extends BaseController
             $search = "";
         }
 
-        $filters = array();
         // OBTENCIÓN Y ASIGNACIÓN DE FILTROS
         if (isset($searchData)) {
 
