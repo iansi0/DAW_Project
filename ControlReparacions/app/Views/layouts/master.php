@@ -23,6 +23,17 @@
             /*montserrat para titulos con bold
             lato y popins para textos medium */
         }
+        .swal2-container {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            z-index: 99999 !important;
+        }
+        body.swal2-height-auto {
+            height: 3.5rem !important;
+        }
     </style>
     <!-- Per provar. -->
     <!-- <?php

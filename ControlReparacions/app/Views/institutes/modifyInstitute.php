@@ -6,7 +6,7 @@
     <span class="text-danger">
         <?= validation_list_errors(); ?>
     </span>
-    <form action="<?= $institute['codi']; ?>" method="POST" class="flex flex-col gap-20">
+    <form id="form" action="<?= $institute['codi']; ?>" method="POST" class="flex flex-col gap-20">
 
         <div class="grid grid-cols-3 gap-x-2">
 
@@ -105,13 +105,37 @@
                             : base_url('/institutes');
                         ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel") ?></a>
 
-            <input type="submit" value="<?= lang("buttons.save") ?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
+            <input type="button" id="submitButton" value="<?= lang("buttons.save")?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
 
         </div>
 
-    </form>
+</form>
 </section>
 
-
+<script>
+    document.getElementById('submitButton').addEventListener('click', function() {
+    Swal.fire({
+        title: `<?=lang('alerts.sure')?>`,
+        text: `<?=lang('alerts.sure_sub')?>`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: `<?=lang('alerts.yes_upd')?>`,
+        cancelButtonText: `<?=lang('alerts.cancel')?>`
+    }).then((result) => {
+    if (result.isConfirmed) {
+        Swal.fire({
+            title: `<?=lang('alerts.updated')?>`,
+            text: `<?=lang('alerts.updated_sub')?>`,
+            icon: 'success'
+        }).then(() => {
+            
+            document.getElementById('form').submit();
+        });
+        }
+    });
+    });
+</script>
 
 <?= $this->endSection() ?>

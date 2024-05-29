@@ -87,7 +87,27 @@ class InventaryController extends BaseController
                 $product['nomInventary'],
                 "
                 <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
-                <a href='$buttonDelete' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>
+                <a onclick='(function() { Swal.fire({
+                    customClass:{htmlContainer: ``,},
+                    title: `".lang('alerts.sure')."`,
+                    text: `".lang('alerts.sure_sub')."`,
+                    icon: `warning`,
+                    showCancelButton: true,
+                    confirmButtonColor: `#3085d6`,
+                    cancelButtonColor: `#d33`,
+                    confirmButtonText: `".lang('alerts.yes_del')."`,
+                    cancelButtonText: `".lang('alerts.cancel')."`,
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = `".$buttonDelete."`;
+
+                        Swal.fire({
+                            title: `".lang('alerts.deleted')."`,
+                            text: `".lang('alerts.deleted_sub')."`,
+                            icon: `success`,
+                        });
+                    }
+                  }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>
                 ",
             );
 
