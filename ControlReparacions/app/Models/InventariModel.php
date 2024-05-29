@@ -65,7 +65,13 @@ class InventariModel extends Model
         inventari.id_tipus_inventari AS tipus,
         tipus_inventari.nom as nomInventary
         ")
-            ->join('tipus_inventari', 'inventari.id_tipus_inventari = tipus_inventari.id');
+            ->join('tipus_inventari', 'inventari.id_tipus_inventari = tipus_inventari.id')
+            ->orLike('inventari.id', $search, 'both', true)
+            ->orLike('inventari.nom', $search, 'both', true)
+            ->orLike('inventari.preu', $search, 'both', true)
+            ->orLike('inventari.data_compra', $search, 'both', true)
+            ->orLike('tipus_inventari.nom', $search, 'both', true)
+            ;
         // ->where('codi_centre', session('user')['code']);
 
 
@@ -73,8 +79,8 @@ class InventariModel extends Model
 
     public function getAllPaged()
     {
-        $role=session()->get('user')['role'];
-        $code=intval(session()->get('user')['code']);
+        $role = session()->get('user')['role'];
+        $code = intval(session()->get('user')['code']);
 
         $this->select("
         inventari.id AS id, 
@@ -88,16 +94,13 @@ class InventariModel extends Model
         $this->join('tipus_inventari', 'inventari.id_tipus_inventari = tipus_inventari.id');
 
         // ->where('codi_centre', session('user')['code']);
-        if ($role=="admin") {
+        if ($role == "admin") {
             $this;
-        }else if($role=="prof" || $role=="alumn"){
-            $this->where("centre_reparador.id",$code);
-        }else if($role=="sstt"){
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
-        }else if($role=="ins"){
-            $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
-        }
-        
+        } else if ($role == "prof" || $role == "alumn" || $$role == "ins") {
+            $this->where("inventari.codi_centre", $code);
+        } else if ($role == "sstt") {
+            $this->where("centre_reparador.id_sstt", $code)->orWhere("centre_emissor.id_sstt", $code);
+        } 
         return $this;
     }
 
@@ -109,7 +112,6 @@ class InventariModel extends Model
     public function modifyInventari($id, $data)
     {
         return $this->where('id', $id)->set($data)->update();
-    
     }
 
     public function getInventarytById($id)

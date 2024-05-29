@@ -12,7 +12,7 @@ class IntervencioModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id','descripcio','id_ticket','id_tipus','id_curs','correu_alumne','id_xtec'];
+    protected $allowedFields    = ['id', 'descripcio', 'id_ticket', 'id_tipus', 'id_curs', 'correu_alumne', 'id_xtec'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,14 +38,15 @@ class IntervencioModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addIntervencio($id,$descripcio,$id_ticket,$id_tipus,$id_curs,$persona_reparadora) {
-           
+    public function addIntervencio($id, $descripcio, $id_ticket, $id_tipus, $persona_reparadora)
+    {
+
         $data = [
             'id' =>  $id,
             'descripcio' => $descripcio,
             'id_ticket' => $id_ticket,
             'id_tipus' => $id_tipus,
-            'id_curs' => $id_curs,
+            
             'correu_alumne' => $persona_reparadora,
         ];
 
@@ -54,10 +55,19 @@ class IntervencioModel extends Model
 
     public function getInterventions($id)
     {
-       
-         return $this->select(['id', 'correu_alumne', 'id_tipus', 'descripcio', 'id_tipus', 'created_at'])
-        ->where('id_ticket', $id)->findAll();
-
- 
+        return $this
+            ->select([
+                'intervencio.id',
+                'intervencio.correu_alumne',
+                'intervencio.id_tipus',
+                'intervencio.descripcio',
+                'intervencio.id_tipus',
+                'intervencio.created_at',
+                'inventari.preu as preu',
+                'inventari.nom as material',
+            ])
+            ->join('inventari', 'intervencio.id = inventari.id_intervencio', 'left')
+            ->where('intervencio.id_ticket', $id)
+            ->findAll();
     }
 }

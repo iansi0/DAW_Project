@@ -11,6 +11,8 @@ $routes->GET('login', 'Home::login');
 $routes->GET('', 'Home::login');
 $routes->GET('/', 'Home::login');
 $routes->POST('login', 'Home::login_post');
+$routes->POST('login/asigninstitute', 'Home::assign_institute');
+$routes->POST('addprof', 'Home::add_prof_or_code');
 
 $routes->group('', ['filter' => 'isLogged'], function ($routes) {
 
@@ -45,8 +47,8 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
     // INTERVENTIONS
     $routes->group('intervention', function ($routes) {
         $routes->GET('', 'InterventionController::intervention');
-        $routes->GET('form', 'InterventionController::interventionForm');
-        $routes->POST('add', 'InterventionController::addIntervention');
+        $routes->POST('form/add', 'InterventionController::addIntervention');
+        $routes->GET('form/(:segment)', 'InterventionController::interventionForm/$1');
     });
 
     // STUDENTS
@@ -112,4 +114,6 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
 
     // LOGOUT
     $routes->GET('logout', 'Home::logout');
+
+    $routes->GET('(:segment)', 'Home::empty');
 });

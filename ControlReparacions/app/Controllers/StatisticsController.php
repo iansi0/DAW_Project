@@ -32,7 +32,7 @@ class StatisticsController extends BaseController
             $months=[];
             for ($i=1; $i <= 12 ; $i++) { 
                 array_push($allTiquetsCounts,0);
-                array_push($months,lang('month.'.$i));
+                array_push($months,lang('months.'.$i));
             }
 
             foreach ($allTiquetsMonthly as $tiquet) {

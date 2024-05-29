@@ -58,46 +58,59 @@ class CentreModel extends Model
         $this->insert($data);
     }
 
-    public function getAllCenter(){
-        $role=session()->get('user')['role'];
-        $code=intval(session()->get('user')['code']);
+    public function getAllCenter()
+    {
+        $role = session()->get('user')['role'];
+        $code = intval(session()->get('user')['code']);
 
         $this->select('codi, nom');
-        
-        if ($role=="admin") {
+
+        if ($role == "admin") {
             $this;
-        }else if($role=="prof" || $role=="alumn"){
-            $this->where("centre.codi",$code);
-        }else if($role=="sstt"){
-            $this->where("centre.id_sstt",$code);
-        }else if($role=="ins"){
-            $this->where("centre.codi",$code);
+        } else if ($role == "prof" || $role == "alumn") {
+            $this->where("centre.codi", $code);
+        } else if ($role == "sstt") {
+            $this->where("centre.id_sstt", $code);
+        } else if ($role == "ins") {
+            $this->where("centre.codi", $code);
         }
 
         return $this->findAll();
     }
-    
-    public function getAllRepairCenters(){
-         
-        $role=session()->get('user')['role'];
-        $code=intval(session()->get('user')['code']);
-        
+    public function getAllCenter2()
+    {
+
+
+        $this->select('codi, nom');
+
+
+
+        return $this->findAll();
+    }
+
+    public function getAllRepairCenters()
+    {
+
+        $role = session()->get('user')['role'];
+        $code = intval(session()->get('user')['code']);
+
         $this->select('codi, nom')->where('actiu', true)->where('taller', true);
-        
-        if ($role=="admin") {
+
+        if ($role == "admin") {
             $this;
-        }else if($role=="prof" || $role=="alumn"){
-            $this->where("centre.codi",$code);
-        }else if($role=="sstt"){
-            $this->where("centre.id_sstt",$code);
-        }else if($role=="ins"){
-            $this->where("centre.codi",$code);
+        } else if ($role == "prof" || $role == "alumn") {
+            $this->where("centre.codi", $code);
+        } else if ($role == "sstt") {
+            $this->where("centre.id_sstt", $code);
+        } else if ($role == "ins") {
+            $this->where("centre.codi", $code);
         }
 
         return $this->findAll();
     }
 
-    public function getRegionWithMostTickets($ssttCode){
+    public function getRegionWithMostTickets($ssttCode)
+    {
 
         $this->select('
         comarca.nom as name,
@@ -106,36 +119,39 @@ class CentreModel extends Model
         $this->join('tiquet', 'centre.codi = tiquet.codi_centre_emissor');
         $this->join('poblacio', 'centre.id_poblacio = poblacio.id');
         $this->join('comarca', 'poblacio.id_comarca = comarca.codi');
-        $this->where('centre.id_sstt',intval($ssttCode)); 
-        $this->orderBy('count','DESC');
-        
+        $this->where('centre.id_sstt', intval($ssttCode));
+        $this->orderBy('count', 'DESC');
+
         return $this->findAll();
     }
 
     public function getByTitleOrText($search)
     {
 
-        return $this->select(["
-                                tiquet.id AS id, 
-                                tiquet.descripcio_avaria AS descripcio,
-                                tiquet.created_at AS created,
-                                tipus_dispositiu.nom AS tipus,
-                                estat.nom as estat,
-                                tiquet.id_estat as id_estat,
-                                COALESCE(centre_emissor.nom, '" . lang('titles.toassign') . "') AS emissor,
-                                COALESCE(centre_reparador.nom, '" . lang('titles.toassign') . "') AS receptor
-                            "])
-            ->join('tipus_dispositiu', 'tiquet.id_tipus_dispositiu = tipus_dispositiu.id')
-            ->join('estat', 'tiquet.id_estat = estat.id')
-            ->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left')
-            ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left')
-            ->orLike('tiquet.id', $search, 'both', true)
-            ->orLike('tipus_dispositiu.nom', $search, 'both', true)
-            ->orLike('tiquet.descripcio_avaria', $search, 'both', true)
-            ->orLike('centre_emissor.nom', $search, 'both', true)
-            ->orLike('centre_reparador.nom', $search, 'both', true)
-            ->orLike('tiquet.created_at', $search, 'both', true)
-            ->orLike('estat.nom', $search, 'both', true);
+        return $this->select(
+            "
+        centre.codi AS codi,
+        centre.nom AS nom, 
+        centre.actiu AS actiu,
+        centre.taller AS taller,
+        centre.nom_persona_contacte AS persona,
+        centre.correu_persona_contacte AS correu,
+        centre.id_poblacio AS id_poblacio,
+        centre.telefon AS telefon,
+        centre.adreca_fisica AS adreca,
+
+        COALESCE(poblacio.nom, '" . lang('titles.toassign') . "') AS poblacio,"
+        )
+            ->join('poblacio', 'centre.id_poblacio = poblacio.id')
+
+            ->orLike('centre.codi', $search, 'both', true)
+            ->orLike('centre.nom', $search, 'both', true)
+            ->orLike('centre.actiu', $search, 'both', true)
+            ->orLike('centre.taller', $search, 'both', true)
+            ->orLike('centre.nom_persona_contacte', $search, 'both', true)
+            ->orLike('centre.correu_persona_contacte', $search, 'both', true)
+            ->orLike('poblacio.nom', $search, 'both', true)
+            ->orLike('centre.telefon', $search, 'both', true);
     }
 
     public function getAllPaged()
@@ -181,7 +197,7 @@ class CentreModel extends Model
 
     public function getInstituteById($id)
     {
-        return $this->where('centre.codi', $id)->first();
+        return $this->where('codi', $id)->first();
     }
 
     public function modifyInstitute($id, $data)

@@ -11,15 +11,21 @@
 
         <div class="grid grid-cols-3 gap-x-2">
 
+            <!-- codi  -->
+            <div class="flex flex-col mt-5">
+                <label class=""><?= lang("forms.code")?>*</label>
+                <input type="text" name="code" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+            </div>
+
             <!-- nom  -->
             <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.name") ?></label>
+                <label class=""><?= lang("forms.name") ?>*</label>
                 <input type="text" name="name" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
             </div>
 
             <!-- actiu  -->
             <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.active") ?></label>
+                <label class=""><?= lang("forms.active") ?>*</label>
                 <select name="active" id="active" class="border-2  border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                     <option value="" selected hidden><?= lang("forms.active")  ?></option>
 
@@ -30,7 +36,7 @@
 
             <!-- taller  -->
             <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.work") ?></label>
+                <label class=""><?= lang("forms.work") ?>*</label>
                 <select name="work" id="work" class="border-2  border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                     <option value="" selected hidden><?= lang("forms.work") ?></option>
 
@@ -41,19 +47,19 @@
 
             <!-- telefon  -->
             <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.phone") ?></label>
+                <label class=""><?= lang("forms.phone") ?>*</label>
                 <input type="text" name="phone" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
             </div>
 
-              <!-- nom  -->
-              <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.adress") ?></label>
+            <!-- adreca  -->
+            <div class="flex flex-col mt-5">
+                <label class=""><?= lang("forms.adress") ?>*</label>
                 <input type="text" name="adress" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
             </div>
 
             <!-- poblacio  -->
             <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.pobl") ?></label>
+                <label class=""><?= lang("forms.pobl") ?>*</label>
                 <select name="population" id="" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                     <option value="" disabled selected hidden><?= lang("forms.s_pobl") ?></option>
                     <?php

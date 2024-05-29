@@ -8,9 +8,9 @@
 
         <h1 class=" text-left text-5xl text-primario"><?= strtoupper(lang('titles.students')) ?></h1>
 
-        <a href="<?= base_url('tickets/add') ?>">
+        <!-- <a href="<?= base_url('work') ?>">
             <button id="add-ticket" class=" px-28 py-1 border border-terciario-4  rounded-lg hover:bg-terciario-4 hover:text-white transition hover:ease-in ease-out duration-250"><?= lang('titles.n_students') ?></button>
-        </a>
+        </a> -->
 
     </div>
 
