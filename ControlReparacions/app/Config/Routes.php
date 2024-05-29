@@ -50,7 +50,8 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
     // STUDENTS
     $routes->group('students', function ($routes) {
         $routes->GET('', 'StudentsController::students');
-        $routes->GET('form', 'Home::empty');
+        $routes->GET('add', 'StudentsController::studentForm');
+        $routes->POST('add', 'StudentsController::addStudent');
     });
 
     // INSTITUTES

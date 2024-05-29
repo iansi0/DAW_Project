@@ -38,7 +38,6 @@
     </script> -->
 </head>
 
-
 <body class=" flex flex-col  h-full bg-[#ffffff]">
 
     <header class=" fixed w-full  bg-[#f7f7f9] text-terciario-4  h-12 flex text-xl z-20 ">
@@ -225,7 +224,7 @@
                 <!-- <img class="w-10 h-10 rounded-full" src="https://cdn-icons-png.freepik.com/512/1077/1077114.png" alt="Rounded avatar"> -->
                 <i class="py-3 rounded-full fa-solid fa-user text-2xl"></i>
                 <h1 class="align-center h mr-5 font-bold ">
-                    <?= session('user')['user'] ?>&nbsp;
+                    <?= session('user')['name'] ?>&nbsp;
                     <i class="fa-solid fa-caret-down"></i>
                 </h1>
             </div>

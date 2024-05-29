@@ -78,7 +78,6 @@ class TicketsController extends BaseController
             } else {
                 $filters['state'] = '';
             }
-
         }
 
         // Get Tiquet Data
@@ -154,75 +153,75 @@ class TicketsController extends BaseController
             $buttonUpdate = base_url("tickets/modify/" . $ticket['id']);
             $buttonView = base_url("tickets/" . $ticket['id']);
 
-            if (($role == "admin" ) || ($role== "sstt") || (($role=="prof") && ($ticket['id_estat']==1)) || (($role=="ins") && ($ticket['id_estat']==1)) ) {
+            if (($role == "admin") || ($role == "sstt") || (($role == "prof") && ($ticket['id_estat'] == 1)) || (($role == "ins") && ($ticket['id_estat'] == 1))) {
                 $table->addRow(
                     // ["data" => $ticket['id'],"class"=>'p-5'],
                     explode("-", $ticket['id'])[4],
                     $ticket['tipus'],
                     ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis"],
-                    ($ticket['emissor'] != lang('titles.toassign')) ? $ticket['emissor'] : lang('titles.toassign').' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
-                    ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign').' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
-    
+                    ($ticket['emissor'] != lang('titles.toassign')) ? $ticket['emissor'] : lang('titles.toassign') . ' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
+                    ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign') . ' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
+
                     date("d/m/Y", strtotime($ticket['created'])),
                     date("H:i", strtotime($ticket['created'])),
-                    
+
                     ["data" => "<a class='flex p-3 justify-center  whitespace-nowrap w-full estat_" . $ticket['id_estat'] . "'>" . $ticket['estat'] . "</a>", "class" => "p-2 "],
-                    
+
                     [
                         "data" =>
                         "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
                          <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
                          <a href='$buttonDelete' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
-    
+
                         "class" => " p-5 flex h-16 justify-between items-center"
                     ],
-    
+
                 );
-            }elseif (("ins"==$role) && ($ticket['id_estat']!=1)) {
+            } elseif (("ins" == $role) && ($ticket['id_estat'] != 1)) {
                 $table->addRow(
                     // ["data" => $ticket['id'],"class"=>'p-5'],
                     explode("-", $ticket['id'])[4],
                     $ticket['tipus'],
                     ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis"],
-                    ($ticket['emissor'] != lang('titles.toassign')) ? $ticket['emissor'] : lang('titles.toassign').' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
-                    ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign').' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
-    
+                    ($ticket['emissor'] != lang('titles.toassign')) ? $ticket['emissor'] : lang('titles.toassign') . ' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
+                    ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign') . ' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
+
                     date("d/m/Y", strtotime($ticket['created'])),
                     date("H:i", strtotime($ticket['created'])),
-                    
+
                     ["data" => "<a class='flex p-3 justify-center  whitespace-nowrap w-full estat_" . $ticket['id_estat'] . "'>" . $ticket['estat'] . "</a>", "class" => "p-2 "],
-                    
+
                     [
                         "data" =>
                         "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
                          <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>",
-    
+
                         "class" => " p-5 flex h-16 justify-between items-center"
                     ],
-    
-                );            
-            }else{
+
+                );
+            } else {
                 $table->addRow(
                     // ["data" => $ticket['id'],"class"=>'p-5'],
                     explode("-", $ticket['id'])[4],
                     $ticket['tipus'],
                     ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis"],
-                    ($ticket['emissor'] != lang('titles.toassign')) ? $ticket['emissor'] : lang('titles.toassign').' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
-                    ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign').' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
-    
+                    ($ticket['emissor'] != lang('titles.toassign')) ? $ticket['emissor'] : lang('titles.toassign') . ' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
+                    ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign') . ' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
+
                     date("d/m/Y", strtotime($ticket['created'])),
                     date("H:i", strtotime($ticket['created'])),
-                    
+
                     ["data" => "<a class='flex p-3 justify-center  whitespace-nowrap w-full estat_" . $ticket['id_estat'] . "'>" . $ticket['estat'] . "</a>", "class" => "p-2 "],
-                    
+
                     [
                         "data" =>
                         "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>",
-    
+
                         "class" => " p-5 flex h-16 justify-between items-center"
                     ],
-    
-                );   
+
+                );
             }
 
             $count++;
@@ -359,27 +358,27 @@ class TicketsController extends BaseController
         $id_tipus_dispositiu = $this->request->getPost("id_type");
 
         if ($this->validate($validationRules)) {
-                if (session()->get('user')['role']="prof" || session()->get('user')['role']="ins") {
+            if (session()->get('user')['role'] = "prof" || session()->get('user')['role'] = "ins") {
 
-                    $codi_centre_emissor = session()->get('user')['code'];
-                    $id_estat = 1;
+                $codi_centre_emissor = session()->get('user')['code'];
+                $id_estat = 1;
+                $codi_centre_reparador = 0;
+            } else {
+
+                $id_estat = 2;
+
+                if ($this->request->getPost("repair") && $this->request->getPost("sender")) {
+                    $codi_centre_reparador = $this->request->getPost("repair");
+                    $codi_centre_emissor = $this->request->getPost("sender");
+                } else if ($this->request->getPost("repair")) {
+                    $codi_centre_reparador = $this->request->getPost("repair");
+                    $codi_centre_emissor = 0;
+                } else {
+                    // TODO: Poner aqui el error porque n hay centro reparador en esta opcion
+                    $codi_centre_emissor = $this->request->getPost("sender");
                     $codi_centre_reparador = 0;
-                }else{
-
-                    $id_estat = 2;
-                    
-                    if ($this->request->getPost("repair") && $this->request->getPost("sender")) {
-                        $codi_centre_reparador = $this->request->getPost("repair");
-                        $codi_centre_emissor = $this->request->getPost("sender");
-                    } else if ($this->request->getPost("repair")) {
-                        $codi_centre_reparador = $this->request->getPost("repair");
-                        $codi_centre_emissor = 0;
-                    } else {
-                        // TODO: Poner aqui el error porque n hay centro reparador en esta opcion
-                        $codi_centre_emissor = $this->request->getPost("sender");
-                        $codi_centre_reparador = 0;
-                    }
                 }
+            }
 
 
             $model->addTiquet(
@@ -489,9 +488,9 @@ class TicketsController extends BaseController
         $model = new TiquetModel();
 
         $estat = $this->request->getPost("selectType");
-        $model->saveState($id,$estat);
+        $model->saveState($id, $estat);
 
-        return redirect()->to(base_url('/tickets/'.$id));
+        return redirect()->to(base_url('/tickets/' . $id));
     }
 
     public function exportCSV()
@@ -555,7 +554,6 @@ class TicketsController extends BaseController
             } else {
                 $filters['state'] = '';
             }
-
         }
 
         $model = new TiquetModel();
@@ -575,7 +573,7 @@ class TicketsController extends BaseController
         }
 
         header('Content-Disposition: attachment; filename="ticket_export_' . date("d-m-Y") . '.csv"');
-        
+
         echo $csv_string;
     }
 
@@ -640,7 +638,6 @@ class TicketsController extends BaseController
             } else {
                 $filters['state'] = '';
             }
-
         }
 
         $model = new TiquetModel();
