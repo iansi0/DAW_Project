@@ -94,8 +94,12 @@ class TiquetModel extends Model
         if(!empty($filters)){
             $this->groupStart();
                 if(!empty($filters['device'])) $this->like('tipus_dispositiu.nom', $filters['device'], 'both', true);
-                if(!empty($filters['center'])) $this->like('centre_emissor.nom', $filters['center'], 'both', true);
-                if(!empty($filters['center'])) $this->like('centre_reparador.nom', $filters['center'], 'both', true);
+                if(!empty($filters['center'])) {
+                    $this->groupStart(); 
+                        $this->like('centre_emissor.nom', $filters['center'], 'both', true);
+                        $this->orLike('centre_reparador.nom', $filters['center'], 'both', true);
+                    $this->groupEnd();
+                }
                 $this->groupStart();
                     $this->where('DATE(tiquet.created_at) >= ', $filters['date_ini']);
                     $this->where('DATE(tiquet.created_at) <= ', $filters['date_end']);
@@ -117,6 +121,8 @@ class TiquetModel extends Model
         }
 
         return $this->orderBy('tiquet.created_at', 'desc');
+        $this->find();
+        dd($this->db->getLastQuery());
 
     }   
 

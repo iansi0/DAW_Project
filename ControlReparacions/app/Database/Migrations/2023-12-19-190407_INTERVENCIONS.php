@@ -28,6 +28,11 @@ class INTERVENCIONS extends Migration
                         'constraint'     => 3,
                         'null'           => false,
                 ],
+                'id_curs'          => [
+                        'type'           => 'BINARY',
+                        'constraint'     => 32,
+                        'null'           => false,
+                ],
                 'id_user'          => [
                         'type'           => 'BINARY',
                         'constraint'     => 32,
@@ -51,6 +56,7 @@ class INTERVENCIONS extends Migration
         $this->forge->addForeignKey('id_ticket', 'TICKET', 'id');
         $this->forge->addForeignKey('id_tipus', 'TIPUS_INTERVENCIO', 'id');
         $this->forge->addForeignKey('id_user', 'USERS', 'id');
+        $this->forge->addForeignKey('id_curs', 'CURS', 'id');
 
     }
 

@@ -27,7 +27,6 @@ class TicketsController extends BaseController
             $search = "";
         }
 
-        $filters = array();
         // OBTENCIÓN Y ASIGNACIÓN DE FILTROS
         if (isset($searchData)) {
 
@@ -81,16 +80,18 @@ class TicketsController extends BaseController
             }
 
         }
+
         // Get Tiquet Data
         $model = new TiquetModel();
         
-        if (!empty($filters) || $search != '') {
+        if (is_array($filters) && !empty($filters)) {
             $paginateData = $model->getByTitleOrText($search, $filters)->paginate(8);
-            // dd($model->getByTitleOrText($search, $filters)->find());
-        }else {
-            dd(session('user')['role']);
+        } else if ($search != ''){
+            $paginateData = $model->getByTitleOrText($search, [])->paginate(8);
+        } else {
             $paginateData = $model->getAllPaged()->paginate(8);
         }
+
 
         ($filters['date_ini'] == '1970-01-01') ? '' : $filters['date_ini'];
         ($filters['time_ini'] == '00:00') ? '' : $filters['time_ini'];
@@ -493,7 +494,7 @@ class TicketsController extends BaseController
         return redirect()->to(base_url('/tickets/'.$id));
     }
 
-    public function exportCSV($search = '')
+    public function exportCSV()
     {
         $searchData = $this->request->getGet();
 
@@ -559,10 +560,12 @@ class TicketsController extends BaseController
 
         $model = new TiquetModel();
 
-        if ($search == '' && empty($filters)) {
-            $paginateData = $model->getAllPaged()->findAll();
-        } else {
+        if (is_array($filters) && !empty($filters)) {
             $paginateData = $model->getByTitleOrText($search, $filters)->findAll();
+        } else if ($search != ''){
+            $paginateData = $model->getByTitleOrText($search, [])->findAll();
+        } else {
+            $paginateData = $model->getAllPaged()->findAll();
         }
 
         $csv_string = "";
@@ -576,17 +579,16 @@ class TicketsController extends BaseController
         echo $csv_string;
     }
 
-    public function exportXLS($search = '')
+    public function exportXLS($search = '', $filter = [])
     {
         $searchData = $this->request->getGet();
-
+        
         if (isset($searchData) && isset($searchData['q'])) {
             $search = $searchData["q"];
         } else {
             $search = "";
         }
 
-        $filters = array();
         // OBTENCIÓN Y ASIGNACIÓN DE FILTROS
         if (isset($searchData)) {
 
@@ -643,11 +645,12 @@ class TicketsController extends BaseController
 
         $model = new TiquetModel();
 
-        if ($search == '') {
-            $paginateData = $model->getAllPaged()->findAll();
-            // dd($paginateData);
-        } else {
+        if (is_array($filters) && !empty($filters)) {
             $paginateData = $model->getByTitleOrText($search, $filters)->findAll();
+        } else if ($search != ''){
+            $paginateData = $model->getByTitleOrText($search, [])->findAll();
+        } else {
+            $paginateData = $model->getAllPaged()->findAll();
         }
 
         header("Content-Type: application/vnd.ms-excel; charset=utf-8");

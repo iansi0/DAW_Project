@@ -12,7 +12,7 @@ class IntervencioModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'descripcio', 'id_ticket', 'id_tipus', 'id_curs', 'correu_alumne', 'id_xtec'];
+    protected $allowedFields    = ['id', 'descripcio', 'id_ticket', 'id_tipus', 'id_curs', 'id_user'];
 
     // Dates
     protected $useTimestamps = true;
@@ -47,7 +47,7 @@ class IntervencioModel extends Model
             'id_ticket' => $id_ticket,
             'id_tipus' => $id_tipus,
             
-            'correu_alumne' => $persona_reparadora,
+            'id_user' => $persona_reparadora,
         ];
 
         $this->insert($data);
@@ -58,7 +58,8 @@ class IntervencioModel extends Model
         return $this
             ->select([
                 'intervencio.id',
-                'intervencio.correu_alumne',
+                'intervencio.id_user AS id_reparador',
+                'COALESCE(CONCAT(alumne.nom, " ", alumne.cognoms), CONCAT(professor.nom, " ", professor.cognoms), "") as nom_reparador',
                 'intervencio.id_tipus',
                 'intervencio.descripcio',
                 'intervencio.id_tipus',
@@ -67,6 +68,8 @@ class IntervencioModel extends Model
                 'inventari.nom as material',
             ])
             ->join('inventari', 'intervencio.id = inventari.id_intervencio', 'left')
+            ->join('alumne', 'intervencio.id_user = alumne.id_user', 'left')
+            ->join('professor', 'intervencio.id_user = professor.id_user', 'left')
             ->where('intervencio.id_ticket', $id)
             ->findAll();
     }

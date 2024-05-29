@@ -3,7 +3,6 @@
 
 
 <div class="flex gap-16 items-center  text-primario p-3 rounded-lg pl-5 w-full mb-3">
-
     <a href="<?= strpos(previous_url(), 'tickets?') !== false
                     ? str_replace('index.php/', '', previous_url())
                     : base_url('/tickets'); ?>">
