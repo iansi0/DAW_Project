@@ -25,10 +25,10 @@ class ESTATSeeder extends Seeder
                 /*
 
                     PARÁMETROS DE addEstat()
-                    +------------+
-                    | id         |
-                    | nom        |
-                    +------------+
+                    +------+
+                    | id   |
+                    | nom  |
+                    +------+
                     
                 */
 

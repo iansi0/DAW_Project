@@ -15,13 +15,14 @@ class TIQUETS extends Migration
                         'null'           => false,
                 ],
                 'codi_dispositiu'          => [
-                        'type'           => 'BINARY',
-                        'constraint'     => 32,
+                        'type'           => 'VARCHAR',
+                        'constraint'     => 100,
+                        'trim'           => true,
                 ],
                 'descripcio_avaria'          => [
                         'type'           => 'VARCHAR',
                         'trim'           => true,
-                        'constraint'     => 500,
+                        'constraint'     => 200,
                         'null'           => false,
                 ],
                 'nom_persona_contacte_centre'          => [
@@ -68,13 +69,13 @@ class TIQUETS extends Migration
                     'null'       => true,
                 ],
         ]);
+
         $this->forge->addKey('id', true);
         $this->forge->createTable('TIQUET');
         $this->forge->addForeignKey('id_tipus_dispositiu', 'TIPUS_DISPOSITIU', 'id');
         $this->forge->addForeignKey('id_estat', 'ESTAT', 'id');
         $this->forge->addForeignKey('codi_centre_emissor', 'CENTRE', 'codi');
         $this->forge->addForeignKey('codi_centre_reparador', 'CENTRE', 'codi');
-
 
     }
 

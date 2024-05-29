@@ -38,7 +38,7 @@ class COMARCASeeder extends Seeder
                 // Si no existe en el array, generamos la comarca en BBDD y guardamos el id en el array
                 if (!in_array($row[11], $arrComarca)) {
                     $comarca -> addComarca( 
-                        (int) $row[11],
+                        trim($row[11]),
                         trim($row[12])
                     );
 

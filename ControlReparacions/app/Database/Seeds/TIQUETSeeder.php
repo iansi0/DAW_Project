@@ -37,12 +37,12 @@ class TIQUETSeeder extends Seeder
 
             $tiquet->addTiquet(
                 $fake->uuid(),
-                $fake->uuid(),
-                $fake->text(25),
+                '',
+                $fake->text(50),
                 $fake->name()." ".$fake->lastName(),
                 $fake->email(),
                 rand(0, 9),
-                rand(0, 13),    
+                rand(0, 13),
                 $arrCentres[rand((count($arrCentres)/2)-1, count($arrCentres)-1)],
                 $arrCentres[rand(count($arrCentres)-1, (count($arrCentres)/2)-1)]
             );

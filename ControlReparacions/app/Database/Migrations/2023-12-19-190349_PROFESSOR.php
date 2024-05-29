@@ -9,11 +9,6 @@ class PROFESSOR extends Migration
     public function up()
     {
         $this->forge->addField([
-                'id_xtec'          => [
-                    'type'           => 'VARCHAR',
-                    'trim'           => true,
-                    'constraint'     => 50,
-                ],
                 'id_user'          => [
                     'type'           => 'BINARY',
                     'constraint'     => 32,
@@ -50,7 +45,6 @@ class PROFESSOR extends Migration
                 ],
         ]);
         $this->forge->addKey('id_user', true);
-        $this->forge->addKey('id_xtec');
         $this->forge->createTable('PROFESSOR');
         $this->forge->addForeignKey('id_user', 'USERS', 'id');
         $this->forge->addForeignKey('codi_centre', 'CENTRE', 'codi');

@@ -11,7 +11,6 @@ use App\Models\UsersModel;
 use App\Models\SSTTModel;
 use App\Models\CentreModel;
 use App\Models\ProfessorModel;
-use App\Models\LlistaAdmesosModel;
 use App\Models\AlumneModel;
 use App\Models\RolesModel;
 use App\Models\UsersInRolesModel;
@@ -196,6 +195,8 @@ class USERSSeeder extends Seeder
 
         echo("START INSTITUTE\n");
 
+        $arrCentres = array();
+
         /**
          * AÑADIR INSTITUTOS
          */
@@ -251,7 +252,7 @@ class USERSSeeder extends Seeder
                     $centre -> addCentre(
                         $uuid,
                         trim($row[0]),
-                        trim($row[1]),
+                        str_replace('"', '\"', trim($row[1])),
                         false,
                         false,
                         str_replace(' ', '', trim($row[8])),
@@ -261,6 +262,8 @@ class USERSSeeder extends Seeder
                         trim($row[9]),
                         trim($row[13])
                     );
+
+                    $arrCentres[] = trim($row[0]);
 
                     // Le añadimos el rol de INS
                     $user_role -> addUserRole( 
@@ -301,25 +304,22 @@ class USERSSeeder extends Seeder
 
             $professor = new ProfessorModel();
 
-            $arrCentres = ['25002799', '17010700', '17010499', '17008249', '8000013', '8001509', '8002198', '8015399', '8017104', '8019401'];
             $rnd = rand(0, count($arrCentres) - 1);
 
             /*
 
                 PARÁMETROS DE addProfessor()
-                +------------------+
-                | id_user          |
-                | id_xtec          |
-                | nom_professor    |
-                | cognom_professor |
-                | codi_centre      |
-                +------------------+
+                +--------------+
+                | id_user      |
+                | nom          |
+                | cognom       |
+                | codi_centre  |
+                +--------------+
                     
             */
 
             $professor->addProfessor(
                 $uuid,
-                $fake->userName(),
                 $fake->name(),
                 $fake->lastName(),
                 $arrCentres[$rnd]
@@ -331,26 +331,6 @@ class USERSSeeder extends Seeder
                 $uuid,
                 $role_id[3]
             );
-
-            // Al mismo añadir al profesor, lo añadimos a la "whiteList"
-            $admesos = new LlistaAdmesosModel();
-            
-            /*
-
-                PARÁMETROS DE addLlistaAdmesos()
-                +------------------+
-                | id_user          |
-                | data_entrega     |
-                | codi_centre      |
-                +------------------+
-                    
-            */
-            $admesos->addLlistaAdmesos(
-                $uuid,
-                $fake->date(),
-                $arrCentres[$rnd]
-            );
-
             
         }
         
@@ -394,13 +374,15 @@ class USERSSeeder extends Seeder
 
                 PARÁMETROS DE addAlumne()
                 +--------------+
-                | correu       |
+                | id_user      |
+                | nom          |
+                | cognoms      |
+                | id_curs      |
                 | codi_centre  |
                 +--------------+
                     
             */
 
-            $arrCentres = ['25002799', '17010700', '17010499', '17008249', '8000013', '8001509', '8002198', '8015399', '8017104', '8019401'];
             $rndCentre = rand(0, count($arrCentres) - 1);
             $rndCurs = rand(0, count($arrCurs) - 1);
 

@@ -25,10 +25,10 @@ class TIPUSINVENTARISeeder extends Seeder
                 /*
 
                     PARÁMETROS DE addTipusInventari()
-                    +----------------+
-                    | id             |
-                    | nom            |
-                    +----------------+
+                    +-----+
+                    | id  |
+                    | nom |
+                    +-----+
                     
                 */
 

@@ -43,7 +43,6 @@ class TipusDispositiuModel extends Model
         $data = [
             'id' =>  $id,
             'nom' => $nom,
-            
         ];
 
         $this->insert($data);

@@ -40,16 +40,16 @@
 
     <!-- Export Buttons -->
     <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "ins")  || (session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "admin")) : ?>
-
+      
       <div>
-
-        <a href="<?= base_url('tickets/xls/' . $search) ?>">
+        <a href="<?= base_url('export/xls?'.str_replace(base_url('tickets'), '', str_replace('index.php/', '', previous_url()))) ?>">
           <button id="xls" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " XLS" ?></button>
         </a>
-        <a href="<?= base_url('tickets/csv/' . $search) ?>">
+        <a href="<?= base_url('export/csv?'.str_replace(base_url('tickets'), '', str_replace('index.php/', '', previous_url()))) ?>">
           <button id="csv" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " CSV" ?></button>
         </a>
       </div>
+      
     <?php endif ?>
 
   </div>
@@ -60,7 +60,7 @@
 
     <!-- DATALIST DISPOSITIVOS -->
     <div class='relative searchable-device-list'>
-      <input name="d" type='text' style="width: 165px; overflow: hidden;text-overflow: ellipsis;" class='data-device-list peer h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
+      <input name="d" id="f_devices" type='text' value="<?=$filters['device']?>" style="width: 165px; overflow: hidden;text-overflow: ellipsis;" class='data-device-list peer h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
               caret-gray-800 pl-2 pr-7 focus:bg-gray-200 font-bold transition-all duration-300 text-sm text-overflow-ellipsis ' spellcheck="false" placeholder="<?= lang('forms.s_disp') ?>">
       <svg class="outline-none cursor-pointer fill-gray-400 absolute transition-all duration-200 h-full w-4 -rotate-90 right-2 top-[50%] -translate-y-[50%]" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <path d="M0 256l512 512L1024 256z"></path>
@@ -74,7 +74,7 @@
 
     <!-- DATALIST CENTROS -->
     <div class='relative searchable-center-list'>
-      <input name="c" type='text' style="width: 165px; overflow: hidden;text-overflow: ellipsis;" class='data-center-list peer h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
+      <input name="c" id="f_centers" type='text' value="<?=$filters['center']?>" style="width: 165px; overflow: hidden;text-overflow: ellipsis;" class='data-center-list peer h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
               caret-gray-800 pl-2 pr-7 focus:bg-gray-200 font-bold transition-all duration-300 text-sm text-overflow-ellipsis ' spellcheck="false" placeholder="<?= lang('forms.s_ins') ?>">
       <svg class="outline-none cursor-pointer fill-gray-400 absolute transition-all duration-200 h-full w-4 -rotate-90 right-2 top-[50%] -translate-y-[50%]" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <path d="M0 256l512 512L1024 256z"></path>
@@ -88,7 +88,7 @@
 
     <!-- DATALIST ESTADOS -->
     <div class='relative searchable-state-list'>
-      <input name="e" type='text' style="width: 165px; overflow: hidden;text-overflow: ellipsis;" class='data-state-list peer h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
+      <input name="e" id="f_states" type='text' value="<?=$filters['state']?>" style="width: 165px; overflow: hidden;text-overflow: ellipsis;" class='data-state-list peer h-10 rounded-sm bg-white cursor-pointer outline-none text-gray-700
               caret-gray-800 pl-2 pr-7 focus:bg-gray-200 font-bold transition-all duration-300 text-sm text-overflow-ellipsis ' spellcheck="false" placeholder="<?= lang('forms.s_state') ?>">
       <svg class="outline-none cursor-pointer fill-gray-400 absolute transition-all duration-200 h-full w-4 -rotate-90 right-2 top-[50%] -translate-y-[50%]" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <path d="M0 256l512 512L1024 256z"></path>
@@ -100,7 +100,7 @@
       </ul>
     </div>
 
-    <!-- DATA -->
+    <!-- FECHA -->
     <div class="flex justify-between gap-3">
       <div class="flex">
         <input id="dt_1" name="dt_1" type="date" value="<?= $filters['date_ini'] ?>" class=" px-2 py-1 w-32  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
@@ -147,9 +147,6 @@
 
 </div>
 
-<!-- CLASS DATALIST CUSTOM -->
-<script src="/assets/js/dataList.js"></script>
-
 <script>
   // Funcion para mostrar/esconder los filtros
   function toggleFilters() {
@@ -175,9 +172,9 @@
   function resetForm() {
     event.preventDefault();
     document.getElementById("filters_form").reset();
-    document.getElementById("dispositiu").value = '';
-    document.getElementById("centre").value = '';
-    document.getElementById("estat").value = '';
+    document.getElementById("f_devices").value = '';
+    document.getElementById("f_centers").value = '';
+    document.getElementById("f_states").value = '';
   }
 
   // CREADOR DE DATALIST DISPOSITIVOS

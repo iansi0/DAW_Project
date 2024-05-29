@@ -28,13 +28,12 @@ class INTERVENCIONS extends Migration
                         'constraint'     => 3,
                         'null'           => false,
                 ],
-                'correu_alumne'          => [
-                        'type'           => 'VARCHAR',
-                        'trim'           => true,
-                        'constraint'     => 50,
+                'id_curs'          => [
+                        'type'           => 'BINARY',
+                        'constraint'     => 32,
                         'null'           => false,
                 ],
-                'id_xtec'          => [
+                'id_user'          => [
                         'type'           => 'BINARY',
                         'constraint'     => 32,
                         'null'           => false,
@@ -51,14 +50,13 @@ class INTERVENCIONS extends Migration
                     'null'       => true,
                 ],
         ]);
+        
         $this->forge->addKey('id', true);
         $this->forge->createTable('INTERVENCIO');
         $this->forge->addForeignKey('id_ticket', 'TICKET', 'id');
         $this->forge->addForeignKey('id_tipus', 'TIPUS_INTERVENCIO', 'id');
+        $this->forge->addForeignKey('id_user', 'USERS', 'id');
         $this->forge->addForeignKey('id_curs', 'CURS', 'id');
-        $this->forge->addForeignKey('correu_alumne', 'ALUMNE', 'correu_alumne');
-        $this->forge->addForeignKey('id_xtec', 'PROFESSOR', 'id_xtec');
-
 
     }
 

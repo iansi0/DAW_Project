@@ -31,8 +31,10 @@ class ESTATS extends Migration
                     'null'       => true,
                 ],
         ]);
+
         $this->forge->addKey('id', true);
         $this->forge->createTable('ESTAT');
+        
     }
 
     public function down()
