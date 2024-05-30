@@ -84,7 +84,7 @@ class StudentsController extends BaseController
     {
         helper('form');
 
-        if ($this->request->getFiles()) {
+        if (!empty($this->request->getFiles())) {
             // guardar el csv 
             $file = $this->request->getFiles();
 
@@ -103,36 +103,31 @@ class StudentsController extends BaseController
 
                 if (!$firstLine) {
 
-                    if (trim($row[2] == 1)) {
+                    $fake = Factory::create("es_ES");
 
-                        // dd($row[0]);
+                    $modelAlumne = new AlumneModel();
+                    $modelUser = new UsersModel();
+                    $userInRole = new UsersInRolesModel();
+                    $roleModel = new RolesModel();
 
-                        $fake = Factory::create("es_ES");
+                    $id_user = $fake->uuid();
+                    $nom =  trim($row[0]);
+                    $cognoms = trim($row[1]);
+                    $codi_centre = session()->get('user')['code'];
+                    $id_curs = trim($row[2]);
 
-                        $modelAlumne = new AlumneModel();
-                        $modelUser = new UsersModel();
-                        $userInRole = new UsersInRolesModel();
-                        $roleModel = new RolesModel();
-
-                        $id_user = $fake->uuid();
-                        $nom =  trim($row[0]);
-                        $cognoms = trim($row[0]);
-                        $codi_centre = session()->get('user')['code'];
-                        $id_curs = trim($row[0]);
-
-                        $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre);
+                    $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre);
 
 
-                        $user = trim($row[0]);
-                        $passwd = password_hash("1234", PASSWORD_DEFAULT);
-                        $lang = "ca";
+                    $user = trim($row[3]);
+                    $passwd = password_hash("1234", PASSWORD_DEFAULT);
+                    $lang = "ca";
 
-                        $modelUser->addUser($id_user, $user, $passwd, $lang);
-                        $newId = $fake->uuid();
-                        $role = $roleModel->getIdByRole("alumn");
+                    $modelUser->addUser($id_user, $user, $passwd, $lang);
+                    $newId = $fake->uuid();
+                    $role = $roleModel->getIdByRole("alumn");
 
-                        $userInRole->addUserRole($newId, $id_user, $role["id"]);
-                    }
+                    $userInRole->addUserRole($newId, $id_user, $role["id"]);
                 }
 
                 $firstLine = false;
@@ -140,8 +135,20 @@ class StudentsController extends BaseController
 
             fclose($fileCsv);
 
+            $email = \Config\Services::email();
+
+            $email->setFrom('braianpb02@gmail.com', 'KYS');
+            $email->setTo($user);
+            $email->setSubject('Registro KYS');
+            $email->setMessage('Tu contraseña es: ' . $passwd);
+
+            if ($email->send()) {
+                echo 'Correo electrónico enviado correctamente.';
+            } else {
+                echo 'Error al enviar el correo electrónico.';
+            }
+
             return redirect()->to(base_url('/students'));
-            
         } else {
             $validationRules =
                 [
@@ -191,14 +198,24 @@ class StudentsController extends BaseController
 
 
                 $user = $this->request->getPost("email");
-                $passwd = password_hash("1234", PASSWORD_DEFAULT);
+                $passwd = $fake->password();
+                $passwd_hash = password_hash($passwd, PASSWORD_DEFAULT);
                 $lang = "ca";
 
-                $modelUser->addUser($id_user, $user, $passwd, $lang);
+                $modelUser->addUser($id_user, $user, $passwd_hash, $lang);
                 $newId = $fake->uuid();
                 $role = $roleModel->getIdByRole("alumn");
 
                 $userInRole->addUserRole($newId, $id_user, $role["id"]);
+
+                $email = \Config\Services::email();
+
+                $email->setFrom('braianpb02@gmail.com', 'KYS');
+                $email->setTo($user);
+                $email->setSubject('Registro KYS');
+                $email->setMessage('Tu contraseña es: ' . $passwd);
+
+                $email->send();
             } else {
                 return redirect()->back()->withInput();
             }
