@@ -4,7 +4,8 @@
 <h1 class="text-5xl text-primario mt-14"><?= lang("titles.n_students") ?></h1>
 
 <section style="view-transition-name: addTicket;" class=" mx-auto px-4 py-8 mt-10 text-base">
-    <form action="add" method="POST" class="flex flex-col gap-20">
+    <form action="add" method="POST" class="flex flex-col gap-20" enctype="multipart/form-data">
+    <?= csrf_field() ?>
 
         <div class="grid grid-cols-3 gap-x-2 gap-y-2">
 
