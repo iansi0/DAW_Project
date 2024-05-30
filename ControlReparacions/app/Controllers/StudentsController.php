@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Models\AlumneModel;
 use App\Models\UsersModel;
 use App\Controllers\BaseController;
+use App\Models\RolesModel;
+use App\Models\UsersInRolesModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use Faker\Factory;
 
@@ -154,6 +156,8 @@ class StudentsController extends BaseController
 
                 $modelAlumne = new AlumneModel();
                 $modelUser = new UsersModel();
+                $userInRole = new UsersInRolesModel();
+                $roleModel = new RolesModel();
 
                 $fake = Factory::create("es_ES");
 
@@ -162,15 +166,20 @@ class StudentsController extends BaseController
                 $cognoms = $this->request->getPost("surnames");
                 $codi_centre = session()->get('user')['code'];
                 $id_curs = $this->request->getPost("course");
-
+                
                 $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre);
-
-
+                
+                
                 $user = $this->request->getPost("email");
-                $passwd = password_hash($fake->password(), PASSWORD_DEFAULT);
+                $passwd = password_hash("1234", PASSWORD_DEFAULT);
                 $lang = "ca";
-
+                
                 $modelUser->addUser($id_user, $user, $passwd, $lang);
+                $newId = $fake->uuid();
+                $role=$roleModel->getIdByRole("alumn");
+
+                $userInRole->addUserRole($newId,$id_user,$role["id"]);
+
             } else {
                 return redirect()->back()->withInput();
             }
