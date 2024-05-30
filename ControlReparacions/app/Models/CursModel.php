@@ -12,7 +12,7 @@ class CursModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id','cicle'];
+    protected $allowedFields    = ['id', 'curs', 'any', 'titol', 'codi_centre'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,11 +38,14 @@ class CursModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addCurs($id,$cicle) {
+    public function addCurs($id, $curs, $any, $titol, $codi_centre) {
            
         $data = [
             'id' =>  $id,
-            'cicle' => $cicle,
+            'curs' => $curs,
+            'any' => $any,
+            'titol' => $titol,
+            'codi_centre' => $codi_centre,
         ];
 
         $this->insert($data);

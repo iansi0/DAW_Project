@@ -12,7 +12,7 @@ class CentreModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_user', 'codi', 'nom', 'actiu', 'taller', 'telefon', 'adreca_fisica', 'nom_persona_contacte', 'correu_persona_contacte', 'id_sstt', 'id_poblacio'];
+    protected $allowedFields    = ['codi', 'id_user', 'nom', 'actiu', 'taller', 'telefon', 'adreca_fisica', 'nom_persona_contacte', 'correu_persona_contacte', 'id_sstt', 'id_poblacio'];
 
     // Dates
     protected $useTimestamps = true;
