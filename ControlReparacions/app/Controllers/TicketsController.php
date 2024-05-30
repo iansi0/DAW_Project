@@ -82,10 +82,10 @@ class TicketsController extends BaseController
 
         // Get Tiquet Data
         $model = new TiquetModel();
-        
+
         if (is_array($filters) && !empty($filters)) {
             $paginateData = $model->getByTitleOrText($search, $filters)->paginate(8);
-        } else if ($search != ''){
+        } else if ($search != '') {
             $paginateData = $model->getByTitleOrText($search, [])->paginate(8);
         } else {
             $paginateData = $model->getAllPaged()->paginate(8);
@@ -173,21 +173,21 @@ class TicketsController extends BaseController
                          <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
                          <a onclick='(function() { Swal.fire({
                             customClass:{htmlContainer: ``,},
-                            title: `".lang('alerts.sure')."`,
-                            text: `".lang('alerts.sure_sub')."`,
+                            title: `" . lang('alerts.sure') . "`,
+                            text: `" . lang('alerts.sure_sub') . "`,
                             icon: `warning`,
                             showCancelButton: true,
                             confirmButtonColor: `#3085d6`,
                             cancelButtonColor: `#d33`,
-                            confirmButtonText: `".lang('alerts.yes_del')."`,
-                            cancelButtonText: `".lang('alerts.cancel')."`,
+                            confirmButtonText: `" . lang('alerts.yes_del') . "`,
+                            cancelButtonText: `" . lang('alerts.cancel') . "`,
                           }).then((result) => {
                             if (result.isConfirmed) {
-                                window.location.href = `".$buttonDelete."`;
+                                window.location.href = `" . $buttonDelete . "`;
 
                                 Swal.fire({
-                                    title: `".lang('alerts.deleted')."`,
-                                    text: `".lang('alerts.deleted_sub')."`,
+                                    title: `" . lang('alerts.deleted') . "`,
+                                    text: `" . lang('alerts.deleted_sub') . "`,
                                     icon: `success`,
                                 });
                             }
@@ -517,75 +517,76 @@ class TicketsController extends BaseController
     {
         $searchData = $this->request->getGet();
 
-        if (isset($searchData) && isset($searchData['q'])) {
+        if (isset($searchData['q'])) {
             $search = $searchData["q"];
         } else {
             $search = "";
         }
 
-        // OBTENCIÓN Y ASIGNACIÓN DE FILTROS
-        if (isset($searchData)) {
 
-            //  Obtener filtro de dispositivo (?d=)
-            if (isset($searchData['d']) && !empty($searchData['d'])) {
-                $filters['device'] = $searchData['d'];
-            } else {
-                $filters['device'] = '';
-            }
-
-            // Obtener filtro de centro (?c=)
-            if (isset($searchData['c']) && !empty($searchData['c'])) {
-                $filters['center'] = $searchData['c'];
-            } else {
-                $filters['center'] = '';
-            }
-
-            // Obtener filtro de fecha-inicio (?dt_1=)
-            if (isset($searchData['dt_1']) && !empty($searchData['dt_1'])) {
-                $filters['date_ini'] = $searchData['dt_1'];
-            } else {
-                $filters['date_ini'] = '1970-01-01';
-            }
-
-            // Obtener filtro de fecha-fin (?dt_2=)
-            if (isset($searchData['dt_2']) && !empty($searchData['dt_2'])) {
-                $filters['date_end'] = $searchData['dt_2'];
-            } else {
-                $filters['date_end'] = date('d-m-Y');
-            }
-
-            // Obtener filtro de tiempo-inicio (?tm_1=)
-            if (isset($searchData['tm_1']) && !empty($searchData['tm_1'])) {
-                $filters['time_ini'] = $searchData['tm_1'];
-            } else {
-                $filters['time_ini'] = '00:00:00';
-            }
-
-            // Obtener filtro de tiempo-inicio (?tm_2=)
-            if (isset($searchData['tm_2']) && !empty($searchData['tm_2'])) {
-                $filters['time_end'] = $searchData['tm_2'];
-            } else {
-                $filters['time_end'] = date('H:i:s');
-            }
-
-            // Obtener filtro de estado (?e=)
-            if (isset($searchData['e']) && !empty($searchData['e'])) {
-                $filters['state'] = $searchData['e'];
-            } else {
-                $filters['state'] = '';
-            }
+        //  Obtener filtro de dispositivo (?d=)
+        if (isset($searchData['d']) && !empty($searchData['d'])) {
+            $filters['device'] = $searchData['d'];
+        } else {
+            $filters['device'] = '';
         }
+
+
+        // Obtener filtro de centro (?c=)
+        if (isset($searchData['c']) && !empty($searchData['c'])) {
+            $filters['center'] = $searchData['c'];
+        } else {
+            $filters['center'] = '';
+        }
+
+        // Obtener filtro de fecha-inicio (?dt_1=)
+        if (isset($searchData['dt_1']) && !empty($searchData['dt_1'])) {
+            $filters['date_ini'] = $searchData['dt_1'];
+        } else {
+            $filters['date_ini'] = '1970-01-01';
+        }
+
+        // Obtener filtro de fecha-fin (?dt_2=)
+        if (isset($searchData['dt_2']) && !empty($searchData['dt_2'])) {
+            $filters['date_end'] = $searchData['dt_2'];
+        } else {
+            $filters['date_end'] = date('Y-m-d');
+        }
+
+        // Obtener filtro de tiempo-inicio (?tm_1=)
+        if (isset($searchData['tm_1']) && !empty($searchData['tm_1'])) {
+            $filters['time_ini'] = $searchData['tm_1'];
+        } else {
+            $filters['time_ini'] = '00:00';
+        }
+
+        // Obtener filtro de tiempo-inicio (?tm_2=)
+        if (isset($searchData['tm_2']) && !empty($searchData['tm_2'])) {
+            $filters['time_end'] = $searchData['tm_2'];
+        } else {
+            $filters['time_end'] = '23:59';
+        }
+
+        // Obtener filtro de estado (?e=)
+        if (isset($searchData['e']) && !empty($searchData['e'])) {
+            $filters['state'] = $searchData['e'];
+        } else {
+            $filters['state'] = '';
+        }
+
+        // dd($filters);
 
         $model = new TiquetModel();
 
         if (is_array($filters) && !empty($filters)) {
             $paginateData = $model->getByTitleOrText($search, $filters)->findAll();
-        } else if ($search != ''){
+        } else if ($search != '') {
             $paginateData = $model->getByTitleOrText($search, [])->findAll();
         } else {
             $paginateData = $model->getAllPaged()->findAll();
         }
 
+        // dd($paginateData);
         $csv_string = "";
 
         foreach ($paginateData as $ticket) {
@@ -597,90 +598,94 @@ class TicketsController extends BaseController
         echo $csv_string;
     }
 
-    public function exportXLS($search = '', $filter = [])
+    public function exportXLS()
     {
         $searchData = $this->request->getGet();
-        
-        if (isset($searchData) && isset($searchData['q'])) {
+
+        if (isset($searchData['q'])) {
             $search = $searchData["q"];
         } else {
             $search = "";
         }
 
         // OBTENCIÓN Y ASIGNACIÓN DE FILTROS
-        if (isset($searchData)) {
 
-            //  Obtener filtro de dispositivo (?d=)
-            if (isset($searchData['d']) && !empty($searchData['d'])) {
-                $filters['device'] = $searchData['d'];
-            } else {
-                $filters['device'] = '';
-            }
 
-            // Obtener filtro de centro (?c=)
-            if (isset($searchData['c']) && !empty($searchData['c'])) {
-                $filters['center'] = $searchData['c'];
-            } else {
-                $filters['center'] = '';
-            }
-
-            // Obtener filtro de fecha-inicio (?dt_1=)
-            if (isset($searchData['dt_1']) && !empty($searchData['dt_1'])) {
-                $filters['date_ini'] = $searchData['dt_1'];
-            } else {
-                $filters['date_ini'] = '1970-01-01';
-            }
-
-            // Obtener filtro de fecha-fin (?dt_2=)
-            if (isset($searchData['dt_2']) && !empty($searchData['dt_2'])) {
-                $filters['date_end'] = $searchData['dt_2'];
-            } else {
-                $filters['date_end'] = date('d-m-Y');
-            }
-
-            // Obtener filtro de tiempo-inicio (?tm_1=)
-            if (isset($searchData['tm_1']) && !empty($searchData['tm_1'])) {
-                $filters['time_ini'] = $searchData['tm_1'];
-            } else {
-                $filters['time_ini'] = '00:00:00';
-            }
-
-            // Obtener filtro de tiempo-inicio (?tm_2=)
-            if (isset($searchData['tm_2']) && !empty($searchData['tm_2'])) {
-                $filters['time_end'] = $searchData['tm_2'];
-            } else {
-                $filters['time_end'] = date('H:i:s');
-            }
-
-            // Obtener filtro de estado (?e=)
-            if (isset($searchData['e']) && !empty($searchData['e'])) {
-                $filters['state'] = $searchData['e'];
-            } else {
-                $filters['state'] = '';
-            }
+        //  Obtener filtro de dispositivo (?d=)
+        if (isset($searchData['d']) && !empty($searchData['d'])) {
+            $filters['device'] = $searchData['d'];
+        } else {
+            $filters['device'] = '';
         }
+
+        // Obtener filtro de centro (?c=)
+        if (isset($searchData['c']) && !empty($searchData['c'])) {
+            $filters['center'] = $searchData['c'];
+        } else {
+            $filters['center'] = '';
+        }
+
+        // Obtener filtro de fecha-inicio (?dt_1=)
+        if (isset($searchData['dt_1']) && !empty($searchData['dt_1'])) {
+            $filters['date_ini'] = $searchData['dt_1'];
+        } else {
+            $filters['date_ini'] = '1970-01-01';
+        }
+
+        // Obtener filtro de fecha-fin (?dt_2=)
+        if (isset($searchData['dt_2']) && !empty($searchData['dt_2'])) {
+            $filters['date_end'] = $searchData['dt_2'];
+        } else {
+            $filters['date_end'] = date('Y-m-d');
+        }
+
+        // Obtener filtro de tiempo-inicio (?tm_1=)
+        if (isset($searchData['tm_1']) && !empty($searchData['tm_1'])) {
+            $filters['time_ini'] = $searchData['tm_1'];
+        } else {
+            $filters['time_ini'] = '00:00';
+        }
+
+        // Obtener filtro de tiempo-inicio (?tm_2=)
+        if (isset($searchData['tm_2']) && !empty($searchData['tm_2'])) {
+            $filters['time_end'] = $searchData['tm_2'];
+        } else {
+            $filters['time_end'] = '23:59';
+        }
+
+        // Obtener filtro de estado (?e=)
+        if (isset($searchData['e']) && !empty($searchData['e'])) {
+            $filters['state'] = $searchData['e'];
+        } else {
+            $filters['state'] = '';
+        }
+
 
         $model = new TiquetModel();
 
         if (is_array($filters) && !empty($filters)) {
             $paginateData = $model->getByTitleOrText($search, $filters)->findAll();
-        } else if ($search != ''){
+        } else if ($search != '') {
             $paginateData = $model->getByTitleOrText($search, [])->findAll();
         } else {
             $paginateData = $model->getAllPaged()->findAll();
         }
 
-        header("Content-Type: application/vnd.ms-excel; charset=utf-8");
+        header("Content-Type: application/vnd.ms-excel");
+        header('Content-Disposition: attachment; filename="ticket_export_' . date("d-m-Y") . '.xls"');
+
+        echo "\xEF\xBB\xBF"; // UTF-8 BOM
+
+        // Encabezados de las columnas
+        echo "Identificador\tDescripcion\tFecha\ttipo\testat\temissor\treceptor\n";
         $xls_string = "";
 
         foreach ($paginateData as $ticket) {
-            $xls_string .= implode("\t", $ticket) . "\n";
+            echo implode("\t", $ticket) . "\n";
             // d($xls_string);
         }
         // dd('fin');
 
-        header('Content-Disposition: attachment; filename="ticket_export_' . date("d-m-Y") . '.xls"');
 
-        echo $xls_string;
     }
 }

@@ -42,10 +42,10 @@
     <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "ins")  || (session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "admin")) : ?>
       
       <div>
-        <a href="<?= base_url('export/xls?'.str_replace(base_url('tickets'), '', str_replace('index.php/', '', previous_url()))) ?>">
+        <a href="<?= base_url('export/xls?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>">
           <button id="xls" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " XLS" ?></button>
         </a>
-        <a href="<?= base_url('export/csv?'.str_replace(base_url('tickets'), '', str_replace('index.php/', '', previous_url()))) ?>">
+        <a href="<?= base_url('export/csv?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>">
           <button id="csv" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " CSV" ?></button>
         </a>
       </div>
@@ -129,7 +129,7 @@
 
     <div class="absolute right-2">
       <button onclick='document.getElementById("filters_form").submit();' class="bg-primario text-white px-8 py-1 border border-terciario-4 rounded-lg hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.filter') ?></button>
-      <button onclick='resetForm()' class="bg-primario text-white px-8 py-1 border border-terciario-4 rounded-lg hover:bg-red-500 transition hover:ease-in ease-out duration-250"><?= lang('buttons.clear') ?></button>
+      <a href="<?=base_url('tickets') ?>" class="bg-primario text-white px-8 py-1 border border-terciario-4 rounded-lg hover:bg-red-500 transition hover:ease-in ease-out duration-250"><?= lang('buttons.clear') ?></a>
     </div>
 
   </form>
