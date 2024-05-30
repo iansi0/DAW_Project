@@ -253,7 +253,7 @@ class USERSSeeder extends Seeder
                         $uuid,
                         trim($row[0]),
                         str_replace('"', '\"', trim($row[1])),
-                        false,
+                        true,
                         false,
                         str_replace(' ', '', trim($row[8])),
                         trim($row[6]),

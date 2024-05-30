@@ -156,8 +156,10 @@ class CentreModel extends Model
 
     public function getAllPaged()
     {
+        $role = session()->get('user')['role'];
+        $code = session()->get('user')['code'];
 
-        return $this->select(
+        $this->select(
             "
             centre.codi AS codi,
             centre.nom AS nom, 
@@ -170,8 +172,21 @@ class CentreModel extends Model
             centre.adreca_fisica AS adreca,
     
             COALESCE(poblacio.nom, '" . lang('titles.toassign') . "') AS poblacio,"
-        )
-            ->join('poblacio', 'centre.id_poblacio = poblacio.id');
+        );
+        $this->join('poblacio', 'centre.id_poblacio = poblacio.id');
+
+    
+        if ($role == "admin") {
+            return $this;
+        } else if ($role == "prof" || $role == "alumn") {
+            return $this->where("centre.codi", $code);
+        } else if ($role == "sstt") {
+            return $this->where("centre.id_sstt", $code);
+        } else if ($role == "ins") {
+            return $this->where("centre.codi", $code);
+        }
+        
+        
     }
 
     public function viewInstitute($id)

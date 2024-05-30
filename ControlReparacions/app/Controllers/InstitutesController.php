@@ -83,12 +83,12 @@ class InstitutesController extends BaseController
                 $institute['persona'],
                 $institute['correu'],
 
-                $institute['actiu'] == 0
+                $institute['actiu'] == 1
                     ? '<i class="fa-solid fa-check text-xl text-green-600" ></i>'
                     : '<i class="fa-solid fa-xmark text-xl text-red-600" ></i>',
-                $institute['taller'] == 0
-                    ? '<i class="fa-solid fa-xmark text-xl text-red-600" ></i>'
-                    : '<i class="fa-solid fa-check text-xl text-green-600" ></i>',
+                $institute['taller'] == 1
+                    ? '<i class="fa-solid fa-check text-xl text-green-600" ></i>'
+                    : '<i class="fa-solid fa-xmark text-xl text-red-600" ></i>',
                 $institute['poblacio'],
                 $institute['telefon'],
                 "
