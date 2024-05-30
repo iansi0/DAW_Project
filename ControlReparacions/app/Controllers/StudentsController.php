@@ -171,7 +171,6 @@ class StudentsController extends BaseController
                 $lang = "ca";
 
                 $modelUser->addUser($id_user, $user, $passwd, $lang);
-                dd('añadido');
             } else {
                 return redirect()->back()->withInput();
             }

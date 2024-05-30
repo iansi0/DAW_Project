@@ -121,8 +121,6 @@ class TiquetModel extends Model
         }
 
         return $this->orderBy('tiquet.created_at', 'desc');
-        $this->find();
-        dd($this->db->getLastQuery());
 
     }   
 
@@ -180,20 +178,23 @@ class TiquetModel extends Model
     public function deleteTicket($id)
     {
         $role=session()->get('user')['role'];
-        $code=intval(session()->get('user')['code']);
-
-        $this->where('id', $id);
+        $code=session()->get('user')['code'];
         $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+        $this->where('id', $id);
 
         if ($role=="admin") {
-            $this;
+            return $this->delete();
         }else if($role=="prof" || $role=="alumn" || $role=="ins"){
+            $this->groupStart();
             $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+            $this->groupEnd();
         }else if($role=="sstt"){
+            $this->groupStart();
             $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+            $this->groupEnd();
         }else{
-            return;
+            return; 
         }
         return $this->delete();
     }
@@ -202,8 +203,8 @@ class TiquetModel extends Model
     {
 
         $role=session()->get('user')['role'];
-        $code=intval(session()->get('user')['code']);
-
+        $code=session()->get('user')['code'];
+        // dd($id);
         $this->where('id', $id);
         $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
@@ -211,9 +212,13 @@ class TiquetModel extends Model
         if ($role=="admin") {
             $this;
         }else if($role=="prof" || $role=="alumn" || $role=="ins"){
+            $this->groupStart();
             $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+            $this->groupEnd();
         }else if($role=="sstt"){
+            $this->groupStart();
             $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+            $this->groupEnd();
         }else{
             return;
         }
@@ -224,7 +229,7 @@ class TiquetModel extends Model
     {
 
         $role=session()->get('user')['role'];
-        $code=intval(session()->get('user')['code']);
+        $code=session()->get('user')['code'];
 
         $this->where('id', $id);
         $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
@@ -248,7 +253,7 @@ class TiquetModel extends Model
     {
         
         $role=session()->get('user')['role'];
-        $code=intval(session()->get('user')['code']);
+        $code=session()->get('user')['code'];
 
 
         $this->select(["
@@ -285,7 +290,7 @@ class TiquetModel extends Model
 
     public function getTicketById($id)
     {
-        $code=intval(session()->get('user')['code']);
+        $code=session()->get('user')['code'];
         $role=session()->get('user')['role'];
 
         $this->where('tiquet.id', $id)->first();
@@ -305,7 +310,7 @@ class TiquetModel extends Model
     public function getTicketsByMonths()
     {
         $role=session()->get('user')['role'];
-        $code=intval(session()->get('user')['code']);
+        $code=session()->get('user')['code'];
 
         $this->select('
         MONTH(tiquet.created_at) as month
@@ -328,7 +333,7 @@ class TiquetModel extends Model
     {
 
         $role=session()->get('user')['role'];
-        $code=intval(session()->get('user')['code']);
+        $code=session()->get('user')['code'];
 
         $this->select('
         tipus_dispositiu.nom AS tipus,
@@ -368,7 +373,7 @@ class TiquetModel extends Model
                 ->join('estat', 'tiquet.id_estat = estat.id')
                 ->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left')
                 ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left')
-                ->where("tiquet.codi_centre_emissor", 8000013);
+                ->where("tiquet.codi_centre_emissor", $id);
                 
         } else {
 
@@ -386,7 +391,7 @@ class TiquetModel extends Model
                 ->join('estat', 'tiquet.id_estat = estat.id')
                 ->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left')
                 ->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left')
-                ->where("tiquet.codi_centre_reparador", 8000013);
+                ->where("tiquet.codi_centre_reparador", $id);
         }
     }
 }

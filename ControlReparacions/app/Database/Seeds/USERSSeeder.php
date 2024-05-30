@@ -269,7 +269,7 @@ class USERSSeeder extends Seeder
                     $user_role -> addUserRole( 
                         LibrariesUUID::v4(),
                         $uuid,
-                        $role_id[1]
+                        $role_id[2]
                     );
     
                 }

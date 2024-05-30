@@ -341,7 +341,7 @@ class InstitutesController extends BaseController
             "taller" => intval($this->request->getPost("work")),
             "telefon" => $this->request->getPost("phone"),
             "adreca_fisica" => $this->request->getPost("adress"),
-            "id_sstt" =>  intval($this->request->getPost("sstt")),
+            "id_sstt" =>  $this->request->getPost("sstt"),
             "id_poblacio" => $this->request->getPost("population"),
         ];
 

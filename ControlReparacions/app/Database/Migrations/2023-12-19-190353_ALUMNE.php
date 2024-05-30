@@ -27,8 +27,9 @@ class ALUMNE extends Migration
                         'null'           => false,
                 ],
                 'codi_centre'          => [
-                        'type'           => 'BINARY',
-                        'constraint'     => 32,
+                        'type'           => 'VARCHAR',
+                        'trim'           => true,
+                        'constraint'     => 10,
                         'null'           => false,
                 ],
                 'id_curs'          => [

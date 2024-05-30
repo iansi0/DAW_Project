@@ -59,13 +59,15 @@ class CENTRE extends Migration
                                 'null'           => false,
                         ],
                         'id_sstt'          => [
-                                'type'           => 'INT',
+                                'type'           => 'VARCHAR',
+                                'trim'           => true,
                                 'constraint'     => 10,
                                 'null'           => false,
                         ],
                         'id_poblacio'          => [
-                                'type'           => 'BINARY',
-                                'constraint'     => 32,
+                                'type'           => 'VARCHAR',
+                                'trim'           => true,
+                                'constraint'     => 8,
                                 'null'           => false,
                         ],
 

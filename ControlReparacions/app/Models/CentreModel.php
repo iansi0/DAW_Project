@@ -61,7 +61,7 @@ class CentreModel extends Model
     public function getAllCenter()
     {
         $role = session()->get('user')['role'];
-        $code = intval(session()->get('user')['code']);
+        $code = session()->get('user')['code'];
 
         $this->select('codi, nom');
 
@@ -92,7 +92,7 @@ class CentreModel extends Model
     {
 
         $role = session()->get('user')['role'];
-        $code = intval(session()->get('user')['code']);
+        $code = session()->get('user')['code'];
 
         $this->select('codi, nom')->where('actiu', true)->where('taller', true);
 
@@ -105,7 +105,7 @@ class CentreModel extends Model
         } else if ($role == "ins") {
             $this->where("centre.codi", $code);
         }
-
+        
         return $this->findAll();
     }
 
@@ -119,7 +119,7 @@ class CentreModel extends Model
         $this->join('tiquet', 'centre.codi = tiquet.codi_centre_emissor');
         $this->join('poblacio', 'centre.id_poblacio = poblacio.id');
         $this->join('comarca', 'poblacio.id_comarca = comarca.codi');
-        $this->where('centre.id_sstt', intval($ssttCode));
+        $this->where('centre.id_sstt', $ssttCode);
         $this->orderBy('count', 'DESC');
 
         return $this->findAll();

@@ -21,8 +21,8 @@ class POBLACIO extends Migration
                 'null'           => false,
             ],
             'id_comarca'          => [
-                'type'           => 'BINARY',
-                'constraint'     => 2,
+                'type'           => 'VARCHAR',
+                'constraint'     => 5,
                 'null'           => false,
             ],
 

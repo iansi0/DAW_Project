@@ -48,7 +48,6 @@
         console.log( );
     </script> -->
 </head>
-
 <body class=" flex flex-col  h-full bg-[#ffffff]">
 
     <header class=" fixed w-full  bg-[#f7f7f9] text-terciario-4  h-12 flex text-xl z-20 ">
