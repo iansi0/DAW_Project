@@ -65,7 +65,7 @@ class TicketsController extends BaseController
                 $filters['time_ini'] = '00:00';
             }
 
-            // Obtener filtro de tiempo-fin (?tm_2=)
+            // Obtener filtro de tiempo-inicio (?tm_2=)
             if (isset($searchData['tm_2']) && !empty($searchData['tm_2'])) {
                 $filters['time_end'] = $searchData['tm_2'];
             } else {
@@ -78,14 +78,6 @@ class TicketsController extends BaseController
             } else {
                 $filters['state'] = '';
             }
-
-            // Si los filtros estan vacíos, reseteamos el array de filtros
-            if ($filters['device'] == '' && $filters['center'] == '' && $filters['state'] == '' 
-                && $filters['date_ini'] == '1970-01-01' && $filters['date_end'] == date('Y-m-d') 
-                && $filters['time_ini'] == '00:00' && $filters['time_end'] == '23:59') {
-                $filters = [];
-            }
-
         }
 
         // Get Tiquet Data
@@ -586,7 +578,7 @@ class TicketsController extends BaseController
 
         $model = new TiquetModel();
 
-        if (count($filters) == 0) {
+        if (is_array($filters) && !empty($filters)) {
             $paginateData = $model->getByTitleOrText($search, $filters)->findAll();
         } else if ($search != '') {
             $paginateData = $model->getByTitleOrText($search, [])->findAll();
@@ -671,7 +663,7 @@ class TicketsController extends BaseController
 
         $model = new TiquetModel();
 
-        if (count($filters) == 0) {
+        if (is_array($filters) && !empty($filters)) {
             $paginateData = $model->getByTitleOrText($search, $filters)->findAll();
         } else if ($search != '') {
             $paginateData = $model->getByTitleOrText($search, [])->findAll();
