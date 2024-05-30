@@ -47,7 +47,7 @@ class Home extends BaseController
 
                 //si el domino no es xtex devolvemos error
                 // if ($dominio[1] == 'gmail.com') {
-                if ($dominio[1] !== 'xtec.cat') {
+                if ($dominio[1] == 'xtec.cat') {
                     $user = new UsersModel();
                     $mail=$userInfo->getEmail();
                     $fullname=$userInfo->getName();
@@ -216,7 +216,6 @@ class Home extends BaseController
         $userModel = new UsersModel();
         $profModel = new ProfessorModel();
         $userInRole = new UsersInRolesModel();
-        $id_xtec = explode("@",$mail);
         // Obtenemos el usuario por user o por mail
         $user = $userModel->getLoginByMail($mail);
 
@@ -224,7 +223,7 @@ class Home extends BaseController
         if (!$user) {
             $id=LibrariesUUID::v4();
             $userModel->addUser($id,$mail,password_hash("1234",PASSWORD_DEFAULT),'ca');
-            $profModel->addProfessor($id,$id_xtec[0],$fullname,"",$code);
+            $profModel->addProfessor($id,$fullname,"",$code);
             $roleModel = new RolesModel();
             $role=$roleModel->getIdByRole("prof");
             $newId=LibrariesUUID::v4();

@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class ProfessorModel extends Model
 {
     protected $table            = 'professor';
-    protected $primaryKey       = 'id_xtec';
+    protected $primaryKey       = 'id_user';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;

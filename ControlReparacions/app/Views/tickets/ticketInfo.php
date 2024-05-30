@@ -53,7 +53,7 @@
                         <?php
                         foreach ($estatsFiltrats as $filtrat) {
                             if ($filtrat['id'] == $ticket['id_estat']) {
-                                echo "<option selected class='bg-secundario cursor-pointer'  value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
+                                echo "<option selected class='bg-secundario text-terciario-1 cursor-pointer'  value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
                             } else {
                                 echo "<option class='bg-secundario cursor-pointer' value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
                             }

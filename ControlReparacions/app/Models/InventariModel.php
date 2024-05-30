@@ -80,7 +80,7 @@ class InventariModel extends Model
     public function getAllPaged()
     {
         $role = session()->get('user')['role'];
-        $code = intval(session()->get('user')['code']);
+        $code = session()->get('user')['code'];
 
         $this->select("
         inventari.id AS id, 
@@ -93,10 +93,9 @@ class InventariModel extends Model
 
         $this->join('tipus_inventari', 'inventari.id_tipus_inventari = tipus_inventari.id');
 
-        // ->where('codi_centre', session('user')['code']);
         if ($role == "admin") {
             $this;
-        } else if ($role == "prof" || $role == "alumn" || $$role == "ins") {
+        } else if ($role == "prof" || $role == "alumn" || $role == "ins") {
             $this->where("inventari.codi_centre", $code);
         } else if ($role == "sstt") {
             $this->where("centre_reparador.id_sstt", $code)->orWhere("centre_emissor.id_sstt", $code);

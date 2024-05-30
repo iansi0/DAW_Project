@@ -17,6 +17,7 @@ class StatisticsController extends BaseController
             // Mirem comarques amb més tiquets
             $centremodel= new CentreModel();
             $comarcaTotal=$centremodel->getRegionWithMostTickets($ssttCode);
+            
             $comarcaName=[];
             $comarcaCount=[];
             foreach ($comarcaTotal as $comarca) {

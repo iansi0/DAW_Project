@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Models\AlumneModel;
 use App\Models\UsersModel;
 use App\Controllers\BaseController;
+use App\Models\RolesModel;
+use App\Models\UsersInRolesModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use Faker\Factory;
 
@@ -82,65 +84,126 @@ class StudentsController extends BaseController
     {
         helper('form');
 
-   
-    
+        if ($this->request->getFiles()) {
+            // guardar el csv 
+            $file = $this->request->getFiles();
 
-        $validationRules =
-            [
-                'email' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Error Email',
-                    ],
-                ],
-                'name' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Error Name',
-                    ],
-                ],
-                'surnames' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Error Surnames',
-                    ],
-                ],
-                'course' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Error Course',
-                    ],
-                ],
-            ];
+            // $files['files']
 
+            // dd($file['csv']);
 
-        if ($this->validate($validationRules)) {
+            // leer el csv 
+            $fileCsv = fopen($file['csv'], 'r');
 
-            $modelAlumne = new AlumneModel();
-            $modelUser = new UsersModel();
+            // Boolean para saltarnos la primera fila (es una fila con los nombres de los campos y por ende la descartamos)
+            $firstLine = false;
 
-            $fake = Factory::create("es_ES");
+            // hacer un while para introducir los datos 
+            while (($row = fgetcsv($fileCsv, 2000, ",")) !== FALSE) {
 
-            $id_user = $fake->uuid();
-            $nom = $this->request->getPost("name");
-            $cognoms = $this->request->getPost("surnames");
-            $codi_centre = session()->get('user')['code'];
-            $id_curs = $this->request->getPost("course");
+                if (!$firstLine) {
 
-            $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre);
+                    if (trim($row[2] == 1)) {
+
+                        // dd($row[0]);
+
+                        $fake = Factory::create("es_ES");
+
+                        $modelAlumne = new AlumneModel();
+                        $modelUser = new UsersModel();
+                        $userInRole = new UsersInRolesModel();
+                        $roleModel = new RolesModel();
+
+                        $id_user = $fake->uuid();
+                        $nom =  trim($row[0]);
+                        $cognoms = trim($row[0]);
+                        $codi_centre = session()->get('user')['code'];
+                        $id_curs = trim($row[0]);
+
+                        $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre);
 
 
-            $user = $this->request->getPost("email");
-            $passwd = password_hash($fake->password(), PASSWORD_DEFAULT);
-            $lang = "ca";
+                        $user = trim($row[0]);
+                        $passwd = password_hash("1234", PASSWORD_DEFAULT);
+                        $lang = "ca";
 
-            $modelUser->addUser($id_user, $user, $passwd, $lang);
-            dd('añadido');
+                        $modelUser->addUser($id_user, $user, $passwd, $lang);
+                        $newId = $fake->uuid();
+                        $role = $roleModel->getIdByRole("alumn");
 
+                        $userInRole->addUserRole($newId, $id_user, $role["id"]);
+                    }
+                }
+
+                $firstLine = false;
+            }
+
+            fclose($fileCsv);
+
+            return redirect()->to(base_url('/students'));
+            
         } else {
-            return redirect()->back()->withInput();
-        }
+            $validationRules =
+                [
+                    'email' => [
+                        'rules'  => 'required',
+                        'errors' => [
+                            'required' => 'Error Email',
+                        ],
+                    ],
+                    'name' => [
+                        'rules'  => 'required',
+                        'errors' => [
+                            'required' => 'Error Name',
+                        ],
+                    ],
+                    'surnames' => [
+                        'rules'  => 'required',
+                        'errors' => [
+                            'required' => 'Error Surnames',
+                        ],
+                    ],
+                    'course' => [
+                        'rules'  => 'required',
+                        'errors' => [
+                            'required' => 'Error Course',
+                        ],
+                    ],
+                ];
 
-        return redirect()->to(base_url('/students'));
+
+            if ($this->validate($validationRules)) {
+
+                $modelAlumne = new AlumneModel();
+                $modelUser = new UsersModel();
+                $userInRole = new UsersInRolesModel();
+                $roleModel = new RolesModel();
+
+                $fake = Factory::create("es_ES");
+
+                $id_user = $fake->uuid();
+                $nom = $this->request->getPost("name");
+                $cognoms = $this->request->getPost("surnames");
+                $codi_centre = session()->get('user')['code'];
+                $id_curs = $this->request->getPost("course");
+
+                $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre);
+
+
+                $user = $this->request->getPost("email");
+                $passwd = password_hash("1234", PASSWORD_DEFAULT);
+                $lang = "ca";
+
+                $modelUser->addUser($id_user, $user, $passwd, $lang);
+                $newId = $fake->uuid();
+                $role = $roleModel->getIdByRole("alumn");
+
+                $userInRole->addUserRole($newId, $id_user, $role["id"]);
+            } else {
+                return redirect()->back()->withInput();
+            }
+
+            return redirect()->to(base_url('/students'));
+        }
     }
 }
