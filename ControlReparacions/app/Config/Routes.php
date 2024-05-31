@@ -23,7 +23,7 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
 
         $routes->GET('add', 'TicketsController::ticketForm', ['filter' => 'addTicket']);
         $routes->POST('add', 'TicketsController::addTicket', ['filter' => 'addTicket']);
-        
+
         $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
 
         $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1', ['filter' => 'deleteTicket']);
@@ -32,7 +32,7 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
     });
 
     // EXPORT
-    $routes->group('export', ['filter' => 'exportTicket'], function($routes){
+    $routes->group('export', ['filter' => 'exportTicket'], function ($routes) {
         //CSV
         $routes->GET('csv', 'TicketsController::exportCSV');
         // XLS
@@ -52,6 +52,10 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('', 'StudentsController::students');
         $routes->GET('add', 'StudentsController::studentForm');
         $routes->POST('add', 'StudentsController::addStudent');
+
+        $routes->GET('delete/(:segment)', 'StudentsController::deleteStudent/$1');
+        $routes->GET('modify/(:segment)', 'StudentsController::modifyStudent/$1');
+        $routes->POST('modify/(:segment)', 'StudentsController::modifyStudent_post/$1');
     });
 
     // INSTITUTES
@@ -68,7 +72,6 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('(:segment)', 'InstitutesController::instituteInfo/$1');
         $routes->GET('(:segment)/filterSender', 'InstitutesController::instituteInfo/$1/sender');
         $routes->GET('(:segment)/filterReceiver', 'InstitutesController::instituteInfo/$1/receiver');
-
     });
 
     // ASSIGN
@@ -101,10 +104,10 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
     $routes->group('error', function ($routes) {
         $routes->GET('404', 'Home::error404');
     });
-    
+
     //STATISTICS
     $routes->GET('statistics', 'StatisticsController::index');
-    
+
     $routes->POST('savestate/(:segment)', 'TicketsController::saveState/$1');
     // LANGUAGE CHANGE
     $routes->GET('change_lang/(:segment)', 'Home::change_lang/$1');

@@ -35,7 +35,7 @@ class StudentsController extends BaseController
 
         // GENERADOR DE TABLA 
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading('ID de Usuario', 'Nombre', 'Cognoms', 'Code_centre', ' ', ' ', ' ');
+        $table->setHeading('Nombre', 'Cognoms', 'Curs', 'Actions');
 
 
         $template = [
@@ -63,11 +63,41 @@ class StudentsController extends BaseController
         // llenar la tabla con los datos de los alumnes
         foreach ($data['students'] as $students) {
 
+            $buttonDelete = base_url("students/delete/" . $students['id_user']);
+            $buttonUpdate = base_url("students/modify/" . $students['id_user']);
+
             $table->addRow(
-                $students['id_user'],
                 $students['nom'],
                 $students['cognoms'],
-                $students['codi_centre'],
+                $students['curs'],
+                [
+                    "data" =>
+                    "
+                     <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
+                     <a onclick='(function() { Swal.fire({
+                        customClass:{htmlContainer: ``,},
+                        title: `" . lang('alerts.sure') . "`,
+                        text: `" . lang('alerts.sure_sub') . "`,
+                        icon: `warning`,
+                        showCancelButton: true,
+                        confirmButtonColor: `#3085d6`,
+                        cancelButtonColor: `#d33`,
+                        confirmButtonText: `" . lang('alerts.yes_del') . "`,
+                        cancelButtonText: `" . lang('alerts.cancel') . "`,
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = `" . $buttonDelete . "`;
+
+                            Swal.fire({
+                                title: `" . lang('alerts.deleted') . "`,
+                                text: `" . lang('alerts.deleted_sub') . "`,
+                                icon: `success`,
+                            });
+                        }
+                      }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
+
+                    "class" => "  justify-between items-center"
+                ],
             );
         }
         return view('students/students', $data);
@@ -222,5 +252,15 @@ class StudentsController extends BaseController
 
             return redirect()->to(base_url('/students'));
         }
+    }
+
+    public function deleteStudent($id)
+    {
+
+        $model = new AlumneModel();
+
+        $model->deleteStudent($id);
+
+        return redirect()->to(base_url('/students'));
     }
 }
