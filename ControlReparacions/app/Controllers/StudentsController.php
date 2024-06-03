@@ -210,10 +210,11 @@ class StudentsController extends BaseController
 
                 $email = \Config\Services::email();
 
-                $email->setFrom('braianpb02@gmail.com', 'KYS');
+                $email->setFrom('braianpb02@gmail.com', 'KeepYourSoftware');
                 $email->setTo($user);
-                $email->setSubject('Registro KYS');
-                $email->setMessage('Tu contraseña es: ' . $passwd);
+                $email->setSubject('Usuari gestor d\'intervencions');
+                $email->setMessage('Bones nou usuari, benvingut a l\'aplicatiu de gestions d\'intervencions. \n\n
+                 El teu usuari és: ' . $user . '\n La teva contrassenya és: ' . $passwd);
 
                 $email->send();
             } else {
