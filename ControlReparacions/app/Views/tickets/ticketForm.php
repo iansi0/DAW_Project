@@ -20,7 +20,7 @@
         <a href="<?= strpos(previous_url(), 'tickets?') !== false
                         ? str_replace('index.php/', '', previous_url())
                         : base_url('/tickets');
-                    ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 mr-2 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel") ?></a>
+                    ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 mr-3 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel") ?></a>
 
         <button onclick="sendTicket()" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.add") ?></button>
     </div>
@@ -33,17 +33,15 @@
 
     function addLine() {
 
+        count_ins++;
+
         let div = document.createElement('div');
-        div.classList = 'ticket grid grid-cols-3 gap-x-2 gap-y-2'
-
-        // Generacion de plantillas de elementos
-        let div_input, input, label, error;
-
-        error.classList = 'font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
+        div.classList = 'ticket grid grid-cols-3 gap-x-2';
+        div.id = 'ticket_' + count_ins;
 
         // Input descripcion
         let div_input_desc = document.createElement('div');
-        div_input_desc.classList = 'flex flex-col mt-5';
+        div_input_desc.classList = 'flex flex-col mt-2';
         label = document.createElement('label');
         label.innerText = '<?= lang("forms.description") ?>*';
 
@@ -70,7 +68,7 @@
 
         // Input nombre contacto
         let div_input_nc = document.createElement('div');
-        div_input_nc.classList = 'flex flex-col mt-5';
+        div_input_nc.classList = 'flex flex-col mt-2';
         label = document.createElement('label');
         label.innerText = '<?= lang("forms.contact_name") ?>*';
         
@@ -97,7 +95,7 @@
 
         // Input email contacto
         let div_input_ec = document.createElement('div');
-        div_input_ec.classList = 'flex flex-col mt-5';
+        div_input_ec.classList = 'flex flex-col mt-2';
         label = document.createElement('label');
         label.innerText = '<?= lang("forms.contact_email") ?>*';
 
@@ -125,7 +123,7 @@
 
         // Select tipo dispositivo
         let div_input_td = document.createElement('div');
-        div_input_td.classList = 'flex flex-col mt-5';
+        div_input_td.classList = 'flex flex-col mt-2';
         label = document.createElement('label');
         label.innerText = '<?= lang("forms.s_disp") ?>*';
         
@@ -137,7 +135,6 @@
         option.value = '';
         option.disabled = true;
         option.selected = true;
-        option.hidden = true;
         option.innerText = '<?= lang("forms.s_disp") ?>';
         input_td.appendChild(option);
         <?php foreach ($types as $type): ?>
@@ -167,25 +164,20 @@
 
             // Select instituto emisor
             let div_input_ie = document.createElement('div');
-            div_input_ie.classList = 'flex flex-col mt-5';
+            div_input_ie.classList = 'flex flex-col mt-2';
             
-            label = document.createElement('label');
-            label.innerText = '<?= lang("forms.s_ins") ?>';
-            label.id = 'labelSender_' + count_ins;
-            label.for = 'sender';
-            label.classList = 'hidden';
+            let label_ie = document.createElement('label');
+            label_ie.innerText = '<?= lang("forms.s_ins") ?>';
+            label_ie.id = 'labelSender_' + count_ins;
+            label_ie.for = 'sender_' + count_ins;
+            label_ie.classList = 'hidden';
 
-            let button_ie =document.createElement('button');
+            let button_ie = document.createElement('button');
             button_ie.type = "button";
             button_ie.id = 'assignSender_' + count_ins;
             button_ie.classList = "bg-primario text-white mt-[22px] px-2 py-3  hover:bg-terciario-4 border border-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250";
             button_ie.innerText = '<?= lang("forms.s_ins") ?>';
-
-            button_ie.addEventListener('click', () => {
-                document.getElementById('labelSender_' + count_ins).style.display = 'block';
-                document.getElementById('sender_' + count_ins).style.display = 'block';
-                document.getElementById('assignSender_' + count_ins).style.display = 'none';
-            });
+            button_ie.setAttribute('onclick', 'showSender(this)');
 
             let input_ie = document.createElement('select');
             input_ie.classList = 'border-2 hidden border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150';
@@ -196,7 +188,7 @@
             option.value = '';
             option.disabled = true;
             option.selected = true;
-            option.hidden = true;
+            option.innerText = '<?= lang("forms.s_ins") ?>';
             input_ie.appendChild(option);
             <?php foreach ($centers as $center): ?>
                 option = document.createElement('option');
@@ -207,31 +199,26 @@
 
             // Añadimos el label e input al div
             div_input_ie.appendChild(button_ie);
-            div_input_ie.appendChild(label);
+            div_input_ie.appendChild(label_ie);
             div_input_ie.appendChild(input_ie);
             div.appendChild(div_input_ie);
 
             // Select instituto reparador
             let div_input_ir = document.createElement('div');
-            div_input_ir.classList = 'flex flex-col mt-5';
+            div_input_ir.classList = 'flex flex-col mt-2';
             
-            label = document.createElement('label');
-            label.innerText = '<?= lang("forms.s_ins") ?>';
-            label.id = 'labelRepair_' + count_ins;
-            label.for = 'repair';
-            label.classList = 'hidden';
+            let label_ir = document.createElement('label');
+            label_ir.innerText = '<?= lang("forms.s_ins") . ' ' . lang("forms.work") ?>';
+            label_ir.id = 'labelRepair_' + count_ins;
+            label_ir.for = 'repair_' + count_ins;
+            label_ir.classList = 'hidden';
 
             let button_ir =document.createElement('button');
             button_ir.type = "button";
             button_ir.id = 'assignRepair_' + count_ins;
             button_ir.classList = "bg-primario text-white mt-[22px] px-2 py-3  hover:bg-terciario-4 border border-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250";
-            button_ir.innerText = '<?= lang("forms.s_ins") ?>';
-
-            button_ir.addEventListener('click', () => {
-                document.getElementById('labelRepair_' + count_ins).style.display = 'block';
-                document.getElementById('repair_' + count_ins).style.display = 'block';
-                document.getElementById('assignRepair_' + count_ins).style.display = 'none';
-            });
+            button_ir.innerText = '<?= lang("forms.s_ins") . ' ' . lang("forms.work") ?>';
+            button_ir.setAttribute('onclick', 'showRepair(this)');
 
             let input_ir = document.createElement('select');
             input_ir.classList = 'border-2 hidden border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150';
@@ -242,8 +229,7 @@
             option.value = '';
             option.disabled = true;
             option.selected = true;
-            option.hidden = true;
-            option.innerText = '<?= lang("forms.s_ins") ?>';
+            option.innerText = '<?= lang("forms.s_ins") . ' ' . lang("forms.work") ?>';
             input_ir.appendChild(option);
             <?php foreach ($repairs as $repair): ?>
                 option = document.createElement('option');
@@ -254,28 +240,110 @@
 
             // Añadimos el label e input al div
             div_input_ir.appendChild(button_ir);
-            div_input_ir.appendChild(label);
+            div_input_ir.appendChild(label_ir);
             div_input_ir.appendChild(input_ir);
             div.appendChild(div_input_ir);
         <?php endif ?>
 
+        // Añadimos los botones de eliminar tiquet y copiar tiquet
+        let div_btn_remove = document.createElement('div');
+        div_btn_remove.classList = 'flex flex-col mt-3';
+
+        let remove = document.createElement('button');
+        remove.classList = 'outline outline-offset-1 outline-red-500 text-red-500  mx-1 transition hover:ease-in ease-out duration-250 hover:bg-red-500 hover:text-white';
+        remove.style = 'height: 35px;';
+        remove.innerHTML = '<i class="fa-solid fa-trash"></i>';
+        remove.id = 'r_ticket_' + count_ins;
+        remove.setAttribute('onclick', 'removeTicket(this)');
+
+        div_btn_remove.appendChild(remove);
+
+        div.appendChild(div_btn_remove);
+
+        let div_btn_copy = document.createElement('div');
+        div_btn_copy.classList = 'flex flex-col mt-3';
+
+        let copy = document.createElement('button');
+        copy.classList = 'outline outline-offset-1 outline-blue-500 text-blue-500  mx-1 transition hover:ease-in ease-out duration-250 hover:bg-blue-500 hover:text-white';
+        copy.style = 'height: 35px;';
+        copy.innerHTML = '<i class="fa-regular fa-copy"></i>';
+        copy.id = 'c_ticket_' + count_ins;
+        copy.setAttribute('onclick', 'copyTicket(this)');
+
+        div_btn_copy.appendChild(copy);
+
+        div.appendChild(div_btn_copy);
+
         // Añadimos al formulario
         document.getElementById('ticketList').appendChild(div);
+    }
 
+    function showSender(obj){
+        event.preventDefault();
+        let num = obj.id.replace('assignSender_', '');
+
+        document.getElementById('labelSender_'+num).style.display = 'block';
+        document.getElementById('sender_'+num).style.display = 'block';
+        document.getElementById('assignSender_'+num).style.display = 'none';
+    }
+
+    function showRepair(obj){
+        event.preventDefault();
+        let num = obj.id.replace('assignRepair_', '');
+
+        document.getElementById('labelRepair_'+num).style.display = 'block';
+        document.getElementById('repair_'+num).style.display = 'block';
+        document.getElementById('assignRepair_'+num).style.display = 'none';
+    }
+
+    function removeTicket(obj){
+        event.preventDefault();
+        let num = obj.id.replace('r_ticket_', '');
+        document.getElementById('ticket_' + num).remove();
+    }
+
+    function copyTicket(obj){
+        event.preventDefault();
+        // Obtenemos el numero de ticket
+        let num = obj.id.replace('c_ticket_', '');
+        // Clonamos el ticket
+        let new_div = document.getElementById('ticket_' + num).cloneNode(true);
         count_ins++;
+
+        // Cambiamos todos los id para evitar conflictos
+        new_div.id = 'ticket_'+count_ins;
+        new_div.querySelector('#r_ticket_'+num).setAttribute('id', 'r_ticket_' + count_ins);
+        new_div.querySelector('#c_ticket_'+num).setAttribute('id', 'c_ticket_' + count_ins);
+
+        let val_ie = new_div.querySelector('#sender_'+num).value;
+        let val_ir = new_div.querySelector('#repair_'+num).value;
+
+        let label_ie = new_div.querySelector('#labelSender_'+num).setAttribute('id', 'labelSender_' + count_ins);
+        let input_ie = new_div.querySelector('#sender_'+num);
+        input_ie.setAttribute('id', 'sender_' + count_ins);
+        input_ie.value = val_ie;
+        let button_ie = new_div.querySelector('#assignSender_'+num).setAttribute('id', 'assignSender_' + count_ins);
+
+        let label_ir = new_div.querySelector('#labelRepair_'+num).setAttribute('id', 'labelRepair_' + count_ins);
+        let input_ir = new_div.querySelector('#repair_'+num);
+        input_ir.setAttribute('id', 'repair_' + count_ins);
+        input_ir.value = val_ir;
+        let button_ir = new_div.querySelector('#assignRepair_'+num).setAttribute('id', 'assignRepair_' + count_ins);
+
+        document.getElementById('ticketList').appendChild(new_div);
     }
 
     function sendTicket() {
         let tickets = document.getElementsByClassName('ticket');
 
         tickets.forEach(ticket => {
-            
+            console.log(ticket)
         });
     }
 
     document.addEventListener('DOMContentLoaded', function(){
         addLine();
-    })
+    });
 </script>
 
 <?= $this->endSection() ?>
