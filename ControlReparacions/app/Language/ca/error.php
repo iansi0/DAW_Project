@@ -14,6 +14,7 @@ return [
     'wrong_code'        => 'El codi no és correcte',
 
     'empty_slot'        => 'Falten camps per omplir',
+    'empty_slot_2'      => 'Aquest camp no pot estar buit',
     'wrong_slot'        => 'Hi han camps incorrectes',
 
     'empty'             => 'No s\'ha trobat cap element',

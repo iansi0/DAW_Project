@@ -130,9 +130,11 @@
         let input_td = document.createElement('select');
         input_td.classList = 'border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150';
         input_td.name = 'id_type';
+        input_td.id = 'id_type_' + count_ins;
+        input_td.value = null;
         
         var option = document.createElement('option');
-        option.value = '';
+        option.value = null;
         option.disabled = true;
         option.selected = true;
         option.innerText = '<?= lang("forms.s_disp") ?>';
@@ -183,9 +185,10 @@
             input_ie.classList = 'border-2 hidden border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150';
             input_ie.id = 'sender_' + count_ins;
             input_ie.name = 'sender';
+            input_ie.value = null;
 
             option = document.createElement('option');
-            option.value = '';
+            option.value = null;
             option.disabled = true;
             option.selected = true;
             option.innerText = '<?= lang("forms.s_ins") ?>';
@@ -224,9 +227,10 @@
             input_ir.classList = 'border-2 hidden border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150';
             input_ir.id = 'repair_' + count_ins;
             input_ir.name = 'repair';
+            input_ir.value = null;
 
             option = document.createElement('option');
-            option.value = '';
+            option.value = null;
             option.disabled = true;
             option.selected = true;
             option.innerText = '<?= lang("forms.s_ins") . ' ' . lang("forms.work") ?>';
@@ -245,26 +249,12 @@
             div.appendChild(div_input_ir);
         <?php endif ?>
 
-        // Añadimos los botones de eliminar tiquet y copiar tiquet
-        let div_btn_remove = document.createElement('div');
-        div_btn_remove.classList = 'flex flex-col mt-3';
-
-        let remove = document.createElement('button');
-        remove.classList = 'outline outline-offset-1 outline-red-500 text-red-500  mx-1 transition hover:ease-in ease-out duration-250 hover:bg-red-500 hover:text-white';
-        remove.style = 'height: 35px;';
-        remove.innerHTML = '<i class="fa-solid fa-trash"></i>';
-        remove.id = 'r_ticket_' + count_ins;
-        remove.setAttribute('onclick', 'removeTicket(this)');
-
-        div_btn_remove.appendChild(remove);
-
-        div.appendChild(div_btn_remove);
-
         let div_btn_copy = document.createElement('div');
         div_btn_copy.classList = 'flex flex-col mt-3';
 
+        // Añadimos los botones de copiar tiquet y eliminar tiquet
         let copy = document.createElement('button');
-        copy.classList = 'outline outline-offset-1 outline-blue-500 text-blue-500  mx-1 transition hover:ease-in ease-out duration-250 hover:bg-blue-500 hover:text-white';
+        copy.classList = 'outline outline-blue-500 text-blue-500  mx-1 transition hover:ease-in ease-out duration-250 hover:bg-blue-500 hover:text-white';
         copy.style = 'height: 35px;';
         copy.innerHTML = '<i class="fa-regular fa-copy"></i>';
         copy.id = 'c_ticket_' + count_ins;
@@ -273,6 +263,22 @@
         div_btn_copy.appendChild(copy);
 
         div.appendChild(div_btn_copy);
+
+        if (document.getElementById('ticketList').childElementCount >= 1) {
+            let div_btn_remove = document.createElement('div');
+            div_btn_remove.classList = 'flex flex-col mt-3';
+
+            let remove = document.createElement('button');
+            remove.classList = 'outline outline-red-500 text-red-500  mx-1 transition hover:ease-in ease-out duration-250 hover:bg-red-500 hover:text-white';
+            remove.style = 'height: 35px;';
+            remove.innerHTML = '<i class="fa-solid fa-trash"></i>';
+            remove.id = 'r_ticket_' + count_ins;
+            remove.setAttribute('onclick', 'removeTicket(this)');
+
+            div_btn_remove.appendChild(remove);
+
+            div.appendChild(div_btn_remove);
+        }
 
         // Añadimos al formulario
         document.getElementById('ticketList').appendChild(div);
@@ -307,38 +313,133 @@
         // Obtenemos el numero de ticket
         let num = obj.id.replace('c_ticket_', '');
         // Clonamos el ticket
+        let old_div = document.getElementById('ticket_' + num);
         let new_div = document.getElementById('ticket_' + num).cloneNode(true);
         count_ins++;
 
         // Cambiamos todos los id para evitar conflictos
         new_div.id = 'ticket_'+count_ins;
-        new_div.querySelector('#r_ticket_'+num).setAttribute('id', 'r_ticket_' + count_ins);
+        if (new_div.querySelector('#r_ticket_'+num)) {
+            new_div.querySelector('#r_ticket_'+num).setAttribute('id', 'r_ticket_' + count_ins);
+        } else {
+            // Añadimos el boton de eliminar ticket
+            let div_btn_remove = document.createElement('div');
+            div_btn_remove.classList = 'flex flex-col mt-3';
+
+            let remove = document.createElement('button');
+            remove.classList = 'outline outline-offset-1 outline-red-500 text-red-500  mx-1 transition hover:ease-in ease-out duration-250 hover:bg-red-500 hover:text-white';
+            remove.style = 'height: 35px;';
+            remove.innerHTML = '<i class="fa-solid fa-trash"></i>';
+            remove.id = 'r_ticket_' + count_ins;
+            remove.setAttribute('onclick', 'removeTicket(this)');
+
+            div_btn_remove.appendChild(remove);
+
+            new_div.appendChild(div_btn_remove);
+        }
         new_div.querySelector('#c_ticket_'+num).setAttribute('id', 'c_ticket_' + count_ins);
 
-        let val_ie = new_div.querySelector('#sender_'+num).value;
-        let val_ir = new_div.querySelector('#repair_'+num).value;
+        // Obtenemos los valores de los select
+        let val_ie = old_div.querySelector('#sender_'+num).value;
+        let val_ir = old_div.querySelector('#repair_'+num).value;
+        let val_td = old_div.querySelector('#id_type_'+num).value;
 
+        // Modificación de instituto emisor
         let label_ie = new_div.querySelector('#labelSender_'+num).setAttribute('id', 'labelSender_' + count_ins);
         let input_ie = new_div.querySelector('#sender_'+num);
         input_ie.setAttribute('id', 'sender_' + count_ins);
         input_ie.value = val_ie;
         let button_ie = new_div.querySelector('#assignSender_'+num).setAttribute('id', 'assignSender_' + count_ins);
 
+        // Modificación de instituto reparador
         let label_ir = new_div.querySelector('#labelRepair_'+num).setAttribute('id', 'labelRepair_' + count_ins);
         let input_ir = new_div.querySelector('#repair_'+num);
         input_ir.setAttribute('id', 'repair_' + count_ins);
         input_ir.value = val_ir;
         let button_ir = new_div.querySelector('#assignRepair_'+num).setAttribute('id', 'assignRepair_' + count_ins);
 
+        // Modificación de tipo dispositivo
+        let input_td = new_div.querySelector('#id_type_'+num);
+        input_td.setAttribute('id', 'id_type_' + count_ins);
+        input_td.value = val_td;
+
         document.getElementById('ticketList').appendChild(new_div);
     }
 
     function sendTicket() {
-        let tickets = document.getElementsByClassName('ticket');
 
+        let error = false;
+
+        event.preventDefault();
+        // Obtenemos todos los elementos con clase ticket
+        let tickets = document.querySelectorAll('.ticket');
+
+        // Los vamos recorriendo y obteniendo los valores del input y añadiendolos a un array
+        var arrTickets = [];
         tickets.forEach(ticket => {
-            console.log(ticket)
+
+            // Generamos el array que tendra los datos de cada tiquet
+            let arrData = [];
+            // Le añadimos el id_front del ticket
+            arrData.push({id:ticket.id});
+
+            // Recorremos todos los inputs y obteniendo sus valores
+            var inputs = ticket.querySelectorAll('input');
+            var arrInputs = [];
+            inputs.forEach(input => {
+                let name = input.name;
+                let value = input.value;
+                let tmp = {
+                    [name]:value
+                }
+                arrInputs.push(tmp);
+
+                // Comprobación de inputs
+                if (value == '' || value == null) {
+                    error = true;
+                    let error_msg = document.createElement('p');
+                    error_msg.classList = 'font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
+                    error_msg.innerText = '<?=lang('error.empty_slot_2')?>';
+                    input.parentElement.appendChild(error_msg);
+                }
+            });
+            
+            // Recorremos todos los selects y obteniendo sus valores
+            var selects = ticket.querySelectorAll('select');
+            var arrSelects = [];
+            selects.forEach(select => {
+                let name = select.name
+                let value = select.value
+                let tmp = {
+                    [name]:value
+                }
+                arrSelects.push(tmp)
+
+                // Comprobación de selects
+                if (name == 'id_type' && (value == '' || value == null || value == 'null')) {
+                    error = true;
+                    let error_msg = document.createElement('p');
+                    error_msg.classList = 'font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
+                    error_msg.innerText = '<?=lang('error.empty_slot_2')?>';
+                    select.parentElement.appendChild(error_msg);
+                }
+            });
+            
+            // Combinamos ambos arrays (inputs y selects) para formar un tiquet entero
+            arrData = arrData.concat(arrSelects.concat(arrInputs));
+
+            // Añadimos el tiquet al array principal
+            arrTickets.push(arrData);
         });
+
+        console.log(arrTickets)
+
+        if (!error) {
+            console.log('fino')
+        } else {
+            console.log('no fino')
+        }
+
     }
 
     document.addEventListener('DOMContentLoaded', function(){

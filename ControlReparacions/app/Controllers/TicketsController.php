@@ -336,6 +336,8 @@ class TicketsController extends BaseController
     {
         helper('form');
 
+        
+
         $validationRules =
             [
                 'description' => [
@@ -367,8 +369,6 @@ class TicketsController extends BaseController
         $model = new TiquetModel();
 
         $fake = Factory::create("es_ES");
-        // $arrCentres = ['25002799', '17010700', '17010499', '17008249', '8000013', '8001509', '8002198', '8015399', '8017104', '8019401'];
-
 
         $id_tiquet =  $fake->uuid();
         $codi_equip = $fake->uuid();
@@ -522,7 +522,6 @@ class TicketsController extends BaseController
         } else {
             $search = "";
         }
-
 
         //  Obtener filtro de dispositivo (?d=)
         if (isset($searchData['d']) && !empty($searchData['d'])) {

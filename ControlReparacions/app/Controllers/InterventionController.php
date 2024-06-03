@@ -54,34 +54,25 @@ class InterventionController extends BaseController
             ];
 
         if ($this->validate($validationRules)) {
+            
             $model = new IntervencioModel();
 
             $fake = Factory::create("es_ES");
 
             $id_inventary = $this->request->getPost("id_inventary");
 
-
-
-            //Añadir intervencion
+            // Añadir intervencion
             $id =  $fake->uuid();
             $descripcio =  $this->request->getPost("description");
             $id_ticket = $this->request->getPost("ticket_id");
 
 
-            //mirar si id_tipus_inventary de id_inventary
+            // Mirar si id_tipus_inventary de id_inventary
             $modelInventary = new InventariModel();
             $product = $modelInventary->getInventarytById($id_inventary);
 
-            // $id_tipus = $product['id_tipus_inventari'] == 6 ? 1 : 0;
+            $id_tipus = isset($product['id_tipus_inventari']) ? (($product['id_tipus_inventari'] == 6) ? 1 : 0) : 0;
 
-            $id_tipus = isset($product['id_tipus_inventari'])
-                ? $product['id_tipus_inventari'] == 6
-                ? 1
-                : 0
-                : 0;
-
-
-            $id_curs = session('user')['code'];
             $persona_reparadora = session('user')['user'];
 
             $model->addIntervencio(
@@ -89,21 +80,16 @@ class InterventionController extends BaseController
                 $descripcio,
                 $id_ticket,
                 $id_tipus,
-                $id_curs,
                 $persona_reparadora
             );
 
             //Modificar inventario relacionandolo con la intervencion
-
-
-
             $data = [
                 "id" =>  $id_inventary,
                 'id_intervencio' => $id,
             ];
 
             $modelInventary->modifyInventari($id_inventary, $data);
-
 
             return redirect()->to(base_url("tickets/" . $id_ticket));
         } else {
