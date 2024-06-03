@@ -44,24 +44,30 @@ class UsersModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addUser($id, $user, $passwd, $lang) {
-           
-        $data = [
-            'id'            => $id,
-            'user'            => $user,
-            'passwd'         => trim($passwd),
-            'lang'            => $lang
-        ];
+    public function addUser($id, $user, $passwd, $lang)
+    {
 
-        $this->insert($data);
+        $userExist = $this->where('user', $user)->first();
+
+        if ($userExist == null) {
+
+            $data = [
+                'id'            => $id,
+                'user'            => $user,
+                'passwd'         => trim($passwd),
+                'lang'            => $lang
+            ];
+
+            $this->insert($data);
+        }
     }
 
     // FUNCIÓN EXCLUSIVA PARA OBTENER LA CONTRASEÑA DE LOGIN PARA UN USER
     public function getLoginByMail($user)
     {
         return $this->select("id, user, passwd")
-                    ->orWhere('user', $user)
-                    ->first();
+            ->orWhere('user', $user)
+            ->first();
         // dd($this->db->getLastQuery());
     }
 
@@ -97,7 +103,8 @@ class UsersModel extends Model
 
         $id_str = $this->db->escape($id);
 
-        $this->select(  "users.id, users.user, users.lang
+        $this->select(
+            "users.id, users.user, users.lang
                         ,COALESCE(sstt.codi, centre.codi, professor.codi_centre, alumne.codi_centre, '') AS code
                         ,COALESCE(sstt.nom, centre.nom, CONCAT(professor.nom, ' ', COALESCE(professor.cognoms, '')), CONCAT(alumne.nom, ' ', COALESCE(alumne.cognoms, '')), '') AS name
                         ,COALESCE(sstt.adreca_fisica, centre.adreca_fisica, (SELECT centre.adreca_fisica FROM centre JOIN professor ON professor.codi_centre = centre.codi WHERE professor.id_user = $id_str), (SELECT centre.adreca_fisica FROM centre JOIN alumne ON alumne.codi_centre = centre.codi WHERE alumne.id_user = $id_str), '') AS adress
@@ -105,7 +112,7 @@ class UsersModel extends Model
                         ,COALESCE(sstt.altres, CONCAT(centre.taller, ',', centre.actiu), '') AS other
                         ,COALESCE(CONCAT(centre.nom_persona_contacte, ',', centre.correu_persona_contacte), '') AS contact
                         "
-                    );
+        );
         $this->join('sstt', 'sstt.id_user = users.id', 'left');
         $this->join('centre', 'centre.id_user = users.id', 'left');
         $this->join('professor', 'professor.id_user = users.id', 'left');
@@ -123,8 +130,15 @@ class UsersModel extends Model
     public function changeLang($lang)
     {
         if (session()->has("user") && !empty(session()->get("user"))) {
-            return $this->update(session()->get('user')["uid"], ['lang'=>$lang]);
+            return $this->update(session()->get('user')["uid"], ['lang' => $lang]);
             // dd($this->db->getLastQuery());
         }
+    }
+
+
+    // saber si el user existe para crearlo o no 
+    public function getUserByEmail($email){
+
+        return $this->select('id')->where('user', $email)->first();
     }
 }

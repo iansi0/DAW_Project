@@ -15,7 +15,7 @@
                 <input type="mail" name="email" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
                 <?php
                 if (validation_errors()) : ?>
-                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['nameContact'] ?></p>
+                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['email'] ?></p>
                 <?php endif ?>
             </div>
 
@@ -26,7 +26,7 @@
 
                 <?php
                 if (validation_errors()) : ?>
-                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['description'] ?></p>
+                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['name'] ?></p>
                 <?php endif ?>
             </div>
 
@@ -36,7 +36,7 @@
                 <input type="text" name="surnames" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
                 <?php
                 if (validation_errors()) : ?>
-                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['nameContact'] ?></p>
+                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['surnames'] ?></p>
                 <?php endif ?>
             </div>
 
@@ -46,7 +46,7 @@
                 <input type="text" name="course" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
                 <?php
                 if (validation_errors()) : ?>
-                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['emailContact'] ?></p>
+                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['course'] ?></p>
                 <?php endif ?>
             </div>
 

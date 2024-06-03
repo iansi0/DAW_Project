@@ -114,14 +114,14 @@ class StudentsController extends BaseController
     {
         helper('form');
 
-        if (!empty($this->request->getFiles())) {
+
+        $csv = $this->request->getFiles()['csv'];
+
+        if ($csv->getSize() != 0) {
             // guardar el csv 
             $file = $this->request->getFiles();
 
-            // $files['files']
-
-            // dd($file['csv']);
-
+     
             // leer el csv 
             $fileCsv = fopen($file['csv'], 'r');
 
@@ -146,14 +146,17 @@ class StudentsController extends BaseController
                     $codi_centre = session()->get('user')['code'];
                     $id_curs = trim($row[2]);
 
-                    $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre);
 
 
                     $user = trim($row[3]);
-                    $passwd = password_hash("1234", PASSWORD_DEFAULT);
+                    $passwd = $fake->password();
+                    $passwdHash = password_hash($passwd, PASSWORD_DEFAULT);
                     $lang = "ca";
 
-                    $modelUser->addUser($id_user, $user, $passwd, $lang);
+                    $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre, $user);
+                    $modelUser->addUser($id_user, $user, $passwdHash, $lang);
+
+                    // revisralo 
                     $newId = $fake->uuid();
                     $role = $roleModel->getIdByRole("alumn");
 
@@ -224,15 +227,16 @@ class StudentsController extends BaseController
                 $codi_centre = session()->get('user')['code'];
                 $id_curs = $this->request->getPost("course");
 
-                $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre);
-
-
                 $user = $this->request->getPost("email");
                 $passwd = $fake->password();
                 $passwd_hash = password_hash($passwd, PASSWORD_DEFAULT);
                 $lang = "ca";
 
+
+                $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre, $user);
                 $modelUser->addUser($id_user, $user, $passwd_hash, $lang);
+
+                
                 $newId = $fake->uuid();
                 $role = $roleModel->getIdByRole("alumn");
 

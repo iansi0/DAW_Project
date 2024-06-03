@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\UsersModel;
 
 class AlumneModel extends Model
 {
@@ -38,9 +39,30 @@ class AlumneModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addAlumne($id, $nom, $cognoms, $id_curs, $codi_centre)
+    public function addAlumne($id, $nom, $cognoms, $id_curs, $codi_centre, $correo = null)
     {
 
+        if ($correo != null) {
+
+            $modelUser = new UsersModel();
+
+            //Esto devuelve la id del user 
+            $userExist = $modelUser->getUserByEmail($correo);
+
+            if ($userExist != null) {
+                # code...
+                // si la id existe buscar el alumno y activarlo 
+
+                $data = [
+                    'id_curs'       => trim($id_curs),
+                    // aqui falta activar el alumno 
+                ];
+
+                return $this->where('id_user', $userExist)->set($data)->update();
+            }
+        }
+
+        //Si no existe añadirlo normal
         $data = [
             'id_user'       => $id,
             'nom'           => trim($nom),
@@ -65,7 +87,7 @@ class AlumneModel extends Model
         $code = session()->get('user')['code'];
 
 
-         $this->select(
+        $this->select(
             "alumne.id_user,
             alumne.nom,
             alumne.cognoms,
@@ -76,8 +98,8 @@ class AlumneModel extends Model
 
         $this->join('curs', 'alumne.id_curs = curs.id', 'left');
 
-         if($role=="prof" || $role=="ins"){
-            $this->where("alumne.codi_centre",$code);
+        if ($role == "prof" || $role == "ins") {
+            $this->where("alumne.codi_centre", $code);
         }
 
         return $this->paginate($nElements);
