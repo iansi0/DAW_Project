@@ -8,6 +8,9 @@ return [
 
     'role'          => 'Rol',
 
+    'general'       => 'Datos generales',
+    'specific'      => 'Datos específicos',
+
     'title'         => 'Título',
     'cycle'         => 'Ciclo',
     'course'        => 'Curso',
