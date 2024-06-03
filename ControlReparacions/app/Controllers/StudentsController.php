@@ -213,9 +213,9 @@ class StudentsController extends BaseController
                 $email->setFrom('braianpb02@gmail.com', 'KeepYourSoftware');
                 $email->setTo($user);
                 $email->setSubject('Usuari gestor d\'intervencions');
-                $email->setMessage('Bones nou usuari, benvingut a l\'aplicatiu de gestions d\'intervencions. \n\n
-                 El teu usuari és: ' . $user . '\n La teva contrassenya és: ' . $passwd);
-
+                $email->setMessage('Hola '.$nom.' '.$cognoms.', et donem la benvinguda a <a href="'.base_url().'"> l\'aplicatiu de gestions d\'intervencions</a>. <br><br>
+                 El teu usuari és: ' . $user . '<br> La teva contrassenya és: ' . $passwd);
+                 
                 $email->send();
             } else {
                 return redirect()->back()->withInput();
