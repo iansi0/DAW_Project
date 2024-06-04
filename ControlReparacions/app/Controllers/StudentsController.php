@@ -121,7 +121,7 @@ class StudentsController extends BaseController
             // guardar el csv 
             $file = $this->request->getFiles();
 
-     
+
             // leer el csv 
             $fileCsv = fopen($file['csv'], 'r');
 
@@ -236,7 +236,7 @@ class StudentsController extends BaseController
                 $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre, $user);
                 $modelUser->addUser($id_user, $user, $passwd_hash, $lang);
 
-                
+
                 $newId = $fake->uuid();
                 $role = $roleModel->getIdByRole("alumn");
 
@@ -261,9 +261,11 @@ class StudentsController extends BaseController
     public function deleteStudent($id)
     {
 
-        $model = new AlumneModel();
+        $modelStudent = new AlumneModel();
+       
 
-        $model->deleteStudent($id);
+        $modelStudent->deleteStudent($id);
+     
 
         return redirect()->to(base_url('/students'));
     }

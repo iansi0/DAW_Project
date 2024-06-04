@@ -107,6 +107,9 @@ class AlumneModel extends Model
 
     public function deleteStudent($id)
     {
+
+        $modelUser = new UsersModel();
+
         $role = session()->get('user')['role'];
         $code = session()->get('user')['code'];
 
@@ -114,6 +117,7 @@ class AlumneModel extends Model
         $this->where('id_user', $id);
 
         if ($role == "admin") {
+            $modelUser->deleteUser($id);
             return $this->delete();
         } else if ($role == "prof" || $role == "ins") {
             $this->groupStart();
@@ -123,6 +127,7 @@ class AlumneModel extends Model
             return;
         }
 
+        $modelUser->deleteUser($id);
         return $this->delete();
     }
 }
