@@ -56,11 +56,13 @@ class AlumneModel extends Model
                 // si la id existe buscar el alumno y activarlo 
                 // dd($userExist);
                 $data = [
+                    'id_user'       => $userExist['id'],
                     'id_curs'       => trim($id_curs),
+                    'deleted_at'       => (NULL),
                 ];
 
                 $modelUser->activatedUser($userExist);
-                $this->where('id_user', $userExist['id'])->withDeleted()->set('deleted_at', null)->update($data);
+                $this->where('id_user', $userExist['id'])->set($data)->update();
                   return false;
               
             }

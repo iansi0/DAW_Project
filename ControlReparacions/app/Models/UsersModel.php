@@ -153,11 +153,13 @@ class UsersModel extends Model
 
         // dd($id);
         $data = [
-            'deleted_at'    => null,
+            'id'    => $id['id'],
+            $this->deletedField   => (NULL),
         ];
 
-        d($id);
-        dd($id['id']);
-        return $this->where('id', $id['id'])->set('deleted_at', null)->update();
+        // d($id);
+        // d($id['id']);
+        // dd($this->where('id', $id['id'])->withDeleted()->findAll());
+        return $this->builder->where('id', $id['id'])->set($this->deletedField, null)->update();
     }
 }
