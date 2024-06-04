@@ -8,7 +8,7 @@ use App\Models\UsersModel;
 class AlumneModel extends Model
 {
     protected $table            = 'alumne';
-    protected $primaryKey       = 'correu_alumne';
+    protected $primaryKey       = 'id_user';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
@@ -42,36 +42,41 @@ class AlumneModel extends Model
     public function addAlumne($id, $nom, $cognoms, $id_curs, $codi_centre, $correo = null)
     {
 
+      
         if ($correo != null) {
 
+        
             $modelUser = new UsersModel();
-
+            // dd($correo);
             //Esto devuelve la id del user 
             $userExist = $modelUser->getUserByEmail($correo);
-
+            
+         
             if ($userExist != null) {
-                # code...
                 // si la id existe buscar el alumno y activarlo 
-
+                // dd($userExist);
                 $data = [
                     'id_curs'       => trim($id_curs),
-                    // aqui falta activar el alumno 
                 ];
 
-                return $this->where('id_user', $userExist)->set($data)->update();
+                $modelUser->activatedUser($userExist);
+                $this->where('id_user', $userExist['id'])->withDeleted()->set('deleted_at', null)->update($data);
+                  return false;
+              
             }
         }
 
-        //Si no existe añadirlo normal
-        $data = [
-            'id_user'       => $id,
-            'nom'           => trim($nom),
-            'cognoms'       => trim($cognoms),
-            'id_curs'       => trim($id_curs),
-            'codi_centre'   => trim($codi_centre),
-        ];
+        // //Si no existe añadirlo normal
+        // $data = [
+        //     'id_user'       => $id,
+        //     'nom'           => trim($nom),
+        //     'cognoms'       => trim($cognoms),
+        //     'id_curs'       => trim($id_curs),
+        //     'codi_centre'   => trim($codi_centre),
+        // ];
 
-        $this->insert($data);
+        // $this->insert($data);
+        // return true;
     }
 
     public function getByTitleOrText($search)

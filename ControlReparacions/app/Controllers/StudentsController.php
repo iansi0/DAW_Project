@@ -233,23 +233,30 @@ class StudentsController extends BaseController
                 $lang = "ca";
 
 
-                $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre, $user);
-                $modelUser->addUser($id_user, $user, $passwd_hash, $lang);
+                $createdAlumne = $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre, $user);
 
 
-                $newId = $fake->uuid();
-                $role = $roleModel->getIdByRole("alumn");
+                // dd($createdAlumne);
+                if ($createdAlumne) {
 
-                $userInRole->addUserRole($newId, $id_user, $role["id"]);
 
-                $email = \Config\Services::email();
+                    $modelUser->addUser($id_user, $user, $passwd_hash, $lang);
 
-                $email->setFrom('braianpb02@gmail.com', 'KYS');
-                $email->setTo($user);
-                $email->setSubject('Registro KYS');
-                $email->setMessage('Tu contraseña es: ' . $passwd);
 
-                $email->send();
+                    $newId = $fake->uuid();
+                    $role = $roleModel->getIdByRole("alumn");
+
+                    $userInRole->addUserRole($newId, $id_user, $role["id"]);
+
+                    $email = \Config\Services::email();
+
+                    $email->setFrom('braianpb02@gmail.com', 'KYS');
+                    $email->setTo($user);
+                    $email->setSubject('Registro KYS');
+                    $email->setMessage('Tu contraseña es: ' . $passwd);
+
+                    $email->send();
+                }
             } else {
                 return redirect()->back()->withInput();
             }
@@ -262,10 +269,10 @@ class StudentsController extends BaseController
     {
 
         $modelStudent = new AlumneModel();
-       
+
 
         $modelStudent->deleteStudent($id);
-     
+
 
         return redirect()->to(base_url('/students'));
     }

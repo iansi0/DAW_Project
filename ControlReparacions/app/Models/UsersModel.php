@@ -139,12 +139,25 @@ class UsersModel extends Model
     // saber si el user existe para crearlo o no 
     public function getUserByEmail($email)
     {
-
-        return $this->select('id')->where('user', $email)->first();
+        
+        return $this->select('id')->where('user', $email)->withDeleted()->first();
     }
 
     public function deleteUser($id)
     {
-       return $this->where('id', $id)->delete();
+        return $this->where('id', $id)->delete();
+    }
+
+    public function activatedUser($id)
+    {
+
+        // dd($id);
+        $data = [
+            'deleted_at'    => null,
+        ];
+
+        d($id);
+        dd($id['id']);
+        return $this->where('id', $id['id'])->set('deleted_at', null)->update();
     }
 }
