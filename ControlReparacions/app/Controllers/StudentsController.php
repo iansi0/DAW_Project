@@ -210,12 +210,12 @@ class StudentsController extends BaseController
 
                 $email = \Config\Services::email();
 
-                $email->setFrom('braianpb02@gmail.com', 'KeepYourSoftware');
+                $email->setFrom('keepyoursoftware@gmail.com', 'KeepYourSoftware');
                 $email->setTo($user);
                 $email->setSubject('Usuari gestor d\'intervencions');
                 $email->setMessage('Hola '.$nom.' '.$cognoms.', et donem la benvinguda a <a href="'.base_url().'"> l\'aplicatiu de gestions d\'intervencions</a>. <br><br>
                  El teu usuari és: ' . $user . '<br> La teva contrassenya és: ' . $passwd);
-                 
+
                 $email->send();
             } else {
                 return redirect()->back()->withInput();

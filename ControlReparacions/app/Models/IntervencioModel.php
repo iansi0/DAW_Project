@@ -38,7 +38,7 @@ class IntervencioModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addIntervencio($id, $descripcio, $id_ticket, $id_tipus, $persona_reparadora)
+    public function addIntervencio($id, $descripcio, $id_ticket, $id_tipus, $id_curs, $persona_reparadora)
     {
 
         $data = [
@@ -46,7 +46,7 @@ class IntervencioModel extends Model
             'descripcio' => $descripcio,
             'id_ticket' => $id_ticket,
             'id_tipus' => $id_tipus,
-            
+            'id_curs' => $id_curs,
             'id_user' => $persona_reparadora,
         ];
 
