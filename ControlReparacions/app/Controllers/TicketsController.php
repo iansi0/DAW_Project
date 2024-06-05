@@ -401,7 +401,7 @@ class TicketsController extends BaseController
 
             $model->addTiquet(
                 $id_tiquet,
-                $codi_equip??LibrariesUUID::v4(),
+                $codi_equip,
                 $descripcio_avaria,
                 $nom_persona_contacte_centre,
                 $correu_persona_contacte_centre,
