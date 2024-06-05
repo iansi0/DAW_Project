@@ -12,7 +12,22 @@ class UserController extends BaseController
         $model = new UsersModel();
         $data['user'] = $model->getUserById(session('user')['uid']);
 
-        return view('user/user_config', $data);
+        // dd($data['user']);
+
+        $role = session()->get('user')['role'];
+
+        return view('configurations/student', $data);
+
+        if ($role == 'alumn') {
+            return view('configurations/student', $data);
+        } else if ($role == 'prof') {
+            return view('configurations/teacher', $data);
+        } else if ($role == 'ins') {
+            return view('configurations/institutes', $data);
+        } else if ($role == 'sstt') {
+            return view('configurations/sstt', $data);
+        }
+        return view('configurations/admin', $data);
     }
 
     public function config_post()
@@ -21,7 +36,7 @@ class UserController extends BaseController
 
         $language = $this->request->getPost('select_lang');
 
-        if($language != 'ca' && $language != 'es' && $language != 'en'){
+        if ($language != 'ca' && $language != 'es' && $language != 'en') {
             session()->setFlashdata('error', lang("error.wrong_slot"));
             return redirect()->to(base_url('config'));
         }
