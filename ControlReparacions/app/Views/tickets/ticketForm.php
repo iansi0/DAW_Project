@@ -54,15 +54,6 @@
         div_input_desc.appendChild(label);
         div_input_desc.appendChild(input_desc);
 
-        <?php if (validation_errors()) : ?>
-            // Comprobamos si hay errores
-            error_desc = document.createElement('p');
-            error_desc.classList = 'font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
-            error_desc.innerText = '<?= validation_errors()['description'] ?>';
-            // Añadimos los errores al div
-            div_input_desc.appendChild(error_desc);
-        <?php endif ?>
-
         // Añadimos todo al div del formulario
         div.appendChild(div_input_desc);
 
@@ -80,15 +71,6 @@
         // Añadimos el label e input al div
         div_input_nc.appendChild(label);
         div_input_nc.appendChild(input_nc);
-
-        <?php if (validation_errors()) : ?>
-            // Comprobamos si hay errores
-            error_nc = document.createElement('p');
-            error_nc.classList = 'font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
-            error_nc.innerText = '<?= validation_errors()['nameContact'] ?>';
-            // Añadimos los errores al div
-            div_input_nc.appendChild(error_nc);
-        <?php endif ?>
 
         // Añadimos todo al div del formulario
         div.appendChild(div_input_nc);
@@ -108,15 +90,6 @@
         // Añadimos el label e input al div
         div_input_ec.appendChild(label);
         div_input_ec.appendChild(input_ec);
-
-        <?php if (validation_errors()) : ?>
-            // Comprobamos si hay errores
-            error_ec = document.createElement('p');
-            error_ec.classList = 'font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
-            error_ec.innerText = '<?= validation_errors()['emailContact'] ?>';
-            // Añadimos los errores al div
-            div_input_ec.appendChild(error_ec);
-        <?php endif ?>
 
         // Añadimos todo al div del formulario
         div.appendChild(div_input_ec);
@@ -149,15 +122,6 @@
         // Añadimos el label e input al div
         div_input_td.appendChild(label);
         div_input_td.appendChild(input_td);
-
-        <?php if (validation_errors()) : ?>
-            // Comprobamos si hay errores
-            error_td = document.createElement('p');
-            error_td.classList = 'font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
-            error_td.innerText = '<?= validation_errors()['id_type'] ?>';
-            // Añadimos los errores al div
-            div_input_td.appendChild(error_td);
-        <?php endif ?>
 
         // Añadimos todo al div del formulario
         div.appendChild(div_input_td);
@@ -432,10 +396,31 @@
             arrTickets.push(arrData);
         });
 
-        console.log(arrTickets)
-
         if (!error) {
-            console.log('fino')
+
+            // Convertimos el array a JSON
+            var arrJSON = JSON.stringify(arrTickets);
+            console.log(arrJSON)
+
+            // Creamos un formulario temporal
+            var form_tmp = document.createElement('form');
+            form_tmp.action = 'add';
+            form_tmp.method = 'POST';
+            form_tmp.style.display = 'none';
+
+            // Creamos un input con los datos del JSON y lo añadimos al formulario anterior
+            let inout_tmp = document.createElement('input');
+            inout_tmp.type = 'hidden';
+            inout_tmp.name = 'arrTickets';
+            inout_tmp.value = arrJSON;
+            form_tmp.appendChild(inout_tmp);
+
+            // Añadimos el formulario al documento y lo enviamos
+            document.body.appendChild(form_tmp);
+            form_tmp.submit();
+
+            form_tmp.remove();
+            
         } else {
             console.log('no fino')
         }

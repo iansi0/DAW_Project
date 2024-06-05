@@ -13,6 +13,8 @@ use App\Models\InventariModel;
 use Faker\Factory;
 use Google\Service\Walletobjects\Pagination;
 
+use App\Libraries\UUID as LibrariesUUID;
+
 class TicketsController extends BaseController
 {
     public function tickets()
@@ -336,86 +338,83 @@ class TicketsController extends BaseController
     {
         helper('form');
 
-        
+        $arrTickets = $this->request->getPost('arrTickets');
 
-        $validationRules =
-            [
-                'description' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Error Descripcio',
-                    ],
-                ],
-                'nameContact' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Error nameContact',
-                    ],
-                ],
-                'emailContact' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Error emailContact',
-                    ],
-                ],
-                'id_type' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Error id_type',
-                    ],
-                ],
-            ];
+        // Forzamos el json_decode
+        $arrTickets = json_decode((string) $arrTickets);
 
-        $model = new TiquetModel();
+        // dd($arrTickets);
 
-        $fake = Factory::create("es_ES");
+        // Creamos un array que irá almacenando los inputs erróneos
+        $arrErrors = [];
 
-        $id_tiquet =  $fake->uuid();
-        $codi_equip = $fake->uuid();
-        $descripcio_avaria =  $this->request->getPost("description");
-        $nom_persona_contacte_centre = $this->request->getPost("nameContact");
-        $correu_persona_contacte_centre =  $this->request->getPost("emailContact");
-        $id_tipus_dispositiu = $this->request->getPost("id_type");
+        // Hacemos un primer recorrido comprobando que los inputs están correctos
+        foreach ($arrTickets as $ticket) {
 
-        if ($this->validate($validationRules)) {
-            if (session()->get('user')['role'] = "prof" || session()->get('user')['role'] = "ins") {
+            $id_ticket = $ticket[0]->id;
+            $id_tipus_dispositiu = $ticket[1]->id_type;
+            $descripcio_avaria =  $ticket[4]->description;
+            $nom_persona_contacte_centre = $ticket[5]->nameContact;
+            $correu_persona_contacte_centre =  $ticket[6]->emailContact;
 
-                $codi_centre_emissor = session()->get('user')['code'];
-                $id_estat = 1;
-                $codi_centre_reparador = 0;
-            } else {
-
-                $id_estat = 2;
-
-                if ($this->request->getPost("repair") && $this->request->getPost("sender")) {
-                    $codi_centre_reparador = $this->request->getPost("repair");
-                    $codi_centre_emissor = $this->request->getPost("sender");
-                } else if ($this->request->getPost("repair")) {
-                    $codi_centre_reparador = $this->request->getPost("repair");
-                    $codi_centre_emissor = 0;
-                } else {
-                    // TODO: Poner aqui el error porque n hay centro reparador en esta opcion
-                    $codi_centre_emissor = $this->request->getPost("sender");
-                    $codi_centre_reparador = 0;
-                }
+            if ($id_tipus_dispositiu == null || $id_tipus_dispositiu == '') {
+                $arrErrors[$id_ticket]["id_type"] = lang('error.id_type');
             }
+            if ($descripcio_avaria == null || $descripcio_avaria == '') {
+                $arrErrors[$id_ticket]["description"] = lang('error.description');
+            }
+            if ($nom_persona_contacte_centre == null || $nom_persona_contacte_centre == '') {
+                $arrErrors[$id_ticket]["nameContact"] = lang('error.nameContact');
+            }
+            if ($correu_persona_contacte_centre == null || $correu_persona_contacte_centre == '') {
+                $arrErrors[$id_ticket]["emailContact"] = lang('error.emailContact');
+            }
+        }
 
+        // Si detectamos errores, los mandamos de vuelta al front para ser corregidos
+        // PD: el flash data no sera ejecutado y no solo eso, se le va a recargar la pagina al cliente borrándole todos los tiquets
+        // PDD: Un cliente normal se quedaria en las validaciones de javascript
+        if (count($arrErrors) > 0) {
+            session()->setFlashdata('error', $arrErrors);
+            return redirect()->back();
+        }
+
+        // Si todo esta bien, añadimos los tickets
+        foreach ($arrTickets as $ticket) {
+
+            $model = new TiquetModel();
+
+            $id_tiquet = LibrariesUUID::v4();
+            $codi_equip = null;
+            $id_tipus_dispositiu = $ticket[1]->id_type;
+            $ins_emissor = $ticket[2]->sender??0;
+            $ins_receptor = $ticket[3]->repair??0;
+            $descripcio_avaria =  $ticket[4]->description;
+            $nom_persona_contacte_centre = $ticket[5]->nameContact;
+            $correu_persona_contacte_centre =  $ticket[6]->emailContact;
+            $id_estat = 1;
+
+            if (session()->get('user')['role'] == "prof" || session()->get('user')['role'] == "ins") {
+                $ins_emissor = session()->get('user')['code'];
+                $ins_receptor = 0;
+            }
 
             $model->addTiquet(
                 $id_tiquet,
-                $codi_equip,
+                $codi_equip??LibrariesUUID::v4(),
                 $descripcio_avaria,
                 $nom_persona_contacte_centre,
                 $correu_persona_contacte_centre,
                 $id_tipus_dispositiu,
                 $id_estat,
-                $codi_centre_emissor,
-                $codi_centre_reparador
+                $ins_emissor,
+                $ins_receptor
             );
-        } else {
-            return redirect()->back()->withInput();
+            
         }
+
         return redirect()->to(base_url('/tickets'));
+
     }
 
     public function modifyTicket($id)
