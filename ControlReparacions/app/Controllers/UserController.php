@@ -89,6 +89,7 @@ class UserController extends BaseController
 
         if ($this->validate($validationRules)) {
 
+            // dd($password);
             $model->changePassword($password);
 
             return redirect()->to(base_url('config'));

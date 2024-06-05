@@ -70,17 +70,17 @@ class AlumneModel extends Model
             }
         }
 
-        // //Si no existe añadirlo normal
-        // $data = [
-        //     'id_user'       => $id,
-        //     'nom'           => trim($nom),
-        //     'cognoms'       => trim($cognoms),
-        //     'id_curs'       => trim($id_curs),
-        //     'codi_centre'   => trim($codi_centre),
-        // ];
+        //Si no existe añadirlo normal
+        $data = [
+            'id_user'       => $id,
+            'nom'           => trim($nom),
+            'cognoms'       => trim($cognoms),
+            'id_curs'       => trim($id_curs),
+            'codi_centre'   => trim($codi_centre),
+        ];
 
-        // $this->insert($data);
-        // return true;
+        $this->insert($data);
+        return true;
     }
 
     public function getByTitleOrText($search)
