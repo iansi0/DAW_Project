@@ -4,15 +4,19 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UsersModel;
+use App\Models\CentreModel;
 
 class UserController extends BaseController
 {
     public function config()
     {
         $model = new UsersModel();
-        $data['user'] = $model->getUserById(session('user')['uid']);
+        $modelInstitute = new CentreModel();
 
-        // dd($data['user']);
+        $data['user'] = $model->getUserById(session('user')['uid']);
+        $data['institute'] = $modelInstitute->getInstituteById(session('user')['code']);
+
+        // dd($data['institute']);
 
         $role = session()->get('user')['role'];
 
