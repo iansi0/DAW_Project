@@ -16,7 +16,7 @@ class TIQUETS extends Migration
                 ],
                 'codi_dispositiu'          => [
                         'type'           => 'VARCHAR',
-                        'constraint'     => 100,
+                        'constraint'     => 32,
                         'trim'           => true,
                 ],
                 'descripcio_avaria'          => [
@@ -39,7 +39,7 @@ class TIQUETS extends Migration
                 ],
                 'id_tipus_dispositiu'          => [
                         'type'           => 'INT',
-                        'constraint'     => 2,
+                        'constraint'     => 3,
                         'null'           => false,
                 ],
                 'id_estat'          => [

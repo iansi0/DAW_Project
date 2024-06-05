@@ -16,18 +16,18 @@ class USERS extends Migration
             'user' => [
                 'type'           => 'VARCHAR',
                 'trim'           => true,
-                'constraint'     => 200,
+                'constraint'     => 100,
             ],
             'passwd' => [
                 'type'           => 'VARCHAR',
                 'trim'           => true,
-                'constraint'     => 100,
+                'constraint'     => 255,
                 'null'           => true,
             ],
             'lang'          => [
                 'type'           => 'VARCHAR',
                 'trim'           => true,
-                'constraint'     => 10,
+                'constraint'     => 2,
                 'null'           => true,
             ],
 

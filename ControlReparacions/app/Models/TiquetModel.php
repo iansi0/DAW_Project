@@ -114,8 +114,11 @@ class TiquetModel extends Model
 
         if ($role=="admin") {
             $this;
-        }else if($role=="prof" || $role=="alumn" || $role=="ins"){
+        }else if($role=="prof" || $role=="ins"){
             $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+        }else if($role=="alumn"){
+            $this->where("tiquet.codi_centre_reparador",$code);
+            $this->where("estat.id",'6');
         }else if($role=="sstt"){
             $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
         }
@@ -166,8 +169,11 @@ class TiquetModel extends Model
 
         if ($role=="admin") {
             $this;
-        }else if($role=="prof" || $role=="alumn" || $role=="ins"){
+        }else if($role=="prof" || $role=="ins"){
             $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+        }else if($role=="alumn"){
+            $this->where("tiquet.codi_centre_reparador",$code);
+            $this->where("estat.id",'6');
         }else if($role=="sstt"){
             $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
         }
@@ -185,7 +191,7 @@ class TiquetModel extends Model
 
         if ($role=="admin") {
             return $this->delete();
-        }else if($role=="prof" || $role=="alumn" || $role=="ins"){
+        }else if($role=="prof" || $role=="ins"){
             $this->groupStart();
             $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
@@ -211,7 +217,7 @@ class TiquetModel extends Model
 
         if ($role=="admin") {
             $this;
-        }else if($role=="prof" || $role=="alumn" || $role=="ins"){
+        }else if($role=="prof" || $role=="ins"){
             $this->groupStart();
             $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
@@ -237,7 +243,7 @@ class TiquetModel extends Model
 
         if ($role=="admin") {
             $this;
-        }else if($role=="prof" || $role=="alumn" || $role=="ins"){
+        }else if($role=="prof" || $role=="ins"){
             $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
         }else if($role=="sstt"){
             $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
