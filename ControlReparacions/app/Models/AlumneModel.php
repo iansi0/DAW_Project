@@ -42,16 +42,16 @@ class AlumneModel extends Model
     public function addAlumne($id, $nom, $cognoms, $id_curs, $codi_centre, $correo = null)
     {
 
-      
+
         if ($correo != null) {
 
-        
+
             $modelUser = new UsersModel();
             // dd($correo);
             //Esto devuelve la id del user 
             $userExist = $modelUser->getUserByEmail($correo);
-            
-         
+
+
             if ($userExist != null) {
                 // si la id existe buscar el alumno y activarlo 
                 // dd($userExist);
@@ -60,13 +60,12 @@ class AlumneModel extends Model
                     'deleted_at'      => null,
                 ];
 
-                $this->where('id_user', $userExist['id'])->set('id_curs',trim($id_curs))->update();
+                $this->where('id_user', $userExist['id'])->set('id_curs', trim($id_curs))->update();
                 $this->builder->where('id_user', $userExist['id'])->set($this->deletedField, null)->update();
 
                 $modelUser->activatedUser($userExist);
                 // $this->builder->where('id_user', $userExist['id'])->set($data)->update();
-                  return false;
-              
+                return false;
             }
         }
 
@@ -112,6 +111,27 @@ class AlumneModel extends Model
         }
 
         return $this->paginate($nElements);
+    }
+
+    public function getStudentById($id)
+    {
+
+        $role = session()->get('user')['role'];
+        $code = session()->get('user')['code'];
+
+
+        $this->select(
+            "alumne.id_user,
+            alumne.nom,
+            alumne.cognoms,
+            alumne.id_curs,
+            curs.titol as curs,
+            alumne.codi_centre"
+        );
+
+        $this->join('curs', 'alumne.id_curs = curs.id', 'left');
+
+        return $this->where('id_user', $id)->findAll();
     }
 
     public function deleteStudent($id)

@@ -265,6 +265,19 @@ class StudentsController extends BaseController
         }
     }
 
+    public function modifyStudent($id)
+    {
+        helper('form');
+
+        $modelStudent = new AlumneModel();
+
+        $data = [
+            'student' => $modelStudent->getStudentById($id),
+        ];
+
+        return view('students/modifyStudent', $data);
+    }
+
     public function deleteStudent($id)
     {
 
