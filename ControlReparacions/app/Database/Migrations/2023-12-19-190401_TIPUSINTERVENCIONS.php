@@ -10,8 +10,8 @@ class TIPUSINTERVENCIONS extends Migration
     {
         $this->forge->addField([
                 'id'          => [
-                    'type'           => 'BINARY',
-                    'constraint'     => 32,
+                    'type'           => 'INT',
+                    'constraint'     => 3,
                 ],
                 'nom'          => [
                     'type'           => 'VARCHAR',

@@ -14,14 +14,14 @@ class CURS extends Migration
                     'constraint'     => 32,
                     'null'           => false,
                 ],
-                'curs'          => [
-                    'type'           => 'INT',
-                    'constraint'     => 4,
+                'clase'          => [
+                    'type'           => 'VARCHAR',
+                    'constraint'     => 5,
                     'null'           => false,
                 ],
                 'any'          => [
-                    'type'           => 'INT',
-                    'constraint'     => 1,
+                    'type'           => 'VARCHAR',
+                    'constraint'     => 5,
                     'null'           => false,
                 ],
                 'titol'          => [

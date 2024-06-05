@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class CursModel extends Model
 {
     protected $table            = 'curs';
-    protected $primaryKey       = 'idcurs';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'curs', 'any', 'titol', 'codi_centre'];
+    protected $allowedFields    = ['id','clase','any','titol','codi_centre'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,11 +38,11 @@ class CursModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addCurs($id, $curs, $any, $titol, $codi_centre) {
+    public function addCurs($id,$clase,$any,$titol,$codi_centre) {
            
         $data = [
             'id' =>  $id,
-            'curs' => $curs,
+            'clase' => $clase,
             'any' => $any,
             'titol' => $titol,
             'codi_centre' => $codi_centre,

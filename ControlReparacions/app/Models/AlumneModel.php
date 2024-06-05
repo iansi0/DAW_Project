@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class AlumneModel extends Model
 {
     protected $table            = 'alumne';
-    protected $primaryKey       = 'correu_alumne';
+    protected $primaryKey       = 'id_user';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
