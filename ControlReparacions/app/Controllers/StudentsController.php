@@ -229,7 +229,7 @@ class StudentsController extends BaseController
 
                 $user = $this->request->getPost("email");
                 $passwd = $fake->password();
-                $passwd_hash = password_hash($passwd, PASSWORD_DEFAULT);
+                $passwd_hash = password_hash('1234', PASSWORD_DEFAULT);
                 $lang = "ca";
 
 

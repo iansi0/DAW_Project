@@ -65,4 +65,34 @@ class UserController extends BaseController
 
         return redirect()->to(base_url('config'));
     }
+
+    public function change_passwd()
+    {
+
+        //cambiar la passwd
+        $model = new UsersModel();
+        $password = $this->request->getPost('passwd');
+
+        //validation errors
+        helper('form');
+
+        $validationRules =
+            [
+                'passwd' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error passwd',
+                    ],
+                ],
+            ];
+
+
+        if ($this->validate($validationRules)) {
+
+            $model->changePassword($password);
+
+            return redirect()->to(base_url('config'));
+        }
+        return redirect()->back()->withInput();
+    }
 }

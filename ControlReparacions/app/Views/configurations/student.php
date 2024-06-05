@@ -13,10 +13,10 @@
             <p>email: <?= $user['user'] ?> </p>
         </div>
 
-        <form action="" class="flex flex-col gap-5 px-10 py-5 border-2 border-black rounded-lg">
+        <form action="<?=base_url('config/passwd')?>" class="flex flex-col gap-5 px-10 py-5 border-2 border-black rounded-lg">
             <div class="flex flex-col mt-5">
                 <label class="">Cambiar contraseña*</label>
-                <input type="text" name="description" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                <input type="text" name="passwd" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
             </div>
             <input type="submit" value="Cambiar" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
         </form>

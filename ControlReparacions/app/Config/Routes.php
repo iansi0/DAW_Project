@@ -93,6 +93,7 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
     // CONFIG
     $routes->group('config', function ($routes) {
         $routes->GET('', 'UserController::config');
+        $routes->GET('passwd', 'UserController::change_passwd');
         $routes->POST('', 'UserController::config_post');
     });
 
