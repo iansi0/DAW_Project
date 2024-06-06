@@ -688,4 +688,116 @@ class TicketsController extends BaseController
 
 
     }
+
+    public function importCSV()
+    {
+        $csv = $this->request->getFiles()['uploadCSV'];
+
+        if ($csv->getSize() != 0) {
+            // guardar el csv 
+            $file = $this->request->getFiles();
+
+            // leer el csv 
+            $fileCsv = fopen($file['uploadCSV'], 'r');
+
+            // Boolean para saltarnos la primera fila (es una fila con los nombres de los campos y por ende la descartamos)
+            $firstLine = true;
+
+            // hacer un while para introducir los datos 
+            while (($row = fgetcsv($fileCsv, 2000, ",")) !== FALSE) {
+
+                if (!$firstLine) {
+
+                    $fake = Factory::create("es_ES");
+
+                    $modelTickets = new TiquetModel();
+
+                    $id_tiquet =  $fake->uuid();
+                    $codi_equip = $fake->uuid();
+                    $descripcio_avaria =  trim($row[0]);
+                    $nom_persona_contacte_centre = trim($row[1]);
+                    $correu_persona_contacte_centre =  trim($row[2]);
+                    $id_tipus_dispositiu = trim($row[3]);
+                    $codi_centre_emissor = trim($row[4]);
+                    $id_estat = trim($row[5]);
+                    $codi_centre_reparador = trim($row[6]);
+
+
+                    $modelTickets->addTiquet(
+                        $id_tiquet,
+                        $codi_equip,
+                        $descripcio_avaria,
+                        $nom_persona_contacte_centre,
+                        $correu_persona_contacte_centre,
+                        $id_tipus_dispositiu,
+                        $id_estat,
+                        $codi_centre_emissor,
+                        $codi_centre_reparador
+                    );
+                }
+                $firstLine = false;
+            }
+
+            fclose($fileCsv);
+
+            return redirect()->to(base_url('/tickets'));
+        }
+    }
+
+    public function importXLS()
+    {
+        $csv = $this->request->getFiles()['uploadXLS'];
+
+    
+        if ($csv->getSize() != 0) {
+            // guardar el csv 
+            $file = $this->request->getFiles();
+
+            // leer el csv 
+            $fileCsv = fopen($file['uploadXLS'], 'r');
+
+            // Boolean para saltarnos la primera fila (es una fila con los nombres de los campos y por ende la descartamos)
+            $firstLine = true;
+
+            // hacer un while para introducir los datos 
+            while (($row = fgetcsv($fileCsv, 2000, ",")) !== FALSE) {
+
+                if (!$firstLine) {
+
+                    $fake = Factory::create("es_ES");
+
+                    $modelTickets = new TiquetModel();
+
+
+                    $id_tiquet =  $fake->uuid();
+                    $codi_equip = $fake->uuid();
+                    $descripcio_avaria =  trim($row[0]);
+                    $nom_persona_contacte_centre = trim($row[1]);
+                    $correu_persona_contacte_centre =  trim($row[2]);
+                    $id_tipus_dispositiu = trim($row[3]);
+                    $codi_centre_emissor = trim($row[4]);
+                    $id_estat = trim($row[5]);
+                    $codi_centre_reparador = trim($row[6]);
+
+
+                    $modelTickets->addTiquet(
+                        $id_tiquet,
+                        $codi_equip,
+                        $descripcio_avaria,
+                        $nom_persona_contacte_centre,
+                        $correu_persona_contacte_centre,
+                        $id_tipus_dispositiu,
+                        $id_estat,
+                        $codi_centre_emissor,
+                        $codi_centre_reparador
+                    );
+                }
+                $firstLine = false;
+            }
+
+            fclose($fileCsv);
+
+            return redirect()->to(base_url('/tickets'));
+        }
+    }
 }

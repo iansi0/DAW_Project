@@ -49,7 +49,7 @@
         </button>
 
         <!-- Dropdown menu -->
-        <div id="dropdown" class="absolute z-10 w-full  bg-white divide-y divide-gray-100 rounded-lg ">
+        <div id="dropdown" class="absolute hidden z-10 w-full  bg-white divide-y divide-gray-100 rounded-lg ">
 
           <ul class=" flex flex-col shadow-lg border-2 border-terciario-1 gap-2  text-terciario-4 text-lg" aria-labelledby="dropdownDefaultButton">
 
@@ -69,28 +69,28 @@
 
             <!-- Import CSV -->
             <li>
-              <form action="subircsv" method="POST">
+              <form action="<?=base_url('import/csv')?>" method="POST" enctype="multipart/form-data">
                 <label for="uploadCSV" class="block px-4 py-2 hover:bg-primario hover:text-secundario">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-current inline" viewBox="0 0 32 32">
                     <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z" data-original="#000000" />
                     <path d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z" data-original="#000000" />
                   </svg>
                   Import CSV
-                  <input type="file" id='uploadCSV' class="hidden" />
+                  <input type="file" id='uploadCSV' name="uploadCSV" class="hidden" />
                 </label>
               </form>
             </li>
 
             <!-- Import XLS -->
             <li>
-              <form action="subirxls" method="POST">
+              <form action="<?=base_url('import/xls')?>" method="POST" enctype="multipart/form-data">
                 <label for="uploadXLS" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-current inline" viewBox="0 0 32 32">
                     <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z" data-original="#000000" />
                     <path d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z" data-original="#000000" />
                   </svg>
                   Import XLS
-                  <input type="file" id='uploadXLS' class="hidden" />
+                  <input type="file" id='uploadXLS' name="uploadXLS" class="hidden" />
                 </label>
               </form>
             </li>
@@ -247,7 +247,7 @@
   uploadCSV.addEventListener('change', function() {
     if (this.files && this.files[0]) {
       let parentForm = uploadCSV.parentElement.parentElement;
-
+    
       (function() {
         Swal.fire({
           customClass: {

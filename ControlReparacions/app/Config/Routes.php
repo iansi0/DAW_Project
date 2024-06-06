@@ -38,7 +38,15 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         // XLS
         $routes->GET('xls', 'TicketsController::exportXLS');
     });
-    $routes->GET('pdf/(:segment)', 'PDFController::index/$1');
+
+    // IMPORTS
+    $routes->group('import', ['filter' => 'exportTicket'], function ($routes) {
+        //CSV
+        $routes->POST('csv', 'TicketsController::importCSV');
+        // XLS
+        $routes->POST('xls', 'TicketsController::importXLS');
+    });
+
 
     // INTERVENTIONS
     $routes->group('intervention', function ($routes) {
