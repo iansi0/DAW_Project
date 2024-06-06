@@ -55,24 +55,23 @@
 
             <!-- Export CSV  -->
             <li>
-              <a href="<?= base_url('export/csv?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>">
-                <button id="csv" class=" px-8  py-1 border border-terciario-4  rounded-lg  transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " CSV" ?></button>
+              <a href="<?= base_url('export/csv?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
+                <?= lang('buttons.export') . " CSV" ?>
               </a>
             </li>
 
             <!-- Export XLS -->
             <li>
-              <a href="<?= base_url('export/xls?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>">
-                <button id="xls" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " XLS" ?></button>
+              <a href="<?= base_url('export/xls?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
+                <?= lang('buttons.export') . " XLS" ?>
               </a>
             </li>
 
             <!-- Import CSV -->
             <li>
               <form action="subircsv" method="POST">
-
-                <label for="uploadCSV" class="flex bg-gray-800 hover:bg-gray-700 text-white text-base px-5 py-3 outline-none rounded w-max cursor-pointer mx-auto font-[sans-serif]">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-white inline" viewBox="0 0 32 32">
+                <label for="uploadCSV" class="block px-4 py-2 hover:bg-primario hover:text-secundario">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-current inline" viewBox="0 0 32 32">
                     <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z" data-original="#000000" />
                     <path d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z" data-original="#000000" />
                   </svg>
@@ -85,8 +84,8 @@
             <!-- Import XLS -->
             <li>
               <form action="subirxls" method="POST">
-                <label for="uploadXLS" class="flex bg-gray-800 hover:bg-gray-700 text-white text-base px-5 py-3 outline-none rounded w-max cursor-pointer mx-auto font-[sans-serif]">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-white inline" viewBox="0 0 32 32">
+                <label for="uploadXLS" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-current inline" viewBox="0 0 32 32">
                     <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z" data-original="#000000" />
                     <path d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z" data-original="#000000" />
                   </svg>
@@ -98,14 +97,12 @@
 
             <!-- Imprimir PDF  -->
             <li>
-              <a href="<?= base_url('TicketsPDF?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" 
-              class="block px-4 py-2 hover:bg-primario hover:text-secundario">Imprimir PDF</a>
+              <a href="<?= base_url('TicketsPDF?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" class="block px-4 py-2 hover:bg-primario hover:text-secundario">Imprimir PDF</a>
             </li>
 
             <!-- Etiquetas PDF  -->
             <li>
-              <a href="<?= base_url('EtiquetasPDF?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" 
-                class="block px-4 py-2 hover:bg-primario hover:text-secundario">Etiquetes PDF</a>
+              <a href="<?= base_url('EtiquetasPDF?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" class="block px-4 py-2 hover:bg-primario hover:text-secundario">Etiquetes PDF</a>
             </li>
 
             <!-- Plantilla CSV  -->
