@@ -4,9 +4,6 @@
 <h1 class="text-5xl text-primario mt-14"><?= lang("titles.n_int") ?></h1>
 
 <section style="view-transition-name: addTicket;" class="container mx-auto px-4 py-8 mt-10 text-base">
-    <span class="text-danger">
-        <?= validation_list_errors(); ?>
-    </span>
     <form action="add" method="POST" class="flex flex-col gap-20">
 
         <div class="grid grid-cols-3 gap-x-2">
@@ -15,6 +12,10 @@
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.description") ?>*</label>
                 <input type="text" name="description" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                <?php
+                if (isset(validation_errors()['description'])) : ?>
+                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['description'] ?></p>
+                <?php endif ?>
             </div>
 
             <!-- id ticket  -->

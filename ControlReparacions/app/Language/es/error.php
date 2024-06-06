@@ -16,6 +16,10 @@ return [
     'empty_slot'        => 'Faltan campos para llenar',
     'empty_slot_2'      => 'Este campo no puede estar vacío',
     'wrong_slot'        => 'Hay campos incorrectos',
+    'wrong_email'       => 'Formato email incorrecto',
+    'wrong_numeric'       => 'Formato telefono incorrecto',
+    'wrong_price'       => 'Formato precio incorrecto',
+
 
     'empty'             => 'No se ha encontrado ningún elemento',
     'no_exists'         => 'El elemento introducido no existe',

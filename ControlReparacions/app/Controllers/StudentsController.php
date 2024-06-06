@@ -193,27 +193,28 @@ class StudentsController extends BaseController
             $validationRules =
                 [
                     'email' => [
-                        'rules'  => 'required',
+                        'rules'  => 'required|valid_email',
                         'errors' => [
-                            'required' => 'Error Email',
+                            'required' => lang('error.empty_slot_2'),
+                            'valid_email' => lang('error.wrong_email'),
                         ],
                     ],
                     'name' => [
                         'rules'  => 'required',
                         'errors' => [
-                            'required' => 'Error Name',
+                            'required' => lang('error.empty_slot_2'),
                         ],
                     ],
                     'surnames' => [
                         'rules'  => 'required',
                         'errors' => [
-                            'required' => 'Error Surnames',
+                            'required' => lang('error.empty_slot_2'),
                         ],
                     ],
                     'course' => [
                         'rules'  => 'required',
                         'errors' => [
-                            'required' => 'Error Course',
+                            'required' => lang('error.empty_slot_2'),
                         ],
                     ],
                 ];
@@ -301,27 +302,28 @@ class StudentsController extends BaseController
         $validationRules =
             [
                 'email' => [
-                    'rules'  => 'required',
+                    'rules'  => 'required|valid_email',
                     'errors' => [
-                        'required' => 'Error Email',
+                        'required' => lang('error.empty_slot_2'),
+                        'valid_email' => lang('error.wrong_email'),
                     ],
                 ],
                 'name' => [
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Error Name',
+                        'required' =>  lang('error.empty_slot_2'),
                     ],
                 ],
                 'surnames' => [
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Error Surnames',
+                        'required' =>  lang('error.empty_slot_2'),
                     ],
                 ],
                 'course' => [
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => lang('error.wrong_login'),
+                        'required' =>  lang('error.empty_slot_2'),
                     ],
                 ],
             ];
