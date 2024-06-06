@@ -14,6 +14,7 @@ return [
     'wrong_code'        => 'El código no es correcto',
 
     'empty_slot'        => 'Faltan campos para llenar',
+    'empty_slot_2'      => 'Este campo no puede estar vacío',
     'wrong_slot'        => 'Hay campos incorrectos',
 
     'empty'             => 'No se ha encontrado ningún elemento',

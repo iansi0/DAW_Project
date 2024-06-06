@@ -12,7 +12,7 @@ class CentreModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_user', 'codi', 'nom', 'actiu', 'taller', 'telefon', 'adreca_fisica', 'nom_persona_contacte', 'correu_persona_contacte', 'id_sstt', 'id_poblacio'];
+    protected $allowedFields    = ['codi', 'id_user', 'nom', 'actiu', 'taller', 'telefon', 'adreca_fisica', 'nom_persona_contacte', 'correu_persona_contacte', 'id_sstt', 'id_poblacio'];
 
     // Dates
     protected $useTimestamps = true;
@@ -68,22 +68,22 @@ class CentreModel extends Model
         if ($role == "admin") {
             $this;
         } else if ($role == "prof" || $role == "alumn") {
-            $this->where("centre.codi", $code);
+            $this->where("codi", $code);
         } else if ($role == "sstt") {
-            $this->where("centre.id_sstt", $code);
+            $this->where("id_sstt", $code);
         } else if ($role == "ins") {
-            $this->where("centre.codi", $code);
+            $this->where("codi", $code);
         }
+
+        $this->orderBy('nom');
 
         return $this->findAll();
     }
     public function getAllCenter2()
     {
 
-
         $this->select('codi, nom');
-
-
+        $this->orderBy('nom');
 
         return $this->findAll();
     }
@@ -105,6 +105,8 @@ class CentreModel extends Model
         } else if ($role == "ins") {
             $this->where("centre.codi", $code);
         }
+
+        $this->orderBy('nom');
         
         return $this->findAll();
     }
