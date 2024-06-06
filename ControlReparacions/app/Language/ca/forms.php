@@ -66,6 +66,8 @@ return [
     'price'         => 'Preu',
     'type_inventary'=> 'Tipus inventari',
     'info'          => 'Informació',
+    'assign_to'     => 'Assignar a',
+    'apply'         => 'Aplicar',
 
     'required_slot' => 'Els camps marcats amb ( * ) són obligatoris',
 

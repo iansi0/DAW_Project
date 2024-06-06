@@ -373,7 +373,7 @@
             var arrSelects = [];
             selects.forEach(select => {
                 let name = select.name
-                let value = select.value
+                let value = (select.value == 'null')?0:select.value;
                 let tmp = {
                     [name]:value
                 }

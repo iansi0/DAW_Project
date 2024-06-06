@@ -385,7 +385,7 @@ class TicketsController extends BaseController
             $model = new TiquetModel();
 
             $id_tiquet = LibrariesUUID::v4();
-            $codi_equip = null;
+            $codi_equip = '';
             $id_tipus_dispositiu = $ticket[1]->id_type;
             $ins_emissor = $ticket[2]->sender??0;
             $ins_receptor = $ticket[3]->repair??0;

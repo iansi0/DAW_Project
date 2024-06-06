@@ -18,7 +18,7 @@
         <div>
           <div class="flex justify-between w-auto  text-primario text-left pb-3 pr-8 text-3xl rounded-t-2xl">
             <div class="flex align-left">
-              <h1 class=""><?= lang('form.assign_to'); ?>: &nbsp; </h1>
+              <h1 class=""><?= lang('forms.assign_to'); ?>: &nbsp; </h1>
 
               <div class='flex align-left relative searchable-device-list'>
                   <input name="d" type='text' class='data-device-list peer w-full h-10 rounded-sm bg-secundario cursor-pointer outline-none text-primario
@@ -34,7 +34,7 @@
                           duration-200 origin-top-left'>
                   </ul>
               </div>
-              <input class="ml-5 text-lg p-2 rounded-2xl bg-primario text-secundario hover:cursor-pointer hover:bg-terciario-2 hover:text-terciario-1 transition hover:ease-in ease-out duration-250" type="submit" value="<?= lang('titles.assign') ?>"/>
+              <input class="ml-5 text-lg p-2 rounded-2xl bg-primario text-secundario hover:cursor-pointer hover:bg-terciario-2 hover:text-terciario-1 transition hover:ease-in ease-out duration-250" type="submit" value="<?= lang('forms.apply') ?>"/>
             </div>
 
             <div class="flex align-right mt-2 gap-3">
