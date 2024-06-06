@@ -8,6 +8,9 @@ return [
 
     'role'          => 'Rol',
 
+    'general'       => 'Datos generales',
+    'specific'      => 'Datos específicos',
+
     'title'         => 'Título',
     'cycle'         => 'Ciclo',
     'course'        => 'Curso',
@@ -21,6 +24,7 @@ return [
     'email'         => 'E-mail',
     'phone'         => 'Teléfono',
 
+    'contact'       => 'Contacto',
     'contact_name'  => 'Nombre del responsable',
     'contact_email' => 'Email del responsable',
 

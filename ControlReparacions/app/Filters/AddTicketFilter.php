@@ -25,11 +25,11 @@ class AddTicketFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (session()->get('user')['role']=="admin" || session()->get('user')['role']=="prof" || session()->get('user')['role']=="ins"|| session()->get('user')['role']=="sstt") {
+        // if (session()->get('user') && (session()->get('user')['role']=="admin" || session()->get('user')['role']=="prof" || session()->get('user')['role']=="ins"|| session()->get('user')['role']=="sstt")) {
               
-        }else{
-            return redirect()->back();  
-        }
+        // }else{
+        //     return redirect()->back();  
+        // }
     }
 
     /**
