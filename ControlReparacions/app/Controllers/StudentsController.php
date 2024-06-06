@@ -70,7 +70,7 @@ class StudentsController extends BaseController
             $table->addRow(
                 $students['nom'],
                 $students['cognoms'],
-                $students['curs'],
+                mb_strtoupper($students['curs']),
                 [
                     "data" =>
                     "
@@ -114,8 +114,6 @@ class StudentsController extends BaseController
             "courses" => $modelCurs->getAllCourses(),
         ];
 
-       
-// dd($data['courses']);
         return view('students/studentsForm', $data);
     }
 
@@ -259,10 +257,10 @@ class StudentsController extends BaseController
 
                     $email = \Config\Services::email();
 
-                $email->setFrom('keepyoursoftware@gmail.com', 'KeepYourSoftware');
-                $email->setTo($user);
-                $email->setSubject('Usuari gestor d\'intervencions');
-                $email->setMessage('Hola '.$nom.' '.$cognoms.', et donem la benvinguda a <a href="'.base_url().'"> l\'aplicatiu de gestions d\'intervencions</a>. <br><br>
+                    $email->setFrom('keepyoursoftware@gmail.com', 'KeepYourSoftware');
+                    $email->setTo($user);
+                    $email->setSubject('Usuari gestor d\'intervencions');
+                    $email->setMessage('Hola ' . $nom . ' ' . $cognoms . ', et donem la benvinguda a <a href="' . base_url() . '"> l\'aplicatiu de gestions d\'intervencions</a>. <br><br>
                  El teu usuari és: ' . $user . '<br> La teva contrassenya és: ' . $passwd);
 
                     $email->send();
@@ -280,15 +278,20 @@ class StudentsController extends BaseController
         helper('form');
 
         $modelStudent = new AlumneModel();
+        $modelCurs = new CursModel();
 
         $data = [
             'student' => $modelStudent->getStudentById($id),
+            "courses" => $modelCurs->getAllCourses(),
         ];
+
+        // dd($data['courses']);
 
         return view('students/modifyStudent', $data);
     }
 
-    public function modifyStudent_post($id){
+    public function modifyStudent_post($id)
+    {
 
         helper('form');
 
@@ -296,32 +299,32 @@ class StudentsController extends BaseController
         $modelUser = new UsersModel();
 
         $validationRules =
-        [
-            'email' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Error Email',
+            [
+                'email' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error Email',
+                    ],
                 ],
-            ],
-            'name' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Error Name',
+                'name' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error Name',
+                    ],
                 ],
-            ],
-            'surnames' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Error Surnames',
+                'surnames' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Error Surnames',
+                    ],
                 ],
-            ],
-            'course' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => lang('error.wrong_login'),
+                'course' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.wrong_login'),
+                    ],
                 ],
-            ],
-        ];
+            ];
 
         if ($this->validate($validationRules)) {
 
@@ -329,13 +332,13 @@ class StudentsController extends BaseController
                 "id_user" => $id,
                 "nom"     => $this->request->getPost("name"),
                 "cognoms"     => $this->request->getPost("surnames"),
-                "course"     => $this->request->getPost("course"),
+                "id_curs"     => $this->request->getPost("course"),
 
             ];
 
             $modelStudent->modifyStudent($id, $student);
 
-            $user=[
+            $user = [
                 'id' => $id,
                 'user' => $this->request->getPost("email"),
             ];
@@ -343,11 +346,9 @@ class StudentsController extends BaseController
             $modelUser->modifyUser($id, $user);
 
             return redirect()->to(base_url('/students'));
-
         }
 
         return redirect()->back()->withInput();
-
     }
 
     public function deleteStudent($id)

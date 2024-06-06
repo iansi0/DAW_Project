@@ -100,7 +100,7 @@ class AlumneModel extends Model
             alumne.nom,
             alumne.cognoms,
             alumne.id_curs,
-            curs.titol as curs,
+            CONCAT(curs.any, ' ' , curs.titol, ' ', curs.clase) as curs,
             alumne.codi_centre"
         );
 

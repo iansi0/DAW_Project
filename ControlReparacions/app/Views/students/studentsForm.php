@@ -47,7 +47,7 @@
 
                 <option value="" disabled selected hidden><?= lang("forms.s_course") ?></option>
                     <?php foreach ($courses as $course) : ?>
-                        <option value="<?= $course["id"] ?>"><?= $course["titol"] . " " .  $course['clase'] . " " . $course['any'] ?></option>
+                        <option value="<?= $course["id"] ?>"><?= $course["any"] . " " .  $course['titol'] . " " . $course['clase'] ?></option>
                     <?php endforeach; ?>
 
                 </select>
