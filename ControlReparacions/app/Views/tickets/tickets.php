@@ -43,7 +43,9 @@
     <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "ins")  || (session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "admin")) : ?>
 
       <div class="relative">
-        <button id="dropdownDefaultButton" class="text-white bg-primario hover:bg-terciario-4 rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">Dropdown button <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        <button id="dropdownDefaultButton" class="text-white bg-primario hover:bg-terciario-4 rounded-lg text-sm px-7 py-2.5 text-center inline-flex items-center" type="button">
+          Import / Export
+          <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
           </svg>
         </button>
@@ -69,7 +71,7 @@
 
             <!-- Import CSV -->
             <li>
-              <form action="<?=base_url('import/csv')?>" method="POST" enctype="multipart/form-data">
+              <form action="<?= base_url('import/csv') ?>" method="POST" enctype="multipart/form-data">
                 <label for="uploadCSV" class="block px-4 py-2 hover:bg-primario hover:text-secundario">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-current inline" viewBox="0 0 32 32">
                     <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z" data-original="#000000" />
@@ -83,7 +85,7 @@
 
             <!-- Import XLS -->
             <li>
-              <form action="<?=base_url('import/xls')?>" method="POST" enctype="multipart/form-data">
+              <form action="<?= base_url('import/xls') ?>" method="POST" enctype="multipart/form-data">
                 <label for="uploadXLS" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-current inline" viewBox="0 0 32 32">
                     <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z" data-original="#000000" />
@@ -247,7 +249,7 @@
   uploadCSV.addEventListener('change', function() {
     if (this.files && this.files[0]) {
       let parentForm = uploadCSV.parentElement.parentElement;
-    
+
       (function() {
         Swal.fire({
           customClass: {

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\CentreModel;
+use App\Models\UsersModel;
 use App\Models\SSTTModel;
 use App\Models\TiquetModel;
 use App\Models\PoblacioModel;
@@ -272,6 +273,7 @@ class InstitutesController extends BaseController
 
             ];
         $model = new CentreModel();
+        $modelUser = new UsersModel();
 
         $fake = Factory::create("es_ES");
 
@@ -302,6 +304,13 @@ class InstitutesController extends BaseController
                 $id_sstt,
                 $id_poblacio
             );
+
+            $user = $codi . "@xtec.cat";
+            $passwd_hash = password_hash($fake->password(), PASSWORD_DEFAULT);
+            $lang = 'ca';
+
+            $modelUser->addUser($id_user, $user, $passwd_hash, $lang);
+
         } else {
             return redirect()->back()->withInput();
         }
