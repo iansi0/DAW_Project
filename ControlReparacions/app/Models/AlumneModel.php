@@ -126,13 +126,36 @@ class AlumneModel extends Model
             alumne.cognoms,
             alumne.id_curs,
             curs.titol as curs,
-            alumne.codi_centre"
+            alumne.codi_centre,
+            users.user as correo "
         );
 
         $this->join('curs', 'alumne.id_curs = curs.id', 'left');
+        $this->join('users', 'alumne.id_user = users.id', 'left');
 
-        return $this->where('id_user', $id)->findAll();
+        return $this->where('id_user', $id)->first();
     }
+
+    public function modifyStudent($id, $data){
+
+        $role=session()->get('user')['role'];
+        $code=session()->get('user')['code'];
+
+        $this->where('id_user', $id);
+        $this->join('centre AS centre', 'alumne.codi_centre = centre.codi', 'left');
+
+        if ($role=="admin") {
+            $this;
+        }else if($role=="prof" || $role=="ins"){
+            $this->groupStart();
+            $this->where("alumne.codi_centre",$code);
+            $this->groupEnd();
+        }
+
+        return $this->set($data)->update();
+
+    }
+
 
     public function deleteStudent($id)
     {

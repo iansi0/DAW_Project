@@ -279,6 +279,68 @@ class StudentsController extends BaseController
         return view('students/modifyStudent', $data);
     }
 
+    public function modifyStudent_post($id){
+
+        helper('form');
+
+        $modelStudent = new AlumneModel();
+        $modelUser = new UsersModel();
+
+        $validationRules =
+        [
+            'email' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Error Email',
+                ],
+            ],
+            'name' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Error Name',
+                ],
+            ],
+            'surnames' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Error Surnames',
+                ],
+            ],
+            'course' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => lang('error.wrong_login'),
+                ],
+            ],
+        ];
+
+        if ($this->validate($validationRules)) {
+
+            $student = [
+                "id_user" => $id,
+                "nom"     => $this->request->getPost("name"),
+                "cognoms"     => $this->request->getPost("surnames"),
+                "course"     => $this->request->getPost("course"),
+
+            ];
+
+            $modelStudent->modifyStudent($id, $student);
+
+            $user=[
+                'id' => $id,
+                'user' => $this->request->getPost("email"),
+            ];
+
+            $modelUser->modifyUser($id, $user);
+
+            return redirect()->to(base_url('/students'));
+
+        }
+
+        return redirect()->back()->withInput();
+
+    }
+
     public function deleteStudent($id)
     {
 

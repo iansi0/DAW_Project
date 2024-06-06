@@ -170,4 +170,14 @@ class UsersModel extends Model
         // dd($this->where('id', $id['id'])->withDeleted()->findAll());
         return $this->builder->where('id', $id['id'])->set($this->deletedField, null)->update();
     }
+
+    public function modifyUser($id, $data){
+
+        $role=session()->get('user')['role'];
+        $code=session()->get('user')['code'];
+
+        $this->where('id', $id);
+        return $this->set($data)->update();
+
+    }
 }
