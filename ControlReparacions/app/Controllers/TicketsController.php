@@ -369,7 +369,7 @@ class TicketsController extends BaseController
         $fake = Factory::create("es_ES");
         // $arrCentres = ['25002799', '17010700', '17010499', '17008249', '8000013', '8001509', '8002198', '8015399', '8017104', '8019401'];
 
-
+        $role =session()->get('user')['role'];
         $id_tiquet =  $fake->uuid();
         $codi_equip = $fake->uuid();
         $descripcio_avaria =  $this->request->getPost("description");
@@ -378,14 +378,17 @@ class TicketsController extends BaseController
         $id_tipus_dispositiu = $this->request->getPost("id_type");
 
         if ($this->validate($validationRules)) {
-            if (session()->get('user')['role'] = "prof" || session()->get('user')['role'] = "ins") {
-
+            if ($role == "prof" || $role == "ins") {
                 $codi_centre_emissor = session()->get('user')['code'];
                 $id_estat = 1;
                 $codi_centre_reparador = 0;
             } else {
+                if ($role=='sstt') {
+                    $id_estat = 1;
+                }else{
+                    $id_estat = 2;
 
-                $id_estat = 2;
+                }
 
                 if ($this->request->getPost("repair") && $this->request->getPost("sender")) {
                     $codi_centre_reparador = $this->request->getPost("repair");
@@ -393,9 +396,12 @@ class TicketsController extends BaseController
                 } else if ($this->request->getPost("repair")) {
                     $codi_centre_reparador = $this->request->getPost("repair");
                     $codi_centre_emissor = 0;
+                } else if ($this->request->getPost("sender")) {
+                    $codi_centre_emissor = $this->request->getPost("sender");
+                    $codi_centre_reparador = 0;
                 } else {
                     // TODO: Poner aqui el error porque n hay centro reparador en esta opcion
-                    $codi_centre_emissor = $this->request->getPost("sender");
+                    $codi_centre_emissor = 0;
                     $codi_centre_reparador = 0;
                 }
             }

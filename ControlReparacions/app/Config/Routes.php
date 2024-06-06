@@ -68,12 +68,14 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('(:segment)', 'InstitutesController::instituteInfo/$1');
         $routes->GET('(:segment)/filterSender', 'InstitutesController::instituteInfo/$1/sender');
         $routes->GET('(:segment)/filterReceiver', 'InstitutesController::instituteInfo/$1/receiver');
-
+        
     });
-
+    
     // ASSIGN
     $routes->group('assign', function ($routes) {
-        $routes->GET('', 'Home::empty');
+        $routes->GET('', 'AssignController::assign');
+        $routes->GET('filterSender', 'AssignController::assign/sender');
+        $routes->GET('filterReceiver', 'AssignController::assign/receiver');
     });
 
     // INVENTARY

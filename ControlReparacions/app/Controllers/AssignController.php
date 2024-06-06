@@ -3,12 +3,13 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\CentreModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\TiquetModel;
 
 class AssignController extends BaseController
 {
-    public function assign($id = null, $filter = "sender")
+    public function assign($filter = "sender")
     {
 
         $modelTickets = new TiquetModel();
@@ -29,7 +30,7 @@ class AssignController extends BaseController
 
         // TEMPLATE
         $template = [
-            'table_open'  => "<table class='w-full'>",
+            'table_open'  => "<table class='w-full rounded-t-2xl overflow-hidden '>",
 
             'thead_open'  => "<thead class='bg-primario text-secundario'>",
 
@@ -43,20 +44,28 @@ class AssignController extends BaseController
         $table->setTemplate($template);
 
         $data = [
-            'tickets' => $modelTickets->getInstituteTickets($id, $filter)->paginate(20),
+            'tickets' => $modelTickets->getInstituteTickets("0", $filter)->paginate(20),
             'pager' => $modelTickets->pager,
             'table' => $table,
             'filter' => $filter,
         ];
+        $insModel = new CentreModel();
 
+        if ($filter == 'sender') {
+            $data['institutes']=$insModel->getAllCenter();
+
+        }else{
+            $data['institutes']=$insModel->getAllRepairCenters();
+
+        }
 
         foreach ($data['tickets'] as $ticket) {
 
-            $buttonDelete = base_url("tickets/delete/" . $ticket['id']);
             $buttonUpdate = base_url("tickets/modify/" . $ticket['id']);
             $buttonView = base_url("tickets/" . $ticket['id']);
             $table->addRow(
-                // ["data" => $ticket['id'],"class"=>'p-5'],
+                ["data" => "<input type='checkbox' class='subCheckbox accent-primario' id='".$ticket['id']."'>", "class" => "p-2 "],
+                
                 explode("-", $ticket['id'])[4],
                 $ticket['tipus'],
                 ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis"],
