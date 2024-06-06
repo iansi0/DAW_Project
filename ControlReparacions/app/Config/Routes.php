@@ -76,6 +76,9 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('', 'AssignController::assign');
         $routes->GET('filterSender', 'AssignController::assign/sender');
         $routes->GET('filterReceiver', 'AssignController::assign/receiver');
+        $routes->POST('', 'AssignController::assign_post');
+        $routes->POST('filterSender', 'AssignController::assign_post/sender');
+        $routes->POST('filterReceiver', 'AssignController::assign_post/receiver');
     });
 
     // INVENTARY
@@ -94,7 +97,6 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('', 'UserController::config');
         $routes->POST('', 'UserController::config_post');
     });
-
 
     // WORKING
     $routes->GET('work', 'Home::empty');

@@ -111,5 +111,5 @@
 
 
 </script>
-
+<script src="node_modules/@material-tailwind/html@latest/scripts/ripple.js"></script>
 <?= $this->endSection() ?>

@@ -163,7 +163,7 @@ class InstitutesController extends BaseController
                 explode("-", $ticket['id'])[4],
                 $ticket['tipus'],
                 ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis"],
-                $ticket['emissor'],
+                ($ticket['emissor'] != lang('titles.toassign')) ? $ticket['emissor'] : lang('titles.toassign') . ' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
                 ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign') . ' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
 
                 date("d/m/Y", strtotime($ticket['created'])),
