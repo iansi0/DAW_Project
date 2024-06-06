@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\AlumneModel;
 use App\Models\UsersModel;
+use App\Models\CursModel;
 use App\Controllers\BaseController;
 use App\Models\RolesModel;
 use App\Models\UsersInRolesModel;
@@ -105,9 +106,17 @@ class StudentsController extends BaseController
 
     public function studentForm()
     {
-
         helper('form');
-        return view('students/studentsForm');
+
+        $modelCurs = new CursModel();
+
+        $data = [
+            "courses" => $modelCurs->getAllCourses(),
+        ];
+
+       
+// dd($data['courses']);
+        return view('students/studentsForm', $data);
     }
 
     public function addStudent()

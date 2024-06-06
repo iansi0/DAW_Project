@@ -5,7 +5,7 @@
 
 <section style="view-transition-name: addTicket;" class=" mx-auto px-4 py-8 mt-10 text-base">
     <form action="add" method="POST" class="flex flex-col gap-20" enctype="multipart/form-data">
-    <?= csrf_field() ?>
+        <?= csrf_field() ?>
 
         <div class="grid grid-cols-3 gap-x-2 gap-y-2">
 
@@ -43,12 +43,20 @@
             <!-- Curs  -->
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.course") ?>*</label>
-                <input type="text" name="course" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
+                <select type="text" name="course" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+
+                <option value="" disabled selected hidden><?= lang("forms.s_course") ?></option>
+                    <?php foreach ($courses as $course) : ?>
+                        <option value="<?= $course["id"] ?>"><?= $course["titol"] . " " .  $course['clase'] . " " . $course['any'] ?></option>
+                    <?php endforeach; ?>
+
+                </select>
                 <?php
                 if (validation_errors()) : ?>
                     <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['course'] ?></p>
                 <?php endif ?>
             </div>
+
 
 
         </div>
