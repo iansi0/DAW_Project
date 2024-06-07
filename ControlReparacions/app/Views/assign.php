@@ -134,34 +134,58 @@ function assignIns(){
     }
 
     if (!error) {
+        Swal.fire({
+        title: `<?=lang('alerts.sure')?>`,
+        text: `<?=lang('alerts.sure_sub')?>`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: `<?=lang('alerts.yes_ass')?>`,
+        cancelButtonText: `<?=lang('alerts.cancel')?>`
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
 
-        var arrJSON = JSON.stringify(selectedIds);
-        console.log(arrJSON);
+                title: `<?=lang('alerts.assigned')?>`,
+                text: `<?=lang('alerts.assigned_sub')?>`,
+                icon: 'success',
+                showConfirmButton: false,
+                timer:2000,
 
-        var form_tmp = document.createElement('form');
-        form_tmp.action = '';
-        form_tmp.method = 'POST';
-        form_tmp.style.display = 'none';
+            }).then(() => {
+                
+                var arrJSON = JSON.stringify(selectedIds);
+                console.log(arrJSON);
 
-        // Creamos un input con los datos del JSON y lo añadimos al formulario anterior
-        let input_ids = document.createElement('input');
-        input_ids.type = 'hidden';
-        input_ids.name = 'ids';
-        input_ids.value = arrJSON;
-        form_tmp.appendChild(input_ids);
+                var form_tmp = document.createElement('form');
+                form_tmp.action = '';
+                form_tmp.method = 'POST';
+                form_tmp.style.display = 'none';
+
+                // Creamos un input con los datos del JSON y lo añadimos al formulario anterior
+                let input_ids = document.createElement('input');
+                input_ids.type = 'hidden';
+                input_ids.name = 'ids';
+                input_ids.value = arrJSON;
+                form_tmp.appendChild(input_ids);
+                
+                let input_ins = document.createElement('input');
+                input_ins.type = 'hidden';
+                input_ins.name = 'ins';
+                input_ins.value = ins;
+                form_tmp.appendChild(input_ins);
+                
+
+                // Añadimos el formulario al documento y lo enviamos
+                document.body.appendChild(form_tmp);
+                form_tmp.submit();
+
+                form_tmp.remove();        
+            });
+        }
+    });
         
-        let input_ins = document.createElement('input');
-        input_ins.type = 'hidden';
-        input_ins.name = 'ins';
-        input_ins.value = ins;
-        form_tmp.appendChild(input_ins);
-        
-
-        // Añadimos el formulario al documento y lo enviamos
-        document.body.appendChild(form_tmp);
-        form_tmp.submit();
-
-        form_tmp.remove();
         
 
     }

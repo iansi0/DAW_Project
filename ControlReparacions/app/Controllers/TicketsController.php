@@ -185,12 +185,17 @@ class TicketsController extends BaseController
                             cancelButtonText: `" . lang('alerts.cancel') . "`,
                           }).then((result) => {
                             if (result.isConfirmed) {
-                                window.location.href = `" . $buttonDelete . "`;
-
+        
                                 Swal.fire({
-                                    title: `" . lang('alerts.deleted') . "`,
-                                    text: `" . lang('alerts.deleted_sub') . "`,
+                                    title: `".lang('alerts.deleted')."`,
+                                    text: `".lang('alerts.deleted_sub')."`,
                                     icon: `success`,
+                                    showConfirmButton: false,
+                                    timer:2000,
+        
+                                }).then(()=>{
+                                    window.location.href = `".$buttonDelete."`;
+        
                                 });
                             }
                           }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
