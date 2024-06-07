@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use App\Models\InventariModel;
 use App\Models\TipusInventariModel;
+use App\Models\UsersModel;
+use App\Models\UsersInRolesModel;
+use App\Models\RolesModel;
 
 use Faker\Factory;
 
@@ -261,12 +264,6 @@ class InventaryController extends BaseController
     {
         $searchData = $this->request->getGet();
 
-        // if ($search == '') {
-        //     $paginateData = $model->getAllPaged(8);
-        // } else {
-        //     $paginateData = $model->getByTitleOrText($search)->paginate(8);
-        // }
-
         // Get News Data
 
         $model = new InventariModel();
@@ -276,56 +273,140 @@ class InventaryController extends BaseController
         } else {
             $paginateData = $model->getByTitleOrText($search)->findAll();
         }
+
+
+        $propiedades = [
+
+            'id', 'nom', 'preu', 'data_compra', 'id_tipus', 'tipus'
+        ];
 
         $csv_string = "";
 
+        $csv_string .= implode(";", $propiedades) . "\n";
+
         foreach ($paginateData as $ticket) {
-            $csv_string .= implode(",", $ticket) . "\n";
-        }
-        // dd($csv_string);
-        if ($search != '') {
-            header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '_filter-' . $search . '.csv"');
-        } else {
-            header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '.csv"');
+            $csv_string .= implode(";", $ticket) . "\n";
         }
 
+        header('Content-Disposition: attachment; filename="inventary_export_' . date("d-m-Y") . '.csv"');
 
         echo $csv_string;
     }
-    public function exportXLS($search = '')
+
+    // public function exportXLS($search = '')
+    // {
+    //     $searchData = $this->request->getGet();
+
+
+
+    //     // Get News Data
+
+    //     $model = new InventariModel();
+
+    //     if ($search == '') {
+    //         $paginateData = $model->getAllPaged()->findAll();
+    //         // dd($paginateData);
+
+
+    //     } else {
+    //         $paginateData = $model->getByTitleOrText($search)->findAll();
+    //     }
+
+    //     header("Content-Type: application/vnd.ms-excel; charset=utf-8");
+    //     $xls_string = "";
+
+    //     foreach ($paginateData as $ticket) {
+    //         $xls_string .= implode("\t", $ticket) . "\n";
+    //         // d($xls_string);
+    //     }
+    //     // dd('fin');
+
+    //     if ($search != '') {
+    //         header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '_filter-' . $search . '.xls"');
+    //     } else {
+    //         header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '.xls"');
+    //     }
+
+    //     echo $xls_string;
+    // }
+
+    public function importCSV()
     {
-        $searchData = $this->request->getGet();
+        $csv = $this->request->getFiles()['uploadCSV'];
+
+        if ($csv->getSize() != 0) {
+            // guardar el csv 
+            $file = $this->request->getFiles();
+
+            // leer el csv 
+            $fileCsv = fopen($file['uploadCSV'], 'r');
+
+            // Boolean para saltarnos la primera fila (es una fila con los nombres de los campos y por ende la descartamos)
+            $firstLine = true;
+
+            // hacer un while para introducir los datos 
+            while (($row = fgetcsv($fileCsv, 2000, ";")) !== FALSE) {
+
+                if (!$firstLine) {
+
+                    $fake = Factory::create("es_ES");
+
+                    $model = new InventariModel();
 
 
 
-        // Get News Data
-
-        $model = new InventariModel();
-
-        if ($search == '') {
-            $paginateData = $model->getAllPaged()->findAll();
-            // dd($paginateData);
+                    $fake = Factory::create("es_ES");
 
 
-        } else {
-            $paginateData = $model->getByTitleOrText($search)->findAll();
+                    $id = $fake->uuid();
+                    $nom = trim($row[0]);
+                    $data_compra = trim($row[2]);
+                    $preu = trim($row[1]);
+                    $codi_centre = session('user')['code'];
+                    $id_tipus_inventari = trim($row[3]);
+        
+                    $model->addInventari(
+                        $id,
+                        $nom,
+                        $data_compra,
+                        $preu,
+                        $codi_centre,
+                        $id_tipus_inventari
+                    );
+                }
+
+                $firstLine = false;
+            }
+
+            fclose($fileCsv);
+
+            return redirect()->to(base_url('/inventary'));
+        }
+    }
+
+    public function downloadCSV()
+    {
+        // Establecer la ruta del archivo
+        $rutaArchivo = WRITEPATH . 'plantillas' . DIRECTORY_SEPARATOR . 'plantilla_inventari.csv';
+
+
+        // Comprobar si el archivo existe
+        if (!file_exists($rutaArchivo)) {
+            // Manejar el error de archivo no encontrado
+            echo "Error: Archivo no encontrado";
+            return;
         }
 
-        header("Content-Type: application/vnd.ms-excel; charset=utf-8");
-        $xls_string = "";
+        // Obtener el tamaño y el tipo de contenido del archivo
+        $tamañoArchivo = filesize($rutaArchivo);
+        $tipoContenido = mime_content_type($rutaArchivo);
 
-        foreach ($paginateData as $ticket) {
-            $xls_string .= implode("\t", $ticket) . "\n";
-            // d($xls_string);
-        }
-        // dd('fin');
+        // Establecer encabezados de descarga
+        header('Content-Disposition: attachment; filename="plantilla_inventari.csv"');
+        header('Content-Length: ' . $tamañoArchivo);
+        header('Content-Type: ' . $tipoContenido);
 
-        if ($search != '') {
-            header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '_filter-' . $search . '.xls"');
-        } else {
-            header('Content-Disposition: attachment; filename="' . date("d-m-Y") . '.xls"');
-        }
-
-        echo $xls_string;
+        // Leer el contenido del archivo y enviarlo al navegador
+        readfile($rutaArchivo);
     }
 }

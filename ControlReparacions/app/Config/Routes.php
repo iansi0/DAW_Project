@@ -165,9 +165,9 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         });
 
         //Downloads
-        $routes->GET('dowloadXLS', 'InventaryController::downloadCSV');
+        $routes->GET('dowloadCSV', 'InventaryController::downloadCSV');
 
-        $routes->GET('dowloadCSV', 'InventaryController::downloadXLS');
+        $routes->GET('dowloadXLS', 'InventaryController::downloadXLS');
     });
 
     // CONFIG
