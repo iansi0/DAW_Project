@@ -63,11 +63,11 @@
             </li>
 
             <!-- Export XLS -->
-            <li>
+            <!-- <li>
               <a href="<?= base_url('tickets/export/xls?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
                 <?= lang('buttons.export') . " XLS" ?>
               </a>
-            </li>
+            </li> -->
 
             <!-- Import CSV -->
             <li>
@@ -84,7 +84,7 @@
             </li>
 
             <!-- Import XLS -->
-            <li>
+            <!-- <li>
               <form action="<?= base_url('tickets/import/xls') ?>" method="POST" enctype="multipart/form-data">
                 <label for="uploadXLS" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-current inline" viewBox="0 0 32 32">
@@ -95,7 +95,7 @@
                   <input type="file" id='uploadXLS' name="uploadXLS" class="hidden" />
                 </label>
               </form>
-            </li>
+            </li> -->
 
             <!-- Imprimir PDF  -->
             <li>
@@ -113,9 +113,9 @@
             </li>
 
             <!-- Plantilla XLS  -->
-            <li>
+            <!-- <li>
               <a href="<?= base_url('tickets/dowloadXLS') ?>" class="block px-4 py-2 hover:bg-primario hover:text-secundario">Plantilla XLS</a>
-            </li>
+            </li> -->
           </ul>
         </div>
 

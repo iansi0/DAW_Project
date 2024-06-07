@@ -55,11 +55,11 @@
                         </li>
 
                         <!-- Export XLS -->
-                        <li>
+                        <!-- <li>
                             <a href="<?= base_url('students/export/xls') ?>" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
                                 <?= lang('buttons.export') . " XLS" ?>
                             </a>
-                        </li>
+                        </li> -->
 
                         <!-- Import CSV -->
                         <li>
@@ -76,7 +76,7 @@
                         </li>
 
                         <!-- Import XLS -->
-                        <li>
+                        <!-- <li>
                             <form action="<?= base_url('students/import/xls') ?>" method="POST" enctype="multipart/form-data">
                                 <label for="uploadXLS" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-current inline" viewBox="0 0 32 32">
@@ -87,7 +87,7 @@
                                     <input type="file" id='uploadXLS' name="uploadXLS" class="hidden" />
                                 </label>
                             </form>
-                        </li>
+                        </li> -->
 
                         <!-- Plantilla CSV  -->
                         <li>
@@ -95,9 +95,9 @@
                         </li>
 
                         <!-- Plantilla XLS  -->
-                        <li>
+                        <!-- <li>
                             <a href="<?= base_url('students/dowloadXLS') ?>" class="block px-4 py-2 hover:bg-primario hover:text-secundario">Plantilla XLS</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
 
