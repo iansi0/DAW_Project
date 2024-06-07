@@ -34,15 +34,73 @@
 
         <!-- Export Buttons -->
         <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "ins")  || (session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "admin")) : ?>
+            <div class="relative">
+                <button id="dropdownDefaultButton" class="text-white bg-primario hover:bg-terciario-4 rounded-lg text-sm px-7 py-2.5 text-center inline-flex items-center" type="button">
+                    Import / Export
+                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                    </svg>
+                </button>
 
-            <div>
+                <!-- Dropdown menu -->
+                <div id="dropdown" class="absolute hidden z-10 w-full  bg-white divide-y divide-gray-100 rounded-lg ">
 
-                <a href="<?= base_url('tickets/xls/' . $search) ?>">
-                    <button id="xls" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " XLS" ?></button>
-                </a>
-                <a href="<?= base_url('tickets/csv/' . $search) ?>">
-                    <button id="csv" class=" bg-primario text-white px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-terciario-4 transition hover:ease-in ease-out duration-250"><?= lang('buttons.export') . " CSV" ?></button>
-                </a>
+                    <ul class=" flex flex-col shadow-lg border-2 border-terciario-1 gap-2  text-terciario-4 text-lg" aria-labelledby="dropdownDefaultButton">
+
+                        <!-- Export CSV  -->
+                        <li>
+                            <a href="<?= base_url('students/export/csv')?>" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
+                                <?= lang('buttons.export') . " CSV" ?>
+                            </a>
+                        </li>
+
+                        <!-- Export XLS -->
+                        <li>
+                            <a href="<?= base_url('students/export/xls') ?>" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
+                                <?= lang('buttons.export') . " XLS" ?>
+                            </a>
+                        </li>
+
+                        <!-- Import CSV -->
+                        <li>
+                            <form action="<?= base_url('students/import/csv') ?>" method="POST" enctype="multipart/form-data">
+                                <label for="uploadCSV" class="block px-4 py-2 hover:bg-primario hover:text-secundario">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-current inline" viewBox="0 0 32 32">
+                                        <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z" data-original="#000000" />
+                                        <path d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z" data-original="#000000" />
+                                    </svg>
+                                    Import CSV
+                                    <input type="file" id='uploadCSV' name="uploadCSV" class="hidden" />
+                                </label>
+                            </form>
+                        </li>
+
+                        <!-- Import XLS -->
+                        <li>
+                            <form action="<?= base_url('students/import/xls') ?>" method="POST" enctype="multipart/form-data">
+                                <label for="uploadXLS" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-current inline" viewBox="0 0 32 32">
+                                        <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z" data-original="#000000" />
+                                        <path d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z" data-original="#000000" />
+                                    </svg>
+                                    Import XLS
+                                    <input type="file" id='uploadXLS' name="uploadXLS" class="hidden" />
+                                </label>
+                            </form>
+                        </li>
+
+                        <!-- Plantilla CSV  -->
+                        <li>
+                            <a href="<?= base_url('students/dowloadCSV') ?>" class="block px-4 py-2 hover:bg-primario hover:text-secundario">Plantilla CSV</a>
+                        </li>
+
+                        <!-- Plantilla XLS  -->
+                        <li>
+                            <a href="<?= base_url('students/dowloadXLS') ?>" class="block px-4 py-2 hover:bg-primario hover:text-secundario">Plantilla XLS</a>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         <?php endif ?>
     </div>

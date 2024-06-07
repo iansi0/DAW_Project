@@ -485,6 +485,89 @@
 
     });
 
+    document.addEventListener("DOMContentLoaded", function(event) {
+
+        // FUNCIONES DE SHOW / HIDE DE DROPDOWN USUARIO
+        var dropdown = document.querySelector("#dropdown");
+
+
+        window.addEventListener('click', function(event) {
+
+            if (event.target.id != 'dropdown' || event.target.closest('div').id != 'dropdown') {
+                if (event.target && (event.target.id === 'dropdownDefaultButton' || (event.target.closest('div') && event.target.closest('div').id === 'dropdownDefaultButton'))) {
+                    if (dropdown.style.display == "none") {
+                        dropdown.style.display = "block";
+                    } else {
+                        dropdown.style.display = "none";
+                    }
+                } else {
+                    dropdown.style.display = "none";
+                }
+            }
+
+        })
+    })
+
+
+    const uploadCSV = document.getElementById('uploadCSV');
+    const uploadXLS = document.getElementById('uploadXLS');
+
+    uploadCSV.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            let parentForm = uploadCSV.parentElement.parentElement;
+
+            (function() {
+                Swal.fire({
+                    customClass: {
+                        htmlContainer: ``,
+                    },
+                    title: `<?= lang('alerts.sure') ?>`,
+                    text: `<?= lang('alerts.sure_sub') ?> "`,
+                    icon: `warning`,
+                    showCancelButton: true,
+                    confirmButtonColor: `#3085d6`,
+                    cancelButtonColor: `#d33`,
+                    confirmButtonText: `<?= lang('alerts.yes_del') ?>`,
+                    cancelButtonText: `<?= lang('alerts.cancel') ?>`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        parentForm.submit();
+                    }
+                    uploadCSV.value = '';
+                });
+            })()
+
+        }
+    })
+
+    uploadXLS.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            let parentForm = uploadXLS.parentElement.parentElement;
+
+            (function() {
+                Swal.fire({
+                    customClass: {
+                        htmlContainer: ``,
+                    },
+                    title: `<?= lang('alerts.sure') ?>`,
+                    text: `<?= lang('alerts.sure_sub') ?> "`,
+                    icon: `warning`,
+                    showCancelButton: true,
+                    confirmButtonColor: `#3085d6`,
+                    cancelButtonColor: `#d33`,
+                    confirmButtonText: `<?= lang('alerts.yes_del') ?>`,
+                    cancelButtonText: `<?= lang('alerts.cancel') ?>`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        parentForm.submit();
+                    }
+                    uploadXLS.value = '';
+                });
+            })()
+
+        }
+    })
+
     function show() {
         var modal = document.getElementById('modal');
         modal.style.display = 'none';

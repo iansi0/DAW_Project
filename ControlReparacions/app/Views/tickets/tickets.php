@@ -57,21 +57,21 @@
 
             <!-- Export CSV  -->
             <li>
-              <a href="<?= base_url('export/csv?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
+              <a href="<?= base_url('tickets/export/csv?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
                 <?= lang('buttons.export') . " CSV" ?>
               </a>
             </li>
 
             <!-- Export XLS -->
             <li>
-              <a href="<?= base_url('export/xls?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
+              <a href="<?= base_url('tickets/export/xls?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
                 <?= lang('buttons.export') . " XLS" ?>
               </a>
             </li>
 
             <!-- Import CSV -->
             <li>
-              <form action="<?= base_url('import/csv') ?>" method="POST" enctype="multipart/form-data">
+              <form action="<?= base_url('tickets/import/csv') ?>" method="POST" enctype="multipart/form-data">
                 <label for="uploadCSV" class="block px-4 py-2 hover:bg-primario hover:text-secundario">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-current inline" viewBox="0 0 32 32">
                     <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z" data-original="#000000" />
@@ -85,7 +85,7 @@
 
             <!-- Import XLS -->
             <li>
-              <form action="<?= base_url('import/xls') ?>" method="POST" enctype="multipart/form-data">
+              <form action="<?= base_url('tickets/import/xls') ?>" method="POST" enctype="multipart/form-data">
                 <label for="uploadXLS" class=" block px-4 py-2 hover:bg-primario hover:text-secundario">
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-6 mr-2 fill-current inline" viewBox="0 0 32 32">
                     <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z" data-original="#000000" />
@@ -109,12 +109,12 @@
 
             <!-- Plantilla CSV  -->
             <li>
-              <a href="<?= base_url('dowloadCSV') ?>" class="block px-4 py-2 hover:bg-primario hover:text-secundario">Plantilla CSV</a>
+              <a href="<?= base_url('tickets/dowloadCSV') ?>" class="block px-4 py-2 hover:bg-primario hover:text-secundario">Plantilla CSV</a>
             </li>
 
             <!-- Plantilla XLS  -->
             <li>
-              <a href="<?= base_url('dowloadXLS') ?>" class="block px-4 py-2 hover:bg-primario hover:text-secundario">Plantilla XLS</a>
+              <a href="<?= base_url('tickets/dowloadXLS') ?>" class="block px-4 py-2 hover:bg-primario hover:text-secundario">Plantilla XLS</a>
             </li>
           </ul>
         </div>
@@ -219,88 +219,7 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function(event) {
 
-    // FUNCIONES DE SHOW / HIDE DE DROPDOWN USUARIO
-    var dropdown = document.querySelector("#dropdown");
-
-
-    window.addEventListener('click', function(event) {
-
-      if (event.target.id != 'dropdown' || event.target.closest('div').id != 'dropdown') {
-        if (event.target && (event.target.id === 'dropdownDefaultButton' || (event.target.closest('div') && event.target.closest('div').id === 'dropdownDefaultButton'))) {
-          if (dropdown.style.display == "none") {
-            dropdown.style.display = "block";
-          } else {
-            dropdown.style.display = "none";
-          }
-        } else {
-          dropdown.style.display = "none";
-        }
-      }
-
-    })
-  })
-
-
-  const uploadCSV = document.getElementById('uploadCSV');
-  const uploadXLS = document.getElementById('uploadXLS');
-
-  uploadCSV.addEventListener('change', function() {
-    if (this.files && this.files[0]) {
-      let parentForm = uploadCSV.parentElement.parentElement;
-
-      (function() {
-        Swal.fire({
-          customClass: {
-            htmlContainer: ``,
-          },
-          title: `<?= lang('alerts.sure') ?>`,
-          text: `<?= lang('alerts.sure_sub') ?> "`,
-          icon: `warning`,
-          showCancelButton: true,
-          confirmButtonColor: `#3085d6`,
-          cancelButtonColor: `#d33`,
-          confirmButtonText: `<?= lang('alerts.yes_del') ?>`,
-          cancelButtonText: `<?= lang('alerts.cancel') ?>`,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            parentForm.submit();
-          }
-          uploadCSV.value = '';
-        });
-      })()
-
-    }
-  })
-
-  uploadXLS.addEventListener('change', function() {
-    if (this.files && this.files[0]) {
-      let parentForm = uploadXLS.parentElement.parentElement;
-
-      (function() {
-        Swal.fire({
-          customClass: {
-            htmlContainer: ``,
-          },
-          title: `<?= lang('alerts.sure') ?>`,
-          text: `<?= lang('alerts.sure_sub') ?> "`,
-          icon: `warning`,
-          showCancelButton: true,
-          confirmButtonColor: `#3085d6`,
-          cancelButtonColor: `#d33`,
-          confirmButtonText: `<?= lang('alerts.yes_del') ?>`,
-          cancelButtonText: `<?= lang('alerts.cancel') ?>`,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            parentForm.submit();
-          }
-          uploadXLS.value = '';
-        });
-      })()
-
-    }
-  })
 
 
 
