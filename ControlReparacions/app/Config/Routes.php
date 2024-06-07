@@ -90,9 +90,9 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         });
 
         //Downloads
-        $routes->GET('dowloadXLS', 'StudentsController::downloadCSV');
+        $routes->GET('dowloadCSV', 'StudentsController::downloadCSV');
 
-        $routes->GET('dowloadCSV', 'StudentsController::downloadXLS');
+        $routes->GET('dowloadXLS', 'StudentsController::downloadXLS');
     });
 
     // INSTITUTES
@@ -106,30 +106,30 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('modify/(:segment)', 'InstitutesController::modifyInstitute/$1');
         $routes->POST('modify/(:segment)', 'InstitutesController::modifyInstitute_post/$1');
 
-        $routes->GET('(:segment)', 'InstitutesController::instituteInfo/$1');
-        $routes->GET('(:segment)/filterSender', 'InstitutesController::instituteInfo/$1/sender');
-        $routes->GET('(:segment)/filterReceiver', 'InstitutesController::instituteInfo/$1/receiver');
-
         // EXPORTS
         $routes->group('export', ['filter' => 'exportTicket'], function ($routes) {
             //CSV
-            $routes->GET('csv', 'StudentsController::exportCSV');
+            $routes->GET('csv', 'InstitutesController::exportCSV');
             // XLS
-            $routes->GET('xls', 'StudentsController::exportXLS');
+            $routes->GET('xls', 'InstitutesController::exportXLS');
         });
 
         // IMPORTS
         $routes->group('import', ['filter' => 'exportTicket'], function ($routes) {
             //CSV
-            $routes->POST('csv', 'StudentsController::importCSV');
+            $routes->POST('csv', 'InstitutesController::importCSV');
             // XLS
-            $routes->POST('xls', 'StudentsController::importXLS');
+            $routes->POST('xls', 'InstitutesController::importXLS');
         });
 
         //Downloads
-        $routes->GET('dowloadXLS', 'StudentsController::downloadCSV');
+        $routes->GET('dowloadCSV', 'InstitutesController::downloadCSV');
+        $routes->GET('dowloadXLS', 'InstitutesController::downloadXLS');
 
-        $routes->GET('dowloadCSV', 'StudentsController::downloadXLS');
+        $routes->GET('(:segment)', 'InstitutesController::instituteInfo/$1');
+        $routes->GET('(:segment)/filterSender', 'InstitutesController::instituteInfo/$1/sender');
+        $routes->GET('(:segment)/filterReceiver', 'InstitutesController::instituteInfo/$1/receiver');
+
     });
     
     // ASSIGN
@@ -156,23 +156,23 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         // EXPORTS
         $routes->group('export', ['filter' => 'exportTicket'], function ($routes) {
             //CSV
-            $routes->GET('csv', 'StudentsController::exportCSV');
+            $routes->GET('csv', 'InventaryController::exportCSV');
             // XLS
-            $routes->GET('xls', 'StudentsController::exportXLS');
+            $routes->GET('xls', 'InventaryController::exportXLS');
         });
 
         // IMPORTS
         $routes->group('import', ['filter' => 'exportTicket'], function ($routes) {
             //CSV
-            $routes->POST('csv', 'StudentsController::importCSV');
+            $routes->POST('csv', 'InventaryController::importCSV');
             // XLS
-            $routes->POST('xls', 'StudentsController::importXLS');
+            $routes->POST('xls', 'InventaryController::importXLS');
         });
 
         //Downloads
-        $routes->GET('dowloadXLS', 'StudentsController::downloadCSV');
+        $routes->GET('dowloadXLS', 'InventaryController::downloadCSV');
 
-        $routes->GET('dowloadCSV', 'StudentsController::downloadXLS');
+        $routes->GET('dowloadCSV', 'InventaryController::downloadXLS');
     });
 
     // CONFIG

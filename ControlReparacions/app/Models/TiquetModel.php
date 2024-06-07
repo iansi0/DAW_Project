@@ -318,7 +318,7 @@ class TiquetModel extends Model
         $code=session()->get('user')['code'];
         $role=session()->get('user')['role'];
 
-        $this->where('tiquet.id', $id)->first();
+        $this->where('id', $id);
         $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
         

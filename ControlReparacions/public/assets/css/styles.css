@@ -659,6 +659,11 @@ video {
   margin-right: 0.25rem;
 }
 
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -820,6 +825,7 @@ video {
   height: 0.625rem;
 }
 
+<<<<<<< HEAD
 .h-3 {
   height: 0.75rem;
 }
@@ -828,6 +834,8 @@ video {
   height: 0.875rem;
 }
 
+=======
+>>>>>>> origin/braian
 .h-4 {
   height: 1rem;
 }
@@ -892,6 +900,7 @@ video {
   width: 0.625rem;
 }
 
+<<<<<<< HEAD
 .w-3 {
   width: 0.75rem;
 }
@@ -900,6 +909,8 @@ video {
   width: 0.875rem;
 }
 
+=======
+>>>>>>> origin/braian
 .w-32 {
   width: 8rem;
 }
@@ -1346,10 +1357,13 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+<<<<<<< HEAD
 .bg-gray-900\/10 {
   background-color: rgb(17 24 39 / 0.1);
 }
 
+=======
+>>>>>>> origin/braian
 .bg-green-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(21 128 61 / var(--tw-bg-opacity));
