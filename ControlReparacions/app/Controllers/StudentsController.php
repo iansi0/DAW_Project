@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\AlumneModel;
 use App\Models\UsersModel;
+use App\Models\CursModel;
 use App\Controllers\BaseController;
 use App\Models\RolesModel;
 use App\Models\UsersInRolesModel;
@@ -35,7 +36,7 @@ class StudentsController extends BaseController
 
         // GENERADOR DE TABLA 
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading('ID de Usuario', 'Nombre', 'Cognoms', 'Code_centre', ' ', ' ', ' ');
+        $table->setHeading('Nombre', 'Cognoms', 'Curs', 'Actions');
 
 
         $template = [
@@ -63,11 +64,41 @@ class StudentsController extends BaseController
         // llenar la tabla con los datos de los alumnes
         foreach ($data['students'] as $students) {
 
+            $buttonDelete = base_url("students/delete/" . $students['id_user']);
+            $buttonUpdate = base_url("students/modify/" . $students['id_user']);
+
             $table->addRow(
-                $students['id_user'],
                 $students['nom'],
                 $students['cognoms'],
-                $students['codi_centre'],
+                mb_strtoupper($students['curs']),
+                [
+                    "data" =>
+                    "
+                     <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
+                     <a onclick='(function() { Swal.fire({
+                        customClass:{htmlContainer: ``,},
+                        title: `" . lang('alerts.sure') . "`,
+                        text: `" . lang('alerts.sure_sub') . "`,
+                        icon: `warning`,
+                        showCancelButton: true,
+                        confirmButtonColor: `#3085d6`,
+                        cancelButtonColor: `#d33`,
+                        confirmButtonText: `" . lang('alerts.yes_del') . "`,
+                        cancelButtonText: `" . lang('alerts.cancel') . "`,
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = `" . $buttonDelete . "`;
+
+                            Swal.fire({
+                                title: `" . lang('alerts.deleted') . "`,
+                                text: `" . lang('alerts.deleted_sub') . "`,
+                                icon: `success`,
+                            });
+                        }
+                      }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
+
+                    "class" => "  justify-between items-center"
+                ],
             );
         }
         return view('students/students', $data);
@@ -75,31 +106,37 @@ class StudentsController extends BaseController
 
     public function studentForm()
     {
-
         helper('form');
-        return view('students/studentsForm');
+
+        $modelCurs = new CursModel();
+
+        $data = [
+            "courses" => $modelCurs->getAllCourses(),
+        ];
+
+        return view('students/studentsForm', $data);
     }
 
     public function addStudent()
     {
         helper('form');
 
-        if (!empty($this->request->getFiles())) {
+
+        $csv = $this->request->getFiles()['csv'];
+
+        if ($csv->getSize() != 0) {
             // guardar el csv 
             $file = $this->request->getFiles();
 
-            // $files['files']
-
-            // dd($file['csv']);
 
             // leer el csv 
             $fileCsv = fopen($file['csv'], 'r');
 
             // Boolean para saltarnos la primera fila (es una fila con los nombres de los campos y por ende la descartamos)
-            $firstLine = false;
+            $firstLine = true;
 
             // hacer un while para introducir los datos 
-            while (($row = fgetcsv($fileCsv, 2000, ",")) !== FALSE) {
+            while (($row = fgetcsv($fileCsv, 2000, ";")) !== FALSE) {
 
                 if (!$firstLine) {
 
@@ -116,14 +153,17 @@ class StudentsController extends BaseController
                     $codi_centre = session()->get('user')['code'];
                     $id_curs = trim($row[2]);
 
-                    $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre);
 
 
                     $user = trim($row[3]);
-                    $passwd = password_hash("1234", PASSWORD_DEFAULT);
+                    $passwd = $fake->password();
+                    $passwdHash = password_hash($passwd, PASSWORD_DEFAULT);
                     $lang = "ca";
 
-                    $modelUser->addUser($id_user, $user, $passwd, $lang);
+                    $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre, $user);
+                    $modelUser->addUser($id_user, $user, $passwdHash, $lang);
+
+                    // revisralo 
                     $newId = $fake->uuid();
                     $role = $roleModel->getIdByRole("alumn");
 
@@ -153,27 +193,28 @@ class StudentsController extends BaseController
             $validationRules =
                 [
                     'email' => [
-                        'rules'  => 'required',
+                        'rules'  => 'required|valid_email',
                         'errors' => [
-                            'required' => 'Error Email',
+                            'required' => lang('error.empty_slot_2'),
+                            'valid_email' => lang('error.wrong_email'),
                         ],
                     ],
                     'name' => [
                         'rules'  => 'required',
                         'errors' => [
-                            'required' => 'Error Name',
+                            'required' => lang('error.empty_slot_2'),
                         ],
                     ],
                     'surnames' => [
                         'rules'  => 'required',
                         'errors' => [
-                            'required' => 'Error Surnames',
+                            'required' => lang('error.empty_slot_2'),
                         ],
                     ],
                     'course' => [
                         'rules'  => 'required',
                         'errors' => [
-                            'required' => 'Error Course',
+                            'required' => lang('error.empty_slot_2'),
                         ],
                     ],
                 ];
@@ -194,34 +235,133 @@ class StudentsController extends BaseController
                 $codi_centre = session()->get('user')['code'];
                 $id_curs = $this->request->getPost("course");
 
-                $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre);
-
-
                 $user = $this->request->getPost("email");
                 $passwd = $fake->password();
                 $passwd_hash = password_hash($passwd, PASSWORD_DEFAULT);
                 $lang = "ca";
 
-                $modelUser->addUser($id_user, $user, $passwd_hash, $lang);
-                $newId = $fake->uuid();
-                $role = $roleModel->getIdByRole("alumn");
 
-                $userInRole->addUserRole($newId, $id_user, $role["id"]);
+                $createdAlumne = $modelAlumne->addAlumne($id_user, $nom, $cognoms, $id_curs, $codi_centre, $user);
 
-                $email = \Config\Services::email();
 
-                $email->setFrom('keepyoursoftware@gmail.com', 'KeepYourSoftware');
-                $email->setTo($user);
-                $email->setSubject('Usuari gestor d\'intervencions');
-                $email->setMessage('Hola '.$nom.' '.$cognoms.', et donem la benvinguda a <a href="'.base_url().'"> l\'aplicatiu de gestions d\'intervencions</a>. <br><br>
+                // dd($createdAlumne);
+                if ($createdAlumne) {
+
+
+                    $modelUser->addUser($id_user, $user, $passwd_hash, $lang);
+
+
+                    $newId = $fake->uuid();
+                    $role = $roleModel->getIdByRole("alumn");
+
+                    $userInRole->addUserRole($newId, $id_user, $role["id"]);
+
+                    $email = \Config\Services::email();
+
+                    $email->setFrom('keepyoursoftware@gmail.com', 'KeepYourSoftware');
+                    $email->setTo($user);
+                    $email->setSubject('Usuari gestor d\'intervencions');
+                    $email->setMessage('Hola ' . $nom . ' ' . $cognoms . ', et donem la benvinguda a <a href="' . base_url() . '"> l\'aplicatiu de gestions d\'intervencions</a>. <br><br>
                  El teu usuari és: ' . $user . '<br> La teva contrassenya és: ' . $passwd);
 
-                $email->send();
+                    $email->send();
+                }
             } else {
                 return redirect()->back()->withInput();
             }
 
             return redirect()->to(base_url('/students'));
         }
+    }
+
+    public function modifyStudent($id)
+    {
+        helper('form');
+
+        $modelStudent = new AlumneModel();
+        $modelCurs = new CursModel();
+
+        $data = [
+            'student' => $modelStudent->getStudentById($id),
+            "courses" => $modelCurs->getAllCourses(),
+        ];
+
+        // dd($data['courses']);
+
+        return view('students/modifyStudent', $data);
+    }
+
+    public function modifyStudent_post($id)
+    {
+
+        helper('form');
+
+        $modelStudent = new AlumneModel();
+        $modelUser = new UsersModel();
+
+        $validationRules =
+            [
+                'email' => [
+                    'rules'  => 'required|valid_email',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                        'valid_email' => lang('error.wrong_email'),
+                    ],
+                ],
+                'name' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' =>  lang('error.empty_slot_2'),
+                    ],
+                ],
+                'surnames' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' =>  lang('error.empty_slot_2'),
+                    ],
+                ],
+                'course' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' =>  lang('error.empty_slot_2'),
+                    ],
+                ],
+            ];
+
+        if ($this->validate($validationRules)) {
+
+            $student = [
+                "id_user" => $id,
+                "nom"     => $this->request->getPost("name"),
+                "cognoms"     => $this->request->getPost("surnames"),
+                "id_curs"     => $this->request->getPost("course"),
+
+            ];
+
+            $modelStudent->modifyStudent($id, $student);
+
+            $user = [
+                'id' => $id,
+                'user' => $this->request->getPost("email"),
+            ];
+
+            $modelUser->modifyUser($id, $user);
+
+            return redirect()->to(base_url('/students'));
+        }
+
+        return redirect()->back()->withInput();
+    }
+
+    public function deleteStudent($id)
+    {
+
+        $modelStudent = new AlumneModel();
+
+
+        $modelStudent->deleteStudent($id);
+
+
+        return redirect()->to(base_url('/students'));
     }
 }

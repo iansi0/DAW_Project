@@ -89,20 +89,20 @@ class InventaryController extends BaseController
                 <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
                 <a onclick='(function() { Swal.fire({
                     customClass:{htmlContainer: ``,},
-                    title: `".lang('alerts.sure')."`,
-                    text: `".lang('alerts.sure_sub')."`,
+                    title: `" . lang('alerts.sure') . "`,
+                    text: `" . lang('alerts.sure_sub') . "`,
                     icon: `warning`,
                     showCancelButton: true,
                     confirmButtonColor: `#3085d6`,
                     cancelButtonColor: `#d33`,
-                    confirmButtonText: `".lang('alerts.yes_del')."`,
-                    cancelButtonText: `".lang('alerts.cancel')."`,
+                    confirmButtonText: `" . lang('alerts.yes_del') . "`,
+                    cancelButtonText: `" . lang('alerts.cancel') . "`,
                   }).then((result) => {
                     if (result.isConfirmed) {
 
                         Swal.fire({
-                            title: `".lang('alerts.deleted')."`,
-                            text: `".lang('alerts.deleted_sub')."`,
+                            title: `" . lang('alerts.deleted') . "`,
+                            text: `" . lang('alerts.deleted_sub') . "`,
                             icon: `success`,
                             showConfirmButton: false,
                             timer:2000,
@@ -146,19 +146,20 @@ class InventaryController extends BaseController
                 'name' => [
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Error Name',
+                        'required' => lang('error.empty_slot_2'),
                     ],
                 ],
                 'price' => [
-                    'rules'  => 'required',
+                    'rules'  => 'required|is_numeric',
                     'errors' => [
-                        'required' => 'Error Price',
+                        'required' => lang('error.empty_slot_2'),
+                        'is_numeric' => lang('error.wrong_price'),
                     ],
                 ],
                 'type_inventary' => [
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Error Type',
+                        'required' => lang('error.empty_slot_2'),
                     ],
                 ],
             ];
@@ -186,13 +187,15 @@ class InventaryController extends BaseController
             );
 
             return redirect()->to(base_url('inventary'));
-        }else {
+        } else {
             return redirect()->back()->withInput();
         }
     }
 
     public function modifyInventary($id)
     {
+        helper('form');
+
         $type = new TipusInventariModel();
         $inventary = new InventariModel();
 
@@ -205,20 +208,48 @@ class InventaryController extends BaseController
 
     public function modifyInventary_post($id)
     {
+        helper('form');
 
-        $model = new InventariModel();
+        $validationRules =
+            [
+                'name' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'price' => [
+                    'rules'  => 'required|is_numeric',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                        'is_numeric' => lang('error.wrong_price'),
+                    ],
+                ],
+                'type_inventary' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+            ];
 
-        $data = [
-            "id" =>  $id,
-            "nom" =>  $this->request->getPost("name"),
-            "preu" =>  $this->request->getPost("price"),
-            "id_tipus_inventari" => intval($this->request->getPost("type_inventary")),
-        ];
+        if ($this->validate($validationRules)) {
+            $model = new InventariModel();
+
+            $data = [
+                "id" =>  $id,
+                "nom" =>  $this->request->getPost("name"),
+                "preu" =>  $this->request->getPost("price"),
+                "id_tipus_inventari" => intval($this->request->getPost("type_inventary")),
+            ];
 
 
-        $model->modifyInventari($id, $data);
+            $model->modifyInventari($id, $data);
 
-        return redirect()->to(base_url('/inventary'));
+            return redirect()->to(base_url('/inventary'));
+        }
+
+        return redirect()->back()->withInput();
     }
 
     public function deleteInventary($id)

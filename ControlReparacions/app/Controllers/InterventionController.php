@@ -48,7 +48,7 @@ class InterventionController extends BaseController
                 'description' => [
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Error Description',
+                        'required' => lang('error.empty_slot_2'),
                     ],
                 ],
             ];
@@ -80,6 +80,7 @@ class InterventionController extends BaseController
                 $descripcio,
                 $id_ticket,
                 $id_tipus,
+                $id_curs,
                 $persona_reparadora
             );
 

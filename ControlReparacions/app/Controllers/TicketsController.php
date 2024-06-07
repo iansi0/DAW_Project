@@ -392,8 +392,8 @@ class TicketsController extends BaseController
             $id_tiquet = LibrariesUUID::v4();
             $codi_equip = '';
             $id_tipus_dispositiu = $ticket[1]->id_type;
-            $ins_emissor = $ticket[2]->sender??0;
-            $ins_receptor = $ticket[3]->repair??0;
+            $ins_emissor = $ticket[2]->sender ?? 0;
+            $ins_receptor = $ticket[3]->repair ?? 0;
             $descripcio_avaria =  $ticket[4]->description;
             $nom_persona_contacte_centre = $ticket[5]->nameContact;
             $correu_persona_contacte_centre =  $ticket[6]->emailContact;
@@ -415,11 +415,9 @@ class TicketsController extends BaseController
                 $ins_emissor,
                 $ins_receptor
             );
-            
         }
 
         return redirect()->to(base_url('/tickets'));
-
     }
 
     public function modifyTicket($id)
@@ -577,7 +575,6 @@ class TicketsController extends BaseController
             $filters['state'] = '';
         }
 
-        // dd($filters);
 
         $model = new TiquetModel();
 
@@ -589,11 +586,20 @@ class TicketsController extends BaseController
             $paginateData = $model->getAllPaged()->findAll();
         }
 
-        // dd($paginateData);
+        $propiedades = [
+
+            'id', 'descripcio', 'created', 'tipus', 'estat', 'id_estat', 'emissor', 'receptor'
+        ];
+
+
+
         $csv_string = "";
 
+        $csv_string .= implode(";", $propiedades) . "\n";
+
+
         foreach ($paginateData as $ticket) {
-            $csv_string .= implode(",", $ticket) . "\n";
+            $csv_string .= implode(";", $ticket) . "\n";
         }
 
         header('Content-Disposition: attachment; filename="ticket_export_' . date("d-m-Y") . '.csv"');
@@ -674,21 +680,203 @@ class TicketsController extends BaseController
             $paginateData = $model->getAllPaged()->findAll();
         }
 
-        header("Content-Type: application/vnd.ms-excel");
-        header('Content-Disposition: attachment; filename="ticket_export_' . date("d-m-Y") . '.xls"');
 
-        echo "\xEF\xBB\xBF"; // UTF-8 BOM
+        $propiedades = [
 
-        // Encabezados de las columnas
-        echo "Identificador\tDescripcion\tFecha\ttipo\testat\temissor\treceptor\n";
+            'id', 'descripcio', 'created', 'tipus', 'estat', 'id_estat', 'emissor', 'receptor'
+        ];
+
+
+
         $xls_string = "";
 
+        $xls_string .= implode("\t", $propiedades) . "\n";
+
         foreach ($paginateData as $ticket) {
-            echo implode("\t", $ticket) . "\n";
+            // echo implode(";", $ticket) . "\n";
+            $xls_string .= implode("\t", $ticket) . "\n";
             // d($xls_string);
         }
-        // dd('fin');
+
+        // $xls_string .= "\n";
+
+        $xls_string = "\xFF\xFE" . mb_convert_encoding($xls_string, 'UTF-16LE', 'UTF-8');
 
 
+        header('Content-type: application/vnd.ms-excel;charset=UTF-16LE');
+        header('Content-Disposition: attachment; filename="ticket_export_' . date("d-m-Y") . '.xls"');
+        header("Cache-Control: no-cache");
+
+        echo $xls_string;
+    }
+
+    public function importCSV()
+    {
+        $csv = $this->request->getFiles()['uploadCSV'];
+
+        if ($csv->getSize() != 0) {
+            // guardar el csv 
+            $file = $this->request->getFiles();
+
+            // leer el csv 
+            $fileCsv = fopen($file['uploadCSV'], 'r');
+
+            // Boolean para saltarnos la primera fila (es una fila con los nombres de los campos y por ende la descartamos)
+            $firstLine = true;
+
+            // hacer un while para introducir los datos 
+            while (($row = fgetcsv($fileCsv, 2000, ";")) !== FALSE) {
+
+                if (!$firstLine) {
+
+                    $fake = Factory::create("es_ES");
+
+                    $modelTickets = new TiquetModel();
+
+                    $id_tiquet =  $fake->uuid();
+                    $codi_equip = $fake->uuid();
+                    $descripcio_avaria =  trim($row[0]);
+                    $nom_persona_contacte_centre = trim($row[1]);
+                    $correu_persona_contacte_centre =  trim($row[2]);
+                    $id_tipus_dispositiu = trim($row[3]);
+                    $codi_centre_emissor = trim($row[4]);
+                    $id_estat = trim($row[5]);
+                    $codi_centre_reparador = trim($row[6]);
+
+
+                    $modelTickets->addTiquet(
+                        $id_tiquet,
+                        $codi_equip,
+                        $descripcio_avaria,
+                        $nom_persona_contacte_centre,
+                        $correu_persona_contacte_centre,
+                        $id_tipus_dispositiu,
+                        $id_estat,
+                        $codi_centre_emissor,
+                        $codi_centre_reparador
+                    );
+                }
+                $firstLine = false;
+            }
+
+            fclose($fileCsv);
+
+            return redirect()->to(base_url('/tickets'));
+        }
+    }
+
+    public function importXLS()
+    {
+        $csv = $this->request->getFiles()['uploadXLS'];
+
+        if ($csv->getSize() != 0) {
+            // guardar el csv 
+            $file = $this->request->getFiles();
+
+            // leer el csv 
+            $fileCsv = fopen($file['uploadXLS'], 'r');
+
+            // Boolean para saltarnos la primera fila (es una fila con los nombres de los campos y por ende la descartamos)
+            $firstLine = true;
+
+            
+
+            // hacer un while para introducir los datos 
+            while (($row = fgetcsv($fileCsv, 2000, "\n")) !== FALSE) {
+
+                if (!$firstLine) {
+
+                   
+                    dd($row);
+
+                    $fake = Factory::create("es_ES");
+
+                    $modelTickets = new TiquetModel();
+
+
+                    $id_tiquet =  $fake->uuid();
+                    $codi_equip = $fake->uuid();
+                    $descripcio_avaria =  trim($row[0]);
+                    $nom_persona_contacte_centre = trim($row[1]);
+                    $correu_persona_contacte_centre =  trim($row[2]);
+                    $id_tipus_dispositiu = trim($row[3]);
+                    $codi_centre_emissor = trim($row[4]);
+                    $id_estat = trim($row[5]);
+                    $codi_centre_reparador = trim($row[6]);
+
+
+                    $modelTickets->addTiquet(
+                        $id_tiquet,
+                        $codi_equip,
+                        $descripcio_avaria,
+                        $nom_persona_contacte_centre,
+                        $correu_persona_contacte_centre,
+                        $id_tipus_dispositiu,
+                        $id_estat,
+                        $codi_centre_emissor,
+                        $codi_centre_reparador
+                    );
+                }
+                $firstLine = false;
+            }
+
+            fclose($fileCsv);
+
+            return redirect()->to(base_url('/tickets'));
+        }
+    }
+
+    public function downloadCSV()
+    {
+        // Establecer la ruta del archivo
+        $rutaArchivo = WRITEPATH . 'plantillas' . DIRECTORY_SEPARATOR . 'plantilla_tickets.csv';
+
+        // dd($rutaArchivo);
+
+        // Comprobar si el archivo existe
+        if (!file_exists($rutaArchivo)) {
+            // Manejar el error de archivo no encontrado
+            echo "Error: Archivo no encontrado";
+            return;
+        }
+
+        // Obtener el tamaño y el tipo de contenido del archivo
+        $tamañoArchivo = filesize($rutaArchivo);
+        $tipoContenido = mime_content_type($rutaArchivo);
+
+        // Establecer encabezados de descarga
+        header('Content-Disposition: attachment; filename="plantilla_ticket.csv"');
+        header('Content-Length: ' . $tamañoArchivo);
+        header('Content-Type: ' . $tipoContenido);
+
+        // Leer el contenido del archivo y enviarlo al navegador
+        readfile($rutaArchivo);
+    }
+
+    public function downloadXLS()
+    {
+        // Establecer la ruta del archivo
+        $rutaArchivo = WRITEPATH . 'plantillas' . DIRECTORY_SEPARATOR . 'plantilla tickets.xls';
+
+        // dd($rutaArchivo);
+
+        // Comprobar si el archivo existe
+        if (!file_exists($rutaArchivo)) {
+            // Manejar el error de archivo no encontrado
+            echo "Error: Archivo no encontrado";
+            return;
+        }
+
+        // Obtener el tamaño y el tipo de contenido del archivo
+        $tamañoArchivo = filesize($rutaArchivo);
+        $tipoContenido = mime_content_type($rutaArchivo);
+
+        // Establecer encabezados de descarga
+        header('Content-Disposition: attachment; filename="plantilla_ticket.xls"');
+        header('Content-Length: ' . $tamañoArchivo);
+        header('Content-Type: ' . $tipoContenido);
+
+        // Leer el contenido del archivo y enviarlo al navegador
+        readfile($rutaArchivo);
     }
 }

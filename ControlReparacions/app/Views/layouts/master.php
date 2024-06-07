@@ -23,6 +23,7 @@
             /*montserrat para titulos con bold
             lato y popins para textos medium */
         }
+
         .swal2-container {
             position: absolute !important;
             top: 0 !important;
@@ -31,6 +32,7 @@
             bottom: 0 !important;
             z-index: 99999 !important;
         }
+
         body.swal2-height-auto {
             height: 3.5rem !important;
         }
@@ -48,6 +50,7 @@
         console.log( );
     </script> -->
 </head>
+
 <body class=" flex flex-col  h-full bg-[#ffffff]">
 
     <header class=" fixed w-full  bg-[#f7f7f9] text-terciario-4  h-12 flex text-xl z-20 ">
@@ -66,28 +69,28 @@
             <button class="modalButton w-full text-right pr-8 pt-5 text-4xl">X</button>
 
             <ul class=" flex flex-col gap-5 text-center justify-center justify-items-center content-center">
-            <?php if((session()->get('user')['role']=="sstt")  || (session()->get('user')['role']=="admin")) : ?>
+                <?php if ((session()->get('user')['role'] == "sstt")  || (session()->get('user')['role'] == "admin")) : ?>
 
-<li>
-    <a href="<?= base_url('statistics') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'statistics') ? 'bg-red-300' : '' ?>">
-        <p class="mr-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 40 32">
-                <g>
-                    <path d="M31,26c-0.6,0-1-0.4-1-1V12c0-0.6,0.4-1,1-1s1,0.4,1,1v13C32,25.6,31.6,26,31,26z"></path>
-                </g>
-                <g>
-                    <path d="M16,21c-0.2,0-0.3,0-0.5-0.1l-15-8C0.2,12.7,0,12.4,0,12s0.2-0.7,0.5-0.9l15-8c0.3-0.2,0.6-0.2,0.9,0l15,8
+                    <li>
+                        <a href="<?= base_url('statistics') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'statistics') ? 'bg-red-300' : '' ?>">
+                            <p class="mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 40 32">
+                                    <g>
+                                        <path d="M31,26c-0.6,0-1-0.4-1-1V12c0-0.6,0.4-1,1-1s1,0.4,1,1v13C32,25.6,31.6,26,31,26z"></path>
+                                    </g>
+                                    <g>
+                                        <path d="M16,21c-0.2,0-0.3,0-0.5-0.1l-15-8C0.2,12.7,0,12.4,0,12s0.2-0.7,0.5-0.9l15-8c0.3-0.2,0.6-0.2,0.9,0l15,8
                 c0.3,0.2,0.5,0.5,0.5,0.9s-0.2,0.7-0.5,0.9l-15,8C16.3,21,16.2,21,16,21z">
-                    </path>
-                </g>
-                <path d="M17.4,22.6C17,22.9,16.5,23,16,23s-1-0.1-1.4-0.4L6,18.1V22c0,3.1,4.9,6,10,6s10-2.9,10-6v-3.9L17.4,22.6z"></path>
-            </svg>
-        </p>
-        <b><?= lang('titles.statistics') ?></b>
-    </a>
-</li>
+                                        </path>
+                                    </g>
+                                    <path d="M17.4,22.6C17,22.9,16.5,23,16,23s-1-0.1-1.4-0.4L6,18.1V22c0,3.1,4.9,6,10,6s10-2.9,10-6v-3.9L17.4,22.6z"></path>
+                                </svg>
+                            </p>
+                            <b><?= lang('titles.statistics') ?></b>
+                        </a>
+                    </li>
 
-<?php endif ?>
+                <?php endif ?>
                 <li>
                     <a href="<?= base_url('tickets') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= strpos(uri_string(), 'tickets') !== false || strpos(uri_string(), 'intervention') !== false ? 'bg-red-300' : '' ?>">
                         <p class="mr-3">
@@ -98,70 +101,70 @@
                         <b><?= lang('titles.ticket') ?></b>
                     </a>
                 </li>
-                
-                <?php if((session()->get('user')['role']=="ins") || (session()->get('user')['role']=="prof")  || (session()->get('user')['role']=="admin")) : ?>
 
-                <li>
-                    <a href="<?= base_url('students') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= strpos(uri_string(), 'students') !== false ? 'bg-red-300' : '' ?>">
-                        <p class="mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 40 32">
-                                <g>
-                                    <path d="M31,26c-0.6,0-1-0.4-1-1V12c0-0.6,0.4-1,1-1s1,0.4,1,1v13C32,25.6,31.6,26,31,26z"></path>
-                                </g>
-                                <g>
-                                    <path d="M16,21c-0.2,0-0.3,0-0.5-0.1l-15-8C0.2,12.7,0,12.4,0,12s0.2-0.7,0.5-0.9l15-8c0.3-0.2,0.6-0.2,0.9,0l15,8
+                <?php if ((session()->get('user')['role'] == "ins") || (session()->get('user')['role'] == "prof")  || (session()->get('user')['role'] == "admin")) : ?>
+
+                    <li>
+                        <a href="<?= base_url('students') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= strpos(uri_string(), 'students') !== false ? 'bg-red-300' : '' ?>">
+                            <p class="mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 40 32">
+                                    <g>
+                                        <path d="M31,26c-0.6,0-1-0.4-1-1V12c0-0.6,0.4-1,1-1s1,0.4,1,1v13C32,25.6,31.6,26,31,26z"></path>
+                                    </g>
+                                    <g>
+                                        <path d="M16,21c-0.2,0-0.3,0-0.5-0.1l-15-8C0.2,12.7,0,12.4,0,12s0.2-0.7,0.5-0.9l15-8c0.3-0.2,0.6-0.2,0.9,0l15,8
 		                        c0.3,0.2,0.5,0.5,0.5,0.9s-0.2,0.7-0.5,0.9l-15,8C16.3,21,16.2,21,16,21z">
-                                    </path>
-                                </g>
-                                <path d="M17.4,22.6C17,22.9,16.5,23,16,23s-1-0.1-1.4-0.4L6,18.1V22c0,3.1,4.9,6,10,6s10-2.9,10-6v-3.9L17.4,22.6z"></path>
-                            </svg>
-                        </p>
-                        <b><?= lang('titles.students') ?></b>
-                    </a>
-                </li>
+                                        </path>
+                                    </g>
+                                    <path d="M17.4,22.6C17,22.9,16.5,23,16,23s-1-0.1-1.4-0.4L6,18.1V22c0,3.1,4.9,6,10,6s10-2.9,10-6v-3.9L17.4,22.6z"></path>
+                                </svg>
+                            </p>
+                            <b><?= lang('titles.students') ?></b>
+                        </a>
+                    </li>
 
                 <?php endif ?>
-                <?php if((session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin")) : ?>
+                <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
 
-                <li>
-                    <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= strpos(uri_string(), 'institutes') !== false ? 'bg-red-300' : '' ?>">
-                        <p class="mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 2 35 26">
-                                <g id="school-7_1_">
-                                    <polygon points="15,10 14,10 14,12 14,13 15,13 17,13 17,12 15,12 	"></polygon>
-                                    <path d="M27,25v-9h1l-1-2h-6v11h-1V9.067l1.529,0.815l0.941-1.766L15,4.133V3h3V0h-3h-1v4.133L6.529,8.117l0.941,1.766L9,9.067V25
+                    <li>
+                        <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= strpos(uri_string(), 'institutes') !== false ? 'bg-red-300' : '' ?>">
+                            <p class="mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 2 35 26">
+                                    <g id="school-7_1_">
+                                        <polygon points="15,10 14,10 14,12 14,13 15,13 17,13 17,12 15,12 	"></polygon>
+                                        <path d="M27,25v-9h1l-1-2h-6v11h-1V9.067l1.529,0.815l0.941-1.766L15,4.133V3h3V0h-3h-1v4.133L6.529,8.117l0.941,1.766L9,9.067V25
 		                    H8V14H2l-1,2h1v9H0v1h29v-1H27z M22,21v-1h3v1H22z M4,21v-1h3v1H4z M14.5,16c-1.933,0-3.5-1.567-3.5-3.5S12.567,9,14.5,9
 		                    c1.933,0,3.5,1.567,3.5,3.5S16.433,16,14.5,16z M13,25v-5h3v5H13z">
-                                    </path>
-                                </g>
-                            </svg>
-                        </p>
-                        <b><?= lang('titles.ins') ?></b>
-                    </a>
-                </li>
+                                        </path>
+                                    </g>
+                                </svg>
+                            </p>
+                            <b><?= lang('titles.ins') ?></b>
+                        </a>
+                    </li>
 
                 <?php endif ?>
-                <?php if((session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin")) : ?>
+                <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
 
-                <li>
-                    <a href="<?= base_url('assign') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= strpos(uri_string(), 'assign') !== false ? 'bg-red-300' : '' ?>">
-                        <p class="mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-30 0 520 455">
-                                <g transform="translate(0.000000,455.000000) scale(0.050000,-0.050000)" stroke="none">
-                                    <path d="M4038 9036 c-801 -397 -673 -1607 196 -1846 95 -26 93 -26 -138 -28
+                    <li>
+                        <a href="<?= base_url('assign') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= strpos(uri_string(), 'assign') !== false ? 'bg-red-300' : '' ?>">
+                            <p class="mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-30 0 520 455">
+                                    <g transform="translate(0.000000,455.000000) scale(0.050000,-0.050000)" stroke="none">
+                                        <path d="M4038 9036 c-801 -397 -673 -1607 196 -1846 95 -26 93 -26 -138 -28
                             -489 -4 -782 -156 -937 -488 -92 -196 -102 -296 -95 -979 8 -797 16 -815 393
                             -815 l178 0 8 248 c41 1208 1697 1170 1697 -40 l0 -208 187 0 c378 0 393 33
                             393 854 0 812 -28 937 -259 1167 -197 196 -382 258 -789 261 -198 2 -226 6
                             -152 20 869 170 1035 1429 242 1845 l-138 73 -329 0 -329 0 -128 -64z" />
-                                    <path d="M1102 8828 c-939 -252 -987 -1575 -69 -1899 l137 -48 -180 -1 c-474
+                                        <path d="M1102 8828 c-939 -252 -987 -1575 -69 -1899 l137 -48 -180 -1 c-474
                             -2 -763 -135 -931 -428 l-59 -102 0 -835 0 -836 65 -39 c99 -60 2488 -62 2587
                             -2 127 77 131 105 124 877 -7 790 -12 820 -184 1032 -183 225 -385 312 -766
                             328 l-264 11 126 44 c609 213 859 967 495 1495 -238 346 -680 511 -1081 403z" />
-                                    <path d="M7362 8828 c-958 -257 -967 -1617 -12 -1920 79 -25 77 -25 -90 -27
+                                        <path d="M7362 8828 c-958 -257 -967 -1617 -12 -1920 79 -25 77 -25 -90 -27
                                 -581 -6 -919 -221 -1030 -654 -52 -205 -36 -1436 20 -1510 91 -122 31 -117
                                 1375 -117 l1229 0 68 46 68 46 5 808 5 809 -53 105 c-161 318 -461 463 -967
                                 466 l-170 1 130 45 c1200 409 646 2231 -578 1902z" />
-                                    <path d="M4398 5718 c-129 -19 -240 -82 -332 -186 -156 -177 -146 17 -146
+                                        <path d="M4398 5718 c-129 -19 -240 -82 -332 -186 -156 -177 -146 17 -146
                             -2894 l0 -2598 -140 0 -140 0 0 1169 c0 1409 -8 1461 -258 1711 -205 205 -714
                             328 -840 202 l-42 -42 0 -1520 0 -1520 -1250 0 c-820 0 -1250 -7 -1250 -20 0
                             -13 1513 -20 4500 -20 2987 0 4500 7 4500 20 0 12 -100 20 -259 20 l-260 0 -5
@@ -171,36 +174,36 @@
                             -49 -177 676 l-6 644 -59 107 c-161 290 -398 347 -606 145 -167 -162 -174
                             -195 -181 -859 l-7 -586 -83 13 c-46 6 -109 17 -139 23 l-55 10 0 1398 c0
                             1344 -2 1402 -40 1503 -92 246 -351 394 -622 354z" />
-                                </g>
-                            </svg>
+                                    </g>
+                                </svg>
 
-                        </p>
-                        <b><?= lang('titles.assign') ?></b>
-                    </a>
-                </li>
-                
+                            </p>
+                            <b><?= lang('titles.assign') ?></b>
+                        </a>
+                    </li>
+
                 <?php endif ?>
-                <?php if((session()->get('user')['role']=="ins") || (session()->get('user')['role']=="prof") || (session()->get('user')['role']=="admin")) : ?>
+                <?php if ((session()->get('user')['role'] == "ins") || (session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "admin")) : ?>
 
-                <li>
-                    <a href="<?= base_url('inventary') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= strpos(uri_string(), 'inventary') !== false ? 'bg-red-300' : '' ?>">
-                        <p class="mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="65" height="100" fill="currentColor" viewBox="-3 0 38 32">
-                                <g>
-                                    <path d="M27.3,12.1l2.4-2.4C29.9,9.5,30,9.1,30,8.8c-0.1-0.3-0.3-0.6-0.6-0.7l-10-4C19,3.9,18.6,4,18.3,4.3L16,6.6l-2.3-2.3
+                    <li>
+                        <a href="<?= base_url('inventary') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= strpos(uri_string(), 'inventary') !== false ? 'bg-red-300' : '' ?>">
+                            <p class="mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="65" height="100" fill="currentColor" viewBox="-3 0 38 32">
+                                    <g>
+                                        <path d="M27.3,12.1l2.4-2.4C29.9,9.5,30,9.1,30,8.8c-0.1-0.3-0.3-0.6-0.6-0.7l-10-4C19,3.9,18.6,4,18.3,4.3L16,6.6l-2.3-2.3
 		                    C13.4,4,13,3.9,12.6,4.1l-10,4C2.3,8.2,2.1,8.5,2,8.8C2,9.1,2.1,9.5,2.3,9.7l2.4,2.4l-2.5,3.3C2,15.6,2,16,2,16.3
 		                    c0.1,0.3,0.3,0.5,0.6,0.7l10,4c0.1,0,0.2,0.1,0.4,0.1c0.3,0,0.6-0.1,0.8-0.4l2.2-2.9l2.2,2.9c0.2,0.3,0.5,0.4,0.8,0.4
 		                    c0.1,0,0.3,0,0.4-0.1l10-4c0.3-0.1,0.5-0.4,0.6-0.7c0.1-0.3,0-0.6-0.2-0.9L27.3,12.1z M16,14.9L8.7,12L16,9.1l7.3,2.9L16,14.9z">
-                                    </path>
-                                    <path d="M19,23c-0.9,0-1.8-0.4-2.4-1.2L16,21l-0.6,0.8c-0.8,1.1-2.3,1.5-3.5,1L5,20v4c0,0.4,0.2,0.8,0.6,0.9l10,4
+                                        </path>
+                                        <path d="M19,23c-0.9,0-1.8-0.4-2.4-1.2L16,21l-0.6,0.8c-0.8,1.1-2.3,1.5-3.5,1L5,20v4c0,0.4,0.2,0.8,0.6,0.9l10,4
 		                    c0.1,0,0.2,0.1,0.4,0.1s0.3,0,0.4-0.1l10-4c0.4-0.2,0.6-0.5,0.6-0.9v-4l-6.9,2.8C19.8,22.9,19.4,23,19,23z">
-                                    </path>
-                                </g>
-                            </svg>
-                        </p>
-                        <b><?= lang("titles.inventory_2") ?></b>
-                    </a>
-                </li>
+                                        </path>
+                                    </g>
+                                </svg>
+                            </p>
+                            <b><?= lang("titles.inventory_2") ?></b>
+                        </a>
+                    </li>
 
                 <?php endif ?>
 
@@ -244,7 +247,7 @@
             <div id="dropdown_user" class="absolute hidden right-1 top-12 w-60 px-5 py-3 bg-[#f7f7f9] shadow border border-transparent rounded-b-lg">
                 <ul class="space-y-3 text-terciario-4">
                     <li class="font-medium h-8">
-                        <a href="<?= base_url('work') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                        <a href="<?= base_url('config') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
                             <div class="mr-3">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
@@ -285,25 +288,25 @@
                     <img width="50" height="100" class="mr-3" src="/assets/img/logo.png" alt="Logo">
                     <b>KeepYourSoftware</b>
                 </div>
-                
+
                 <!-- STATISTICS -->
-                <?php if((session()->get('user')['role']=="sstt")  || (session()->get('user')['role']=="admin")) : ?>
+                <?php if ((session()->get('user')['role'] == "sstt")  || (session()->get('user')['role'] == "admin")) : ?>
                     <a href="<?= base_url('statistics') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'statistics') ? 'bg-red-300' : '' ?>">
                         <p style="margin-left: -1rem;">
-                        <svg fill="currentColor" viewBox="200 0 1 512" height="40" width="80" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  xml:space="preserve">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier"> 
-                                <g> 
-                                    <path d="M447.652,304.13h-40.138c-6.681,0-12.097,5.416-12.097,12.097v95.805c0,6.681,5.416,12.098,12.097,12.098h40.138 c6.681,0,12.098-5.416,12.098-12.098v-95.805C459.75,309.546,454.334,304.13,447.652,304.13z"></path> 
-                                    <path d="M348.798,258.13H308.66c-6.681,0-12.098,5.416-12.098,12.097v141.805c0,6.681,5.416,12.098,12.098,12.098h40.138 c6.681,0,12.097-5.416,12.097-12.098V270.228C360.896,263.546,355.48,258.13,348.798,258.13z"></path> 
-                                    <path d="M151.09,304.13h-40.138c-6.681,0-12.097,5.416-12.097,12.097v95.805c0,6.681,5.416,12.098,12.097,12.098h40.138 c6.681,0,12.098-5.416,12.098-12.098v-95.805C163.188,309.546,157.771,304.13,151.09,304.13z"></path> 
-                                    <path d="M52.236,258.13H12.098C5.416,258.13,0,263.546,0,270.228v141.805c0,6.681,5.416,12.098,12.098,12.098h40.138 c6.681,0,12.097-5.416,12.097-12.098V270.228C64.333,263.546,58.917,258.13,52.236,258.13z"></path> 
-                                    <path d="M249.944,196.968h-40.138c-6.681,0-12.098,5.416-12.098,12.098v202.967c0,6.681,5.416,12.098,12.098,12.098h40.138 c6.681,0,12.098-5.416,12.098-12.098V209.066C262.042,202.384,256.625,196.968,249.944,196.968z"></path> 
-                                    <path d="M436.869,244.62c8.14,0,15-6.633,15-15v-48.479c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v12.119L269.52,40.044 c-3.148-3.165-7.536-4.767-11.989-4.362c-4.446,0.403-8.482,2.765-11.011,6.445L131.745,209.185L30.942,144.969 c-6.987-4.451-16.26-2.396-20.71,4.592c-4.451,6.987-2.396,16.259,4.592,20.71l113.021,72c2.495,1.589,5.286,2.351,8.046,2.351 c4.783,0,9.475-2.285,12.376-6.507L261.003,74.025L400.8,214.62h-12.41c-8.284,0-15,6.716-15,15c0,8.284,6.716,15,15,15 c6.71,0,41.649,0,48.443,0H436.869z"></path> 
-                                </g> 
-                            </g>
-                        </svg>
+                            <svg fill="currentColor" viewBox="200 0 1 512" height="40" width="80" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <g>
+                                        <path d="M447.652,304.13h-40.138c-6.681,0-12.097,5.416-12.097,12.097v95.805c0,6.681,5.416,12.098,12.097,12.098h40.138 c6.681,0,12.098-5.416,12.098-12.098v-95.805C459.75,309.546,454.334,304.13,447.652,304.13z"></path>
+                                        <path d="M348.798,258.13H308.66c-6.681,0-12.098,5.416-12.098,12.097v141.805c0,6.681,5.416,12.098,12.098,12.098h40.138 c6.681,0,12.097-5.416,12.097-12.098V270.228C360.896,263.546,355.48,258.13,348.798,258.13z"></path>
+                                        <path d="M151.09,304.13h-40.138c-6.681,0-12.097,5.416-12.097,12.097v95.805c0,6.681,5.416,12.098,12.097,12.098h40.138 c6.681,0,12.098-5.416,12.098-12.098v-95.805C163.188,309.546,157.771,304.13,151.09,304.13z"></path>
+                                        <path d="M52.236,258.13H12.098C5.416,258.13,0,263.546,0,270.228v141.805c0,6.681,5.416,12.098,12.098,12.098h40.138 c6.681,0,12.097-5.416,12.097-12.098V270.228C64.333,263.546,58.917,258.13,52.236,258.13z"></path>
+                                        <path d="M249.944,196.968h-40.138c-6.681,0-12.098,5.416-12.098,12.098v202.967c0,6.681,5.416,12.098,12.098,12.098h40.138 c6.681,0,12.098-5.416,12.098-12.098V209.066C262.042,202.384,256.625,196.968,249.944,196.968z"></path>
+                                        <path d="M436.869,244.62c8.14,0,15-6.633,15-15v-48.479c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v12.119L269.52,40.044 c-3.148-3.165-7.536-4.767-11.989-4.362c-4.446,0.403-8.482,2.765-11.011,6.445L131.745,209.185L30.942,144.969 c-6.987-4.451-16.26-2.396-20.71,4.592c-4.451,6.987-2.396,16.259,4.592,20.71l113.021,72c2.495,1.589,5.286,2.351,8.046,2.351 c4.783,0,9.475-2.285,12.376-6.507L261.003,74.025L400.8,214.62h-12.41c-8.284,0-15,6.716-15,15c0,8.284,6.716,15,15,15 c6.71,0,41.649,0,48.443,0H436.869z"></path>
+                                    </g>
+                                </g>
+                            </svg>
                         </p>
                         <b><?= lang('titles.statistics') ?></b>
                     </a>
@@ -318,9 +321,9 @@
                     </p>
                     <b><?= lang('titles.ticket') ?></b>
                 </a>
-                
+
                 <!-- ESTUDIANTES -->
-                <?php if((session()->get('user')['role']=="ins") || (session()->get('user')['role']=="prof")  || (session()->get('user')['role']=="admin")) : ?>
+                <?php if ((session()->get('user')['role'] == "ins") || (session()->get('user')['role'] == "prof")  || (session()->get('user')['role'] == "admin")) : ?>
                     <a href="<?= base_url('students') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white  <?= strpos(uri_string(), 'students') !== false ? 'bg-red-300' : '' ?>">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 40 32">
@@ -340,7 +343,7 @@
                 <?php endif ?>
 
                 <!-- INSTITUTOS -->
-                <?php if((session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin")) : ?>
+                <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
                     <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white  <?= strpos(uri_string(), 'institutes') !== false ? 'bg-red-300' : '' ?>">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 2 35 26">
@@ -358,7 +361,7 @@
                 <?php endif ?>
 
                 <!-- ASIGNAR -->
-                <?php if((session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin")) : ?>
+                <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
                     <a href="<?= base_url('assign') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white  <?= strpos(uri_string(), 'assign') !== false ? 'bg-red-300' : '' ?>">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-30 0 520 455">
@@ -395,7 +398,7 @@
                 <?php endif ?>
 
                 <!-- INVENTARIO -->
-                <?php if((session()->get('user')['role']=="ins") || (session()->get('user')['role']=="prof") || (session()->get('user')['role']=="admin")) : ?>
+                <?php if ((session()->get('user')['role'] == "ins") || (session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "admin")) : ?>
                     <a href="<?= base_url('inventary') ?>" class="w-ful h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white  <?= strpos(uri_string(), 'inventary') !== false ? 'bg-red-300' : '' ?>">
                         <p class="mr-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 38 32">
@@ -439,7 +442,6 @@
 
 
 <script>
-
     document.addEventListener("DOMContentLoaded", function(event) {
 
         // FUNCIONES DE SHOW / HIDE DE DROPDOWN USUARIO
@@ -483,6 +485,89 @@
 
 
     });
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+
+        // FUNCIONES DE SHOW / HIDE DE DROPDOWN USUARIO
+        var dropdown = document.querySelector("#dropdown");
+
+
+        window.addEventListener('click', function(event) {
+
+            if (event.target.id != 'dropdown' || event.target.closest('div').id != 'dropdown') {
+                if (event.target && (event.target.id === 'dropdownDefaultButton' || (event.target.closest('div') && event.target.closest('div').id === 'dropdownDefaultButton'))) {
+                    if (dropdown.style.display == "none") {
+                        dropdown.style.display = "block";
+                    } else {
+                        dropdown.style.display = "none";
+                    }
+                } else {
+                    dropdown.style.display = "none";
+                }
+            }
+
+        })
+    })
+
+
+    const uploadCSV = document.getElementById('uploadCSV');
+    const uploadXLS = document.getElementById('uploadXLS');
+
+    uploadCSV.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            let parentForm = uploadCSV.parentElement.parentElement;
+
+            (function() {
+                Swal.fire({
+                    customClass: {
+                        htmlContainer: ``,
+                    },
+                    title: `<?= lang('alerts.sure') ?>`,
+                    text: `<?= lang('alerts.sure_sub') ?> "`,
+                    icon: `warning`,
+                    showCancelButton: true,
+                    confirmButtonColor: `#3085d6`,
+                    cancelButtonColor: `#d33`,
+                    confirmButtonText: `<?= lang('alerts.yes_del') ?>`,
+                    cancelButtonText: `<?= lang('alerts.cancel') ?>`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        parentForm.submit();
+                    }
+                    uploadCSV.value = '';
+                });
+            })()
+
+        }
+    })
+
+    uploadXLS.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            let parentForm = uploadXLS.parentElement.parentElement;
+
+            (function() {
+                Swal.fire({
+                    customClass: {
+                        htmlContainer: ``,
+                    },
+                    title: `<?= lang('alerts.sure') ?>`,
+                    text: `<?= lang('alerts.sure_sub') ?> "`,
+                    icon: `warning`,
+                    showCancelButton: true,
+                    confirmButtonColor: `#3085d6`,
+                    cancelButtonColor: `#d33`,
+                    confirmButtonText: `<?= lang('alerts.yes_del') ?>`,
+                    cancelButtonText: `<?= lang('alerts.cancel') ?>`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        parentForm.submit();
+                    }
+                    uploadXLS.value = '';
+                });
+            })()
+
+        }
+    })
 
     function show() {
         var modal = document.getElementById('modal');

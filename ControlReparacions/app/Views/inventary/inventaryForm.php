@@ -4,9 +4,6 @@
 <h1 class="text-5xl text-primario mt-14"><?= lang("titles.n_inventory") ?></h1>
 
 <section style="view-transition-name: addInventary;" class="container mx-auto px-4 py-8 mt-10 text-base">
-    <span class="text-danger">
-        <?= validation_list_errors(); ?>
-    </span>
     <form action="add" method="POST" class="flex flex-col gap-20">
 
         <div class="grid grid-cols-3 gap-x-2">
@@ -14,11 +11,19 @@
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.name") ?>*</label>
                 <input type="text" name="name" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                <?php
+                if (isset(validation_errors()['name'])) : ?>
+                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['name'] ?></p>
+                <?php endif ?>
             </div>
 
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.price") ?>*</label>
-                <input type="number" name="price" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
+                <input type="text" name="price" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
+                <?php
+                if (isset(validation_errors()['price'])) : ?>
+                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['price'] ?></p>
+                <?php endif ?>
             </div>
 
 
@@ -32,6 +37,10 @@
                     }
                     ?>
                 </select>
+                <?php
+                if (isset(validation_errors()['type_inventary'])) : ?>
+                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['type_inventary'] ?></p>
+                <?php endif ?>
             </div>
 
         </div>
