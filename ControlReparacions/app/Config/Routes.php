@@ -25,6 +25,7 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->POST('add', 'TicketsController::addTicket', ['filter' => 'addTicket']);
 
        
+        $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
 
         $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1', ['filter' => 'deleteTicket']);
         $routes->GET('modify/(:segment)', 'TicketsController::modifyTicket/$1', ['filter' => 'modifyTicket']);
@@ -52,7 +53,6 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('dowloadXLS', 'TicketsController::downloadXLS');
 
         //Ruta para acceder a ticketInfo
-        $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
     });
 
     // INTERVENTIONS

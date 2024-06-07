@@ -49,6 +49,7 @@
 <script>
     const count2 = <?= json_encode($date['count']) ?>;
     const month = <?= json_encode($date['month']) ?>;
+    console.log(count2);
     createDateChart("",count2, month, '', '', '#month');
 </script>
 

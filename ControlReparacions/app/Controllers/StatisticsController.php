@@ -31,15 +31,13 @@ class StatisticsController extends BaseController
             $allTiquetsMonthly = $tiquetmodel->getTicketsByMonths();
             $allTiquetsCounts=[];
             $months=[];
-            for ($i=1; $i <= 12 ; $i++) { 
+            for ($i=0; $i <= 11 ; $i++) { 
                 array_push($allTiquetsCounts,0);
-                array_push($months,lang('months.'.$i));
+                array_push($months,lang('months.'.($i)));
             }
-
             foreach ($allTiquetsMonthly as $tiquet) {
-                $allTiquetsCounts[$tiquet['month']]=$tiquet['count'];
+                $allTiquetsCounts[$tiquet['month']-1]=$tiquet['count'];
             }
-
             $allTiquetsMonthly=['month' => $months,'count' => $allTiquetsCounts];
 
             $allTiquetsType = $tiquetmodel->getTicketsByType();

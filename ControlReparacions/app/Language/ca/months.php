@@ -1,15 +1,15 @@
 <?php
 return[
-    '1'     => 'Gener',
-    '2'     => 'Febrer',
-    '3'     => 'Març',
-    '4'     => 'Abril',
-    '5'     => 'Maig',
-    '6'     => 'Juny',
-    '7'     => 'Juliol',
-    '8'     => 'Agost',
-    '9'     => 'Setembre',
-    '10'    => 'Octubre',
-    '11'    => 'Novembre',
-    '12'    => 'Desembre'
+    '0'     => 'Gener',
+    '1'     => 'Febrer',
+    '2'     => 'Març',
+    '3'     => 'Abril',
+    '4'     => 'Maig',
+    '5'     => 'Juny',
+    '6'     => 'Juliol',
+    '7'     => 'Agost',
+    '8'     => 'Setembre',
+    '9'    => 'Octubre',
+    '10'    => 'Novembre',
+    '11'    => 'Desembre'
 ];

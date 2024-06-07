@@ -47,15 +47,15 @@
                         }
                     }
                     ?>
-                    <select name="selectType" id="selectType" class="py-1.5 border border-terciario-1 cursor-pointer <?= $selected ?> rounded-lg ">
+                    <select name="selectType" id="selectType"  class="py-1.5 border border-terciario-1 cursor-pointer <?= $selected ?> rounded-lg ">
 
 
                         <?php
                         foreach ($estatsFiltrats as $filtrat) {
                             if ($filtrat['id'] == $ticket['id_estat']) {
-                                echo "<option selected class='bg-secundario text-terciario-1 cursor-pointer'  value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
+                                echo "<option selected style='color: #003049 !important;' class='bg-secundario text-terciario-1 cursor-pointer'  value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
                             } else {
-                                echo "<option class='bg-secundario cursor-pointer' value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
+                                echo "<option style='color: #003049 !important;' class='bg-secundario cursor-pointer' value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
                             }
                         }
                         ?>
