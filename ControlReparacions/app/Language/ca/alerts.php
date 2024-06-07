@@ -12,4 +12,8 @@ return [
     'deleted_sub'       => 'El registre ha estat eliminat.',
     'updated_sub'       => 'El registre ha estat actualitzat.',
     
+    'ticket_not'       => 'No has seleccionat cap tiquet!',
+    'ticket_not_sub'   => 'Si us plau selecciona un o varis tiquets per assignar.',
+    'ins_not'          => 'No has seleccionat cap institut!',
+    'ins_not_sub'      => 'Si us plau selecciona un institut al que assignar.',
 ];

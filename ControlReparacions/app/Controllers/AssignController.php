@@ -129,5 +129,33 @@ class AssignController extends BaseController
     }
     public function assign_post($filter = "sender"){
 
+        $ids = $this->request->getPost('ids');
+        $institute = $this->request->getPost('ins');
+        $institute = explode("(",(string) $institute);
+        $institute = explode(")",$institute[1]);
+        $code = $institute[0];
+        $ticketModel = new TiquetModel();
+
+        // Forzamos el json_decode
+        $ids = json_decode((string) $ids);
+
+        if ($filter == "sender") {
+            $data = [
+                "codi_centre_emissor" => $code,
+            ];
+            foreach ($ids as $id) {
+                $ticketModel->modifyInstitute($id,$data);
+            }
+        }else{
+            $data = [
+                "codi_centre_reparador" => $code,
+            ];
+            foreach ($ids as $id) {
+                $ticketModel->modifyInstitute($id,$data);
+            }
+        }
+
+
+        return redirect()->back();
     }
 }

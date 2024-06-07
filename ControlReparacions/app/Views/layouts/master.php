@@ -221,11 +221,12 @@
         </nav>
 
         <div class="flex gap-5 w-full justify-end">
-            <div class="  flex align-middle mt-2 gap-3">
+            <!-- Lang Beta -->
+            <!-- <div class="  flex align-middle mt-2 gap-3">
                 <a class="hover:text-primario <?= session('user')['lang'] == 'es' ? "text-primario font-bold" : "" ?>" href="<?= base_url('change_lang/es') ?>">ES</a>
                 <span>&nbsp;|&nbsp;</span>
                 <a class="hover:text-primario <?= session('user')['lang'] == 'ca' ? "text-primario font-bold" : "" ?>" href="<?= base_url('change_lang/ca') ?>">CA</a>
-            </div>
+            </div> -->
 
             <!-- User img and name -->
             <div id="div_user" style="cursor:pointer" class="flex items-center  h-full gap-2 transform transition-all ease-in duration-200 hover:text-primario">

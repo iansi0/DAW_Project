@@ -50,8 +50,8 @@ return [
     'n_students'    => 'Afegir Alumne',
     'e_students'    => 'Modificar Alumne',
 
-    'ticket'        => 'Tickets',
-    'ticket_2'      => 'Ticket',
+    'ticket'        => 'Tiquets',
+    'ticket_2'      => 'Tiquet',
     'id_ticket'     => 'Identificador del Ticket:',
     'n_ticket'      => 'Afegir Ticket',
     'e_ticket'      => 'Modificar Ticket',

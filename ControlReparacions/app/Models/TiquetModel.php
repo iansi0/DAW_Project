@@ -231,6 +231,25 @@ class TiquetModel extends Model
         return $this->set($data)->update();
 
     }
+
+    public function modifyInstitute($id,$data)
+    {
+
+        $role=session()->get('user')['role'];
+        $code=session()->get('user')['code'];
+        // dd($id);
+        $this->where('id', $id);
+        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
+        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+
+        if ($role=="admin" || $role=="sstt") {
+            return $this->set($data)->update();
+        }else{
+            return;
+        }
+
+    }
+
     public function saveState($id,$state)
     {
 
