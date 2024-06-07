@@ -29,7 +29,7 @@ class StudentsController extends BaseController
 
         // realizar la busqueda filtrada si se ha espesificado una busqueda
         if ($search == '') {
-            $paginateData = $model->getAllPaged(8);
+            $paginateData = $model->getAllPaged()->paginate(8);
         } else {
             $paginateData = $model->getByTitleOrText($search)->paginate(8);
         }
@@ -294,97 +294,60 @@ class StudentsController extends BaseController
     }
 
 
-    // public function exportCSV()
-    // {
-    //     $searchData = $this->request->getGet();
+    public function exportCSV()
+    {
+        $searchData = $this->request->getGet();
 
-    //     if (isset($searchData['q'])) {
-    //         $search = $searchData["q"];
-    //     } else {
-    //         $search = "";
-    //     }
+        if (isset($searchData['q'])) {
+            $search = $searchData["q"];
+        } else {
+            $search = "";
+        }
 
-    //     //  Obtener filtro de dispositivo (?d=)
-    //     if (isset($searchData['d']) && !empty($searchData['d'])) {
-    //         $filters['device'] = $searchData['d'];
-    //     } else {
-    //         $filters['device'] = '';
-    //     }
-
-
-    //     // Obtener filtro de centro (?c=)
-    //     if (isset($searchData['c']) && !empty($searchData['c'])) {
-    //         $filters['center'] = $searchData['c'];
-    //     } else {
-    //         $filters['center'] = '';
-    //     }
-
-    //     // Obtener filtro de fecha-inicio (?dt_1=)
-    //     if (isset($searchData['dt_1']) && !empty($searchData['dt_1'])) {
-    //         $filters['date_ini'] = $searchData['dt_1'];
-    //     } else {
-    //         $filters['date_ini'] = '1970-01-01';
-    //     }
-
-    //     // Obtener filtro de fecha-fin (?dt_2=)
-    //     if (isset($searchData['dt_2']) && !empty($searchData['dt_2'])) {
-    //         $filters['date_end'] = $searchData['dt_2'];
-    //     } else {
-    //         $filters['date_end'] = date('Y-m-d');
-    //     }
-
-    //     // Obtener filtro de tiempo-inicio (?tm_1=)
-    //     if (isset($searchData['tm_1']) && !empty($searchData['tm_1'])) {
-    //         $filters['time_ini'] = $searchData['tm_1'];
-    //     } else {
-    //         $filters['time_ini'] = '00:00';
-    //     }
-
-    //     // Obtener filtro de tiempo-inicio (?tm_2=)
-    //     if (isset($searchData['tm_2']) && !empty($searchData['tm_2'])) {
-    //         $filters['time_end'] = $searchData['tm_2'];
-    //     } else {
-    //         $filters['time_end'] = '23:59';
-    //     }
-
-    //     // Obtener filtro de estado (?e=)
-    //     if (isset($searchData['e']) && !empty($searchData['e'])) {
-    //         $filters['state'] = $searchData['e'];
-    //     } else {
-    //         $filters['state'] = '';
-    //     }
+        // Obtener filtro de estado (?e=)
+        // if (isset($searchData['e']) && !empty($searchData['e'])) {
+        //     $filters['state'] = $searchData['e'];
+        // } else {
+        //     $filters['state'] = '';
+        // }
 
 
-    //     $model = new TiquetModel();
+        $model = new AlumneModel();
 
-    //     if (is_array($filters) && !empty($filters)) {
-    //         $paginateData = $model->getByTitleOrText($search, $filters)->findAll();
-    //     } else if ($search != '') {
-    //         $paginateData = $model->getByTitleOrText($search, [])->findAll();
-    //     } else {
-    //         $paginateData = $model->getAllPaged()->findAll();
-    //     }
+        // if (is_array($filters) && !empty($filters)) {
+        //     $paginateData = $model->getByTitleOrText($search, $filters)->findAll();
+        // } else if ($search != '') {
+        //     $paginateData = $model->getByTitleOrText($search, [])->findAll();
+        // } else {
+        //     $paginateData = $model->getAllPaged()->findAll();
+        // }
 
-    //     $propiedades = [
+        if ($search != '') {
+            $paginateData = $model->getByTitleOrText($search)->findAll();
+        }else{
+            $paginateData = $model->getAllPaged(true)->findAll();
+        }
 
-    //         'id', 'descripcio', 'created', 'tipus', 'estat', 'id_estat', 'emissor', 'receptor'
-    //     ];
+        $propiedades = [
+
+            'nom', 'cognoms', 'id_curs', 'curs'
+        ];
 
 
 
-    //     $csv_string = "";
+        $csv_string = "";
 
-    //     $csv_string .= implode(";", $propiedades) . "\n";
+        $csv_string .= implode(";", $propiedades) . "\n";
 
 
-    //     foreach ($paginateData as $ticket) {
-    //         $csv_string .= implode(";", $ticket) . "\n";
-    //     }
+        foreach ($paginateData as $ticket) {
+            $csv_string .= implode(";", $ticket) . "\n";
+        }
 
-    //     header('Content-Disposition: attachment; filename="ticket_export_' . date("d-m-Y") . '.csv"');
+        header('Content-Disposition: attachment; filename="students_export_' . date("d-m-Y") . '.csv"');
 
-    //     echo $csv_string;
-    // }
+        echo $csv_string;
+    }
 
     // public function exportXLS()
     // {

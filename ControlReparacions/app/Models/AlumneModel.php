@@ -88,29 +88,42 @@ class AlumneModel extends Model
         return $this->select(['id_user', 'nom', 'cognoms', 'codi_centre'])->orLike('id_user', $search, 'both', true)->orLike('nom', $search, 'both', true);
     }
 
-    public function getAllPaged($nElements)
+    public function getAllPaged($export = null)
     {
 
         $role = session()->get('user')['role'];
         $code = session()->get('user')['code'];
 
+        if ($export) {
+            $this->select(
+                "
+                alumne.nom,
+                alumne.cognoms,
+                alumne.id_curs,
+                CONCAT(curs.any, ' ' , curs.titol, ' ', curs.clase) as curs,
+                "
+            );
+            $this->join('curs', 'alumne.id_curs = curs.id', 'left');
+        } else {
+            $this->select(
+                "
+                alumne.id_user,
+                alumne.nom,
+                alumne.cognoms,
+                alumne.id_curs,
+                CONCAT(curs.any, ' ' , curs.titol, ' ', curs.clase) as curs,
+                alumne.codi_centre
+                "
+            );
+            $this->join('curs', 'alumne.id_curs = curs.id', 'left');
+        }
 
-        $this->select(
-            "alumne.id_user,
-            alumne.nom,
-            alumne.cognoms,
-            alumne.id_curs,
-            CONCAT(curs.any, ' ' , curs.titol, ' ', curs.clase) as curs,
-            alumne.codi_centre"
-        );
-
-        $this->join('curs', 'alumne.id_curs = curs.id', 'left');
 
         if ($role == "prof" || $role == "ins") {
             $this->where("alumne.codi_centre", $code);
         }
 
-        return $this->paginate($nElements);
+        return $this;
     }
 
     public function getStudentById($id)
@@ -136,24 +149,24 @@ class AlumneModel extends Model
         return $this->where('id_user', $id)->first();
     }
 
-    public function modifyStudent($id, $data){
+    public function modifyStudent($id, $data)
+    {
 
-        $role=session()->get('user')['role'];
-        $code=session()->get('user')['code'];
+        $role = session()->get('user')['role'];
+        $code = session()->get('user')['code'];
 
         $this->where('id_user', $id);
         $this->join('centre AS centre', 'alumne.codi_centre = centre.codi', 'left');
 
-        if ($role=="admin") {
+        if ($role == "admin") {
             $this;
-        }else if($role=="prof" || $role=="ins"){
+        } else if ($role == "prof" || $role == "ins") {
             $this->groupStart();
-            $this->where("alumne.codi_centre",$code);
+            $this->where("alumne.codi_centre", $code);
             $this->groupEnd();
         }
 
         return $this->set($data)->update();
-
     }
 
 
