@@ -133,10 +133,10 @@ class StudentsController extends BaseController
             $fileCsv = fopen($file['csv'], 'r');
 
             // Boolean para saltarnos la primera fila (es una fila con los nombres de los campos y por ende la descartamos)
-            $firstLine = false;
+            $firstLine = true;
 
             // hacer un while para introducir los datos 
-            while (($row = fgetcsv($fileCsv, 2000, ",")) !== FALSE) {
+            while (($row = fgetcsv($fileCsv, 2000, ";")) !== FALSE) {
 
                 if (!$firstLine) {
 
