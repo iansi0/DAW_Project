@@ -17,6 +17,6 @@ return [
     
     'ticket_not'       => 'No has seleccionat cap tiquet!',
     'ticket_not_sub'   => 'Si us plau selecciona un o varis tiquets per assignar.',
-    'ins_not'          => 'No has seleccionat cap institut!',
-    'ins_not_sub'      => 'Si us plau selecciona un institut al que assignar.',
+    'ins_not'          => 'No has seleccionat cap centre!',
+    'ins_not_sub'      => 'Si us plau selecciona un centre al que assignar.',
 ];

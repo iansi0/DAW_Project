@@ -11,7 +11,7 @@ function createDonut(title,seriesArray,labelsArray,id){
                   download: true,
                 },
             },
-            width: 380,
+            width: 400,
             type: 'pie',
             
         },
@@ -28,7 +28,7 @@ function createDonut(title,seriesArray,labelsArray,id){
         breakpoint: 480,
         options: {
             chart: {
-            width: 200
+            width: 300
             },
             legend: {
             position: 'bottom'

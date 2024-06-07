@@ -11,22 +11,28 @@
 <br>
 <main class="grid grid-cols-2 gap-4 justify-center">
 
-    <div class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-2xl font-semibold text-primario mb-4"><?= lang('charts.comarca') ?></h2>
+    <div class="bg-white rounded-t-lg shadow-xl border-b border-primario">
+        <header class="bg-primario rounded-t-xl p-4 mb-2">
+            <h2 class="text-2xl font-semibold text-left text-2xl text-secundario"><?=  strtoupper(lang('charts.comarca')) ?></h2>
+        </header>
         <div class="flex justify-center">
             <div id="comarca" ></div>
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-2xl font-semibold text-primario mb-4"><?= lang('charts.type') ?></h2>
+    <div class="bg-white rounded-t-lg shadow-xl border-b border-primario">
+        <header class="bg-primario rounded-t-xl p-4 mb-2">
+            <h2 class="text-2xl font-semibold text-left text-2xl text-secundario"><?=  strtoupper(lang('charts.type')) ?></h2>
+        </header>
         <div class="flex justify-center">
             <div id="type" ></div>
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-2xl font-semibold text-primario mb-4"><?= lang('charts.month') ?></h2>
+    <div class="bg-white rounded-t-lg shadow-xl border-b border-primario">
+        <header class="bg-primario rounded-t-xl p-4 mb-2">
+            <h2 class="text-2xl font-semibold text-left text-2xl text-secundario"><?= strtoupper(lang('charts.month')); ?></h2>
+        </header>
         <div class=" justify-center">
             <div id="month" ></div>
         </div>

@@ -34,7 +34,7 @@ return [
     'pobl'          => 'Població',
 
     's_sstt'        => 'Escull Servei Territorial',
-    's_ins'         => 'Escull Institut',
+    's_ins'         => 'Escull Centre',
     's_prof'        => 'Escull Professor',
     's_student'     => 'Escull Alumne',
     's_ticket'      => 'Escull Ticket',

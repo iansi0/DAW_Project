@@ -48,14 +48,14 @@ class AssignController extends BaseController
 
         // TEMPLATE
         $template = [
-            'table_open'  => "<table class='w-full rounded-t-2xl overflow-hidden '>",
+            'table_open'  => "<table class='w-full rounded-t-2xl overflow-hidden border-b shadow-xl border-primario'>",
 
             'thead_open'  => "<thead class='bg-primario text-secundario'>",
 
             'heading_cell_start' => "<th class='py-3 text-base'>",
 
             'row_start' => "<tr class='border-b-[0.01px] '>",
-            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-terciario-2'>",
+            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-[#F7F4EF]'>",
 
 
         ];

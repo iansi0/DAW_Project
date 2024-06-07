@@ -41,13 +41,14 @@
               <span>&nbsp;|&nbsp;</span>
               <a class="hover:font-bold <?= $filter == 'receiver' ? " font-bold" : "" ?>" href="<?= base_url('assign/filterReceiver') ?>"><?= lang('titles.receiver') ?></a>
             </div>
-          </div>
+          </div >
           
           <?php
             echo $table->generate();
             ?>
+            <div class="border-b border-primario"></div>
         </div>
-        
+        <br><br><br>
       </article>
   </main>
 
