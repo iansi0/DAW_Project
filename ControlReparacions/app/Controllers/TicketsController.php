@@ -848,7 +848,7 @@ class TicketsController extends BaseController
     public function downloadXLS()
     {
         // Establecer la ruta del archivo
-        $rutaArchivo = WRITEPATH . 'plantillas' . DIRECTORY_SEPARATOR . 'plantilla tickets.xls';
+        $rutaArchivo = WRITEPATH . 'plantillas' . DIRECTORY_SEPARATOR . 'plantilla_tickets.xls';
 
         // dd($rutaArchivo);
 

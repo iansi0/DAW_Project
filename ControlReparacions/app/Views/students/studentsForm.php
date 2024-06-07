@@ -61,10 +61,6 @@
 
         </div>
 
-        <div>
-            <input type="file" name="csv" id="csv">
-        </div>
-
         <div class="flex gap-5 justify-end w-full">
 
             <a href="<?= strpos(previous_url(), 'students?') !== false
