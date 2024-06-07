@@ -106,10 +106,6 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('modify/(:segment)', 'InstitutesController::modifyInstitute/$1');
         $routes->POST('modify/(:segment)', 'InstitutesController::modifyInstitute_post/$1');
 
-        $routes->GET('(:segment)', 'InstitutesController::instituteInfo/$1');
-        $routes->GET('(:segment)/filterSender', 'InstitutesController::instituteInfo/$1/sender');
-        $routes->GET('(:segment)/filterReceiver', 'InstitutesController::instituteInfo/$1/receiver');
-
         // EXPORTS
         $routes->group('export', ['filter' => 'exportTicket'], function ($routes) {
             //CSV
@@ -127,9 +123,13 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         });
 
         //Downloads
-        $routes->GET('dowloadXLS', 'InstitutesController::downloadCSV');
+        $routes->GET('dowloadCSV', 'InstitutesController::downloadCSV');
+        $routes->GET('dowloadXLS', 'InstitutesController::downloadXLS');
 
-        $routes->GET('dowloadCSV', 'InstitutesController::downloadXLS');
+        $routes->GET('(:segment)', 'InstitutesController::instituteInfo/$1');
+        $routes->GET('(:segment)/filterSender', 'InstitutesController::instituteInfo/$1/sender');
+        $routes->GET('(:segment)/filterReceiver', 'InstitutesController::instituteInfo/$1/receiver');
+
     });
 
     // ASSIGN

@@ -41,6 +41,14 @@ class CentreModel extends Model
     public function addCentre($id, $codi, $nom, $actiu, $taller, $telefon, $adreca_fisica, $nom_persona_contacte, $correu_persona_contacte, $id_sstt, $id_poblacio)
     {
 
+        $modelUser = new UsersModel();
+
+        $exist = $modelUser->getUserByEmail($correu_persona_contacte);
+
+        if ($exist != null) {
+            return false;
+        }
+
         $data = [
             'id_user'                 => $id,
             'codi'                    => trim($codi),
@@ -56,6 +64,8 @@ class CentreModel extends Model
         ];
 
         $this->insert($data);
+
+        return true;
     }
 
     public function getAllCenter()
