@@ -21,14 +21,14 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('', 'TicketsController::tickets');
         $routes->POST('', 'TicketsController::tickets');
 
-        $routes->GET('add', 'TicketsController::ticketForm', ['filter' => 'addTicket']);
-        $routes->POST('add', 'TicketsController::addTicket', ['filter' => 'addTicket']);
+        $routes->GET('add', 'TicketsController::ticketForm');
+        $routes->POST('add', 'TicketsController::addTicket');
         
         $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
 
-        $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1', ['filter' => 'deleteTicket']);
-        $routes->GET('modify/(:segment)', 'TicketsController::modifyTicket/$1', ['filter' => 'modifyTicket']);
-        $routes->POST('modify/(:segment)', 'TicketsController::modifyTicket_post/$1', ['filter' => 'modifyTicket']);
+        $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1');
+        $routes->GET('modify/(:segment)', 'TicketsController::modifyTicket/$1');
+        $routes->POST('modify/(:segment)', 'TicketsController::modifyTicket_post/$1');
     });
 
     // EXPORT
@@ -38,7 +38,7 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         // XLS
         $routes->GET('xls', 'TicketsController::exportXLS');
     });
-    $routes->GET('pdf/(:segment)', 'PDFController::index/$1');
+    $routes->GET('pdf/(:segment)', 'PdfController::index/$1');
 
     // INTERVENTIONS
     $routes->group('intervention', function ($routes) {
