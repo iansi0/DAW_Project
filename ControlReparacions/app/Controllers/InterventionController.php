@@ -4,14 +4,11 @@ namespace App\Controllers;
 
 use App\Models\IntervencioModel;
 use App\Models\InventariModel;
-
+use App\Models\TiquetModel;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
 
-use Faker\Factory;
-
-
+use App\Libraries\UUID as LibrariesUUID;
 
 
 class InterventionController extends BaseController
@@ -46,62 +43,87 @@ class InterventionController extends BaseController
         // Forzamos el json_decode
         $arrInterventions = json_decode((string) $arrInterventions);
 
-        dd($arrInterventions);
+        // dd($arrInterventions);
 
-        helper('form');
+        // Creamos un array que irá almacenando los inputs erróneos
+        $arrErrors = [];
+        $arrValues = [];
 
-        $validationRules =
-            [
-                'description' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Error Description',
-                    ],
-                ],
-            ];
+        // Hacemos un primer recorrido comprobando que los inputs están correctos
+        foreach ($arrInterventions[0] as $inv) {
 
-        if ($this->validate($validationRules)) {
-            
-            $model = new IntervencioModel();
+            $id_intervencio = $inv[0]->id;
+            $id_inventari = $inv[1]->id_type;
 
-            $fake = Factory::create("es_ES");
+            if ($id_intervencio == null || $id_intervencio == '') {
+                $arrErrors[$id_inventari]["id_type"] = lang('error.id_type');
+            }
 
-            $id_inventary = $this->request->getPost("id_inventary");
+            if(in_array($id_inventari, $arrValues)) {
+                $arrErrors[$id_inventari]["id_type"] = lang('error.id_type');
+            } else {
+                $arrValues[] = $id_inventari;
+            }
 
-            // Añadir intervencion
-            $id =  $fake->uuid();
-            $descripcio =  $this->request->getPost("description");
-            $id_ticket = $this->request->getPost("ticket_id");
+        }
 
+        $ticketModel = new TiquetModel();
 
-            // Mirar si id_tipus_inventary de id_inventary
-            $modelInventary = new InventariModel();
-            $product = $modelInventary->getInventarytById($id_inventary);
-            $id_curs = 0;
-            $id_tipus = isset($product['id_tipus_inventari']) ? (($product['id_tipus_inventari'] == 6) ? 1 : 0) : 0;
+        if(!$ticketModel->getTicketById($this->request->getPost("id_ticket"))){
+            $arrErrors[] = lang('error.id_type');
+        };
 
-            $persona_reparadora = session('user')['user'];
+        // Si detectamos errores, los mandamos de vuelta al front para ser corregidos
+        // PD: el flash data no sera ejecutado y no solo eso, se le va a recargar la pagina al cliente borrándole todo
+        // PDD: Un cliente normal se quedaria en las validaciones de javascript
+        if (count($arrErrors) > 0) {
+            session()->setFlashdata('error', $arrErrors);
+            return redirect()->back();
+        }
+           
+        $model = new IntervencioModel();
 
-            $model->addIntervencio(
-                $id,
-                $descripcio,
-                $id_ticket,
-                $id_tipus,
-                $id_curs,
-                $persona_reparadora
-            );
+        $id_inventary = $this->request->getPost("id_inventary");
 
-            //Modificar inventario relacionandolo con la intervencion
+        // Añadir intervencion
+        $id = LibrariesUUID::v4();
+        $descripcio = $arrInterventions[1][0]->description;
+        $id_ticket = $this->request->getPost("id_ticket");
+
+        // dd($id_ticket);
+
+        $modelInventary = new InventariModel();
+        $product = $modelInventary->getInventarytById($id_inventary);
+        $id_curs = 0;
+        // Comprobamos si se ha cambiado el disco duro para hacer la intervencion bloqueante
+        $id_tipus = isset($product['id_tipus_inventari']) ? (($product['id_tipus_inventari'] == 6) ? 1 : 0) : 0;
+
+        $persona_reparadora = session('user')['user'];
+
+        $model->addIntervencio(
+            $id,
+            $descripcio,
+            $id_ticket,
+            $id_tipus,
+            $id_curs,
+            $persona_reparadora
+        );
+
+        // Modificamos inventario relacionandolo con la intervencion
+        foreach ($arrInterventions[0] as $inv) {
+
+            $id_inventari = $inv[1]->id_type;
+
             $data = [
-                "id" =>  $id_inventary,
+                "id" =>  $id_inventari,
                 'id_intervencio' => $id,
             ];
+    
+            $modelInventary->modifyInventari($id_inventari, $data);
 
-            $modelInventary->modifyInventari($id_inventary, $data);
-
-            return redirect()->to(base_url("tickets/" . $id_ticket));
-        } else {
-            return redirect()->back()->withInput();
         }
+
+        return redirect()->to(base_url("tickets/" . $id_ticket));
+
     }
 }

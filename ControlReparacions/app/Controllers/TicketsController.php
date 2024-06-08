@@ -301,12 +301,12 @@ class TicketsController extends BaseController
         foreach ($data['interventions'] as $intervencio) {
 
             $totalPrice += $intervencio['preu'];
-
+            
             $buttonView = base_url("tickets/" . $intervencio['id']); // Reemplazar con tu ruta real
 
             $table->addRow(
                 $intervencio['created_at'],
-                $intervencio['correu_alumne'],
+                $intervencio['nom_reparador'],
                 $intervencio['material'],
 
                 ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-segundario' : 'bg-segundario']
@@ -386,12 +386,12 @@ class TicketsController extends BaseController
 
             $id_tiquet = LibrariesUUID::v4();
             $codi_equip = '';
-            $id_tipus_dispositiu = htmlspecialchars($ticket[1]->id_type);
-            $ins_emissor = htmlspecialchars($ticket[2]->sender??0);
-            $ins_receptor = htmlspecialchars($ticket[3]->repair??0);
-            $descripcio_avaria = htmlspecialchars( $ticket[6]->description);
-            $nom_persona_contacte_centre = htmlspecialchars($ticket[4]->nameContact);
-            $correu_persona_contacte_centre = htmlspecialchars( $ticket[5]->emailContact);
+            $id_tipus_dispositiu = $ticket[1]->id_type;
+            $ins_emissor = $ticket[2]->sender??0;
+            $ins_receptor = $ticket[3]->repair??0;
+            $descripcio_avaria =  $ticket[6]->description;
+            $nom_persona_contacte_centre = $ticket[4]->nameContact;
+            $correu_persona_contacte_centre =  $ticket[5]->emailContact;
             $id_estat = 1;
 
             if (session()->get('user')['role'] == "prof" || session()->get('user')['role'] == "ins") {

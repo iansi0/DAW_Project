@@ -79,6 +79,7 @@
         input_td.classList = 'border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150';
         input_td.name = 'id_type';
         input_td.id = 'id_type_' + count_ins;
+        input_td.setAttribute('onchange', 'disableInventory('+count_ins+')');
         input_td.value = null;
         
         var option = document.createElement('option');
@@ -138,6 +139,8 @@
         // Añadimos al formulario
         div.appendChild(div_form);
         document.getElementById('interventionList').append(div);
+
+        disableInventory();
     }
 
     function removeIntervention(id){
@@ -153,8 +156,6 @@
 
         // Obtenemos todos los elementos con clase intervention
         let interventions = document.querySelectorAll('.intervention');
-
-        error = true
 
         // Los vamos recorriendo y obteniendo los valores del input y añadiendolos a un array
         var arrInterventions = [];
@@ -175,8 +176,6 @@
                     [name]:value
                 }
                 arrSelects.push(tmp)
-
-                console.log(arrSelects)
 
                 // Comprobación de selects
                 if (name == 'id_type' && (value == '' || value == null || value == 'null')) {
@@ -215,13 +214,14 @@
         }
 
         // Añadimos el array de textareas al array de datos
-        arrInterventions = arrInterventions.concat(arrTextareas);
+        var arrFinal = [];
+        arrFinal.push(arrInterventions);
+        arrFinal.push(arrTextareas);
 
         if (!error) {
 
             // Convertimos el array a JSON
-            var arrJSON = JSON.stringify(arrInterventions);
-            console.log(arrJSON)
+            var arrJSON = JSON.stringify(arrFinal);
 
             // Creamos un formulario temporal
             var form_tmp = document.createElement('form');
@@ -238,7 +238,7 @@
 
             let id_tmp = document.createElement('input');
             id_tmp.type = 'hidden';
-            id_tmp.name = 'id_intervention';
+            id_tmp.name = 'id_ticket';
             id_tmp.value = '<?=$id_ticket?>';
             form_tmp.appendChild(id_tmp);
 
@@ -251,6 +251,33 @@
             
         }
 
+    }
+
+    function disableInventory(){
+        let arrSelectInventory = document.getElementsByName('id_type');
+
+        // Primero obtenemos los valores de todos los select
+        let arrSelectValue = [];
+        arrSelectInventory.forEach(inventario => {
+            arrSelectValue.push(inventario.value)
+        })
+
+        // Luego en todos los selects vamos marcando en disabled la opcion
+        arrSelectInventory.forEach(inventario => {
+            let opciones = inventario.querySelectorAll('option');
+            opciones.forEach(opcion => {
+                if (arrSelectValue.includes(opcion.value)) {
+                    opcion.setAttribute('disabled', '');
+                } else {
+                    opcion.removeAttribute('disabled')
+                }
+            })
+        })
+    }
+    
+    function sumChar(){
+        var spanElement = document.getElementById('char_description');
+        spanElement.innerText = document.getElementById('description').value.length;
     }
 
     document.addEventListener('DOMContentLoaded', function(){

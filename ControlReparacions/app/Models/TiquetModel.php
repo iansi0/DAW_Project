@@ -45,15 +45,15 @@ class TiquetModel extends Model
     {
 
         $data = [
-            'id' =>  $id_tiquet,
-            'codi_dispositiu' => $codi_equip,
-            'descripcio_avaria' => $descripcio_avaria,
-            'nom_persona_contacte_centre' => $nom_persona_contacte_centre,
-            'correu_persona_contacte_centre' => $correu_persona_contacte_centre,
-            'id_tipus_dispositiu' => $id_tipus_dispositiu,
-            'id_estat' => $id_estat,
-            'codi_centre_emissor' => $codi_centre_emissor,
-            'codi_centre_reparador' => $codi_centre_reparador,
+            'id' => htmlspecialchars( $id_tiquet),
+            'codi_dispositiu' => htmlspecialchars($codi_equip),
+            'descripcio_avaria' => htmlspecialchars($descripcio_avaria),
+            'nom_persona_contacte_centre' => htmlspecialchars($nom_persona_contacte_centre),
+            'correu_persona_contacte_centre' => htmlspecialchars($correu_persona_contacte_centre),
+            'id_tipus_dispositiu' => htmlspecialchars($id_tipus_dispositiu),
+            'id_estat' => htmlspecialchars($id_estat),
+            'codi_centre_emissor' => htmlspecialchars($codi_centre_emissor),
+            'codi_centre_reparador' => htmlspecialchars($codi_centre_reparador),
         ];
 
         $this->insert($data);
@@ -205,8 +205,12 @@ class TiquetModel extends Model
         return $this->delete();
     }
 
-    public function modifyTicket($id,$data)
+    public function modifyTicket($id, $data)
     {
+
+        foreach ($data as &$value) {
+            $value = htmlspecialchars($value);
+        }
 
         $role=session()->get('user')['role'];
         $code=session()->get('user')['code'];
@@ -231,8 +235,10 @@ class TiquetModel extends Model
         return $this->set($data)->update();
 
     }
-    public function saveState($id,$state)
+    public function saveState($id, $state)
     {
+
+        $state = htmlspecialchars($state);
 
         $role=session()->get('user')['role'];
         $code=session()->get('user')['code'];

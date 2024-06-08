@@ -42,12 +42,12 @@ class IntervencioModel extends Model
     {
 
         $data = [
-            'id' =>  $id,
-            'descripcio' => $descripcio,
-            'id_ticket' => $id_ticket,
-            'id_tipus' => $id_tipus,
-            'id_curs' => $id_curs,
-            'id_user' => $persona_reparadora,
+            'id' =>  htmlspecialchars(trim($id)),
+            'descripcio' => htmlspecialchars(trim($descripcio)),
+            'id_ticket' => htmlspecialchars(trim($id_ticket)),
+            'id_tipus' => htmlspecialchars(trim($id_tipus)),
+            'id_curs' => htmlspecialchars(trim($id_curs)),
+            'id_user' => htmlspecialchars(trim($persona_reparadora)),
         ];
 
         $this->insert($data);
