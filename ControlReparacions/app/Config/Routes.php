@@ -24,6 +24,9 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('add', 'TicketsController::ticketForm', ['filter' => 'addTicket']);
         $routes->POST('add', 'TicketsController::addTicket', ['filter' => 'addTicket']);
 
+       
+        $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
+
         $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1', ['filter' => 'deleteTicket']);
         $routes->GET('modify/(:segment)', 'TicketsController::modifyTicket/$1', ['filter' => 'modifyTicket']);
         $routes->POST('modify/(:segment)', 'TicketsController::modifyTicket_post/$1', ['filter' => 'modifyTicket']);
@@ -50,7 +53,6 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('dowloadXLS', 'TicketsController::downloadXLS');
 
         //Ruta para acceder a ticketInfo
-        $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
     });
 
     // INTERVENTIONS
@@ -134,10 +136,15 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('(:segment)/filterReceiver', 'InstitutesController::instituteInfo/$1/receiver');
 
     });
-
+    
     // ASSIGN
     $routes->group('assign', function ($routes) {
-        $routes->GET('', 'Home::empty');
+        $routes->GET('', 'AssignController::assign');
+        $routes->GET('filterSender', 'AssignController::assign/sender');
+        $routes->GET('filterReceiver', 'AssignController::assign/receiver');
+        $routes->POST('', 'AssignController::assign_post');
+        $routes->POST('filterSender', 'AssignController::assign_post/sender');
+        $routes->POST('filterReceiver', 'AssignController::assign_post/receiver');
     });
 
     // INVENTARY
@@ -179,7 +186,6 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->POST('passwd', 'UserController::change_passwd');
         $routes->POST('', 'UserController::config_post');
     });
-
 
     // WORKING
     $routes->GET('work', 'Home::empty');

@@ -1,6 +1,6 @@
 <?php
 return [
-    "0"      => 'Desballestament ',
+    "0"      => 'Desguaçat ',
     "1"      => 'Espatllat',
     "2"      => 'Espatllat-Recollir',
     "3"      => 'Espatllat-Enviat',

@@ -34,8 +34,8 @@
                 <select name="active" id="active" class="border-2  border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                     <option value="" selected hidden><?= lang("forms.active")  ?></option>
 
-                    <option value='0'>si</option>
-                    <option value='1'>no</option>
+                    <option value='0'>No</option>
+                    <option value='1'>Si</option>
                 </select>
                 <?php
                 if (isset(validation_errors()['active'])) : ?>
@@ -48,9 +48,9 @@
                 <label class=""><?= lang("forms.work") ?>*</label>
                 <select name="work" id="work" class="border-2  border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                     <option value="" selected hidden><?= lang("forms.work") ?></option>
-
-                    <option value='0'>no</option>
-                    <option value='1'>si</option>
+                   
+                    <option value='0'>No</option>
+                    <option value='1'>Si</option>
                 </select>
                 <?php
                 if (isset(validation_errors()['work'])) : ?>

@@ -208,7 +208,7 @@ class Home extends BaseController
         // Dona error pero esta be, pensa que es un array i es un string
         // $fullname =  explode(" ", $fullname);
       
-        $institute = explode("(",$institute);
+        $institute = explode("(",(string)$institute);
         $institute = explode(")",$institute[1]);
         $code = $institute[0];
         // $name=$fullname[0];

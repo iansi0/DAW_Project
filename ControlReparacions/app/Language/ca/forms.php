@@ -34,7 +34,7 @@ return [
     'pobl'          => 'Població',
 
     's_sstt'        => 'Escull Servei Territorial',
-    's_ins'         => 'Escull Institut',
+    's_ins'         => 'Escull Centre',
     's_prof'        => 'Escull Professor',
     's_student'     => 'Escull Alumne',
     's_ticket'      => 'Escull Ticket',
@@ -66,6 +66,8 @@ return [
     'price'         => 'Preu',
     'type_inventary'=> 'Tipus inventari',
     'info'          => 'Informació',
+    'assign_to'     => 'Assignar a',
+    'apply'         => 'Aplicar',
 
     'required_slot' => 'Els camps marcats amb ( * ) són obligatoris',
 

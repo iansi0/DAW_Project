@@ -34,7 +34,7 @@ return [
     'pobl'          => 'Población',
 
     's_sstt'        => 'Escoge Servei Territorial',
-    's_ins'         => 'Escoge Instituto',
+    's_ins'         => 'Escoge Centro',
     's_prof'        => 'Escoge Profesor',
     's_student'     => 'Escoge Alumno',
     's_ticket'      => 'Escoge Ticket',

@@ -47,15 +47,15 @@
                         }
                     }
                     ?>
-                    <select name="selectType" id="selectType" class="py-1.5 border border-terciario-1 cursor-pointer <?= $selected ?> rounded-lg ">
+                    <select name="selectType" id="selectType"  class="py-1.5 border border-terciario-1 cursor-pointer <?= $selected ?> rounded-lg ">
 
 
                         <?php
                         foreach ($estatsFiltrats as $filtrat) {
                             if ($filtrat['id'] == $ticket['id_estat']) {
-                                echo "<option selected class='bg-secundario text-terciario-1 cursor-pointer'  value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
+                                echo "<option selected style='color: #003049 !important;' class='bg-secundario text-terciario-1 cursor-pointer'  value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
                             } else {
-                                echo "<option class='bg-secundario cursor-pointer' value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
+                                echo "<option style='color: #003049 !important;' class='bg-secundario cursor-pointer' value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
                             }
                         }
                         ?>
@@ -81,7 +81,7 @@
             <div class="flex justify-between bg-primario text-secundario text-left p-3 pr-8 text-3xl rounded-t-2xl">
                 <h1><?= lang('titles.int'); ?></h1>
 
-                    <?php if (((session()->get('user')['role'] == "prof") && (session()->get('user')['code'] == $ticket['codi_reparador'])) || (session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
+                    <?php if (((session()->get('user')['role'] == "prof") && (session()->get('user')['code'] == $ticket['codi_reparador'])) || ((session()->get('user')['role'] == "alumn") && (session()->get('user')['code'] == $ticket['codi_reparador'])) || (session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
 
                         <div class="hover:bg-green-700 hover:text-secundario p-2 px-3 rounded-xl transition hover:ease-in ease-out duration-250">
                             <a href="<?= base_url('intervention/form/' . $ticket['id']) ?>"><i class="fa-icon fa-solid fa-plus "></i></a>
