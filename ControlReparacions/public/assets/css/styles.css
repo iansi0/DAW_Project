@@ -614,6 +614,10 @@ video {
   left: 0px;
 }
 
+.left-1\/2 {
+  left: 50%;
+}
+
 .left-2\/4 {
   left: 50%;
 }
@@ -686,6 +690,10 @@ video {
 
 .mb-6 {
   margin-bottom: 1.5rem;
+}
+
+.me-2 {
+  margin-inline-end: 0.5rem;
 }
 
 .ml-1 {
@@ -772,8 +780,20 @@ video {
   margin-top: 22px;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.ml-2\.5 {
+  margin-left: 0.625rem;
+}
+
 .block {
   display: block;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .inline {
@@ -798,6 +818,11 @@ video {
 
 .hidden {
   display: none;
+}
+
+.size-3 {
+  width: 0.75rem;
+  height: 0.75rem;
 }
 
 .h-10 {
@@ -988,6 +1013,11 @@ video {
   transform-origin: top left;
 }
 
+.-translate-x-1\/2 {
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .-translate-x-2\/4 {
   --tw-translate-x: -50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1066,6 +1096,10 @@ video {
 
 .justify-items-center {
   justify-items: center;
+}
+
+.gap-1 {
+  gap: 0.25rem;
 }
 
 .gap-10 {
@@ -1512,6 +1546,11 @@ video {
   padding-bottom: 2rem;
 }
 
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .pl-2 {
   padding-left: 0.5rem;
 }
@@ -1538,6 +1577,14 @@ video {
 
 .pt-5 {
   padding-top: 1.25rem;
+}
+
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
+
+.pb-3 {
+  padding-bottom: 0.75rem;
 }
 
 .text-left {
@@ -1621,6 +1668,11 @@ video {
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.text-gray-600 {
+  --tw-text-opacity: 1;
+  color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
 .text-gray-700 {
@@ -2242,6 +2294,10 @@ video {
   outline-offset: 2px;
 }
 
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+
 .peer:checked ~ .peer-checked\:opacity-100 {
   opacity: 1;
 }
@@ -2260,5 +2316,17 @@ video {
 
   .md\:hidden {
     display: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark\:bg-white {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  }
+
+  .dark\:text-neutral-400 {
+    --tw-text-opacity: 1;
+    color: rgb(163 163 163 / var(--tw-text-opacity));
   }
 }
