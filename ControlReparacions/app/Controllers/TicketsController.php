@@ -911,7 +911,7 @@ class TicketsController extends BaseController
     public function downloadCSV()
     {
         // Establecer la ruta del archivo
-        $rutaArchivo = WRITEPATH . 'plantillas' . DIRECTORY_SEPARATOR . 'plantilla_tickets.csv';
+        $rutaArchivo = WRITEPATH . 'plantilles' . DIRECTORY_SEPARATOR . 'plantilla_tiquets.csv';
 
         // dd($rutaArchivo);
 
@@ -927,7 +927,7 @@ class TicketsController extends BaseController
         $tipoContenido = mime_content_type($rutaArchivo);
 
         // Establecer encabezados de descarga
-        header('Content-Disposition: attachment; filename="plantilla_ticket.csv"');
+        header('Content-Disposition: attachment; filename="plantilla_tiquets.csv"');
         header('Content-Length: ' . $tamañoArchivo);
         header('Content-Type: ' . $tipoContenido);
 
@@ -938,7 +938,7 @@ class TicketsController extends BaseController
     public function downloadXLS()
     {
         // Establecer la ruta del archivo
-        $rutaArchivo = WRITEPATH . 'plantillas' . DIRECTORY_SEPARATOR . 'plantilla_tickets.xls';
+        $rutaArchivo = WRITEPATH . 'plantilles' . DIRECTORY_SEPARATOR . 'plantilla_tiquets.xls';
 
         // dd($rutaArchivo);
 
@@ -954,7 +954,7 @@ class TicketsController extends BaseController
         $tipoContenido = mime_content_type($rutaArchivo);
 
         // Establecer encabezados de descarga
-        header('Content-Disposition: attachment; filename="plantilla_ticket.xls"');
+        header('Content-Disposition: attachment; filename="plantilla_tiquets.xls"');
         header('Content-Length: ' . $tamañoArchivo);
         header('Content-Type: ' . $tipoContenido);
 

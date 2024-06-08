@@ -387,7 +387,7 @@ class InventaryController extends BaseController
     public function downloadCSV()
     {
         // Establecer la ruta del archivo
-        $rutaArchivo = WRITEPATH . 'plantillas' . DIRECTORY_SEPARATOR . 'plantilla_inventari.csv';
+        $rutaArchivo = WRITEPATH . 'plantilles' . DIRECTORY_SEPARATOR . 'plantilla_inventari.csv';
 
 
         // Comprobar si el archivo existe

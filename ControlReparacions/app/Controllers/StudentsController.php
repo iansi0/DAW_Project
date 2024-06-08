@@ -526,7 +526,7 @@ class StudentsController extends BaseController
     public function downloadCSV()
     {
         // Establecer la ruta del archivo
-        $rutaArchivo = WRITEPATH . 'plantillas' . DIRECTORY_SEPARATOR . 'plantilla_alumnos.csv';
+        $rutaArchivo = WRITEPATH . 'plantilles' . DIRECTORY_SEPARATOR . 'plantilla_alumnos.csv';
 
         // dd($rutaArchivo);
 
@@ -553,7 +553,7 @@ class StudentsController extends BaseController
     public function downloadXLS()
     {
         // Establecer la ruta del archivo
-        $rutaArchivo = WRITEPATH . 'plantillas' . DIRECTORY_SEPARATOR . 'plantilla_alumnos.xls';
+        $rutaArchivo = WRITEPATH . 'plantilles' . DIRECTORY_SEPARATOR . 'plantilla_alumnos.xls';
 
         // dd($rutaArchivo);
 
