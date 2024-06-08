@@ -26,11 +26,12 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
 
        
         $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
-
+        
         $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1', ['filter' => 'deleteTicket']);
         $routes->GET('modify/(:segment)', 'TicketsController::modifyTicket/$1', ['filter' => 'modifyTicket']);
         $routes->POST('modify/(:segment)', 'TicketsController::modifyTicket_post/$1', ['filter' => 'modifyTicket']);
-
+        
+        $routes->GET('labels', 'TicketsController::labels');
         // EXPORTS
         $routes->group('export', ['filter' => 'exportTicket'], function ($routes) {
             //CSV

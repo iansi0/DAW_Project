@@ -85,4 +85,9 @@ class PDFController extends BaseController
         $dompdf->stream("ticket_".$id.".pdf", array("Attachment" => false));
         
     }
+
+    public function labels()
+    {
+        
+    }
 }
