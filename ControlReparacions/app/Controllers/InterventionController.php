@@ -30,16 +30,23 @@ class InterventionController extends BaseController
 
         $data = [
             "id_ticket" => $id,
-            "inventary" => $inventary->getInventaryNoAssigned(),
+            "types" => $inventary->getInventaryNoAssigned(),
 
         ];
 
-
         return view('intervention/interventionForm', $data);
+
     }
 
     public function addIntervention()
     {
+
+        $arrInterventions = $this->request->getPost('arrInterventions');
+
+        // Forzamos el json_decode
+        $arrInterventions = json_decode((string) $arrInterventions);
+
+        dd($arrInterventions);
 
         helper('form');
 
@@ -70,7 +77,7 @@ class InterventionController extends BaseController
             // Mirar si id_tipus_inventary de id_inventary
             $modelInventary = new InventariModel();
             $product = $modelInventary->getInventarytById($id_inventary);
-
+            $id_curs = 0;
             $id_tipus = isset($product['id_tipus_inventari']) ? (($product['id_tipus_inventari'] == 6) ? 1 : 0) : 0;
 
             $persona_reparadora = session('user')['user'];
@@ -80,6 +87,7 @@ class InterventionController extends BaseController
                 $descripcio,
                 $id_ticket,
                 $id_tipus,
+                $id_curs,
                 $persona_reparadora
             );
 

@@ -353,9 +353,9 @@ class TicketsController extends BaseController
 
             $id_ticket = $ticket[0]->id;
             $id_tipus_dispositiu = $ticket[1]->id_type;
-            $descripcio_avaria =  $ticket[4]->description;
-            $nom_persona_contacte_centre = $ticket[5]->nameContact;
-            $correu_persona_contacte_centre =  $ticket[6]->emailContact;
+            $descripcio_avaria =  $ticket[6]->description;
+            $nom_persona_contacte_centre = $ticket[4]->nameContact;
+            $correu_persona_contacte_centre =  $ticket[5]->emailContact;
 
             if ($id_tipus_dispositiu == null || $id_tipus_dispositiu == '') {
                 $arrErrors[$id_ticket]["id_type"] = lang('error.id_type');
@@ -385,13 +385,13 @@ class TicketsController extends BaseController
             $model = new TiquetModel();
 
             $id_tiquet = LibrariesUUID::v4();
-            $codi_equip = null;
-            $id_tipus_dispositiu = $ticket[1]->id_type;
-            $ins_emissor = $ticket[2]->sender??0;
-            $ins_receptor = $ticket[3]->repair??0;
-            $descripcio_avaria =  $ticket[4]->description;
-            $nom_persona_contacte_centre = $ticket[5]->nameContact;
-            $correu_persona_contacte_centre =  $ticket[6]->emailContact;
+            $codi_equip = '';
+            $id_tipus_dispositiu = htmlspecialchars($ticket[1]->id_type);
+            $ins_emissor = htmlspecialchars($ticket[2]->sender??0);
+            $ins_receptor = htmlspecialchars($ticket[3]->repair??0);
+            $descripcio_avaria = htmlspecialchars( $ticket[6]->description);
+            $nom_persona_contacte_centre = htmlspecialchars($ticket[4]->nameContact);
+            $correu_persona_contacte_centre = htmlspecialchars( $ticket[5]->emailContact);
             $id_estat = 1;
 
             if (session()->get('user')['role'] == "prof" || session()->get('user')['role'] == "ins") {
