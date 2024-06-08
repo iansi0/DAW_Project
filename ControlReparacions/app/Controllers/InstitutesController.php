@@ -562,7 +562,7 @@ class InstitutesController extends BaseController
     public function downloadCSV()
     {
         // Establecer la ruta del archivo
-        $rutaArchivo = WRITEPATH . 'plantillas' . DIRECTORY_SEPARATOR . 'plantilla_instituts.csv';
+        $rutaArchivo = WRITEPATH . 'plantilles' . DIRECTORY_SEPARATOR . 'plantilla_centres.csv';
 
 
         // Comprobar si el archivo existe
@@ -577,7 +577,7 @@ class InstitutesController extends BaseController
         $tipoContenido = mime_content_type($rutaArchivo);
 
         // Establecer encabezados de descarga
-        header('Content-Disposition: attachment; filename="plantilla_instituts.csv"');
+        header('Content-Disposition: attachment; filename="plantilla_centres.csv"');
         header('Content-Length: ' . $tamañoArchivo);
         header('Content-Type: ' . $tipoContenido);
 
