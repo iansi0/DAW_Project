@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/master.php') ?>
 <?= $this->section('content') ?>
 
-<div>
+<div style="view-transition-name: addTicket;">
 
     <div>
         <div class="flex">
@@ -24,7 +24,7 @@
     </div>
 
 
-    <div style="view-transition-name: addTicket;" class="text-base">
+    <div class="text-base">
 
         <!-- LIST TICKETS -->
         <form id="ticketList" action="add" method="POST" class="mt-4 flex flex-col gap-20 px-20">
@@ -348,8 +348,9 @@
     }
 
     function copyTicket(id_ticket){
+
         event.preventDefault();
-        // Obtenemos el numero de ticket
+
         // Clonamos el ticket
         let old_div = document.getElementById('ticket_' + id_ticket);
         let new_div = document.getElementById('ticket_' + id_ticket).cloneNode(true);
@@ -389,22 +390,22 @@
         let val_td = old_div.querySelector('#id_type_'+id_ticket).value;
 
         <?php if ((session()->get('user')['role']=="sstt") || (session()->get('user')['role']=="admin") ) : ?>
-        let val_ie = old_div.querySelector('#sender_'+id_ticket).value;
-        let val_ir = old_div.querySelector('#repair_'+id_ticket).value;
+            let val_ie = old_div.querySelector('#sender_'+id_ticket).value;
+            let val_ir = old_div.querySelector('#repair_'+id_ticket).value;
 
-        // Modificación de instituto emisor
-        let label_ie = new_div.querySelector('#labelSender_'+id_ticket).setAttribute('id', 'labelSender_' + count_ins);
-        let input_ie = new_div.querySelector('#sender_'+id_ticket);
-        input_ie.setAttribute('id', 'sender_' + count_ins);
-        input_ie.value = val_ie;
-        let button_ie = new_div.querySelector('#assignSender_'+id_ticket).setAttribute('id', 'assignSender_' + count_ins);
+            // Modificación de instituto emisor
+            let label_ie = new_div.querySelector('#labelSender_'+id_ticket).setAttribute('id', 'labelSender_' + count_ins);
+            let input_ie = new_div.querySelector('#sender_'+id_ticket);
+            input_ie.setAttribute('id', 'sender_' + count_ins);
+            input_ie.value = val_ie;
+            let button_ie = new_div.querySelector('#assignSender_'+id_ticket).setAttribute('id', 'assignSender_' + count_ins);
 
-        // Modificación de instituto reparador
-        let label_ir = new_div.querySelector('#labelRepair_'+id_ticket).setAttribute('id', 'labelRepair_' + count_ins);
-        let input_ir = new_div.querySelector('#repair_'+id_ticket);
-        input_ir.setAttribute('id', 'repair_' + count_ins);
-        input_ir.value = val_ir;
-        let button_ir = new_div.querySelector('#assignRepair_'+id_ticket).setAttribute('id', 'assignRepair_' + count_ins);
+            // Modificación de instituto reparador
+            let label_ir = new_div.querySelector('#labelRepair_'+id_ticket).setAttribute('id', 'labelRepair_' + count_ins);
+            let input_ir = new_div.querySelector('#repair_'+id_ticket);
+            input_ir.setAttribute('id', 'repair_' + count_ins);
+            input_ir.value = val_ir;
+            let button_ir = new_div.querySelector('#assignRepair_'+id_ticket).setAttribute('id', 'assignRepair_' + count_ins);
         <?php endif; ?>
 
         // Modificación de tipo dispositivo
@@ -420,6 +421,13 @@
         let error = false;
 
         event.preventDefault();
+
+        // Eliminamos todos los mensajes de error
+        let errors = document.querySelectorAll('.error');
+        errors.forEach(error => {
+            error.remove();
+        })
+
         // Obtenemos todos los elementos con clase ticket
         let tickets = document.querySelectorAll('.ticket');
 
@@ -447,7 +455,7 @@
                 if (value == '' || value == null) {
                     error = true;
                     let error_msg = document.createElement('p');
-                    error_msg.classList = 'font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
+                    error_msg.classList = 'error font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
                     error_msg.innerText = '<?=lang('error.empty_slot_2')?>';
                     input.parentElement.appendChild(error_msg);
                 }
@@ -468,7 +476,7 @@
                 if (value == '' || value == null) {
                     error = true;
                     let error_msg = document.createElement('p');
-                    error_msg.classList = 'font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
+                    error_msg.classList = 'error font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
                     error_msg.innerText = '<?=lang('error.empty_slot_2')?>';
                     textarea.parentElement.appendChild(error_msg);
                 }
@@ -489,7 +497,7 @@
                 if (name == 'id_type' && (value == '' || value == null || value == 'null')) {
                     error = true;
                     let error_msg = document.createElement('p');
-                    error_msg.classList = 'font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
+                    error_msg.classList = 'error font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
                     error_msg.innerText = '<?=lang('error.empty_slot_2')?>';
                     select.parentElement.appendChild(error_msg);
                 }

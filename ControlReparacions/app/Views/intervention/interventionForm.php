@@ -154,6 +154,12 @@
 
         event.preventDefault();
 
+        // Eliminamos todos los mensajes de error
+        let errors = document.querySelectorAll('.error');
+        errors.forEach(error => {
+            error.remove();
+        })
+
         // Obtenemos todos los elementos con clase intervention
         let interventions = document.querySelectorAll('.intervention');
 
@@ -181,7 +187,7 @@
                 if (name == 'id_type' && (value == '' || value == null || value == 'null')) {
                     error = true;
                     let error_msg = document.createElement('p');
-                    error_msg.classList = 'font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
+                    error_msg.classList = 'error font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
                     error_msg.innerText = '<?=lang('error.empty_slot_2')?>';
                     select.parentElement.appendChild(error_msg);
                 }
@@ -208,7 +214,7 @@
         if (value == '' || value == null) {
             error = true;
             let error_msg = document.createElement('p');
-            error_msg.classList = 'font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
+            error_msg.classList = 'error font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
             error_msg.innerText = '<?=lang('error.empty_slot_2')?>';
             textarea.parentElement.appendChild(error_msg);
         }

@@ -43,12 +43,12 @@ class InventariModel extends Model
     {
 
         $data = [
-            'id' =>  $id_inventari,
-            'nom' => $nom,
-            'data_compra' => $data_compra,
-            'preu' => $preu,
-            'codi_centre' => $codi_centre,
-            'id_tipus_inventari' => $id_tipus_inventari,
+            'id' =>  htmlspecialchars(trim($id_inventari)),
+            'nom' => htmlspecialchars(trim($nom)),
+            'data_compra' => htmlspecialchars(trim($data_compra)),
+            'preu' => htmlspecialchars(trim($preu)),
+            'codi_centre' => htmlspecialchars(trim($codi_centre)),
+            'id_tipus_inventari' => htmlspecialchars(trim($id_tipus_inventari)),
             'id_intervencio' => null,
         ];
 
@@ -73,8 +73,6 @@ class InventariModel extends Model
             ->orLike('tipus_inventari.nom', $search, 'both', true)
             ;
         // ->where('codi_centre', session('user')['code']);
-
-
     }
 
     public function getAllPaged()
