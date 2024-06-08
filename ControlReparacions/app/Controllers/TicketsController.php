@@ -121,7 +121,69 @@ class TicketsController extends BaseController
             mb_strtoupper(lang('titles.receiver'), 'utf-8'),
             mb_strtoupper(lang('titles.date'), 'utf-8'),
             mb_strtoupper(lang('titles.hour'), 'utf-8'),
-            mb_strtoupper(lang('titles.status'), 'utf-8'),
+            "<div class='relative group w-full'>" .
+                mb_strtoupper(lang('titles.status'), 'utf-8') . "&nbsp; <i class='fa-solid fa-circle-info'></i>
+
+                <div class='absolute w-48 px-3 py-2 flex flex-col gap-1 left-1/2 transform -translate-x-1/2   bg-secundario border-2 border-terciario-1 ease-out transition-all  duration-250 rounded-lg opacity-0 group-hover:opacity-100 '>
+
+                    <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_0 rounded-full me-2 dark:bg-white'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>Desguaçat</span>
+                    </div>
+                    <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_1 rounded-full me-2'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>Espatllat</span>
+                    </div>
+                    <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_2 rounded-full me-2'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>Espatllat Recollit</span>
+                    </div>
+                    <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_3 rounded-full me-2'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>Espatllat Enviat</span>
+                    </div>
+                    <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_4 rounded-full me-2'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>Espatllat Entregat</span>
+                    </div>
+                    <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_5 rounded-full me-2 dark:blue-500'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>Espera Reparació</span>
+                    </div>
+                    <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_6 rounded-full me-2'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>Reparació</span>
+                    </div>
+                    <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_7 rounded-full me-2'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>Revisio</span>
+                    </div>
+                    <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_8 rounded-full me-2'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>Reparat</span>
+                    </div>
+                    <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_9 rounded-full me-2'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>Reparat Recollit</span>
+                    </div>
+                     <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_10 rounded-full me-2'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>Reparat Enviat</span>
+                    </div>
+                     <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_11 rounded-full me-2'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>Finalitzat</span>
+                    </div>
+                     <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_12 rounded-full me-2'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>SSTT</span>
+                    </div>
+                     <div class='flex items-center'>
+                        <span class='size-3 inline-block estat_13 rounded-full me-2'></span>
+                        <span class='text-gray-600 dark:text-neutral-400'>Rebutjat</span>
+                    </div>
+                </div>
+            </div>",
             mb_strtoupper(lang('titles.actions'), 'utf-8'),
         );
 
@@ -307,14 +369,42 @@ class TicketsController extends BaseController
 
             $totalPrice += $intervencio['preu'];
 
-            $buttonView = base_url("tickets/" . $intervencio['id']); // Reemplazar con tu ruta real
+            $buttonUpdate = base_url("intervention/modify/" . $intervencio['id']);
+            $buttonDelete = base_url("intervention/delete/" . $intervencio['id']);
 
             $table->addRow(
                 $intervencio['created_at'],
-                $intervencio['correu_alumne'],
+                $intervencio['nom_reparador'],
                 $intervencio['material'],
+                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-segundario' : 'bg-segundario'],
+                [
+                    "data" =>
+                    "
+                     <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
+                     <a onclick='(function() { Swal.fire({
+                        customClass:{htmlContainer: ``,},
+                        title: `" . lang('alerts.sure') . "`,
+                        text: `" . lang('alerts.sure_sub') . "`,
+                        icon: `warning`,
+                        showCancelButton: true,
+                        confirmButtonColor: `#3085d6`,
+                        cancelButtonColor: `#d33`,
+                        confirmButtonText: `" . lang('alerts.yes_del') . "`,
+                        cancelButtonText: `" . lang('alerts.cancel') . "`,
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = `" . $buttonDelete . "`;
 
-                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-segundario' : 'bg-segundario']
+                            Swal.fire({
+                                title: `" . lang('alerts.deleted') . "`,
+                                text: `" . lang('alerts.deleted_sub') . "`,
+                                icon: `success`,
+                            });
+                        }
+                      }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
+
+                    "class" => " p-5 flex h-16 justify-between items-center"
+                ],
             );
         }
 
@@ -694,7 +784,7 @@ class TicketsController extends BaseController
 
         foreach ($paginateData as $ticket) {
 
-            $xls_string .= implode("\t", $ticket) . "\n";  
+            $xls_string .= implode("\t", $ticket) . "\n";
         }
 
         $xls_string = "\xFF\xFE" . mb_convert_encoding($xls_string, 'UTF-16LE', 'UTF-8');
@@ -771,7 +861,7 @@ class TicketsController extends BaseController
     //         $file = $this->request->getFiles();
 
     //         // leer el csv 
-            
+
     //         $xls_string = "\xFF\xFE" . mb_convert_encoding($xls_string, 'UTF-16LE', 'UTF-8');
     //         $fileCsv = fopen($file['uploadXLS'], 'r');
 
@@ -826,7 +916,7 @@ class TicketsController extends BaseController
     public function downloadCSV()
     {
         // Establecer la ruta del archivo
-        $rutaArchivo = WRITEPATH . 'plantillas' . DIRECTORY_SEPARATOR . 'plantilla_tickets.csv';
+        $rutaArchivo = WRITEPATH . 'plantilles' . DIRECTORY_SEPARATOR . 'plantilla_tiquets.csv';
 
         // dd($rutaArchivo);
 
@@ -842,7 +932,7 @@ class TicketsController extends BaseController
         $tipoContenido = mime_content_type($rutaArchivo);
 
         // Establecer encabezados de descarga
-        header('Content-Disposition: attachment; filename="plantilla_ticket.csv"');
+        header('Content-Disposition: attachment; filename="plantilla_tiquets.csv"');
         header('Content-Length: ' . $tamañoArchivo);
         header('Content-Type: ' . $tipoContenido);
 
@@ -853,7 +943,7 @@ class TicketsController extends BaseController
     public function downloadXLS()
     {
         // Establecer la ruta del archivo
-        $rutaArchivo = WRITEPATH . 'plantillas' . DIRECTORY_SEPARATOR . 'plantilla_tickets.xls';
+        $rutaArchivo = WRITEPATH . 'plantilles' . DIRECTORY_SEPARATOR . 'plantilla_tiquets.xls';
 
         // dd($rutaArchivo);
 
@@ -869,7 +959,7 @@ class TicketsController extends BaseController
         $tipoContenido = mime_content_type($rutaArchivo);
 
         // Establecer encabezados de descarga
-        header('Content-Disposition: attachment; filename="plantilla_ticket.xls"');
+        header('Content-Disposition: attachment; filename="plantilla_tiquets.xls"');
         header('Content-Length: ' . $tamañoArchivo);
         header('Content-Type: ' . $tipoContenido);
 

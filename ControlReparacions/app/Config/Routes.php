@@ -61,6 +61,11 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('', 'InterventionController::intervention');
         $routes->POST('form/add', 'InterventionController::addIntervention');
         $routes->GET('form/(:segment)', 'InterventionController::interventionForm/$1');
+
+        $routes->GET('delete/(:segment)', 'InterventionController::deleteIntervention/$1');
+        $routes->GET('modify/(:segment)', 'InterventionController::modifyIntervention/$1');
+        $routes->POST('modify/(:segment)', 'InterventionController::modifyIntervention_post/$1');
+
     });
 
     // STUDENTS
@@ -171,9 +176,9 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         });
 
         //Downloads
-        $routes->GET('dowloadXLS', 'InventaryController::downloadCSV');
+        $routes->GET('dowloadCSV', 'InventaryController::downloadCSV');
 
-        $routes->GET('dowloadCSV', 'InventaryController::downloadXLS');
+        $routes->GET('dowloadXLS', 'InventaryController::downloadXLS');
     });
 
     // CONFIG
