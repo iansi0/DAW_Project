@@ -24,8 +24,6 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('add', 'TicketsController::ticketForm', ['filter' => 'addTicket']);
         $routes->POST('add', 'TicketsController::addTicket', ['filter' => 'addTicket']);
 
-       
-
         $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1', ['filter' => 'deleteTicket']);
         $routes->GET('modify/(:segment)', 'TicketsController::modifyTicket/$1', ['filter' => 'modifyTicket']);
         $routes->POST('modify/(:segment)', 'TicketsController::modifyTicket_post/$1', ['filter' => 'modifyTicket']);
@@ -60,6 +58,11 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('', 'InterventionController::intervention');
         $routes->POST('form/add', 'InterventionController::addIntervention');
         $routes->GET('form/(:segment)', 'InterventionController::interventionForm/$1');
+
+        $routes->GET('delete/(:segment)', 'InterventionController::deleteIntervention/$1');
+        $routes->GET('modify/(:segment)', 'InterventionController::modifyIntervention/$1');
+        $routes->POST('modify/(:segment)', 'InterventionController::modifyIntervention_post/$1');
+
     });
 
     // STUDENTS

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\InventariModel;
 
 class IntervencioModel extends Model
 {
@@ -46,13 +47,14 @@ class IntervencioModel extends Model
             'descripcio' => $descripcio,
             'id_ticket' => $id_ticket,
             'id_tipus' => $id_tipus,
-            'id_curs' => $id_curs,
+            'id_curs' => '1',
             'id_user' => $persona_reparadora,
         ];
 
         $this->insert($data);
     }
 
+    //Buscar intervencions de ticket
     public function getInterventions($id)
     {
         return $this
@@ -72,5 +74,60 @@ class IntervencioModel extends Model
             ->join('professor', 'intervencio.id_user = professor.id_user', 'left')
             ->where('intervencio.id_ticket', $id)
             ->findAll();
+    }
+
+    //Buscar una intervecion por id
+    public function getInterventionById($id){
+
+       return $this->select([
+            'intervencio.id',
+            'intervencio.descripcio',
+            'intervencio.id_ticket',
+        ])
+        ->where('intervencio.id', $id)
+        ->first();
+    }
+
+    public function modifyIntervention($id,$data)
+    {
+
+        $role=session()->get('user')['role'];
+        $uid=session()->get('user')['uid'];
+
+        $this->where('id', $id);
+    
+        if ($role=="admin") {
+            $this;
+        }else if($role=="alumn"){
+            $this->groupStart();
+            $this->where("intervencio.id_user",$uid);
+            $this->groupEnd();
+        }else{
+            return;
+        }
+        return $this->set($data)->update();
+
+    }
+
+    public function deleteTicket($id)
+    {
+        $role=session()->get('user')['role'];
+        $uid=session()->get('user')['uid'];
+
+        $this->where('id', $id);
+
+        $modelInventary = new InventariModel();
+
+        if ($role=="admin") {
+            $modelInventary->unassignInventary($id);
+            return $this->delete();
+        }else if($role=="alumn"){
+            $this->groupStart();
+            $this->where("intervencio.id_user",$uid);
+            $this->groupEnd();
+        }else{
+            return; 
+        }
+        return $this->delete();
     }
 }

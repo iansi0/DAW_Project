@@ -302,14 +302,42 @@ class TicketsController extends BaseController
 
             $totalPrice += $intervencio['preu'];
 
-            $buttonView = base_url("tickets/" . $intervencio['id']); // Reemplazar con tu ruta real
-
+            $buttonUpdate = base_url("intervention/modify/" . $intervencio['id']);
+            $buttonDelete = base_url("intervention/delete/" . $intervencio['id']);
+    
             $table->addRow(
                 $intervencio['created_at'],
-                $intervencio['correu_alumne'],
+                $intervencio['nom_reparador'],
                 $intervencio['material'],
+                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-segundario' : 'bg-segundario'],
+                [
+                    "data" =>
+                    "
+                     <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
+                     <a onclick='(function() { Swal.fire({
+                        customClass:{htmlContainer: ``,},
+                        title: `" . lang('alerts.sure') . "`,
+                        text: `" . lang('alerts.sure_sub') . "`,
+                        icon: `warning`,
+                        showCancelButton: true,
+                        confirmButtonColor: `#3085d6`,
+                        cancelButtonColor: `#d33`,
+                        confirmButtonText: `" . lang('alerts.yes_del') . "`,
+                        cancelButtonText: `" . lang('alerts.cancel') . "`,
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = `" . $buttonDelete . "`;
 
-                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-segundario' : 'bg-segundario']
+                            Swal.fire({
+                                title: `" . lang('alerts.deleted') . "`,
+                                text: `" . lang('alerts.deleted_sub') . "`,
+                                icon: `success`,
+                            });
+                        }
+                      }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
+
+                    "class" => " p-5 flex h-16 justify-between items-center"
+                ],
             );
         }
 

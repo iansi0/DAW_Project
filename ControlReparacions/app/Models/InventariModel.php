@@ -122,4 +122,17 @@ class InventariModel extends Model
     {
         return $this->select('id, nom')->where('id_intervencio', null)->findAll();
     }
+
+    public function getInventaryAssigned($id)
+    {
+        return $this->select('id, nom')->where('id_intervencio', $id)->findAll();
+    }
+
+    public function unassignInventary($id){
+
+        $data = [
+            'id_intervencio' => null,
+        ];
+        return $this->where('id_intervencio', $id)->set($data)->update();
+    }
 }
