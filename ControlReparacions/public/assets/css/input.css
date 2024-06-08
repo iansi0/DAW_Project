@@ -35,19 +35,19 @@
 /* Espera Reparació */
 .estat_5{
   border-radius: 10px;
-  @apply bg-orange-700 m-1 font-semibold  text-secundario 
+  @apply bg-yellow-700 m-1 font-semibold  text-secundario 
   
 }
 /* Reparació */
 .estat_6{
   border-radius: 10px;
-  @apply bg-orange-600 m-1 font-semibold  text-terciario-1 
+  @apply bg-yellow-600 m-1 font-semibold  text-terciario-1 
   
 }
 /* Revisio */
 .estat_7{
   border-radius: 10px;
-  @apply bg-orange-500 m-1 font-semibold  text-terciario-1 
+  @apply bg-yellow-500 m-1 font-semibold  text-terciario-1 
   
 }
 /* Reparat */

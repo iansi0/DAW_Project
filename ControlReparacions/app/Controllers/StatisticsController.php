@@ -40,6 +40,7 @@ class StatisticsController extends BaseController
             }
             $allTiquetsMonthly=['month' => $months,'count' => $allTiquetsCounts];
 
+            // Aqui mirem els tiquets per tipus
             $allTiquetsType = $tiquetmodel->getTicketsByType();
 
             $typeName=[];
@@ -51,12 +52,25 @@ class StatisticsController extends BaseController
             
             $allTiquetsType=['type' => $typeName,'count' => $typeCount];
 
+            // Aqui mirem els tiquets per estat
+
+            $allTiquetsState = $tiquetmodel->getTicketsByState();
+            // dd($allTiquetsState);
+            $stateName=[];
+            $stateCount=[];
+            foreach ($allTiquetsState as $state) {
+                array_push($stateName,$state['estat']);
+                array_push($stateCount,intval($state['count']));
+            }
+            
+            $allTiquetsState=['state' => $stateName,'count' => $stateCount];
 
             // data per passar tot
             $data = [
                 'comarca' => $comarcaTotal,
                 'date' => $allTiquetsMonthly,
                 'type' => $allTiquetsType,
+                'state' => $allTiquetsState,
             ];            
             // return a la vista amb les dades
             return view('statistics',$data);

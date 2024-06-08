@@ -368,6 +368,31 @@ class TiquetModel extends Model
         $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
         $this->groupBy('tipus');
+        $this->orderBy('tipus_dispositiu.id');
+
+        if ($role=="admin") {
+            $this;
+        }else if($role=="sstt"){
+            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+        }
+        return $this->findAll();
+    }
+
+    public function getTicketsByState()
+    {
+
+        $role=session()->get('user')['role'];
+        $code=session()->get('user')['code'];
+
+        $this->select('
+        estat.nom AS estat,
+        , COUNT(tiquet.id) as count
+        ');
+        $this->join('estat', 'tiquet.id_estat = estat.id');
+        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
+        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+        $this->groupBy('estat');
+        $this->orderBy('estat.id');
 
         if ($role=="admin") {
             $this;
