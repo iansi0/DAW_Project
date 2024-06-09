@@ -34,9 +34,9 @@
                 </div>
 
                 <div class="flex text-4xl align-right  gap-3">
-                    <a class="hover:font-bold <?= $filter == 'sender' ? " font-bold" : "" ?>" href="<?= base_url('assign/filterSender') ?>"><?= lang('titles.sender') ?></a>
+                    <a class="hover:font-bold transition hover:ease-in ease-out duration-250 <?= $filter == 'sender' ? " font-bold" : "" ?>" href="<?= base_url('assign/filterSender') ?>"><?= lang('titles.sender') ?></a>
                     <span class="overflow-hidden">&nbsp;|&nbsp;</span>
-                    <a class="hover:font-bold <?= $filter == 'receiver' ? " font-bold" : "" ?>" href="<?= base_url('assign/filterReceiver') ?>"><?= lang('titles.receiver') ?></a>
+                    <a class="hover:font-bold transition hover:ease-in ease-out duration-250 <?= $filter == 'receiver' ? " font-bold" : "" ?>" href="<?= base_url('assign/filterReceiver') ?>"><?= lang('titles.receiver') ?></a>
                 </div>
             </div>
 

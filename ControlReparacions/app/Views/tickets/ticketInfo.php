@@ -81,7 +81,7 @@
             <div class="flex justify-between bg-primario text-secundario text-left p-3 pr-8 text-3xl rounded-t-2xl">
                 <h1><?= lang('titles.int'); ?></h1>
 
-                    <?php if (((session()->get('user')['role'] == "prof") && (session()->get('user')['code'] == $ticket['codi_reparador'])) || ((session()->get('user')['role'] == "alumn") && (session()->get('user')['code'] == $ticket['codi_reparador'])) || (session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
+                    <?php if (((session()->get('user')['role'] == "prof") && (session()->get('user')['code'] == $ticket['codi_reparador'])) || ((session()->get('user')['role'] == "alumn") && (session()->get('user')['code'] == $ticket['codi_reparador'])) || (session()->get('user')['role'] == "admin")) : ?>
 
                         <div class="hover:bg-green-700 hover:text-secundario p-2 px-3 rounded-xl transition hover:ease-in ease-out duration-250">
                             <a href="<?= base_url('intervention/form/' . $ticket['id']) ?>"><i class="fa-icon fa-solid fa-plus "></i></a>
