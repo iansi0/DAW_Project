@@ -21,36 +21,36 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('', 'TicketsController::tickets');
         $routes->POST('', 'TicketsController::tickets');
 
-        $routes->GET('add', 'TicketsController::ticketForm', ['filter' => 'addTicket']);
-        $routes->POST('add', 'TicketsController::addTicket', ['filter' => 'addTicket']);
+        $routes->GET('add', 'TicketsController::ticketForm');
+        $routes->POST('add', 'TicketsController::addTicket');
         
-       
         $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
-        
-        $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1', ['filter' => 'deleteTicket']);
-        $routes->GET('modify/(:segment)', 'TicketsController::modifyTicket/$1', ['filter' => 'modifyTicket']);
-        $routes->POST('modify/(:segment)', 'TicketsController::modifyTicket_post/$1', ['filter' => 'modifyTicket']);
-        
-        // EXPORTS
-        $routes->group('export', ['filter' => 'exportTicket'], function ($routes) {
-            //CSV
-            $routes->GET('csv', 'TicketsController::exportCSV');
-            // XLS
-            $routes->GET('xls', 'TicketsController::exportXLS');
-        });
 
-        // IMPORTS
-        $routes->group('import', ['filter' => 'exportTicket'], function ($routes) {
-            //CSV
-            $routes->POST('csv', 'TicketsController::importCSV');
-            // XLS
-            $routes->POST('xls', 'TicketsController::importXLS');
-        });
+        $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1');
+        $routes->GET('modify/(:segment)', 'TicketsController::modifyTicket/$1');
+        $routes->POST('modify/(:segment)', 'TicketsController::modifyTicket_post/$1');
+    });
 
-        //Downloads
-        $routes->GET('dowloadCSV', 'TicketsController::downloadCSV');
+    // EXPORTS
+    $routes->group('export', function ($routes) {
+        //CSV
+        $routes->GET('csv', 'TicketsController::exportCSV');
+        // XLS
+        $routes->GET('xls', 'TicketsController::exportXLS');
+    });
 
-        $routes->GET('dowloadXLS', 'TicketsController::downloadXLS');
+    // IMPORTS
+    $routes->group('import', function ($routes) {
+        //CSV
+        $routes->POST('csv', 'TicketsController::importCSV');
+        // XLS
+        $routes->POST('xls', 'TicketsController::importXLS');
+    });
+
+    //Downloads
+    $routes->GET('dowloadCSV', 'TicketsController::downloadCSV');
+
+    $routes->GET('dowloadXLS', 'TicketsController::downloadXLS');
 
         //Ruta para acceder a ticketInfo
     });
@@ -117,7 +117,7 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->POST('modify/(:segment)', 'InstitutesController::modifyInstitute_post/$1');
 
         // EXPORTS
-        $routes->group('export', ['filter' => 'exportTicket'], function ($routes) {
+        $routes->group('export', function ($routes) {
             //CSV
             $routes->GET('csv', 'InstitutesController::exportCSV');
             // XLS
@@ -125,7 +125,7 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         });
 
         // IMPORTS
-        $routes->group('import', ['filter' => 'exportTicket'], function ($routes) {
+        $routes->group('import', function ($routes) {
             //CSV
             $routes->POST('csv', 'InstitutesController::importCSV');
             // XLS
@@ -164,7 +164,7 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
 
 
         // EXPORTS
-        $routes->group('export', ['filter' => 'exportTicket'], function ($routes) {
+        $routes->group('export', function ($routes) {
             //CSV
             $routes->GET('csv', 'InventaryController::exportCSV');
             // XLS
@@ -172,7 +172,7 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         });
 
         // IMPORTS
-        $routes->group('import', ['filter' => 'exportTicket'], function ($routes) {
+        $routes->group('import', function ($routes) {
             //CSV
             $routes->POST('csv', 'InventaryController::importCSV');
             // XLS

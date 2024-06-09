@@ -45,15 +45,15 @@ class TiquetModel extends Model
     {
 
         $data = [
-            'id' =>  $id_tiquet,
-            'codi_dispositiu' => $codi_equip,
-            'descripcio_avaria' => $descripcio_avaria,
-            'nom_persona_contacte_centre' => $nom_persona_contacte_centre,
-            'correu_persona_contacte_centre' => $correu_persona_contacte_centre,
-            'id_tipus_dispositiu' => $id_tipus_dispositiu,
-            'id_estat' => $id_estat,
-            'codi_centre_emissor' => $codi_centre_emissor,
-            'codi_centre_reparador' => $codi_centre_reparador,
+            'id' => htmlspecialchars( $id_tiquet),
+            'codi_dispositiu' => htmlspecialchars($codi_equip),
+            'descripcio_avaria' => htmlspecialchars($descripcio_avaria),
+            'nom_persona_contacte_centre' => htmlspecialchars($nom_persona_contacte_centre),
+            'correu_persona_contacte_centre' => htmlspecialchars($correu_persona_contacte_centre),
+            'id_tipus_dispositiu' => htmlspecialchars($id_tipus_dispositiu),
+            'id_estat' => htmlspecialchars($id_estat),
+            'codi_centre_emissor' => htmlspecialchars($codi_centre_emissor),
+            'codi_centre_reparador' => htmlspecialchars($codi_centre_reparador),
         ];
 
         $this->insert($data);
@@ -61,6 +61,9 @@ class TiquetModel extends Model
 
     public function getByTitleOrText($search, $filters)
     {
+
+        // dd($filters);
+
         $role = session()->get('user')['role'];
         $code = session()->get('user')['code'];
 
@@ -80,20 +83,20 @@ class TiquetModel extends Model
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
         
         // WHERE USING SEARCH 
-        $this->groupStart()
-            ->orLike('tiquet.id', $search, 'both', true)
-            ->orLike('tipus_dispositiu.nom', $search, 'both', true)
-            ->orLike('tiquet.descripcio_avaria', $search, 'both', true)
-            ->orLike('centre_emissor.nom', $search, 'both', true)
-            ->orLike('centre_reparador.nom', $search, 'both', true)
-            ->orLike('tiquet.created_at', $search, 'both', true)
-            ->orLike('estat.nom', $search, 'both', true)
-        ->groupEnd();
+        // Si los filtros estan activos, los priorizamos antes que la búsqueda para evitar conflictos
+        $this->groupStart();
+            $this->orLike('tiquet.id', $search, 'both', true);
+            $this->orLike('tiquet.descripcio_avaria', $search, 'both', true);
+            if(empty($filters['device'])) $this->orLike('tipus_dispositiu.nom', $search, 'both', true);
+            if(empty($filters['center'])) $this->orLike('centre_emissor.nom', $search, 'both', true);
+            if(empty($filters['center'])) $this->orLike('centre_reparador.nom', $search, 'both', true);
+            if(empty($filters['state'])) $this->orLike('estat.nom', $search, 'both', true);
+        $this->groupEnd();
 
         // WHERE USING FILTERS
         if(!empty($filters)){
             $this->groupStart();
-                if(!empty($filters['device'])) $this->like('tipus_dispositiu.nom', $filters['device'], 'both', true);
+                if(!empty($filters['device'])) $this->where('tipus_dispositiu.nom', $filters['device'], true);
                 if(!empty($filters['center'])) {
                     $this->groupStart(); 
                         $this->like('centre_emissor.nom', $filters['center'], 'both', true);
@@ -115,12 +118,18 @@ class TiquetModel extends Model
         if ($role=="admin") {
             $this;
         }else if($role=="prof" || $role=="ins"){
-            $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+            $this->groupStart();
+                $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+            $this->groupEnd();
         }else if($role=="alumn"){
-            $this->where("tiquet.codi_centre_reparador",$code);
-            $this->where("estat.id",'6');
+            $this->groupStart();
+                $this->where("tiquet.codi_centre_reparador",$code);
+                $this->where("estat.id",'6');
+            $this->groupEnd();
         }else if($role=="sstt"){
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+            $this->groupStart();
+                $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+            $this->groupEnd();
         }
 
         return $this->orderBy('tiquet.created_at', 'desc');
@@ -170,12 +179,18 @@ class TiquetModel extends Model
         if ($role=="admin") {
             $this;
         }else if($role=="prof" || $role=="ins"){
-            $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+            $this->groupStart();
+                $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+            $this->groupEnd();
         }else if($role=="alumn"){
-            $this->where("tiquet.codi_centre_reparador",$code);
-            $this->where("estat.id",'6');
+            $this->groupStart();
+                $this->where("tiquet.codi_centre_reparador",$code);
+                $this->where("estat.id",'6');
+            $this->groupEnd();
         }else if($role=="sstt"){
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+            $this->groupStart();
+                $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+            $this->groupEnd();
         }
         return $this->orderBy('tiquet.created_at', 'desc');
 
@@ -193,11 +208,11 @@ class TiquetModel extends Model
             return $this->delete();
         }else if($role=="prof" || $role=="ins"){
             $this->groupStart();
-            $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+                $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
         }else if($role=="sstt"){
             $this->groupStart();
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+                $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
             $this->groupEnd();
         }else{
             return; 
@@ -205,8 +220,12 @@ class TiquetModel extends Model
         return $this->delete();
     }
 
-    public function modifyTicket($id,$data)
+    public function modifyTicket($id, $data)
     {
+
+        foreach ($data as &$value) {
+            $value = htmlspecialchars($value);
+        }
 
         $role=session()->get('user')['role'];
         $code=session()->get('user')['code'];
@@ -219,11 +238,11 @@ class TiquetModel extends Model
             $this;
         }else if($role=="prof" || $role=="ins"){
             $this->groupStart();
-            $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+                $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
         }else if($role=="sstt"){
             $this->groupStart();
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+                $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
             $this->groupEnd();
         }else{
             return;
@@ -252,6 +271,8 @@ class TiquetModel extends Model
 
     public function saveState($id,$state)
     {
+
+        $state = htmlspecialchars($state);
 
         $role=session()->get('user')['role'];
         $code=session()->get('user')['code'];

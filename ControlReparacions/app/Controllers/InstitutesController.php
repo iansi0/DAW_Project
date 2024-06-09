@@ -58,14 +58,14 @@ class InstitutesController extends BaseController
 
         // TEMPLATE
         $template = [
-            'table_open'  => "<table class='w-full rounded-t-2xl overflow-hidden '>",
+            'table_open'  => "<table class='w-full rounded-t-2xl shadow-xl overflow-hidden '>",
 
-            'thead_open'  => "<thead class='bg-primario text-secundario '>",
+            'thead_open'  => "<thead class='py-5 bg-primario text-secundario '>",
 
-            'heading_cell_start' => "<th class='py-3 text-base'>",
+            'heading_cell_start' => "<th class='py-6 text-base'>",
 
-            'row_start' => "<tr class='border-b-[0.01px] '>",
-            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-[#F7F4EF]'>",
+            'row_start' => "<tr class='border-b-[0.01px] py-2'>",
+            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-[#F7F4EF] py-2'>",
         ];
         $table->setTemplate($template);
 
@@ -87,11 +87,11 @@ class InstitutesController extends BaseController
                 $institute['correu'],
 
                 $institute['actiu'] == 1
-                    ? '<i class="fa-solid fa-check text-xl text-green-600" ></i>'
-                    : '<i class="fa-solid fa-xmark text-xl text-red-600" ></i>',
+                    ? '<i class="fa-solid py-6 fa-check text-xl text-green-600" ></i>'
+                    : '<i class="fa-solid py-6 fa-xmark text-xl text-red-600" ></i>',
                 $institute['taller'] == 1
-                    ? '<i class="fa-solid fa-check text-xl text-green-600" ></i>'
-                    : '<i class="fa-solid fa-xmark text-xl text-red-600" ></i>',
+                    ? '<i class="fa-solid py-6 fa-check text-xl text-green-600" ></i>'
+                    : '<i class="fa-solid py-6 fa-xmark text-xl text-red-600" ></i>',
                 $institute['poblacio'],
                 $institute['telefon'],
                 "
@@ -138,7 +138,7 @@ class InstitutesController extends BaseController
 
             'thead_open'  => "<thead class='bg-primario text-secundario'>",
 
-            'heading_cell_start' => "<th class='py-3 text-base'>",
+            'heading_cell_start' => "<th class='py-6 text-base'>",
 
             'row_start' => "<tr class='border-b-[0.01px] '>",
             'row_alt_start' => "<tr class='border-b-[0.01px]  bg-terciario-2'>",
@@ -172,12 +172,12 @@ class InstitutesController extends BaseController
                 date("d/m/Y", strtotime($ticket['created'])),
                 date("H:i", strtotime($ticket['created'])),
 
-                ["data" => "<a class='flex p-3 justify-center  whitespace-nowrap w-full estat_" . $ticket['id_estat'] . "'>" . $ticket['estat'] . "</a>", "class" => "p-2 "],
+                ["data" => "<a class='flex p-3 justify-center  whitespace-nowrap w-full estat_" . $ticket['id_estat'] . "'>" . $ticket['estat'] . "</a>", "class" => "p-3 "],
 
                 [
                     "data" =>
-                    "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
-                     <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
+                    "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='py-2 btn btn-primary'><i class='fa-solid p-3 text-center mt-4 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
+                     <a href='$buttonUpdate' class='py-2 btn btn-primary'><i class='fa-solid p-3 text-center mt-4 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
                      <a onclick='(function() { Swal.fire({
                         customClass:{htmlContainer: ``,},
                         title: `" . lang('alerts.sure') . "`,
@@ -203,7 +203,7 @@ class InstitutesController extends BaseController
     
                             });
                         }
-                      }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
+                      }); })()' class='py-2 cursor-pointer btn btn-primary'><i class='fa-solid p-3 px-3.5 text-xl mt-4 text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
 
                     "class" => " p-5 flex h-16 justify-between items-center"
                 ],
