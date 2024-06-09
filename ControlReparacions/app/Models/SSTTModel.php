@@ -58,4 +58,8 @@ class SSTTModel extends Model
     public function getAllSSTT(){
         return $this->select('codi, nom')->findAll();
     }
+
+    public function getSSTTById($id){
+        return $this->where('codi', $id)->first();
+    }
 }

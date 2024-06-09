@@ -8,9 +8,10 @@
     <aside class="flex flex-col gap-10">
         <div class="flex flex-col gap-5 px-10 py-5 border-2 border-black rounded-lg">
             <h1 class="text-4xl">INFO</h1>
-            <p>name: <?= $user['name'] ?> </p>
-            <p>apellidos: <?= $user['name'] ?> </p>
-            <p>email: <?= $user['user'] ?> </p>
+            <p>name: <?= $student['nom'] ?> </p>
+            <p>apellidos: <?= $student['cognoms'] ?> </p>
+            <p>email: <?= $student['correo'] ?> </p>
+            <p>curs: <?= $student['curs'] ?> </p>
         </div>
 
         <form action="<?= base_url('config/passwd') ?>" method="POST" class="flex flex-col gap-5 px-10 py-5 border-2 border-black rounded-lg">
