@@ -124,7 +124,7 @@ class TicketsController extends BaseController
             "<div class='relative  w-full'>" .
                 mb_strtoupper(lang('titles.status'), 'utf-8') . "&nbsp; <i class='fa-solid  fa-circle-info peer'></i>
 
-                <div class='absolute  w-72 px-3 py-2  flex-col gap-1 left-1/2 transform -translate-x-1/2  bg-secundario border-2 border-terciario-1  rounded-lg  hidden  peer-hover:flex '>
+                <div class='absolute  w-48 px-3 py-2  flex-col gap-1 left-1/2 transform -translate-x-1/2  bg-secundario border-2 border-terciario-1  rounded-lg  hidden  peer-hover:flex '>
 
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_0 rounded-full me-2 dark:bg-white'></span>
