@@ -179,12 +179,18 @@ class TiquetModel extends Model
         if ($role=="admin") {
             $this;
         }else if($role=="prof" || $role=="ins"){
-            $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+            $this->groupStart();
+                $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+            $this->groupEnd();
         }else if($role=="alumn"){
-            $this->where("tiquet.codi_centre_reparador",$code);
-            $this->where("estat.id",'6');
+            $this->groupStart();
+                $this->where("tiquet.codi_centre_reparador",$code);
+                $this->where("estat.id",'6');
+            $this->groupEnd();
         }else if($role=="sstt"){
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+            $this->groupStart();
+                $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+            $this->groupEnd();
         }
         return $this->orderBy('tiquet.created_at', 'desc');
 
@@ -202,11 +208,11 @@ class TiquetModel extends Model
             return $this->delete();
         }else if($role=="prof" || $role=="ins"){
             $this->groupStart();
-            $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+                $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
         }else if($role=="sstt"){
             $this->groupStart();
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+                $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
             $this->groupEnd();
         }else{
             return; 
@@ -232,11 +238,11 @@ class TiquetModel extends Model
             $this;
         }else if($role=="prof" || $role=="ins"){
             $this->groupStart();
-            $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+                $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
         }else if($role=="sstt"){
             $this->groupStart();
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+                $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
             $this->groupEnd();
         }else{
             return;
