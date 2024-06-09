@@ -364,16 +364,9 @@ class InventaryController extends BaseController
 
                 if (!$firstLine) {
 
-                    $fake = Factory::create("es_ES");
-
                     $model = new InventariModel();
 
-
-
-                    $fake = Factory::create("es_ES");
-
-
-                    $id = $fake->uuid();
+                    $id = LibrariesUUID::v4();
                     $nom = trim($row[0]);
                     $data_compra = trim($row[2]);
                     $preu = trim($row[1]);
