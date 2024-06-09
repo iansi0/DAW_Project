@@ -518,26 +518,26 @@
             if (this.files && this.files[0]) {
                 let parentForm = uploadCSV.parentElement.parentElement;
 
-            (function() {
-                Swal.fire({
-                    customClass: {
-                        htmlContainer: ``,
-                    },
-                    title: `<?= lang('alerts.sure') ?>`,
-                    text: `<?= lang('alerts.sure_sub') ?> "`,
-                    icon: `warning`,
-                    showCancelButton: true,
-                    confirmButtonColor: `#3085d6`,
-                    cancelButtonColor: `#d33`,
-                    confirmButtonText: `<?= lang('alerts.yes_imp') ?>`,
-                    cancelButtonText: `<?= lang('alerts.cancel') ?>`,
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        parentForm.submit();
-                    }
-                    uploadCSV.value = '';
-                });
-            })()
+                (function() {
+                    Swal.fire({
+                        customClass: {
+                            htmlContainer: ``,
+                        },
+                        title: `<?= lang('alerts.sure') ?>`,
+                        text: `<?= lang('alerts.sure_sub') ?> "`,
+                        icon: `warning`,
+                        showCancelButton: true,
+                        confirmButtonColor: `#3085d6`,
+                        cancelButtonColor: `#d33`,
+                        confirmButtonText: `<?= lang('alerts.yes_del') ?>`,
+                        cancelButtonText: `<?= lang('alerts.cancel') ?>`,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            parentForm.submit();
+                        }
+                        uploadCSV.value = '';
+                    });
+                })()
 
             }
         })

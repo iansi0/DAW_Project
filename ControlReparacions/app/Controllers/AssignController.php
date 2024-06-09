@@ -101,7 +101,7 @@ class AssignController extends BaseController
                 </label>
                 </div>
                 ", 
-                "class" => "p-2 "],
+                "class" => "p-1 "],
                 
                 explode("-", $ticket['id'])[4],
                 $ticket['tipus'],
@@ -119,7 +119,7 @@ class AssignController extends BaseController
                     "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class=' p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
                     ",
 
-                    "class" => "p-3 h-16 justify-between items-center"
+                    "class" => "p-2 h-16 justify-between items-center"
                 ],
 
             );

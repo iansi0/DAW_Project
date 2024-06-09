@@ -14,7 +14,7 @@
 
     <div class="bg-white rounded-t-lg shadow-xl border-b border-primario">
         <header class="bg-primario rounded-t-xl p-4 mb-2">
-            <h2 class="text-2xl font-semibold text-left text-2xl text-secundario"><?=  strtoupper(lang('charts.state')) ?></h2>
+            <h2 class="text-2xl font-semibold text-left text-secundario"><?=  strtoupper(lang('charts.state')) ?></h2>
         </header>
         <div class="flex justify-center">
             <div id="state" ></div>
@@ -23,7 +23,7 @@
 
     <div class="bg-white rounded-t-lg shadow-xl border-b border-primario">
         <header class="bg-primario rounded-t-xl p-4 mb-2">
-            <h2 class="text-2xl font-semibold text-left text-2xl text-secundario"><?=  strtoupper(lang('charts.type')) ?></h2>
+            <h2 class="text-2xl font-semibold text-left text-secundario"><?=  strtoupper(lang('charts.type')) ?></h2>
         </header>
         <div class="flex justify-center">
             <div id="type" ></div>
@@ -34,7 +34,7 @@
 
     <div class="bg-white rounded-t-lg shadow-xl border-b border-primario">
         <header class="bg-primario rounded-t-xl p-4 mb-2">
-            <h2 class="text-2xl font-semibold text-left text-2xl text-secundario"><?= strtoupper(lang('charts.month')); ?></h2>
+            <h2 class="text-2xl font-semibold text-left text-secundario"><?= strtoupper(lang('charts.month')); ?></h2>
         </header>
         <div class=" justify-center">
             <div id="month" ></div>
@@ -43,7 +43,7 @@
 
     <div class="bg-white rounded-t-lg shadow-xl border-b border-primario">
         <header class="bg-primario rounded-t-xl p-4 mb-2">
-            <h2 class="text-2xl font-semibold text-left text-2xl text-secundario"><?=  strtoupper(lang('charts.comarca')) ?></h2>
+            <h2 class="text-2xl font-semibold text-left text-secundario"><?=  strtoupper(lang('charts.comarca')) ?></h2>
         </header>
         <div class="flex justify-center">
             <div id="comarca" ></div>
