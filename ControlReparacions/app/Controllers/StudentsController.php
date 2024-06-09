@@ -211,6 +211,67 @@ class StudentsController extends BaseController
 
         return redirect()->to(base_url('/students'));
     }
+    public function courseForm()
+    {
+        helper('form');
+
+        return view('course');
+    }
+    public function addCourse()
+    {
+        helper('form');
+
+        $validationRules =
+            [
+                'class' => [
+                    'rules'  => 'required|valid_email',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'year' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'title  ' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                
+            ];
+
+
+        if ($this->validate($validationRules)) {
+
+            $cursModel = new CursModel();
+          
+
+            $fake = Factory::create("es_ES");
+
+            $id = $fake->uuid();
+            $clase = $this->request->getPost("name");
+            $any = $this->request->getPost("surnames");
+            $titol = $this->request->getPost("course");
+            $codi_centre = session()->get('user')['code'];
+
+            $user = $this->request->getPost("email");
+            $passwd = $fake->password();
+            $passwd_hash = password_hash($passwd, PASSWORD_DEFAULT);
+            $lang = "ca";
+
+
+            $cursModel->addCurs($id, $clase, $any, $titol, $codi_centre);
+
+        } else {
+            return redirect()->back()->withInput();
+        }
+
+        return redirect()->to(base_url('/students'));
+    }
 
     public function modifyStudent($id)
     {
