@@ -64,9 +64,8 @@ class IntervencioModel extends Model
                 'COALESCE(CONCAT(alumne.nom, " ", alumne.cognoms), CONCAT(professor.nom, " ", professor.cognoms), "") as nom_reparador',
                 'intervencio.id_tipus',
                 'intervencio.descripcio',
-                'intervencio.id_tipus',
                 'intervencio.created_at',
-                'inventari.preu as preu',
+                'SUM(inventari.preu) as preu',
                 'inventari.nom as material',
             ])
             ->join('inventari', 'intervencio.id = inventari.id_intervencio', 'left')

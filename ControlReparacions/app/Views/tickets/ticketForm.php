@@ -61,7 +61,7 @@
         div.appendChild(div_header)
 
         let div_form =document.createElement('div');
-        div_form.classList = ' grid grid-cols-2-large-1-small mt-2 p-4';
+        div_form.classList = 'grid grid-cols-2-large-1-small mt-2 p-4';
 
         // Div que contiene la parte izquierda del formulario (datos de contacto)
         let row = document.createElement('div');
