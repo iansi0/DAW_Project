@@ -123,6 +123,9 @@ class AlumneModel extends Model
             $this->where("alumne.codi_centre", $code);
         }
 
+        $this->orderBy('curs');
+        $this->orderBy('cognoms');
+
         return $this;
     }
 
