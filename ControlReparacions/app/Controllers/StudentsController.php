@@ -42,12 +42,12 @@ class StudentsController extends BaseController
         $template = [
             'table_open'  => "<table class='w-full rounded-t-2xl overflow-hidden '>",
 
-            'thead_open'  => "<thead class='bg-primario text-secundario '>",
+            'thead_open'  => "<thead class='py-5 bg-primario text-secundario '>",
 
-            'heading_cell_start' => "<th class='py-3 text-base'>",
+            'heading_cell_start' => "<th class='py-6 text-base'>",
 
-            'row_start' => "<tr class='border-b-[0.01px] '>",
-            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-[#F7F4EF]'>",
+            'row_start' => "<tr class='border-b-[0.01px] py-2'>",
+            'row_alt_start' => "<tr class='border-b-[0.01px] py-2 bg-[#F7F4EF]'>",
         ];
 
         $table->setTemplate($template);
@@ -102,7 +102,7 @@ class StudentsController extends BaseController
                         }
                       }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
 
-                    "class" => "  justify-between items-center"
+                    "class" => " py-2 justify-between items-center"
                 ],
             );
         }

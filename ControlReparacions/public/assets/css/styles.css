@@ -1826,6 +1826,11 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-terciario-3 {
+  --tw-text-opacity: 1;
+  color: rgb(136 136 136 / var(--tw-text-opacity));
+}
+
 .caret-gray-800 {
   caret-color: #1f2937;
 }

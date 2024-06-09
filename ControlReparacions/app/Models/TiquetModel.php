@@ -310,8 +310,10 @@ class TiquetModel extends Model
         
         if ($role=="admin") {
             $this;
-        }else if($role=="prof" || $role=="alumn" || $role=="ins"){
-            $this->where("centre_reparador.codi",$code)->orWhere("centre_emissor.codi",$code);
+        }else if($role=="prof" || $role=="ins"){
+            $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+        }else if($role=="alumn"){
+            $this->where("tiquet.codi_centre_reparador",$code);
         }else if($role=="sstt"){
             $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
         }
@@ -330,8 +332,10 @@ class TiquetModel extends Model
         
         if ($role=="admin") {
             $this;
-        }else if($role=="prof" || $role=="alumn" || $role=="ins"){
+        }else if($role=="prof" || $role=="ins"){
             $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+        }else if($role=="alumn"){
+            $this->where("tiquet.codi_centre_reparador",$code);
         }else if($role=="sstt"){
             $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
         }

@@ -30,7 +30,7 @@
                         </ul>
                     </div>
                    
-                    <button onclick="assignIns()"  class="bg-primario text-white px-6 ml-2.5 py-1 border border-terciario-4 hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('forms.apply') ?></button>
+                    <button onclick="assignIns()"  class="bg-primario text-white px-8 text-base ml-2.5 py-1 border border-terciario-4 font-semibold hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('forms.apply') ?></button>
                 </div>
 
                 <div class="flex text-4xl align-right  gap-3">
