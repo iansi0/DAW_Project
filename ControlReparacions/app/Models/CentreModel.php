@@ -41,13 +41,13 @@ class CentreModel extends Model
     public function addCentre($id, $codi, $nom, $actiu, $taller, $telefon, $adreca_fisica, $nom_persona_contacte, $correu_persona_contacte, $id_sstt, $id_poblacio)
     {
 
-        $modelUser = new UsersModel();
+        // $modelUser = new UsersModel();
 
-        $exist = $modelUser->getUserByEmail($correu_persona_contacte);
+        // $exist = $modelUser->getUserByEmail($correu_persona_contacte);
 
-        if ($exist != null) {
-            return false;
-        }
+        // if ($exist != null) {
+        //     return false;
+        // }
 
         $data = [
             'id_user'                 => $id,
