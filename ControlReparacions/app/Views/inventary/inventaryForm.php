@@ -213,7 +213,7 @@
         new_div.id = 'inventory_'+count_ins;
 
         new_div.querySelector('#header_'+id_ticket).id = 'header_' + count_ins;
-        new_div.querySelector('#header_'+count_ins).innerText = 'Ticket #'+count_ins;
+        new_div.querySelector('#header_'+count_ins).innerText = '<?=mb_strtoupper(lang('titles.inventory_2'))?> #'+count_ins;
         
         if (new_div.querySelector('#r_inventory_'+id_ticket)) {
             new_div.querySelector('#r_inventory_'+id_ticket).setAttribute('id', 'r_inventory_' + count_ins);

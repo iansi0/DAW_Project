@@ -364,7 +364,7 @@
         new_div.querySelector('#char_'+id_ticket).id = 'char_' + count_ins;
 
         new_div.querySelector('#header_'+id_ticket).id = 'header_' + count_ins;
-        new_div.querySelector('#header_'+count_ins).innerText = 'Ticket #'+count_ins;
+        new_div.querySelector('#header_'+count_ins).innerText = '<?=mb_strtoupper(lang('titles.ticket_2'))?> #'+count_ins;
         
         if (new_div.querySelector('#r_ticket_'+id_ticket)) {
             new_div.querySelector('#r_ticket_'+id_ticket).setAttribute('id', 'r_ticket_' + count_ins);

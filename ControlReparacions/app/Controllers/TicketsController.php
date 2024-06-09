@@ -10,8 +10,6 @@ use App\Models\CentreModel;
 use App\Models\EstatModel;
 use App\Models\IntervencioModel;
 use App\Models\InventariModel;
-use Faker\Factory;
-use Google\Service\Walletobjects\Pagination;
 
 use App\Libraries\UUID as LibrariesUUID;
 
@@ -351,11 +349,20 @@ class TicketsController extends BaseController
         // Hacemos un primer recorrido comprobando que los inputs están correctos
         foreach ($arrTickets as $ticket) {
 
-            $id_ticket = $ticket[0]->id;
-            $id_tipus_dispositiu = $ticket[1]->id_type;
-            $descripcio_avaria =  $ticket[6]->description;
-            $nom_persona_contacte_centre = $ticket[4]->nameContact;
-            $correu_persona_contacte_centre =  $ticket[5]->emailContact;
+            if(session('user')['role'] == 'sstt' || session('user')['role'] == 'admin'){
+                $id_ticket = $ticket[0]->id;
+                $id_tipus_dispositiu = $ticket[1]->id_type;
+                // LOS 2 VALORES QUE FALTAN SON institut_emissor E institut_reparador
+                $nom_persona_contacte_centre = $ticket[4]->nameContact;
+                $correu_persona_contacte_centre =  $ticket[5]->emailContact;
+                $descripcio_avaria =  $ticket[6]->description;
+            } else {
+                $id_ticket = $ticket[0]->id;
+                $id_tipus_dispositiu = $ticket[1]->id_type;
+                $nom_persona_contacte_centre = $ticket[2]->nameContact;
+                $correu_persona_contacte_centre =  $ticket[3]->emailContact;
+                $descripcio_avaria =  $ticket[4]->description;
+            }
 
             if ($id_tipus_dispositiu == null || $id_tipus_dispositiu == '') {
                 $arrErrors[$id_ticket]["id_type"] = lang('error.id_type');
@@ -386,13 +393,25 @@ class TicketsController extends BaseController
 
             $id_tiquet = LibrariesUUID::v4();
             $codi_equip = '';
-            $id_tipus_dispositiu = $ticket[1]->id_type;
-            $ins_emissor = $ticket[2]->sender??0;
-            $ins_receptor = $ticket[3]->repair??0;
-            $descripcio_avaria =  $ticket[6]->description;
-            $nom_persona_contacte_centre = $ticket[4]->nameContact;
-            $correu_persona_contacte_centre =  $ticket[5]->emailContact;
             $id_estat = 1;
+
+            if(session('user')['role'] == 'sstt' || session('user')['role'] == 'admin'){
+                $id_tipus_dispositiu = $ticket[1]->id_type;
+                $ins_emissor = $ticket[2]->sender??0;
+                $ins_receptor = $ticket[3]->repair??0;
+                $nom_persona_contacte_centre = $ticket[4]->nameContact;
+                $correu_persona_contacte_centre =  $ticket[5]->emailContact;
+                $descripcio_avaria =  $ticket[6]->description;
+            } else {
+                $id_tipus_dispositiu = $ticket[1]->id_type;
+                $ins_emissor = session()->get('user')['code'];
+                $ins_receptor = 0;
+                $nom_persona_contacte_centre = $ticket[2]->nameContact;
+                $correu_persona_contacte_centre =  $ticket[3]->emailContact;
+                $descripcio_avaria =  $ticket[4]->description;
+            }
+
+            
 
             if (session()->get('user')['role'] == "prof" || session()->get('user')['role'] == "ins") {
                 $ins_emissor = session()->get('user')['code'];
