@@ -22,12 +22,14 @@
     </style>
 </head>
 <body>
-
+<?php
+// dd($tickets);
+?>
 <div style="padding: 10px 30px 10px 30px;">
-    <?php foreach ($tickets as $ticket) {
+<?php for ($i=0; $i < count($tickets['id']); $i++) { 
         echo '<div style="position: relative; margin-top: 50px; width: 393.7px; height: 280.6px;">';
-        echo '<h2 style="position: absolute; padding: 2px 8px;">'.$ticket['id'].'</h2>';
-        echo '<img src="data:image/png;base64,'. $ticket['qr'] .'"/>';
+        echo '<h2 style="position: absolute; padding: 2px 8px;">'.$tickets['id'][$i].'</h2>';
+        echo '<img src="data:image/png;base64,'. $tickets['qr'][$i] .'"/>';
         echo '</div>';
         echo '';
     }?>

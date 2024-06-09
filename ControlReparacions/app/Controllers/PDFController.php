@@ -44,7 +44,7 @@ class PDFController extends BaseController
 
             'row_start' => "<tr style='border-bottom: 1px solid #DDDDDD'>",
             'row_alt_start' => "<tr style='border-bottom: 1px solid #DDDDDD; background-color: #B3B3B3'>"
-            
+
         ];
         $table->setTemplate($template);
 
@@ -61,7 +61,7 @@ class PDFController extends BaseController
             'pager' => $modelInterventions->pager,
             'table' => $table,
             'estats' => $estat->getAllStates(),
-            'qr' => base64_encode($writer->writeString(base_url()."tickets/".$id)),
+            'qr' => base64_encode($writer->writeString(base_url() . "tickets/" . $id)),
         ];
 
         foreach ($data['interventions'] as $intervencio) {
@@ -73,18 +73,17 @@ class PDFController extends BaseController
                 $intervencio['id_tipus'],
                 $intervencio['descripcio']
             );
-
         }
-        
+
         $dompdf = new Dompdf();
-        
-        $html = view('pdfTicket',$data); 
+
+        $html = view('pdfTicket', $data);
         $dompdf->loadHtml($html);
         $dompdf->render();
         // Attachment == true -> descargar PDF || Attachment == false -> visualizar en navegador
         // Comentar aixo per pujar a PLESK
-        $dompdf->stream("ticket_".$id.".pdf", array("Attachment" => false));
-        
+        $dompdf->stream("ticket_" . $id . ".pdf", array("Attachment" => false));
+
         // Descomentar aixo per pujar a PLESK
         // $this->response->setHeader('Content-Type', 'application/pdf');
         // $this->response->setHeader('Content-Disposition', 'inline; filename="ticket_' . $id . '.pdf"');
@@ -155,7 +154,7 @@ class PDFController extends BaseController
         $model = new TiquetModel();
 
         if (is_array($filters) && !empty($filters)) {
-            
+
             $paginateData = $model->getByTitleOrText($search, $filters)->findAll();
         } else if ($search != '') {
             $paginateData = $model->getByTitleOrText($search, [])->findAll();
@@ -171,44 +170,46 @@ class PDFController extends BaseController
             )
         );
 
-        // $tickets = [
-        //     'id' => [], 
-        //     'qr' => []
-        // ];
-        
-        $qr=[];
+        // $tickets = [0]['id'];
+
+        // 'id' => [], 
+        // 'qr' => []
+
+        $tickets = [];
+        $id = [];
+        $qr = [];
         foreach ($paginateData as $info) {
             // $tickets['id'][]=$info['id'];
-            array_push($tickets,$info['id']);
-            
+            array_push($id, $info['id']);
+
             $qrString = base_url() . "tickets/" . $info['id'];
             $qrCode = $writer->writeString($qrString);
             $encodedQr = base64_encode($qrCode);
-            array_push($tickets['qr'], $encodedQr);            
+            array_push($qr, $encodedQr);
         }
-        d($qr);
-        dd($tickets);
-            
+
+        $tickets = ['id' => $id, 'qr' => $qr];
+        // d($qr);
+     
+
         $data = [
             'tickets' => $tickets,
         ];
         $dompdf = new Dompdf();
-        
-        $html = view('etiquetaTicket',$data); 
-        dd("HOLA");
+
+        $html = view('etiquetaTicket', $data);
+        // dd("HOLA");
         $dompdf->loadHtml($html);
         $dompdf->render();
         // Attachment == true -> descargar PDF || Attachment == false -> visualizar en navegador
         // Comentar aixo per pujar a PLESK
         $actual = date('d-m-Y');
-        $dompdf->stream("etiquetes_".$actual.".pdf", array("Attachment" => false));
-        
+        $dompdf->stream("etiquetes_" . $actual . ".pdf", array("Attachment" => false));
+
         // Descomentar aixo per pujar a PLESK
         // $this->response->setHeader('Content-Type', 'application/pdf');
         // $this->response->setHeader('Content-Disposition', 'inline; filename="ticket_' . $id . '.pdf"');
         // $this->response->setBody($dompdf->output());
         // return $this->response;
     }
-
 }
-
