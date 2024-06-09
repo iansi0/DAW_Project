@@ -6,6 +6,7 @@ return [
     'yes_del'     => 'Si, elimina-ho!',
     'yes_upd'     => 'Si, actualitza-ho!',
     'yes_ass'     => 'Si, assigna-ho!',
+    'yes_imp'     => 'Si, importa-ho!',
     'cancel'    => 'Cancelar.',
 
     'deleted'       => 'Eliminat!',

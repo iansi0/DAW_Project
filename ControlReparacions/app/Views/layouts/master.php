@@ -528,7 +528,7 @@
                     showCancelButton: true,
                     confirmButtonColor: `#3085d6`,
                     cancelButtonColor: `#d33`,
-                    confirmButtonText: `<?= lang('alerts.yes_del') ?>`,
+                    confirmButtonText: `<?= lang('alerts.yes_imp') ?>`,
                     cancelButtonText: `<?= lang('alerts.cancel') ?>`,
                 }).then((result) => {
                     if (result.isConfirmed) {
