@@ -111,7 +111,7 @@ class InventariModel extends Model
         return $this->where('id', $id)->set($data)->update();
     }
 
-    public function getInventarytById($id)
+    public function getInventaryById($id)
     {
         return $this->where('inventari.id', $id)->first();
     }

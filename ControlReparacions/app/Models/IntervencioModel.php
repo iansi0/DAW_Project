@@ -39,7 +39,7 @@ class IntervencioModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addIntervencio($id, $descripcio, $id_ticket, $id_tipus, $id_curs, $persona_reparadora)
+    public function addIntervencio($id, $descripcio, $id_ticket, $id_tipus, $codi_centre, $persona_reparadora)
     {
 
         $data = [
@@ -47,7 +47,7 @@ class IntervencioModel extends Model
             'descripcio' => htmlspecialchars(trim($descripcio)),
             'id_ticket' => htmlspecialchars(trim($id_ticket)),
             'id_tipus' => htmlspecialchars(trim($id_tipus)),
-            'id_curs' => htmlspecialchars(trim($id_curs)),
+            'codi_centre' => htmlspecialchars(trim($codi_centre)),
             'id_user' => htmlspecialchars(trim($persona_reparadora)),
         ];
 
@@ -88,23 +88,28 @@ class IntervencioModel extends Model
         ->first();
     }
 
-    public function modifyIntervention($id,$data)
+    public function modifyIntervention($id, $id_tipus, $description)
     {
 
-        $role=session()->get('user')['role'];
-        $uid=session()->get('user')['uid'];
+        $data = [
+            'id' => htmlspecialchars(trim($id)),
+            'id_tipus' => htmlspecialchars(trim($id_tipus)),
+            'descripcio' => htmlspecialchars(trim($description)),
+        ];
+
+        $role = session()->get('user')['role'];
+        $uid = session()->get('user')['uid'];
 
         $this->where('id', $id);
     
-        if ($role=="admin") {
-            $this;
-        }else if($role=="alumn"){
+        if($role == "alumn"){
             $this->groupStart();
-            $this->where("intervencio.id_user",$uid);
+            $this->where("intervencio.id_user", $uid);
             $this->groupEnd();
         }else{
             return;
         }
+
         return $this->set($data)->update();
 
     }
