@@ -23,14 +23,14 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
 
         $routes->GET('add', 'TicketsController::ticketForm', ['filter' => 'addTicket']);
         $routes->POST('add', 'TicketsController::addTicket', ['filter' => 'addTicket']);
-
+        
        
         $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
-
+        
         $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1', ['filter' => 'deleteTicket']);
         $routes->GET('modify/(:segment)', 'TicketsController::modifyTicket/$1', ['filter' => 'modifyTicket']);
         $routes->POST('modify/(:segment)', 'TicketsController::modifyTicket_post/$1', ['filter' => 'modifyTicket']);
-
+        
         // EXPORTS
         $routes->group('export', ['filter' => 'exportTicket'], function ($routes) {
             //CSV
@@ -54,6 +54,9 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
 
         //Ruta para acceder a ticketInfo
     });
+    $routes->GET('labels', 'PDFController::labels');
+
+    $routes->GET('pdf/(:segment)', 'PDFController::index/$1');
 
     // INTERVENTIONS
     $routes->group('intervention', function ($routes) {
