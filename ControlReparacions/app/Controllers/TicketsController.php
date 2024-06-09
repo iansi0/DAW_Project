@@ -357,7 +357,6 @@ class TicketsController extends BaseController
         if (!$modelTickets->viewTicket($id)) {
             return redirect()->back();
         }
-
         $data = [
             'ticket' => $modelTickets->viewTicket($id),
             'interventions' => $modelInterventions->getInterventions($id),
@@ -420,7 +419,6 @@ class TicketsController extends BaseController
         }
 
         $data += ['totalPrice' => $totalPrice,];
-
         session()->setFlashdata('ticket_id', $id);
 
         return view('tickets/ticketInfo', $data);
@@ -449,7 +447,6 @@ class TicketsController extends BaseController
         // Forzamos el json_decode
         $arrTickets = json_decode((string) $arrTickets);
 
-        // dd($arrTickets);
 
         // Creamos un array que irá almacenando los inputs erróneos
         $arrErrors = [];
@@ -904,7 +901,6 @@ class TicketsController extends BaseController
     //             if (!$firstLine) {
 
     //                 echo $row[0];
-    //                 dd('hola');
 
     //                 $fake = Factory::create("es_ES");
 
@@ -948,7 +944,6 @@ class TicketsController extends BaseController
         // Establecer la ruta del archivo
         $rutaArchivo = WRITEPATH . 'plantilles' . DIRECTORY_SEPARATOR . 'plantilla_tiquets.csv';
 
-        // dd($rutaArchivo);
 
         // Comprobar si el archivo existe
         if (!file_exists($rutaArchivo)) {
@@ -975,7 +970,6 @@ class TicketsController extends BaseController
         // Establecer la ruta del archivo
         $rutaArchivo = WRITEPATH . 'plantilles' . DIRECTORY_SEPARATOR . 'plantilla_tiquets.xls';
 
-        // dd($rutaArchivo);
 
         // Comprobar si el archivo existe
         if (!file_exists($rutaArchivo)) {
