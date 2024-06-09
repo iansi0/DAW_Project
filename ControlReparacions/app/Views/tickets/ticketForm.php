@@ -547,6 +547,12 @@
 
     document.addEventListener('DOMContentLoaded', function(){
         addLine();
+
+        document.getElementById('ticketList').addEventListener('keypress', function(event){
+            if(event.keyCode == '13'){
+                event.preventDefault();
+            }
+        })
     });
 </script>
 
