@@ -103,9 +103,9 @@
               <a href="<?= base_url('TicketsPDF?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" class="block px-4 py-2 hover:bg-primario hover:text-secundario">Imprimir PDF</a>
             </li>
 
-            <!-- Etiquetas PDF  -->
+            <!-- Etiquetes PDF  -->
             <li>
-              <a href="<?= base_url('EtiquetasPDF?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" class="block px-4 py-2 hover:bg-primario hover:text-secundario">Etiquetes PDF</a>
+              <a href="<?= base_url('labels?q=' . $search . "&d=" . $filters['device'] . "&c=" . $filters['center'] . "&dt_1=" . $filters['date_ini'] . "&dt_2=" . $filters['date_end'] . "&tm_1=" . $filters['time_ini'] . "&tm_2=" . $filters['time_end'] . "&e=" . $filters['state']) ?>" class="block px-4 py-2 hover:bg-primario hover:text-secundario">Etiquetes PDF</a>
             </li>
 
             <!-- Plantilla CSV  -->

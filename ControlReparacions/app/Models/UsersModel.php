@@ -158,17 +158,11 @@ class UsersModel extends Model
 
     public function activatedUser($id)
     {
-
-        // dd($id);
         $data = [
-            'id'    => $id['id'],
+            'id'    => $id,
             $this->deletedField   => (NULL),
         ];
-
-        // d($id);
-        // d($id['id']);
-        // dd($this->where('id', $id['id'])->withDeleted()->findAll());
-        return $this->builder->where('id', $id['id'])->set($this->deletedField, null)->update();
+        return $this->builder->where('id', $id)->set($this->deletedField, null)->update();
     }
 
     public function modifyUser($id, $data){

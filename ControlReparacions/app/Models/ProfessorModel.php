@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Models\UsersModel;
 
 class ProfessorModel extends Model
 {
@@ -51,6 +52,9 @@ class ProfessorModel extends Model
     }
 
     public function updateCode($id,$code){
-        return $this->where('id_user', $id)->set(['codi_centre' => $code])->update();
-    }
+         $this->where('id_user', $id)->set(['codi_centre' => $code])->update();
+         
+         $modelUser = new UsersModel();
+         return $modelUser->activatedUser($id);
+        }
 }

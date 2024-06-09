@@ -4,7 +4,7 @@
 <h1 class="text-5xl text-primario mt-14"><?= lang("titles.e_students") ?></h1>
 
 <section style="view-transition-name: addTicket;" class=" mx-auto px-4 py-8 mt-10 text-base">
-    <form action="<?= $student['id_user'] ?>" method="POST" class="flex flex-col gap-20" enctype="multipart/form-data">
+    <form id="form" action="<?= $student['id_user'] ?>" method="POST" class="flex flex-col gap-20">
         <?= csrf_field() ?>
 
         <div class="grid grid-cols-3 gap-x-2 gap-y-2">
@@ -73,12 +73,36 @@
                             : base_url('/students');
                         ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel") ?></a>
 
-            <input type="submit" value="<?= lang("buttons.add") ?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
+            <input type="button"  id="submitButton" value="<?= lang("buttons.add") ?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
 
         </div>
     </form>
 </section>
 
-
+<script>
+document.getElementById('submitButton').addEventListener('click', function() {
+    Swal.fire({
+        title: `<?=lang('alerts.sure')?>`,
+        text: `<?=lang('alerts.sure_sub')?>`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: `<?=lang('alerts.yes_upd')?>`,
+        cancelButtonText: `<?=lang('alerts.cancel')?>`
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: `<?=lang('alerts.updated')?>`,
+                text: `<?=lang('alerts.updated_sub')?>`,
+                icon: 'success'
+            }).then(() => {
+                
+                document.getElementById('form').submit();
+            });
+        }
+    });
+});
+</script>
 
 <?= $this->endSection() ?><?= $this->extend('layouts/master.php') ?>
