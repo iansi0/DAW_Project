@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Etiquetes</title>
     <meta charset="UTF-8">
@@ -12,28 +13,54 @@
         body {
             /* font-family: monospace; */
             font-family: system-ui, Arial, Helvetica;
+
             /*montserrat para titulos con bold
             lato y popins para textos medium */
+            padding: 10px 30px 10px 30px;
         }
 
-        .bold{
-            font-weight: 700;
+
+        div {
+            /* position: absolute; */
+            margin-top: 50px;
+            width: 393.7px;
+            height: 280.6px;
         }
+
+        h2 {
+            /* position: absolute; */
+            padding: 2px 8px;
+        }
+
+        img {}
     </style>
 </head>
+
 <body>
-<?php
-// dd($tickets);
-?>
-<div style="padding: 10px 30px 10px 30px;">
-<?php for ($i=0; $i < count($tickets['id']); $i++) { 
-        echo '<div style="position: relative; margin-top: 50px; width: 393.7px; height: 280.6px;">';
-        echo '<h2 style="position: absolute; padding: 2px 8px;">'.$tickets['id'][$i].'</h2>';
-        echo '<img src="data:image/png;base64,'. $tickets['qr'][$i] .'"/>';
-        echo '</div>';
-        echo '';
-    }?>
-    
-</div>
+
+<table>
+    <?php
+    // Assuming you have an array of tickets named $tickets
+    // Each ticket has an 'id' and 'qr' property
+
+    for ($i = 0; $i < count($tickets['id']); $i++) { // Loop for 3 rows
+        echo " <tr>"; // Start a row
+
+        for ($j = 0; $j < 2; $j++) { // Loop for 2 columns
+            $ticketIndex = $i * 2 + $j; // Calculate ticket index
+            if (isset($tickets['id'][$ticketIndex])) { // Check if ticket exists
+                echo "<td >"; // Start a column
+                echo  $tickets['id'][$ticketIndex]; // Display ticket ID
+                echo "<img style='width: 280px;' src='data:image/png;base64," . $tickets['qr'][$ticketIndex] . "' alt='Ticket QR Code'>"; // Display ticket QR code
+                echo "</td>"; // End a column
+            }
+        }
+
+        echo "</tr>"; // End a row
+    }
+    ?>
+    </table>
+
 </body>
+
 </html>

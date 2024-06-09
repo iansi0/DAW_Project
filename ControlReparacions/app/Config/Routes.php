@@ -53,7 +53,9 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
     $routes->GET('dowloadXLS', 'TicketsController::downloadXLS');
 
         //Ruta para acceder a ticketInfo
-   
+    });
+    $routes->GET('TicketsPDF', 'PDFController::tickets');
+
     $routes->GET('labels', 'PDFController::labels');
 
     $routes->GET('pdf/(:segment)', 'PDFController::index/$1');
