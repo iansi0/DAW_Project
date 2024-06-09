@@ -188,6 +188,7 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('', 'UserController::config');
         $routes->POST('passwd', 'UserController::change_passwd');
         $routes->POST('institute', 'UserController::change_institute');
+        $routes->POST('sstt', 'UserController::change_sstt');
         $routes->POST('', 'UserController::config_post');
     });
 

@@ -39,9 +39,10 @@ class UserController extends BaseController
 
             return view('configurations/institutes', $data);
         } else if ($role == 'sstt') {
+            $data['sstt'] = $modelSSTT->getSSTTById(session('user')['code']);
             $data['user'] = $modelUser->getUserById(session('user')['uid']);
 
-
+        
             return view('configurations/sstt', $data);
         }
         $data['user'] = $modelUser->getUserById(session('user')['uid']);
@@ -136,6 +137,63 @@ class UserController extends BaseController
                     'errors' => [
                         'required' => lang('error.empty_slot_2'),
                         'valid_email' => lang('error.wrong_email'),
+                    ],
+                ],
+                'phone' => [
+                    'rules'  => 'required|is_numeric|min_length[9]|max_length[9]',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                        'is_numeric' => lang('error.wrong_numeric'),
+                        'min_length' => lang('error.wrong_numeric'),
+                        'max_length' => lang('error.wrong_numeric'),
+                    ],
+                ],
+                'adress' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+            ];
+
+        if ($this->validate($validationRules)) {
+
+            // dd( session('user'));
+            $data = [
+                "codi" =>  session('user')['code'],
+                "nom_persona_contacte" => $this->request->getPost('name'),
+                "correu_persona_contacte" =>  $this->request->getPost('email'),
+                "adreca_fisica" =>  $this->request->getPost('adress'),
+                "telefon" =>  $this->request->getPost('phone'),
+
+            ];
+
+            $model->modifyInstitute(session('user')['code'], $data);
+            return redirect()->to(base_url('config'));
+        }
+        return redirect()->back()->withInput();
+    }
+
+    public function change_institute()
+    {
+
+        $model = new CentreModel();
+
+        //validation errors
+        helper('form');
+
+        $validationRules =
+            [
+                'population' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'cp' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
                     ],
                 ],
                 'phone' => [
