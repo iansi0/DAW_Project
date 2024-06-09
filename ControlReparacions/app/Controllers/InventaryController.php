@@ -214,7 +214,7 @@ class InventaryController extends BaseController
 
         $data = [
             "types" => $type->getAllTypes(),
-            "product" => $inventary->getInventarytById($id),    
+            "product" => $inventary->getInventaryById($id),    
         ];
         return view('inventary/modifyInventary', $data);
     }
