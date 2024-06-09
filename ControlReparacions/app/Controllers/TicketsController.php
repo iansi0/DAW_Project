@@ -365,6 +365,13 @@ class TicketsController extends BaseController
 
         foreach ($data['interventions'] as $intervencio) {
 
+            $arrMaterial = [];
+            $material = $modelInventari->getInventaryAssigned($intervencio['id'])->findAll();
+
+            foreach ($material as $value) {
+                $arrMaterial[] = '<li>'.$value['nom'].'</li>';
+            }
+
             $totalPrice += $intervencio['preu'];
 
             $buttonUpdate = base_url("intervention/modify/" . $intervencio['id']);
@@ -373,8 +380,8 @@ class TicketsController extends BaseController
             $table->addRow(
                 $intervencio['created_at'],
                 $intervencio['nom_reparador'],
-                $intervencio['material'],
-                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-segundario' : 'bg-segundario'],
+                '<ul>'.implode('', $arrMaterial).'</ul>',
+                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-secundario' : 'bg-secundario'],
                 [
                     "data" =>
                     "

@@ -28,7 +28,6 @@ class InterventionController extends BaseController
         $data = [
             "id_ticket" => $id,
             "types" => $inventary->getInventaryNoAssigned(),
-
         ];
 
         return view('intervention/interventionForm', $data);
@@ -149,8 +148,8 @@ class InterventionController extends BaseController
 
         $data = [
             "intervention" => $intervention->getInterventionById($id),
-            "inventaryNoAssigned" => $inventary->getInventaryNoAssigned(),
-            "inventaryAssigned" => $inventary->getInventaryAssigned($id),
+            "inventaryNoAssigned" => $inventary->getInventaryNoAssigned()->findAll(),
+            "inventaryAssigned" => $inventary->getInventaryAssigned($id)->findAll(),
         ];
 
         // dd($data);

@@ -118,12 +118,20 @@ class InventariModel extends Model
 
     public function getInventaryNoAssigned()
     {
-        return $this->select('id, nom')->where('id_intervencio', null)->findAll();
+        $this->select('id, nom');
+        $this->where('id_intervencio', null);
+        if (session('user')['role'] == 'prof' || session('user')['role'] == 'ins' || session('user')['role'] == 'alumn')$this->where('codi_centre', session('user')['code']);
+
+        return $this;
     }
 
     public function getInventaryAssigned($id)
     {
-        return $this->select('id, nom')->where('id_intervencio', $id)->findAll();
+        $this->select('id, nom');
+        $this->where('id_intervencio', $id);
+        if (session('user')['role'] == 'prof' || session('user')['role'] == 'centre' || session('user')['role'] == 'alumn')$this->where('codi_centre', session('user')['code']);
+
+        return $this;
     }
 
     public function unassignInventary($id){
