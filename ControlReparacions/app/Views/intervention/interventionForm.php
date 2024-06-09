@@ -15,7 +15,7 @@
 
             <a href="<?= strpos(previous_url(), 'tickets?') !== false
                             ? str_replace('index.php/', '', previous_url())
-                            : base_url('/tickets');
+                            : base_url('/tickets/'.$id_ticket);
                         ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 mr-3 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel") ?></a>
 
             <button onclick="sendIntervention()" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.save") ?></button>
