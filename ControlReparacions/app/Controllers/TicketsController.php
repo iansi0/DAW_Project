@@ -284,7 +284,7 @@ class TicketsController extends BaseController
                         "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
                          <a href='$buttonUpdate' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>",
 
-                        "class" => " p-5 flex h-16 justify-between items-center"
+                         "class" => " p-3 h-16 "
                     ],
 
                 );
@@ -306,7 +306,7 @@ class TicketsController extends BaseController
                         "data" =>
                         "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>",
 
-                        "class" => " p-5 flex h-16 justify-between items-center"
+                        "class" => " p-3 h-16 "
                     ],
 
                 );
@@ -559,9 +559,9 @@ class TicketsController extends BaseController
 
     public function modifyTicket_post($id)
     {
+        helper('form');
 
         $model = new TiquetModel();
-        helper('form');
         $validationRules =
             [
                 'description' => [

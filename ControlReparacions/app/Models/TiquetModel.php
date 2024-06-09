@@ -225,13 +225,13 @@ class TiquetModel extends Model
         foreach ($data as &$value) {
             $value = htmlspecialchars($value);
         }
-
         $role=session()->get('user')['role'];
         $code=session()->get('user')['code'];
+        d($code);
 
-        $this->where('id', $id);
         $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
+        $this->where('id', $id);
 
         if ($role=="admin") {
             $this;
@@ -241,8 +241,10 @@ class TiquetModel extends Model
             $this->groupEnd();
         }else if($role=="sstt"){
             $this->groupStart();
-                $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+            $this->where('codi_centre_reparador IN (SELECT codi FROM centre WHERE id_sstt = \'' . $code . '\')')->orWhere('codi_centre_emissor IN (SELECT codi FROM centre WHERE id_sstt = \'' . $code . '\')');
             $this->groupEnd();
+            // dd("hola");
+
         }else{
             return;
         }
