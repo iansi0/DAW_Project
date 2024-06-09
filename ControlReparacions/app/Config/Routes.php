@@ -54,6 +54,8 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
 
         //Ruta para acceder a ticketInfo
     });
+    $routes->GET('TicketsPDF', 'PDFController::tickets');
+
     $routes->GET('labels', 'PDFController::labels');
 
     $routes->GET('pdf/(:segment)', 'PDFController::index/$1');

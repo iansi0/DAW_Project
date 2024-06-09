@@ -19,9 +19,6 @@
             padding: 10px 30px 10px 30px;
         }
 
-        .bold {
-            font-weight: 100;
-        }
 
         div {
             /* position: absolute; */
