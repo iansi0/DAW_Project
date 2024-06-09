@@ -137,6 +137,22 @@ class CentreModel extends Model
         return $this->findAll();
     }
 
+    public function getCostByRepairCenter()
+    {
+
+        $this->select('
+        centre.nom as name,
+        SUM(inventari.preu) as count,
+        ');
+        $this->join('tiquet', 'centre.codi = tiquet.codi_centre_emissor');
+        $this->join('intervencio', 'intervencio.id_ticket = tiquet.id');
+        $this->join('inventari', 'inventari.id_intervencio = intervencio.id');
+
+        $this->orderBy('count', 'DESC');
+
+        return $this->findAll();
+    }
+
     public function getByTitleOrText($search)
     {
 

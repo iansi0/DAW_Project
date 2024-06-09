@@ -427,8 +427,6 @@ class TiquetModel extends Model
         return $this->findAll();
     }
 
-    
-
     public function getInstituteTickets($id, $filter)
     {
       
