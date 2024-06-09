@@ -43,7 +43,7 @@ class IntervencioModel extends Model
     {
 
         $data = [
-            'id' =>  htmlspecialchars(trim($id)),
+            'id' =>  $id,
             'descripcio' => htmlspecialchars(trim($descripcio)),
             'id_ticket' => htmlspecialchars(trim($id_ticket)),
             'id_tipus' => htmlspecialchars(trim($id_tipus)),
@@ -92,7 +92,6 @@ class IntervencioModel extends Model
     {
 
         $data = [
-            'id' => htmlspecialchars(trim($id)),
             'id_tipus' => htmlspecialchars(trim($id_tipus)),
             'descripcio' => htmlspecialchars(trim($description)),
         ];
@@ -102,15 +101,16 @@ class IntervencioModel extends Model
 
         $this->where('id', $id);
     
-        if($role == "alumn"){
+        if($role == "alumn" || $role == 'prof'){
             $this->groupStart();
-            $this->where("intervencio.id_user", $uid);
+                $this->where("intervencio.id_user", $uid);
             $this->groupEnd();
-        }else{
+        }else if ($role != 'admin') {
             return;
         }
 
         return $this->set($data)->update();
+        // dd($this->db->getLastQuery());
 
     }
 
