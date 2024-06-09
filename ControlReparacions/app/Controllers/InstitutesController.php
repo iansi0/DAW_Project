@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\CentreModel;
+use App\Models\UsersModel;
+use App\Models\UsersInRolesModel;
+use App\Models\RolesModel;
 use App\Models\SSTTModel;
 use App\Models\TiquetModel;
 use App\Models\PoblacioModel;
@@ -163,7 +166,7 @@ class InstitutesController extends BaseController
                 explode("-", $ticket['id'])[4],
                 $ticket['tipus'],
                 ["data" =>  $ticket['descripcio'], "class" => " max-w-10 min-w-auto whitespace-nowrap overflow-hidden text-ellipsis"],
-                $ticket['emissor'],
+                ($ticket['emissor'] != lang('titles.toassign')) ? $ticket['emissor'] : lang('titles.toassign') . ' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
                 ($ticket['receptor'] != lang('titles.toassign')) ? $ticket['receptor'] : lang('titles.toassign') . ' <i class="fa-solid fa-circle-exclamation text-xl text-red-600" ></i>',
 
                 date("d/m/Y", strtotime($ticket['created'])),
@@ -177,22 +180,27 @@ class InstitutesController extends BaseController
                      <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
                      <a onclick='(function() { Swal.fire({
                         customClass:{htmlContainer: ``,},
-                        title: `".lang('alerts.sure')."`,
-                        text: `".lang('alerts.sure_sub')."`,
+                        title: `" . lang('alerts.sure') . "`,
+                        text: `" . lang('alerts.sure_sub') . "`,
                         icon: `warning`,
                         showCancelButton: true,
                         confirmButtonColor: `#3085d6`,
                         cancelButtonColor: `#d33`,
-                        confirmButtonText: `".lang('alerts.yes_del')."`,
-                        cancelButtonText: `".lang('alerts.cancel')."`,
+                        confirmButtonText: `" . lang('alerts.yes_del') . "`,
+                        cancelButtonText: `" . lang('alerts.cancel') . "`,
                       }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = `".$buttonDelete."`;
-
+    
                             Swal.fire({
-                                title: `".lang('alerts.deleted')."`,
-                                text: `".lang('alerts.deleted_sub')."`,
+                                title: `" . lang('alerts.deleted') . "`,
+                                text: `" . lang('alerts.deleted_sub') . "`,
                                 icon: `success`,
+                                showConfirmButton: false,
+                                timer:2000,
+    
+                            }).then(()=>{
+                                window.location.href = `".$buttonDelete."`;
+    
                             });
                         }
                       }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
@@ -229,49 +237,53 @@ class InstitutesController extends BaseController
                 'code' => [
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Error Code',
+                        'required' => lang('error.empty_slot_2'),
                     ],
                 ],
                 'name' => [
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Error Name',
+                        'required' => lang('error.empty_slot_2'),
                     ],
                 ],
                 'active' => [
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Error active',
+                        'required' => lang('error.empty_slot_2'),
                     ],
                 ],
                 'work' => [
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Error work',
+                        'required' => lang('error.empty_slot_2'),
                     ],
                 ],
                 'phone' => [
-                    'rules'  => 'required',
+                    'rules'  => 'required|is_numeric|min_length[9]|max_length[9]',
                     'errors' => [
-                        'required' => 'Error phone',
+                        'required' => lang('error.empty_slot_2'),
+                        'is_numeric' => lang('error.wrong_numeric'),
+                        'min_length' => lang('error.wrong_numeric'),
+                        'max_length' => lang('error.wrong_numeric'),
                     ],
                 ],
                 'adress' => [
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Error Adress',
+                        'required' => lang('error.empty_slot_2'),
                     ],
                 ],
                 'population' => [
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Error population',
+                        'required' => lang('error.empty_slot_2'),
                     ],
                 ],
 
 
             ];
         $model = new CentreModel();
+        $modelUser = new UsersModel();
 
         $fake = Factory::create("es_ES");
 
@@ -283,12 +295,12 @@ class InstitutesController extends BaseController
         $telefon = $this->request->getPost("phone");
         $adreca_fisica = $this->request->getPost("adress");
         $nom_persona_contacte = "";
-        $correu_persona_contacte = "a".$this->request->getPost("code")."@xtec.cat";
+        $correu_persona_contacte = "a" . $this->request->getPost("code") . "@xtec.cat";
         $id_sstt = session('user')['code'];
         $id_poblacio = $this->request->getPost("population");
 
         if ($this->validate($validationRules)) {
-         
+
             $model->addCentre(
                 $id_user,
                 $codi,
@@ -302,6 +314,19 @@ class InstitutesController extends BaseController
                 $id_sstt,
                 $id_poblacio
             );
+
+            $user = $codi . "@xtec.cat";
+            $passwd_hash = password_hash($fake->password(), PASSWORD_DEFAULT);
+            $lang = 'ca';
+
+            $modelUser->addUser($id_user, $user, $passwd_hash, $lang);
+
+            $roleModel = new RolesModel();
+            $userInRole = new UsersInRolesModel();
+            $newId = $fake->uuid();
+            $role = $roleModel->getIdByRole("ins");
+
+            $userInRole->addUserRole($newId, $id_user, $role["id"]);
         } else {
             return redirect()->back()->withInput();
         }
@@ -324,7 +349,7 @@ class InstitutesController extends BaseController
             "SSTTs" => $sstt->getAllSSTT(),
 
         ];
- 
+
         return view('institutes/modifyInstitute', $data);
     }
 
@@ -334,26 +359,234 @@ class InstitutesController extends BaseController
         $model = new CentreModel();
         helper('form');
 
-        $data = [
-            "codi" =>  $this->request->getPost("code"),
-            "nom" => $this->request->getPost("name"),
-            "actiu" =>  intval($this->request->getPost("active")),
-            "taller" => intval($this->request->getPost("work")),
-            "telefon" => $this->request->getPost("phone"),
-            "adreca_fisica" => $this->request->getPost("adress"),
-            "id_sstt" =>  $this->request->getPost("sstt"),
-            "id_poblacio" => $this->request->getPost("population"),
-        ];
+        $validationRules =
+            [
+                'code' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'name' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'active' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'work' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'phone' => [
+                    'rules'  => 'required|is_numeric|min_length[9]|max_length[9]',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                        'is_numeric' => lang('error.wrong_numeric'),
+                        'min_length' => lang('error.wrong_numeric'),
+                        'max_length' => lang('error.wrong_numeric'),
+                    ],
+                ],
+                'adress' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'population' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+
+
+            ];
+
+        if ($this->validate($validationRules)) {
+
+            $data = [
+                "codi" =>  $this->request->getPost("code"),
+                "nom" => $this->request->getPost("name"),
+                "actiu" =>  intval($this->request->getPost("active")),
+                "taller" => intval($this->request->getPost("work")),
+                "telefon" => $this->request->getPost("phone"),
+                "adreca_fisica" => $this->request->getPost("adress"),
+                "id_sstt" =>  $this->request->getPost("sstt"),
+                "id_poblacio" => $this->request->getPost("population"),
+            ];
 
 
 
-        $model->modifyInstitute($id, $data);
+            $model->modifyInstitute($id, $data);
 
-        return redirect()->to(base_url('/institutes'));
+            return redirect()->to(base_url('/institutes'));
+        }
+
+        return redirect()->back()->withInput();
     }
 
     public function assign()
     {
         return view('institutes/assign');
+    }
+
+
+    public function exportCSV()
+    {
+        $searchData = $this->request->getGet();
+
+        if (isset($searchData['q'])) {
+            $search = $searchData["q"];
+        } else {
+            $search = "";
+        }
+
+        //  Obtener filtro de dispositivo (?d=)
+        // if (isset($searchData['d']) && !empty($searchData['d'])) {
+        //     $filters['device'] = $searchData['d'];
+        // } else {
+        //     $filters['device'] = '';
+        // }
+
+        $model = new CentreModel();
+
+        // if (is_array($filters) && !empty($filters)) {
+        //     $paginateData = $model->getByTitleOrText($search, $filters)->findAll();
+        // } else if ($search != '') {
+        //     $paginateData = $model->getByTitleOrText($search, [])->findAll();
+        // } else {
+        //     $paginateData = $model->getAllPaged()->findAll();
+        // }
+
+        if ($search != '') {
+            $paginateData = $model->getByTitleOrText($search)->findAll();
+        } else {
+            $paginateData = $model->getAllPaged()->findAll();
+        }
+
+        $propiedades = [
+
+            'codi', 'nom', 'actiu', 'taller', 'persona', 'correu', 'id_poblacio', 'telefon', 'adreca', 'poblacio'
+        ];
+
+
+
+        $csv_string = "";
+
+        $csv_string .= implode(";", $propiedades) . "\n";
+
+
+        foreach ($paginateData as $ticket) {
+            $csv_string .= implode(";", $ticket) . "\n";
+        }
+
+        header('Content-Disposition: attachment; filename="instituts_export_' . date("d-m-Y") . '.csv"');
+
+        echo $csv_string;
+    }
+
+    public function importCSV()
+    {
+        $csv = $this->request->getFiles()['uploadCSV'];
+
+        if ($csv->getSize() != 0) {
+            // guardar el csv 
+            $file = $this->request->getFiles();
+
+            // leer el csv 
+            $fileCsv = fopen($file['uploadCSV'], 'r');
+
+            // Boolean para saltarnos la primera fila (es una fila con los nombres de los campos y por ende la descartamos)
+            $firstLine = true;
+
+            // hacer un while para introducir los datos 
+            while (($row = fgetcsv($fileCsv, 2000, ";")) !== FALSE) {
+
+                if (!$firstLine) {
+
+                    $fake = Factory::create("es_ES");
+
+                    $modelCentre = new CentreModel();
+                    $modelUser = new UsersModel();
+                    $userInRole = new UsersInRolesModel();
+                    $roleModel = new RolesModel();
+
+
+                    $fake = Factory::create("es_ES");
+
+                    $codi =  trim($row[0]);
+                    $id_user = $fake->uuid();
+                    $nom =  trim($row[1]);
+                    $actiu = trim($row[2]);
+                    $taller =  trim($row[3]);
+                    $nom_persona_contacte = trim($row[4]);
+                    $correu_persona_contacte = trim($row[5]);
+                    $id_poblacio = trim($row[6]);
+                    $telefon = trim($row[7]);
+                    $adreca_fisica = trim($row[8]);
+                    $id_sstt = session('user')['code'];
+
+
+
+                    $user = trim($row[5]);
+                    $passwd = $fake->password();
+                    $passwdHash = password_hash($passwd, PASSWORD_DEFAULT);
+                    $lang = "ca";
+
+                    $createdInstitute = $modelCentre->addCentre($id_user, $codi, $nom, $actiu, $taller, $telefon, $adreca_fisica, $nom_persona_contacte, $correu_persona_contacte, $id_sstt, $id_poblacio);
+
+                    if ($createdInstitute) {
+
+                        $modelUser->addUser($id_user, $user, $passwdHash, $lang);
+
+                        $newId = $fake->uuid();
+                        $role = $roleModel->getIdByRole("ins");
+
+                        $userInRole->addUserRole($newId, $id_user, $role["id"]);
+
+                    }
+                }
+
+                $firstLine = false;
+            }
+
+            fclose($fileCsv);
+
+            return redirect()->to(base_url('/institutes'));
+        }
+    }
+
+    public function downloadCSV()
+    {
+        // Establecer la ruta del archivo
+        $rutaArchivo = WRITEPATH . 'plantilles' . DIRECTORY_SEPARATOR . 'plantilla_centres.csv';
+
+
+        // Comprobar si el archivo existe
+        if (!file_exists($rutaArchivo)) {
+            // Manejar el error de archivo no encontrado
+            echo "Error: Archivo no encontrado";
+            return;
+        }
+
+        // Obtener el tamaño y el tipo de contenido del archivo
+        $tamañoArchivo = filesize($rutaArchivo);
+        $tipoContenido = mime_content_type($rutaArchivo);
+
+        // Establecer encabezados de descarga
+        header('Content-Disposition: attachment; filename="plantilla_centres.csv"');
+        header('Content-Length: ' . $tamañoArchivo);
+        header('Content-Type: ' . $tipoContenido);
+
+        // Leer el contenido del archivo y enviarlo al navegador
+        readfile($rutaArchivo);
     }
 }

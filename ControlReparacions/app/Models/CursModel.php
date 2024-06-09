@@ -50,4 +50,15 @@ class CursModel extends Model
 
         $this->insert($data);
     }
+
+    public function getAllCourses(){
+
+        $role = session()->get('user')['role'];
+        $code = session()->get('user')['code'];
+
+        $this->select('id, clase, any, titol');
+        $this->where('codi_centre', $code);
+        return $this->findAll();
+    }
 }
+

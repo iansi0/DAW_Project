@@ -20,7 +20,7 @@
     <section class="flex flex-col min-w-[400px]">
 
         <div class="p-5">
-            <iframe  class="w-full h-72 border shadow-lg rounded-lg" src="https://www.google.com/maps/embed/v1/place?q=<?=$institute['nom']?>, <?=$institute['adreca']?>,<?=$institute['poblacio']?>&key=AIzaSyAQgyXUgGsAzaE62TskQwqQUmXt4S7G3eg" ></iframe>
+            <iframe  class="w-full h-72 border shadow-lg rounded-lg" src="https://www.google.com/maps/embed/v1/place?q=<?=$institute['nom']?>, <?=$institute['adreca']?>,<?=$institute['poblacio']?>&key=AIzaSyCee3Q2FSeZD6kb9V32r7lb5_39jFarwP4" ></iframe>
             
         </div>
 

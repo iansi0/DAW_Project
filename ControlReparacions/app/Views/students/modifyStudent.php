@@ -1,10 +1,10 @@
 <?= $this->extend('layouts/master.php') ?>
 <?= $this->section('content') ?>
 
-<h1 class="text-5xl text-primario mt-14"><?= lang("titles.n_students") ?></h1>
+<h1 class="text-5xl text-primario mt-14"><?= lang("titles.e_students") ?></h1>
 
 <section style="view-transition-name: addTicket;" class=" mx-auto px-4 py-8 mt-10 text-base">
-    <form action="add" method="POST" class="flex flex-col gap-20" enctype="multipart/form-data">
+    <form action="<?= $student['id_user'] ?>" method="POST" class="flex flex-col gap-20" enctype="multipart/form-data">
         <?= csrf_field() ?>
 
         <div class="grid grid-cols-3 gap-x-2 gap-y-2">
@@ -12,7 +12,7 @@
             <!-- Correo  -->
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.email") ?>*</label>
-                <input type="mail" name="email" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
+                <input type="mail" name="email" value="<?= $student['correo'] ?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
                 <?php
                 if (isset(validation_errors()['email'])) : ?>
                     <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['email'] ?></p>
@@ -22,7 +22,7 @@
             <!-- Nombre  -->
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.name") ?>*</label>
-                <input type="text" name="name" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                <input type="text" name="name" value="<?= $student['nom'] ?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
 
                 <?php
                 if (isset(validation_errors()['name'])) : ?>
@@ -33,7 +33,7 @@
             <!-- Apellidos  -->
             <div class="flex flex-col mt-5">
                 <label class=""><?= lang("forms.surnames") ?>*</label>
-                <input type="text" name="surnames" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
+                <input type="text" name="surnames" value="<?= $student['cognoms'] ?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
                 <?php
                 if (isset(validation_errors()['surnames'])) : ?>
                     <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['surnames'] ?></p>
@@ -45,21 +45,26 @@
                 <label class=""><?= lang("forms.course") ?>*</label>
                 <select type="text" name="course" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
 
-                <option value="" disabled selected hidden><?= lang("forms.s_course") ?></option>
-                    <?php foreach ($courses as $course) : ?>
-                        <option value="<?= $course["id"] ?>"><?= $course["any"] . " " .  $course['titol'] . " " . $course['clase'] ?></option>
-                    <?php endforeach; ?>
+                    <?php
+                    foreach ($courses as $course) {
+                        if ($course["id"] == $student["id_curs"]) {
+                            echo "<option selected value='" . $course["id"] . "'>" . $course["any"] . " " .  $course['titol'] . " " . $course['clase'] . "</option>";
+                        } else {
+                            echo "<option value='" . $course["id"] . "'>" . $course["any"] . " " .  $course['titol'] . " " . $course['clase'] . "</option>";
+                        }
+                    }
+                    ?>
 
                 </select>
                 <?php
-                if (isset(validation_errors()['course'])) : ?>
+                if (validation_errors()) : ?>
                     <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['course'] ?></p>
                 <?php endif ?>
             </div>
 
 
-
         </div>
+
 
         <div class="flex gap-5 justify-end w-full">
 

@@ -8,6 +8,8 @@ function createDateChart(title,seriesData,months,name,text,id){
         height: 350,
         type: 'bar',
       },
+      colors:['#22C55E', '#2563EB', '#EAB308', '#DB2777', '#775DD0', '#0D9488', '#BE185D', '#4338CA', '#991B1B', '#15803D', '#0369A1', '#C2410C', '#A3E635', '#FFDC00'],
+      
       title:{
         text: title,
         align:'center',

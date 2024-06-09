@@ -16,6 +16,9 @@ return [
     'empty_slot'        => 'Falten camps per omplir',
     'empty_slot_2'      => 'Aquest camp no pot estar buit',
     'wrong_slot'        => 'Hi han camps incorrectes',
+    'wrong_email'       => 'Format email incorrecte',
+    'wrong_numeric'       => 'Format telefon incorrecte',
+    'wrong_price'       => 'Format preu incorrecte',
 
     'empty'             => 'No s\'ha trobat cap element',
     'no_exists'         => 'L\'element introduït no existeix',
@@ -26,8 +29,8 @@ return [
     'success_edtit'     => 'Element modificat correctament',
 
     'id_type'           => 'El tipus de dispositiu és incorrecte o està buit',
-    'sender'            => 'L\'Institut emissor és incorrecte o està buit',
-    'repair'            => 'L\'Institut reparador és incorrecte o està buit',
+    'sender'            => 'El centre emissor és incorrecte o està buit',
+    'repair'            => 'El centre reparador és incorrecte o està buit',
     'description'       => 'La descripció és incorrecta o està buida',
     'nameContact'       => 'El nom de contacte és incorrecte o està buit',
     'emailContact'      => 'El correu de contacte és incorrecte o està buit',
