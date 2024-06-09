@@ -63,7 +63,7 @@ class AlumneModel extends Model
                 $this->where('id_user', $userExist['id'])->set('id_curs', trim($id_curs))->update();
                 $this->builder->where('id_user', $userExist['id'])->set($this->deletedField, null)->update();
 
-                $modelUser->activatedUser($userExist);
+                $modelUser->activatedUser($userExist['id']);
                 // $this->builder->where('id_user', $userExist['id'])->set($data)->update();
                 return false;
             }
