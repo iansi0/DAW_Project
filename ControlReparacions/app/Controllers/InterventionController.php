@@ -27,7 +27,7 @@ class InterventionController extends BaseController
 
         $data = [
             "id_ticket" => $id,
-            "types" => $inventary->getInventaryNoAssigned(),
+            "types" => $inventary->getInventaryNoAssigned()->findAll(),
         ];
 
         return view('intervention/interventionForm', $data);
