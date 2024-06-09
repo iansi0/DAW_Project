@@ -36,11 +36,16 @@ class StudentsController extends BaseController
 
         // GENERADOR DE TABLA 
         $table = new \CodeIgniter\View\Table();
-        $table->setHeading('Nombre', 'Cognoms', 'Curs', 'Actions');
+        $table->setHeading(
+            mb_strtoupper(lang('forms.name'), 'utf-8'),
+            mb_strtoupper(lang('forms.surnames'), 'utf-8'),
+            mb_strtoupper(lang('forms.course'), 'utf-8'),
+            mb_strtoupper(lang('titles.actions'), 'utf-8'),
+        );
 
 
         $template = [
-            'table_open'  => "<table class='w-full rounded-t-2xl overflow-hidden '>",
+            'table_open'  => "<table class='w-full rounded-t-2xl shadow-xl overflow-hidden '>",
 
             'thead_open'  => "<thead class='py-5 bg-primario text-secundario '>",
 
@@ -102,7 +107,7 @@ class StudentsController extends BaseController
                         }
                       }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
 
-                    "class" => " py-2 justify-between items-center"
+                    "class" => " py-3 justify-between items-center"
                 ],
             );
         }

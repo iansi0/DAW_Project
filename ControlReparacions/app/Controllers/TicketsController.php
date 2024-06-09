@@ -261,7 +261,7 @@ class TicketsController extends BaseController
                             }
                           }); })()' class='p-2 btn  mt-2  btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
 
-                        "class" => " p-5 flex h-16 justify-between items-center"
+                        "class" => " p-3 h-16 "
                     ],
 
                 );

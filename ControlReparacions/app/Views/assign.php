@@ -18,7 +18,7 @@
                     <h1 class="text-2xl"><?= lang('forms.assign_to'); ?>: &nbsp; </h1>
 
                     <div class='flex align-left relative searchable-device-list'>
-                        <input id="institute" name="d" type='text' class='data-device-list peer w-full h-10 rounded-sm bg-secundario cursor-pointer outline-none text-primario
+                        <input id="institute" name="d" type='text' class='data-device-list peer w-full h-8 rounded-sm bg-secundario cursor-pointer outline-none text-primario
                           caret-gray-800 pl-2 pr-7 focus:bg-gray-200 font-bold transition-all duration-300 text-sm text-overflow-ellipsis ' spellcheck="false" placeholder="<?= lang('forms.s_ins') ?>">
                         <svg class="outline-none cursor-pointer fill-gray-400 absolute transition-all duration-200 h-full w-4 -rotate-90 right-2 top-[50%] -translate-y-[50%]" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <path d="M0 256l512 512L1024 256z"></path>
