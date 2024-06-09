@@ -42,17 +42,18 @@
                 <p style="margin-left: 20px"><span class="bold"><?=lang('titles.ins_2')?> <?=lang('titles.sender')?>: </span><?=$ticket['emissor']?></p>
                 <p style="margin-left: 20px"><span class="bold"><?=lang('titles.ins_2')?> <?=lang('titles.receiver')?>: </span><?=$ticket['receptor']?> (<?=$ticket['codi_reparador']?>)</p>
             </div>
+
+            <div style="position: absolute; top: 8px; right: 0;">
+                <img style="height: 130px; width: auto;" src="data:image/png;base64, <?= $qr; ?> "/>
+            </div>
         </div>
 
         <!-- DESCRIPTION -->
         <div style="position: relative; border: 1px solid black;margin-top: 50px;">
             <h2 style="position: absolute; top: -40px; left: 20px; background-color: #FFFFFF; padding: 2px 8px;width: 140px;"><?= lang('forms.description'); ?></h2>
-            <div style="line-height: 8px; margin-top: 25px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="line-height: 8px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
                 <div>
                     <p style="margin-left: 20px;"><?=$ticket['descripcio']?></p>
-                </div>
-                <div>
-                    <img src="data:image/png;base64, <?= $qr; ?> "/>
                 </div>
             </div>
 
@@ -60,9 +61,11 @@
 
         <!-- INTERVENTIONS -->
         <div style="position: relative; border: 1px solid black;margin-top: 50px;">
-            <h2 style="position: absolute; top: -40px; left: 20px; background-color: #FFFFFF; padding: 2px 8px;width: 170px;"><?= lang('titles.int'); ?></h2>
-            <div style="line-height: 8px; margin-top: -8px;">
-                <p style="margin-left: 20px"><?=$table->generate();?></p>
+            <h2 style="position: absolute; top: -35px; left: 20px; background-color: #FFFFFF; padding: 2px 8px;width: 170px;"><?= lang('titles.int'); ?></h2>
+            <div style="line-height: 8px; margin-top: -8px;line-height: 20px;">
+                <p style="margin-left: 20px;">
+                    <?=$table->generate();?>
+                </p>
             </div>
         </div>
 

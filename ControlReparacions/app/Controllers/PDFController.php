@@ -5,8 +5,8 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\EstatModel;
 use App\Models\IntervencioModel;
+use App\Models\InventariModel;
 use App\Models\TiquetModel;
-use CodeIgniter\HTTP\ResponseInterface;
 use Dompdf\Dompdf;
 use BaconQrCode\Renderer\ImageRenderer;
 use BaconQrCode\Renderer\Image\SvgImageBackEnd;
@@ -23,6 +23,7 @@ class PDFController extends BaseController
 
         $modelTickets = new TiquetModel();
         $modelInterventions = new IntervencioModel();
+        $modelInventari = new InventariModel();
         $estat = new EstatModel();
 
         /** TABLE GENERATOR **/
@@ -31,7 +32,8 @@ class PDFController extends BaseController
             mb_strtoupper(lang('forms.date'), 'utf-8'),
             mb_strtoupper(lang('titles.students'), 'utf-8'),
             mb_strtoupper(lang('titles.material_2'), 'utf-8'),
-            mb_strtoupper(lang('forms.description'), 'utf-8')
+            mb_strtoupper(lang('forms.description'), 'utf-8'),
+            mb_strtoupper(lang('forms.price'), 'utf-8')
         );
 
         $template = [
@@ -43,7 +45,10 @@ class PDFController extends BaseController
             'heading_cell_start' => "<th style='padding: 8px;padding-top: 14px;'>",
 
             'row_start' => "<tr style='border-bottom: 1px solid #DDDDDD'>",
-            'row_alt_start' => "<tr style='border-bottom: 1px solid #DDDDDD; background-color: #B3B3B3'>"
+            'row_alt_start' => "<tr style='border-bottom: 1px solid #DDDDDD; background-color: #B3B3B3'>",
+
+            'cell_start' => "<td style='text-align: center'>",
+            'cell_alt_start' => "<td style='text-align: center'>"
 
         ];
         $table->setTemplate($template);
@@ -63,15 +68,35 @@ class PDFController extends BaseController
             'estats' => $estat->getAllStates(),
             'qr' => base64_encode($writer->writeString(base_url() . "tickets/" . $id)),
         ];
-
+        
+        $totalPriceTicket = 0;
         foreach ($data['interventions'] as $intervencio) {
-            // $buttonView = base_url("tickets/" . $intervencio['id']); // Reemplazar con tu ruta real
+
+            $arrMaterial = [];
+            $material = $modelInventari->getInventaryAssigned($intervencio['id'])->findAll();
+
+            foreach ($material as $value) {
+                $arrMaterial[] = '<li>'.$value['nom'].'</li>';
+            }
 
             $table->addRow(
-                $intervencio['created_at'],
-                $intervencio['correu_alumne'],
-                $intervencio['id_tipus'],
-                $intervencio['descripcio']
+                date('d/m/Y H:i', strtotime($intervencio['created_at'])),
+                $intervencio['nom_reparador'],
+                '<ul>'.implode('', $arrMaterial).'</ul>',
+                $intervencio['descripcio'],
+                $intervencio['preu'].'€',
+            );
+
+            $totalPriceTicket += $intervencio['preu'];
+        }
+
+        if (count($data['interventions']) > 0) {
+            $table->addRow(
+                ["data" => "TOTAL", "style" => "background-color: #003049 !important; color: #F2F2F2 !important;"],
+                ["data" => "", "style" => "background-color: #003049 !important; color: #F2F2F2 !important;"],
+                ["data" => "", "style" => "background-color: #003049 !important; color: #F2F2F2 !important;"],
+                ["data" => "", "style" => "background-color: #003049 !important; color: #F2F2F2 !important;"],
+                ["data" => $totalPriceTicket.'€', "style" => "background-color: #003049 !important; color: #F2F2F2 !important;"]
             );
         }
 
