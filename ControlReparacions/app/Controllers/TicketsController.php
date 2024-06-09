@@ -119,10 +119,10 @@ class TicketsController extends BaseController
             mb_strtoupper(lang('titles.receiver'), 'utf-8'),
             mb_strtoupper(lang('titles.date'), 'utf-8'),
             mb_strtoupper(lang('titles.hour'), 'utf-8'),
+            "<div class='relative  w-full'>" .
+                mb_strtoupper(lang('titles.status'), 'utf-8') . "&nbsp; <i class='fa-solid  fa-circle-info peer'></i>
 
-            mb_strtoupper(lang('titles.status'), 'utf-8') . "&nbsp; <i class='fa-solid   fa-circle-info peer'></i>
-
-                <div class='absolute  w-48 px-3 py-2 z-50  flex-col gap-1  bg-secundario border-2 border-terciario-1  rounded-lg  hidden  peer-hover:flex '>
+                <div class='absolute  w-48 px-3 py-2  flex-col gap-1 left-1/2 transform -translate-x-1/2  bg-secundario border-2 border-terciario-1  rounded-lg  hidden  peer-hover:flex '>
 
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_0 rounded-full me-2 dark:bg-white'></span>
@@ -182,15 +182,16 @@ class TicketsController extends BaseController
                     </div>
                 </div>
 
-              ",
+                
+            </div>",
             mb_strtoupper(lang('titles.actions'), 'utf-8'),
         );
 
         // TEMPLATE
         $template = [
-            'table_open'  => "<table class='w-full rounded-t-2xl   overflow-hidden  '>",
+            'table_open'  => "<table class='w-full rounded-t-2xl overflow-hidden '>",
 
-            'thead_open'  => "<thead class='bg-primario text-secundario  '>",
+            'thead_open'  => "<thead class='bg-primario text-secundario '>",
 
             'heading_cell_start' => "<th class='py-3 text-base'>",
 
@@ -248,14 +249,14 @@ class TicketsController extends BaseController
                             if (result.isConfirmed) {
         
                                 Swal.fire({
-                                    title: `" . lang('alerts.deleted') . "`,
-                                    text: `" . lang('alerts.deleted_sub') . "`,
+                                    title: `".lang('alerts.deleted')."`,
+                                    text: `".lang('alerts.deleted_sub')."`,
                                     icon: `success`,
                                     showConfirmButton: false,
                                     timer:2000,
         
                                 }).then(()=>{
-                                    window.location.href = `" . $buttonDelete . "`;
+                                    window.location.href = `".$buttonDelete."`;
         
                                 });
                             }

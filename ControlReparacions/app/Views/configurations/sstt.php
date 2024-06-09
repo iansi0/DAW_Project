@@ -67,10 +67,10 @@
 
             <div class="flex flex-col mt-5">
                 <label class="">Altres</label>
-                <input type="text" value="<?= $sstt['altres'] ?>" name="name" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                <input type="text" value="<?= $sstt['altres'] ?>" name="altres" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                 <?php
-                if (isset(validation_errors()['name'])) : ?>
-                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['name'] ?></p>
+                if (isset(validation_errors()['altres'])) : ?>
+                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['altres'] ?></p>
                 <?php endif ?>
             </div>
 

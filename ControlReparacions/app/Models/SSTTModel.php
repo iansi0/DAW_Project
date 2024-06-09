@@ -62,4 +62,9 @@ class SSTTModel extends Model
     public function getSSTTById($id){
         return $this->where('codi', $id)->first();
     }
+
+    public function modifySSTT($id, $data){
+
+        return $this->where('codi', $id)->set($data)->update();
+    }
 }

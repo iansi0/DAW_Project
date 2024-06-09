@@ -45,9 +45,8 @@ class UserController extends BaseController
         
             return view('configurations/sstt', $data);
         }
-        $data['user'] = $modelUser->getUserById(session('user')['uid']);
-
-        return view('configurations/admin', $data);
+        
+        return redirect()->to(previous_url());
     }
 
     public function config_post()
@@ -174,10 +173,10 @@ class UserController extends BaseController
         return redirect()->back()->withInput();
     }
 
-    public function change_institute()
+    public function change_sstt()
     {
 
-        $model = new CentreModel();
+        $model = new SSTTModel();
 
         //validation errors
         helper('form');
@@ -217,15 +216,18 @@ class UserController extends BaseController
 
             // dd( session('user'));
             $data = [
-                "codi" =>  session('user')['code'],
-                "nom_persona_contacte" => $this->request->getPost('name'),
-                "correu_persona_contacte" =>  $this->request->getPost('email'),
-                "adreca_fisica" =>  $this->request->getPost('adress'),
+                'codi'       => session('user')['code'],
+                "poblacio" => $this->request->getPost('population'),
+                "cp" =>  $this->request->getPost('cp'),
                 "telefon" =>  $this->request->getPost('phone'),
+                "adreca_fisica" =>  $this->request->getPost('adress'),
+                'altres'        => $this->request->getPost('altres'),
 
             ];
 
-            $model->modifyInstitute(session('user')['code'], $data);
+         
+            $model->modifySSTT(session('user')['code'], $data);
+
             return redirect()->to(base_url('config'));
         }
         return redirect()->back()->withInput();
