@@ -20,19 +20,13 @@ class Filters extends BaseConfig
      * @phpstan-var array<string, class-string|list<class-string>>
      */
     public array $aliases = [
-        'csrf'          => CSRF::class,
-        'toolbar'       => DebugToolbar::class,
-        'honeypot'      => Honeypot::class,
-        'invalidchars'  => InvalidChars::class,
-        'secureheaders' => SecureHeaders::class,
+        'csrf'                => CSRF::class,
+        'toolbar'             => DebugToolbar::class,
+        'honeypot'            => Honeypot::class,
+        'invalidchars'        => InvalidChars::class,
+        'secureheaders'       => SecureHeaders::class,
 
-        'isLogged'      => \App\Filters\LoginFilter::class,
-        'addTicket'     => \App\Filters\AddTicketFilter::class,
-        'modifyTicket'  => \App\Filters\ModifyTicketFilter::class,
-        'deleteTicket'  => \App\Filters\DeleteTicketFilter::class,
-        'addIntervention'        => \App\Filters\AddInterventionFilter::class,
-        'modifyIntervention'      => \App\Filters\ModifyInterventionFilter::class,
-        'exportTicket'      => \App\Filters\ExportXLSFilter::class,
+        'isLogged'            => \App\Filters\LoginFilter::class,
         
     ];
 

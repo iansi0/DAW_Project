@@ -4,14 +4,11 @@ namespace App\Controllers;
 
 use App\Models\InventariModel;
 use App\Models\TipusInventariModel;
-use App\Models\UsersModel;
-use App\Models\UsersInRolesModel;
-use App\Models\RolesModel;
-
-use Faker\Factory;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
+
+use App\Libraries\UUID as LibrariesUUID;
+
 
 class InventaryController extends BaseController
 {
@@ -142,43 +139,58 @@ class InventaryController extends BaseController
 
     public function addInventary()
     {
+
         helper('form');
 
-        $validationRules =
-            [
-                'name' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => lang('error.empty_slot_2'),
-                    ],
-                ],
-                'price' => [
-                    'rules'  => 'required|is_numeric',
-                    'errors' => [
-                        'required' => lang('error.empty_slot_2'),
-                        'is_numeric' => lang('error.wrong_price'),
-                    ],
-                ],
-                'type_inventary' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => lang('error.empty_slot_2'),
-                    ],
-                ],
-            ];
+        $arrInventory = $this->request->getPost('arrInventory');
 
-        if ($this->validate($validationRules)) {
+        // Forzamos el json_decode
+        $arrInventory = json_decode((string) $arrInventory);
 
+        // Creamos un array que irá almacenando los inputs erróneos
+        $arrErrors = [];
+
+        // Hacemos un primer recorrido comprobando que los inputs están correctos
+        foreach ($arrInventory as $inventory) {
+
+            $id_inventory = $inventory[0]->id;
+            $id_tipus_inventari = $inventory[1]->id_type;
+            $nom_inventari = $inventory[2]->name;
+            $preu_inventari =  $inventory[3]->price;
+
+            if ($id_tipus_inventari == null || $id_tipus_inventari == '') {
+                $arrErrors[$id_inventory]["id_type"] = lang('error.id_type');
+            }
+            if ($nom_inventari == null || $nom_inventari == '') {
+                $arrErrors[$id_inventory]["name"] = lang('error.name');
+            }
+            if ($preu_inventari == null || $preu_inventari == '') {
+                $arrErrors[$id_inventory]["price"] = lang('error.price');
+            }
+
+        }
+
+        // Si detectamos errores, los mandamos de vuelta al front para ser corregidos
+        // PD: el flash data no sera ejecutado y no solo eso, se le va a recargar la pagina al cliente borrándole todos los tiquets
+        // PDD: Un cliente normal se quedaria en las validaciones de javascript
+        if (count($arrErrors) > 0) {
+            session()->setFlashdata('error', $arrErrors);
+            return redirect()->back();
+        }
+
+        // Si todo esta bien, añadimos los tickets
+        foreach ($arrInventory as $inventory) {
+
+            // dd($inventory);
 
             $model = new InventariModel();
-            $fake = Factory::create("es_ES");
 
-            $id = $fake->uuid();
-            $nom = $this->request->getPost("name");
+            $id = LibrariesUUID::v4();
+            $id_tipus_inventari = $inventory[1]->id_type;
+            $nom = $inventory[2]->name;
             $data_compra = date('Y-m-d');
-            $preu = $this->request->getPost("price");
+            $preu = $inventory[3]->price;
             $codi_centre = session('user')['code'];
-            $id_tipus_inventari = $this->request->getPost("type_inventary");
 
             $model->addInventari(
                 $id,
@@ -188,11 +200,9 @@ class InventaryController extends BaseController
                 $codi_centre,
                 $id_tipus_inventari
             );
-
-            return redirect()->to(base_url('inventary'));
-        } else {
-            return redirect()->back()->withInput();
         }
+
+        return redirect()->to(base_url('inventary'));
     }
 
     public function modifyInventary($id)
@@ -204,7 +214,7 @@ class InventaryController extends BaseController
 
         $data = [
             "types" => $type->getAllTypes(),
-            "product" => $inventary->getInventarytById($id),
+            "product" => $inventary->getInventaryById($id),    
         ];
         return view('inventary/modifyInventary', $data);
     }
@@ -354,16 +364,9 @@ class InventaryController extends BaseController
 
                 if (!$firstLine) {
 
-                    $fake = Factory::create("es_ES");
-
                     $model = new InventariModel();
 
-
-
-                    $fake = Factory::create("es_ES");
-
-
-                    $id = $fake->uuid();
+                    $id = LibrariesUUID::v4();
                     $nom = trim($row[0]);
                     $data_compra = trim($row[2]);
                     $preu = trim($row[1]);
