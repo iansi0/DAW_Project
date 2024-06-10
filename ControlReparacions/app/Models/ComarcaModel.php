@@ -12,7 +12,7 @@ class ComarcaModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['codi','nom'];
+    protected $allowedFields    = ['codi', 'nom'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,8 +38,9 @@ class ComarcaModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addComarca($codi,$nom) {
-           
+    public function addComarca($codi, $nom)
+    {
+
         $data = [
             'codi' =>  $codi,
             'nom' => $nom,
@@ -48,4 +49,22 @@ class ComarcaModel extends Model
         $this->insert($data);
     }
 
+    public function getAllPaged()
+    {
+        $role = session()->get('user')['role'];
+        $ssttCode = session()->get('user')['code'];
+
+
+            $this->select('comarca.codi, comarca.nom,');
+        
+            $this->join('poblacio', 'comarca.codi = poblacio.id_comarca');
+            $this->join('centre', 'poblacio.id = centre.id_poblacio');
+            $this->join('sstt', 'centre.id_sstt = sstt.codi');
+            $this->where('centre.id_sstt', $ssttCode);
+            $this->groupBy('comarca.codi, comarca.nom');
+
+          
+            return $this->findAll();
+        
+    }
 }

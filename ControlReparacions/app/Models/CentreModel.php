@@ -124,6 +124,7 @@ class CentreModel extends Model
     public function getRegionWithMostTickets($ssttCode)
     {
 
+        
         $this->select('
         comarca.nom as name,
         COUNT(tiquet.id) as count,

@@ -33,7 +33,7 @@
             </div>
 
             <?php
-           // echo $table->generate();
+            echo $table->generate();
             ?>
             <div class="border-b border-primario"></div>
         </div>

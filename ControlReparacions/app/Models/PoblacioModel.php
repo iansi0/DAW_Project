@@ -53,4 +53,23 @@ class PoblacioModel extends Model
     public function getAllPopulations(){
         return $this->select('id, nom')->findAll();
     }
+
+    public function getAllPaged()
+    {
+        $role = session()->get('user')['role'];
+        $ssttCode = session()->get('user')['code'];
+
+
+            $this->select('poblacio.id, poblacio.nom, comarca.nom as comarca');
+        
+            $this->join('comarca', 'poblacio.id_comarca = comarca.codi');
+            $this->join('centre', 'poblacio.id = centre.id_poblacio');
+            $this->join('sstt', 'centre.id_sstt = sstt.codi');
+            $this->where('sstt.codi', $ssttCode);
+            $this->groupBy('poblacio.id, poblacio.nom, comarca.nom');
+
+          
+            return $this->findAll();
+        
+    }
 }

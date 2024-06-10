@@ -79,6 +79,7 @@ return [
     'e_material'   => 'Modificar Material',
 
     'locations'     => 'Localitats',
+    'comarca'     => 'Comarca',
 
     'start'         => 'Començat',
     'end'           => 'Acabat',
