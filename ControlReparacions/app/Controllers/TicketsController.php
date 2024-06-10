@@ -386,8 +386,8 @@ class TicketsController extends BaseController
             if (session('user')['role'] == 'admin' || session('user')['uid'] == $intervencio['id_reparador']) {
 
                 $table->addRow(
-                    $intervencio['created_at'],
-                    $intervencio['nom_reparador'],
+                    date("d/m/Y", strtotime($intervencio['created_at']))." ".date("H:i", strtotime($intervencio['created_at'])),                   
+                     $intervencio['nom_reparador'],
                     '<ul>'.implode('', $arrMaterial).'</ul>',
                     ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-secundario' : ''],
                     [
@@ -423,7 +423,7 @@ class TicketsController extends BaseController
                 );
             }else{
                 $table->addRow(
-                    $intervencio['created_at'],
+                    date("d/m/Y", strtotime($intervencio['created_at']))." ".date("H:i", strtotime($intervencio['created_at'])),                   
                     $intervencio['nom_reparador'],
                     '<ul>'.implode('', $arrMaterial).'</ul>',
                     ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-secundario' : ''],

@@ -36,6 +36,36 @@
 
 
 <script>
+    document.getElementById('submitButton').addEventListener('click', function() {
+
+        event.preventDefault();
+
+        Swal.fire({
+            title: `<?= lang('alerts.sure') ?>`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: `<?= lang('alerts.yes_add') ?>`,
+            cancelButtonText: `<?= lang('alerts.cancel') ?>`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: `<?= lang('alerts.added') ?>`,
+                    text: `<?= lang('alerts.added_sub') ?>`,
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer:2000,
+                }).then(() => {
+
+                    document.getElementById('form').submit();
+                });
+            }
+        });
+    });
+</script>
+
+<script>
 
     var count_ins = 0;
 
@@ -511,31 +541,51 @@
         });
 
         if (!error) {
+            Swal.fire({
+            title: `<?= lang('alerts.sure') ?>`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: `<?= lang('alerts.yes_add') ?>`,
+            cancelButtonText: `<?= lang('alerts.cancel') ?>`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: `<?= lang('alerts.added') ?>`,
+                    text: `<?= lang('alerts.added_sub') ?>`,
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer:2000,
+                }).then(() => {
 
-            // Convertimos el array a JSON
-            var arrJSON = JSON.stringify(arrTickets);
-            console.log(arrJSON)
-
-            // Creamos un formulario temporal
-            var form_tmp = document.createElement('form');
-            form_tmp.action = 'add';
-            form_tmp.method = 'POST';
-            form_tmp.style.display = 'none';
-
-            // Creamos un input con los datos del JSON y lo añadimos al formulario anterior
-            let input_tmp = document.createElement('input');
-            input_tmp.type = 'hidden';
-            input_tmp.name = 'arrTickets';
-            input_tmp.value = arrJSON;
-            form_tmp.appendChild(input_tmp);
-
-            // Añadimos el formulario al documento y lo enviamos
-            document.body.appendChild(form_tmp);
-            form_tmp.submit();
-
-            // Eliminamos el formulario para no dejar rastro
-            form_tmp.remove();
-            
+                    // Convertimos el array a JSON
+                    var arrJSON = JSON.stringify(arrTickets);
+                    console.log(arrJSON)
+                    
+                    // Creamos un formulario temporal
+                    var form_tmp = document.createElement('form');
+                    form_tmp.action = 'add';
+                    form_tmp.method = 'POST';
+                    form_tmp.style.display = 'none';
+                    
+                    // Creamos un input con los datos del JSON y lo añadimos al formulario anterior
+                    let input_tmp = document.createElement('input');
+                    input_tmp.type = 'hidden';
+                    input_tmp.name = 'arrTickets';
+                    input_tmp.value = arrJSON;
+                    form_tmp.appendChild(input_tmp);
+                    
+                    // Añadimos el formulario al documento y lo enviamos
+                    document.body.appendChild(form_tmp);
+                    form_tmp.submit();
+                    
+                    // Eliminamos el formulario para no dejar rastro
+                    form_tmp.remove();
+                    
+                });
+            }
+        });
         }
 
     }

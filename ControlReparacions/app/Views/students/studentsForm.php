@@ -86,5 +86,35 @@
     </form>
 </div>
 
+<script>
+    document.getElementById('submitButton').addEventListener('click', function() {
+
+        event.preventDefault();
+
+        Swal.fire({
+            title: `<?= lang('alerts.sure') ?>`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: `<?= lang('alerts.yes_add') ?>`,
+            cancelButtonText: `<?= lang('alerts.cancel') ?>`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: `<?= lang('alerts.added') ?>`,
+                    text: `<?= lang('alerts.added_sub') ?>`,
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer:2000,
+                }).then(() => {
+
+                    document.getElementById('form').submit();
+                });
+            }
+        });
+    });
+</script>
+
 <?= $this->endSection() ?>
 <?= $this->extend('layouts/master.php') ?>

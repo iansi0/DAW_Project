@@ -7,6 +7,14 @@ function createDonut(title,seriesArray,labelsArray,id){
     }else{
         colorChart=[ '#22C55E', '#2563EB', '#EAB308', '#DB2777', '#775DD0', '#0D9488', '#BE185D', '#4338CA', '#991B1B', '#15803D', '#0369A1', '#C2410C', '#A3E635', '#FFDC00'];
     }
+
+    if (id=="#center") {
+        format='€';
+    }else if(id=="#state"){
+        format='%';
+    }else{
+        format='%';
+    }
     var options = {
         series: seriesArray,
         chart: {
@@ -34,6 +42,15 @@ function createDonut(title,seriesArray,labelsArray,id){
             }
         },
         labels: labelsArray,
+        tooltip: {
+            enabled: true,
+            
+            formatter: function (val, opts) {
+                return val+format;
+            },
+            
+          },
+        
         responsive: [{
         breakpoint: 480,
         options: {
@@ -41,7 +58,8 @@ function createDonut(title,seriesArray,labelsArray,id){
             width: 300
             },
             legend: {
-            position: 'bottom'
+                position: 'bottom',
+                width:'40px',
             }
         }
         }]

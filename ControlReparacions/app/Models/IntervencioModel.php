@@ -73,6 +73,8 @@ class IntervencioModel extends Model
             ->join('professor', 'intervencio.id_user = professor.id_user', 'left')
             ->where('intervencio.id_ticket', $id)
             ->groupBy('intervencio.id')
+            ->orderBy('intervencio.created_at','DESC')
+
             ->findAll();
     }
 
