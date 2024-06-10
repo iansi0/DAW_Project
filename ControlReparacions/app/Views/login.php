@@ -54,7 +54,7 @@
             </div>
 
             <!-- RECORDAR + OLVIDAR -->
-            <div class="flex gap-10 text-sm">
+            <div class="flex gap-10 w-80 text-sm">
 
                 <div class="flex items-center">
                     <input id="remember" name="remember" type="checkbox" class="h-4 w-4 shrink-0  border-gray-300 rounded" <?=(!empty($_COOKIE['user']))?'checked':''?> />
@@ -63,7 +63,6 @@
                     </label>
                 </div>
 
-                <a class="text-center hover:text-blue-900 hover:underline" href="#"><?=lang('login.forget') ?></a>
             </div>
 
             <!-- BOTON LOGIN -->
