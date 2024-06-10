@@ -258,6 +258,7 @@ class CentreModel extends Model
 
     public function modifyInstitute($id, $data)
     {
+    
         return $this->where('codi', $id)->set($data)->update();
     }
 }

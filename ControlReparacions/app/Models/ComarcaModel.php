@@ -41,7 +41,6 @@ class ComarcaModel extends Model
     public function addComarca($codi, $nom)
     {
 
-        dd($codi);
         $data = [
             'codi' =>  $codi,
             'nom' => $nom,

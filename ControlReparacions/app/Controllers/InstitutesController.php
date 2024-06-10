@@ -354,18 +354,12 @@ class InstitutesController extends BaseController
 
     public function modifyInstitute_post($id)
     {
-
+  
         $model = new CentreModel();
         helper('form');
     
         $validationRules =
             [
-                'code' => [
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => lang('error.empty_slot_2'),
-                    ],
-                ],
                 'name' => [
                     'rules'  => 'required',
                     'errors' => [
@@ -411,8 +405,8 @@ class InstitutesController extends BaseController
 
         if ($this->validate($validationRules)) {
 
+          
             $data = [
-                "codi" => $this->request->getPost("code"),
                 "nom" => $this->request->getPost("name"),
                 "actiu" =>  intval($this->request->getPost("active")),
                 "taller" => intval($this->request->getPost("work")),
@@ -421,11 +415,11 @@ class InstitutesController extends BaseController
                 "id_sstt" =>  session('user')['code'],
                 "id_poblacio" => $this->request->getPost("population"),
             ];
-
-            // dd($data);
+           
 
             $model->modifyInstitute($this->request->getPost("code"), $data);
 
+       
             return redirect()->to(base_url('/institutes'));
         }
 

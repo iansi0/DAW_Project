@@ -8,7 +8,7 @@
 
     </div>
 
-    <form action="add" method="POST" class="mt-4 flex flex-col gap-2 px-20">
+    <form id="form" action="add" method="POST" class="mt-4 flex flex-col gap-2 px-20">
 
         <!-- BOTONES -->
         <div class="flex justify-end align-middle">
@@ -18,7 +18,7 @@
                             : base_url('/institutes');
                         ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 mr-3 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel") ?></a>
 
-            <input type="submit" value="<?= lang("buttons.save") ?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
+            <input type="submit" id="submitButton" value="<?= lang("buttons.save") ?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
 
         </div>
 
@@ -35,7 +35,9 @@
                     <!-- codi  -->
                     <div class="col-span-2 grid-cols-12 text-left px-2">
                         <label class="font-semibold text-primario"><?= mb_strtoupper(lang("forms.code")) ?>*</label>
-                        <input value="<?=$institute['codi']?>" type="text" name="code" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
+                        <input value="<?=$institute['codi']?>" type="text" disabled  class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
+                        
+                        <input value="<?=$institute['codi']?>" hidden type="text" name="code">
                         <?php
                         if (isset(validation_errors()['code'])) : ?>
                             <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['code'] ?></p>

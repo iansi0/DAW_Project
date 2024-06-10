@@ -8,7 +8,7 @@
 
     </div>
 
-    <form action="" method="POST" class="mt-4 flex flex-col gap-2 px-20">
+    <form id="form" action="" method="POST" class="mt-4 flex flex-col gap-2 px-20">
 
         <!-- BOTONES -->
         <div class="flex justify-end align-middle">
@@ -18,14 +18,14 @@
                             : base_url('/locations');
                         ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 mr-3 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel") ?></a>
 
-            <input type="submit" value="<?= lang("buttons.save") ?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
+            <input type="submit" id="submitButton" value="<?= lang("buttons.save") ?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
 
         </div>
 
         <div class="shadow-xl border-b border-primario rounded-t-xl">
 
             <div class="col-span-12 text-left mb-3 bg-primario text-white rounded-t-lg p-4">
-                <h2 class="text-2xl font-semibold"><?=mb_strtoupper(lang('titles.comarca'))?></h2>
+                <h2 class="text-2xl font-semibold"><?= mb_strtoupper(lang('titles.comarca')) ?></h2>
             </div>
 
             <div class="grid grid-cols-12 mt-2 p-4">
@@ -59,5 +59,35 @@
 
     </form>
 </div>
+
+<script>
+    document.getElementById('submitButton').addEventListener('click', function() {
+
+        event.preventDefault();
+
+        Swal.fire({
+            title: `<?= lang('alerts.sure') ?>`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: `<?= lang('alerts.yes_add') ?>`,
+            cancelButtonText: `<?= lang('alerts.cancel') ?>`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: `<?= lang('alerts.added') ?>`,
+                    text: `<?= lang('alerts.added_sub') ?>`,
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000,
+                }).then(() => {
+
+                    document.getElementById('form').submit();
+                });
+            }
+        });
+    });
+</script>
 
 <?= $this->endSection() ?>
