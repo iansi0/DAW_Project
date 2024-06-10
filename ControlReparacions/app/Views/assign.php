@@ -5,7 +5,7 @@
 
 
 <div class="flex justify-between items-center mb-1">
-    <h1 class="text-left text-5xl text-primario"> <?= strtoupper(lang('titles.assign').' '.lang("titles.$filter")) ?></h1>
+<h1 class="text-left text-5xl text-primario"> <?= strtoupper(lang('titles.assign').' '.lang("titles.$filter")) ?></h1>
 </div>
 
 <main class="flex gap-7 py-1 ">
@@ -13,7 +13,7 @@
     <article class="flex flex-col gap-2 w-full">
 
         <div>
-            <div class="flex justify-between w-auto items-center text-center  text-primario pr-8 rounded-t-2xl">
+        <div class="flex justify-between w-auto items-center text-center  text-primario pr-8 rounded-t-2xl">
                 <div class="flex align-left mb-1">
                     <h1 class="text-2xl"><?= lang('forms.assign_to') ?>: &nbsp; </h1>
 

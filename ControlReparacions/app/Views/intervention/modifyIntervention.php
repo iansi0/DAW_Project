@@ -115,7 +115,7 @@
         div_form.appendChild(row);
 
         // Añadimos los botones de añadir inventario y eliminar inventario
-        if (document.getElementById('interventionList').childElementCount >= 1) {
+        if (document.getElementById('interventionList').childElementCount >= 0) {
             let div_btn_remove = document.createElement('div');
             div_btn_remove.classList = 'col-span-2 ml-1 h-auto';
 

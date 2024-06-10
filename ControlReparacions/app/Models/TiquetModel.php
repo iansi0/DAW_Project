@@ -199,6 +199,7 @@ class TiquetModel extends Model
     {
         $role=session()->get('user')['role'];
         $code=session()->get('user')['code'];
+
         $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
         $this->where('id', $id);
@@ -209,20 +210,22 @@ class TiquetModel extends Model
             $this->groupStart();
                 $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
-        }else if($role=="sstt"){
-            $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", $code)->find();
-            foreach ($a as &$value) {
-                $value = $value['codi'];
-            }
-            $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", $code)->find();
-            foreach ($b as &$value) {
-                $value = $value['codi'];
-            }
 
-            $this->groupStart();
-                $this->whereIn("tiquet.codi_centre_reparador", $a);
-                $this->orWhereIn("tiquet.codi_centre_emissor", $b);
-            $this->groupEnd();
+        }else if($role=="sstt"){
+            $this;
+            // $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", $code)->find();
+            // foreach ($a as &$value) {
+            //     $value = $value['codi'];
+            // }
+            // $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", $code)->find();
+            // foreach ($b as &$value) {
+            //     $value = $value['codi'];
+            // }
+
+            // $this->groupStart();
+            //     $this->where("tiquet.codi_centre_reparador", $a);
+            //     $this->orWhere("tiquet.codi_centre_emissor", $b);
+            // $this->groupEnd();
             
         }else{
             return; 
@@ -251,20 +254,20 @@ class TiquetModel extends Model
                 $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
         }else if($role=="sstt"){
-            
-            $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", $code)->find();
-            foreach ($a as &$value) {
-                $value = $value['codi'];
-            }
-            $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", $code)->find();
-            foreach ($b as &$value) {
-                $value = $value['codi'];
-            }
+            $this;
+            // $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", $code)->find();
+            // foreach ($a as &$value) {
+            //     $value = $value['codi'];
+            // }
+            // $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", $code)->find();
+            // foreach ($b as &$value) {
+            //     $value = $value['codi'];
+            // }
 
-            $this->groupStart();
-                $this->whereIn("tiquet.codi_centre_reparador", $a);
-                $this->orWhereIn("tiquet.codi_centre_emissor", $b);
-            $this->groupEnd();
+            // $this->groupStart();
+            //     $this->whereIn("tiquet.codi_centre_reparador", $a);
+            //     $this->orWhereIn("tiquet.codi_centre_emissor", $b);
+            // $this->groupEnd();
 
         }else{
             return;
@@ -286,23 +289,27 @@ class TiquetModel extends Model
             return $this->set($data)->update();
         } else if ($role=="sstt"){
 
-            $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", session('user')['code'])->find();
-            foreach ($a as &$value) {
-                $value = $value['codi'];
-            }
-            $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", session('user')['code'])->find();
-            foreach ($b as &$value) {
-                $value = $value['codi'];
-            }
+            return $this->set($data)->update();
+            
+            // $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", session('user')['code'])->find();
+            // foreach ($a as &$value) {
+            //     $value = $value['codi'];
+            // }
+            // $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", session('user')['code'])->find();
+            // foreach ($b as &$value) {
+            //     $value = $value['codi'];
+            // }
 
-            $this->groupStart();
-                $this->whereIn("tiquet.codi_centre_reparador", $a);
-                $this->orWhereIn("tiquet.codi_centre_emissor", $b);
-            $this->groupEnd();
+            // $this->groupStart();
+            //     $this->whereIn("tiquet.codi_centre_reparador", $a);
+            //     $this->orWhereIn("tiquet.codi_centre_emissor", $b);
+            // $this->groupEnd();
 
         }else{
             return;
         }
+
+
 
     }
 
