@@ -50,6 +50,7 @@ return [
     'lang'          => 'Idioma',
 
     'date'          => 'Data',
+    'shop_date'     => 'Data Compra',
     'create_date'   => 'Data de Creació',
     'start_date'    => 'Data Inici',
     'end_date'      => 'Data Fi',

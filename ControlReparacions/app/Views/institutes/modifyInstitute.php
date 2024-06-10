@@ -71,8 +71,8 @@
                         <label class="font-semibold text-primario"><?= mb_strtoupper(lang("forms.work")) ?>*</label>
                         <select name="work" id="work" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
                             <option value="" selected hidden><?= lang("forms.work") ?></option>
-                            <option value='0' <?=$institute['actiu']==0?'selected':''?>>No</option>
-                            <option value='1' <?=$institute['actiu']==1?'selected':''?>>Si</option>
+                            <option value='0' <?=$institute['taller']==0?'selected':''?>>No</option>
+                            <option value='1' <?=$institute['taller']==1?'selected':''?>>Si</option>
                         </select>
                         <?php
                         if (isset(validation_errors()['work'])) : ?>
@@ -107,12 +107,10 @@
                     <div class="col-span-4 grid-cols-12 text-left px-2">
                         <label class="font-semibold text-primario"><?= mb_strtoupper(lang("forms.pobl")) ?>*</label>
                         <select name="population" id="" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
-                            <option value="" disabled selected hidden><?= lang("forms.s_pobl") ?></option>
-                            <?php
-                            foreach ($populations as $population) {
-                                echo "<option value='" . $population["id"] . "' ".($institute['id_poblacio']==$population["id"])?'selected':''.">" . $population["nom"] . "</option>";
-                            }
-                            ?>
+                            <option value="" disabled hidden><?= lang("forms.s_pobl") ?></option>
+                            <?php foreach ($populations as $population):?>
+                                <option value="<?=$population['id']?>" <?=($institute['id_poblacio']==$population["id"])?'selected':''?>><?=$population["nom"]?></option>;
+                            <?php endforeach; ?>
                         </select>
                         <?php
                         if (isset(validation_errors()['population'])) : ?>

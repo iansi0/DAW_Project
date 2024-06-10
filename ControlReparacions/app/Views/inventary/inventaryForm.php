@@ -85,7 +85,7 @@
 
         // Select tipo inventario
         let div_input_td = document.createElement('div');
-        div_input_td.classList = 'col-span-6 pe-2 text-left mt-2';
+        div_input_td.classList = 'col-span-4 pe-2 text-left mt-2';
         label = document.createElement('label');
         label.classList = 'font-semibold text-primario';
         label.innerText = '<?= mb_strtoupper(lang("forms.type_inventary")) ?>*';
@@ -117,13 +117,12 @@
 
         // Input precio
         let div_input_ec = document.createElement('div');
-        div_input_ec.classList = 'col-span-6 pe-2 text-left mt-2';
+        div_input_ec.classList = 'col-span-4 pe-2 text-left mt-2';
         label = document.createElement('label');
         label.classList = 'font-semibold text-primario';
         label.innerText = '<?= mb_strtoupper(lang("forms.price")) ?>*';
 
         input_ec = document.createElement('input')
-        input_ec.type = 'text';
         input_ec.classList = 'border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150';
         input_ec.name = 'price';
         input_ec.type = 'number';
@@ -134,6 +133,25 @@
 
         // Añadimos todo al div del formulario
         row.appendChild(div_input_ec);
+
+        // Input fecha compra
+        let div_input_fc = document.createElement('div');
+        div_input_fc.classList = 'col-span-4 pe-2 text-left mt-2';
+        label = document.createElement('label');
+        label.classList = 'font-semibold text-primario';
+        label.innerText = '<?= mb_strtoupper(lang("forms.shop_date")) ?>*';
+
+        input_ec = document.createElement('input')
+        input_ec.classList = 'border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150';
+        input_ec.name = 'shop_date';
+        input_ec.type = 'date';
+
+        // Añadimos el label e input al div
+        div_input_fc.appendChild(label);
+        div_input_fc.appendChild(input_ec);
+
+        // Añadimos todo al div del formulario
+        row.appendChild(div_input_fc);
 
         div_form.appendChild(row);
         
@@ -227,7 +245,7 @@
             remove.style = 'height: 50px;';
             remove.innerHTML = '<i class="fa-solid fa-trash"></i>';
             remove.id = 'r_inventory_' + count_ins;
-            remove.setAttribute('onclick', 'removeTicket('+count_ins+')');
+            remove.setAttribute('onclick', 'removeInventory('+count_ins+')');
 
             div_btn_remove.appendChild(remove);
             

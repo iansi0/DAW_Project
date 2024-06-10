@@ -295,7 +295,7 @@ class InstitutesController extends BaseController
         $telefon = $this->request->getPost("phone");
         $adreca_fisica = $this->request->getPost("adress");
         $nom_persona_contacte = "";
-        $correu_persona_contacte = "a" . $this->request->getPost("code") . "@xtec.cat";
+        $correu_persona_contacte = "";
         $id_sstt = session('user')['code'];
         $id_poblacio = $this->request->getPost("population");
 
@@ -342,7 +342,6 @@ class InstitutesController extends BaseController
 
         $sstt = new SSTTModel();
 
-
         $data = [
             "institute" => $modelInstitute->getInstituteById($id),
             "populations" => $populations->getAllPopulations(),
@@ -358,7 +357,7 @@ class InstitutesController extends BaseController
 
         $model = new CentreModel();
         helper('form');
-
+    
         $validationRules =
             [
                 'code' => [
@@ -413,19 +412,19 @@ class InstitutesController extends BaseController
         if ($this->validate($validationRules)) {
 
             $data = [
-                "codi" =>  $this->request->getPost("code"),
+                "codi" => $this->request->getPost("code"),
                 "nom" => $this->request->getPost("name"),
                 "actiu" =>  intval($this->request->getPost("active")),
                 "taller" => intval($this->request->getPost("work")),
                 "telefon" => $this->request->getPost("phone"),
                 "adreca_fisica" => $this->request->getPost("adress"),
-                "id_sstt" =>  $this->request->getPost("sstt"),
+                "id_sstt" =>  session('user')['code'],
                 "id_poblacio" => $this->request->getPost("population"),
             ];
 
+            // dd($data);
 
-
-            $model->modifyInstitute($id, $data);
+            $model->modifyInstitute($this->request->getPost("code"), $data);
 
             return redirect()->to(base_url('/institutes'));
         }

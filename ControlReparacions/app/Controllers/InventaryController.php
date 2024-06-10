@@ -149,6 +149,8 @@ class InventaryController extends BaseController
         // Forzamos el json_decode
         $arrInventory = json_decode((string) $arrInventory);
 
+        // dd($arrInventory);
+
         // Creamos un array que irá almacenando los inputs erróneos
         $arrErrors = [];
 
@@ -159,15 +161,19 @@ class InventaryController extends BaseController
             $id_tipus_inventari = $inventory[1]->id_type;
             $nom_inventari = $inventory[2]->name;
             $preu_inventari =  $inventory[3]->price;
+            $data_compra =  $inventory[4]->shop_date;
 
             if ($id_tipus_inventari == null || $id_tipus_inventari == '') {
                 $arrErrors[$id_inventory]["id_type"] = lang('error.id_type');
             }
             if ($nom_inventari == null || $nom_inventari == '') {
-                $arrErrors[$id_inventory]["name"] = lang('error.name');
+                $arrErrors[$id_inventory]["name"] = lang('error.nameContact');
             }
             if ($preu_inventari == null || $preu_inventari == '') {
-                $arrErrors[$id_inventory]["price"] = lang('error.price');
+                $arrErrors[$id_inventory]["price"] = lang('error.wrong_price');
+            }
+            if ($data_compra == null || $data_compra == '') {
+                $arrErrors[$id_inventory]["shop_date"] = lang('error.shop_date');
             }
 
         }
@@ -190,7 +196,7 @@ class InventaryController extends BaseController
             $id = LibrariesUUID::v4();
             $id_tipus_inventari = $inventory[1]->id_type;
             $nom = $inventory[2]->name;
-            $data_compra = date('Y-m-d');
+            $data_compra = $inventory[4]->shop_date??date('Y-m-d');
             $preu = $inventory[3]->price;
             $codi_centre = session('user')['code'];
 

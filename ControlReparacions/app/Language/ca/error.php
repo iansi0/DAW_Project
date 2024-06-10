@@ -17,7 +17,7 @@ return [
     'empty_slot_2'      => 'Aquest camp no pot estar buit',
     'wrong_slot'        => 'Hi han camps incorrectes',
     'wrong_email'       => 'Format email incorrecte',
-    'wrong_numeric'       => 'Format telefon incorrecte',
+    'wrong_numeric'     => 'Format telefon incorrecte',
     'wrong_price'       => 'Format preu incorrecte',
 
     'empty'             => 'No s\'ha trobat cap element',
@@ -34,4 +34,5 @@ return [
     'description'       => 'La descripció és incorrecta o està buida',
     'nameContact'       => 'El nom de contacte és incorrecte o està buit',
     'emailContact'      => 'El correu de contacte és incorrecte o està buit',
+    'shop_date'         => 'La data de compra és incorrecta o està buida',
 ];

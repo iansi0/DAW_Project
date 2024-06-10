@@ -98,6 +98,9 @@ class InventariModel extends Model
         } else if ($role == "sstt") {
             $this->where("centre_reparador.id_sstt", $code)->orWhere("centre_emissor.id_sstt", $code);
         } 
+
+        $this->orderBy('inventari.data_compra', 'desc');
+
         return $this;
     }
 
@@ -122,6 +125,8 @@ class InventariModel extends Model
         $this->where('id_intervencio', null);
         if (session('user')['role'] == 'prof' || session('user')['role'] == 'ins' || session('user')['role'] == 'alumn')$this->where('codi_centre', session('user')['code']);
 
+        $this->orderBy('data_compra', 'desc');
+
         return $this;
     }
 
@@ -130,6 +135,7 @@ class InventariModel extends Model
         $this->select('id, nom');
         $this->where('id_intervencio', $id);
         if (session('user')['role'] == 'prof' || session('user')['role'] == 'centre' || session('user')['role'] == 'alumn')$this->where('codi_centre', session('user')['code']);
+        $this->orderBy('data_compra', 'desc');
 
         return $this;
     }
