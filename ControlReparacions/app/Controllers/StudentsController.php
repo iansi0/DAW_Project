@@ -215,7 +215,39 @@ class StudentsController extends BaseController
     {
         helper('form');
 
-        return view('course');
+        $modelCurs = new CursModel();
+
+        $table = new \CodeIgniter\View\Table();
+        $table->setHeading(
+            mb_strtoupper(lang('titles.cursos_exist'), 'utf-8'),
+        );
+
+        $template = [
+            'table_open'  => "<table class='w-80 rounded-t-2xl text-xl shadow-xl overflow-hidden '>",
+
+            'thead_open'  => "<thead class='py-5 bg-primario text-secundario '>",
+
+            'heading_cell_start' => "<th class='py-6 text-xl'>",
+
+            'row_start' => "<tr class='border-b-[0.01px] py-2'>",
+            'row_alt_start' => "<tr class='border-b-[0.01px] py-2 bg-[#F7F4EF]'>",
+        ];
+
+        $table->setTemplate($template);
+
+        $data = [
+            "courses" => $modelCurs->getAllCourses(),
+            'table' => $table,
+        ];
+
+        foreach ($data['courses'] as $curso) {
+
+            $table->addRow(
+                $curso['any'] . " " . $curso['titol'] . " " . $curso['clase'] ,
+            );
+        }
+
+        return view('course', $data);
     }
     public function addCourse()
     {
@@ -241,14 +273,14 @@ class StudentsController extends BaseController
                         'required' => lang('error.empty_slot_2'),
                     ],
                 ],
-                
+
             ];
 
 
         if ($this->validate($validationRules)) {
 
             $cursModel = new CursModel();
-        
+
             $fake = Factory::create("es_ES");
 
             $id = $fake->uuid();
@@ -256,9 +288,8 @@ class StudentsController extends BaseController
             $any = $this->request->getPost("year");
             $titol = $this->request->getPost("name");
             $codi_centre = session()->get('user')['code'];
-        
-            $cursModel->addCurs($id, $clase, $any, $titol, $codi_centre);
 
+            $cursModel->addCurs($id, $clase, $any, $titol, $codi_centre);
         } else {
             return redirect()->back()->withInput();
         }
@@ -322,7 +353,7 @@ class StudentsController extends BaseController
 
         if ($this->validate($validationRules)) {
 
-            
+
             $student = [
                 "nom"     => $this->request->getPost("name"),
                 "cognoms"     => $this->request->getPost("surnames"),

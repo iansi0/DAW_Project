@@ -91,5 +91,7 @@ return [
     'start'         => 'Començat',
     'end'           => 'Acabat',
 
+    'cursos_exist'           => 'Afegits',
+
     
 ];
