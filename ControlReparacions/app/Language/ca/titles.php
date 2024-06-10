@@ -80,9 +80,12 @@ return [
 
     'locations'     => 'Localitats',
     'comarca'     => 'Comarca',
+    'poblacio'     => 'Població',
     'locations_1'     => 'Comarques',
     'locations_2'     => 'Poblacions',
-    'poblation'     => 'Població',
+    'n_locations_1'      => 'Afegir Comarca',
+    'n_locations_2'      => 'Afegir Població',
+
 
     'start'         => 'Començat',
     'end'           => 'Acabat',
