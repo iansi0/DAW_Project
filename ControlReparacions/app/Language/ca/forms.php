@@ -32,6 +32,7 @@ return [
     'cp'            => 'Codi Postal',
     'local'         => 'Localitat',
     'pobl'          => 'Població',
+    'coma'          => 'Comarca',
 
     's_sstt'        => 'Escull Servei Territorial',
     's_ins'         => 'Escull Centre',
@@ -41,6 +42,7 @@ return [
     's_int'         => 'Escull Intervenció',
     's_disp'        => 'Escull Dispositiu',
     's_pobl'        => 'Escull Població',
+    's_coma'        => 'Escull Comarca',
     's_cycle'       => 'Escull Cicle Formatiu',
     's_course'      => 'Escull Curs',
     's_role'        => 'Escull Rol',

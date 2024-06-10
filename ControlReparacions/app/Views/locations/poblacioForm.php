@@ -4,7 +4,7 @@
 <div>
     <div class="flex">
 
-        <h1 class="text-5xl text-primario"><?= strtoupper(lang("titles.n_ins")) ?></h1>
+        <h1 class="text-5xl text-primario"><?= strtoupper(lang("titles.n_locations_2")) ?></h1>
 
     </div>
 
@@ -25,7 +25,7 @@
         <div class="shadow-xl border-b border-primario rounded-t-xl">
 
             <div class="col-span-12 text-left mb-3 bg-primario text-white rounded-t-lg p-4">
-                <h2 class="text-2xl font-semibold"><?= mb_strtoupper(lang('titles.ins_2')) ?></h2>
+                <h2 class="text-2xl font-semibold"><?= mb_strtoupper(lang('titles.poblacio')) ?></h2>
             </div>
 
             <div class="grid grid-cols-12 mt-2 p-4">
@@ -54,9 +54,9 @@
 
                     <!-- Comarca  -->
                     <div class="col-span-5 grid-cols-12 text-left px-2">
-                        <label class="font-semibold text-primario"><?= mb_strtoupper(lang("forms.pobl")) ?>*</label>
+                        <label class="font-semibold text-primario"><?= mb_strtoupper(lang("forms.coma")) ?>*</label>
                         <select name="population" id="" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
-                            <option value="" disabled selected hidden><?= lang("forms.s_pobl") ?></option>
+                            <option value="" disabled selected hidden><?= lang("forms.s_coma") ?></option>
                             <?php
                             foreach ($comarcas as $comarca) {
                                 echo "<option value='" . $comarca["codi"] . "'>" . $comarca["nom"] . "</option>";

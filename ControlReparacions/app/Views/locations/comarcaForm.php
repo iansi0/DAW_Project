@@ -4,7 +4,7 @@
 <div>
     <div class="flex">
 
-        <h1 class="text-5xl text-primario"><?= strtoupper(lang("titles.n_ins")) ?></h1>
+        <h1 class="text-5xl text-primario"><?= strtoupper(lang("titles.n_locations_1")) ?></h1>
 
     </div>
 
@@ -25,7 +25,7 @@
         <div class="shadow-xl border-b border-primario rounded-t-xl">
 
             <div class="col-span-12 text-left mb-3 bg-primario text-white rounded-t-lg p-4">
-                <h2 class="text-2xl font-semibold"><?=mb_strtoupper(lang('titles.ins_2'))?></h2>
+                <h2 class="text-2xl font-semibold"><?=mb_strtoupper(lang('titles.comarca'))?></h2>
             </div>
 
             <div class="grid grid-cols-12 mt-2 p-4">
@@ -33,7 +33,7 @@
                 <div class="col-span-12 grid grid-cols-12">
 
                     <!-- codi  -->
-                    <div class="col-span-3 grid-cols-12 text-left px-2">
+                    <div class="col-span-4 grid-cols-12 text-left px-2">
                         <label class="font-semibold text-primario"><?= mb_strtoupper(lang("forms.code")) ?>*</label>
                         <input type="text" name="code" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
                         <?php
@@ -43,7 +43,7 @@
                     </div>
 
                     <!-- nom  -->
-                    <div class="col-span-6 grid-cols-12 text-left px-2">
+                    <div class="col-span-8 grid-cols-12 text-left px-2">
                         <label class="font-semibold text-primario"><?= mb_strtoupper(lang("forms.name")) ?>*</label>
                         <input type="text" name="name" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
                         <?php
