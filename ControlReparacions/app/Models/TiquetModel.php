@@ -210,9 +210,20 @@ class TiquetModel extends Model
                 $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
         }else if($role=="sstt"){
+            $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", $code)->find();
+            foreach ($a as &$value) {
+                $value = $value['codi'];
+            }
+            $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", $code)->find();
+            foreach ($b as &$value) {
+                $value = $value['codi'];
+            }
+
             $this->groupStart();
-                $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+                $this->whereIn("tiquet.codi_centre_reparador", $a);
+                $this->orWhereIn("tiquet.codi_centre_emissor", $b);
             $this->groupEnd();
+            
         }else{
             return; 
         }
@@ -240,10 +251,20 @@ class TiquetModel extends Model
                 $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
         }else if($role=="sstt"){
+            
+            $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", $code)->find();
+            foreach ($a as &$value) {
+                $value = $value['codi'];
+            }
+            $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", $code)->find();
+            foreach ($b as &$value) {
+                $value = $value['codi'];
+            }
+
             $this->groupStart();
-            $this->where('codi_centre_reparador IN (SELECT codi FROM centre WHERE id_sstt = \'' . $code . '\')')->orWhere('codi_centre_emissor IN (SELECT codi FROM centre WHERE id_sstt = \'' . $code . '\')');
+                $this->whereIn("tiquet.codi_centre_reparador", $a);
+                $this->orWhereIn("tiquet.codi_centre_emissor", $b);
             $this->groupEnd();
-            // dd("hola");
 
         }else{
             return;
@@ -261,8 +282,24 @@ class TiquetModel extends Model
         $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
 
-        if ($role=="admin" || $role=="sstt") {
+        if ($role=="admin") {
             return $this->set($data)->update();
+        } else if ($role=="sstt"){
+
+            $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", session('user')['code'])->find();
+            foreach ($a as &$value) {
+                $value = $value['codi'];
+            }
+            $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", session('user')['code'])->find();
+            foreach ($b as &$value) {
+                $value = $value['codi'];
+            }
+
+            $this->groupStart();
+                $this->whereIn("tiquet.codi_centre_reparador", $a);
+                $this->orWhereIn("tiquet.codi_centre_emissor", $b);
+            $this->groupEnd();
+
         }else{
             return;
         }
@@ -274,26 +311,35 @@ class TiquetModel extends Model
 
         $state = htmlspecialchars($state);
 
-        $role=session()->get('user')['role'];
-        $code=session()->get('user')['code'];
+        $role = session()->get('user')['role'];
+        $code = session()->get('user')['code'];
 
         $this->where('id', $id);
-        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
-        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
 
-        if ($role=="admin") {
-            $this;
-        }else if($role=="prof" || $role=="ins"){
+        if($role=="prof" || $role=="ins"){
             $this->groupStart();
-            $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+                $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
         }else if($role=="sstt"){
+
+            $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", $code)->find();
+            foreach ($a as &$value) {
+                $value = $value['codi'];
+            }
+            $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", $code)->find();
+            foreach ($b as &$value) {
+                $value = $value['codi'];
+            }
+
             $this->groupStart();
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+                $this->whereIn("tiquet.codi_centre_reparador", $a);
+                $this->orWhereIn("tiquet.codi_centre_emissor", $b);
             $this->groupEnd();
-        }else{
+
+        }else if ($role!="admin") {
             return;
         }
+
         return $this->set(['id_estat' => $state])->update();
 
     }
@@ -303,7 +349,6 @@ class TiquetModel extends Model
     {
         $role=session()->get('user')['role'];
         $code=session()->get('user')['code'];
-
 
         $this->select(["
             tiquet.id AS id, 

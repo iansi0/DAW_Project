@@ -71,6 +71,7 @@ return [
     'info'          => 'Informació',
     'assign_to'     => 'Assignar a',
     'apply'         => 'Aplicar',
+    'quantity'      => 'Quantitat',
     
     'year'         => 'Any Escolar',
     'class'        => 'Classe',

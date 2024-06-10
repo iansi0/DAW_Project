@@ -117,7 +117,7 @@
 
         // Input precio
         let div_input_ec = document.createElement('div');
-        div_input_ec.classList = 'col-span-4 pe-2 text-left mt-2';
+        div_input_ec.classList = 'col-span-2 pe-2 text-left mt-2';
         label = document.createElement('label');
         label.classList = 'font-semibold text-primario';
         label.innerText = '<?= mb_strtoupper(lang("forms.price")) ?>*';
@@ -126,6 +126,7 @@
         input_ec.classList = 'border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150';
         input_ec.name = 'price';
         input_ec.type = 'number';
+        input_ec.value = '1';
 
         // Añadimos el label e input al div
         div_input_ec.appendChild(label);
@@ -141,17 +142,38 @@
         label.classList = 'font-semibold text-primario';
         label.innerText = '<?= mb_strtoupper(lang("forms.shop_date")) ?>*';
 
-        input_ec = document.createElement('input')
-        input_ec.classList = 'border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150';
-        input_ec.name = 'shop_date';
-        input_ec.type = 'date';
+        input_fc = document.createElement('input')
+        input_fc.classList = 'border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150';
+        input_fc.name = 'shop_date';
+        input_fc.type = 'date';
 
         // Añadimos el label e input al div
         div_input_fc.appendChild(label);
-        div_input_fc.appendChild(input_ec);
+        div_input_fc.appendChild(input_fc);
 
         // Añadimos todo al div del formulario
         row.appendChild(div_input_fc);
+
+        // Input Cantidad
+        let div_input_q = document.createElement('div');
+        div_input_q.classList = 'col-span-2 pe-2 text-left mt-2';
+        label = document.createElement('label');
+        label.classList = 'font-semibold text-primario';
+        label.innerText = '<?= mb_strtoupper(lang("forms.quantity")) ?>*';
+
+        input_q = document.createElement('input')
+        input_q.classList = 'border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150';
+        input_q.name = 'quantity';
+        input_q.type = 'number';
+        input_q.min = '1';
+        input_q.value = '1';
+
+        // Añadimos el label e input al div
+        div_input_q.appendChild(label);
+        div_input_q.appendChild(input_q);
+
+        // Añadimos todo al div del formulario
+        row.appendChild(div_input_q);
 
         div_form.appendChild(row);
         
@@ -300,7 +322,7 @@
                 arrInputs.push(tmp);
 
                 // Comprobación de inputs
-                if (value == '' || value == null) {
+                if (value == '' || value == null || value == 0) {
                     error = true;
                     let error_msg = document.createElement('p');
                     error_msg.classList = 'error font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
