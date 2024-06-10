@@ -24,12 +24,12 @@
       <!-- <button id='btn_filters' onclick='toggleFilters()' class="bg-primario text-white px-2 py-1 border border-terciario-4 hover:bg-red-300 cursor-pointer hover:text-terciario-4 rounded-lg transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-filter"></i></button> -->
       <!-- BUTTON ADD TICKET -->
       <a href="<?= base_url('institutes/add') ?>">
-        <button id='add-ticket' class="bg-primario text-white px-2 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-plus"></i></button>
+        <button id='add-ticket' class="bg-primario text-base font-semibold text-white px-3 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?=lang('buttons.add')?> <?=lang('titles.ins_2')?></button>
       </a>
     </div>
 
     <div class="relative">
-      <button id="dropdownDefaultButton" class="text-secundario text-lg font-semibold  bg-primario hover:bg-terciario-4 rounded-lg px-7 py-1.5 text-center inline-flex items-center transition hover:ease-in ease-out duration-250" type="button">
+      <button id="dropdownDefaultButton" class="text-secundario text-base font-semibold  bg-primario hover:bg-terciario-4 rounded-lg px-7 py-1.5 text-center inline-flex items-center transition hover:ease-in ease-out duration-250" type="button">
         Importar | Exportar
         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
@@ -39,11 +39,11 @@
       <!-- Dropdown menu -->
       <div id="dropdown" class="absolute hidden z-10 w-full bg-white divide-y divide-gray-100  transition hover:ease-in ease-out duration-250">
 
-        <ul class="rounded-lg flex flex-col shadow-lg border border-primario text-lg text-terciario-4 " aria-labelledby="dropdownDefaultButton">
+        <ul class="rounded-lg flex flex-col shadow-lg border border-primario text-base text-terciario-4 " aria-labelledby="dropdownDefaultButton">
 
           <!-- Export CSV  -->
           <li>
-            <a href="<?= base_url('institutes/export/csv') ?>" class="rounded-t-md transition hover:ease-in ease-out duration-250 block px-4 py-1 hover:bg-primario hover:text-secundario">
+            <a href="<?= base_url('institutes/export/csv') ?>" class="rounded-t-md transition hover:ease-in ease-out duration-250 block px-4 py-2 hover:bg-primario hover:text-secundario">
               <?= lang('buttons.export') . " CSV" ?>
             </a>
           </li>

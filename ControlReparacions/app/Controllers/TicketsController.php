@@ -122,63 +122,64 @@ class TicketsController extends BaseController
             "<div class='relative  w-full'>" .
                 mb_strtoupper(lang('titles.status'), 'utf-8') . "&nbsp; <i class='fa-solid  fa-circle-info peer'></i>
 
+                <div class='absolute w-48 px-3 py-2 z-50  flex-col gap-1  bg-secundario border shadow-xl border-primario  rounded-lg  hidden  peer-hover:flex '>
                 <div class='absolute  w-48 px-3 py-2  flex-col gap-1 left-1/2 transform -translate-x-1/2  bg-secundario border-2 border-terciario-1  rounded-lg  hidden  peer-hover:flex '>
 
                     <div class='flex items-center'>
-                        <span class='size-3 inline-block estat_0 rounded-full me-2 dark:bg-white'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>Desguaçat</span>
+                        <span class='size-3 inline-block estat_0 rounded-full me-2'></span>
+                        <span class='text-terciario-4   '>Desguaçat</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_1 rounded-full me-2'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>Espatllat</span>
+                        <span class='text-terciario-4   '>Espatllat</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_2 rounded-full me-2'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>Espatllat Recollit</span>
+                        <span class='text-terciario-4   '>Espatllat Recollit</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_3 rounded-full me-2'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>Espatllat Enviat</span>
+                        <span class='text-terciario-4   '>Espatllat Enviat</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_4 rounded-full me-2'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>Espatllat Entregat</span>
+                        <span class='text-terciario-4   '>Espatllat Entregat</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_5 rounded-full me-2 dark:blue-500'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>Espera Reparació</span>
+                        <span class='text-terciario-4   '>Espera Reparació</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_6 rounded-full me-2'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>Reparació</span>
+                        <span class='text-terciario-4   '>Reparació</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_7 rounded-full me-2'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>Revisio</span>
+                        <span class='text-terciario-4   '>Revisio</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_8 rounded-full me-2'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>Reparat</span>
+                        <span class='text-terciario-4   '>Reparat</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_9 rounded-full me-2'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>Reparat Recollit</span>
+                        <span class='text-terciario-4   '>Reparat Recollit</span>
                     </div>
                      <div class='flex items-center'>
                         <span class='size-3 inline-block estat_10 rounded-full me-2'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>Reparat Enviat</span>
+                        <span class='text-terciario-4   '>Reparat Enviat</span>
                     </div>
                      <div class='flex items-center'>
                         <span class='size-3 inline-block estat_11 rounded-full me-2'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>Finalitzat</span>
+                        <span class='text-terciario-4   '>Finalitzat</span>
                     </div>
                      <div class='flex items-center'>
                         <span class='size-3 inline-block estat_12 rounded-full me-2'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>SSTT</span>
+                        <span class='text-terciario-4   '>SSTT</span>
                     </div>
                      <div class='flex items-center'>
                         <span class='size-3 inline-block estat_13 rounded-full me-2'></span>
-                        <span class='text-gray-600 dark:text-neutral-400'>Rebutjat</span>
+                        <span class='text-terciario-4   '>Rebutjat</span>
                     </div>
                 </div>
 
@@ -189,14 +190,14 @@ class TicketsController extends BaseController
 
         // TEMPLATE
         $template = [
-            'table_open'  => "<table class='w-full rounded-t-2xl overflow-hidden '>",
+            'table_open'  => "<table class='w-full rounded-t-2xl   shadow-xl overflow-hidden  '>",
 
-            'thead_open'  => "<thead class='bg-primario text-secundario '>",
+            'thead_open'  => "<thead class='py-5 bg-primario text-secundario  '>",
 
-            'heading_cell_start' => "<th class='py-3 text-base'>",
+            'heading_cell_start' => "<th class='py-6 text-base'>",
 
-            'row_start' => "<tr class='border-b-[0.01px] '>",
-            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-[#F7F4EF]'>",
+            'row_start' => "<tr class='border-b-[0.01px] py-2'>",
+            'row_alt_start' => "<tr class='border-b-[0.01px] py-2 bg-[#F7F4EF]'>",
         ];
         $table->setTemplate($template);
 
@@ -233,8 +234,8 @@ class TicketsController extends BaseController
 
                     [
                         "data" =>
-                        "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
-                         <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
+                        "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2 btn mt-2 btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
+                         <a href='$buttonUpdate' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
                          <a onclick='(function() { Swal.fire({
                             customClass:{htmlContainer: ``,},
                             title: `" . lang('alerts.sure') . "`,
@@ -260,9 +261,9 @@ class TicketsController extends BaseController
         
                                 });
                             }
-                          }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
+                          }); })()' class='p-2 btn  mt-2  btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
 
-                        "class" => " p-5 flex h-16 justify-between items-center"
+                        "class" => " p-3 h-16 "
                     ],
 
                 );
@@ -282,10 +283,10 @@ class TicketsController extends BaseController
 
                     [
                         "data" =>
-                        "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
-                         <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>",
+                        "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
+                         <a href='$buttonUpdate' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>",
 
-                        "class" => " p-5 flex h-16 justify-between items-center"
+                         "class" => " p-3 h-16 "
                     ],
 
                 );
@@ -305,9 +306,9 @@ class TicketsController extends BaseController
 
                     [
                         "data" =>
-                        "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>",
+                        "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>",
 
-                        "class" => " p-5 flex h-16 justify-between items-center"
+                        "class" => " p-3 h-16 "
                     ],
 
                 );
@@ -354,6 +355,10 @@ class TicketsController extends BaseController
         ];
         $table->setTemplate($template);
 
+        // If per mirar que no entri gent que no te permisos.
+        if (!$modelTickets->viewTicket($id)) {
+            return redirect()->back();
+        }
         $data = [
             'ticket' => $modelTickets->viewTicket($id),
             'interventions' => $modelInterventions->getInterventions($id),
@@ -416,7 +421,6 @@ class TicketsController extends BaseController
         }
 
         $data += ['totalPrice' => $totalPrice,];
-
         session()->setFlashdata('ticket_id', $id);
 
         return view('tickets/ticketInfo', $data);
@@ -445,7 +449,6 @@ class TicketsController extends BaseController
         // Forzamos el json_decode
         $arrTickets = json_decode((string) $arrTickets);
 
-        // dd($arrTickets);
 
         // Creamos un array que irá almacenando los inputs erróneos
         $arrErrors = [];
@@ -558,9 +561,9 @@ class TicketsController extends BaseController
 
     public function modifyTicket_post($id)
     {
+        helper('form');
 
         $model = new TiquetModel();
-        helper('form');
         $validationRules =
             [
                 'description' => [
@@ -900,7 +903,6 @@ class TicketsController extends BaseController
     //             if (!$firstLine) {
 
     //                 echo $row[0];
-    //                 dd('hola');
 
     //                 $fake = Factory::create("es_ES");
 
@@ -944,7 +946,6 @@ class TicketsController extends BaseController
         // Establecer la ruta del archivo
         $rutaArchivo = WRITEPATH . 'plantilles' . DIRECTORY_SEPARATOR . 'plantilla_tiquets.csv';
 
-        // dd($rutaArchivo);
 
         // Comprobar si el archivo existe
         if (!file_exists($rutaArchivo)) {
@@ -971,7 +972,6 @@ class TicketsController extends BaseController
         // Establecer la ruta del archivo
         $rutaArchivo = WRITEPATH . 'plantilles' . DIRECTORY_SEPARATOR . 'plantilla_tiquets.xls';
 
-        // dd($rutaArchivo);
 
         // Comprobar si el archivo existe
         if (!file_exists($rutaArchivo)) {

@@ -14,7 +14,7 @@ class Reboot extends Migration
             CREATE EVENT IF NOT EXISTS reboot_prof_and_alumn_event
             ON SCHEDULE
                 EVERY 1 YEAR
-                STARTS '2024-08-31 00:00:00'
+                STARTS '2024-08-31 01:00:00'
             DO
             BEGIN
                 UPDATE alumne SET deleted_at = NOW() WHERE deleted_at IS NULL;
