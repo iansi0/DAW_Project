@@ -211,6 +211,60 @@ class StudentsController extends BaseController
 
         return redirect()->to(base_url('/students'));
     }
+    public function courseForm()
+    {
+        helper('form');
+
+        return view('course');
+    }
+    public function addCourse()
+    {
+        helper('form');
+
+        $validationRules =
+            [
+                'class' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'year' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'name  ' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                
+            ];
+
+
+        if ($this->validate($validationRules)) {
+
+            $cursModel = new CursModel();
+        
+            $fake = Factory::create("es_ES");
+
+            $id = $fake->uuid();
+            $clase = $this->request->getPost("class");
+            $any = $this->request->getPost("year");
+            $titol = $this->request->getPost("name");
+            $codi_centre = session()->get('user')['code'];
+        
+            $cursModel->addCurs($id, $clase, $any, $titol, $codi_centre);
+
+        } else {
+            return redirect()->back()->withInput();
+        }
+
+        return redirect()->to(base_url('/students'));
+    }
 
     public function modifyStudent($id)
     {
