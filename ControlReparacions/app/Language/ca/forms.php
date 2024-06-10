@@ -68,6 +68,9 @@ return [
     'info'          => 'Informació',
     'assign_to'     => 'Assignar a',
     'apply'         => 'Aplicar',
+    
+    'year'         => 'Any Escolar',
+    'class'        => 'Classe',
 
     'required_slot' => 'Els camps marcats amb ( * ) són obligatoris',
 

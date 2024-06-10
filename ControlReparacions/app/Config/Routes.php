@@ -59,7 +59,9 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
     $routes->GET('labels', 'PDFController::labels');
 
     $routes->GET('pdf/(:segment)', 'PDFController::index/$1');
-
+    
+    $routes->GET('course/add', 'StudentsController::courseForm');
+    $routes->POST('course/add', 'StudentsController::addCourse');
     // INTERVENTIONS
     $routes->group('intervention', function ($routes) {
         $routes->GET('', 'InterventionController::intervention');

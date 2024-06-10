@@ -224,7 +224,7 @@ class StudentsController extends BaseController
         $validationRules =
             [
                 'class' => [
-                    'rules'  => 'required|valid_email',
+                    'rules'  => 'required',
                     'errors' => [
                         'required' => lang('error.empty_slot_2'),
                     ],
@@ -235,7 +235,7 @@ class StudentsController extends BaseController
                         'required' => lang('error.empty_slot_2'),
                     ],
                 ],
-                'title  ' => [
+                'name  ' => [
                     'rules'  => 'required',
                     'errors' => [
                         'required' => lang('error.empty_slot_2'),
@@ -248,22 +248,15 @@ class StudentsController extends BaseController
         if ($this->validate($validationRules)) {
 
             $cursModel = new CursModel();
-          
-
+        
             $fake = Factory::create("es_ES");
 
             $id = $fake->uuid();
-            $clase = $this->request->getPost("name");
-            $any = $this->request->getPost("surnames");
-            $titol = $this->request->getPost("course");
+            $clase = $this->request->getPost("class");
+            $any = $this->request->getPost("year");
+            $titol = $this->request->getPost("name");
             $codi_centre = session()->get('user')['code'];
-
-            $user = $this->request->getPost("email");
-            $passwd = $fake->password();
-            $passwd_hash = password_hash($passwd, PASSWORD_DEFAULT);
-            $lang = "ca";
-
-
+        
             $cursModel->addCurs($id, $clase, $any, $titol, $codi_centre);
 
         } else {
