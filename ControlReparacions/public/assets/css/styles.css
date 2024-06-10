@@ -1969,6 +1969,16 @@ video {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #B3B3B3
+}
+
 /* Desguaçat */
 
 .estat_0{
