@@ -25,12 +25,18 @@
                     <!-- BUTTON SHOW FILTERS -->
                     <!-- <button id='btn_filters' onclick='toggleFilters()' class="bg-primario text-white px-2 py-1 border border-terciario-4 hover:bg-red-300 cursor-pointer hover:text-terciario-4 rounded-lg transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-filter"></i></button> -->
                     <!-- BUTTON ADD TICKET -->
-                    <a href="<?= base_url('institutes/add') ?>">
-                        <button id='add-ticket' class="bg-primario text-base font-semibold text-white px-3 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('buttons.add') ?> <?= lang('titles.ins_2') ?></button>
-                    </a>
+                    <?php if ($filter == 'comarca') : ?>
+                        <a href="<?= base_url('locations/add/comarca') ?>">
+                            <button id='add-ticket' class="bg-primario text-base font-semibold text-white px-3 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('buttons.add') ?> <?= lang('titles.comarca') ?></button>
+                        </a>
+                    <?php else : ?>
+                        <a href="<?= base_url('locations/add/poblacio') ?>">
+                            <button id='add-ticket' class="bg-primario text-base font-semibold text-white px-3 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('buttons.add') ?> <?= lang('titles.poblation') ?></button>
+                        </a>
+                    <?php endif ?>
                 </div>
 
-                <div class="flex text-4xl align-right  gap-3">
+                <div class="flex text-4xl align-right  text-primario gap-3">
                     <a class="hover:font-bold transition hover:ease-in ease-out duration-250 <?= $filter == 'comarca' ? " font-bold" : "" ?>" href="<?= base_url('locations/filterComarca') ?>"><?= lang('titles.locations_1') ?></a>
                     <span class="overflow-hidden">&nbsp;|&nbsp;</span>
                     <a class="hover:font-bold transition hover:ease-in ease-out duration-250 <?= $filter == 'poblacio' ? " font-bold" : "" ?>" href="<?= base_url('locations/filterPoblacio') ?>"><?= lang('titles.locations_2') ?></a>

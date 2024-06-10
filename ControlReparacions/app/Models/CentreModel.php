@@ -141,6 +141,9 @@ class CentreModel extends Model
     public function getCostByRepairCenter()
     {
 
+        $role = session()->get('user')['role'];
+        $code = session()->get('user')['code'];
+
         $this->select('
         centre.nom as name,
         SUM(inventari.preu) as count,
@@ -150,7 +153,16 @@ class CentreModel extends Model
         $this->join('inventari', 'inventari.id_intervencio = intervencio.id');
 
         $this->orderBy('count', 'DESC');
-
+        if ($role == "admin") {
+            $this;
+        } else if ($role == "prof" || $role == "alumn") {
+            $this->where("centre.codi", $code);
+        } else if ($role == "sstt") {
+            $this->where("centre.id_sstt", $code);
+        } else if ($role == "ins") {
+            $this->where("centre.codi", $code);
+        }
+        
         return $this->findAll();
     }
 

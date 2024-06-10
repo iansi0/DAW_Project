@@ -27,7 +27,7 @@ class LocationsController extends BaseController
 
             'thead_open'  => "<thead class='bg-primario text-secundario'>",
 
-            'heading_cell_start' => "<th class='py-3 text-base'>",
+            'heading_cell_start' => "<th class='py-6 text-base'>",
 
             'row_start' => "<tr class='border-b-[0.01px] '>",
             'row_alt_start' => "<tr class='border-b-[0.01px]  bg-[#F7F4EF]'>",
