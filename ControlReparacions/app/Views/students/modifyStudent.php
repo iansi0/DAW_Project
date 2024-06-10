@@ -8,7 +8,7 @@
 
     </div>
 
-    <form action="add" method="POST" class="mt-4 flex flex-col gap-2 px-20" enctype="multipart/form-data">
+    <form id="form" action="add" method="POST" class="mt-4 flex flex-col gap-2 px-20" enctype="multipart/form-data">
         <!-- BOTONES -->
         <div class="flex justify-end align-middle">
 
@@ -29,6 +29,7 @@
 
             <div class="grid grid-cols-12 mt-2 p-4">
 
+            <input type="text" value="<?= $student['id_user'] ?>" name="id" hidden>
                 <div class="col-span-12 grid grid-cols-12">
                     <!-- Nombre  -->
                     <div class="col-span-6 grid-cols-12 text-left px-2">

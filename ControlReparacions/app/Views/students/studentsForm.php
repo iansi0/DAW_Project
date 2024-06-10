@@ -8,7 +8,7 @@
 
     </div>
 
-    <form action="add" method="POST" class="mt-4 flex flex-col gap-2 px-20" enctype="multipart/form-data">
+    <form id="form" action="add" method="POST" class="mt-4 flex flex-col gap-2 px-20" enctype="multipart/form-data">
         <!-- BOTONES -->
         <div class="flex justify-end align-middle">
 
@@ -17,7 +17,7 @@
                             : base_url('/students');
                         ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 mr-3 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel") ?></a>
 
-            <input type="submit" value="<?= lang("buttons.save") ?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
+            <input type="submit" id="submitButton" value="<?= lang("buttons.save") ?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
         
         </div>
 

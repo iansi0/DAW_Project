@@ -283,7 +283,7 @@ class StudentsController extends BaseController
         return view('students/modifyStudent', $data);
     }
 
-    public function modifyStudent_post($id)
+    public function modifyStudent_post()
     {
 
         helper('form');
@@ -322,22 +322,21 @@ class StudentsController extends BaseController
 
         if ($this->validate($validationRules)) {
 
+            
             $student = [
-                "id_user" => $id,
                 "nom"     => $this->request->getPost("name"),
                 "cognoms"     => $this->request->getPost("surnames"),
                 "id_curs"     => $this->request->getPost("course"),
 
             ];
 
-            $modelStudent->modifyStudent($id, $student);
+            $modelStudent->modifyStudent($this->request->getPost("id"), $student);
 
             $user = [
-                'id' => $id,
                 'user' => $this->request->getPost("email"),
             ];
 
-            $modelUser->modifyUser($id, $user);
+            $modelUser->modifyUser($this->request->getPost("id"), $user);
 
             return redirect()->to(base_url('/students'));
         }
