@@ -78,6 +78,10 @@ return [
     'n_material'   => 'Afegir Material',
     'e_material'   => 'Modificar Material',
 
+    'locations'     => 'Localitats',
+
     'start'         => 'Començat',
     'end'           => 'Acabat',
+
+    
 ];
