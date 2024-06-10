@@ -1,86 +1,96 @@
 <?= $this->extend('layouts/master.php') ?>
 <?= $this->section('content') ?>
 
-<h1 class="text-5xl text-primario mt-14"><?= lang("titles.e_students") ?></h1>
+<div>
+    <div class="flex">
 
-<section style="view-transition-name: addTicket;" class=" mx-auto px-4 py-8 mt-10 text-base">
-    <form id="form" action="<?= $student['id_user'] ?>" method="POST" class="flex flex-col gap-20">
-        <?= csrf_field() ?>
+        <h1 class="text-5xl text-primario"><?= strtoupper(lang("titles.e_students")) ?></h1>
 
-        <div class="grid grid-cols-3 gap-x-2 gap-y-2">
+    </div>
 
-            <!-- Correo  -->
-            <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.email") ?>*</label>
-                <input type="mail" name="email" value="<?= $student['correo'] ?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
-                <?php
-                if (isset(validation_errors()['email'])) : ?>
-                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['email'] ?></p>
-                <?php endif ?>
-            </div>
-
-            <!-- Nombre  -->
-            <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.name") ?>*</label>
-                <input type="text" name="name" value="<?= $student['nom'] ?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
-
-                <?php
-                if (isset(validation_errors()['name'])) : ?>
-                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['name'] ?></p>
-                <?php endif ?>
-            </div>
-
-            <!-- Apellidos  -->
-            <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.surnames") ?>*</label>
-                <input type="text" name="surnames" value="<?= $student['cognoms'] ?>" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 "></input>
-                <?php
-                if (isset(validation_errors()['surnames'])) : ?>
-                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['surnames'] ?></p>
-                <?php endif ?>
-            </div>
-
-            <!-- Curs  -->
-            <div class="flex flex-col mt-5">
-                <label class=""><?= lang("forms.course") ?>*</label>
-                <select type="text" name="course" class="border-2 border-terciario-1 px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
-
-                    <?php
-                    foreach ($courses as $course) {
-                        if ($course["id"] == $student["id_curs"]) {
-                            echo "<option selected value='" . $course["id"] . "'>" . $course["any"] . " " .  $course['titol'] . " " . $course['clase'] . "</option>";
-                        } else {
-                            echo "<option value='" . $course["id"] . "'>" . $course["any"] . " " .  $course['titol'] . " " . $course['clase'] . "</option>";
-                        }
-                    }
-                    ?>
-
-                </select>
-                <?php
-                if (validation_errors()) : ?>
-                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['course'] ?></p>
-                <?php endif ?>
-            </div>
-
-
-        </div>
-
-
-        <div class="flex gap-5 justify-end w-full">
+    <form action="add" method="POST" class="mt-4 flex flex-col gap-2 px-20" enctype="multipart/form-data">
+        <!-- BOTONES -->
+        <div class="flex justify-end align-middle">
 
             <a href="<?= strpos(previous_url(), 'students?') !== false
                             ? str_replace('index.php/', '', previous_url())
                             : base_url('/students');
-                        ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel") ?></a>
+                        ?>" class="bg-red-700 hover:bg-red-500 text-white px-4 py-2 mr-3 rounded transition hover:ease-in ease-out duration-250"><?= lang("buttons.cancel") ?></a>
 
-            <input type="button"  id="submitButton" value="<?= lang("buttons.add") ?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
+            <input type="submit" id="submitButton" value="<?= lang("buttons.save") ?>" class="bg-green-700 hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
+        
+        </div>
+
+        <div class="shadow-xl border-b border-primario rounded-t-xl">
+
+            <div class="col-span-12 text-left mb-3 bg-primario text-white rounded-t-lg p-4">
+                <h2 class="text-2xl font-semibold"><?=mb_strtoupper(lang('titles.students_2'))?></h2>
+            </div>
+
+            <div class="grid grid-cols-12 mt-2 p-4">
+
+                <div class="col-span-12 grid grid-cols-12">
+                    <!-- Nombre  -->
+                    <div class="col-span-6 grid-cols-12 text-left px-2">
+
+                        <label class="font-semibold text-primario"><?=mb_strtoupper(lang("forms.name")) ?>*</label>
+                        <input value="<?= $student['nom'] ?>" type="text" name="name" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
+
+                        <?php
+                        if (isset(validation_errors()['name'])) : ?>
+                            <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['name'] ?></p>
+                        <?php endif ?>
+                    </div>
+
+                    <!-- Apellidos  -->
+                    <div class="col-span-6 grid-cols-12 text-left px-2">
+                        <label class="font-semibold text-primario"><?=mb_strtoupper(lang("forms.surnames")) ?>*</label>
+                        <input value="<?= $student['cognoms'] ?>" type="text" name="surnames" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150"></input>
+                        <?php
+                        if (isset(validation_errors()['surnames'])) : ?>
+                            <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['surnames'] ?></p>
+                        <?php endif ?>
+                    </div>
+                </div>
+
+                <div class="col-span-12 grid grid-cols-12 mt-5 mb-3">
+                    <!-- Correo  -->
+                    <div class="col-span-6 grid-cols-12 text-left px-2">
+                        <label class="font-semibold text-primario"><?=mb_strtoupper(lang("forms.email")) ?>*</label>
+                        <input value="<?= $student['correo'] ?>" type="mail" name="email" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150"></input>
+                        <?php
+                        if (isset(validation_errors()['email'])) : ?>
+                            <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['email'] ?></p>
+                        <?php endif ?>
+                    </div>
+                    
+                    <!-- Curs  -->
+                    <div class="col-span-6 grid-cols-12 text-left px-2">
+                        <label class="font-semibold text-primario"><?=mb_strtoupper(lang("forms.course")) ?>*</label>
+                        <select value="<?= $student['curs'] ?>" type="text" name="course" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
+
+                        <option value="" disabled selected hidden><?= lang("forms.s_course") ?></option>
+                            <?php foreach ($courses as $course) : ?>
+                                <option value="<?= $course["id"] ?>"><?= $course["any"] . " " .  $course['titol'] . " " . $course['clase'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?php
+                        if (isset(validation_errors()['course'])) : ?>
+                            <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['course'] ?></p>
+                        <?php endif ?>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </form>
-</section>
+</div>
 
 <script>
 document.getElementById('submitButton').addEventListener('click', function() {
+    
+    event.preventDefault();
+    
     Swal.fire({
         title: `<?=lang('alerts.sure')?>`,
         text: `<?=lang('alerts.sure_sub')?>`,
@@ -97,7 +107,6 @@ document.getElementById('submitButton').addEventListener('click', function() {
                 text: `<?=lang('alerts.updated_sub')?>`,
                 icon: 'success'
             }).then(() => {
-                
                 document.getElementById('form').submit();
             });
         }
@@ -105,4 +114,5 @@ document.getElementById('submitButton').addEventListener('click', function() {
 });
 </script>
 
-<?= $this->endSection() ?><?= $this->extend('layouts/master.php') ?>
+<?= $this->endSection() ?>
+<?= $this->extend('layouts/master.php') ?>
