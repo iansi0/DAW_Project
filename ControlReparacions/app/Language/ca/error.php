@@ -35,4 +35,5 @@ return [
     'nameContact'       => 'El nom de contacte és incorrecte o està buit',
     'emailContact'      => 'El correu de contacte és incorrecte o està buit',
     'shop_date'         => 'La data de compra és incorrecta o està buida',
+    'quantity'          => 'La quantitat és incorrecta o està buida',
 ];

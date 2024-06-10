@@ -429,6 +429,7 @@
             input_ie.setAttribute('id', 'sender_' + count_ins);
             input_ie.value = val_ie;
             let button_ie = new_div.querySelector('#assignSender_'+id_ticket).setAttribute('id', 'assignSender_' + count_ins);
+            new_div.querySelector('#assignSender_'+count_ins).setAttribute('onclick', 'showSender(' + count_ins + ')');
 
             // Modificación de instituto reparador
             let label_ir = new_div.querySelector('#labelRepair_'+id_ticket).setAttribute('id', 'labelRepair_' + count_ins);
@@ -436,6 +437,7 @@
             input_ir.setAttribute('id', 'repair_' + count_ins);
             input_ir.value = val_ir;
             let button_ir = new_div.querySelector('#assignRepair_'+id_ticket).setAttribute('id', 'assignRepair_' + count_ins);
+            new_div.querySelector('#assignRepair_'+count_ins).setAttribute('onclick', 'showRepair(' + count_ins + ')');
         <?php endif; ?>
 
         // Modificación de tipo dispositivo

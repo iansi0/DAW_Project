@@ -162,6 +162,7 @@ class InventaryController extends BaseController
             $nom_inventari = $inventory[2]->name;
             $preu_inventari =  $inventory[3]->price;
             $data_compra =  $inventory[4]->shop_date;
+            $quantitat =  $inventory[5]->quantity;
 
             if ($id_tipus_inventari == null || $id_tipus_inventari == '') {
                 $arrErrors[$id_inventory]["id_type"] = lang('error.id_type');
@@ -175,6 +176,9 @@ class InventaryController extends BaseController
             if ($data_compra == null || $data_compra == '') {
                 $arrErrors[$id_inventory]["shop_date"] = lang('error.shop_date');
             }
+            if ($quantitat == null || $quantitat == '' || $quantitat == 0) {
+                $arrErrors[$id_inventory]["quantity"] = lang('error.quantity');
+            }
 
         }
 
@@ -186,6 +190,7 @@ class InventaryController extends BaseController
             return redirect()->back();
         }
 
+
         // Si todo esta bien, añadimos los tickets
         foreach ($arrInventory as $inventory) {
 
@@ -193,24 +198,30 @@ class InventaryController extends BaseController
 
             $model = new InventariModel();
 
-            $id = LibrariesUUID::v4();
             $id_tipus_inventari = $inventory[1]->id_type;
             $nom = $inventory[2]->name;
             $data_compra = $inventory[4]->shop_date??date('Y-m-d');
             $preu = $inventory[3]->price;
-            $codi_centre = session('user')['code'];
+            $codi_centre = session('user')['code']??'';
+            $quantity = $inventory[5]->quantity;
 
-            $model->addInventari(
-                $id,
-                $nom,
-                $data_compra,
-                $preu,
-                $codi_centre,
-                $id_tipus_inventari
-            );
+            for ($i=0; $i < $quantity; $i++) { 
+                $id = LibrariesUUID::v4();
+
+                $model->addInventari(
+                    $id,
+                    $nom,
+                    $data_compra,
+                    $preu,
+                    $codi_centre,
+                    $id_tipus_inventari
+                );
+            }
+
         }
 
         return redirect()->to(base_url('inventary'));
+
     }
 
     public function modifyInventary($id)
