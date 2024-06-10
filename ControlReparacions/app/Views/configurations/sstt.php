@@ -19,7 +19,7 @@
             </div>
 
             <!-- info insti  -->
-            <form action="<?= base_url('config/sstt') ?>" method="POST" class="col-span-12 grid grid-cols-12 mt-2 p-4 ">
+            <form id="form" action="<?= base_url('config/sstt') ?>" method="POST" class="col-span-12 grid grid-cols-12 mt-2 p-4 ">
                 <div class="col-span-12 grid grid-cols-12 mt-2 p-4 ">
 
 
@@ -91,11 +91,18 @@
                         <div class="col-span-6 grid grid-cols-12">
                             <div class="col-span-12 grid-cols-12 text-left px-2">
                                 <label class="font-semibold text-primario">ALTRES: </label>
-                                <input type="text" value="<?= $sstt['altres'] ?>" name="altres" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
+                                <input type="text" value="<?= $sstt['adreca_fisica'] ?>" name="adress" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
                                 <?php
-                                if (isset(validation_errors()['altres'])) : ?>
-                                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['altres'] ?></p>
+                                if (isset(validation_errors()['adress'])) : ?>
+                                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['adress'] ?></p>
                                 <?php endif ?>
+                            </div>
+                        </div>
+
+                        <div class="col-span-6 grid grid-cols-12">
+                            <div class="col-span-12 grid-cols-12 text-left px-2">
+                                <label class="font-semibold text-primario">ALTRES: </label>
+                                <input type="text" value="<?= $sstt['altres'] ?>" name="altres" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
                             </div>
                         </div>
                     </div>
@@ -118,33 +125,33 @@
 </main>
 
 <script>
-document.getElementById('submitButton').addEventListener('click', function() {
-    
-    event.preventDefault();
-    
-    Swal.fire({
-        title: `<?=lang('alerts.sure')?>`,
-        text: `<?=lang('alerts.sure_sub')?>`,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: `<?=lang('alerts.yes_upd')?>`,
-        cancelButtonText: `<?=lang('alerts.cancel')?>`
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: `<?=lang('alerts.updated')?>`,
-                text: `<?=lang('alerts.updated_sub')?>`,
-                icon: 'success',
-                showConfirmButton: false,
-                timer:2000,
-            }).then(() => {
-                document.getElementById('form').submit();
-            });
-        }
+    document.getElementById('submitButton').addEventListener('click', function() {
+
+        event.preventDefault();
+
+        Swal.fire({
+            title: `<?= lang('alerts.sure') ?>`,
+            text: `<?= lang('alerts.sure_sub') ?>`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: `<?= lang('alerts.yes_upd') ?>`,
+            cancelButtonText: `<?= lang('alerts.cancel') ?>`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: `<?= lang('alerts.updated') ?>`,
+                    text: `<?= lang('alerts.updated_sub') ?>`,
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 2000,
+                }).then(() => {
+                    document.getElementById('form').submit();
+                });
+            }
+        });
     });
-});
 </script>
 
 

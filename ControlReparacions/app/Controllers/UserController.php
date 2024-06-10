@@ -209,10 +209,11 @@ class UserController extends BaseController
                     ],
                 ],
             ];
+        
 
         if ($this->validate($validationRules)) {
 
-            // dd( session('user'));
+           
             $data = [
                 'codi'       => session('user')['code'],
                 "poblacio" => $this->request->getPost('population'),
