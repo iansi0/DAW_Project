@@ -39,8 +39,9 @@ class ProfessorModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addProfessor($id, $nom, $cognoms, $codi_centre) {
-           
+    public function addProfessor($id, $nom, $cognoms, $codi_centre)
+    {
+
         $data = [
             'id_user'       => $id,
             'nom'           => trim($nom),
@@ -51,10 +52,15 @@ class ProfessorModel extends Model
         $this->insert($data);
     }
 
-    public function updateCode($id,$code){
-         $this->where('id_user', $id)->set(['codi_centre' => $code])->update();
-         
-         $modelUser = new UsersModel();
-         return $modelUser->activatedUser($id);
-        }
+    public function updateCode($id, $code)
+    {
+        $this->where('id_user', $id)->set(['codi_centre' => $code])->update();
+
+        $modelUser = new UsersModel();
+        return $modelUser->activatedUser($id);
+    }
+
+    public function getPorfessorById($id){
+        return $this->where('id_user', $id)->first();
+    }
 }

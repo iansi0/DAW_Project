@@ -119,10 +119,10 @@ class TicketsController extends BaseController
             mb_strtoupper(lang('titles.receiver'), 'utf-8'),
             mb_strtoupper(lang('titles.date'), 'utf-8'),
             mb_strtoupper(lang('titles.hour'), 'utf-8'),
+            "<div class='relative  w-full'>" .
+                mb_strtoupper(lang('titles.status'), 'utf-8') . "&nbsp; <i class='fa-solid  fa-circle-info peer'></i>
 
-            mb_strtoupper(lang('titles.status'), 'utf-8') . "&nbsp; <i class='fa-solid   fa-circle-info peer'></i>
-
-                <div class='absolute w-48 px-3 py-2 z-50  flex-col gap-1  bg-secundario border shadow-xl border-primario  rounded-lg  hidden  peer-hover:flex '>
+                <div class='absolute w-48 px-3 py-2 z-50  flex-col gap-1 left-1/2 transform -translate-x-1/2 bg-secundario border shadow-xl border-primario  rounded-lg  hidden  peer-hover:flex '>
 
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_0 rounded-full me-2'></span>
@@ -182,7 +182,8 @@ class TicketsController extends BaseController
                     </div>
                 </div>
 
-              ",
+                
+            </div>",
             mb_strtoupper(lang('titles.actions'), 'utf-8'),
         );
 
@@ -216,7 +217,7 @@ class TicketsController extends BaseController
             $buttonUpdate = base_url("tickets/modify/" . $ticket['id']);
             $buttonView = base_url("tickets/" . $ticket['id']);
 
-            if (($role == "admin") || ($role == "sstt") || (($role == "prof") && ($ticket['id_estat'] == 1)) || (($role == "ins") && ($ticket['id_estat'] == 1))) {
+            if (($role == "admin") || (($role == "sstt") && ($ticket['id_estat'] == 1)) || (($role == "prof") && ($ticket['id_estat'] == 1)) || (($role == "ins") && ($ticket['id_estat'] == 1))) {
                 $table->addRow(
                     // ["data" => $ticket['id'],"class"=>'p-5'],
                     explode("-", $ticket['id'])[4],
@@ -248,14 +249,14 @@ class TicketsController extends BaseController
                             if (result.isConfirmed) {
         
                                 Swal.fire({
-                                    title: `" . lang('alerts.deleted') . "`,
-                                    text: `" . lang('alerts.deleted_sub') . "`,
+                                    title: `".lang('alerts.deleted')."`,
+                                    text: `".lang('alerts.deleted_sub')."`,
                                     icon: `success`,
                                     showConfirmButton: false,
                                     timer:2000,
         
                                 }).then(()=>{
-                                    window.location.href = `" . $buttonDelete . "`;
+                                    window.location.href = `".$buttonDelete."`;
         
                                 });
                             }
@@ -265,7 +266,7 @@ class TicketsController extends BaseController
                     ],
 
                 );
-            } elseif (("ins" == $role) && ($ticket['id_estat'] != 1)) {
+            } elseif (("ins" == $role) && ($ticket['id_estat'] != 1) || ($role == "sstt")) {
                 $table->addRow(
                     // ["data" => $ticket['id'],"class"=>'p-5'],
                     explode("-", $ticket['id'])[4],
@@ -382,41 +383,55 @@ class TicketsController extends BaseController
 
             $buttonUpdate = base_url("intervention/modify/" . $intervencio['id']);
             $buttonDelete = base_url("intervention/delete/" . $intervencio['id']);
+            if (session('user')['role'] == 'admin' || session('user')['uid'] == $intervencio['id_reparador']) {
 
-            $table->addRow(
-                $intervencio['created_at'],
-                $intervencio['nom_reparador'],
-                '<ul>'.implode('', $arrMaterial).'</ul>',
-                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-secundario' : ''],
-                [
-                    "data" =>
-                    "
-                     <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
-                     <a onclick='(function() { Swal.fire({
-                        customClass:{htmlContainer: ``,},
-                        title: `" . lang('alerts.sure') . "`,
-                        text: `" . lang('alerts.sure_sub') . "`,
-                        icon: `warning`,
-                        showCancelButton: true,
-                        confirmButtonColor: `#3085d6`,
-                        cancelButtonColor: `#d33`,
-                        confirmButtonText: `" . lang('alerts.yes_del') . "`,
-                        cancelButtonText: `" . lang('alerts.cancel') . "`,
-                      }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = `" . $buttonDelete . "`;
+                $table->addRow(
+                    date("d/m/Y", strtotime($intervencio['created_at']))." ".date("H:i", strtotime($intervencio['created_at'])),                   
+                     $intervencio['nom_reparador'],
+                    '<ul>'.implode('', $arrMaterial).'</ul>',
+                    ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-secundario' : ''],
+                    [
+                        "data" =>
+                        "
+                        <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
+                        <a onclick='(function() { Swal.fire({
+                            customClass:{htmlContainer: ``,},
+                            title: `" . lang('alerts.sure') . "`,
+                            text: `" . lang('alerts.sure_sub') . "`,
+                            icon: `warning`,
+                            showCancelButton: true,
+                            confirmButtonColor: `#3085d6`,
+                            cancelButtonColor: `#d33`,
+                            confirmButtonText: `" . lang('alerts.yes_del') . "`,
+                            cancelButtonText: `" . lang('alerts.cancel') . "`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = `" . $buttonDelete . "`;
 
-                            Swal.fire({
-                                title: `" . lang('alerts.deleted') . "`,
-                                text: `" . lang('alerts.deleted_sub') . "`,
-                                icon: `success`,
-                            });
-                        }
-                      }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
+                                Swal.fire({
+                                    title: `" . lang('alerts.deleted') . "`,
+                                    text: `" . lang('alerts.deleted_sub') . "`,
+                                    icon: `success`,
+                                    showConfirmButton: false,
+                                    timer:2000,
+                                });
+                            }
+                        }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
 
-                    "class" => " p-5 flex h-16 justify-between items-center"
-                ],
-            );
+                        "class" => " p-5 h-16"
+                    ],
+                );
+            }else{
+                $table->addRow(
+                    date("d/m/Y", strtotime($intervencio['created_at']))." ".date("H:i", strtotime($intervencio['created_at'])),                   
+                    $intervencio['nom_reparador'],
+                    '<ul>'.implode('', $arrMaterial).'</ul>',
+                    ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-secundario' : ''],
+                    ['data' => '', "class" => " p-5 h-16"],
+
+                );
+            }
+
         }
 
         $data += ['totalPrice' => $totalPrice,];

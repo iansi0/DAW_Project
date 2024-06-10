@@ -25,6 +25,12 @@
                     <button id='' class="bg-primario text-base font-semibold text-white px-2 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('titles.n_students') ?></button>
                 </a>
             <?php endif ?>
+            <!-- BUTTON ADD STUDENT -->
+            <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "ins") || (session()->get('user')['role'] == "admin")) : ?>
+                <a href="<?= base_url('course/add') ?>">
+                    <button id='' class="bg-primario text-base font-semibold text-white px-2 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('buttons.add') ?> <?= lang('forms.course') ?></button>
+                </a>
+            <?php endif ?>
 
         </div>
 

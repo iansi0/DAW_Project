@@ -23,42 +23,45 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
 
         $routes->GET('add', 'TicketsController::ticketForm');
         $routes->POST('add', 'TicketsController::addTicket');
-        
+
         $routes->GET('(:segment)', 'TicketsController::ticketInfo/$1');
 
         $routes->GET('delete/(:segment)', 'TicketsController::deleteTicket/$1');
         $routes->GET('modify/(:segment)', 'TicketsController::modifyTicket/$1');
         $routes->POST('modify/(:segment)', 'TicketsController::modifyTicket_post/$1');
+
+        // EXPORTS
+        $routes->group('export', function ($routes) {
+            //CSV
+            $routes->GET('csv', 'TicketsController::exportCSV');
+            // XLS
+            $routes->GET('xls', 'TicketsController::exportXLS');
+        });
+
+        // IMPORTS
+        $routes->group('import', function ($routes) {
+            //CSV
+            $routes->POST('csv', 'TicketsController::importCSV');
+            // XLS
+            $routes->POST('xls', 'TicketsController::importXLS');
+        });
+
+
+        //Downloads
+        $routes->GET('dowloadCSV', 'TicketsController::downloadCSV');
+
+        $routes->GET('dowloadXLS', 'TicketsController::downloadXLS');
     });
-
-    // EXPORTS
-    $routes->group('export', function ($routes) {
-        //CSV
-        $routes->GET('csv', 'TicketsController::exportCSV');
-        // XLS
-        $routes->GET('xls', 'TicketsController::exportXLS');
-    });
-
-    // IMPORTS
-    $routes->group('import', function ($routes) {
-        //CSV
-        $routes->POST('csv', 'TicketsController::importCSV');
-        // XLS
-        $routes->POST('xls', 'TicketsController::importXLS');
-    });
-
-    //Downloads
-    $routes->GET('dowloadCSV', 'TicketsController::downloadCSV');
-
-    $routes->GET('dowloadXLS', 'TicketsController::downloadXLS');
-
-        //Ruta para acceder a ticketInfo
+    
+    //Ruta para acceder a ticketInfo
     $routes->GET('TicketsPDF', 'PDFController::tickets');
 
     $routes->GET('labels', 'PDFController::labels');
 
     $routes->GET('pdf/(:segment)', 'PDFController::index/$1');
-
+    
+    $routes->GET('course/add', 'StudentsController::courseForm');
+    $routes->POST('course/add', 'StudentsController::addCourse');
     // INTERVENTIONS
     $routes->group('intervention', function ($routes) {
         $routes->GET('', 'InterventionController::intervention');
@@ -68,7 +71,6 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('delete/(:segment)', 'InterventionController::deleteIntervention/$1');
         $routes->GET('modify/(:segment)', 'InterventionController::modifyIntervention/$1');
         $routes->POST('modify/(:segment)', 'InterventionController::modifyIntervention_post/$1');
-
     });
 
     // STUDENTS
@@ -138,9 +140,17 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('(:segment)', 'InstitutesController::instituteInfo/$1');
         $routes->GET('(:segment)/filterSender', 'InstitutesController::instituteInfo/$1/sender');
         $routes->GET('(:segment)/filterReceiver', 'InstitutesController::instituteInfo/$1/receiver');
-
     });
-    
+
+    //LOCATIONS
+    $routes->group('locations', function ($routes) {
+        $routes->GET('', 'LocationsController::locations');
+        $routes->GET('filterComarca', 'LocationsController::locations/comarca');
+        $routes->GET('filterPoblacio', 'LocationsController::locations/poblacio');
+       
+     
+    });
+
     // ASSIGN
     $routes->group('assign', function ($routes) {
         $routes->GET('', 'AssignController::assign');
@@ -188,6 +198,8 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
     $routes->group('config', function ($routes) {
         $routes->GET('', 'UserController::config');
         $routes->POST('passwd', 'UserController::change_passwd');
+        $routes->POST('institute', 'UserController::change_institute');
+        $routes->POST('sstt', 'UserController::change_sstt');
         $routes->POST('', 'UserController::config_post');
     });
 

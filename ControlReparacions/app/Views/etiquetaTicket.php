@@ -31,8 +31,6 @@
             /* position: absolute; */
             padding: 2px 8px;
         }
-
-        img {}
     </style>
 </head>
 

@@ -7,7 +7,7 @@ return [
     'user_exists'       => 'Usuari ja existent',
     'user_no_exists'    => 'L\'usuari no existeix',
 
-    'wrong_passwd'      => 'La contrasenya no cumpleix els paràmetres',
+    'wrong_passwd'      => 'La contrasenya ha de tindre minim 4 caracters',
     'match_passwd'      => 'Les contrasenyes no coincideixen',
 
     'wrong_captcha'     => 'El captcha no és correcte',

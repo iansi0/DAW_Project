@@ -145,7 +145,9 @@
                 Swal.fire({
                     title: `<?= lang('alerts.updated') ?>`,
                     text: `<?= lang('alerts.updated_sub') ?>`,
-                    icon: 'success'
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer:2000,
                 }).then(() => {
 
                     document.getElementById('form').submit();

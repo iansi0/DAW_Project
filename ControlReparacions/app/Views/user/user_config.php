@@ -4,7 +4,7 @@
 <?= $this->extend('layouts/master.php') ?>
 <?= $this->section('content') ?>
 
-<h1 class="text-center text-7xl text-primario"><?= strtoupper(lang('titles.config')) ?></h1>
+<h1 class="text-center text-7xl text-primario"><?= mb_strtoupper(lang('titles.config')) ?></h1>
 
 <section class="container mx-auto px-4 py-8 mt-10">
 

@@ -325,7 +325,6 @@ class TiquetModel extends Model
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
 
         $this->where('tiquet.id', $id);
-        
         if ($role=="admin") {
             $this;
         }else if($role=="prof" || $role=="ins"){

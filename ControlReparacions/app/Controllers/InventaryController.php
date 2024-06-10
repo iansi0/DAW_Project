@@ -82,7 +82,7 @@ class InventaryController extends BaseController
             $table->addRow(
                 $product['id'],
                 $product['nom'],
-                $product['data_compra'],
+                date("d/m/Y", strtotime($product['data_compra'])),
                 $product['preu']."€",
                 $product['nomInventary'],
                 [

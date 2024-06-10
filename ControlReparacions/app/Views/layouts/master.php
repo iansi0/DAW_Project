@@ -74,16 +74,19 @@
                     <li>
                         <a href="<?= base_url('statistics') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= (uri_string() === 'statistics') ? 'bg-red-300' : '' ?>">
                             <p class="mr-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-3 0 40 32">
-                                    <g>
-                                        <path d="M31,26c-0.6,0-1-0.4-1-1V12c0-0.6,0.4-1,1-1s1,0.4,1,1v13C32,25.6,31.6,26,31,26z"></path>
+                                <svg fill="currentColor" viewBox="200 0 1 512" height="40" width="80" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <g>
+                                            <path d="M447.652,304.13h-40.138c-6.681,0-12.097,5.416-12.097,12.097v95.805c0,6.681,5.416,12.098,12.097,12.098h40.138 c6.681,0,12.098-5.416,12.098-12.098v-95.805C459.75,309.546,454.334,304.13,447.652,304.13z"></path>
+                                            <path d="M348.798,258.13H308.66c-6.681,0-12.098,5.416-12.098,12.097v141.805c0,6.681,5.416,12.098,12.098,12.098h40.138 c6.681,0,12.097-5.416,12.097-12.098V270.228C360.896,263.546,355.48,258.13,348.798,258.13z"></path>
+                                            <path d="M151.09,304.13h-40.138c-6.681,0-12.097,5.416-12.097,12.097v95.805c0,6.681,5.416,12.098,12.097,12.098h40.138 c6.681,0,12.098-5.416,12.098-12.098v-95.805C163.188,309.546,157.771,304.13,151.09,304.13z"></path>
+                                            <path d="M52.236,258.13H12.098C5.416,258.13,0,263.546,0,270.228v141.805c0,6.681,5.416,12.098,12.098,12.098h40.138 c6.681,0,12.097-5.416,12.097-12.098V270.228C64.333,263.546,58.917,258.13,52.236,258.13z"></path>
+                                            <path d="M249.944,196.968h-40.138c-6.681,0-12.098,5.416-12.098,12.098v202.967c0,6.681,5.416,12.098,12.098,12.098h40.138 c6.681,0,12.098-5.416,12.098-12.098V209.066C262.042,202.384,256.625,196.968,249.944,196.968z"></path>
+                                            <path d="M436.869,244.62c8.14,0,15-6.633,15-15v-48.479c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v12.119L269.52,40.044 c-3.148-3.165-7.536-4.767-11.989-4.362c-4.446,0.403-8.482,2.765-11.011,6.445L131.745,209.185L30.942,144.969 c-6.987-4.451-16.26-2.396-20.71,4.592c-4.451,6.987-2.396,16.259,4.592,20.71l113.021,72c2.495,1.589,5.286,2.351,8.046,2.351 c4.783,0,9.475-2.285,12.376-6.507L261.003,74.025L400.8,214.62h-12.41c-8.284,0-15,6.716-15,15c0,8.284,6.716,15,15,15 c6.71,0,41.649,0,48.443,0H436.869z"></path>
+                                        </g>
                                     </g>
-                                    <g>
-                                        <path d="M16,21c-0.2,0-0.3,0-0.5-0.1l-15-8C0.2,12.7,0,12.4,0,12s0.2-0.7,0.5-0.9l15-8c0.3-0.2,0.6-0.2,0.9,0l15,8
-                c0.3,0.2,0.5,0.5,0.5,0.9s-0.2,0.7-0.5,0.9l-15,8C16.3,21,16.2,21,16,21z">
-                                        </path>
-                                    </g>
-                                    <path d="M17.4,22.6C17,22.9,16.5,23,16,23s-1-0.1-1.4-0.4L6,18.1V22c0,3.1,4.9,6,10,6s10-2.9,10-6v-3.9L17.4,22.6z"></path>
                                 </svg>
                             </p>
                             <b><?= lang('titles.statistics') ?></b>
@@ -124,26 +127,7 @@
                     </li>
 
                 <?php endif ?>
-                <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
 
-                    <li>
-                        <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= strpos(uri_string(), 'institutes') !== false ? 'bg-red-300' : '' ?>">
-                            <p class="mr-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 2 35 26">
-                                    <g id="school-7_1_">
-                                        <polygon points="15,10 14,10 14,12 14,13 15,13 17,13 17,12 15,12 	"></polygon>
-                                        <path d="M27,25v-9h1l-1-2h-6v11h-1V9.067l1.529,0.815l0.941-1.766L15,4.133V3h3V0h-3h-1v4.133L6.529,8.117l0.941,1.766L9,9.067V25
-		                    H8V14H2l-1,2h1v9H0v1h29v-1H27z M22,21v-1h3v1H22z M4,21v-1h3v1H4z M14.5,16c-1.933,0-3.5-1.567-3.5-3.5S12.567,9,14.5,9
-		                    c1.933,0,3.5,1.567,3.5,3.5S16.433,16,14.5,16z M13,25v-5h3v5H13z">
-                                        </path>
-                                    </g>
-                                </svg>
-                            </p>
-                            <b><?= lang('titles.ins') ?></b>
-                        </a>
-                    </li>
-
-                <?php endif ?>
                 <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
 
                     <li>
@@ -183,6 +167,28 @@
                     </li>
 
                 <?php endif ?>
+
+                <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
+
+                    <li>
+                        <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= strpos(uri_string(), 'institutes') !== false ? 'bg-red-300' : '' ?>">
+                            <p class="mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 2 35 26">
+                                    <g id="school-7_1_">
+                                        <polygon points="15,10 14,10 14,12 14,13 15,13 17,13 17,12 15,12 	"></polygon>
+                                        <path d="M27,25v-9h1l-1-2h-6v11h-1V9.067l1.529,0.815l0.941-1.766L15,4.133V3h3V0h-3h-1v4.133L6.529,8.117l0.941,1.766L9,9.067V25
+                                             H8V14H2l-1,2h1v9H0v1h29v-1H27z M22,21v-1h3v1H22z M4,21v-1h3v1H4z M14.5,16c-1.933,0-3.5-1.567-3.5-3.5S12.567,9,14.5,9
+                                                c1.933,0,3.5,1.567,3.5,3.5S16.433,16,14.5,16z M13,25v-5h3v5H13z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </p>
+                            <b><?= lang('titles.ins') ?></b>
+                        </a>
+                    </li>
+
+                <?php endif ?>
+
                 <?php if ((session()->get('user')['role'] == "ins") || (session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "admin")) : ?>
 
                     <li>
@@ -207,19 +213,21 @@
 
                 <?php endif ?>
 
-                <li>
-                    <a href="<?= base_url('logout') ?>" class=" w-full  h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white">
-                        <p class="mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 0 30 24">
-                                <path fill="none" d="M0 0h24v24H0z"></path>
-                                <path d="M4 18h2v2h12V4H6v2H4V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3zm2-7h7v2H6v3l-5-4 5-4v3z"></path>
+                <?php if ((session()->get('user')['role'] == "sstt")  || (session()->get('user')['role'] == "admin")) : ?>
+
+                    <li>
+                        <a href="<?= base_url('locations') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= strpos(uri_string(), 'inventary') !== false ? 'bg-red-300' : '' ?>">
+                            <p class="mr-3">
+                            <svg height="100" fill="currentColor" width="50" viewBox="80 -75 20 355" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 35.032514,25.300913 L 40.677914,67.077103 L 20.354414,102.07878 L 31.645314,98.691523 L 21.483514,116.75691 L 25.999814,122.40234 L 15.838064,139.33864 L 19.225314,154.01676 L 14.708974,160.79128 L 22.612614,167.56580 L 33.974014,175.46940 L 57.755414,163.04945 L 56.485214,156.27493 L 41.807014,156.27493 L 65.517814,133.69320 L 77.937814,133.69320 L 125.35941,115.62782 L 126.48851,100.94970 L 156.97381,91.917013 L 172.78111,69.335283 L 168.26471,45.624463 L 179.55561,36.591773 L 155.77421,32.075423 L 135.09781,44.495373 L 123.73641,36.591773 L 95.438614,34.333603 L 77.302714,32.075423 L 74.973914,19.655473 L 64.741614,23.042733 L 56.767414,15.139133 L 40.889614,11.751873 L 35.032514,25.300913 z " id="rect7355" sodipodi:nodetypes="cccccccccccccccccccccccccccccccc" style="fill:currentColor;fill-opacity:1.0000000;fill-rule:evenodd;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000;" />
                             </svg>
-                        </p>
-                        <b><?= lang('buttons.logout') ?></b>
-                    </a>
-                </li>
+                            </p>
+                            <b><?= lang("titles.locations") ?></b>
+                        </a>
+                    </li>
 
-
+                <?php endif ?>
+         
             </ul>
         </nav>
 
@@ -342,23 +350,6 @@
                     </a>
                 <?php endif ?>
 
-                <!-- INSTITUTOS -->
-                <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
-                    <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white  <?= strpos(uri_string(), 'institutes') !== false ? 'bg-red-300' : '' ?>">
-                        <p class="mr-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 2 35 26">
-                                <g id="school-7_1_">
-                                    <polygon points="15,10 14,10 14,12 14,13 15,13 17,13 17,12 15,12 	"></polygon>
-                                    <path d="M27,25v-9h1l-1-2h-6v11h-1V9.067l1.529,0.815l0.941-1.766L15,4.133V3h3V0h-3h-1v4.133L6.529,8.117l0.941,1.766L9,9.067V25
-                                H8V14H2l-1,2h1v9H0v1h29v-1H27z M22,21v-1h3v1H22z M4,21v-1h3v1H4z M14.5,16c-1.933,0-3.5-1.567-3.5-3.5S12.567,9,14.5,9
-                                c1.933,0,3.5,1.567,3.5,3.5S16.433,16,14.5,16z M13,25v-5h3v5H13z">
-                                    </path>
-                                </g>
-                            </svg>
-                        </p>
-                        <b><?= lang('titles.ins') ?></b>
-                    </a>
-                <?php endif ?>
 
                 <!-- ASIGNAR -->
                 <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
@@ -397,6 +388,24 @@
                     </a>
                 <?php endif ?>
 
+                <!-- INSTITUTOS -->
+                <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
+                    <a href="<?= base_url('institutes') ?>" class="w-full h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white  <?= strpos(uri_string(), 'institutes') !== false ? 'bg-red-300' : '' ?>">
+                        <p class="mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 2 35 26">
+                                <g id="school-7_1_">
+                                    <polygon points="15,10 14,10 14,12 14,13 15,13 17,13 17,12 15,12 	"></polygon>
+                                    <path d="M27,25v-9h1l-1-2h-6v11h-1V9.067l1.529,0.815l0.941-1.766L15,4.133V3h3V0h-3h-1v4.133L6.529,8.117l0.941,1.766L9,9.067V25
+                                H8V14H2l-1,2h1v9H0v1h29v-1H27z M22,21v-1h3v1H22z M4,21v-1h3v1H4z M14.5,16c-1.933,0-3.5-1.567-3.5-3.5S12.567,9,14.5,9
+                                c1.933,0,3.5,1.567,3.5,3.5S16.433,16,14.5,16z M13,25v-5h3v5H13z">
+                                    </path>
+                                </g>
+                            </svg>
+                        </p>
+                        <b><?= lang('titles.ins') ?></b>
+                    </a>
+                <?php endif ?>
+
                 <!-- INVENTARIO -->
                 <?php if ((session()->get('user')['role'] == "ins") || (session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "admin")) : ?>
                     <a href="<?= base_url('inventary') ?>" class="w-ful h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white  <?= strpos(uri_string(), 'inventary') !== false ? 'bg-red-300' : '' ?>">
@@ -418,16 +427,18 @@
                     </a>
                 <?php endif ?>
 
-                <!-- CERRAR SESIÓN -->
-                <a href="<?= base_url('logout') ?>" class=" w-full  h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white ">
-                    <p class="mr-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="100" fill="currentColor" viewBox="-2 0 30 24">
-                            <path fill="none" d="M0 0h24v24H0z"></path>
-                            <path d="M4 18h2v2h12V4H6v2H4V3a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3zm2-7h7v2H6v3l-5-4 5-4v3z"></path>
-                        </svg>
-                    </p>
-                    <b><?= lang('buttons.logout') ?></b>
-                </a>
+                <!-- COMARQUES I POBLACIONS -->
+                <?php if ((session()->get('user')['role'] == "sstt")  || (session()->get('user')['role'] == "admin")) : ?>
+                    <a href="<?= base_url('locations') ?>" class=" w-full  h-16 flex items-center transition-all ease-in duration-300 hover:bg-primario hover:text-white ">
+                        <p class="mr-3">
+                            <svg height="100" fill="currentColor" width="50" viewBox="80 -75 20 355" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 35.032514,25.300913 L 40.677914,67.077103 L 20.354414,102.07878 L 31.645314,98.691523 L 21.483514,116.75691 L 25.999814,122.40234 L 15.838064,139.33864 L 19.225314,154.01676 L 14.708974,160.79128 L 22.612614,167.56580 L 33.974014,175.46940 L 57.755414,163.04945 L 56.485214,156.27493 L 41.807014,156.27493 L 65.517814,133.69320 L 77.937814,133.69320 L 125.35941,115.62782 L 126.48851,100.94970 L 156.97381,91.917013 L 172.78111,69.335283 L 168.26471,45.624463 L 179.55561,36.591773 L 155.77421,32.075423 L 135.09781,44.495373 L 123.73641,36.591773 L 95.438614,34.333603 L 77.302714,32.075423 L 74.973914,19.655473 L 64.741614,23.042733 L 56.767414,15.139133 L 40.889614,11.751873 L 35.032514,25.300913 z " id="rect7355" sodipodi:nodetypes="cccccccccccccccccccccccccccccccc" style="fill:currentColor;fill-opacity:1.0000000;fill-rule:evenodd;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000;" />
+                            </svg>
+
+                        </p>
+                        <b><?= lang('titles.locations') ?></b>
+                    </a>
+                <?php endif ?>
             </nav>
         </div>
 

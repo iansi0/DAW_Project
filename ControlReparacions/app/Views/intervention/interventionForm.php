@@ -184,13 +184,13 @@
                 arrSelects.push(tmp)
 
                 // Comprobación de selects
-                if (name == 'id_type' && (value == '' || value == null || value == 'null')) {
-                    error = true;
-                    let error_msg = document.createElement('p');
-                    error_msg.classList = 'error font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
-                    error_msg.innerText = '<?=lang('error.empty_slot_2')?>';
-                    select.parentElement.appendChild(error_msg);
-                }
+                // if (name == 'id_type' && (value == '' || value == null || value == 'null')) {
+                //     error = true;
+                //     let error_msg = document.createElement('p');
+                //     error_msg.classList = 'error font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
+                //     error_msg.innerText = '<?=lang('error.empty_slot_2')?>';
+                //     select.parentElement.appendChild(error_msg);
+                // }
             });
             
             // Combinamos ambos arrays (inputs y selects) para formar un tiquet entero
@@ -225,35 +225,55 @@
         arrFinal.push(arrTextareas);
 
         if (!error) {
+            Swal.fire({
+                title: `<?= lang('alerts.sure') ?>`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: `<?= lang('alerts.yes_add') ?>`,
+                cancelButtonText: `<?= lang('alerts.cancel') ?>`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: `<?= lang('alerts.added') ?>`,
+                        text: `<?= lang('alerts.added_sub') ?>`,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer:2000,
+                    }).then(() => {
 
-            // Convertimos el array a JSON
-            var arrJSON = JSON.stringify(arrFinal);
+                        // Convertimos el array a JSON
+                        var arrJSON = JSON.stringify(arrFinal);
+                        
+                        // Creamos un formulario temporal
+                        var form_tmp = document.createElement('form');
+                        form_tmp.action = 'add';
+                        form_tmp.method = 'POST';
+                        form_tmp.style.display = 'none';
+                        
+                        // Creamos un input con los datos del JSON y lo añadimos al formulario anterior
+                        let input_tmp = document.createElement('input');
+                        input_tmp.type = 'hidden';
+                        input_tmp.name = 'arrInterventions';
+                        input_tmp.value = arrJSON;
+                        form_tmp.appendChild(input_tmp);
+                        
+                        let id_tmp = document.createElement('input');
+                        id_tmp.type = 'hidden';
+                        id_tmp.name = 'id_ticket';
+                        id_tmp.value = '<?=$id_ticket?>';
+                        form_tmp.appendChild(id_tmp);
 
-            // Creamos un formulario temporal
-            var form_tmp = document.createElement('form');
-            form_tmp.action = 'add';
-            form_tmp.method = 'POST';
-            form_tmp.style.display = 'none';
-
-            // Creamos un input con los datos del JSON y lo añadimos al formulario anterior
-            let input_tmp = document.createElement('input');
-            input_tmp.type = 'hidden';
-            input_tmp.name = 'arrInterventions';
-            input_tmp.value = arrJSON;
-            form_tmp.appendChild(input_tmp);
-
-            let id_tmp = document.createElement('input');
-            id_tmp.type = 'hidden';
-            id_tmp.name = 'id_ticket';
-            id_tmp.value = '<?=$id_ticket?>';
-            form_tmp.appendChild(id_tmp);
-
-            // Añadimos el formulario al documento y lo enviamos
-            document.body.appendChild(form_tmp);
-            form_tmp.submit();
-
-            // Eliminamos el formulario para no dejar rastro
-            form_tmp.remove();
+                        // Añadimos el formulario al documento y lo enviamos
+                        document.body.appendChild(form_tmp);
+                        form_tmp.submit();
+                        
+                        // Eliminamos el formulario para no dejar rastro
+                        form_tmp.remove();
+                    });
+                }
+            });
             
         }
 
@@ -288,6 +308,37 @@
 
     document.addEventListener('DOMContentLoaded', function(){
         addLine();
+    });
+</script>
+
+
+<script>
+    document.getElementById('submitButton').addEventListener('click', function() {
+
+        event.preventDefault();
+
+        Swal.fire({
+            title: `<?= lang('alerts.sure') ?>`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: `<?= lang('alerts.yes_add') ?>`,
+            cancelButtonText: `<?= lang('alerts.cancel') ?>`
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: `<?= lang('alerts.added') ?>`,
+                    text: `<?= lang('alerts.added_sub') ?>`,
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer:2000,
+                }).then(() => {
+
+                    document.getElementById('form').submit();
+                });
+            }
+        });
     });
 </script>
 

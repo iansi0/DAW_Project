@@ -78,6 +78,14 @@ return [
     'n_material'   => 'Afegir Material',
     'e_material'   => 'Modificar Material',
 
+    'locations'     => 'Localitats',
+    'comarca'     => 'Comarca',
+    'locations_1'     => 'Comarques',
+    'locations_2'     => 'Poblacions',
+    'poblation'     => 'Població',
+
     'start'         => 'Començat',
     'end'           => 'Acabat',
+
+    
 ];
