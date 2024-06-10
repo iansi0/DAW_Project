@@ -73,7 +73,7 @@
         div_input_td.classList = 'col-span-10 text-left';
         label = document.createElement('label');
         label.classList = 'text-primario font-semibold';
-        label.innerText = '<?= mb_strtoupper(lang("titles.inventory_2")) ?> '+count_ins+'*';
+        label.innerText = '<?= mb_strtoupper(lang("titles.inventory_2")) ?> '+count_ins;
         
         let input_td = document.createElement('select');
         input_td.classList = 'border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150';

@@ -299,9 +299,15 @@
     }
 
     document.addEventListener('DOMContentLoaded', function(){
-        <?php foreach ($inventaryAssigned as $value):?>
-            addLine('<?=$value['id']?>');
-        <?php endforeach; ?>
+
+        <?php if(count($inventaryAssigned) > 0): ?>
+            <?php foreach ($inventaryAssigned as $value):?>
+                addLine('<?=$value['id']?>');
+            <?php endforeach; ?>
+        <?php else: ?>
+            addLine();
+        <?php endif; ?>
+        
     });
 </script>
 

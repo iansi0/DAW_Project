@@ -5,7 +5,7 @@
 
 
 <div class="flex justify-between items-center mb-1">
-    <h1 class="text-left text-5xl text-primario"> <?= strtoupper(lang('titles.assign')) ?></h1>
+    <h1 class="text-left text-5xl text-primario"> <?= strtoupper(lang('titles.assign').' '.lang("titles.$filter")) ?></h1>
 </div>
 
 <main class="flex gap-7 py-1 ">
@@ -13,9 +13,9 @@
     <article class="flex flex-col gap-2 w-full">
 
         <div>
-            <div class="flex justify-between w-auto items-center text-center  text-primario  mb-1 pr-8 rounded-t-2xl">
-                <div class="flex align-left">
-                    <h1 class="text-2xl"><?= lang('forms.assign_to'); ?>: &nbsp; </h1>
+            <div class="flex justify-between w-auto items-center text-center  text-primario pr-8 rounded-t-2xl">
+                <div class="flex align-left mb-1">
+                    <h1 class="text-2xl"><?= lang('forms.assign_to') ?>: &nbsp; </h1>
 
                     <div class='flex align-left relative searchable-device-list'>
                         <input id="institute" name="d" type='text' class='data-device-list peer w-full h-8 rounded-sm bg-secundario cursor-pointer outline-none text-primario
@@ -33,10 +33,9 @@
                     <button onclick="assignIns()"  class="bg-primario text-white px-8 text-base ml-2.5 py-1 border border-terciario-4 font-semibold hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('forms.apply') ?></button>
                 </div>
 
-                <div class="flex text-4xl align-right  gap-3">
-                    <a class="hover:font-bold transition hover:ease-in ease-out duration-250 <?= $filter == 'sender' ? " font-bold" : "" ?>" href="<?= base_url('assign/filterSender') ?>"><?= lang('titles.sender') ?></a>
-                    <span class="overflow-hidden">&nbsp;|&nbsp;</span>
-                    <a class="hover:font-bold transition hover:ease-in ease-out duration-250 <?= $filter == 'receiver' ? " font-bold" : "" ?>" href="<?= base_url('assign/filterReceiver') ?>"><?= lang('titles.receiver') ?></a>
+                <div class="flex text-4xl align-right gap-1">
+                    <a class="transition hover:ease-in ease-out duration-250 pb-1 <?= $filter == 'sender' ? "bg-primario rounded-t-lg text-white px-4" : "border border-primario rounded-t-lg px-4" ?>" href="<?= base_url('assign/filterSender') ?>"><?= lang('titles.sender') ?></a>
+                    <a class="transition hover:ease-in ease-out duration-250 pb-1 <?= $filter == 'receiver' ? "bg-primario rounded-t-lg text-white px-4" : "border border-primario rounded-t-lg px-4" ?>" href="<?= base_url('assign/filterReceiver') ?>"><?= lang('titles.receiver') ?></a>
                 </div>
             </div>
 

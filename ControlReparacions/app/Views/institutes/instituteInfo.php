@@ -41,10 +41,9 @@
         <div>
             <div class="flex justify-between bg-primario text-secundario text-left p-3 pr-8 text-3xl rounded-t-2xl">
                 <h1><?= lang('titles.ticket'); ?></h1>
-                <div class="  flex align-middle mt-2 gap-3">
-                    <a class="hover:font-bold <?= $filter == 'sender' ? " font-bold" : "" ?>" href="<?= base_url('institutes/' . $institute['codi'] . '/filterSender') ?>"><?= lang('titles.sender') ?></a>
-                    <span>&nbsp;|&nbsp;</span>
-                    <a class="hover:font-bold <?= $filter == 'receiver' ? " font-bold" : "" ?>" href="<?= base_url('institutes/' . $institute['codi'] . '/filterReceiver') ?>"><?= lang('titles.receiver') ?></a>
+                <div class="flex align-middle mt-2 gap-3">
+                    <a class="<?= $filter == 'sender' ? "bg-white rounded-xl text-primario font-bold p-2" : "border borrder-white rounded-xl p-2" ?>" href="<?= base_url('institutes/' . $institute['codi'] . '/filterSender') ?>"><?= lang('titles.sender') ?></a>
+                    <a class="<?= $filter == 'receiver' ? "bg-white rounded-xl text-primario font-bold p-2" : "border borrder-white rounded-xl p-2" ?>" href="<?= base_url('institutes/' . $institute['codi'] . '/filterReceiver') ?>"><?= lang('titles.receiver') ?></a>
                 </div>
             </div>
 
