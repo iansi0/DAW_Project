@@ -68,4 +68,13 @@ class ComarcaModel extends Model
         
         
     }
+
+    public function getByTitleOrText($search)
+    {
+        
+        return $this->select(['codi', 'nom'])
+        ->orLike('codi', $search, 'both', true)
+        ->orLike('nom', $search, 'both', true);
+    }
+
 }

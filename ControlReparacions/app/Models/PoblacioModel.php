@@ -71,4 +71,17 @@ class PoblacioModel extends Model
         
         
     }
+
+    public function getByTitleOrText($search)
+    {
+
+        return $this->select('poblacio.id, poblacio.nom, comarca.nom as comarca')
+        
+            ->join('comarca', 'poblacio.id_comarca = comarca.codi')
+            ->join('centre', 'poblacio.id = centre.id_poblacio')
+            ->join('sstt', 'centre.id_sstt = sstt.codi')
+            ->orLike('poblacio.id', $search, 'both', true)
+            ->orLike('poblacio.nom', $search, 'both', true)
+            ->orLike('comarca', $search, 'both', true);
+    }
 }

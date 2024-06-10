@@ -86,6 +86,7 @@ return [
     'n_locations_1'      => 'Afegir Comarca',
     'n_locations_2'      => 'Afegir Població',
 
+    'poblation'     => 'Població',
 
     'start'         => 'Començat',
     'end'           => 'Acabat',

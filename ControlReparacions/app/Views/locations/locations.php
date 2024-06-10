@@ -16,19 +16,31 @@
 
                 <div class="flex gap-3 items-center center">
                     <!-- Search form -->
-                    <form method='get' action="<?= base_url('locations/' . $filter); ?>" id="searchForm">
-                        <!-- INPUT SEARCH -->
-                        <input type='text' name='q' value='<?= $search ?>' onkeypress="inputFilter(this)" placeholder="<?= lang('buttons.search') ?>..." class=" px-5 py-1 w-48  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
-                        <!-- BUTTON SEARCH -->
-                        <button id='btnsearch' onclick='document.getElementById("filters_form").submit();' class="bg-primario text-white px-2 py-1 border border-terciario-4 hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </form>
+                    <?php if ($filter == 'comarca') : ?>
+                    
+                    <?php else : ?>
+                    
+                    <?php endif ?>
+                    
 
                     <!-- BUTTON ADD  -->
                     <?php if ($filter == 'comarca') : ?>
+                        <form method='get' action="<?= base_url('locations/filterComarca'); ?>" id="searchForm">
+                            <!-- INPUT SEARCH -->
+                            <input type='text' name='q' value='<?= $search ?>' onkeypress="inputFilter(this)" placeholder="<?= lang('buttons.search') ?>..." class=" px-5 py-1 w-48  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                            <!-- BUTTON SEARCH -->
+                            <button id='btnsearch' onclick='document.getElementById("filters_form").submit();' class="bg-primario text-white px-2 py-1 border border-terciario-4 hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
                         <a href="<?= base_url('locations/addComarca') ?>">
                             <button id='add-ticket' class="bg-primario text-base font-semibold text-white px-3 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('buttons.add') ?> <?= lang('titles.comarca') ?></button>
                         </a>
                     <?php else : ?>
+                        <form method='get' action="<?= base_url('locations/filterPoblacio'); ?>" id="searchForm">
+                            <!-- INPUT SEARCH -->
+                            <input type='text' name='q' value='<?= $search ?>' onkeypress="inputFilter(this)" placeholder="<?= lang('buttons.search') ?>..." class=" px-5 py-1 w-48  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                            <!-- BUTTON SEARCH -->
+                            <button id='btnsearch' onclick='document.getElementById("filters_form").submit();' class="bg-primario text-white px-2 py-1 border border-terciario-4 hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
                         <a href="<?= base_url('locations/addPoblacio') ?>">
                             <button id='add-ticket' class="bg-primario text-base font-semibold text-white px-3 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('buttons.add') ?> <?= lang('titles.population') ?></button>
                         </a>

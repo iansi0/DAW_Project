@@ -29,8 +29,8 @@ class LocationsController extends BaseController
 
             'heading_cell_start' => "<th class='py-6 text-base'>",
 
-            'row_start' => "<tr class='border-b-[0.01px] '>",
-            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-[#F7F4EF]'>",
+            'row_start' => "<tr class='border-b-[0.01px] py-5 '>",
+            'row_alt_start' => "<tr class='border-b-[0.01px]  bg-[#F7F4EF] py-5 '>",
 
 
         ];
@@ -66,7 +66,11 @@ class LocationsController extends BaseController
                 $buttonUpdate = base_url("location/modify/comarca/" . $location['codi']);
                 $table->addRow(
                     $location['codi'],
-                    $location['nom'],
+                    
+                    [
+                        "data" =>$location['nom'],
+                         "class" => " p-3 h-16"
+                    ],
                 );
             }
         } else {
@@ -98,7 +102,10 @@ class LocationsController extends BaseController
                 $buttonUpdate = base_url("location/modify/poblacio/" . $location['id']);
                 $table->addRow(
                     $location['id'],
-                    $location['nom'],
+                    [
+                        "data" =>$location['nom'],
+                         "class" => " p-3 h-16"
+                    ],                    
                     $location['comarca'],
                 );
             }
@@ -107,7 +114,7 @@ class LocationsController extends BaseController
         return view('locations/locations', $data);
     }
 
-
+    
     public function comarcaForm()
     {
 
