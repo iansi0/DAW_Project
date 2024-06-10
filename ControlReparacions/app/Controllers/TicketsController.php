@@ -283,7 +283,10 @@ class TicketsController extends BaseController
                     [
                         "data" =>
                         "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
-                         <a href='$buttonUpdate' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>",
+                         <a href='$buttonUpdate' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
+                         <a  class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-2 fa-trash'></i></a>
+                         ",
+                         
 
                          "class" => " p-3 h-16 "
                     ],
@@ -305,7 +308,10 @@ class TicketsController extends BaseController
 
                     [
                         "data" =>
-                        "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>",
+                        "<a href='$buttonView' style='view-transition-name: info" . $ticket['id'] . ";' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
+                        <a  class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-2 fa-pencil'></i></a>
+                        <a  class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-2 fa-trash'></i></a>
+                        ",
 
                         "class" => " p-3 h-16 "
                     ],
@@ -322,6 +328,7 @@ class TicketsController extends BaseController
     public function ticketInfo($id = null)
     {
 
+        
         if ($id == null) {
             return redirect()->to(base_url('/tickets'));
         }
