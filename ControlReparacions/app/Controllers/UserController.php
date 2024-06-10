@@ -83,7 +83,6 @@ class UserController extends BaseController
 
     public function change_passwd()
     {
-
         //cambiar la passwd
         $model = new UsersModel();
         $password = $this->request->getPost('passwd');

@@ -62,7 +62,7 @@
 
                     <div class="col-span-12 grid grid-cols-12">
                         <div class="col-span-12 grid-cols-12 text-left px-2">
-                            <form action="<?= base_url('config/passwd') ?>" method="POST" class="mt-4 flex flex-col gap-2 px-20">
+                            <form id="form" action="<?= base_url('config/passwd') ?>" method="POST" class="mt-4 flex flex-col gap-2 px-20">
                                 <label class="font-semibold text-primario">ACTUALITZAR CONTRASENYA*</label>
                                 <input type="password" name="passwd" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
                                 <?php
