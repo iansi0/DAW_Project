@@ -110,6 +110,7 @@ class InterventionController extends BaseController
             $persona_reparadora
         );
 
+
         // Modificamos inventario relacionandolo con la intervencion
         foreach ($arrInterventions[0] as $inv) {
 
@@ -123,14 +124,15 @@ class InterventionController extends BaseController
             $modelInventary->modifyInventari($id_inventari, $data);
 
             // Comprobamos si se ha cambiado el disco duro para hacer la intervencion bloqueante
-            $product = $modelInventary->getInventaryById($id_inventary);
+            $inventory = $modelInventary->getInventaryById($id_inventari);
 
-            // Comprobamos si se ha cambiado el disco duro para hacer la intervencion bloqueante
-            $id_tipus = (isset($product['id_tipus_inventari']) && $product['id_tipus_inventari'] == 6) ? 1 : 0;
+            $id_tipus = ($inventory['id_tipus_inventari'] == 6) ? 1 : 0;
+
+            $id = substr($id, 0, -4);
 
             // Actualizamos la intervención si es necesario
             if ($id_tipus == 1) {
-                $model->modifyIntervention($id, $id_tipus, $descripcio);        
+                $model->modifyIntervention($id, $id_tipus, $descripcio);
             }
 
         }

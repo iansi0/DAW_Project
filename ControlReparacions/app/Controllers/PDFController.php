@@ -83,8 +83,8 @@ class PDFController extends BaseController
                 date('d/m/Y H:i', strtotime($intervencio['created_at'])),
                 $intervencio['nom_reparador'],
                 '<ul>'.implode('', $arrMaterial).'</ul>',
-                $intervencio['descripcio'],
-                $intervencio['preu'].'€',
+                ["data" => '<div>'.$intervencio['descripcio'].'</div>', "style" => ""],
+                ($intervencio['preu'] != ''?$intervencio['preu'].'€':''),
             );
 
             $totalPriceTicket += $intervencio['preu'];
@@ -92,11 +92,11 @@ class PDFController extends BaseController
 
         if (count($data['interventions']) > 0) {
             $table->addRow(
-                ["data" => "TOTAL", "style" => "background-color: #003049 !important; color: #F2F2F2 !important;"],
+                ["data" => "<span style='font-weight: bold; font-size: 16pt;'>TOTAL</span>", "style" => "background-color: #003049 !important; color: #F2F2F2 !important;"],
                 ["data" => "", "style" => "background-color: #003049 !important; color: #F2F2F2 !important;"],
                 ["data" => "", "style" => "background-color: #003049 !important; color: #F2F2F2 !important;"],
                 ["data" => "", "style" => "background-color: #003049 !important; color: #F2F2F2 !important;"],
-                ["data" => $totalPriceTicket.'€', "style" => "background-color: #003049 !important; color: #F2F2F2 !important;"]
+                ["data" => "<span style='font-weight: bold; font-size: 18pt;'>".$totalPriceTicket.'€</span>', "style" => "background-color: #003049 !important; color: #F2F2F2 !important;"]
             );
         }
 

@@ -338,7 +338,8 @@ class TicketsController extends BaseController
             mb_strtoupper(lang('forms.date'), 'utf-8'),
             mb_strtoupper(lang('titles.students'), 'utf-8'),
             mb_strtoupper(lang('titles.material_2'), 'utf-8'),
-            mb_strtoupper(lang('forms.description'), 'utf-8')
+            mb_strtoupper(lang('forms.description'), 'utf-8'),
+            mb_strtoupper(lang('titles.actions'), 'utf-8')
         );
 
         $template = [
@@ -388,7 +389,7 @@ class TicketsController extends BaseController
                 $intervencio['created_at'],
                 $intervencio['nom_reparador'],
                 '<ul>'.implode('', $arrMaterial).'</ul>',
-                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-secundario' : 'bg-secundario'],
+                ['data' => $intervencio['descripcio'], 'class' => $intervencio['id_tipus'] == 1 ? 'bg-red-500 text-secundario' : ''],
                 [
                     "data" =>
                     "
