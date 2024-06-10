@@ -107,13 +107,13 @@ class PDFController extends BaseController
         $dompdf->render();
         // Attachment == true -> descargar PDF || Attachment == false -> visualizar en navegador
         // Comentar aixo per pujar a PLESK
-        // $dompdf->stream("ticket_" . $id . ".pdf", array("Attachment" => false));
+        $dompdf->stream("ticket_" . $id . ".pdf", array("Attachment" => false));
 
         // Descomentar aixo per pujar a PLESK
-        $this->response->setHeader('Content-Type', 'application/pdf');
-        $this->response->setHeader('Content-Disposition', 'inline; filename="ticket_' . $id . '.pdf"');
-        $this->response->setBody($dompdf->output());
-        return $this->response;
+        // $this->response->setHeader('Content-Type', 'application/pdf');
+        // $this->response->setHeader('Content-Disposition', 'inline; filename="ticket_' . $id . '.pdf"');
+        // $this->response->setBody($dompdf->output());
+        // return $this->response;
     }
 
     public function tickets()
@@ -274,13 +274,13 @@ class PDFController extends BaseController
         // Attachment == true -> descargar PDF || Attachment == false -> visualizar en navegador
         // Comentar aixo per pujar a PLESK
         $actual = date('d-m-Y');
-        // $dompdf->stream("etiquetes_" . $actual . ".pdf", array("Attachment" => false));
+        $dompdf->stream("etiquetes_" . $actual . ".pdf", array("Attachment" => false));
 
         // Descomentar aixo per pujar a PLESK
-        $this->response->setHeader('Content-Type', 'application/pdf');
-        $this->response->setHeader('Content-Disposition', 'inline; filename="tiquets.pdf"');
-        $this->response->setBody($dompdf->output());
-        return $this->response;
+        // $this->response->setHeader('Content-Type', 'application/pdf');
+        // $this->response->setHeader('Content-Disposition', 'inline; filename="ticket_' . $id . '.pdf"');
+        // $this->response->setBody($dompdf->output());
+        // return $this->response;
     }
 
     public function labels()
@@ -396,12 +396,12 @@ class PDFController extends BaseController
         // Attachment == true -> descargar PDF || Attachment == false -> visualizar en navegador
         // Comentar aixo per pujar a PLESK
         $actual = date('d-m-Y');
-        // $dompdf->stream("etiquetes_" . $actual . ".pdf", array("Attachment" => false));
+        $dompdf->stream("etiquetes_" . $actual . ".pdf", array("Attachment" => false));
 
         // Descomentar aixo per pujar a PLESK
-        $this->response->setHeader('Content-Type', 'application/pdf');
-        $this->response->setHeader('Content-Disposition', 'inline; filename="etiquetes_' . $actual . '.pdf"');
-        $this->response->setBody($dompdf->output());
-        return $this->response;
+        // $this->response->setHeader('Content-Type', 'application/pdf');
+        // $this->response->setHeader('Content-Disposition', 'inline; filename="ticket_' . $id . '.pdf"');
+        // $this->response->setBody($dompdf->output());
+        // return $this->response;
     }
 }
