@@ -145,6 +145,8 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
     //LOCATIONS
     $routes->group('locations', function ($routes) {
         $routes->GET('', 'LocationsController::locations');
+        $routes->GET('filterComarca', 'LocationsController::locations/comarca');
+        $routes->GET('filterPoblacio', 'LocationsController::locations/poblacio');
      
     });
 

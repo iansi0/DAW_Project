@@ -10,7 +10,7 @@ use App\Models\PoblacioModel;
 
 class LocationsController extends BaseController
 {
-    public function locations($filter = 'lala')
+    public function locations($filter = 'comarca')
     {
         $searchData = $this->request->getGet();
 
@@ -38,7 +38,7 @@ class LocationsController extends BaseController
 
 
         // Get News Data
-        if ($filter == null || $filter == 'comarca') {
+        if ($filter == 'comarca') {
             $model = new ComarcaModel();
 
            

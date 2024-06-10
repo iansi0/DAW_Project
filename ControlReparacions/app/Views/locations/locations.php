@@ -30,6 +30,11 @@
                     </a>
                 </div>
 
+                <div class="flex text-4xl align-right  gap-3">
+                    <a class="hover:font-bold transition hover:ease-in ease-out duration-250 <?= $filter == 'comarca' ? " font-bold" : "" ?>" href="<?= base_url('locations/filterComarca') ?>"><?= lang('titles.locations_1') ?></a>
+                    <span class="overflow-hidden">&nbsp;|&nbsp;</span>
+                    <a class="hover:font-bold transition hover:ease-in ease-out duration-250 <?= $filter == 'poblacio' ? " font-bold" : "" ?>" href="<?= base_url('locations/filterPoblacio') ?>"><?= lang('titles.locations_2') ?></a>
+                </div>
             </div>
 
             <?php
