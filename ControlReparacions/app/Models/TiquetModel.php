@@ -210,9 +210,20 @@ class TiquetModel extends Model
                 $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
         }else if($role=="sstt"){
+            $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", $code)->find();
+            foreach ($a as &$value) {
+                $value = $value['codi'];
+            }
+            $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", $code)->find();
+            foreach ($b as &$value) {
+                $value = $value['codi'];
+            }
+
             $this->groupStart();
-                $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+                $this->whereIn("tiquet.codi_centre_reparador", $a);
+                $this->orWhereIn("tiquet.codi_centre_emissor", $b);
             $this->groupEnd();
+            
         }else{
             return; 
         }
