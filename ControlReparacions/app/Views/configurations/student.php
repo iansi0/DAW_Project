@@ -3,7 +3,13 @@
 
 <?= $this->section('content') ?>
 
-<main class="flex gap-72 px-52 py-5 h-full">
+<main class=" h-full">
+
+    <div class="flex justify-between items-center mb-1">
+
+        <h1 class="text-left text-5xl text-primario"><?= strtoupper(lang('titles.config')) ?></h1>
+
+    </div>
 
     <aside>
         <div class="shadow-xl border-b grid grid-cols-12 border-primario rounded-t-xl">
@@ -130,7 +136,6 @@
 
         </div>
     </aside>
-
 
 </main>
 

@@ -33,7 +33,7 @@
       <!-- BUTTON ADD TICKET -->
       <?php if ((session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "ins") || (session()->get('user')['role'] == "admin")) : ?>
         <a href="<?= base_url('tickets/add') ?>">
-          <button id='add-ticket' class="bg-primario text-white px-2 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer text-base font-semibold hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?=lang('buttons.add')?> <?=lang('titles.ticket_2')?></i></button>
+          <button id='add-ticket' class="bg-primario text-white px-2 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer text-base font-semibold hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('buttons.add') ?> <?= lang('titles.ticket_2') ?></i></button>
         </a>
       <?php endif ?>
     </div>
@@ -55,7 +55,7 @@
         <!-- Dropdown menu -->
         <div id="dropdown" class="absolute hidden z-10 w-full bg-white divide-y divide-gray-100  transition hover:ease-in ease-out duration-250">
 
-        <ul class="rounded-lg flex flex-col shadow-lg border border-primario text-base text-terciario-4 " aria-labelledby="dropdownDefaultButton">
+          <ul class="rounded-lg flex flex-col shadow-lg border border-primario text-base text-terciario-4 " aria-labelledby="dropdownDefaultButton">
 
             <!-- Export CSV  -->
             <li>
@@ -221,10 +221,6 @@
 </div>
 
 <script>
-
-
-
-
   // Funcion para mostrar/esconder los filtros
   function toggleFilters() {
 
