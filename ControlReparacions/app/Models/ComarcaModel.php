@@ -41,6 +41,7 @@ class ComarcaModel extends Model
     public function addComarca($codi, $nom)
     {
 
+        dd($codi);
         $data = [
             'codi' =>  $codi,
             'nom' => $nom,
@@ -61,10 +62,10 @@ class ComarcaModel extends Model
             $this->join('centre', 'poblacio.id = centre.id_poblacio');
             $this->join('sstt', 'centre.id_sstt = sstt.codi');
             $this->where('centre.id_sstt', $ssttCode);
-            $this->groupBy('comarca.codi, comarca.nom');
+            return $this->groupBy('comarca.codi, comarca.nom');
 
           
-            return $this->findAll();
+        
         
     }
 }
