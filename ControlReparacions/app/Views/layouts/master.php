@@ -218,16 +218,16 @@
                     <li>
                         <a href="<?= base_url('locations') ?>" class="w-full h-16 flex items-center justify-center transition-all ease-in duration-300 hover:bg-primario hover:text-white <?= strpos(uri_string(), 'locations') !== false ? 'bg-red-300' : '' ?>">
                             <p class="mr-3">
-                            <svg height="100" fill="currentColor" width="50" viewBox="80 -75 20 355" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M 35.032514,25.300913 L 40.677914,67.077103 L 20.354414,102.07878 L 31.645314,98.691523 L 21.483514,116.75691 L 25.999814,122.40234 L 15.838064,139.33864 L 19.225314,154.01676 L 14.708974,160.79128 L 22.612614,167.56580 L 33.974014,175.46940 L 57.755414,163.04945 L 56.485214,156.27493 L 41.807014,156.27493 L 65.517814,133.69320 L 77.937814,133.69320 L 125.35941,115.62782 L 126.48851,100.94970 L 156.97381,91.917013 L 172.78111,69.335283 L 168.26471,45.624463 L 179.55561,36.591773 L 155.77421,32.075423 L 135.09781,44.495373 L 123.73641,36.591773 L 95.438614,34.333603 L 77.302714,32.075423 L 74.973914,19.655473 L 64.741614,23.042733 L 56.767414,15.139133 L 40.889614,11.751873 L 35.032514,25.300913 z " id="rect7355" sodipodi:nodetypes="cccccccccccccccccccccccccccccccc" style="fill:currentColor;fill-opacity:1.0000000;fill-rule:evenodd;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000;" />
-                            </svg>
+                                <svg height="100" fill="currentColor" width="50" viewBox="80 -75 20 355" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M 35.032514,25.300913 L 40.677914,67.077103 L 20.354414,102.07878 L 31.645314,98.691523 L 21.483514,116.75691 L 25.999814,122.40234 L 15.838064,139.33864 L 19.225314,154.01676 L 14.708974,160.79128 L 22.612614,167.56580 L 33.974014,175.46940 L 57.755414,163.04945 L 56.485214,156.27493 L 41.807014,156.27493 L 65.517814,133.69320 L 77.937814,133.69320 L 125.35941,115.62782 L 126.48851,100.94970 L 156.97381,91.917013 L 172.78111,69.335283 L 168.26471,45.624463 L 179.55561,36.591773 L 155.77421,32.075423 L 135.09781,44.495373 L 123.73641,36.591773 L 95.438614,34.333603 L 77.302714,32.075423 L 74.973914,19.655473 L 64.741614,23.042733 L 56.767414,15.139133 L 40.889614,11.751873 L 35.032514,25.300913 z " id="rect7355" sodipodi:nodetypes="cccccccccccccccccccccccccccccccc" style="fill:currentColor;fill-opacity:1.0000000;fill-rule:evenodd;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000;" />
+                                </svg>
                             </p>
                             <b><?= lang("titles.locations") ?></b>
                         </a>
                     </li>
 
                 <?php endif ?>
-         
+
             </ul>
         </nav>
 
@@ -254,19 +254,21 @@
             <!-- DROPDOWN USER -->
             <div id="dropdown_user" class="absolute hidden right-1 top-12 w-60 px-5 py-3 bg-[#f7f7f9] shadow border border-transparent rounded-b-lg">
                 <ul class="space-y-3 text-terciario-4">
-                    <li class="font-medium h-8">
-                        <a href="<?= base_url('config') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
-                            <div class="mr-3">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                            </div>
-                            <?= lang('buttons.config') ?>
-                        </a>
-                    </li>
+                    <?php if (session()->get('user')['role'] != "admin") : ?>
+                        <li class="font-medium h-8">
+                            <a href="<?= base_url('config') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transform transition-all ease-in duration-300 hover:bg-primario hover:text-white">
+                                <div class="mr-3">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <?= lang('buttons.config') ?>
+                            </a>
+                        </li>
 
-                    <hr class="border-gray-700">
+                        <hr class="border-gray-700">
+                    <?php endif ?>
 
                     <li class="font-medium h-8">
                         <a href="<?= base_url('logout') ?>" class="pl-2 h-full py-2 flex items-center rounded-lg transition-all ease-in duration-300 hover:bg-primario hover:text-white">
