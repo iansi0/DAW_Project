@@ -99,7 +99,7 @@ class InterventionController extends BaseController
         $codi_centre = session('user')['code']??'';
         $id_tipus = 0;
 
-        $persona_reparadora = session('user')['user'];
+        $id_persona_reparadora = session('user')['uid'];
 
         $model->addIntervencio(
             $id,
@@ -107,9 +107,8 @@ class InterventionController extends BaseController
             $id_ticket,
             $id_tipus,
             $codi_centre,
-            $persona_reparadora
+            $id_persona_reparadora
         );
-
 
         // Modificamos inventario relacionandolo con la intervencion
         foreach ($arrInterventions[0] as $inv) {
@@ -125,15 +124,18 @@ class InterventionController extends BaseController
 
             // Comprobamos si se ha cambiado el disco duro para hacer la intervencion bloqueante
             $inventory = $modelInventary->getInventaryById($id_inventari);
+            if(isset($inventory['id_tipus_inventari'])){
 
-            $id_tipus = ($inventory['id_tipus_inventari'] == 6) ? 1 : 0;
-
-            $id = substr($id, 0, -4);
-
-            // Actualizamos la intervención si es necesario
+                
+                $id_tipus = ($inventory['id_tipus_inventari'] == 6) ? 1 : 0;
+                    
+                $id = substr($id, 0, -4);
+                
+                // Actualizamos la intervención si es necesario
             if ($id_tipus == 1) {
                 $model->modifyIntervention($id, $id_tipus, $descripcio);
             }
+        }
 
         }
 
@@ -251,12 +253,15 @@ class InterventionController extends BaseController
         $id_tipus = isset($product['id_tipus_inventari']) ? (($product['id_tipus_inventari'] == 6) ? 1 : 0) : 0;
 
         //Modificar inventario relacionandolo con la intervencion
-        $data = [
-            "id" =>  $id_inventari,
-            'id_intervencio' => $id,
-        ];
+        if(isset($id_inventari)){
 
-        $inventaryModel->modifyInventari($id_inventari, $data);
+            $data = [
+                "id" =>  $id_inventari,
+                'id_intervencio' => $id,
+            ];
+
+            $inventaryModel->modifyInventari($id_inventari, $data);
+        }
 
         $descripcio = $arrInterventions[1][0]->description;
 
