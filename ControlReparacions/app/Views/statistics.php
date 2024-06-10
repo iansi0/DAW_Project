@@ -29,6 +29,15 @@
             <div id="type" ></div>
         </div>
     </div>
+
+    <div class="bg-white rounded-t-lg shadow-xl border-b border-primario">
+        <header class="bg-primario rounded-t-xl p-4 mb-2">
+            <h2 class="text-2xl font-semibold text-left text-secundario"><?=  strtoupper(lang('charts.cost')) ?></h2>
+        </header>
+        <div class="flex justify-center">
+            <div id="cost" ></div>
+        </div>
+    </div>
     
     
 

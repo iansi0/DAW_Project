@@ -4,5 +4,6 @@ return [
     'type'    => 'Tiquets per tipus',
     'month'    => 'Tiquets per mes',
     'state'    => 'Tiquets per estat',
+    'cost'    => 'Gastos per centre emissor',
 
 ];

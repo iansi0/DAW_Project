@@ -11,6 +11,7 @@ return [
     'description'   => 'Descripció',
     'name'          => 'Nom',
     'statistics'    => 'Estadistiques',
+    'qr'    => 'QR',
 
     'sender'        => 'Emissor',
     'receiver'      => 'Receptor',
