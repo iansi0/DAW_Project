@@ -59,7 +59,6 @@ class LocationsController extends BaseController
             $table->setHeading(
                 mb_strtoupper(lang('titles.id'), 'utf-8'),
                 mb_strtoupper(lang('titles.name'), 'utf-8'),
-                mb_strtoupper(lang('titles.actions'), 'utf-8'),
             );
 
             foreach ($data['locations'] as $location) {
@@ -68,14 +67,6 @@ class LocationsController extends BaseController
                 $table->addRow(
                     $location['codi'],
                     $location['nom'],
-                    [
-                        "data" =>
-                        "<a href='$buttonUpdate' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
-                        ",
-
-                        "class" => "p-2 h-16 justify-between items-center"
-                    ],
-
                 );
             }
         } else {
@@ -100,7 +91,6 @@ class LocationsController extends BaseController
                 mb_strtoupper(lang('titles.id'), 'utf-8'),
                 mb_strtoupper(lang('titles.name'), 'utf-8'),
                 mb_strtoupper(lang('titles.comarca'), 'utf-8'),
-                mb_strtoupper(lang('titles.actions'), 'utf-8'),
             );
 
             foreach ($data['locations'] as $location) {
@@ -110,14 +100,6 @@ class LocationsController extends BaseController
                     $location['id'],
                     $location['nom'],
                     $location['comarca'],
-                    [
-                        "data" =>
-                        "<a href='$buttonUpdate' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
-                        ",
-
-                        "class" => "p-2 h-16 justify-between items-center"
-                    ],
-
                 );
             }
         }
