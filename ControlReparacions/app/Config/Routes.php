@@ -142,6 +142,12 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('(:segment)/filterReceiver', 'InstitutesController::instituteInfo/$1/receiver');
     });
 
+    //LOCATIONS
+    $routes->group('locations', function ($routes) {
+        $routes->GET('', 'LocationsController::locations');
+     
+    });
+
     // ASSIGN
     $routes->group('assign', function ($routes) {
         $routes->GET('', 'AssignController::assign');
