@@ -184,13 +184,13 @@
                 arrSelects.push(tmp)
 
                 // Comprobación de selects
-                if (name == 'id_type' && (value == '' || value == null || value == 'null')) {
-                    error = true;
-                    let error_msg = document.createElement('p');
-                    error_msg.classList = 'error font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
-                    error_msg.innerText = '<?=lang('error.empty_slot_2')?>';
-                    select.parentElement.appendChild(error_msg);
-                }
+                // if (name == 'id_type' && (value == '' || value == null || value == 'null')) {
+                //     error = true;
+                //     let error_msg = document.createElement('p');
+                //     error_msg.classList = 'error font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300';
+                //     error_msg.innerText = '<?=lang('error.empty_slot_2')?>';
+                //     select.parentElement.appendChild(error_msg);
+                // }
             });
             
             // Combinamos ambos arrays (inputs y selects) para formar un tiquet entero

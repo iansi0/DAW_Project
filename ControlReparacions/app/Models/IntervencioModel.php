@@ -39,7 +39,7 @@ class IntervencioModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addIntervencio($id, $descripcio, $id_ticket, $id_tipus, $codi_centre, $persona_reparadora)
+    public function addIntervencio($id, $descripcio, $id_ticket, $id_tipus, $codi_centre, $id_persona_reparadora)
     {
 
         $data = [
@@ -48,7 +48,7 @@ class IntervencioModel extends Model
             'id_ticket' => htmlspecialchars(trim($id_ticket)),
             'id_tipus' => htmlspecialchars(trim($id_tipus)),
             'codi_centre' => htmlspecialchars(trim($codi_centre)),
-            'id_user' => htmlspecialchars(trim($persona_reparadora)),
+            'id_user' => htmlspecialchars(trim($id_persona_reparadora)),
         ];
 
         $this->insert($data);
@@ -118,7 +118,6 @@ class IntervencioModel extends Model
     {
         $role=session()->get('user')['role'];
         $uid=session()->get('user')['uid'];
-
         $this->where('id', $id);
 
         $modelInventary = new InventariModel();

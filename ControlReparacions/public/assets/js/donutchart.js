@@ -1,7 +1,7 @@
 
 function createDonut(title,seriesArray,labelsArray,id){
     var colorChart;
-    console.log(id);
+    console.log(seriesArray);
     if (id=="#state") {
         colorChart=['#333333', '#9B2C2C', '#C53030', '#EF4444', '#F87171', '#FCD34D', '#FBBF24', '#F59E0B','#48BB78', '#34D399', '#22C55E', '#16A34A', '#2563EB', '#4B5563'];
     }else{

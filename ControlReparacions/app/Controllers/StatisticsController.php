@@ -66,16 +66,16 @@ class StatisticsController extends BaseController
             $allTiquetsState=['state' => $stateName,'count' => $stateCount];
             
             // Aqui mirem els centres reparadors quant han gastat
-            // $allTiquetsState = $centremodel->getCostByRepairCenter();
-            // // dd($allTiquetsState);
-            // $stateName=[];
-            // $stateCount=[];
-            // foreach ($allTiquetsState as $state) {
-            //     array_push($stateName,$state['estat']);
-            //     array_push($stateCount,intval($state['count']));
-            // }
+            $allCenterCost = $centremodel->getCostByRepairCenter();
+            // dd($allCenterCost);
+            $centerName=[];
+            $centerCount=[];
+            foreach ($allCenterCost as $center) {
+                array_push($centerName,$center['name']);
+                array_push($centerCount,intval($center['count']));
+            }
             
-            // $allTiquetsState=['state' => $stateName,'count' => $stateCount];
+            $allCenterCost=['center' => $centerName,'count' => $centerCount];
 
             // data per passar tot
             $data = [
@@ -83,6 +83,7 @@ class StatisticsController extends BaseController
                 'date' => $allTiquetsMonthly,
                 'type' => $allTiquetsType,
                 'state' => $allTiquetsState,
+                'center' => $allCenterCost,
             ];            
             // return a la vista amb les dades
             return view('statistics',$data);

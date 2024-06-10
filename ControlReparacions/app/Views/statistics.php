@@ -35,20 +35,12 @@
             <h2 class="text-2xl font-semibold text-left text-secundario"><?=  strtoupper(lang('charts.cost')) ?></h2>
         </header>
         <div class="flex justify-center">
-            <div id="cost" ></div>
+            <div id="center" ></div>
         </div>
     </div>
     
     
 
-    <div class="bg-white rounded-t-lg shadow-xl border-b border-primario">
-        <header class="bg-primario rounded-t-xl p-4 mb-2">
-            <h2 class="text-2xl font-semibold text-left text-secundario"><?= strtoupper(lang('charts.month')); ?></h2>
-        </header>
-        <div class=" justify-center">
-            <div id="month" ></div>
-        </div>
-    </div>
 
     <div class="bg-white rounded-t-lg shadow-xl border-b border-primario">
         <header class="bg-primario rounded-t-xl p-4 mb-2">
@@ -60,11 +52,19 @@
     </div>
 
     
+
+    
+    </main>
+    <div class="bg-white rounded-t-lg mt-4 shadow-xl border-b border-primario">
+        <header class="bg-primario rounded-t-xl p-4 mb-2">
+            <h2 class="text-2xl font-semibold text-left text-secundario"><?= strtoupper(lang('charts.month')); ?></h2>
+        </header>
+        <div class=" justify-center">
+            <div id="month" ></div>
+        </div>
+    </div>
     
     <br><br><br>
-
-
-</main>
 
 
 <script>
@@ -93,6 +93,15 @@
     const count4 = <?= json_encode($state['count']) ?>;
     const state = <?= json_encode($state['state']) ?>;
     createDonut("",count4, state, '#state');
+</script>
+
+<script>
+    // TIQUET X ESTAT
+    const count5 = <?= json_encode($center['count']) ?>;
+    const center = <?= json_encode($center['center']) ?>;
+    console.log(count5);
+    console.log(center);
+    createDonut("",count5, center, '#center');
 </script>
 
 <?= $this->endSection() ?>
