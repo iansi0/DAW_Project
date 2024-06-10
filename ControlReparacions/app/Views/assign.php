@@ -5,7 +5,7 @@
 
 
 <div class="flex justify-between items-center mb-1">
-    <h1 class="text-left text-5xl text-primario""> <?= strtoupper(lang('titles.assign')) ?></h1>
+    <h1 class="text-left text-5xl text-primario"> <?= strtoupper(lang('titles.assign')) ?></h1>
 </div>
 
 <main class="flex gap-7 py-1 ">
