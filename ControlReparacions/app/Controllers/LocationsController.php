@@ -41,7 +41,7 @@ class LocationsController extends BaseController
         if ($filter == 'comarca') {
             $model = new ComarcaModel();
 
-           
+
             if ($search == '') {
                 $paginateData = $model->getAllPaged()->paginate(8);
             } else {
@@ -65,24 +65,23 @@ class LocationsController extends BaseController
             foreach ($data['locations'] as $location) {
 
                 $buttonUpdate = base_url("location/modify/comarca/" . $location['codi']);
-                $table->addRow(                    
+                $table->addRow(
                     $location['codi'],
-                    $location['nom'],    
+                    $location['nom'],
                     [
                         "data" =>
                         "<a href='$buttonUpdate' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
                         ",
-    
+
                         "class" => "p-2 h-16 justify-between items-center"
                     ],
-    
+
                 );
             }
-
-        }else{
+        } else {
             $model = new PoblacioModel();
 
-            
+
             if ($search == '') {
                 $paginateData = $model->getAllPaged()->paginate(8);
             } else {
@@ -107,22 +106,147 @@ class LocationsController extends BaseController
             foreach ($data['locations'] as $location) {
 
                 $buttonUpdate = base_url("location/modify/poblacio/" . $location['id']);
-                $table->addRow(                    
+                $table->addRow(
                     $location['id'],
-                    $location['nom'],   
-                    $location['comarca'],  
+                    $location['nom'],
+                    $location['comarca'],
                     [
                         "data" =>
                         "<a href='$buttonUpdate' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
                         ",
-    
+
                         "class" => "p-2 h-16 justify-between items-center"
                     ],
-    
+
                 );
             }
         }
 
         return view('locations/locations', $data);
     }
+
+
+    public function comarcaForm()
+    {
+
+        helper('form');
+
+        return view('locations/comarcaForm');
+    }
+
+
+    public function poblacioForm()
+    {
+
+        helper('form');
+
+        $model = new ComarcaModel();
+
+        $data = [
+            'comarcas' => $model->getAllPaged()->findAll(),
+        ];
+
+        return view('locations/poblacioForm', $data);
+    }
+
+
+    public function addComarca()
+    {
+
+        helper('form');
+
+        $validationRules =
+            [
+                'code' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'name' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+            ];
+
+        if ($this->validate($validationRules)) {
+
+            $model = new ComarcaModel();
+
+            $codi =  $this->request->getPost("code");
+            $nom =  $this->request->getPost("name");
+
+            $model->addComarca($codi, $nom);
+
+            return redirect()->to(base_url('locations/filterComarca'));
+        }
+        return redirect()->back()->withInput();
+    }
+
+
+    public function addPoblacio()
+    {
+
+        helper('form');
+
+        $validationRules =
+            [
+                'code' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'name' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'population' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+            ];
+
+        if ($this->validate($validationRules)) {
+
+            $model = new PoblacioModel();
+            
+            $codi =  $this->request->getPost("code");
+            $nom =  $this->request->getPost("name");
+            $comarca =  $this->request->getPost("population");
+
+            $model->addPoblacio($codi, $nom, $comarca);
+
+            return redirect()->to(base_url('locations/filterPoblacio'));
+        }
+        return redirect()->back()->withInput();
+    }
+
+
+    // public function modifyComarca($id){
+
+    // }
+
+    // public function modifyComarca_post($id){
+
+    // }
+
+
+    // public function modifyPoblacio($id){
+
+    // }
+
+
+    // public function modifyPoblacio_post($id){
+
+    // }
+
+
+
 }
