@@ -119,66 +119,66 @@ class TicketsController extends BaseController
             mb_strtoupper(lang('titles.receiver'), 'utf-8'),
             mb_strtoupper(lang('titles.date'), 'utf-8'),
             mb_strtoupper(lang('titles.hour'), 'utf-8'),
-            "<div class='relative  w-full'>" .
+            "<div class='w-full'>" .
                 mb_strtoupper(lang('titles.status'), 'utf-8') . "&nbsp; <i class='fa-solid  fa-circle-info peer'></i>
 
-                <div class='absolute w-48 px-3 py-2 z-50  flex-col gap-1 left-1/2 transform -translate-x-1/2 bg-secundario border shadow-xl border-primario  rounded-lg  hidden  peer-hover:flex '>
+                <div class='absolute w-48 px-3 py-2 z-50 flex-col gap-1 ml-8 bg-secundario border shadow-xl border-primario  rounded-lg  hidden  peer-hover:flex '>
 
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_0 rounded-full me-2'></span>
-                        <span class='text-terciario-4   '>Desguaçat</span>
+                        <span class='text-terciario-4'>Desguaçat</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_1 rounded-full me-2'></span>
-                        <span class='text-terciario-4   '>Espatllat</span>
+                        <span class='text-terciario-4'>Espatllat</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_2 rounded-full me-2'></span>
-                        <span class='text-terciario-4   '>Espatllat Recollit</span>
+                        <span class='text-terciario-4'>Espatllat Recollit</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_3 rounded-full me-2'></span>
-                        <span class='text-terciario-4   '>Espatllat Enviat</span>
+                        <span class='text-terciario-4'>Espatllat Enviat</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_4 rounded-full me-2'></span>
-                        <span class='text-terciario-4   '>Espatllat Entregat</span>
+                        <span class='text-terciario-4'>Espatllat Entregat</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_5 rounded-full me-2 dark:blue-500'></span>
-                        <span class='text-terciario-4   '>Espera Reparació</span>
+                        <span class='text-terciario-4'>Espera Reparació</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_6 rounded-full me-2'></span>
-                        <span class='text-terciario-4   '>Reparació</span>
+                        <span class='text-terciario-4'>Reparació</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_7 rounded-full me-2'></span>
-                        <span class='text-terciario-4   '>Revisio</span>
+                        <span class='text-terciario-4'>Revisio</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_8 rounded-full me-2'></span>
-                        <span class='text-terciario-4   '>Reparat</span>
+                        <span class='text-terciario-4'>Reparat</span>
                     </div>
                     <div class='flex items-center'>
                         <span class='size-3 inline-block estat_9 rounded-full me-2'></span>
-                        <span class='text-terciario-4   '>Reparat Recollit</span>
+                        <span class='text-terciario-4'>Reparat Recollit</span>
                     </div>
                      <div class='flex items-center'>
                         <span class='size-3 inline-block estat_10 rounded-full me-2'></span>
-                        <span class='text-terciario-4   '>Reparat Enviat</span>
+                        <span class='text-terciario-4'>Reparat Enviat</span>
                     </div>
                      <div class='flex items-center'>
                         <span class='size-3 inline-block estat_11 rounded-full me-2'></span>
-                        <span class='text-terciario-4   '>Finalitzat</span>
+                        <span class='text-terciario-4'>Finalitzat</span>
                     </div>
                      <div class='flex items-center'>
                         <span class='size-3 inline-block estat_12 rounded-full me-2'></span>
-                        <span class='text-terciario-4   '>SSTT</span>
+                        <span class='text-terciario-4'>SSTT</span>
                     </div>
                      <div class='flex items-center'>
                         <span class='size-3 inline-block estat_13 rounded-full me-2'></span>
-                        <span class='text-terciario-4   '>Rebutjat</span>
+                        <span class='text-terciario-4'>Rebutjat</span>
                     </div>
                 </div>
 
