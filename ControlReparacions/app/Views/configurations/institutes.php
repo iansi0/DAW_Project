@@ -19,7 +19,7 @@
             </div>
 
             <!-- info insti  -->
-            <form action="<?= base_url('config/institute') ?>" method="POST" class="col-span-6 grid grid-cols-12 mt-2 p-4 ">
+            <form id="form" action="<?= base_url('config/institute') ?>" method="POST" class="col-span-6 grid grid-cols-12 mt-2 p-4 ">
                 <div class="col-span-12 grid grid-cols-12 mt-2 p-4 ">
 
 
