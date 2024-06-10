@@ -147,6 +147,15 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('', 'LocationsController::locations');
         $routes->GET('filterComarca', 'LocationsController::locations/comarca');
         $routes->GET('filterPoblacio', 'LocationsController::locations/poblacio');
+
+        $routes->GET('addComarca', 'LocationsController::addComarca');
+        $routes->GET('addPoblacio', 'LocationsController::addPoblacio');
+
+        $routes->GET('modify/comarca/(:segment)', 'LocationsController::modifyComarca/$1');
+        $routes->POST('modify/comarca/(:segment)', 'LocationsController::modifyComarca_post/$1');
+
+        $routes->GET('modify/poblacio/(:segment)', 'LocationsController::modifyPoblacio/$1');
+        $routes->POST('modify/poblacio/(:segment)', 'LocationsController::modifyPoblacio_post/$1');
      
     });
 

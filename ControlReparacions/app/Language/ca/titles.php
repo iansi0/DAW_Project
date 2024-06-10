@@ -83,6 +83,7 @@ return [
     'locations_1'     => 'Comarques',
     'locations_2'     => 'Poblacions',
 
+
     'start'         => 'Començat',
     'end'           => 'Acabat',
 

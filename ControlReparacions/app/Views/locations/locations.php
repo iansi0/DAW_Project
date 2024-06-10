@@ -16,18 +16,23 @@
 
                 <div class="flex gap-3 items-center center">
                     <!-- Search form -->
-                    <form method='get' action="<?= base_url('institutes'); ?>" id="searchForm">
+                    <form method='get' action="<?= base_url('locations/' . $filter); ?>" id="searchForm">
                         <!-- INPUT SEARCH -->
-                        <input type='text' name='q' value='<?= 'hola' ?>' onkeypress="inputFilter(this)" placeholder="<?= lang('buttons.search') ?>..." class=" px-5 py-1 w-48  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
+                        <input type='text' name='q' value='<?= $search ?>' onkeypress="inputFilter(this)" placeholder="<?= lang('buttons.search') ?>..." class=" px-5 py-1 w-48  border-2 rounded-lg border-terciario-3 hover:bg-secundario transition hover:ease-in ease-out duration-150 ">
                         <!-- BUTTON SEARCH -->
                         <button id='btnsearch' onclick='document.getElementById("filters_form").submit();' class="bg-primario text-white px-2 py-1 border border-terciario-4 hover:bg-terciario-4 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
-                    <!-- BUTTON SHOW FILTERS -->
-                    <!-- <button id='btn_filters' onclick='toggleFilters()' class="bg-primario text-white px-2 py-1 border border-terciario-4 hover:bg-red-300 cursor-pointer hover:text-terciario-4 rounded-lg transition hover:ease-in ease-out duration-250"><i class="fa-solid fa-filter"></i></button> -->
-                    <!-- BUTTON ADD TICKET -->
-                    <a href="<?= base_url('institutes/add') ?>">
-                        <button id='add-ticket' class="bg-primario text-base font-semibold text-white px-3 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('buttons.add') ?> <?= lang('titles.ins_2') ?></button>
-                    </a>
+
+                    <!-- BUTTON ADD  -->
+                    <?php if ($filter == 'comarca') : ?>
+                        <a href="<?= base_url('locations/addComarca') ?>">
+                            <button id='add-ticket' class="bg-primario text-base font-semibold text-white px-3 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('buttons.add') ?> <?= lang('titles.comarca') ?></button>
+                        </a>
+                    <?php else : ?>
+                        <a href="<?= base_url('locations/addPoblacio') ?>">
+                            <button id='add-ticket' class="bg-primario text-base font-semibold text-white px-3 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('buttons.add') ?> <?= lang('titles.population') ?></button>
+                        </a>
+                    <?php endif ?>
                 </div>
 
                 <div class="flex text-4xl align-right  gap-3">
@@ -40,7 +45,14 @@
             <?php
             echo $table->generate();
             ?>
+
             <div class="border-b border-primario"></div>
+
+            <div>
+                <?php // LA FUNCION DE ->only() ES LA QUE MANTIENE LA BUSQUEDA Y FILTROS EN LA URL SIN RESETEARLOS 
+                ?>
+                <?= $pager->only(['q', 'd', 'c', 'dt_1', 'dt_2', 'tm_1', 'tm_2', 'e'])->links() ?>
+            </div>
         </div>
         <br><br><br>
     </article>

@@ -43,7 +43,7 @@ class LocationsController extends BaseController
 
            
             if ($search == '') {
-                $paginateData = $model->getAllPaged();
+                $paginateData = $model->getAllPaged()->paginate(8);
             } else {
                 $paginateData = $model->getByTitleOrText($search)->paginate(8);
             }
@@ -64,14 +64,13 @@ class LocationsController extends BaseController
 
             foreach ($data['locations'] as $location) {
 
-                $buttonUpdate = base_url("location/modify/" . $location['codi']);
-                $buttonView = base_url("location/" . $location['codi']);
+                $buttonUpdate = base_url("location/modify/comarca/" . $location['codi']);
                 $table->addRow(                    
                     $location['codi'],
                     $location['nom'],    
                     [
                         "data" =>
-                        "<a href='$buttonView' style='view-transition-name: info" . $location['codi'] . ";' class=' p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
+                        "<a href='$buttonUpdate' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
                         ",
     
                         "class" => "p-2 h-16 justify-between items-center"
@@ -85,7 +84,7 @@ class LocationsController extends BaseController
 
             
             if ($search == '') {
-                $paginateData = $model->getAllPaged();
+                $paginateData = $model->getAllPaged()->paginate(8);
             } else {
                 $paginateData = $model->getByTitleOrText($search)->paginate(8);
             }
@@ -107,15 +106,14 @@ class LocationsController extends BaseController
 
             foreach ($data['locations'] as $location) {
 
-                $buttonUpdate = base_url("location/modify/" . $location['id']);
-                $buttonView = base_url("location/" . $location['id']);
+                $buttonUpdate = base_url("location/modify/poblacio/" . $location['id']);
                 $table->addRow(                    
                     $location['id'],
                     $location['nom'],   
                     $location['comarca'],  
                     [
                         "data" =>
-                        "<a href='$buttonView' style='view-transition-name: info" . $location['id'] . ";' class=' p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-primario hover:text-secundario rounded-xl hover:rounded-xl transition-all ease-out duration-250 hover:transition hover:ease-in hover:duration-250 fa-eye'></i></a>
+                        "<a href='$buttonUpdate' class='p-2  mt-2  btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
                         ",
     
                         "class" => "p-2 h-16 justify-between items-center"
