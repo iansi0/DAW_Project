@@ -46,12 +46,14 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
             $routes->POST('xls', 'TicketsController::importXLS');
         });
 
+
         //Downloads
         $routes->GET('dowloadCSV', 'TicketsController::downloadCSV');
 
-    $routes->GET('dowloadXLS', 'TicketsController::downloadXLS');
-
-        //Ruta para acceder a ticketInfo
+        $routes->GET('dowloadXLS', 'TicketsController::downloadXLS');
+    });
+    
+    //Ruta para acceder a ticketInfo
     $routes->GET('TicketsPDF', 'PDFController::tickets');
 
     $routes->GET('labels', 'PDFController::labels');
