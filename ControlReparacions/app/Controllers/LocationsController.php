@@ -229,12 +229,17 @@ class LocationsController extends BaseController
 
             $model = new ComarcaModel();
 
-            $codi =  $this->request->getPost("code");
-            $nom =  $this->request->getPost("name");
+            $comarca = $model->getByTitleOrText($this->request->getPost("code"));
 
-            $model->addComarca($codi, $nom, session('user')['code']);
+            if ($comarca == null) {
+                $codi =  $this->request->getPost("code");
+                $nom =  $this->request->getPost("name");
 
-            return redirect()->to(base_url('locations/filterComarca'));
+                $model->addComarca($codi, $nom, session('user')['code']);
+
+                return redirect()->to(base_url('locations/filterComarca'));
+            }
+
         }
         return redirect()->back()->withInput();
     }
@@ -270,14 +275,19 @@ class LocationsController extends BaseController
         if ($this->validate($validationRules)) {
 
             $model = new PoblacioModel();
+
+            $poblacio = $model->getByTitleOrText($this->request->getPost("code"));
+
+            if($poblacio == null) {
+                $codi =  $this->request->getPost("code");
+                $nom =  $this->request->getPost("name");
+                $comarca =  $this->request->getPost("population");
+
+                $model->addPoblacio($codi, $nom, $comarca, session('user')['code']);
+
+                return redirect()->to(base_url('locations/filterPoblacio'));
+            }
             
-            $codi =  $this->request->getPost("code");
-            $nom =  $this->request->getPost("name");
-            $comarca =  $this->request->getPost("population");
-
-            $model->addPoblacio($codi, $nom, $comarca, session('user')['code']);
-
-            return redirect()->to(base_url('locations/filterPoblacio'));
         }
         return redirect()->back()->withInput();
     }
@@ -332,9 +342,11 @@ class LocationsController extends BaseController
         helper('form');
 
         $model = new PoblacioModel();
+        $modelComarca = new ComarcaModel();
 
         $data = [
-            "info" => $model->getByTitleOrText($id)->find()
+            "info" => $model->getByTitleOrText($id)->find(),
+            "comarcas" => $modelComarca->getAllPaged()->find()
         ];
 
         return view('locations/modifyPoblacio', $data);
@@ -347,6 +359,12 @@ class LocationsController extends BaseController
         $validationRules =
             [
                 'name' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+                'population' => [
                     'rules'  => 'required',
                     'errors' => [
                         'required' => lang('error.empty_slot_2'),

@@ -34,7 +34,7 @@
 
                     <!-- codi  -->
                     <div class="col-span-4 grid-cols-12 text-left px-2">
-                        <label class="font-semibold text-primario"><?= mb_strtoupper(lang("forms.code")) ?>*</label>
+                        <label class="font-semibold text-primario"><?= mb_strtoupper(lang("forms.code")) ?></label>
                         <input type="text" disabled value="<?=$info[0]['codi']?>" class="border-2 border-terciario-1 w-full px-2 py-3 rounded bg-terciario-2 transition hover:ease-in ease-out duration-150">
                         <?php if (isset(validation_errors()['code'])) : ?>
                             <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['code'] ?></p>

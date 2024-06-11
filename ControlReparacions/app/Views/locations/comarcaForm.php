@@ -82,7 +82,6 @@
                     showConfirmButton: false,
                     timer: 2000,
                 }).then(() => {
-
                     document.getElementById('form').submit();
                 });
             }

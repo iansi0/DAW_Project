@@ -70,7 +70,7 @@ class PoblacioModel extends Model
     public function getByTitleOrText($search)
     {
 
-        return $this->select('poblacio.id, poblacio.nom, comarca.nom as comarca')
+        return $this->select('poblacio.id, poblacio.nom, comarca.nom as comarca, poblacio.id_comarca')
                         ->join('comarca', 'poblacio.id_comarca = comarca.codi')
                         ->join('centre', 'poblacio.id = centre.id_poblacio')
                         ->join('sstt', 'centre.id_sstt = sstt.codi')

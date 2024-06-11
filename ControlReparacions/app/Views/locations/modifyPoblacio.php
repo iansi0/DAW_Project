@@ -4,7 +4,7 @@
 <div>
     <div class="flex">
 
-        <h1 class="text-5xl text-primario"><?= strtoupper(lang("titles.n_locations_2")) ?></h1>
+        <h1 class="text-5xl text-primario"><?= mb_strtoupper(lang("titles.e_locations_2")) ?></h1>
 
     </div>
 
@@ -34,8 +34,8 @@
 
                     <!-- codi  -->
                     <div class="col-span-2 grid-cols-12 text-left px-2">
-                        <label class="font-semibold text-primario"><?= mb_strtoupper(lang("forms.code")) ?>*</label>
-                        <input type="text" name="code" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
+                        <label class="font-semibold text-primario"><?= mb_strtoupper(lang("forms.code")) ?></label>
+                        <input type="text" disabled value="<?=$info[0]['id']?>" class="border-2 border-terciario-1 w-full px-2 py-3 rounded bg-terciario-2 transition hover:ease-in ease-out duration-150">
                         <?php
                         if (isset(validation_errors()['code'])) : ?>
                             <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['code'] ?></p>
@@ -45,7 +45,7 @@
                     <!-- nom  -->
                     <div class="col-span-5 grid-cols-12 text-left px-2">
                         <label class="font-semibold text-primario"><?= mb_strtoupper(lang("forms.name")) ?>*</label>
-                        <input type="text" name="name" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
+                        <input type="text" value="<?=$info[0]['nom']?>" name="name" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
                         <?php
                         if (isset(validation_errors()['name'])) : ?>
                             <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['name'] ?></p>
@@ -56,12 +56,10 @@
                     <div class="col-span-5 grid-cols-12 text-left px-2">
                         <label class="font-semibold text-primario"><?= mb_strtoupper(lang("forms.coma")) ?>*</label>
                         <select name="population" id="" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
-                            <option value="" disabled selected hidden><?= lang("forms.s_coma") ?></option>
-                            <?php
-                            foreach ($comarcas as $comarca) {
-                                echo "<option value='" . $comarca["codi"] . "'>" . $comarca["nom"] . "</option>";
-                            }
-                            ?>
+                            <option value="" disabled hidden><?= lang("forms.s_coma") ?></option>
+                            <?php foreach ($comarcas as $comarca):?>
+                                <option value='<?=$comarca["codi"]?>' <?=(($comarca["codi"]==$info[0]['id_comarca'])?'selected':'')?>><?=$comarca["nom"]?></option>
+                            <?php endforeach; ?>
                         </select>
                         <?php
                         if (isset(validation_errors()['population'])) : ?>
