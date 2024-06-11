@@ -12,7 +12,7 @@ class UsersModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'user', 'passwd', 'lang'];
+    protected $allowedFields    = ['id', 'user', 'passwd', 'lang', 'deleted_at'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -157,7 +157,7 @@ class UsersModel extends Model
 
     public function activatedUser($id)
     {
-        return $this->set($this->deletedField, null)->update($id);
+        return $this->set('deleted_at', null)->update($id);
     }
 
     public function modifyUser($id, $data)

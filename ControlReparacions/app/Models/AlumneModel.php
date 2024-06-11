@@ -13,7 +13,7 @@ class AlumneModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_user', 'nom', 'cognoms', 'id_curs', 'codi_centre'];
+    protected $allowedFields    = ['id_user', 'nom', 'cognoms', 'id_curs', 'codi_centre', 'deleted_at'];
 
     // Dates
     protected $useTimestamps = true;
@@ -57,8 +57,8 @@ class AlumneModel extends Model
                     'deleted_at'      => null,
                 ];
 
-                $this->where('id_user', $userExist['id'])->set('id_curs', trim($id_curs))->update();
-                $this->where('id_user', $userExist['id'])->set($this->deletedField, null)->update();
+                $this->set('id_curs', trim($id_curs))->update($userExist['id']);
+                $this->set('deleted_at', NULL)->update($userExist['id']);
 
                 $modelUser->activatedUser($userExist['id']);
                 return false;

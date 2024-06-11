@@ -32,14 +32,14 @@
 
                     <div class="col-span-4 grid grid-cols-12">
                         <div class="col-span-12 grid-cols-12 text-left px-2">
-                            <p class="font-semibold text-primario">COGNOMS: </p>
+                            <p class="font-semibold text-primario"><?=mb_strtoupper(lang('forms.email'))?>: </p>
                             <p class="border-2 border-terciario-1 text-terciario-4 w-full px-2 py-3 rounded bg-secundario "> <?= $teacher['cognoms'] ?> </p>
                         </div>
                     </div>
 
                     <div class="col-span-4 grid grid-cols-12">
                         <div class="col-span-12 grid-cols-12 text-left px-2">
-                            <p class="font-semibold text-primario">CORREU: </p>
+                            <p class="font-semibold text-primario"><?=mb_strtoupper(lang('forms.surnames'))?>: </p>
                             <p class="border-2 border-terciario-1 text-terciario-4 w-full px-2 py-3 rounded bg-secundario "> <?= $user['user'] ?> </p>
                         </div>
                     </div>
