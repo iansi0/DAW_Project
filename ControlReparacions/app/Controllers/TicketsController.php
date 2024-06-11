@@ -345,7 +345,7 @@ class TicketsController extends BaseController
             mb_strtoupper(lang('titles.students'), 'utf-8'),
             mb_strtoupper(lang('titles.material_2'), 'utf-8'),
             mb_strtoupper(lang('forms.description'), 'utf-8'),
-            mb_strtoupper(lang('titles.actions'), 'utf-8')
+            (session('user')['role']=='prof' || session('user')['role']=='alumn' || session('user')['role']=='admin')?mb_strtoupper(lang('titles.actions'), 'utf-8'):''
         );
 
         $template = [
@@ -428,7 +428,7 @@ class TicketsController extends BaseController
                         "class" => " p-5 h-16"
                     ],
                 );
-            }else{
+            } else {
                 $table->addRow(
                     date("d/m/Y", strtotime($intervencio['created_at']))." ".date("H:i", strtotime($intervencio['created_at'])),                   
                     $intervencio['nom_reparador'],

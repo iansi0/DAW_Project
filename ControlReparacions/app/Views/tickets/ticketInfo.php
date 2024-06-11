@@ -22,6 +22,7 @@
         <div class=" text-secundario min-w-72 max-w-80 rounded-lg overflow-hidden text-left">
             <h3 class="bg-primario font-semibold text-lg p-3"> <?= lang('forms.info'); ?> </h3>
             <p class="bg-terciario-2 p-2 text-terciario-1 overflow-auto"><i class="m-auto fa-solid fa-hashtag"></i> : <span class="text-sm"><?= $ticket['id'] ?></span></p>
+            <p class="bg-terciario-2 p-2 text-terciario-1 overflow-auto flex-col gap-1"><span class="flex items-center"><span class='size-3 inline-block mt-4 estat_<?=$ticket['id_estat']?> rounded-full'></span> : <span class="text-sm ml-1"><?= $ticket['estat'] ?></span></span></p>
             <p class="bg-terciario-2 p-2 text-terciario-1 overflow-auto"><i class="m-auto fa-solid fa-envelope"></i> : <span class="text-sm"><?= $ticket['correu_contacte'] ?></span></p>
             <p class="bg-terciario-2 p-2 text-terciario-1 overflow-auto"><i class="m-auto fa-solid fa-user"></i> : <span class="text-sm"><?= $ticket['nom_contacte'] ?></span></p>
         </div>
@@ -35,28 +36,43 @@
     </section>
 
     <article class="flex flex-col gap-2 w-full">
+    
+        <div class="flex flex-row justify-between gap-4">
+            <div>
+                <?php if ((session()->get('user')['role'] == "prof" || session()->get('user')['role'] == "sstt" || session()->get('user')['role'] == "ins") && in_array($ticket['id_estat'], $estatsFiltrats)) : ?>
 
-        <div class="flex justify-between gap-4">
-            <?php if ((session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "ins") || (session()->get('user')['role'] == "admin")) : ?>
+                    <form action="<?= base_url('savestate/' . $ticket['id']) ?>" id="stateform" method="post">
 
-                <form action="<?= base_url('savestate/' . $ticket['id']) ?>" id="stateform" method="post">
+                        <select name="selectType" id="selectType" class="py-1.5 border border-terciario-1 cursor-pointer <?= 'estat_'.$ticket['id_estat'] ?> rounded-lg ">
+                            <?php foreach ($estatsFiltrats as $filtrat): ?>
+                                <option <?=($filtrat['id'] == $ticket['id_estat'])?'selected':''?> style='color: #003049 !important;' class='bg-secundario text-terciario-1 cursor-pointer px-2'  value='<?=$filtrat["id"]?>'><?=$filtrat["nom"]?></option>
+                            <?php endforeach; ?>
+                        </select>
 
-                    <select name="selectType" id="selectType"  class="py-1.5 border border-terciario-1 cursor-pointer <?= 'estat_'.$ticket['id_estat'] ?> rounded-lg ">
-                        <?php foreach ($estatsFiltrats as $filtrat): ?>
-                            <option <?=($filtrat['id'] == $ticket['id_estat'])?'selected':''?> style='color: #003049 !important;' class='bg-secundario text-terciario-1 cursor-pointer'  value='<?=$filtrat["id"]?>'><?=$filtrat["nom"]?></option>
-                        <?php endforeach; ?>
-                    </select>
+                        <button id="save" onclick="document.getElementById('stateform').submit()" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-green-700 transition hover:ease-in ease-out duration-250"><?= lang('buttons.save'); ?></button>
 
-                    <button id="save" onclick="document.getElementById('stateform').submit()" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-green-700 transition hover:ease-in ease-out duration-250"><?= lang('buttons.save'); ?></button>
+                    </form>
 
-                </form>
-                
-            <?php endif ?>
+                <?php elseif(session()->get('user')['role'] == "admin"): ?>
+
+                    <form action="<?= base_url('savestate/' . $ticket['id']) ?>" id="stateform" method="post">
+
+                        <select name="selectType" id="selectType"  class="py-1.5 border border-terciario-1 cursor-pointer <?= 'estat_'.$ticket['id_estat'] ?> rounded-lg ">
+                            <?php foreach ($estatsFiltrats as $filtrat): ?>
+                                <option <?=($filtrat['id'] == $ticket['id_estat'])?'selected':''?> style='color: #003049 !important;' class='bg-secundario text-terciario-1 cursor-pointer'  value='<?=$filtrat["id"]?>'><?=$filtrat["nom"]?></option>
+                            <?php endforeach; ?>
+                        </select>
+
+                        <button id="save" onclick="document.getElementById('stateform').submit()" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-green-700 transition hover:ease-in ease-out duration-250"><?= lang('buttons.save'); ?></button>
+
+                    </form>
+                <?php endif ?>
+            </div>
 
             <?php if ((session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
-                <div>
+                <div class="self-center">
                     <a href="<?= base_url('pdf/' . $ticket['id'] . '') ?>">
-                        <button id="pdf" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-red-800 transition hover:ease-in ease-out duration-250">Imprimir PDF</button>
+                        <button id="pdf" class="bg-primario text-secundario px-8 py-1 border border-terciario-4 rounded-lg hover:bg-red-800 transition hover:ease-in ease-out duration-250">Imprimir PDF</button>
                     </a>
                 </div>
             <?php endif ?>

@@ -87,7 +87,7 @@
 
         <!-- Login Google  -->
         <a href="<?= $client ?>" class="px-4 py-2 border flex gap-2 border-slate-700 rounded-lg text-slate-700 hover:bg-red-300 hover:border-slate-400 hover:text-white hover:shadow transition duration-150">
-            <img src="/assets/img/logoxtec.png" alt="Logo" width="80px" class="mb-3.5 ml-2">
+            <img src="/assets/img/logoxtec.png" alt="Logo" width="80px">
         </a>
 
     </section>
@@ -101,7 +101,6 @@
     buttonShow.addEventListener('click', () => {
         const isPasswordVisible = password.type === 'text';
         password.type = isPasswordVisible ? 'password' : 'text';
-
     });
 </script>
 

@@ -157,11 +157,6 @@ class InventariModel extends Model
         $this->select('id, nom');
         $this->where('id_intervencio', $id);
 
-        if ($role == 'prof' || $role == 'centre' || $role == 'alumn'){
-            $this->where('codi_centre', session('user')['code']);
-        } else if ($role != 'admin'){
-            return;
-        }
         $this->orderBy('data_compra', 'desc');
 
         return $this;

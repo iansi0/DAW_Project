@@ -376,18 +376,23 @@ class TiquetModel extends Model
 
         $this->where('tiquet.id', $id);
         if($role=="prof" || $role=="ins"){
+
             $this->groupStart();
-            $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
+                $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
+
         }else if($role=="alumn"){
+
             $this->groupStart();
-            $this->where("tiquet.codi_centre_reparador",$code);
+                $this->where("tiquet.codi_centre_reparador",$code);
             $this->groupEnd();
 
         }else if($role=="sstt"){
+
             $this->groupStart();
-            $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
+                $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
             $this->groupEnd();
+            
         }
         
         return $this->first();

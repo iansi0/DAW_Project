@@ -39,10 +39,10 @@
                 </div>
             </div>
 
-            <?php
-            echo $table->generate();
-            ?>
+            <?= $table->generate(); ?>
+
             <div class="border-b border-primario"></div>
+            
         </div>
         <br><br><br>
     </article>

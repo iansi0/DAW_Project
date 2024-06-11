@@ -12,16 +12,9 @@
     <article class="flex flex-col gap-2 w-full">
 
         <div>
-            <div class="flex justify-between items-center mb-1">
+            <div class="flex justify-between items-center pr-8">
 
-                <div class="flex gap-3 items-center center">
-                    <!-- Search form -->
-                    <?php if ($filter == 'comarca') : ?>
-                    
-                    <?php else : ?>
-                    
-                    <?php endif ?>
-                    
+                <div class="flex gap-3 items-center center">                   
 
                     <!-- BUTTON ADD  -->
                     <?php if ($filter == 'comarca') : ?>
@@ -45,18 +38,17 @@
                             <button id='add-ticket' class="bg-primario text-base font-semibold text-white px-3 py-1 border border-terciario-4 hover:bg-green-700 cursor-pointer hover:text-secundario rounded-lg transition hover:ease-in ease-out duration-250"><?= lang('buttons.add') ?> <?= lang('titles.population') ?></button>
                         </a>
                     <?php endif ?>
+
                 </div>
 
-                <div class="flex text-4xl align-right  text-primario gap-3">
-                    <a class="hover:font-bold transition hover:ease-in ease-out duration-250 <?= $filter == 'comarca' ? " font-bold" : "" ?>" href="<?= base_url('locations/filterComarca') ?>"><?= lang('titles.locations_1') ?></a>
-                    <span class="overflow-hidden">&nbsp;|&nbsp;</span>
-                    <a class="hover:font-bold transition hover:ease-in ease-out duration-250 <?= $filter == 'poblacio' ? " font-bold" : "" ?>" href="<?= base_url('locations/filterPoblacio') ?>"><?= lang('titles.locations_2') ?></a>
+                <div class="flex text-4xl align-right gap-1">
+                    <a class="transition hover:ease-in ease-out duration-250 pb-1 <?= $filter == 'comarca' ? "bg-primario rounded-t-lg text-white px-4" : "border border-primario rounded-t-lg px-4" ?>" href="<?= base_url('locations/filterComarca') ?>"><?= lang('titles.locations_1') ?></a>
+                    <a class="transition hover:ease-in ease-out duration-250 pb-1 <?= $filter == 'poblacio' ? "bg-primario rounded-t-lg text-white px-4" : "border border-primario rounded-t-lg px-4" ?>" href="<?= base_url('locations/filterPoblacio') ?>"><?= lang('titles.locations_2') ?></a>
                 </div>
+
             </div>
 
-            <?php
-            echo $table->generate();
-            ?>
+            <?= $table->generate(); ?>
 
             <div class="border-b border-primario"></div>
 
