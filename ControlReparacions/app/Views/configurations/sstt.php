@@ -12,85 +12,57 @@
     </div>
 
     <aside>
-        <div class="shadow-xl border-b grid grid-cols-12 border-primario rounded-t-xl">
+
+        <div class="col-span-12 shadow-xl border-b grid grid-cols-12 border-primario rounded-t-xl">
 
             <div class="col-span-12 text-left mb-3 bg-primario text-white rounded-t-lg p-4">
-                <h2 class="text-2xl font-semibold">INFORMACIÓ</h2>
+                <h2 class="text-2xl font-semibold"><?=mb_strtoupper(lang('forms.info')).' '.mb_strtoupper(lang('titles.sstt'))?></h2>
             </div>
 
-            <!-- info insti  -->
-            <form id="form" action="<?= base_url('config/sstt') ?>" method="POST" class="col-span-12 grid grid-cols-12 mt-2 p-4 ">
-                <div class="col-span-12 grid grid-cols-12 mt-2 p-4 ">
+            <!-- info sstt  -->
+            <form id="form" action="<?= base_url('config/sstt') ?>" method="POST" class="col-span-12 grid grid-cols-12">
+                <div class="col-span-12 grid grid-cols-12 mt-2">
+                    <div class="col-span-12 grid grid-cols-12 px-4">
 
-
-                    <div class="col-span-12 ">
-                        <h2 class="text-2xl font-semibold">SERVEIS TERRITORIALS</h2>
-                    </div>
-
-                    <div class="grid col-span-12 grid-cols-12  p-4">
-                        <div class="col-span-6 grid grid-cols-12">
+                        <div class="col-span-6 grid grid-cols-12 mt-3">
                             <div class="col-span-12 grid-cols-12 text-left px-2">
-                                <p class="font-semibold text-primario">NOM: </p>
+                                <p class="font-semibold text-primario"><?=mb_strtoupper(lang('forms.name'))?>: </p>
                                 <p class="border-2 border-terciario-1 text-terciario-4 w-full px-2 py-3 rounded bg-secundario "> <?= $sstt['nom'] ?> </p>
                             </div>
                         </div>
 
-                        <div class="col-span-6 grid grid-cols-12">
+                        <div class="col-span-2 grid grid-cols-12 mt-3">
                             <div class="col-span-12 grid-cols-12 text-left px-2">
-                                <p class="font-semibold text-primario">CODI: </p>
-                                <p class="border-2 border-terciario-1 text-terciario-4 w-full px-2 py-3 rounded bg-secundario "> <?= $sstt['codi'] ?></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid col-span-12 grid-cols-12  p-4">
-                        <div class="col-span-6 grid grid-cols-12">
-                            <div class="col-span-12 grid-cols-12 text-left px-2">
-                                <p class="font-semibold text-primario">CORREU: </p>
-                                <p class="border-2 border-terciario-1 text-terciario-4 w-full px-2 py-3 rounded bg-secundario "> <?= $user['user'] ?> </p>
+                                <p class="font-semibold text-primario"><?=mb_strtoupper(lang('forms.code'))?>: </p>
+                                <p class="border-2 border-terciario-1 text-terciario-4 w-full px-2 py-3 rounded bg-secundario "> <?= $sstt['codi'] ?> </p>
                             </div>
                         </div>
 
-                        <div class="col-span-6 grid grid-cols-12">
-                            <div class="col-span-12 grid-cols-12 text-left px-2">
-                                <label class="font-semibold text-primario">TELÈFON: </label>
-                                <input type="text" value="<?= $sstt['telefon'] ?>" name="phone" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
-                                <?php
-                                if (isset(validation_errors()['phone'])) : ?>
-                                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['phone'] ?></p>
-                                <?php endif ?>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid col-span-12 grid-cols-12 mt-2 p-4">
-                        <div class="col-span-6 grid grid-cols-12">
-                            <div class="col-span-12 grid-cols-12 text-left px-2">
-                                <label class="font-semibold text-primario">POBLACIÓ: </label>
-                                <input type="text" value="<?= $sstt['poblacio'] ?>" name="population" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
-                                <?php
-                                if (isset(validation_errors()['population'])) : ?>
-                                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['population'] ?></p>
-                                <?php endif ?>
-                            </div>
+                        <div class="col-span-2 grid grid-cols-12 mt-3">
+                        <div class="col-span-12 grid-cols-12 text-left px-2">
+                                    <label class="font-semibold text-primario"><?=mb_strtoupper(lang('forms.pobl'))?>: </label>
+                                    <input type="text" value="<?= $sstt['poblacio'] ?>" name="population" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
+                                    <?php
+                                    if (isset(validation_errors()['population'])) : ?>
+                                        <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['population'] ?></p>
+                                    <?php endif ?>
+                                </div>
                         </div>
 
-                        <div class="col-span-6 grid grid-cols-12">
-                            <div class="col-span-12 grid-cols-12 text-left px-2">
-                                <label class="font-semibold text-primario">CODI POSTAL: </label>
-                                <input type="text" value="<?= $sstt['cp'] ?>" name="cp" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
-                                <?php
-                                if (isset(validation_errors()['cp'])) : ?>
-                                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['cp'] ?></p>
-                                <?php endif ?>
-                            </div>
+                        <div class="col-span-2 grid grid-cols-12 mt-3">
+                        <div class="col-span-12 grid-cols-12 text-left px-2">
+                                    <label class="font-semibold text-primario"><?=mb_strtoupper(lang('forms.cp_2'))?>: </label>
+                                    <input type="text" value="<?= $sstt['cp'] ?>" name="cp" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
+                                    <?php
+                                    if (isset(validation_errors()['cp'])) : ?>
+                                        <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['cp'] ?></p>
+                                    <?php endif ?>
+                                </div>
                         </div>
-                    </div>
 
-                    <div class="grid col-span-12 grid-cols-12 mt-2 p-4">
-                        <div class="col-span-6 grid grid-cols-12">
+                        <div class="col-span-6 grid grid-cols-12 mt-3">
                             <div class="col-span-12 grid-cols-12 text-left px-2">
-                                <label class="font-semibold text-primario">ALTRES: </label>
+                                <label class="font-semibold text-primario"><?=mb_strtoupper(lang('forms.adress'))?>: </label>
                                 <input type="text" value="<?= $sstt['adreca_fisica'] ?>" name="adress" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
                                 <?php
                                 if (isset(validation_errors()['adress'])) : ?>
@@ -99,26 +71,34 @@
                             </div>
                         </div>
 
-                        <div class="col-span-6 grid grid-cols-12">
+                        <div class="col-span-6 grid grid-cols-12 mt-3">
                             <div class="col-span-12 grid-cols-12 text-left px-2">
-                                <label class="font-semibold text-primario">ALTRES: </label>
+                                <label class="font-semibold text-primario"><?=mb_strtoupper(lang('forms.phone'))?>: </label>
+                                <input type="text" value="<?= $sstt['telefon'] ?>" name="phone" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
+                                <?php
+                                if (isset(validation_errors()['phone'])) : ?>
+                                    <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200  border-t-4 border-red-300 "><?= validation_errors()['phone'] ?></p>
+                                <?php endif ?>
+                            </div>
+                        </div>
+
+                        <div class="col-span-12 grid grid-cols-12 mt-3 mb-3">
+                            <div class="col-span-12 grid-cols-12 text-left px-2">
+                                <label class="font-semibold text-primario"><?=mb_strtoupper(lang('forms.other'))?>: </label>
                                 <input type="text" value="<?= $sstt['altres'] ?>" name="altres" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
                             </div>
                         </div>
-                    </div>
 
-                    <div class="grid col-span-12 grid-cols-12 mt-2 p-4">
-                        <div class="col-span-12 grid grid-cols-12">
-                            <div class="col-span-12 grid-cols-12 text-left px-2">
-                                <input type="submit" id="submitButton" value="Actualitzar" class="bg-green-700 w-full  hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
+                        <div class="grid col-span-12 grid-cols-12 mt-2 p-4">
+                            <div class="col-span-12 grid grid-cols-12">
+                                <div class="col-span-12 grid-cols-12 text-left px-2">
+                                    <input type="submit" id="submitButton" value="Actualitzar" class="bg-green-700 w-full  hover:bg-green-500 cursor-pointer text-white px-4 py-2 rounded transition hover:ease-in ease-out duration-250">
+                                </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </form>
-
         </div>
     </aside>
 
