@@ -26,9 +26,10 @@ class POBLACIO extends Migration
                 'null'           => false,
             ],
             'id_sstt' => [
-                'type'           => 'BINARY',
+                'type'           => 'VARCHAR',
                 'trim'           => true,
-                'constraint'     => 32,
+                'constraint'     => 10,
+                'null'           => false,
             ],
 
             'created_at' => [

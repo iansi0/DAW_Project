@@ -61,7 +61,7 @@ class PoblacioModel extends Model
 
         $this->select('poblacio.id, poblacio.nom, comarca.nom as comarca');
             $this->join('comarca', 'comarca.codi = poblacio.id_comarca');
-            $this->where('id_sstt', $ssttCode);
+            $this->where('poblacio.id_sstt', $ssttCode);
             
         return $this->groupBy('poblacio.id, poblacio.nom, comarca.nom');
 
