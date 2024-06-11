@@ -12,7 +12,7 @@ class PoblacioModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id','nom','id_comarca'];
+    protected $allowedFields    = ['id','nom','id_comarca','id_sstt'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,13 +38,13 @@ class PoblacioModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addPoblacio($id,$nom,$id_comarca) {
+    public function addPoblacio($id,$nom,$id_comarca,$ssttCode) {
            
         $data = [
             'id'         => htmlspecialchars(trim($id)),
             'nom'        => htmlspecialchars(trim($nom)),
             'id_comarca' => htmlspecialchars(trim($id_comarca)),
-            
+            'id_sstt' => htmlspecialchars(trim($ssttCode)),
         ];
 
         $this->insert($data);
@@ -81,4 +81,45 @@ class PoblacioModel extends Model
             ->orLike('poblacio.nom', $search, 'both', true)
             ->orLike('comarca', $search, 'both', true);
     }
+
+    public function modifyPoblacio($id, $nom)
+    {
+
+        $data = [
+            'nom' => htmlspecialchars(trim($nom)),
+        ];
+
+        $role = session()->get('user')['role'];
+    
+        if($role == "sstt"){
+            $this->groupStart();
+                $this->where("id_sstt", session('user')['code']);
+            $this->groupEnd();
+        }else if ($role != 'admin') {
+            return;
+        }
+
+        return $this->set($data)->update($id);
+        // dd($this->db->getLastQuery());
+
+    }
+
+    public function deletePoblacio($id)
+    {
+
+        $role = session()->get('user')['role'];
+    
+        if($role == "sstt"){
+            $this->groupStart();
+                $this->where("id_sstt", session('user')['code']);
+            $this->groupEnd();
+        }else if ($role != 'admin') {
+            return;
+        }
+
+        return $this->delete($id);
+        // dd($this->db->getLastQuery());
+
+    }
+
 }

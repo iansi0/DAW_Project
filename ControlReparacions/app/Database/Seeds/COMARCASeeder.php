@@ -31,6 +31,7 @@ class COMARCASeeder extends Seeder
                     +------+
                     | codi |
                     | nom  |
+                    | sstt |
                     +------+
                     
                 */
@@ -39,7 +40,8 @@ class COMARCASeeder extends Seeder
                 if (!in_array($row[11], $arrComarca)) {
                     $comarca -> addComarca( 
                         trim($row[11]),
-                        trim($row[12])
+                        trim($row[12]),
+                        trim($row[9])
                     );
 
                     $arrComarca[] = $row[11];

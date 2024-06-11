@@ -78,20 +78,21 @@ return [
     'n_material'   => 'Afegir Material',
     'e_material'   => 'Modificar Material',
 
-    'locations'     => 'Localitats',
-    'comarca'     => 'Comarca',
-    'poblacio'     => 'Població',
-    'locations_1'     => 'Comarques',
-    'locations_2'     => 'Poblacions',
+    'locations'          => 'Localitats',
+    'comarca'            => 'Comarca',
+    'poblacio'           => 'Població',
+    'locations_1'        => 'Comarques',
+    'locations_2'        => 'Poblacions',
     'n_locations_1'      => 'Afegir Comarca',
     'n_locations_2'      => 'Afegir Població',
+    'e_locations_1'      => 'Editar Comarca',
+    'e_locations_2'      => 'Editar Població',
 
     'poblation'     => 'Població',
 
     'start'         => 'Començat',
     'end'           => 'Acabat',
 
-    'cursos_exist'           => 'Afegits',
+    'cursos_exist'  => 'Afegits',
 
-    
 ];

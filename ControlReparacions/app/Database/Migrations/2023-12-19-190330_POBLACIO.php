@@ -25,6 +25,11 @@ class POBLACIO extends Migration
                 'constraint'     => 5,
                 'null'           => false,
             ],
+            'id_sstt' => [
+                'type'           => 'BINARY',
+                'trim'           => true,
+                'constraint'     => 32,
+            ],
 
             'created_at' => [
                 'type'       => 'DATETIME',
@@ -41,6 +46,7 @@ class POBLACIO extends Migration
         $this->forge->addKey('id', true);
         $this->forge->createTable('POBLACIO');
         $this->forge->addForeignKey('id_comarca', 'COMARCA', 'codi');
+        $this->forge->addForeignKey('id_sstt', 'SSTT', 'codi');
 
     }
 

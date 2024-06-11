@@ -59,17 +59,50 @@ class LocationsController extends BaseController
             $table->setHeading(
                 mb_strtoupper(lang('titles.id'), 'utf-8'),
                 mb_strtoupper(lang('titles.name'), 'utf-8'),
+                mb_strtoupper(lang('titles.actions'), 'utf-8'),
             );
 
             foreach ($data['locations'] as $location) {
 
-                $buttonUpdate = base_url("location/modify/comarca/" . $location['codi']);
+                $buttonUpdate = base_url("locations/modify/comarca/" . $location['codi']);
+                $buttonDelete = base_url("locations/delete/comarca/" . $location['codi']);
                 $table->addRow(
                     $location['codi'],
-                    
+                
                     [
                         "data" =>$location['nom'],
                          "class" => " p-3 h-16"
+                    ],
+
+                    [
+                        "data" =>
+                        "
+                        <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
+                        <a onclick='(function() { Swal.fire({
+                            customClass:{htmlContainer: ``,},
+                            title: `" . lang('alerts.sure') . "`,
+                            text: `" . lang('alerts.sure_sub') . "`,
+                            icon: `warning`,
+                            showCancelButton: true,
+                            confirmButtonColor: `#3085d6`,
+                            cancelButtonColor: `#d33`,
+                            confirmButtonText: `" . lang('alerts.yes_del') . "`,
+                            cancelButtonText: `" . lang('alerts.cancel') . "`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = `" . $buttonDelete . "`;
+
+                                Swal.fire({
+                                    title: `" . lang('alerts.deleted') . "`,
+                                    text: `" . lang('alerts.deleted_sub') . "`,
+                                    icon: `success`,
+                                    showConfirmButton: false,
+                                    timer:2000,
+                                });
+                            }
+                        }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
+
+                        "class" => " p-5 h-16"
                     ],
                 );
             }
@@ -95,11 +128,13 @@ class LocationsController extends BaseController
                 mb_strtoupper(lang('titles.id'), 'utf-8'),
                 mb_strtoupper(lang('titles.name'), 'utf-8'),
                 mb_strtoupper(lang('titles.comarca'), 'utf-8'),
+                mb_strtoupper(lang('titles.actions'), 'utf-8'),
             );
 
             foreach ($data['locations'] as $location) {
 
-                $buttonUpdate = base_url("location/modify/poblacio/" . $location['id']);
+                $buttonUpdate = base_url("locations/modify/poblacio/" . $location['id']);
+                $buttonDelete = base_url("locations/delete/poblacio/" . $location['id']);
                 $table->addRow(
                     $location['id'],
                     [
@@ -107,6 +142,36 @@ class LocationsController extends BaseController
                          "class" => " p-3 h-16"
                     ],                    
                     $location['comarca'],
+                    [
+                        "data" =>
+                        "
+                        <a href='$buttonUpdate' class='p-2 btn btn-primary'><i class='fa-solid p-3 text-xl text-terciario-1 hover:bg-orange-600 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-pencil'></i></a>
+                        <a onclick='(function() { Swal.fire({
+                            customClass:{htmlContainer: ``,},
+                            title: `" . lang('alerts.sure') . "`,
+                            text: `" . lang('alerts.sure_sub') . "`,
+                            icon: `warning`,
+                            showCancelButton: true,
+                            confirmButtonColor: `#3085d6`,
+                            cancelButtonColor: `#d33`,
+                            confirmButtonText: `" . lang('alerts.yes_del') . "`,
+                            cancelButtonText: `" . lang('alerts.cancel') . "`,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = `" . $buttonDelete . "`;
+
+                                Swal.fire({
+                                    title: `" . lang('alerts.deleted') . "`,
+                                    text: `" . lang('alerts.deleted_sub') . "`,
+                                    icon: `success`,
+                                    showConfirmButton: false,
+                                    timer:2000,
+                                });
+                            }
+                        }); })()' class='p-2 btn btn-primary'><i class='fa-solid p-3 cursor-pointer text-xl text-terciario-1 hover:bg-red-800 hover:text-secundario hover:rounded-xl transition-all ease-out duration-250  rounded-xl hover:transition hover:ease-in hover:duration-250 fa-trash'></i></a>",
+
+                        "class" => " p-5 h-16"
+                    ],
                 );
             }
         }
@@ -167,7 +232,7 @@ class LocationsController extends BaseController
             $codi =  $this->request->getPost("code");
             $nom =  $this->request->getPost("name");
 
-            $model->addComarca($codi, $nom);
+            $model->addComarca($codi, $nom, session('user')['code']);
 
             return redirect()->to(base_url('locations/filterComarca'));
         }
@@ -210,7 +275,7 @@ class LocationsController extends BaseController
             $nom =  $this->request->getPost("name");
             $comarca =  $this->request->getPost("population");
 
-            $model->addPoblacio($codi, $nom, $comarca);
+            $model->addPoblacio($codi, $nom, $comarca, session('user')['code']);
 
             return redirect()->to(base_url('locations/filterPoblacio'));
         }
@@ -218,24 +283,93 @@ class LocationsController extends BaseController
     }
 
 
-    // public function modifyComarca($id){
+    public function modifyComarca($id){
+        helper('form');
 
-    // }
+        $model = new ComarcaModel();
 
-    // public function modifyComarca_post($id){
+        $data = [
+            "info" => $model->getByTitleOrText($id)->find()
+        ];
 
-    // }
+        return view('locations/modifyComarca', $data);
+    }
+
+    public function modifyComarca_post($id){
+
+        helper('form');
+
+        $validationRules =
+            [
+                'name' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+            ];
+
+        if ($this->validate($validationRules)) {
+
+            $model = new ComarcaModel();
+
+            $model->modifyComarca($id, $this->request->getPost('name'));
+
+        }
+
+    }
+
+    public function deleteComarca($id){
+
+        $model = new ComarcaModel();
+
+        $model->deleteComarca($id);
+
+    }
 
 
-    // public function modifyPoblacio($id){
+    public function modifyPoblacio($id){
+        helper('form');
 
-    // }
+        $model = new PoblacioModel();
 
+        $data = [
+            "info" => $model->getByTitleOrText($id)->find()
+        ];
 
-    // public function modifyPoblacio_post($id){
+        return view('locations/modifyPoblacio', $data);
+    }
 
-    // }
+    public function modifyPoblacio_post($id){
 
+        helper('form');
 
+        $validationRules =
+            [
+                'name' => [
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => lang('error.empty_slot_2'),
+                    ],
+                ],
+            ];
+
+        if ($this->validate($validationRules)) {
+
+            $model = new PoblacioModel();
+
+            $model->modifyPoblacio($id, $this->request->getPost('name'));
+
+        }
+
+    }
+
+    public function deletePoblacio($id){
+
+        $model = new PoblacioModel();
+
+        $model->deletePoblacio($id);
+
+    }
 
 }

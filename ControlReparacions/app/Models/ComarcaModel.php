@@ -12,7 +12,7 @@ class ComarcaModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['codi', 'nom'];
+    protected $allowedFields    = ['codi', 'nom', 'id_sstt'];
 
     // Dates
     protected $useTimestamps = true;
@@ -38,12 +38,13 @@ class ComarcaModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addComarca($codi, $nom)
+    public function addComarca($codi, $nom, $ssttCode)
     {
 
         $data = [
-            'codi' => htmlspecialchars($codi),
-            'nom'  => htmlspecialchars($nom),
+            'codi' => htmlspecialchars(trim($codi)),
+            'nom'  => htmlspecialchars(trim($nom)),
+            'id_sstt'  => htmlspecialchars(trim($ssttCode)),
         ];
 
         $this->insert($data);
@@ -69,6 +70,46 @@ class ComarcaModel extends Model
         return $this->select(['codi', 'nom'])
                     ->orLike('codi', $search, 'both', true)
                     ->orLike('nom', $search, 'both', true);
+    }
+
+    public function modifyComarca($id, $nom)
+    {
+
+        $data = [
+            'nom' => htmlspecialchars(trim($nom)),
+        ];
+
+        $role = session()->get('user')['role'];
+    
+        if($role == "sstt"){
+            $this->groupStart();
+                $this->where("id_sstt", session('user')['code']);
+            $this->groupEnd();
+        }else if ($role != 'admin') {
+            return;
+        }
+
+        return $this->set($data)->update($id);
+        // dd($this->db->getLastQuery());
+
+    }
+
+    public function deleteComarca($id)
+    {
+
+        $role = session()->get('user')['role'];
+    
+        if($role == "sstt"){
+            $this->groupStart();
+                $this->where("id_sstt", session('user')['code']);
+            $this->groupEnd();
+        }else if ($role != 'admin') {
+            return;
+        }
+
+        return $this->delete($id);
+        // dd($this->db->getLastQuery());
+
     }
 
 }

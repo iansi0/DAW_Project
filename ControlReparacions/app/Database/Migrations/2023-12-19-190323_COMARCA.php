@@ -20,6 +20,11 @@ class COMARCA extends Migration
                         'constraint'     => 50,
                         'null'           => false,
                     ],
+                    'id_sstt' => [
+                        'type'           => 'BINARY',
+                        'trim'           => true,
+                        'constraint'     => 32,
+                    ],
 
                     'created_at' => [
                         'type'       => 'DATETIME',
@@ -35,6 +40,7 @@ class COMARCA extends Migration
 
             $this->forge->addKey('codi', true);
             $this->forge->createTable('COMARCA');
+            $this->forge->addForeignKey('id_sstt', 'SSTT', 'codi');
             
         }
 

@@ -32,6 +32,7 @@ class POBLACIOSeeder extends Seeder
                     | id            |
                     | nom           |
                     | id_comarca    |
+                    | sstt          |
                     +---------------+
                     
                 */
@@ -41,7 +42,8 @@ class POBLACIOSeeder extends Seeder
                     $poblacio -> addPoblacio( 
                         trim($row[13]),
                         trim($row[14]),
-                        trim($row[11])
+                        trim($row[11]),
+                        trim($row[9])
                     );
 
                     $arrPoblacio[] = $row[13];
