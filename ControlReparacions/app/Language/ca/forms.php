@@ -30,6 +30,7 @@ return [
 
     'adress'        => 'Adreça',
     'cp'            => 'Codi Postal',
+    'cp_2'          => 'C.Postal',
     'local'         => 'Localitat',
     'pobl'          => 'Població',
     'coma'          => 'Comarca',
