@@ -47,23 +47,20 @@ class UsersInRolesModel extends Model
     public function addUserRole($id, $user, $role) {
            
         $data = [
-            'id'            => $id,
-            'id_user'          => trim($user),
-            'id_role'          => trim($role)
+            'id'               => htmlspecialchars($id),
+            'id_user'          => htmlspecialchars(trim($user)),
+            'id_role'          => htmlspecialchars(trim($role))
         ];
 
         $this->insert($data);
     }
 
     public function getRoleByUser($id_user){
-        d($id_user);
-        $result = $this->select('roles.role as role')
-        ->join('roles', 'users_in_roles.id_role = roles.id')
-        ->where('users_in_roles.id_user' , $id_user)
-        ->first();
         
-        d($result);
-        return $result;
-        ;
+        $result = $this->select('roles.role as role')
+                        ->join('roles', 'users_in_roles.id_role = roles.id')
+                        ->where('users_in_roles.id_user' , $id_user);
+
+        return $result->first();
     }
 }

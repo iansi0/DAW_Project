@@ -106,12 +106,25 @@ class InventariModel extends Model
 
     public function deleteInventari($id)
     {
-        return $this->where('id', $id)->delete();
+
+        $role = session('user')['role'];
+        
+        if ($role == 'prof' || $role == 'ins' || $role == 'alumn' || $role == 'admin') {
+            return $this->delete($id);
+        } else {
+            return;
+        }
     }
 
     public function modifyInventari($id, $data)
     {
-        return $this->where('id', $id)->set($data)->update();
+        $role = session('user')['role'];
+
+        if ($role == 'prof' || $role == 'ins' || $role == 'alumn' || $role == 'admin') {
+            return $this->set($data)->update($id);
+        } else {
+            return;
+        }
     }
 
     public function getInventaryById($id)
@@ -121,9 +134,16 @@ class InventariModel extends Model
 
     public function getInventaryNoAssigned()
     {
+        $role = session('user')['role'];
+
         $this->select('id, nom');
         $this->where('id_intervencio', null);
-        if (session('user')['role'] == 'prof' || session('user')['role'] == 'ins' || session('user')['role'] == 'alumn')$this->where('codi_centre', session('user')['code']);
+
+        if ($role == 'prof' || $role == 'ins' || $role == 'alumn'){
+            $this->where('codi_centre', session('user')['code']);
+        } else if($role != 'admin') {
+            return;
+        }
 
         $this->orderBy('data_compra', 'desc');
 
@@ -132,19 +152,32 @@ class InventariModel extends Model
 
     public function getInventaryAssigned($id)
     {
+        $role = session('user')['role'];
+
         $this->select('id, nom');
         $this->where('id_intervencio', $id);
-        if (session('user')['role'] == 'prof' || session('user')['role'] == 'centre' || session('user')['role'] == 'alumn')$this->where('codi_centre', session('user')['code']);
+
+        if ($role == 'prof' || $role == 'centre' || $role == 'alumn'){
+            $this->where('codi_centre', session('user')['code']);
+        } else if ($role != 'admin'){
+            return;
+        }
         $this->orderBy('data_compra', 'desc');
 
         return $this;
     }
 
-    public function unassignInventary($id){
+    public function unassignInventary($id)
+    {
+        $role = session('user')['role'];
 
-        $data = [
-            'id_intervencio' => null,
-        ];
-        return $this->where('id_intervencio', $id)->set($data)->update();
+        if ($role == 'prof' || $role == 'centre' || $role == 'alumn'){
+            $this->where('codi_centre', session('user')['code']);
+        } else if ($role != 'admin'){
+            return;
+        }
+
+        return $this->where('id_intervencio', $id)->set('id_intervencio', null)->update();
+
     }
 }

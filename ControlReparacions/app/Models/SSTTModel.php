@@ -41,14 +41,14 @@ class SSTTModel extends Model
     public function addSSTT($id, $codi, $nom, $adreca_fisica, $cp, $poblacio, $telefon, $altres) {
            
         $data = [
-            'id_user'       => $id,
-            'codi'          => trim($codi),
-            'nom'           => trim($nom),
-            'adreca_fisica' => trim($adreca_fisica),
-            'cp'            => str_replace(' ', '', trim($cp)),
-            'poblacio'      => trim($poblacio),
-            'telefon'       => str_replace(' ', '', trim($telefon)),
-            'altres'        => trim($altres)
+            'id_user'       => htmlspecialchars($id),
+            'codi'          => htmlspecialchars(trim($codi)),
+            'nom'           => htmlspecialchars(trim($nom)),
+            'adreca_fisica' => htmlspecialchars(trim($adreca_fisica)),
+            'cp'            => htmlspecialchars(str_replace(' ', '', trim($cp))),
+            'poblacio'      => htmlspecialchars(trim($poblacio)),
+            'telefon'       => htmlspecialchars(str_replace(' ', '', trim($telefon))),
+            'altres'        => htmlspecialchars(trim($altres))
             
         ];
 
@@ -63,8 +63,14 @@ class SSTTModel extends Model
         return $this->where('codi', $id)->first();
     }
 
-    public function modifySSTT($id, $data){
-
-        return $this->where('codi', $id)->set($data)->update();
+    public function modifySSTT($id, $data)
+    {
+        $role = session('user')['role'];
+        
+        if ($role == 'admin' || $role == 'sstt') {
+            return $this->where('codi', $id)->set($data)->update();
+        } else {
+            return;
+        }
     }
 }

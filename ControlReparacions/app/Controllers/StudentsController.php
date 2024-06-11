@@ -355,16 +355,16 @@ class StudentsController extends BaseController
 
 
             $student = [
-                "nom"     => $this->request->getPost("name"),
-                "cognoms"     => $this->request->getPost("surnames"),
-                "id_curs"     => $this->request->getPost("course"),
+                "nom"         => htmlspecialchars(((string) $this->request->getPost("name"))),
+                "cognoms"     => htmlspecialchars(((string) $this->request->getPost("surnames"))),
+                "id_curs"     => htmlspecialchars(((string) $this->request->getPost("course"))),
 
             ];
 
             $modelStudent->modifyStudent($this->request->getPost("id"), $student);
 
             $user = [
-                'user' => $this->request->getPost("email"),
+                'user' => htmlspecialchars(((string) $this->request->getPost("email"))),
             ];
 
             $modelUser->modifyUser($this->request->getPost("id"), $user);

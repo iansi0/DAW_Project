@@ -38,14 +38,14 @@ class CursModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addCurs($id,$clase,$any,$titol,$codi_centre) {
+    public function addCurs($id, $clase, $any, $titol, $codi_centre) {
            
         $data = [
-            'id' =>  $id,
-            'clase' => $clase,
-            'any' => $any,
-            'titol' => $titol,
-            'codi_centre' => $codi_centre,
+            'id'            => htmlspecialchars($id),
+            'clase'         => htmlspecialchars(trim($clase)),
+            'any'           => htmlspecialchars(trim($any)),
+            'titol'         => htmlspecialchars(trim($titol)),
+            'codi_centre'   => htmlspecialchars(trim($codi_centre)),
         ];
 
         $this->insert($data);
@@ -53,11 +53,11 @@ class CursModel extends Model
 
     public function getAllCourses(){
 
-        $role = session()->get('user')['role'];
         $code = session()->get('user')['code'];
 
         $this->select('id, clase, any, titol');
         $this->where('codi_centre', $code);
+
         return $this->findAll();
     }
 }

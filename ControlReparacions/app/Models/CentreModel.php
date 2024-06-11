@@ -50,17 +50,17 @@ class CentreModel extends Model
         // }
 
         $data = [
-            'id_user'                 => $id,
-            'codi'                    => trim($codi),
-            'nom'                     => trim($nom),
-            'actiu'                   => trim($actiu),
-            'taller'                  => trim($taller),
-            'telefon'                 => trim($telefon),
-            'adreca_fisica'           => trim($adreca_fisica),
-            'nom_persona_contacte'    => trim($nom_persona_contacte),
-            'correu_persona_contacte' => trim($correu_persona_contacte),
-            'id_sstt'                 => trim($id_sstt),
-            'id_poblacio'             => trim($id_poblacio),
+            'id_user'                 => htmlspecialchars($id),
+            'codi'                    => htmlspecialchars(trim($codi)),
+            'nom'                     => htmlspecialchars(trim($nom)),
+            'actiu'                   => htmlspecialchars(trim($actiu)),
+            'taller'                  => htmlspecialchars(trim($taller)),
+            'telefon'                 => htmlspecialchars(trim($telefon)),
+            'adreca_fisica'           => htmlspecialchars(trim($adreca_fisica)),
+            'nom_persona_contacte'    => htmlspecialchars(trim($nom_persona_contacte)),
+            'correu_persona_contacte' => htmlspecialchars(trim($correu_persona_contacte)),
+            'id_sstt'                 => htmlspecialchars(trim($id_sstt)),
+            'id_poblacio'             => htmlspecialchars(trim($id_poblacio)),
         ];
 
         $this->insert($data);
@@ -70,14 +70,13 @@ class CentreModel extends Model
 
     public function getAllCenter()
     {
+
         $role = session()->get('user')['role'];
         $code = session()->get('user')['code'];
 
         $this->select('codi, nom');
 
-        if ($role == "admin") {
-            $this;
-        } else if ($role == "prof" || $role == "alumn") {
+        if ($role == "prof" || $role == "alumn") {
             $this->where("codi", $code);
         } else if ($role == "sstt") {
             $this->where("id_sstt", $code);
@@ -106,9 +105,7 @@ class CentreModel extends Model
 
         $this->select('codi, nom')->where('actiu', true)->where('taller', true);
 
-        if ($role == "admin") {
-            $this;
-        } else if ($role == "prof" || $role == "alumn") {
+        if ($role == "prof" || $role == "alumn") {
             $this->where("centre.codi", $code);
         } else if ($role == "sstt") {
             $this->where("centre.id_sstt", $code);
@@ -153,9 +150,8 @@ class CentreModel extends Model
         $this->join('inventari', 'inventari.id_intervencio = intervencio.id');
 
         $this->orderBy('count', 'DESC');
-        if ($role == "admin") {
-            $this;
-        } else if ($role == "prof" || $role == "alumn") {
+        
+        if ($role == "prof" || $role == "alumn") {
             $this->where("centre.codi", $code);
         } else if ($role == "sstt") {
             $this->where("centre.id_sstt", $code);
@@ -214,19 +210,18 @@ class CentreModel extends Model
     
             COALESCE(poblacio.nom, '" . lang('titles.toassign') . "') AS poblacio,"
         );
+
         $this->join('poblacio', 'centre.id_poblacio = poblacio.id');
 
-    
-        if ($role == "admin") {
-            return $this;
-        } else if ($role == "prof" || $role == "alumn") {
-            return $this->where("centre.codi", $code);
+        if ($role == "prof" || $role == "alumn") {
+            $this->where("centre.codi", $code);
         } else if ($role == "sstt") {
-            return $this->where("centre.id_sstt", $code);
+            $this->where("centre.id_sstt", $code);
         } else if ($role == "ins") {
-            return $this->where("centre.codi", $code);
+            $this->where("centre.codi", $code);
         }
-        
+
+        return $this;
         
     }
 
@@ -258,7 +253,6 @@ class CentreModel extends Model
 
     public function modifyInstitute($id, $data)
     {
-    
         return $this->where('codi', $id)->set($data)->update();
     }
 }

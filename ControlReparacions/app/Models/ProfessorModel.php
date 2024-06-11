@@ -43,10 +43,10 @@ class ProfessorModel extends Model
     {
 
         $data = [
-            'id_user'       => $id,
-            'nom'           => trim($nom),
-            'cognoms'       => trim($cognoms),
-            'codi_centre'   => trim($codi_centre)
+            'id_user'       => htmlspecialchars($id),
+            'nom'           => htmlspecialchars(trim($nom)),
+            'cognoms'       => htmlspecialchars(trim($cognoms)),
+            'codi_centre'   => htmlspecialchars(trim($codi_centre))
         ];
 
         $this->insert($data);
@@ -54,7 +54,7 @@ class ProfessorModel extends Model
 
     public function updateCode($id, $code)
     {
-        $this->where('id_user', $id)->set(['codi_centre' => $code])->update();
+        $this->set(['codi_centre' => $code])->update($id);
 
         $modelUser = new UsersModel();
         return $modelUser->activatedUser($id);

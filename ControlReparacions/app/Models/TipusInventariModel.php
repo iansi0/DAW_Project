@@ -41,8 +41,8 @@ class TipusInventariModel extends Model
     public function addTipusInventari($id,$nom) {
            
         $data = [
-            'id' =>  $id,
-            'nom' => $nom,
+            'id'  => htmlspecialchars(trim($id)),
+            'nom' => htmlspecialchars(trim($nom)),
             
         ];
 

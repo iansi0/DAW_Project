@@ -42,49 +42,46 @@ class AlumneModel extends Model
     public function addAlumne($id, $nom, $cognoms, $id_curs, $codi_centre, $correo = null)
     {
 
-
         if ($correo != null) {
-
 
             $modelUser = new UsersModel();
             // dd($correo);
             //Esto devuelve la id del user 
             $userExist = $modelUser->getUserByEmail($correo);
 
-
             if ($userExist != null) {
+
                 // si la id existe buscar el alumno y activarlo 
-                // dd($userExist);
                 $data = [
-                    'id_curs'       => trim($id_curs),
+                    'id_curs'         => htmlspecialchars(trim($id_curs)),
                     'deleted_at'      => null,
                 ];
 
                 $this->where('id_user', $userExist['id'])->set('id_curs', trim($id_curs))->update();
-                $this->builder->where('id_user', $userExist['id'])->set($this->deletedField, null)->update();
+                $this->where('id_user', $userExist['id'])->set($this->deletedField, null)->update();
 
                 $modelUser->activatedUser($userExist['id']);
-                // $this->builder->where('id_user', $userExist['id'])->set($data)->update();
                 return false;
             }
+
         }
 
         //Si no existe añadirlo normal
         $data = [
-            'id_user'       => $id,
-            'nom'           => trim($nom),
-            'cognoms'       => trim($cognoms),
-            'id_curs'       => trim($id_curs),
-            'codi_centre'   => trim($codi_centre),
+            'id_user'       => htmlspecialchars($id),
+            'nom'           => htmlspecialchars(trim($nom)),
+            'cognoms'       => htmlspecialchars(trim($cognoms)),
+            'id_curs'       => htmlspecialchars(trim($id_curs)),
+            'codi_centre'   => htmlspecialchars(trim($codi_centre)),
         ];
 
         $this->insert($data);
         return true;
+
     }
 
     public function getByTitleOrText($search)
     {
-
         return $this->select(['id_user', 'nom', 'cognoms', 'codi_centre'])->orLike('id_user', $search, 'both', true)->orLike('nom', $search, 'both', true);
     }
 
@@ -132,10 +129,6 @@ class AlumneModel extends Model
     public function getStudentById($id)
     {
 
-        $role = session()->get('user')['role'];
-        $code = session()->get('user')['code'];
-
-
         $this->select(
             "alumne.id_user,
             alumne.nom,
@@ -158,18 +151,15 @@ class AlumneModel extends Model
         $role = session()->get('user')['role'];
         $code = session()->get('user')['code'];
 
-        $this->where('id_user', $id);
-        $this->join('centre AS centre', 'alumne.codi_centre = centre.codi', 'left');
-
-        if ($role == "admin") {
-            $this;
-        } else if ($role == "prof" || $role == "ins") {
+        if ($role == "prof" || $role == "ins") {
             $this->groupStart();
-            $this->where("alumne.codi_centre", $code);
+                $this->where("codi_centre", $code);
             $this->groupEnd();
+        } else if ($role != 'admin'){
+            return;
         }
 
-        return $this->set($data)->update();
+        return $this->set($data)->update($id);
     }
 
 
@@ -181,21 +171,17 @@ class AlumneModel extends Model
         $role = session()->get('user')['role'];
         $code = session()->get('user')['code'];
 
-        $this->join('centre AS centre', 'alumne.codi_centre = centre.codi', 'left');
-        $this->where('id_user', $id);
-
-        if ($role == "admin") {
-            $modelUser->deleteUser($id);
-            return $this->delete();
-        } else if ($role == "prof" || $role == "ins") {
+        if ($role == "prof" || $role == "ins") {
+            
             $this->groupStart();
-            $this->where("alumne.codi_centre", $code);
+                $this->where("codi_centre", $code);
             $this->groupEnd();
-        } else {
+
+        } else if ($role != 'admin') {
             return;
         }
 
         $modelUser->deleteUser($id);
-        return $this->delete();
+        return $this->delete($id);
     }
 }

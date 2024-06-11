@@ -116,16 +116,10 @@
                         
                         <label class="font-semibold text-primario" for="repair" id="labelRepair"><?=  mb_strtoupper(lang("forms.s_ins")." ".lang("forms.work"))?></label>
                         <select name="repair" id="repair" class="border-2 border-terciario-1 w-full px-2 py-3 rounded hover:bg-secundario transition hover:ease-in ease-out duration-150">
-                            <option value="" disabled selected hidden><?= lang("forms.s_ins")?></option>
-                            <?php
-                                foreach ($repairs as $repair) {
-                                    if ($repair["codi"]==$ticket["codi_centre_reparador"]) {
-                                        echo "<option selected value='".$repair["codi"]."'>".$repair["nom"]."</option>";
-                                    }else{
-                                        echo "<option value='".$repair["codi"]."'>".$repair["nom"]."</option>";
-                                    }
-                                }
-                            ?>
+                            <option value="" disabled hidden><?= lang("forms.s_ins")?></option>
+                            <?php foreach ($repairs as $repair) : ?>
+                                <option value='<?=$repair["codi"]?>' <?=($repair["codi"]==$ticket["codi_centre_reparador"]?'selected':'')?>><?=$repair["nom"]?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 <?php else : ?>

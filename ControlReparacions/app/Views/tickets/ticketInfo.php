@@ -19,14 +19,15 @@
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTscU3jYwiMibdPrr7f7S2htGvZGqUWHKr6gSuuUYKQkA&s" alt="imagen dispositivo" class="w-full">
         </div>
 
-        <div class=" text-secundario min-w-72 max-w-80 rounded-lg overflow-hidden">
+        <div class=" text-secundario min-w-72 max-w-80 rounded-lg overflow-hidden text-left">
             <h3 class="bg-primario font-semibold text-lg p-3"> <?= lang('forms.info'); ?> </h3>
-            <p class="bg-terciario-2 p-2 text-terciario-1 overflow-auto"><i class="fa-solid fa-hashtag"></i> : <span class="text-sm"><?= $ticket['id'] ?></span></p>
-            <p class="bg-terciario-2 p-2 text-terciario-1 overflow-auto"><i class="fa-solid fa-envelope"></i> : <span class="text-sm"><?= $ticket['correu_contacte'] ?></span></p>
+            <p class="bg-terciario-2 p-2 text-terciario-1 overflow-auto"><i class="m-auto fa-solid fa-hashtag"></i> : <span class="text-sm"><?= $ticket['id'] ?></span></p>
+            <p class="bg-terciario-2 p-2 text-terciario-1 overflow-auto"><i class="m-auto fa-solid fa-envelope"></i> : <span class="text-sm"><?= $ticket['correu_contacte'] ?></span></p>
+            <p class="bg-terciario-2 p-2 text-terciario-1 overflow-auto"><i class="m-auto fa-solid fa-user"></i> : <span class="text-sm"><?= $ticket['nom_contacte'] ?></span></p>
         </div>
 
 
-        <div class=" text-secundario min-w-64 max-w-72  rounded-lg overflow-hidden">
+        <div class=" text-secundario min-w-64 max-w-72 rounded-lg overflow-hidden">
             <h3 class="bg-primario font-semibold text-lg p-3"><?= lang('forms.description'); ?></h3>
             <p class="bg-terciario-2 p-3 text-terciario-1  min-h-auto max-h-32 overflow-y-auto break-words"><?= $ticket['descripcio'] ?></p>
         </div>
@@ -39,36 +40,21 @@
             <?php if ((session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "ins") || (session()->get('user')['role'] == "admin")) : ?>
 
                 <form action="<?= base_url('savestate/' . $ticket['id']) ?>" id="stateform" method="post">
-                    <?php
-                    foreach ($estats as $estat) {
-                        if ($estat['id'] == $ticket['id_estat']) {
-                            $selected = "estat_" . $estat["id"];
-                        } else {
-                        }
-                    }
-                    ?>
-                    <select name="selectType" id="selectType"  class="py-1.5 border border-terciario-1 cursor-pointer <?= $selected ?> rounded-lg ">
 
-
-                        <?php
-                        foreach ($estatsFiltrats as $filtrat) {
-                            if ($filtrat['id'] == $ticket['id_estat']) {
-                                echo "<option selected style='color: #003049 !important;' class='bg-secundario text-terciario-1 cursor-pointer'  value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
-                            } else {
-                                echo "<option style='color: #003049 !important;' class='bg-secundario cursor-pointer' value='" . $filtrat["id"] . "'>" . $filtrat["nom"] . "</option>";
-                            }
-                        }
-                        ?>
+                    <select name="selectType" id="selectType"  class="py-1.5 border border-terciario-1 cursor-pointer <?= 'estat_'.$ticket['id_estat'] ?> rounded-lg ">
+                        <?php foreach ($estatsFiltrats as $filtrat): ?>
+                            <option <?=($filtrat['id'] == $ticket['id_estat'])?'selected':''?> style='color: #003049 !important;' class='bg-secundario text-terciario-1 cursor-pointer'  value='<?=$filtrat["id"]?>'><?=$filtrat["nom"]?></option>
+                        <?php endforeach; ?>
                     </select>
 
                     <button id="save" onclick="document.getElementById('stateform').submit()" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-green-700 transition hover:ease-in ease-out duration-250"><?= lang('buttons.save'); ?></button>
 
                 </form>
+                
             <?php endif ?>
 
             <?php if ((session()->get('user')['role'] == "prof") || (session()->get('user')['role'] == "sstt") || (session()->get('user')['role'] == "admin")) : ?>
                 <div>
-
                     <a href="<?= base_url('pdf/' . $ticket['id'] . '') ?>">
                         <button id="pdf" class=" bg-primario text-secundario px-8 py-1 border border-terciario-4  rounded-lg  hover:bg-red-800 transition hover:ease-in ease-out duration-250">Imprimir PDF</button>
                     </a>
@@ -78,6 +64,7 @@
         </div>
 
         <div>
+
             <div class="flex justify-between bg-primario font-semibold text-secundario text-left p-3 pr-8 text-3xl rounded-t-2xl">
                 <h1><?= mb_strtoupper(lang('titles.int')); ?></h1>
 
@@ -91,9 +78,7 @@
 
             </div>
 
-            <?php
-            echo $table->generate();
-            ?>
+            <?=$table->generate();?>
 
             <p class="bg-primario text-secundario text-right py-2 rounded-b-lg text-3xl"> Total: <?=$totalPrice?>€ &nbsp;</p>
         </div>

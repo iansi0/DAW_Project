@@ -239,40 +239,40 @@ class TiquetModel extends Model
         foreach ($data as &$value) {
             $value = htmlspecialchars($value);
         }
+
         $role=session()->get('user')['role'];
         $code=session()->get('user')['code'];
-        d($code);
-
-        $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
-        $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
-        $this->where('id', $id);
-
+        
         if ($role=="admin") {
             $this;
         }else if($role=="prof" || $role=="ins"){
+
             $this->groupStart();
                 $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
-        }else if($role=="sstt"){
-            $this;
-            // $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", $code)->find();
-            // foreach ($a as &$value) {
-            //     $value = $value['codi'];
-            // }
-            // $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", $code)->find();
-            // foreach ($b as &$value) {
-            //     $value = $value['codi'];
-            // }
 
-            // $this->groupStart();
-            //     $this->whereIn("tiquet.codi_centre_reparador", $a);
-            //     $this->orWhereIn("tiquet.codi_centre_emissor", $b);
-            // $this->groupEnd();
+        }else if($role=="sstt"){
+
+            $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", $code)->find();
+            foreach ($a as &$value) {
+                $value = $value['codi'];
+            }
+            $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", $code)->find();
+            foreach ($b as &$value) {
+                $value = $value['codi'];
+            }
+
+            $this->groupStart();
+                $this->whereIn("tiquet.codi_centre_reparador", $a);
+                $this->orWhereIn("tiquet.codi_centre_emissor", $b);
+            $this->groupEnd();
 
         }else{
             return;
+
         }
-        return $this->set($data)->update();
+
+        return $this->set($data)->update($id);
 
     }
 
@@ -281,36 +281,35 @@ class TiquetModel extends Model
 
         $role=session()->get('user')['role'];
 
-        $this->where('id', $id);
         $this->join('centre AS centre_emissor', 'tiquet.codi_centre_emissor = centre_emissor.codi', 'left');
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
 
         if ($role=="admin") {
-            return $this->set($data)->update();
+
+            return $this->set($data)->update($id);
+
         } else if ($role=="sstt"){
-
-            return $this->set($data)->update();
             
-            // $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", session('user')['code'])->find();
-            // foreach ($a as &$value) {
-            //     $value = $value['codi'];
-            // }
-            // $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", session('user')['code'])->find();
-            // foreach ($b as &$value) {
-            //     $value = $value['codi'];
-            // }
+            $a = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_reparador = centre.codi')->where("centre.id_sstt", session('user')['code'])->find();
+            foreach ($a as &$value) {
+                $value = $value['codi'];
+            }
+            $b = $this->select('centre.codi')->join('centre', 'tiquet.codi_centre_emissor = centre.codi')->where("centre.id_sstt", session('user')['code'])->find();
+            foreach ($b as &$value) {
+                $value = $value['codi'];
+            }
 
-            // $this->groupStart();
-            //     $this->whereIn("tiquet.codi_centre_reparador", $a);
-            //     $this->orWhereIn("tiquet.codi_centre_emissor", $b);
-            // $this->groupEnd();
+            $this->groupStart();
+                $this->whereIn("tiquet.codi_centre_reparador", $a);
+                $this->orWhereIn("tiquet.codi_centre_emissor", $b);
+            $this->groupEnd();
+
+            $this->set($data)->update($id);
 
         }else{
             return;
         }
-
-
-
+        
     }
 
     public function saveState($id,$state)
@@ -320,8 +319,6 @@ class TiquetModel extends Model
 
         $role = session()->get('user')['role'];
         $code = session()->get('user')['code'];
-
-        $this->where('id', $id);
 
         if($role=="prof" || $role=="ins"){
             $this->groupStart();
@@ -347,7 +344,7 @@ class TiquetModel extends Model
             return;
         }
 
-        return $this->set(['id_estat' => $state])->update();
+        return $this->set(['id_estat' => $state])->update($id);
 
     }
 
@@ -360,6 +357,7 @@ class TiquetModel extends Model
         $this->select(["
             tiquet.id AS id, 
             tiquet.correu_persona_contacte_centre AS correu_contacte, 
+            tiquet.nom_persona_contacte_centre AS nom_contacte, 
             tiquet.descripcio_avaria AS descripcio,
             tiquet.created_at AS created,
             tipus_dispositiu.nom AS tipus,
@@ -377,9 +375,7 @@ class TiquetModel extends Model
         $this->join('centre AS centre_reparador', 'tiquet.codi_centre_reparador = centre_reparador.codi', 'left');
 
         $this->where('tiquet.id', $id);
-        if ($role=="admin") {
-            $this;
-        }else if($role=="prof" || $role=="ins"){
+        if($role=="prof" || $role=="ins"){
             $this->groupStart();
             $this->where("tiquet.codi_centre_reparador",$code)->orWhere("tiquet.codi_centre_emissor",$code);
             $this->groupEnd();
@@ -392,7 +388,6 @@ class TiquetModel extends Model
             $this->groupStart();
             $this->where("centre_reparador.id_sstt",$code)->orWhere("centre_emissor.id_sstt",$code);
             $this->groupEnd();
-
         }
         
         return $this->first();

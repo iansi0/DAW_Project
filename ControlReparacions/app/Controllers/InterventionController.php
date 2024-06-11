@@ -278,7 +278,7 @@ class InterventionController extends BaseController
 
         $model = new IntervencioModel();
 
-        $model->deleteTicket($id);
+        $model->deleteIntervention($id);
 
         return redirect()->to(previous_url());
     }

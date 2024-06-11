@@ -158,11 +158,10 @@ class UserController extends BaseController
             // dd( session('user'));
             $data = [
                 "codi" =>  session('user')['code'],
-                "nom_persona_contacte" => $this->request->getPost('name'),
-                "correu_persona_contacte" =>  $this->request->getPost('email'),
-                "adreca_fisica" =>  $this->request->getPost('adress'),
-                "telefon" =>  $this->request->getPost('phone'),
-
+                "nom_persona_contacte" => htmlspecialchars(((string) $this->request->getPost('name'))),
+                "correu_persona_contacte" =>  htmlspecialchars(((string) $this->request->getPost('email'))),
+                "adreca_fisica" =>  htmlspecialchars(((string) $this->request->getPost('adress'))),
+                "telefon" =>  htmlspecialchars(((string) $this->request->getPost('phone'))),
             ];
 
             $model->modifyInstitute(session('user')['code'], $data);

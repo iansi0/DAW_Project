@@ -42,8 +42,8 @@ class ComarcaModel extends Model
     {
 
         $data = [
-            'codi' =>  $codi,
-            'nom' => $nom,
+            'codi' => htmlspecialchars($codi),
+            'nom'  => htmlspecialchars($nom),
         ];
 
         $this->insert($data);
@@ -51,29 +51,24 @@ class ComarcaModel extends Model
 
     public function getAllPaged()
     {
-        $role = session()->get('user')['role'];
         $ssttCode = session()->get('user')['code'];
 
+        $this->select('comarca.codi, comarca.nom,');
+    
+        $this->join('poblacio', 'comarca.codi = poblacio.id_comarca');
+        $this->join('centre', 'poblacio.id = centre.id_poblacio');
+        $this->join('sstt', 'centre.id_sstt = sstt.codi');
+        $this->where('centre.id_sstt', $ssttCode);
+        $this->groupBy('comarca.codi, comarca.nom');
 
-            $this->select('comarca.codi, comarca.nom,');
-        
-            $this->join('poblacio', 'comarca.codi = poblacio.id_comarca');
-            $this->join('centre', 'poblacio.id = centre.id_poblacio');
-            $this->join('sstt', 'centre.id_sstt = sstt.codi');
-            $this->where('centre.id_sstt', $ssttCode);
-            return $this->groupBy('comarca.codi, comarca.nom');
-
-          
-        
-        
+        return $this;
     }
 
     public function getByTitleOrText($search)
     {
-        
         return $this->select(['codi', 'nom'])
-        ->orLike('codi', $search, 'both', true)
-        ->orLike('nom', $search, 'both', true);
+                    ->orLike('codi', $search, 'both', true)
+                    ->orLike('nom', $search, 'both', true);
     }
 
 }

@@ -574,7 +574,7 @@ class TicketsController extends BaseController
             "types" => $type->getAllTypes(),
             "centers" => $center->getAllCenter(),
             "repairs" => $center->getAllRepairCenters(),
-            "states" => $state->getAllStates(),
+            "states" => $state->getFilteredStates(),
             "ticket" => $ticket->getTicketById($id),
         ];
         return view('tickets/modifyTicket', $data);

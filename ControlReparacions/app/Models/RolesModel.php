@@ -47,14 +47,14 @@ class RolesModel extends Model
     public function addRole($id, $role) {
            
         $data = [
-            'id'            => $id,
-            'role'          => trim($role)
+            'id'            => htmlspecialchars($id),
+            'role'          => htmlspecialchars(trim($role))
         ];
 
         $this->insert($data);
     }
     public function getIdByRole($role){
-        return $this->select('id')->where('role',$role)->first();
+        return $this->select('id')->where('role', $role)->first();
     }
     
 }

@@ -43,12 +43,12 @@ class IntervencioModel extends Model
     {
 
         $data = [
-            'id' =>  $id,
-            'descripcio' => htmlspecialchars(trim($descripcio)),
-            'id_ticket' => htmlspecialchars(trim($id_ticket)),
-            'id_tipus' => htmlspecialchars(trim($id_tipus)),
-            'codi_centre' => htmlspecialchars(trim($codi_centre)),
-            'id_user' => htmlspecialchars(trim($id_persona_reparadora)),
+            'id'            => htmlspecialchars($id),
+            'descripcio'    => htmlspecialchars(trim($descripcio)),
+            'id_ticket'     => htmlspecialchars(trim($id_ticket)),
+            'id_tipus'      => htmlspecialchars(trim($id_tipus)),
+            'codi_centre'   => htmlspecialchars(trim($codi_centre)),
+            'id_user'       => htmlspecialchars(trim($id_persona_reparadora)),
         ];
 
         $this->insert($data);
@@ -94,8 +94,8 @@ class IntervencioModel extends Model
     {
 
         $data = [
-            'id_tipus' => htmlspecialchars(trim($id_tipus)),
-            'descripcio' => htmlspecialchars(trim($description)),
+            'id_tipus'      => htmlspecialchars(trim($id_tipus)),
+            'descripcio'    => htmlspecialchars(trim($description)),
         ];
 
         $role = session()->get('user')['role'];
@@ -116,24 +116,25 @@ class IntervencioModel extends Model
 
     }
 
-    public function deleteTicket($id)
+    public function deleteIntervention($id)
     {
-        $role=session()->get('user')['role'];
-        $uid=session()->get('user')['uid'];
-        $this->where('id', $id);
+        $role = session()->get('user')['role'];
+        $uid = session()->get('user')['uid'];
 
         $modelInventary = new InventariModel();
 
-        if ($role=="admin") {
-            $modelInventary->unassignInventary($id);
-            return $this->delete();
-        }else if($role=="alumn"){
+        if($role == "alumn" || $role == 'prof'){
+
             $this->groupStart();
-            $this->where("intervencio.id_user",$uid);
+                $this->where("id_user", $uid);
             $this->groupEnd();
-        }else{
+
+        } else if ($role != 'admin'){
             return; 
         }
-        return $this->delete();
+
+        $modelInventary->unassignInventary($id);
+
+        return $this->delete($id);
     }
 }

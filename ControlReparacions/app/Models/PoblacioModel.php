@@ -41,9 +41,9 @@ class PoblacioModel extends Model
     public function addPoblacio($id,$nom,$id_comarca) {
            
         $data = [
-            'id' =>  $id,
-            'nom' => $nom,
-            'id_comarca' => $id_comarca,
+            'id'         => htmlspecialchars(trim($id)),
+            'nom'        => htmlspecialchars(trim($nom)),
+            'id_comarca' => htmlspecialchars(trim($id_comarca)),
             
         ];
 
@@ -56,20 +56,17 @@ class PoblacioModel extends Model
 
     public function getAllPaged()
     {
-        $role = session()->get('user')['role'];
+
         $ssttCode = session()->get('user')['code'];
 
-
-            $this->select('poblacio.id, poblacio.nom, comarca.nom as comarca');
-        
+        $this->select('poblacio.id, poblacio.nom, comarca.nom as comarca');
             $this->join('comarca', 'poblacio.id_comarca = comarca.codi');
             $this->join('centre', 'poblacio.id = centre.id_poblacio');
             $this->join('sstt', 'centre.id_sstt = sstt.codi');
             $this->where('sstt.codi', $ssttCode);
-            return $this->groupBy('poblacio.id, poblacio.nom, comarca.nom');
+            
+        return $this->groupBy('poblacio.id, poblacio.nom, comarca.nom');
 
-        
-        
     }
 
     public function getByTitleOrText($search)

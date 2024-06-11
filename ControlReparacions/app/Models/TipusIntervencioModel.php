@@ -41,8 +41,8 @@ class TipusIntervencioModel extends Model
     public function addTipusIntervencio($id,$nom) {
            
         $data = [
-            'id' =>  $id,
-            'nom' => $nom,
+            'id'  => htmlspecialchars(trim($id)),
+            'nom' => htmlspecialchars(trim($nom)),
             
         ];
 

@@ -41,8 +41,8 @@ class EstatModel extends Model
     public function addEstat($id,$nom) {
            
         $data = [
-            'id' =>  $id,
-            'nom' => $nom,
+            'id'  => htmlspecialchars($id),
+            'nom' => htmlspecialchars($nom),
         ];
 
         $this->insert($data);
@@ -55,10 +55,12 @@ class EstatModel extends Model
 
         $role=session()->get('user')['role'];
 
-        $this->select('id,nom');
+        $this->select('id, nom');
+
         if($role=="prof" || $role=="ins"){
-            $this->where("id",0)->orWhere("id",6)->orWhere("id",7)->orWhere("id",8)->orWhere("id",13);
+            $this->whereIn("id", [0, 6, 7, 8, 13]);
         }
+
         return $this->findAll();
          
     }
