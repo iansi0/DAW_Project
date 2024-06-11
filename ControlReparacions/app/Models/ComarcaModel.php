@@ -54,13 +54,9 @@ class ComarcaModel extends Model
     {
         $ssttCode = session()->get('user')['code'];
 
-        $this->select('comarca.codi, comarca.nom,');
-    
-        $this->join('poblacio', 'comarca.codi = poblacio.id_comarca');
-        $this->join('centre', 'poblacio.id = centre.id_poblacio');
-        $this->join('sstt', 'centre.id_sstt = sstt.codi');
-        $this->where('centre.id_sstt', $ssttCode);
-        $this->groupBy('comarca.codi, comarca.nom');
+        $this->select('codi, nom, id_sstt');
+            $this->where('id_sstt', $ssttCode);
+        $this->groupBy('codi, nom');
 
         return $this;
     }
