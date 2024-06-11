@@ -4,6 +4,7 @@ return [
     'passwd'        => 'Contrasenya',
     'passwd2'       => 'Repetir Contrasenya',
     'e_passwd'      => 'Actualitzar Contrasenya',
+    'r_passwd'      => 'Reenviar Contrasenya',
 
     'id'            => 'Identificador',
 

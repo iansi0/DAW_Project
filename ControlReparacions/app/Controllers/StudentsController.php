@@ -358,7 +358,6 @@ class StudentsController extends BaseController
                 "nom"         => htmlspecialchars(((string) $this->request->getPost("name"))),
                 "cognoms"     => htmlspecialchars(((string) $this->request->getPost("surnames"))),
                 "id_curs"     => htmlspecialchars(((string) $this->request->getPost("course"))),
-
             ];
 
             $modelStudent->modifyStudent($this->request->getPost("id"), $student);
@@ -669,5 +668,39 @@ class StudentsController extends BaseController
 
         // Leer el contenido del archivo y enviarlo al navegador
         readfile($rutaArchivo);
+    }
+
+    public function resetpasswd($id)
+    {
+
+        $alumneModel = new AlumneModel();
+
+        $user = $alumneModel->getStudentById($id);
+
+        if($user != null){
+
+            $userModel = new UsersModel();
+
+            $fake = Factory::create("es_ES");
+
+            $passwd = $fake->password();
+            $passwd_hash = password_hash($passwd, PASSWORD_DEFAULT);
+
+            $userModel->changePassword_student($user['id_user'], $passwd_hash);
+
+            $email = \Config\Services::email();
+
+            $email->setFrom('keepyoursoftware@gmail.com', 'KeepYourSoftware');
+            $email->setTo($user);
+            $email->setSubject('Usuari gestor d\'intervencions');
+            $email->setMessage('Hola ' . $user['nom'] . ' ' . $user['cognoms'] . ', s\'ha realitzat un canvi al teu compte de <a href="' . base_url() . '">, l\'aplicatiu de gestions d\'intervencions</a>. <br><br>
+                El teu usuari és: ' . $user['correo'] . '<br> I la teva contrassenya és: ' . $passwd);
+
+            $email->send();  
+        }
+
+        return redirect()->to(base_url('/students'));
+        
+
     }
 }

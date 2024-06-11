@@ -80,6 +80,12 @@
                             <p class="font-medium flex justify-center mt-2 p-4 mb-4 bg-red-200 border-t-4 border-red-300 "><?= validation_errors()['course'] ?></p>
                         <?php endif ?>
                     </div>
+
+                    <!-- Reenviar contrasenya -->
+                    <div class="col-span-6 grid-cols-12 text-left px-2 mt-6">
+                        <a href="<?=base_url('/students/resetpasswd/'.$student['id_user'])?>" class="bg-primario text-white p-4 rounded-xl hover:bg-terciario-4"><?=lang('forms.r_passwd')?></a>               
+                    </div>
+
                 </div>
             </div>
 

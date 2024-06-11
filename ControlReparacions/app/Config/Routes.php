@@ -83,6 +83,8 @@ $routes->group('', ['filter' => 'isLogged'], function ($routes) {
         $routes->GET('modify/(:segment)', 'StudentsController::modifyStudent/$1');
         $routes->POST('modify/(:segment)', 'StudentsController::modifyStudent_post/$1');
 
+        $routes->GET('resetpasswd/(:segment)', 'StudentsController::resetpasswd/$1');
+
 
         // EXPORTS
         $routes->group('export', ['filter' => 'exportTicket'], function ($routes) {

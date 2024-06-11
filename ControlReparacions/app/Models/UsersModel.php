@@ -143,6 +143,13 @@ class UsersModel extends Model
         }
     }
 
+    public function changePassword_student($id, $passwd){
+
+        if (session()->has("user") && !empty(session()->get("user"))) {
+            return $this->update($id, ['passwd' => $passwd]);
+        }
+    }
+
 
     // saber si el user existe para crearlo o no 
     public function getUserByEmail($email)
