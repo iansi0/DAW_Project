@@ -87,7 +87,7 @@
 
                 <div class="col-span-6 grid grid-cols-12 mt-3">
                     <div class="col-span-12 grid-cols-12 text-left px-2">
-                        <p class="font-semibold text-primario"><?=mb_strtoupper(lang('forms.mail'))?>: </p>
+                        <p class="font-semibold text-primario"><?=mb_strtoupper(lang('forms.email'))?>: </p>
                         <p class="border-2 border-terciario-1 text-terciario-4 w-full px-2 py-3 rounded bg-secundario "> <?= $institute['correu_persona_contacte'] ?> </p>
                     </div>
                 </div>

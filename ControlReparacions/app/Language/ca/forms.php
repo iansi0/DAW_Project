@@ -3,6 +3,7 @@ return [
     'user'          => 'Usuari',
     'passwd'        => 'Contrasenya',
     'passwd2'       => 'Repetir Contrasenya',
+    'e_passwd'      => 'Actualitzar Contrasenya',
 
     'id'            => 'Identificador',
 
